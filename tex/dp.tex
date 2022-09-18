@@ -1,0 +1,404 @@
+\documentclass[a4paper, twoside, 11pt]{article}
+% It is needed to use this command for automatic compilation in VSCode
+% !TEX program = lualatexmk
+
+%DOCUMENT, PREAMBLE AND MACROS DESIGNED FOR LuaLaTeX%
+\newcommand{\fbar}{\FloatBarrier}
+
+\usepackage{amsmath} %matematic package%
+\usepackage{textcomp} %for miscellaneous symbols%
+%\usepackage{times} %times font%
+\usepackage{graphicx} %enhanced support for craphics%
+%\usepackage{mathptmx} %use Times as default text font, and provide maths support%
+\usepackage{cmap} %mapování znaků - vyhledávání v pdf%
+\usepackage[czech]{babel}%CZ%
+\usepackage[utf8]{inputenc}%kódování%
+\usepackage[T1]{fontenc}%kódování%
+\usepackage{multirow}%Multirow table support
+\usepackage{float}%Improves the interface for defining floating objects such as figures and tables%
+\usepackage{wasysym} %for various glyphs, symbols%
+
+\usepackage{setspace}%spacing% 
+\onehalfspacing
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %pokud nechci definovat citecolor=black aby byly odkazy citací černé, tak dám colorlinks=false,%
+    bookmarks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black,
+}
+
+%when using LuaLaTex, defining Times Fonts from your system - it has to be named like this and inserted ttf file in the folder of your tex file%
+\usepackage{fontspec}
+\selectlanguage{czech}
+\setmainfont[Ligatures=TeX,BoldFont={* Bold}] {Times New Roman}
+                                
+\setsansfont[Ligatures=TeX,BoldFont={* Bold}]{Times New Roman}
+                                      
+\setmonofont{Times New Roman}
+ 
+%\usepackage[italic]{mathastext} %for text in math environment, better looking times then
+
+
+
+%for CITATIONS URL to work, it is not needed when you are not using URL label%
+\usepackage{url}
+\usepackage{csquotes}
+\usepackage[style=iso-numeric, backend=bibtex, isbn=true,urldate=iso,seconds=true]{biblatex}
+\addbibresource{src/bib/zdroje.bib} % BIB resources to import
+%\DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
+
+
+
+%\usepackage{biblatex}
+%END for citations%
+
+%changing bibliography font%
+\renewcommand*{\bibfont}{\fontspec{Times New Roman}}
+
+\usepackage{comment} %For comments%
+\usepackage{pdfpages}%for pdf pages%
+\usepackage{enumerate}%For lists%
+\usepackage{enumitem}%For Custom Numbering Nested Lists%
+\setlist[enumerate]{label*=\arabic*.} %setting Number. numbering in lists%
+\usepackage{tikz} %For vector graphics%
+\usepackage{circuitikz}%For schemes%
+\usepackage{pgf} %Post script graphics for tikz%
+
+%pouze funguje v PDFLaTeX%
+%\usepackage{tgtermes}%na times font, jiný nefunguje s vyhledáváním a copy%
+
+%
+\usepackage{placeins}%% for \FloatBarrier command that blocks floating with htbp! go over \FloatBarrier
+\usepackage{mathrsfs}%packagee for math symbols for Laplace, Z transform etc., usage \mathscr{Z}
+\usepackage{upgreek}%for upgreek symbols, specified tau \uptau
+
+%this works only when using PDFLaTeX%
+\usepackage[list=true,listformat=simple]{subcaption}
+\usepackage[figurename=Obr.,font=small,labelfont=it,textfont=it]{caption} %for renaming figures instead of renewcommand, small for 11pt default is 10pt as needed in word template
+\usepackage[tablename=Tab.,font=small,labelfont=it,
+            textfont=it]{caption} %for renaming tables instead of renewcommand
+            
+
+            %this works with LuaLaTex and fontspec package%
+ \DeclareCaptionFont{times}{\fontspec{Times New Roman Italic}}
+
+%labelfont and textfont defined here only works with previous declarecaptionfont times and fontspec%
+\captionsetup{labelfont=times, textfont=times, labelsep=space}%no separator in captions
+%
+
+%\bibliographystyle{czechiso} %czechiso.bst in folder is needed for this style to work, available at http://www.fit.vutbr.cz/~martinek/latex/czechiso.html%
+
+%\hyperref[label]{text}% Help for targeting labels
+
+\usepackage{chngcntr} %for numbered figures with sections
+\usepackage{tocloft}%better TOC
+
+%\usepackage{a4wide}%širší a4%
+\usepackage[inner=3cm,outer=2cm,top=2.5cm,bottom=2.5cm,footskip=1cm]{geometry}%for propper margins
+\usepackage{textcase}%for making text uppercase without caps \MakeTextUppercase
+ 
+ 
+\usepackage{titlesec}%for spacing text after sections
+\usepackage{parskip}[]%for working \parskip
+\newcommand{\sectionbreak}{\clearpage}%maybe for SECTIONS on a new page
+
+\usepackage[titletoc]{appendix}%For appendix - přílohy, titletoc is crucial
+%\renewcommand{\appendixname}{Příloha}
+
+\setlength{\parindent}{0.5cm}%setting indent of paragraph to 0.5cm
+\setlength{\parskip}{0em}%setting parskip to 0 for \titleformat to work properly with parskip package
+
+\usepackage{colortbl}%for colored cells
+\usepackage{xcolor}%for colors
+\definecolor{ctublue}{HTML}{0065BD}%defining ctu color
+\definecolor{ctugreen}{HTML}{A2AD00}
+\definecolor{ctured}{HTML}{C60C30}
+\definecolor{ctuyellow}{HTML}{F0AB00}
+\definecolor{ctugreenyblue}{HTML}{00B2A9}
+\definecolor{ctulightblue}{HTML}{6AADE4}
+\definecolor{ctuorange}{HTML}{E05206}
+
+
+\titlespacing*{\section}{0em}{1em}{-\parskip}%spacing text after sections from titlesec package
+\titlespacing*{\subsection}{0em}{1em}{-\parskip}%spacing text after sections from titlesec package
+\titlespacing*{\subsubsection}{0em}{1em}{-\parskip}%spacing text after sections from titlesec package
+
+%when you want sectin/sub/subsub to be black, delete \color{ctublue}
+\titleformat{\section}{\color{ctublue}\fontspec{Times New Roman}\fontsize{15}{15}\bfseries}{\thesection}{2.1em}{}%defining title sizes by word template
+\titleformat{\subsection}{\color{ctublue}\fontspec{Times New Roman}\fontsize{14}{14}\bfseries}{\thesubsection}{1.53em}{}%defining title sizes by word template
+\titleformat{\subsubsection}{\color{ctublue}\fontspec{Times New Roman}\fontsize{13}{13}\bfseries}{\thesubsubsection}{1em}{}%defining title sizes by word template
+
+\usepackage{ctable}%imports xtable with booktabs
+\usepackage{multicol}
+
+\usepackage{listings}%for code environments - \begin{lstlisting}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{zakopal}{
+    backgroundcolor=\color{ctulightblue},   
+    commentstyle=\color{white},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=zakopal}
+\renewcommand{\lstlistingname}{Kód}% renaming Listing -> Kód 
+\renewcommand{\lstlistlistingname}{Seznam kódů}% renaming List of Listings -> Seznam kódů
+
+\lstdefinelanguage{SCL}
+{morekeywords={FUNCTION_BLOCK,BEGIN,NOT,END_FUNCTION_BLOCK,FUNCTION,VOID,VAR_INPUT,END_VAR,VAR_IN_OUT,IF,
+THEN,END_IF,END_FUNCTION,BOOL,FALSE,TRUE},
+sensitive=false,
+morecomment=[l]{//},
+morestring=[b]",
+literate={;}{{\textcolor{orange}{;}}}{1}
+{:}{{\textcolor{orange}{:}}}{1}
+{)}{{\textcolor{orange}{)}}}{1}
+{(}{{\textcolor{orange}{(}}}{1}
+{=}{{\textcolor{orange}{=}}}{1}
+{,}{{\textcolor{orange}{,}}}{1},} %basic SCL language for siemens defined%
+
+
+%%change in previous commands 2.1 em , 1.53em and 1em to 1em to be easy indented not the same
+\begin{document}
+\fontspec{Times New Roman}
+
+\counterwithin{figure}{section}%changing counter of figure, at each section the numbering resets
+\counterwithin{table}{section}%changing counter of table, at each section the numbering resets
+\counterwithin{equation}{section}%changing counter of equation, at each section the numbering resets
+
+\counterwithin{lstlisting}{section}%counter of lstlist - codes, reseting at each section%
+
+\renewcommand{\thefigure}{\thesection~-~\arabic{figure}}%defining style of countering
+\renewcommand{\thetable}{\thesection~-~\arabic{table}}
+\renewcommand{\theequation}{\thesection~-~\arabic{equation}}
+\renewcommand{\thelstlisting}{\thesection~-~\arabic{lstlisting}}%delfining style for lstlisting codes, needs to be after begin document as previous renewcommand%
+
+\renewcommand*{\cftsecdotsep}{1}  % use dots in the section entries and their step
+\renewcommand*{\cftsubsecdotsep}{1}
+\renewcommand*{\cftsubsubsecdotsep}{1}
+\renewcommand*{\cftsecnumwidth}{4em} % increase space for Roman numerals
+\renewcommand*{\cftsubsecnumwidth}{4em} %numbering width
+\renewcommand*{\cftsubsubsecnumwidth}{4em} %numbering width
+\renewcommand*{\cftsubsubsecindent}{0em}%no indent for subsubsection
+\renewcommand*{\cftsubsecindent}{0em}%no indent for subsection
+\renewcommand*{\cftsecindent}{0em}%no indent for subsection
+
+\renewcommand*{\cftfigdotsep}{1}  % use dots in the figure entries and their step
+\renewcommand*{\cftfignumwidth}{4em}
+\renewcommand*{\cftfigindent}{0em}
+
+\renewcommand*{\cfttabdotsep}{1}  % use dots in the figure entries and their step
+\renewcommand*{\cfttabnumwidth}{4em}
+\renewcommand*{\cfttabindent}{0em}
+
+\renewcommand{\cftsecfont}{\fontspec{Times New Roman}\large \bfseries}
+\renewcommand{\cftsubsecfont}{\fontspec{Times New Roman}}
+\renewcommand{\cftsubsubsecfont}{\fontspec{Times New Roman}}
+
+\renewcommand{\cftfigfont}{\fontspec{Times New Roman}}
+\renewcommand{\cfttabfont}{\fontspec{Times New Roman}}
+
+\renewcommand*\contentsname{\textcolor{ctublue}{\MakeTextUppercase{\fontspec{Times New Roman}Obsah}}}
+\renewcommand{\listtablename}{{\fontspec{Times New Roman}\textcolor{ctublue}{\MakeTextUppercase{{Seznam tabulek}}}}}
+\renewcommand{\listfigurename}{{\fontspec{Times New Roman}\textcolor{ctublue}{\MakeTextUppercase{{Seznam obrázků}}}}}
+
+
+
+%\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}%changing figure name to be section.subsection. but do no reset
+\setcounter{figure}{0}
+
+\begin{titlepage}
+	\begin{center}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=1]{src/misc/symbol_cvut_konturova_verze.pdf}
+	\end{center}
+\end{figure}
+	{\Large{\textbf{ČESKÉ VYSOKÉ UČENÍ TECHNICKÉ V~PRAZE}}}\\
+	{\textbf{Fakulta elektrotechnická}}\\
+	{\textbf{Katedra elektrických pohonů a trakce}}
+	
+	\vspace{3cm}
+	
+	
+	{\Large\textbf{Czech name for DP}}
+	
+	\vspace{1cm}
+	
+	{\Large\textbf{English name for DP}}
+	
+	\vspace{2cm}
+	
+	Diplomová práce\\
+	
+	\end{center}
+	
+	\vspace{3cm}
+	
+	\noindent Studijní program: Elektrotechnika, Energetika a Management\\
+	\noindent Studijní obor: Elektrické pohony
+	
+	\vspace{0.5cm}
+	\noindent Vedoucí práce: Ing. Jan Bauer, Ph.D.
+	
+	\vfill
+	
+\begin{center}
+
+	\large{\textbf{Petr Zakopal}}\\
+	\large{\textbf{Praha 2023}}
+	\end{center}
+\end{titlepage}
+
+
+\newpage
+%\pagenumbering{arabic} to arabic page numbering
+\pagenumbering{gobble} %disabling page numbering
+
+\newpage
+
+
+%%ZADÁNÍ PRÁCE
+%verze pro TISK - jen s NEW PAGE
+
+
+%ONLINE VERZE - se zadáním BEZ PODPISŮ
+\null\newpage
+\includepdf[]{src/docs/zadani_bez_podpisu.pdf}
+
+%\newpage
+%\cleardoublepage
+\null\newpage
+
+\pagenumbering{Roman}
+\setcounter{page}{5}%%3 NUTNO řešit dle zadání etc.
+
+\noindent \textcolor{ctublue}{{\Large{\textbf{\MakeTextUppercase{Prohlášení}}}}}\\
+			Prohlašuji, že jsem předloženou práci vypracoval samostatně a že jsem uvedl veškeré použité informační zdroje v~souladu s~Metodickým pokynem o~dodržování etických principů při přípravě vysokoškolských závěrečných prací.\\
+		\vspace{1.5cm}
+		
+	
+
+	\noindent	V~Praze dne \rule{3.5cm}{0.4pt} \hspace{6.6cm}  \rule{4cm}{0.4pt}
+	
+	\hspace{12.65cm}Petr Zakopal
+
+
+		\vspace{14cm}
+		
+	\noindent	\textcolor{ctublue}{{\Large{\textbf{\MakeTextUppercase{Poděkování}}}}}\\
+	Tímto bych rád poděkoval vedoucímu této práce Ing. Janu Bauerovi, Ph.D. za skvělé vedení práce a cenné rady při vytváření. Dále bych rád poděkoval všem, kteří mě v~mých dosavadních studijních aktivitách podporovali.
+		
+
+
+%%ABSTRAKT%%
+
+\newpage
+%\addcontentsline{toc}{section}{3\quad Abstrakt a klíčová slova}%Added citations to TOC%
+%\begin{comment}
+\begin{minipage}[t]{7.37cm}
+		%\raggedright
+	\textcolor{ctublue}{\Large{\textbf{\MakeTextUppercase{Abstrakt}}}}\\
+	Cílem této práce je realizovat pracoviště s~měničem DCM ovládaným pomocí PLC a představit relevantní teorii k~řešené problematice stejnosměrných cize buzených motorů, jejich řízení a základním schématům pro řízení těchto motorů pomocí usměrňovačů. Výsledky této práce popisují konfiguraci DCM měniče a vytvořený PLC a HMI program, potřebný pro ovládání pracoviště, a umožňují čtenáři získat základní teoretické vědomosti potřebné k~možnému přístupu na realizované pracoviště s~DCM.\\
+	\textbf{Klíčová slova:} ČVUT FEL, katedra elektrických pohonů a trakce, stejnosměrný cize buzený motor, čtyřkvadrantový reverzační usměrňovač, pracoviště s~měničem DCM, PLC Siemens S-1200, HMI, zápis a čtení dat pomocí PLC, SINA\_PARA komunikace
+\end{minipage}%
+\hfill% --- important, otherwise it wont be so nice
+\begin{minipage}[t]{7.37cm}
+		\textcolor{ctublue}{\Large{\textbf{\MakeTextUppercase{Abstract}}}}\\
+		The goal of this thesis is to explain basic theory of direct current separately excited motors and their control with rectifiers. It aims to introduce the reader to a PLC program controlling Siemens DCM drive. Ending purpose of this text is to explain how to control motor with a Siemens DCM rectifier in a conjuction with PLC and HMI programs. Reading this text may equip reader with fundamental knowledge which can be used at workplace with DCM drive. This text explains configuration of DCM drive and creation of PLC and HMI programs used for controlling the drive.\\
+		\textbf{Keywords:} CTU FEE, Department of Electric Drives and Traction, direct current motor, four quadrant reverse rectifier, workplace with DCM Siemens Rectifier, PLC Siemens S-1200, HMI, reading and data writing via PLC, SINA\_PARA block communication
+\end{minipage}
+%\end{comment}
+	%\textcolor{ctublue}{\Large{\textbf{\MakeTextUppercase{Abstrakt}}}}\\
+
+	%\textcolor{ctublue}{\Large{\textbf{\MakeTextUppercase{Abstract}}}}\\
+
+\newpage
+\tableofcontents
+\newpage%
+\flushbottom %vyčištění stránky
+\newpage
+\vspace{0pt}
+\listoffigures %seznam obrázků
+\flushbottom %vyčištění stránky
+\newpage
+\listoftables
+\flushbottom
+\newpage
+
+
+\pagenumbering{arabic} %to arabic page numbering - enabling page numbering after gobble which disabled page numbering
+\pagenumbering{gobble}
+\null\newpage
+\null\newpage %PŘI VERZI ONLINE
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\fontspec{Times New Roman}
+
+\addcontentsline{toc}{section}{\numberline{}Úvod} 
+\section*{Úvod}
+Nulla condimentum metus id vehicula interdum. Nullam consectetur nisi mi, eget luctus eros feugiat pulvinar. Vivamus dignissim, risus nec molestie feugiat, velit sapien ultrices justo, eget placerat enim dolor et sem. Pellentesque metus sapien, facilisis id dictum vitae, varius at tellus. Integer eget lorem lorem. Maecenas faucibus imperdiet purus, at rhoncus ex vestibulum quis. Proin ac ipsum a mauris efficitur vulputate nec sed neque. Sed porta interdum consequat. Integer eget felis dignissim, ultricies diam viverra, lacinia risus. Aliquam sit amet risus odio. Aliquam rhoncus nisi ac consequat auctor. Cras est nunc, sodales nec felis sed, vulputate interdum tortor.\par
+Nullam fringilla sagittis accumsan. Morbi porttitor suscipit elit. Mauris eleifend pharetra lobortis. Maecenas eros turpis, ullamcorper in porta sed, iaculis sit amet diam. Mauris pharetra mi vel sapien mollis consequat. Quisque eu odio lobortis, gravida sapien ut, consectetur sem. In scelerisque nulla porttitor arcu ultrices egestas. Vivamus dapibus sem nulla, ut vestibulum enim luctus in.
+\flushbottom %vyčištění stránky
+\newpage
+%konec úvodu
+
+\section{Stejnosměrný motor s~cizím buzením}%
+
+	\subsection{Princip činnosti}
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel ligula scelerisque, sodales risus eget, auctor nisl. Nulla consectetur eget tortor pulvinar aliquet. Fusce consequat elit nec metus egestas vestibulum. Morbi non elementum mi. Cras nec erat justo. Maecenas ac orci fringilla, cursus augue eget, suscipit justo. Maecenas lacinia elit felis. Proin aliquet tincidunt placerat. Morbi id accumsan felis, at porta ligula. Ut id eros semper, facilisis ex sed, iaculis enim. Sed sit amet elit finibus, venenatis odio sed, feugiat eros.
+		
+%závěr
+\newpage
+\addcontentsline{toc}{section}{\numberline{}Závěr} 
+\section*{Závěr}
+Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod facilisis turpis, nec lobortis libero aliquet sit amet. Aenean suscipit ante eget ipsum viverra hendrerit. Ut sed massa sed nisi tempus dapibus in eu enim. Nullam vitae odio laoreet, malesuada purus non, faucibus orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget odio quis enim laoreet imperdiet nec eu nunc. Maecenas ut consequat purus. Duis faucibus risus nec metus cursus placerat. Phasellus sapien justo, laoreet in pulvinar ut, maximus nec velit.\par
+V~navazující části jsou shrnuty teoretické poznatky o~práci usměrňovačů, které slouží k~napájení stejnosměrných cize buzených motorů. Teoretické informace o~nereverzačním můstkovém usměrňovači byly následně aplikovány při sestavení teorie reverzačních usměrňovačů, používaných v~praktické části práce.\par
+Aliquam blandit vitae mi eget accumsan. Proin eget dui in orci posuere semper in a magna. Suspendisse vitae eleifend ante, sed laoreet eros. Nunc pulvinar sit amet tortor ac semper. Curabitur feugiat urna et fermentum gravida. Sed odio velit, suscipit quis lectus et, lobortis tincidunt ante. Morbi dapibus, urna eu faucibus hendrerit, massa neque suscipit libero, a cursus mauris mauris eget massa. Fusce nec egestas ex, eget cursus leo. Nullam finibus lectus et luctus bibendum. Vivamus ultrices libero diam, ut feugiat tellus condimentum vel. Proin sodales tortor eu odio consequat, sit amet rutrum enim semper. Maecenas ut lacinia ante. Mauris ornare cursus molestie.
+	
+
+\flushbottom %vyčištění stránky
+
+%konec závěru
+
+\newpage
+\printbibliography[title={{Literatura}}]	
+\nocite{*}
+\addcontentsline{toc}{section}{\numberline{}Literatura} %Added citations to TOC%
+	\appendix
+	\titleformat{\section}{\color{ctublue}\fontspec{Times New Roman}\fontsize{15}{15}\bfseries}{Příloha \thesection:}{2.1em}{}
+	\begin{appendices}
+	\section{Seznam symbolů a zkratek}
+		\subsection{Seznam symbolů}
+			\begin{description}
+			\item $\vec{F}$ (N) \hspace*{\parindent} vektor síly
+			
+		\end{description}
+	\subsection{Seznam zkratek}
+		\begin{description}
+			\item DCM \hspace*{\parindent} DC Master
+			
+		\end{description}
+	\end{appendices}
+\end{document}
