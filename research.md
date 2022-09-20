@@ -22,7 +22,7 @@ Where to take inspiration
 - FPGA programming in matlab [MathWorks](https://www.mathworks.com/discovery/fpga-programming.html)
 - Getting Started With Matlab Programming [MathWorks](https://www.mathworks.com/solutions/fpga-asic-soc-development/resources.html)
 - jediné dostupné Intel FPGA, které připadá v úvahu [Mouser](https://cz.mouser.com/ProductDetail/Intel/EK-10CL025U256?qs=HXFqYaX1Q2zh%2FEGiixG4LQ%3D%3D)
-- suppoer for HDL verifier [MathWorks](https://www.mathworks.com/help/supportpkg/alterafpgaboards/ug/altera-fpga-board-support-from-hdl-verifier.html)
+- supported FPGAs for HDL verifier [MathWorks](https://www.mathworks.com/help/supportpkg/alterafpgaboards/ug/altera-fpga-board-support-from-hdl-verifier.html)
 - kde je možné také vyvíjet a simulovat věci na FPGA od intelu (Lite edice) [Intel](https://www.intel.com/content/www/us/en/collections/products/fpga/software/downloads.html?product=modelsim_ae&s=Newest&f:guidetm83741EA404664A899395C861EDA3D38B=%5BIntel%C2%AE%20Cyclone%C2%AE%5D)
 - HDL coder do Matlabu [MathWorks](https://www.mathworks.com/products/hdl-coder.html)
   – FPGA YouTube programming video for intel [YouTube](https://www.youtube.com/watch?v=vmraRVxKYss)
