@@ -55,6 +55,34 @@ Where to take inspiration
 - Vivado HLS has been replaced by Vitis [Vitis Docs](https://www.xilinx.com/support/documentation-navigation/design-hubs/dh0090-vitis-hls-hub.html)
 - Vivado Designing with IP [Vivado Docs](https://www.xilinx.com/support/documentation-navigation/design-hubs/dh0003-vivado-designing-with-ip-hub.html)
 
+## Poznatky
+
+- nainstalovat Vitis, protože obsahuje i Vivado, obráceně ne
+- na vývojovou destičku digilent použít [Návod](https://digilent.com/reference/programmable-logic/guides/installing-vivado-and-vitis)
+- použít podporovanou vezi ubuntu, jinak to nebude fungovat - verze 20.x (v době testování se jedná o poslední podporovanou vezi [20.04](https://releases.ubuntu.com/20.04/)), jaká verze je podporovaná je možné zkontrolovat v [Docs](https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/Supported-Operating-Systems)
+- jeden z možných návodů na vivado a vitis [YouTube](https://www.youtube.com/watch?v=Mb-cStd4Tqs)
+- pokud by se instalace zasekla v poslední části po nainstalování IDE, je možné zrušit v terminálu instalaci Ctrl+C a nainstalovat potřebné balíčky
+
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt install libncurses5
+sudo apt install libtinfo5
+sudo apt install libncurses5-dev libncursesw5-dev
+sudo apt install ncurses-compat-libs
+```
+
+- může se stát, že nebude fungovat `sudo apt install ncurses-compat-libs`, nic se neděje, nevyzkoušel jsem, které jsou crucial pro instalaci
+- pro možnosti nastartování je třeba použít `source` command neboli `source /tools/Xilinx/Vitis_HLS/2022.1/settings64.sh`
+  `source /tools/Xilinx/Vivado/2022.1/settings64.sh`a poté pouštět pomocí commandů `vivado` resp `vitis_hls`, doporučuji však vytvoři aliasy
+
+```bash
+alias vitis_hls="source /tools/Xilinx/Vitis_HLS/2022.1/settings64.sh && vitis_hls"
+alias vivado="source /tools/Xilinx/Vivado/2022.1/settings64.sh && vivado"
+```
+
+a poté spouštět klasickými commandy (protože nastaveno v aliasu)
+
 ## Nápad jak udělat práci v C nebo Matlab/Simulink
 
 - Nejdříve napsat v C HLS ve Xilix Vitis
