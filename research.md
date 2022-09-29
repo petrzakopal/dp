@@ -30,7 +30,7 @@ Where to take inspiration
 - FPGA YouTube programming video for intel [YouTube](https://www.youtube.com/watch?v=vmraRVxKYss)
 - programování FPGA [Design of FPGA-controlled power electronics and drives using MATLAB Simulink](https://ieeexplore-ieee-org.ezproxy.techlib.cz/document/6579155)
 - Simulink Modeling and Design of an Efficient Hardware-Constrained FPGA-Based PMSM Speed Controller [Simulink Modeling and Design of an Efficient Hardware-Constrained FPGA-Based PMSM Speed Controller](https://ieeexplore-ieee-org.ezproxy.techlib.cz/document/6179536)
-- FPGA Zybo Z7 Docs [Docs](https://digilent.com/reference/programmable-logic/zybo-z7/reference-manual?redirect=1)
+- FPGA Zybo Docs [Docs](https://digilent.com/reference/programmable-logic/zybo/start?redirect=1) - retired, replaced by newer version of Zybo Z7 [Docs](https://digilent.com/reference/programmable-logic/zybo-z7/reference-manual?redirect=1)
 
 # Random notes
 
@@ -41,7 +41,8 @@ Where to take inspiration
 
 # Development
 
-- development kit [E-Shop](https://digilent.com/shop/zybo-z7-zynq-7000-arm-fpga-soc-development-board/)
+- DEPRACATED but still used by PZ development kit [Docs](https://digilent.com/reference/programmable-logic/zybo/start?redirect=1)
+- NEW development kit [E-Shop](https://digilent.com/shop/zybo-z7-zynq-7000-arm-fpga-soc-development-board/)
 - basic tutoriál na HDL coder [MathWorks](https://www.mathworks.com/help/hdlcoder/ug/getting-started-with-hardware-software-codesign-workflow-for-xilinx-zynq-platform.html)
 - development in VIVADO [YouTube](https://www.youtube.com/watch?v=7HVpl1HiZoY)
 - VERILOG and VHDL resources [Nandland](https://nandland.com/)
@@ -82,6 +83,14 @@ alias vivado="source /tools/Xilinx/Vivado/2022.1/settings64.sh && vivado"
 ```
 
 a poté spouštět klasickými commandy (protože nastaveno v aliasu)
+
+- jak rozbalit tar archiv v Linuxu
+
+```bash
+tar -xzvf name_of_archive.tar.gz
+```
+
+_zdroj: [https://www.nexcess.net/help/how-to-decompress-files-in-gzip](https://www.nexcess.net/help/how-to-decompress-files-in-gzip)_
 
 ## Nápad jak udělat práci v C nebo Matlab/Simulink
 
