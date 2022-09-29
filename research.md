@@ -1,5 +1,7 @@
 # Research of a subject
 
+Základní base nápadů a poznatků ohledně programování FPGA. Pro a proti programování v C a použití HSL do VHDL nebo Verilog, porovnání s Matlab Coder.
+
 _Advanced numerical model of permanent magnet synchronous motor implemented on FPGA for Hardware-in-in-the-loop systems_
 
 Where to take inspiration
@@ -51,25 +53,49 @@ Where to take inspiration
 - Vivado HLS Introduction [YouTube](https://www.youtube.com/watch?v=5lYq8_bqAcI)
 - Getting started with Vivado HLS Tutorial [YouTube](https://www.youtube.com/watch?v=hZ2RGwLmXc0)
 - Vivado HLS has been replaced by Vitis [Vitis Docs](https://www.xilinx.com/support/documentation-navigation/design-hubs/dh0090-vitis-hls-hub.html)
+- Vivado Designing with IP [Vivado Docs](https://www.xilinx.com/support/documentation-navigation/design-hubs/dh0003-vivado-designing-with-ip-hub.html)
 
-## Nápad jak udělat práci
+## Nápad jak udělat práci v C nebo Matlab/Simulink
 
 - Nejdříve napsat v C HLS ve Xilix Vitis
 - Exportovat IP
 - vložit do Xilinx Vivado
 - nahrát do FPGA
 
-### Problémy 🔴
+### Práce v C
+
+#### Problémy 🔴
 
 - nutnost naprogramování vlastních funkcí na transformace, na výpočty atd
 - nutnost znalosti alespoň trochu VHDL nebo Verilog
 - nutnost více SW
 - nutnost ruční optimalizace
+- SW je jen na Linux
+- Vivado a Vitis mají neskutečně GB velikost
 
-### Výhody 🟢
+#### Výhody 🟢
 
 - open source ❤️
 - možnost snadnějšího portu na jiné FPGA i jiné vendors
 - lépe optimalizovat než Matlab
 - i SW na managing je open source (matlab ne)
 - když bude dobrá optimalizace v C, tak dobrá optimalizace i HDL, lepší efficiency
+- SW je na Linux, ale ne na macOS - nevadí, protože Linux může jet i na serveru (Ubuntu)
+
+### Práce v Simulink/Matlab
+
+#### Problémy 🔴
+
+- jsem závislý na Matlabu a Simulinku a na tom, jak dobře vygeneruje HDL code
+- jsem závislý na Addonu HDL Coder
+- syntéza někdy trvá dlouho
+- asi dlouhý kód
+- nutnost převedení algoritmů do fixed point
+
+#### Výhody 🟢
+
+- dobře viditelné bloky
+- snadno implementovat matematiku - funkce
+- mělo by to být prakticky bez práce
+- žádná nutnost dalších SW asi
+- Matlab a Simulink není tak veliký
