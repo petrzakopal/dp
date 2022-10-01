@@ -123,6 +123,8 @@ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 
 - 📀 dobrý webinář na Vitis a Vivado obecně [YouTube](https://www.youtube.com/watch?v=a9ozwIT98rc)
 
+- Vitis tutorials od Xilinxu na [GitHub](https://github.com/Xilinx/Vitis-Tutorials)
+
 ## Nápad jak udělat práci v C nebo Matlab/Simulink
 
 - Nejdříve napsat v C HLS ve Xilix Vitis
