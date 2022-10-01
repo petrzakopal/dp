@@ -92,6 +92,37 @@ tar -xzvf name_of_archive.tar.gz
 
 _zdroj: [https://www.nexcess.net/help/how-to-decompress-files-in-gzip](https://www.nexcess.net/help/how-to-decompress-files-in-gzip)_
 
+- zobrazit v linuxu připojená USB zařízení
+
+```
+dmesg | grep tty
+```
+
+- digilent Adept [Adept](https://digilent.com/reference/software/adept/start?redirect=2#software_downloads) na zobrazení připojených věcí nefunguje
+
+```
+djtgcfg enum
+```
+
+- někdy spadne syntéza ve Vivado - když je využito mnoho resources nebo chybí knihovny
+
+```bash
+sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
+
+```
+
+- pro kódování v Matlabu je třeba stáhnotu v záložce Add-Ons -> Get Hardware Support Packages - Xilinx Zynq support, ale nejde to na macOS, bude třeba asi Windows
+- pro funkčnost Matlabu na kódění FPGA Xilinx je třeba mít Vivado nainstalované
+- How vitis programming works [https://xilinx.github.io/Vitis-Tutorials/2021-1/build/html/docs/Getting_Started/Vitis/Getting_Started_Vitis.html](https://xilinx.github.io/Vitis-Tutorials/2021-1/build/html/docs/Getting_Started/Vitis/Getting_Started_Vitis.html)
+
+- informace o programování kernelů (pro FPGA) accelerated applications [Xilix](https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/A-Sample-Application)
+
+- jak optimalizovat programy v HLS [Xilix](https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/Getting-Started-with-Vitis-HLS); _je tam dobrý checklist optimalizace_
+
+- co znamená port v PRAGMA [Xilinx](https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/pragma-HLS-interface)
+
+- 📀 dobrý webinář na Vitis a Vivado obecně [YouTube](https://www.youtube.com/watch?v=a9ozwIT98rc)
+
 ## Nápad jak udělat práci v C nebo Matlab/Simulink
 
 - Nejdříve napsat v C HLS ve Xilix Vitis
@@ -128,6 +159,7 @@ _zdroj: [https://www.nexcess.net/help/how-to-decompress-files-in-gzip](https://w
 - syntéza někdy trvá dlouho
 - asi dlouhý kód
 - nutnost převedení algoritmů do fixed point
+- nutnost mít nainstalované Vivado i Matlab současně
 
 #### Výhody 🟢
 
