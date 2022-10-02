@@ -9,7 +9,6 @@ Where to take inspiration
 - [Conference paper](http://poseidon2.feld.cvut.cz/conf/poster/)
 - [IEEE](https://ieeexplore.ieee.org/document/9432517)
 - [Diploma Thesis ČVUT](https://dspace.cvut.cz/bitstream/handle/10467/89815/F3-DP-2020-Sterba-Vojtech-VojtechSterba.pdf?sequence=-1&isAllowed=y)
-- [YouTube HIL Simulation](https://www.youtube.com/watch?v=vrRq6YovMtk)
 
 ## Hardware in the loop systems - HIL
 
@@ -124,6 +123,20 @@ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 - 📀 dobrý webinář na Vitis a Vivado obecně [YouTube](https://www.youtube.com/watch?v=a9ozwIT98rc)
 
 - Vitis tutorials od Xilinxu na [GitHub](https://github.com/Xilinx/Vitis-Tutorials)
+
+- možná návod jak udělat Linux a Accelerated App [Hackster.io](https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a)
+
+- Digilent Zybo Petalinux od Digilentu [GitHub](https://github.com/Digilent/Petalinux-Zybo) (_nefungoval mi_)
+
+## Knihovny do Vitis
+
+_když píše, že nenalezl..._
+
+- [OpenCL](https://github.com/definelicht/hlslib/tree/a67e02f263d666e1c7ba649c6755025b5fdd38bf/include/hlslib)
+- pack nějakých knihoven [HSLIB](https://github.com/definelicht/hlslib)
+- KhronosGroup [OpenCl](https://github.com/KhronosGroup/OpenCL-CLHPP/tree/main/include)
+- HLS_STREAM [GitHub](https://github.com/dgschwend/zynqnet/blob/master/_HLS_CODE/vivado_include/hls_stream.h)
+- [xcl2.hpp a xcl2.cpp](https://github.com/Xilinx/Vitis_Accel_Examples/tree/master/common/includes/xcl2)
 
 ## Nápad jak udělat práci v C nebo Matlab/Simulink
 
