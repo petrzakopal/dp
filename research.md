@@ -126,7 +126,15 @@ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 
 - možná návod jak udělat Linux a Accelerated App [Hackster.io](https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a)
 
-- Digilent Zybo Petalinux od Digilentu [GitHub](https://github.com/Digilent/Petalinux-Zybo) (_nefungoval mi_)
+- Digilent Zybo Petalinux od Digilentu [GitHub](https://github.com/Digilent/Petalinux-Zybo) (_nefungoval mi_), ale obsahuje popis, jak instalovat Petalinux obecně na Linux
+
+  - source petalinux tools
+
+  ```
+   source /opt/pkg/petalinux/settings.sh
+  ```
+
+- zde popisují další změny ale ujiného FPGA při řešení petalinux - po kódu ohledne `petalinux-config -c kernel` [Hackster.io](https://www.hackster.io/news/microzed-chronicles-vitis-sw-platform-fd3921137bcf.amp)
 
 ## Knihovny do Vitis
 
@@ -155,6 +163,10 @@ _když píše, že nenalezl..._
 - nutnost ruční optimalizace
 - SW je jen na Linux
 - Vivado a Vitis mají neskutečně GB velikost
+- momentálně nelze rozchodit HW Accelerated Coding
+  - snažím se udělat s pomocí petalinux linux, který by běžel na CPU a tím pádem bych mohl ve Vitis udělat Platformu, která je accelerated na linuxu a tím pádem např. vloži automaticky examples s knihovnami, které nejdou globálně při klasickým embeded řešení načíst, hlásí to chyby a když je ručně vtáhnu z různých odkazů na webu, tak to stejně nefunguje
+  - i po šesti hodinách se kompilace zasekne asi po 13 minutách a nejde dál, viz ![Compilation stuck](./misc/petalinux-stuck.png)
+  - výpis, který se ukáže po manuálním zrušení ![Interrupted](./misc/petalinux-interrupted.png)
 
 #### Výhody 🟢
 
