@@ -136,6 +136,12 @@ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 
 - zde popisují další změny ale ujiného FPGA při řešení petalinux - po kódu ohledne `petalinux-config -c kernel` [Hackster.io](https://www.hackster.io/news/microzed-chronicles-vitis-sw-platform-fd3921137bcf.amp)
 
+- na odkaze [Support Xilinx](https://support.xilinx.com/s/article/73686?language=en_US) je možné dole stáhnout xlsx soubor, který obsahuje skript na nainstalování potřebných knihoven do Linuxu
+  - např. pro linux 18.04.4
+  ```bash
+  sudo apt-get install gawk python build-essential gcc git make net-tools libncurses5-dev tftpd zlib1g-dev libssl-dev flex bison libselinux1 gnupg wget diffstat chrpath socat xterm autoconf libtool tar unzip texinfo zlib1g-dev gcc-multilib build-essential-dev zlib1g:i386 screen pax gzip
+  ```
+
 ## Knihovny do Vitis
 
 _když píše, že nenalezl..._
