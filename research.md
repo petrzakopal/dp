@@ -38,6 +38,8 @@ Where to take inspiration
 - tyto kostky jsou řízeny pomocí FPGA [GitHub](https://github.com/kbob/LED-Cube) [Twitter](https://twitter.com/esden/status/1160309492896215040)
 - IP znamená Intellectual Property = znovupoužitelý blok, jak už HW tak SW, který není závislý an výrobci a HW, jde použít univerzálněji nebo méně univerzálněji [Info](https://www.techtarget.com/whatis/definition/IP-core-intellectual-property-core)
 
+- rules for newbies with fpga programming generally [Rules for new FPGA designers](http://zipcpu.com/blog/2017/08/21/rules-for-newbies.html)
+
 # Development
 
 - DEPRACATED but still used by PZ development kit [Docs](https://digilent.com/reference/programmable-logic/zybo/start?redirect=1)
@@ -137,10 +139,16 @@ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 - zde popisují další změny ale ujiného FPGA při řešení petalinux - po kódu ohledne `petalinux-config -c kernel` [Hackster.io](https://www.hackster.io/news/microzed-chronicles-vitis-sw-platform-fd3921137bcf.amp)
 
 - na odkaze [Support Xilinx](https://support.xilinx.com/s/article/73686?language=en_US) je možné dole stáhnout xlsx soubor, který obsahuje skript na nainstalování potřebných knihoven do Linuxu
-  - např. pro linux 18.04.4
+
+  - např. pro linux 18.04.4 je dle excelu dostupný tento příkaz, ovšem dle hledání na internetu a hlášky terminalu, balíček `build-essential-dev` neexistuje
+
   ```bash
   sudo apt-get install gawk python build-essential gcc git make net-tools libncurses5-dev tftpd zlib1g-dev libssl-dev flex bison libselinux1 gnupg wget diffstat chrpath socat xterm autoconf libtool tar unzip texinfo zlib1g-dev gcc-multilib build-essential-dev zlib1g:i386 screen pax gzip
   ```
+
+- qemu_args.txt pro Zybo 7000 ve složce s bootem [Xilinx](https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Zynq-7000-PS-Arguments-for-QEMU)
+
+- how to boot petalinux on board xilinx support [Xilinx](https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide/Prerequisites?tocId=8b_X7EaE~qj1uYiTAxonPA)
 
 ## Knihovny do Vitis
 
