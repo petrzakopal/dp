@@ -178,9 +178,28 @@ _když píše, že nenalezl..._
 - SW je jen na Linux
 - Vivado a Vitis mají neskutečně GB velikost
 - momentálně nelze rozchodit HW Accelerated Coding
-  - snažím se udělat s pomocí petalinux linux, který by běžel na CPU a tím pádem bych mohl ve Vitis udělat Platformu, která je accelerated na linuxu a tím pádem např. vloži automaticky examples s knihovnami, které nejdou globálně při klasickým embeded řešení načíst, hlásí to chyby a když je ručně vtáhnu z různých odkazů na webu, tak to stejně nefunguje
+
+  - [**vyřešeno**] [_nepsrávná verze linuxu, i se správnou petalinux-build --sdk trvá přes 40 minut_] snažím se udělat s pomocí petalinux linux, který by běžel na CPU a tím pádem bych mohl ve Vitis udělat Platformu, která je accelerated na linuxu a tím pádem např. vloži automaticky examples s knihovnami, které nejdou globálně při klasickým embeded řešení načíst, hlásí to chyby a když je ručně vtáhnu z různých odkazů na webu, tak to stejně nefunguje
   - i po šesti hodinách se kompilace zasekne asi po 13 minutách a nejde dál, viz ![Compilation stuck](./misc/petalinux-stuck.png)
   - výpis, který se ukáže po manuálním zrušení ![Interrupted](./misc/petalinux-interrupted.png)
+
+- při instalaci vitis nainstalovat knihovny z části _Installation_ [Xilinx](https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/OpenCL-Installable-Client-Driver-Loader)
+
+```bash
+sudo apt-get install ocl-icd-libopencl1
+sudo apt-get install opencl-headers
+sudo apt-get install ocl-icd-opencl-dev
+```
+
+- někdy třeba nejde něco spustit nebo zapisovat do něčeho, musím si vzpomenout u čeho ale je někdy důležité změnit i vlastníka
+
+```
+sudo chmod -R 755 direcotry_ #moznost zapisu a cteni atd
+```
+
+```
+sudo chown -R $USER:$USER directory #zmena vlastnika
+```
 
 #### Výhody 🟢
 
