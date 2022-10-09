@@ -81,6 +81,7 @@ sudo apt install ncurses-compat-libs
 ```bash
 alias vitis_hls="source /tools/Xilinx/Vitis_HLS/2022.1/settings64.sh && vitis_hls"
 alias vivado="source /tools/Xilinx/Vivado/2022.1/settings64.sh && vivado"
+alias vitis="source /tools/Xilinx/Vitis/2022.1/settings64.sh && vitis"
 ```
 
 a poté spouštět klasickými commandy (protože nastaveno v aliasu)
@@ -149,6 +150,8 @@ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 - qemu_args.txt pro Zybo 7000 ve složce s bootem [Xilinx](https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Zynq-7000-PS-Arguments-for-QEMU)
 
 - how to boot petalinux on board xilinx support [Xilinx](https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide/Prerequisites?tocId=8b_X7EaE~qj1uYiTAxonPA)
+
+- připravené základní balíčky Vivado na tvorbu ve Vitis ke stažení [vivado-data.zip](misc/vivado-data.zip) (kde je název linux, je to uzpůsobené na akceleraci)
 
 ## Knihovny do Vitis
 
