@@ -170,6 +170,13 @@ _když píše, že nenalezl..._
 - vložit do Xilinx Vivado
 - nahrát do FPGA
 
+### VNC server
+
+- nainstalovat tiger vnc
+- spustit `sudo tigervncserver :3`
+- na lokálu dát `ssh petr@remote_pc_ip -L 590<screen_id>:localhost:590<screen_id>`
+- a pak se připojit přes viewer jako `localhost:590<screen_id>`
+
 ### Práce v C
 
 #### Problémy 🔴
