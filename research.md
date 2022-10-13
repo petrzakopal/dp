@@ -1,3 +1,7 @@
+# Poznámky ze dne vyhledávání informací a bloudění ve světě FPGA a CPU
+
+[13.10.2022](20221013.md)
+
 # Research of a subject
 
 Základní base nápadů a poznatků ohledně programování FPGA. Pro a proti programování v C a použití HSL do VHDL nebo Verilog, porovnání s Matlab Coder.
