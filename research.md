@@ -1,6 +1,6 @@
 # Poznámky ze dne vyhledávání informací a bloudění ve světě FPGA a CPU
 
-[13.10.2022](20221013.md)
+[13.10.2022](notes/20221013.md)
 
 # Research of a subject
 
