@@ -244,3 +244,7 @@ sudo chown -R $USER:$USER directory #zmena vlastnika
 - mělo by to být prakticky bez práce
 - žádná nutnost dalších SW asi
 - Matlab a Simulink není tak veliký
+
+## Out of topic tipy
+
+- zajímavé zkratky na VSCode [zellwk.com](https://zellwk.com/blog/useful-vscode-keyboard-shortcuts/)

@@ -4,11 +4,11 @@
 
 - research ohledně FPGA (programování v HLS (C/Matlab/Simlink) nevo HDL/Verilog [research.md](/research.md)
 
-## Mé denní poznámky
+## Mé denní poznámky ✏️
 
-[13.10.2022](notes/20221013.md)
+🔗 [13.10.2022](notes/20221013.md)
 
-[14.10.2022](notes/20221014.md)
+🔗 [14.10.2022](notes/20221014.md)
 
 # Progress
 
