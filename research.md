@@ -248,3 +248,6 @@ sudo chown -R $USER:$USER directory #zmena vlastnika
 ## Out of topic tipy
 
 - zajímavé zkratky na VSCode [zellwk.com](https://zellwk.com/blog/useful-vscode-keyboard-shortcuts/)
+- odkaz na techlib jak citovat [Techlib](https://moodle.techlib.cz/pluginfile.php/5874/mod_resource/content/2/Citov%C3%A1n%C3%AD-b%C5%99ezen_2022-moodle.pdf)
+- toto SSD malá životnost ale nízká cena, na základní hrátky asi postačí a bude kompatibilní [Alza](https://www.alza.cz/kingston-a400-480gb-7mm-d4798613.htm)
+- měřit spotřebu zásuvkou [Alza](https://www.alza.cz/tellur-wifi-smart-ac-plug-energy-reading-3680w-16a-bila-d6807599.htm)
