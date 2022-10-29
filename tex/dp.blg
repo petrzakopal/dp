@@ -1,0 +1,16 @@
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is 'dp.blg'
+[98] biber-darwin:340> INFO - === Sat Oct 29, 2022, 17:39:03
+[118] Biber.pm:415> INFO - Reading 'dp.bcf'
+[211] Biber.pm:949> INFO - Using all citekeys in bib section 0
+[229] Biber.pm:4340> INFO - Processing section 0
+[242] Biber.pm:4531> INFO - Looking for bibtex format file 'src/bib/zdroje.bib' for section 0
+[244] bibtex.pm:1689> INFO - LaTeX decoding ...
+[250] bibtex.pm:1494> INFO - Found BibTeX data source 'src/bib/zdroje.bib'
+[282] Utils.pm:395> WARN - Overwriting field 'month' with month value from field 'date' for entry 'tech-talks'
+[292] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
+[292] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[292] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'cs-CZ'
+[300] bbl.pm:654> INFO - Writing 'dp.bbl' with encoding 'UTF-8'
+[302] bbl.pm:757> INFO - Output to dp.bbl
+[302] Biber.pm:128> INFO - WARNINGS: 1

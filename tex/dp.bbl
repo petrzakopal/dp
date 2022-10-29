@@ -1,0 +1,87 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{microchip_calculations}{online}{}
+      \name{author}{1}{}{%
+        {{hash=df91501c7cf3f67d7304ad9e8e4e9319}{%
+           family={Bersani},
+           familyi={B\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Microchip Technology Inc.}%
+      }
+      \strng{namehash}{df91501c7cf3f67d7304ad9e8e4e9319}
+      \strng{fullhash}{df91501c7cf3f67d7304ad9e8e4e9319}
+      \strng{bibnamehash}{df91501c7cf3f67d7304ad9e8e4e9319}
+      \strng{authorbibnamehash}{df91501c7cf3f67d7304ad9e8e4e9319}
+      \strng{authornamehash}{df91501c7cf3f67d7304ad9e8e4e9319}
+      \strng{authorfullhash}{df91501c7cf3f67d7304ad9e8e4e9319}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{online}
+      \field{title}{Switch Mode Power Supply (SMPS) Topologies (Part II)}
+      \field{urlday}{6}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.microchip.com/content/dam/mchp/documents/OTH/ApplicationNotes/ApplicationNotes/01207B.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.microchip.com/content/dam/mchp/documents/OTH/ApplicationNotes/ApplicationNotes/01207B.pdf
+      \endverb
+    \endentry
+    \entry{tech-talks}{incollection}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{YouTube}
+      \field{day}{21}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{note}{Kanál uživatele Tech TALKS}
+      \field{title}{Space Vector PWM 2 | SVPWM Technique | MATLAB Simulation | Step by Step, 2020}
+      \field{urlday}{27}
+      \field{urlmonth}{10}
+      \field{urlyear}{2022}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.youtube.com/watch?v=oq868piQ9Q4
+      \endverb
+      \verb{url}
+      \verb https://www.youtube.com/watch?v=oq868piQ9Q4
+      \endverb
+      \warn{\item Overwriting field 'month' with month value from field 'date' for entry 'tech-talks'}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

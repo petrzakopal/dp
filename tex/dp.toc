@@ -1,0 +1,37 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\hbox to\@tempdima {\hfil }Úvod}{1}{figure.caption.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Stejnosměrný motor s~cizím buzením}{2}{section.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Princip činnosti}{2}{subsection.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{3}{subsection.1.1}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{4}{subsection.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{5}{appendix.1.A}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{5}{subsection.1.A.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{5}{subsection.1.A.2}%
