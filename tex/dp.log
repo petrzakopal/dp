@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  30 OCT 2022 20:47
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  30 OCT 2022 21:00
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1685,12 +1685,12 @@ Here is how much of LuaTeX's memory you used:
  125094,2373549 words of node,token memory allocated
  834 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 17 attribute, 107 glue_spec, 10 attribute_list, 2 write, 2 pdf_action nodes
-   avail lists: 1:5,2:1758,3:537,4:248,5:260,6:113,7:6628,8:103,9:543,10:16,11:748
+   avail lists: 1:5,2:1758,3:537,4:248,5:260,6:113,7:6826,8:103,9:543,10:16,11:774
  70972 multiletter control sequences out of 65536+600000
  82 fonts using 22844351 bytes
  84i,17n,82p,1166b,4305s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-Output written on dp.pdf (17 pages, 277001 bytes).
+Output written on dp.pdf (17 pages, 277085 bytes).
 
 PDF statistics: 348 PDF objects out of 1000 (max. 8388607)
  295 compressed objects within 3 object streams
