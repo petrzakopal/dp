@@ -248,7 +248,7 @@ literate={;}{{\textcolor{orange}{;}}}{1}
 	
 	\vspace{1cm}
 	
-	{\Large\textbf{Usage of FPGA in control of electric drives}}
+	{\Large\textbf{Usage of FPGA for controlling electric drives}}
 	
 	\vspace{2cm}
 	
@@ -358,18 +358,72 @@ literate={;}{{\textcolor{orange}{;}}}{1}
 \pagenumbering{arabic}
 \fontspec{Times New Roman}
 
-\addcontentsline{toc}{section}{\numberline{}Úvod} 
-\section*{Úvod}
-Nulla condimentum metus id vehicula interdum. Nullam consectetur nisi mi, eget luctus eros feugiat pulvinar. Vivamus dignissim, risus nec molestie feugiat, velit sapien ultrices justo, eget placerat enim dolor et sem. Pellentesque metus sapien, facilisis id dictum vitae, varius at tellus. Integer eget lorem lorem. Maecenas faucibus imperdiet purus, at rhoncus ex vestibulum quis. Proin ac ipsum a mauris efficitur vulputate nec sed neque. Sed porta interdum consequat. Integer eget felis dignissim, ultricies diam viverra, lacinia risus. Aliquam sit amet risus odio. Aliquam rhoncus nisi ac consequat auctor. Cras est nunc, sodales nec felis sed, vulputate interdum tortor.\par
-Nullam fringilla sagittis accumsan. Morbi porttitor suscipit elit. Mauris eleifend pharetra lobortis. Maecenas eros turpis, ullamcorper in porta sed, iaculis sit amet diam. Mauris pharetra mi vel sapien mollis consequat. Quisque eu odio lobortis, gravida sapien ut, consectetur sem. In scelerisque nulla porttitor arcu ultrices egestas. Vivamus dapibus sem nulla, ut vestibulum enim luctus in.
+\section{Úvod}
+V době, kdy byla od elektrických pohonů požadována spolehlivost, vysoká účinnost a kvalitní řízení, nastupují k řízení digitální signálové procesory. Postupem časů dochází ke zjištění, že výkon DSP není dostatečný a na některé aplikace, kde je vyžadováno provedení značné množství náročných výpočtů za co nejkratší čas, nejsou vhodné. Proto nastupuje éra logických programovatelných polí (FPGA), které jsou schopny tyto výpočty provést s velmi nízkými nároky na energii za velmi krátký čas.\par
+V mnoha odvětvích se již začíná využívat embedded systém s Application Spefified Hardware, který je určen pouze na předem danou aplikaci. Tento hardware slouží v dané aplikaci k jedinému účelu, který vykonává a na který je optimalizován. Tím se liší od procesoru, který vykonává mnoho instrukcí a využít ho pouze jako samostatnou výpočetní jednotku může být z hlediska energetické i finanční náročnosti nevýhodné. Implementace hradlových polí přináší nejen v řízení elektrických pohonů zvýšení výpočetního výkonu, ale také snižování energetických náročností.\par
+Tato práce se zajímá o aplikace a možné využití FPGA při řízení elektrických pohonů. Autor v ní představuje základní principy Hardware Accelerated Applications, z jakého důvodu je tento přístup perspektivní a proč je vhodné se orientovat tímto směrem.\par
+Perspektiva logických programovatelných polí a hardwarově urychlovaných aplikací je podpořena jejich využíváním i mimo obor elektrických pohonů a trakce. Z důvodu jejich veliké propustnosti, vysokých výpočetních výkonů a nízké energetické náročnosti jsou využívány v AI, machine learningu, zpracování obrazu a jiných nepohonářských aplikacích.\par
+Nevýhodou problematiky FPGA je jejich složitější programovatelnost z hlediska tvoření aplikace. Aplikace je tvořena určitým postupem (workflow), který obsahuje některé nezbytné kroky pro jejich správnou funkci. Většina FPGA je programována pomocí jazyků Verilog či VHDL, které mohou pro softwarově orientované programátory představovat značnou překážku. Proto bylo vyvinuto tvoření aplikací pomocí vyšší úrovně syntézy (HLS), kdy je možné tvořit programy ve vyšších programovacích jazycích jako je například C, C++, Python.  HLS umožnilo rapidní rozšíření a využití Embedded FPGA Accelerated Applications do mnoha aplikací a značně vylepšilo vývojářský požitek (developer experience, DX) při tvorbě aplikací.\par
+Protože může být náročné vytvořit vlastní architekturu, složenou z CPU a spolupracujícího FPGA, je vhodné využít dostupné vývojové desky obsahující již předpřipravené propojení jednotlivých komponent. Součástí těchto vývojových desek bývá také mnoho vstupů a výstupů (I/O) pro snadnější využití při lazení a tvoření aplikace. V této práci je využívána vývojová deska Zybo od firmy Digilent. Ovšem autor v textu představuje další možnosti, které mohou být pro konkrétní aplikace a využití vhodnější.\par
 \flushbottom %vyčištění stránky
 \newpage
 %konec úvodu
 
-\section{Stejnosměrný motor s~cizím buzením}%
+\section{Teoretický základ}
+	\subsection{Application Specified Hardware}
+	\subsection{Hardware Accelerated Applications}
+		\subsubsection{Spolupráce CPU a FPGA}
+		\subsection{Optimalizace aplikace pro maximální propustnost}
+	\subsection{Logické programovatelné pole – FPGA}
+		\subsubsection{Popis funkce}
+		\subsubsection{Programování}
+		% VHDL vs HLS
+		\subsection{Využití}
+			\subsection{Spotřeba}
+			\subsection{Výpočetní výkon a propustnost}
+			\subsubsection{Aplikace v elektrtických pohonech}
+			% HIL
+			% Control
+			% Control and Extended Kaufmann Filter
+	\subsection{Vývojová deska Digilent Zybo}
+		\subsubsection{Parametry a složení}
+		% I/O
+		% FPGA
+		% CPU
+		% RAM
+		\subsubsection{Možné alternativy}
+			% Novější verze Zybo
+			% Něco jiného
+			% Custom řešení - ZynQ Berry
+			%  [ZynQBerry](https://shop.trenz-electronic.de/en/TE0726-03-11C64-A-ZynqBerry-Module-with-Xilinx-Z-7007S-Single-Core-Raspberry-Pi-2-compatible) (velice zajímavější i díky ceně, ale možná by hodně cool bylo celé si udělat sám sestavu)
 
-	\subsection{Princip činnosti}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel ligula scelerisque, sodales risus eget, auctor nisl. Nulla consectetur eget tortor pulvinar aliquet. Fusce consequat elit nec metus egestas vestibulum. Morbi non elementum mi. Cras nec erat justo. Maecenas ac orci fringilla, cursus augue eget, suscipit justo. Maecenas lacinia elit felis. Proin aliquet tincidunt placerat. Morbi id accumsan felis, at porta ligula. Ut id eros semper, facilisis ex sed, iaculis enim. Sed sit amet elit finibus, venenatis odio sed, feugiat eros.
+\section{Matematický model stroje}
+	\subsection{Představení stroje}
+	\subsection{Odvození modelu}
+	\subsection{Optimalizace modelu}
+
+\section{Program pro FPGA a CPU}
+	\subsection{Použité nástroje}
+		\subsubsection{Xilinx Vivado}
+		\subsubsection{Xilinx Vitis}
+		\subsubsection{Petalinux}
+		\subsubsection{Programovací prostředí – operační systém Linux}
+		% Jaké verze jsou momentálně podporované
+		% Co je třeba nainstalovat za balíčky před započetím instalace
+		% Jaký je flow aby byla možná příprava systému
+		% Proč zrovna linux Open Source
+	\subsection{Tvorba HW architektury Xilinx Vivado}
+	% Basic popsání, možná si zjistit do hloubky co vše znamená
+    % WorkFlow
+    % Zjistit jak dát vstupem tlačítka a jak výstupy jako výstupy
+
+	\subsection{Tvorba Petalinux}
+	\subsection{Tvorba SW pro CPU a FPGA}
+
+\section{Představení pracoviště}
+\section{Dosažené výsledky}
+
+
 		
 %závěr
 \newpage
