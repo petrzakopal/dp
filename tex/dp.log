@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  30 OCT 2022 21:00
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  30 OCT 2022 22:16
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1556,7 +1556,7 @@ Package newfloat Info: `rotating' package detected.
 Couldn't patch \ttl@straight@ii
 Couldn't patch \ttl@straight@ii
 \c@lstlisting=\count500
-<src/misc/symbol_cvut_konturova_verze.pdf, id=150, 126.78568pt x 96.54268pt>
+<src/misc/symbol_cvut_konturova_verze.pdf, id=146, 126.78568pt x 96.54268pt>
 File: src/misc/symbol_cvut_konturova_verze.pdf Graphic file (type pdf)
 <use src/misc/symbol_cvut_konturova_verze.pdf>
 Package luatex.def Info: src/misc/symbol_cvut_konturova_verze.pdf  used on input line 237.
@@ -1564,7 +1564,7 @@ Package luatex.def Info: src/misc/symbol_cvut_konturova_verze.pdf  used on input
 [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./src/misc/symbol_cvut_konturova_verze.pdf>] [1]
-<src/docs/zadani_bez_podpisu.pdf, id=164, 597.50829pt x 845.04709pt>
+<src/docs/zadani_bez_podpisu.pdf, id=160, 597.50829pt x 845.04709pt>
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf>
 Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 290.
@@ -1573,7 +1573,7 @@ File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf>
 Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 290.
 (luatex.def)             Requested size: 597.50682pt x 845.04503pt.
-<src/docs/zadani_bez_podpisu.pdf, id=167, page=1, 597.50829pt x 845.04709pt>
+<src/docs/zadani_bez_podpisu.pdf, id=163, page=1, 597.50829pt x 845.04709pt>
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf, page 1>
 Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 290.
@@ -1640,15 +1640,15 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 \tf@toc=\write7
 
 \openout7 = dp.toc
- [7] [8] (./dp.lof)
+ [7] (./dp.lof)
 \tf@lof=\write8
 
 \openout8 = dp.lof
- [9] (./dp.lot)
+ [8] (./dp.lot)
 \tf@lot=\write9
 
 \openout9 = dp.lot
- [10]
+ [9]
 warning  (pdf backend): ignoring duplicate destination with the name 'page.'
 [1]
 warning  (pdf backend): ignoring duplicate destination with the name 'page.'
@@ -1674,26 +1674,26 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 
 ] (./dp.aux)
 Package rerunfilecheck Info: File `dp.out' has not changed.
-(rerunfilecheck)             Checksum: D122512EE0813C2CC4F7BEB33926DFEA;6094.
+(rerunfilecheck)             Checksum: 521B6715EF940388BB949CE026DF941F;5797.
 Package logreq Info: Writing requests to 'dp.run.xml'.
 
 \openout1 = dp.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 52337 strings out of 478092
+ 52334 strings out of 478092
  125094,2373549 words of node,token memory allocated
  834 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 17 attribute, 107 glue_spec, 10 attribute_list, 2 write, 2 pdf_action nodes
-   avail lists: 1:5,2:1758,3:537,4:248,5:260,6:113,7:6826,8:103,9:543,10:16,11:774
- 70972 multiletter control sequences out of 65536+600000
- 82 fonts using 22844351 bytes
+   avail lists: 1:5,2:1701,3:519,4:240,5:257,6:111,7:6826,8:103,9:536,10:16,11:774
+ 70971 multiletter control sequences out of 65536+600000
+ 82 fonts using 22843071 bytes
  84i,17n,82p,1166b,4305s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-Output written on dp.pdf (17 pages, 277085 bytes).
+Output written on dp.pdf (16 pages, 276165 bytes).
 
-PDF statistics: 348 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 131072)
- 329 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 338 PDF objects out of 1000 (max. 8388607)
+ 286 compressed objects within 3 object streams
+ 48 named destinations out of 1000 (max. 131072)
+ 321 words of extra memory for PDF output out of 10000 (max. 100000000)
 
