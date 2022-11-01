@@ -1,1 +1,2 @@
 20221030-vec-add-linux-working-with-mount-wo-usb.zip filter=lfs diff=lfs merge=lfs -text
+20221101-vec-add-linux-working-with-mount-with-usb.zip filter=lfs diff=lfs merge=lfs -text
