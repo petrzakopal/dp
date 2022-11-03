@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  3 NOV 2022 22:16
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  3 NOV 2022 22:31
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1597,7 +1597,17 @@ Overfull \hbox (3.09949pt too wide) in paragraph at lines 305--306
 \TU/TimesNewRoman(2)/m/n/10.95 V Praze dne []   [] 
  []
 
-[5] [6]
+[5]
+Underfull \hbox (badness 1946) in paragraph at lines 324--327
+\TU/TimesNewRoman(2)/m/n/10.95 Nam bib-en-dum com-modo port-ti-tor. Quisque
+ []
+
+
+Underfull \hbox (badness 1946) in paragraph at lines 330--333
+\TU/TimesNewRoman(2)/m/n/10.95 Nam bib-en-dum com-modo port-ti-tor. Quisque
+ []
+
+[6]
 luaotfload | aux : font no 51 (nil) does not define feature smcp for script latn with language dflt
 luaotfload | aux : font no 53 (nil) does not define feature smcp for script latn with language dflt
 luaotfload | aux : font no 54 (nil) does not define feature smcp for script latn with language dflt
@@ -1733,7 +1743,7 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 (biblatex)                Using the old, problematic definition.
 
 
-Overfull \hbox (3.98651pt too wide) in paragraph at lines 532--532
+Overfull \hbox (3.98651pt too wide) in paragraph at lines 533--533
 []\TU/TimesNewRoman(1)/m/n/10.95 What Is Ac-ce-le-ra-ted Com-pu-ting, and Why Is It Im-por-tant?[] In[]: \TU/TimesNewRoman(2)/m/it/10.95 Xi-linx[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-03].
  []
 
@@ -1754,12 +1764,12 @@ Here is how much of LuaTeX's memory you used:
  125094,2373549 words of node,token memory allocated
  858 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 21 attribute, 107 glue_spec, 12 attribute_list, 2 write, 4 pdf_action nodes
-   avail lists: 1:5,2:1955,3:436,4:189,5:268,6:108,7:6824,8:117,9:685,10:16,11:774
+   avail lists: 1:5,2:1904,3:420,4:181,5:268,6:108,7:6824,8:117,9:677,10:13,11:774
  71023 multiletter control sequences out of 65536+600000
  91 fonts using 27110567 bytes
  84i,17n,90p,1594b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on dp.pdf (23 pages, 762023 bytes).
+Output written on dp.pdf (23 pages, 761616 bytes).
 
 PDF statistics: 795 PDF objects out of 1000 (max. 8388607)
  553 compressed objects within 6 object streams
