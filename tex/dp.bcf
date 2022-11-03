@@ -2141,14 +2141,21 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">src/bib/zdroje.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">Sass2010</bcf:citekey>
     <bcf:citekey order="2">Sass2010</bcf:citekey>
     <bcf:citekey order="3">Sass2010</bcf:citekey>
-    <bcf:citekey order="4">xilinx-accelerated-computing</bcf:citekey>
-    <bcf:citekey order="5">xilinx-accelerated-computing</bcf:citekey>
-    <bcf:citekey order="6">xilinx-accelerated-computing</bcf:citekey>
-    <bcf:citekey order="7">xilinx-accelerated-computing</bcf:citekey>
-    <bcf:citekey order="8">xilinx-accelerated-computing</bcf:citekey>
+    <bcf:citekey order="4">juan-fpgas</bcf:citekey>
+    <bcf:citekey order="5">Sass2010</bcf:citekey>
+    <bcf:citekey order="6">Sass2010</bcf:citekey>
+    <bcf:citekey order="7">juan-fpgas</bcf:citekey>
+    <bcf:citekey order="8">juan-fpgas</bcf:citekey>
+    <bcf:citekey order="9">xilinx-accelerated-computing</bcf:citekey>
+    <bcf:citekey order="10">xilinx-accelerated-computing</bcf:citekey>
+    <bcf:citekey order="11">xilinx-accelerated-computing</bcf:citekey>
+    <bcf:citekey order="12">xilinx-accelerated-computing</bcf:citekey>
+    <bcf:citekey order="13">xilinx-accelerated-computing</bcf:citekey>
+    <bcf:citekey order="14">Sass2010</bcf:citekey>
+    <bcf:citekey order="15">Sass2010</bcf:citekey>
+    <bcf:citekey order="16">Sass2010</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->

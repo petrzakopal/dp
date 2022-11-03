@@ -1,84 +1,12 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1}Úvod}{1}{section.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Teoretický základ}{2}{section.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1}Embedded Systems}{2}{subsection.2.1}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.1}Application Specific Integrated Circuit}{2}{subsubsection.2.1.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.2}Hardware Accelerated Applications}{2}{subsubsection.2.1.2}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Logické programovatelné pole – FPGA}{3}{subsection.2.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.2.1}Popis funkce}{3}{subsubsection.2.2.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.2.2}Programování}{3}{subsubsection.2.2.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Využití}{3}{subsection.2.3}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4}Spotřeba}{3}{subsection.2.4}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5}Výpočetní výkon a propustnost}{3}{subsection.2.5}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.5.1}Aplikace v elektrtických pohonech}{3}{subsubsection.2.5.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6}Vývojová deska Digilent Zybo}{3}{subsection.2.6}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.6.1}Parametry a složení}{3}{subsubsection.2.6.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.6.2}Možné alternativy}{3}{subsubsection.2.6.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Matematický model stroje}{3}{section.3}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Představení stroje}{3}{subsection.3.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Odvození modelu}{3}{subsection.3.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Optimalizace modelu}{3}{subsection.3.3}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Program pro FPGA a CPU}{3}{section.4}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Použité nástroje}{3}{subsection.4.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.1}Xilinx Vivado}{4}{subsubsection.4.1.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.2}Xilinx Vitis}{4}{subsubsection.4.1.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.3}Petalinux}{4}{subsubsection.4.1.3}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.4}Programovací prostředí – operační systém Linux}{4}{subsubsection.4.1.4}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Tvorba HW architektury Xilinx Vivado}{4}{subsection.4.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Tvorba Petalinux}{4}{subsection.4.3}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4}Tvorba SW pro CPU a FPGA}{4}{subsection.4.4}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Představení pracoviště}{4}{section.5}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Dosažené výsledky}{4}{section.6}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{5}{section.6}%
+\contentsline {section}{\numberline {2}Embedded Systems}{2}{section.2}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -92,10 +20,102 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{6}{section.6}%
+\contentsline {subsection}{\numberline {2.1}Application Specific Integrated Circuit}{3}{subsection.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{7}{appendix.1.A}%
+\contentsline {subsection}{\numberline {2.2}Hardware Accelerated Applications}{3}{subsection.2.2}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{7}{subsection.1.A.1}%
+\contentsline {section}{\numberline {3}Programovatelné hradlové pole – FPGA}{5}{section.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{7}{subsection.1.A.2}%
+\contentsline {subsection}{\numberline {3.1}Vývoj FPGA z PLD}{5}{subsection.3.1}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Aktuální složení FPGA}{5}{subsection.3.2}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.2.1}Generátory funkcí}{6}{subsubsection.3.2.1}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Popis funkce}{7}{subsection.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}Programování}{7}{subsection.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5}Využití}{7}{subsection.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.6}Spotřeba}{7}{subsection.3.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.7}Výpočetní výkon a propustnost}{7}{subsection.3.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.7.1}Aplikace v elektrtických pohonech}{7}{subsubsection.3.7.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.8}Vývojová deska Digilent Zybo}{7}{subsection.3.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.8.1}Parametry a složení}{7}{subsubsection.3.8.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.8.2}Možné alternativy}{7}{subsubsection.3.8.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Matematický model stroje}{7}{section.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Představení stroje}{7}{subsection.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Odvození modelu}{7}{subsection.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3}Optimalizace modelu}{7}{subsection.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Program pro FPGA a CPU}{7}{section.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}Použité nástroje}{7}{subsection.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.1.1}Xilinx Vivado}{7}{subsubsection.5.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.1.2}Xilinx Vitis}{7}{subsubsection.5.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.1.3}Petalinux}{7}{subsubsection.5.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.1.4}Programovací prostředí – operační systém Linux}{7}{subsubsection.5.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}Tvorba HW architektury Xilinx Vivado}{7}{subsection.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3}Tvorba Petalinux}{7}{subsection.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4}Tvorba SW pro CPU a FPGA}{7}{subsection.5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Představení pracoviště}{8}{section.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Dosažené výsledky}{8}{section.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{9}{section.7}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{10}{section.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{11}{appendix.1.A}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{11}{subsection.1.A.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{11}{subsection.1.A.2}%

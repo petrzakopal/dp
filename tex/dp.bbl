@@ -44,8 +44,8 @@
       \strng{authorbibnamehash}{0ddb1a35936ae3df84886a7791c95a0b}
       \strng{authornamehash}{0ddb1a35936ae3df84886a7791c95a0b}
       \strng{authorfullhash}{0ddb1a35936ae3df84886a7791c95a0b}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{0123743338}
@@ -53,9 +53,55 @@
       \field{title}{Embedded systems design with platform FPGAs}
       \field{year}{2010}
     \endentry
-    \entry{xilinx-accelerated-computing}{incollection}{}
+    \entry{juan-fpgas}{book}{}
+      \name{author}{3}{}{%
+        {{hash=f1a60490b9bf6324ccb8688ce4a145f1}{%
+           family={Andina},
+           familyi={A\bibinitperiod},
+           given={Juan\bibnamedelimb J.\bibnamedelimi R.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=b034740ff0a768c480af4feea0420da4}{%
+           family={Torre\bibnamedelima Arnanz},
+           familyi={T\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Eduardo},
+           giveni={E\bibinitperiod},
+           prefix={de\bibnamedelima la},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{hash=66113ad2ac06c38ee717cca4487362a0}{%
+           family={Valdés\bibnamedelima Peña},
+           familyi={V\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={María\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{location}{1}{%
+        {Bosa Roca}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{f02608731b664df196d9368988738c07}
+      \strng{fullhash}{f02608731b664df196d9368988738c07}
+      \strng{bibnamehash}{f02608731b664df196d9368988738c07}
+      \strng{authorbibnamehash}{f02608731b664df196d9368988738c07}
+      \strng{authornamehash}{f02608731b664df196d9368988738c07}
+      \strng{authorfullhash}{f02608731b664df196d9368988738c07}
       \field{sortinit}{4}
       \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Field Programmable Gate Arrays (FPGAs) are currently recognized as the most suitable platform for the implementation of complex digital systems targeting an increasing number of industrial electronics applications. They cover a huge variety of application areas, such as: aerospace, food industry, art, industrial automation, automotive, biomedicine, process control, military, logistics, power electronics, chemistry, sensor networks, robotics, ultrasound, security, and artificial vision. This book first presents the basic architectures of the devices to familiarize the reader with the fundamentals of FPGAs before identifying and discussing new resources that extend the ability of the devices to solve problems in new application domains. Design methodologies are discussed and application examples are included for some of these domains, e.g., mechatronics, robotics, and power systems.;This book explains the how and why of field-programmable gate array (FPGA) usage. It analyzes fundamental architectures of FPGA devices, providing case studies and simple design examples. It also describes advanced features of the latest devices, exploring new resources enabling problem solving in new application domains, such as high-speed sensor interfacing and control of power converters. From basic circuits to state-of-the-art implementations, this text demystifies FPGAs for engineers who are not digital designers but need efficient digital solutions for their systems to be competitive.;}
+      \field{edition}{1}
+      \field{isbn}{9781439896990;1439896992;}
+      \field{title}{FPGAs: Fundamentals, Advanced Features, and Applications in Industrial Electronics}
+      \field{year}{2017;2015;}
+      \keyw{Field programmable gate arrays; Industrial Electronics; Microelectronics; Systems & Controls}
+    \endentry
+    \entry{xilinx-accelerated-computing}{incollection}{}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx}
       \field{langid}{english}
