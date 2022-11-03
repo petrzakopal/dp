@@ -369,13 +369,106 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 \newpage
 %konec úvodu
 
-\section{Teoretický základ}
-	\subsection{Embedded Control Systems}
-		\subsubsection{Application Specific Hardware}
-		\subsubsection{Hardware Accelerated Applications}
-	\subsection{Logické programovatelné pole – FPGA}
-		\subsubsection{Popis funkce}
-		\subsubsection{Programování}
+	\section{Embedded Systems}
+	Embedded systémy je název pro skupinu zařízení, obecně systémů, které je možné charakterizovat jako specifické výpočetní zařízení, resp. počítače, které jsou určeny pro podporu funkce nebo řízení nějakého většího celku, produktu nebo fyzikálního systému. Oproti tomu osobní počítač je sice výpočetní zařízení, ale nelze mluvit o embedded systému, protože je určen pro mnoho univerzálních aplikací. \cite{Sass2010}\par
+	Dalším důležitým rozdílem mezi \textit{Embedded System} a obecným výpočetním zařízením je ten, že v případě embedded systému je interakce mezi systémem a uživatelem uměle omezena na základní ovládání či kontrolu funkce. Není předpokládáno, že by uživatel, jež aplikaci embedded systému využvá, výrazným způsobem zasahoval do jeho funkce. Naopak obecný výpočetní systém je uzpůsoben na podstatné zásahy uživatele. \cite{Sass2010} \cite{juan-fpgas}\par
+	Do embedded systému obecně vstupují vstupní signály, které jsou následně zpracovány a poté vybrané výsledky výpočtů jsou v podobě výstupní signálů výstupním produktem systému. Tyto produkty mohou pomocí akčních členů zasahovat do řízeného systému či aplikace. Vstupní signály většinou přicházejí ze speciálních snímačů, kompatibilních s embedded systémem (senzor teploty, senzor tlaku, senzor zrychlení, gyroskop apod.). Naopak jeho výstupem signály, vedoucí na konektory, na kterých se dle požadavků objevuje např. specifická hodnota napětí. Nebo mohou na výstupních pinech být připojené LED signalizace, komunikační sběrnice některých komunikačních systémů nebo výstupní LDC displaye. Způsob, kterým jsou kódovány vstupní a výstupní signály je většinou specificky určený aplikaci daného systému. \cite{Sass2010}\par
+	K obecnému výpočetnímu systému je možné připojit vstupní periferie klasických osbních počítačů – myš, klávesnice, mikrofon. Jako hlavní výstupní periferie obecného systému je monitor. Jeho komunikace s periferiemi je většinou standardizována tak, aby bylo možné periferie libovolně zaměňovat bez změny funkčnosti. \cite{Sass2010}.\par
+	Na obrázku \ref{fig:embedded-system-scheme} je zobrazeno názorné blokové schéma řízení fyzikálního systému pomocí embedded systému. Tyto bloky mezi sebou komunikují pomocí digitálních signálů. Pokud tyto signály nejsou digitální, musí se před zpracováním v embedded systému zdiskretizovat.
+
+	\begin{figure}[htbp!]
+		\centering
+			\includegraphics[width=1\textwidth]{src/pdf/embedded-system-scheme.pdf} 
+			\caption{Blokové schéma Embedded systému a řízeného fyzikálního systému. (převzato a upraveno z \cite{juan-fpgas})}
+			\label{fig:embedded-system-scheme}
+	\end{figure}
+
+		\fbar
+		\subsection{Application Specific Integrated Circuit}
+		S tématem embedded systémů se pojí pojem hardware, který je určen pro jedinou aplikaci. Tato skupina zařízení se nazývá \textit{Application Specific Integrated Circuit, popř. Hardware} (ASIC, ASHW). V této oblasti je opět využíváno přesvědčení, že pokud je architektura HW přímo specializovaná na jednu aplikaci, je vysoká pravděpodobnost, že ji bude vykonávat bezchybně, kvalitně a rychle.\par
+		Tyto aplikace jsou využívaný v širokém spektru oborů jako je např. zpracování zvuku, videa, výpočtů apod. Tyto ASIC mohou také vykonávat potřebné rychlé výpočty pro matematické modely elektrických strojů, které jsou využívány např. pro HIL.\par
+		Než je tento specifický obvod vytvořen, je nutné jej navrhnout, vyzkoušet a odladit. K tomu slouží logická programovatelná pole, ve kterých je možné požadovaný HW navrhnut a odladit před velko produkcí ASIC. Pokud velko produkce není z ekonomických důvodů možná, jsou FPGA využívány i v produkční oblasti, kde je HW struktura, která by byla přítomna na ASIC, vytvořena přímo na FPGA.
+
+		\subsection{Hardware Accelerated Applications}
+		V mnoha aplikacích, nejen při řízení elektrických pohonů, je vyžadováno, aby výpočty nebo zpracování dat probíhalo vysokou rychlostí. Tento problém nemůže být většinou vyřešen použitím běžného procesoru (CPU), který je optimalizován na provádění obecných komplexních funkcí řízení běhu programu, komunikace či přesunu dat. V moderním světě dochází k exponenciálnímu nárůstu množství dat, které je potřeba zpracovat. Aby tyto data bylo možné v požadovaném čase zpracovat, je třeba využít specifický HW, který bude schopen požadavky rychlosti a výkonu uspokojit. Tento proces se nazývá \textit{Hardware Acceleration}. \cite{xilinx-accelerated-computing}\par
+		Princip hardwaerové akcelerace spočívá v přesunu výpočetně náročných aktivit na zvláštní oddělený hardware. Celkové řízení běhu aplikace a komunikace je ovšem stále přítomno na řídícím CPU. Oddělený hardware, na kterém dochází k akceleraci výpočtů je optimalizován na vykonávanou úlohu a jeho využití přináší zefektivnění běhu celkové aplikace. \cite{xilinx-accelerated-computing}\par
+		Struktura, ve které je využíváno více oddělených hardwarových procesorových a akceleračních jednotek, se často nazývá heterogenní. \cite{xilinx-accelerated-computing}\par
+		Hardwaerová akcelerace poskytuje rychlejší výpočty než CPU, protože využívá značné úrovně paralelismu výpočtů. Oproti tomu klasické CPU vykonává jednotlivé instrukce sériově. I v případě, že CPU má více jader a využívá více vláken, nemůže se úrovni paralelismu při dané energetické náročnosti HW vyrovnat.\par
+		Pro HW akceleraci je v mnoha oblastech využíváno několik druhů jednotek, které jsou optimální pro dané aplikace.\par
+		\textbf{Graphics Processing Units} (GPUs) jsou jednotky, které převážně slouží k akceleraci zpracování a renderování grafických úloh. V době rapidního rozvoje elektroniky a SW je možné využití GPUs v mnoha odvětví umělé inteligence (AI) či kreativních odvětích. GPUs jsou využívány v aplikacích, kde není kladen veliký důraz na nízkou odezvu (latenci). \cite{xilinx-accelerated-computing}\par
+		\textbf{Tensor Processing Units} (TPUs) jsou jednotky, které slouží k provádění algoritmů strojového učení (machine-learning, ML). Jejich přímé datové propojení umožňuje velmi rychlý a přímý přenost dat. Díky přímému připojení nevyžadují využití pamětí, kter= by přenos dat zpomalovali. \cite{xilinx-accelerated-computing}\par
+		\textbf{Field Programmable Gate Arrays} (FPGAs) jsou jednotky, ve kterých není při výrobě pevně daná HW struktura. To umožňuje vytvoření, resp. naprogramování HW dle požadavků akcelerované aplikace. FPGAs jsou využívány i v on-line výpočtech matematických modelů elektrických strojů. Při realizaci této práce je pro akceleraci využíváno právě těchto programovatelných polí.
+
+	\section{Programovatelné hradlové pole – FPGA}
+		\subsection{Vývoj FPGA z PLD}
+		Programovatelné hradlové pole jsou zařízení, jejichž historický vývoj stojí na programovatelných logických zařízení (programmable logic devices, PLD). První PLD fungovala na principu Booleových funkcí součtu násobení (sum of products). Tyto zařízení obsahovala matici více vstupových bloků AND a OR. Programování požadované probíhalo pomocí přerušování vstupů do těchto logických bloků. Později byly do PLA přidány D klopné obvody s multiplexory. Díky těmto součástím bylo možné vytvářet logické kombinační a sekvenční obvody, resp. automaty. Posledním vylepšením PLA, které stálo před zrodem FPGA, spočívalo v umístění více PLA bloků (skládajících se z AND, OR, multiplexeru a D klopného obvodu) na jeden integrovaný čip. Programovatelné spojení různých PLA bloků a výstupů umožnilo vytvořit požadovanou funkci. \cite{Sass2010}\par
+
+		\subsection{Aktuální složení FPGA}
+		Moderní FPGA se skládají z 2D matice propojených programovatelných logických bloků, bloků speciálních funkcí a propojů vytvořených pomocí CMOS technologie. Po obvodě FPGA jsou rozmístěny vstupní a výstupní piny (I/O), připojené na zvláštní logické bloky. Použité logické bloky se skládají z mnoha logických buněk, které se skládají z generátorů funkcí a paměťových elementů. \cite{Sass2010}\par
+		Na obr. \ref{fig:fpga-general-design} je možné pozorovat názorné schéma základního konceptu uspořádání FPGA. Na schématu jsou vyznačeny logické bloky, jejich propojení, propojovací matice pro aktivování jednotlivých propojů a vstupů a výstupů (I/O) FPGA.\par
+		I přesto, že se tato práce věnuje využití FPGA pro řízení elektrických pohonů je vhodné představit základní části FPGA a nastínit jejich funkci.
+
+		\begin{figure}[htbp!]
+			\centering
+				\includegraphics[width=1\textwidth]{src/pdf/fpga-skladba.pdf} 
+				\caption{Blokové schéma složení moderních FPGA.}
+				\label{fig:fpga-skladba}
+		\end{figure}
+
+
+		\begin{figure}[htbp!]
+			\centering
+				\includegraphics[width=1\textwidth]{src/pdf/fpga-general-design.pdf} 
+				\caption{Základní koncept uspořádání FPGA.}
+				\label{fig:fpga-general-design}
+		\end{figure}
+
+		\fbar
+		\subsubsection{Generátory funkcí}
+		Oproti předchůdcům PLD, které pro generování funkcí používaly logická hradla tvořená CMOS tranzistory, využívají FPGA generátory funkcí.\par
+		Logickou funkci je možné popsat pravdivostní tabulkou, která má určitý počet vstupů a odpovídající počet výstupů. Dle \cite{Sass2010} je možné si představit, že se generátor dané funkce skládá ze samostatné statické paměti (SRAM), jejíž výstupy jsou přímo přivedeny na vstup multiplexeru (MUX). Signály výběru výstupů by odpovídaly vstupním proměnným a jednotlivé vstupy do MUX výstupům funkce.\par
+		Pro bližší pochopení funkce generátoru funkcí z předchozího odstavce je možné představit realizaci smyšlené logické funkce $\text{f} (x, y, z) = \bar{x}z + y$. Pravdivostní tabulka této smyšlené logické funkce je zobrazena v tab. \ref{tab:fpga-pravdivostni-tabulka-smyslene-funkce-generatoru-funkci}. Odpovídající realizace pomocí MUX a SRAM je zobrazena na obr. \ref{fig:fpga-function-generator}. Tato reprezentace se nazývá look-up table (LUT). Grafické znázornění inspirováno \cite{Sass2010}.
+		
+
+	\begin{minipage}[t]{0.45\textwidth}
+		\begin{table}[H]
+			\centering
+			\caption{Pravdivostní tabulka ukázkové funkce, realizované v generátoru funkcí, umístěném v logickém bloku FPGA.}
+		  \vspace*{0.15cm}
+		
+			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt} c !{\vrule width 2pt}}
+			\noalign{\hrule height 2pt}
+			$i$ & $x$ &	$y$ & $z$ & f($x,y,z$)\\
+			\noalign{\hrule height 2pt}
+			0 & 0 & 0 & 0 & 0\\ \hline
+			1 & 0 & 0 & 1 & 1\\ \hline
+			2 & 0 & 1 & 0 & 1\\ \hline
+			3 & 0 & 1 & 1 & 1\\ \hline
+			4 & 1 & 0 & 0 & 0\\ \hline
+			5 & 1 & 0 & 1 & 0\\ \hline
+			6 & 1 & 1 & 0 & 1\\ \hline
+			7 & 1 & 1 & 1 & 1\\\noalign{\hrule height 2pt}
+			\end{tabular}
+			\label{tab:fpga-pravdivostni-tabulka-smyslene-funkce-generatoru-funkci}
+		\end{table}
+	\end{minipage}%
+	\hfill% --- important, otherwise it wont be so nice
+	\begin{minipage}[t]{0.45\textwidth}
+		\begin{figure}[H]
+			\centering
+				\includegraphics[width=1\textwidth]{src/pdf/fpga-function-generator.pdf} 
+				\caption{Ukázka, jakým způsobem realizuje funkční generátor požadovanou funkci pomocí SRAM a MUX.}
+				\label{fig:fpga-function-generator}
+		\end{figure}
+	\end{minipage}
+
+	Výhoda této reprezentace funkcí oproti logickým hradlům je, že doba zpoždění signálu (propagation delay) pro funkci je konstantní. Respektivě je konstantní, pokud funkci je možné realizovat jednou LUT. Pro relizace obecné funkce je zapotřebí multiplexer $2^{n}$ -> 1 a SRAM s počtem buněk $2^{n}$, kde $n$ je počet vstupních proměnných dané funkce. \cite{Sass2010}
+
+	\subsubsection{Paměťové elementy}
+		
+
+		\subsection{Popis funkce}
+		\subsection{Programování}
 		% VHDL vs HLS
 		\subsection{Využití}
 			\subsection{Spotřeba}

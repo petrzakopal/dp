@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  30 OCT 2022 22:16
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  3 NOV 2022 22:16
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1496,12 +1496,6 @@ Package fontspec Info: Font family 'TimesNewRoman(2)' created for font 'Times
 (fontspec)             <->"TimesNewRoman/BI:mode=node;script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
-
-
-Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'tech-talks':
-(biblatex)                - Overwriting field 'month' with month value from field 'date' for entry 'tech-talks'.
-
 )
 Package biblatex Info: Reference section=0 on input line 184.
 Package biblatex Info: Reference segment=0 on input line 184.
@@ -1556,7 +1550,7 @@ Package newfloat Info: `rotating' package detected.
 Couldn't patch \ttl@straight@ii
 Couldn't patch \ttl@straight@ii
 \c@lstlisting=\count500
-<src/misc/symbol_cvut_konturova_verze.pdf, id=146, 126.78568pt x 96.54268pt>
+<src/misc/symbol_cvut_konturova_verze.pdf, id=158, 126.78568pt x 96.54268pt>
 File: src/misc/symbol_cvut_konturova_verze.pdf Graphic file (type pdf)
 <use src/misc/symbol_cvut_konturova_verze.pdf>
 Package luatex.def Info: src/misc/symbol_cvut_konturova_verze.pdf  used on input line 237.
@@ -1564,7 +1558,7 @@ Package luatex.def Info: src/misc/symbol_cvut_konturova_verze.pdf  used on input
 [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./src/misc/symbol_cvut_konturova_verze.pdf>] [1]
-<src/docs/zadani_bez_podpisu.pdf, id=160, 597.50829pt x 845.04709pt>
+<src/docs/zadani_bez_podpisu.pdf, id=172, 597.50829pt x 845.04709pt>
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf>
 Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 290.
@@ -1573,7 +1567,7 @@ File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf>
 Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 290.
 (luatex.def)             Requested size: 597.50682pt x 845.04503pt.
-<src/docs/zadani_bez_podpisu.pdf, id=163, page=1, 597.50829pt x 845.04709pt>
+<src/docs/zadani_bez_podpisu.pdf, id=175, page=1, 597.50829pt x 845.04709pt>
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf, page 1>
 Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 290.
@@ -1629,26 +1623,31 @@ Package fontspec Info: Font family 'TIMESNEWROMAN(0)' created for font 'TIMES
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
  (./dp.toc<<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 5.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 7.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 5.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 7.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-)<<ot1.cmap>>)
+)<<ot1.cmap>> [7])
 \tf@toc=\write7
 
 \openout7 = dp.toc
- [7] (./dp.lof)
+ [8] (./dp.lof
+Overfull \hbox (3.56317pt too wide) in paragraph at lines 43--43
+ [][] [][][]\TU/TimesNewRoman(2)/m/n/10.95 Ukázka, ja-kým způ-so-bem re-a-li-zuje funkční ge-ne-rá-tor po-ža-do-va-nou funkci po-mocí SRAM 
+ []
+
+)
 \tf@lof=\write8
 
 \openout8 = dp.lof
- [8] (./dp.lot)
+ [9] (./dp.lot)
 \tf@lot=\write9
 
 \openout9 = dp.lot
- [9]
+ [10]
 warning  (pdf backend): ignoring duplicate destination with the name 'page.'
 [1]
 warning  (pdf backend): ignoring duplicate destination with the name 'page.'
@@ -1656,9 +1655,74 @@ warning  (pdf backend): ignoring duplicate destination with the name 'page.'
 warning  (pdf backend): ignoring duplicate destination with the name 'page.1'
 [1
 
-] [2
+]
+warning  (file src/pdf/embedded-system-scheme.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
+<src/pdf/embedded-system-scheme.pdf, id=326, 845.1575pt x 597.23125pt>
+File: src/pdf/embedded-system-scheme.pdf Graphic file (type pdf)
+<use src/pdf/embedded-system-scheme.pdf>
+Package luatex.def Info: src/pdf/embedded-system-scheme.pdf  used on input line 381.
+(luatex.def)             Requested size: 455.24411pt x 321.70723pt.
 
-] [3
+Package fontspec Info: Could not resolve font "TimesNewRomanItalic/BI" (it
+(fontspec)             probably doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "TimesNewRomanItalic/B" (it
+(fontspec)             probably doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "TimesNewRomanItalic/I" (it
+(fontspec)             probably doesn't exist).
+
+luaotfload | aux : font no 85 (nil) does not define feature smcp for script latn with language dflt
+
+Package fontspec Info: Font family 'TimesNewRomanItalic(0)' created for font
+(fontspec)             'Times New Roman Italic' with options [].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"TimesNewRomanItalic:mode=node;script=latn;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+
+[2
+
+] [3<./src/pdf/embedded-system-scheme.pdf>] [4]
+warning  (file src/pdf/fpga-skladba.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
+<src/pdf/fpga-skladba.pdf, id=363, 1265.72874pt x 634.37pt>
+File: src/pdf/fpga-skladba.pdf Graphic file (type pdf)
+<use src/pdf/fpga-skladba.pdf>
+Package luatex.def Info: src/pdf/fpga-skladba.pdf  used on input line 413.
+(luatex.def)             Requested size: 455.24411pt x 228.16006pt.
+
+warning  (file src/pdf/fpga-general-design.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
+<src/pdf/fpga-general-design.pdf, id=364, 917.4275pt x 591.20876pt>
+File: src/pdf/fpga-general-design.pdf Graphic file (type pdf)
+<use src/pdf/fpga-general-design.pdf>
+Package luatex.def Info: src/pdf/fpga-general-design.pdf  used on input line 421.
+(luatex.def)             Requested size: 455.24411pt x 293.36641pt.
+[5
+
+<./src/pdf/fpga-skladba.pdf>]
+warning  (file src/pdf/fpga-function-generator.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
+<src/pdf/fpga-function-generator.pdf, id=537, 494.84875pt x 570.13pt>
+File: src/pdf/fpga-function-generator.pdf Graphic file (type pdf)
+<use src/pdf/fpga-function-generator.pdf>
+Package luatex.def Info: src/pdf/fpga-function-generator.pdf  used on input line 459.
+(luatex.def)             Requested size: 204.85846pt x 236.01668pt.
+
+Underfull \hbox (badness 1430) in paragraph at lines 460--460
+\TU/TimesNewRomanItalic(0)/m/n/10 ge-ne-rá-tor po-ža-do-va-nou funkci po-mocí SRAM a
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6<./src/pdf/fpga-general-design.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7<./src/pdf/fpga-function-generator.pdf>] [8] [9
 
 ]
 
@@ -1668,32 +1732,37 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 (biblatex)                but note that the syntax is different.
 (biblatex)                Using the old, problematic definition.
 
-[4
 
-] [5
+Overfull \hbox (3.98651pt too wide) in paragraph at lines 532--532
+[]\TU/TimesNewRoman(1)/m/n/10.95 What Is Ac-ce-le-ra-ted Com-pu-ting, and Why Is It Im-por-tant?[] In[]: \TU/TimesNewRoman(2)/m/it/10.95 Xi-linx[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-03].
+ []
+
+[10
+
+] [11
 
 ] (./dp.aux)
 Package rerunfilecheck Info: File `dp.out' has not changed.
-(rerunfilecheck)             Checksum: 521B6715EF940388BB949CE026DF941F;5797.
+(rerunfilecheck)             Checksum: C3300720448E686C0D0CE3309E4C7E42;6264.
 Package logreq Info: Writing requests to 'dp.run.xml'.
 
 \openout1 = dp.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 52334 strings out of 478092
+ 52426 strings out of 478092
  125094,2373549 words of node,token memory allocated
- 834 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 17 attribute, 107 glue_spec, 10 attribute_list, 2 write, 2 pdf_action nodes
-   avail lists: 1:5,2:1701,3:519,4:240,5:257,6:111,7:6826,8:103,9:536,10:16,11:774
- 70971 multiletter control sequences out of 65536+600000
- 82 fonts using 22843071 bytes
- 84i,17n,82p,1166b,4305s stack positions out of 5000i,500n,10000p,200000b,80000s
-</System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-Output written on dp.pdf (16 pages, 276165 bytes).
+ 858 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 21 attribute, 107 glue_spec, 12 attribute_list, 2 write, 4 pdf_action nodes
+   avail lists: 1:5,2:1955,3:436,4:189,5:268,6:108,7:6824,8:117,9:685,10:16,11:774
+ 71023 multiletter control sequences out of 65536+600000
+ 91 fonts using 27110567 bytes
+ 84i,17n,90p,1594b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
+</System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on dp.pdf (23 pages, 762023 bytes).
 
-PDF statistics: 338 PDF objects out of 1000 (max. 8388607)
- 286 compressed objects within 3 object streams
- 48 named destinations out of 1000 (max. 131072)
- 321 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 795 PDF objects out of 1000 (max. 8388607)
+ 553 compressed objects within 6 object streams
+ 64 named destinations out of 1000 (max. 131072)
+ 345 words of extra memory for PDF output out of 10000 (max. 100000000)
 
