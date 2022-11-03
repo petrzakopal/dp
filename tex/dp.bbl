@@ -53,6 +53,24 @@
       \field{title}{Embedded systems design with platform FPGAs}
       \field{year}{2010}
     \endentry
+    \entry{xilinx-accelerated-computing}{incollection}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx}
+      \field{langid}{english}
+      \field{title}{What Is Accelerated Computing, and Why Is It Important?}
+      \field{urlday}{3}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/applications/adaptive-computing/what-is-accelerated-computing-and-why-is-it-important.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/applications/adaptive-computing/what-is-accelerated-computing-and-why-is-it-important.html
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
