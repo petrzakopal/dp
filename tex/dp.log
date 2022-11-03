@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  30 OCT 2022 22:16
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  3 NOV 2022 11:54
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1496,12 +1496,6 @@ Package fontspec Info: Font family 'TimesNewRoman(2)' created for font 'Times
 (fontspec)             <->"TimesNewRoman/BI:mode=node;script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
-
-
-Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'tech-talks':
-(biblatex)                - Overwriting field 'month' with month value from field 'date' for entry 'tech-talks'.
-
 )
 Package biblatex Info: Reference section=0 on input line 184.
 Package biblatex Info: Reference segment=0 on input line 184.
@@ -1656,44 +1650,39 @@ warning  (pdf backend): ignoring duplicate destination with the name 'page.'
 warning  (pdf backend): ignoring duplicate destination with the name 'page.1'
 [1
 
-] [2
-
-] [3
-
 ]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Package biblatex Warning: '\mainlang' is deprecated in favour of
-(biblatex)                '\textmainlang'.
-(biblatex)                Please consider using the new command,
-(biblatex)                but note that the syntax is different.
-(biblatex)                Using the old, problematic definition.
+ [2
 
-[4
+] [3] [4
 
 ] [5
 
+] [6
+
 ] (./dp.aux)
 Package rerunfilecheck Info: File `dp.out' has not changed.
-(rerunfilecheck)             Checksum: 521B6715EF940388BB949CE026DF941F;5797.
+(rerunfilecheck)             Checksum: F64DD0E573C4F5D89658FE70C51BC2FC;5807.
 Package logreq Info: Writing requests to 'dp.run.xml'.
 
 \openout1 = dp.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 52334 strings out of 478092
+ 52327 strings out of 478092
  125094,2373549 words of node,token memory allocated
- 834 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 17 attribute, 107 glue_spec, 10 attribute_list, 2 write, 2 pdf_action nodes
-   avail lists: 1:5,2:1701,3:519,4:240,5:257,6:111,7:6826,8:103,9:536,10:16,11:774
- 70971 multiletter control sequences out of 65536+600000
- 82 fonts using 22843071 bytes
- 84i,17n,82p,1166b,4305s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 810 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 13 attribute, 107 glue_spec, 8 attribute_list, 2 write nodes
+   avail lists: 1:5,2:1632,3:362,4:166,5:257,6:107,7:7236,8:73,9:536,10:16,11:819
+ 70964 multiletter control sequences out of 65536+600000
+ 83 fonts using 23398919 bytes
+ 84i,17n,82p,1166b,2794s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-Output written on dp.pdf (16 pages, 276165 bytes).
+Output written on dp.pdf (17 pages, 280302 bytes).
 
-PDF statistics: 338 PDF objects out of 1000 (max. 8388607)
- 286 compressed objects within 3 object streams
+PDF statistics: 340 PDF objects out of 1000 (max. 8388607)
+ 287 compressed objects within 3 object streams
  48 named destinations out of 1000 (max. 131072)
  321 words of extra memory for PDF output out of 10000 (max. 100000000)
 

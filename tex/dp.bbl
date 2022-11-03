@@ -19,67 +19,39 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{microchip_calculations}{online}{}
-      \name{author}{1}{}{%
-        {{hash=df91501c7cf3f67d7304ad9e8e4e9319}{%
-           family={Bersani},
-           familyi={B\bibinitperiod},
-           given={Antonio},
-           giveni={A\bibinitperiod}}}%
+    \entry{Sass2010}{book}{}
+      \name{author}{2}{}{%
+        {{hash=2616ebf86f1b94355531f313375e3e09}{%
+           family={Sass},
+           familyi={S\bibinitperiod},
+           given={Ronald},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a741bd8a3d4162ced0702716c2aab73f}{%
+           family={Schmidt},
+           familyi={S\bibinitperiod},
+           given={Andrew\bibnamedelima G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Boston}%
       }
       \list{publisher}{1}{%
-        {Microchip Technology Inc.}%
+        {Morgan Kaufmann}%
       }
-      \strng{namehash}{df91501c7cf3f67d7304ad9e8e4e9319}
-      \strng{fullhash}{df91501c7cf3f67d7304ad9e8e4e9319}
-      \strng{bibnamehash}{df91501c7cf3f67d7304ad9e8e4e9319}
-      \strng{authorbibnamehash}{df91501c7cf3f67d7304ad9e8e4e9319}
-      \strng{authornamehash}{df91501c7cf3f67d7304ad9e8e4e9319}
-      \strng{authorfullhash}{df91501c7cf3f67d7304ad9e8e4e9319}
+      \strng{namehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{fullhash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{bibnamehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{authorbibnamehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{authornamehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{authorfullhash}{0ddb1a35936ae3df84886a7791c95a0b}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{online}
-      \field{title}{Switch Mode Power Supply (SMPS) Topologies (Part II)}
-      \field{urlday}{6}
-      \field{urlmonth}{4}
-      \field{urlyear}{2022}
-      \field{year}{2009}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \true{nocite}
-      \verb{urlraw}
-      \verb https://www.microchip.com/content/dam/mchp/documents/OTH/ApplicationNotes/ApplicationNotes/01207B.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.microchip.com/content/dam/mchp/documents/OTH/ApplicationNotes/ApplicationNotes/01207B.pdf
-      \endverb
-    \endentry
-    \entry{tech-talks}{incollection}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{YouTube}
-      \field{day}{21}
-      \field{langid}{english}
-      \field{month}{6}
-      \field{note}{Kanál uživatele Tech TALKS}
-      \field{title}{Space Vector PWM 2 | SVPWM Technique | MATLAB Simulation | Step by Step, 2020}
-      \field{urlday}{27}
-      \field{urlmonth}{10}
-      \field{urlyear}{2022}
-      \field{year}{2020}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \true{nocite}
-      \verb{urlraw}
-      \verb https://www.youtube.com/watch?v=oq868piQ9Q4
-      \endverb
-      \verb{url}
-      \verb https://www.youtube.com/watch?v=oq868piQ9Q4
-      \endverb
-      \warn{\item Overwriting field 'month' with month value from field 'date' for entry 'tech-talks'}
+      \field{isbn}{0123743338}
+      \field{subtitle}{principles and practices}
+      \field{title}{Embedded systems design with platform FPGAs}
+      \field{year}{2010}
     \endentry
   \enddatalist
 \endrefsection

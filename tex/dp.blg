@@ -1,16 +1,14 @@
 [0] Config.pm:311> INFO - This is Biber 2.16
 [0] Config.pm:314> INFO - Logfile is 'dp.blg'
-[100] biber-darwin:340> INFO - === Sun Oct 30, 2022, 22:16:12
-[121] Biber.pm:415> INFO - Reading 'dp.bcf'
-[217] Biber.pm:949> INFO - Using all citekeys in bib section 0
-[236] Biber.pm:4340> INFO - Processing section 0
-[251] Biber.pm:4531> INFO - Looking for bibtex format file 'src/bib/zdroje.bib' for section 0
-[254] bibtex.pm:1689> INFO - LaTeX decoding ...
-[260] bibtex.pm:1494> INFO - Found BibTeX data source 'src/bib/zdroje.bib'
-[290] Utils.pm:395> WARN - Overwriting field 'month' with month value from field 'date' for entry 'tech-talks'
-[305] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
-[306] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[306] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'cs-CZ'
-[316] bbl.pm:654> INFO - Writing 'dp.bbl' with encoding 'UTF-8'
-[317] bbl.pm:757> INFO - Output to dp.bbl
-[317] Biber.pm:128> INFO - WARNINGS: 1
+[91] biber-darwin:340> INFO - === Thu Nov  3, 2022, 10:06:50
+[114] Biber.pm:415> INFO - Reading 'dp.bcf'
+[206] Biber.pm:949> INFO - Using all citekeys in bib section 0
+[224] Biber.pm:4340> INFO - Processing section 0
+[237] Biber.pm:4531> INFO - Looking for bibtex format file 'src/bib/zdroje.bib' for section 0
+[238] bibtex.pm:1689> INFO - LaTeX decoding ...
+[242] bibtex.pm:1494> INFO - Found BibTeX data source 'src/bib/zdroje.bib'
+[302] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
+[302] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[302] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'cs-CZ'
+[304] bbl.pm:654> INFO - Writing 'dp.bbl' with encoding 'UTF-8'
+[305] bbl.pm:757> INFO - Output to dp.bbl

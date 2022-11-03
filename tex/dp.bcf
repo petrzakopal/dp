@@ -2141,6 +2141,9 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">src/bib/zdroje.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="1">Sass2010</bcf:citekey>
+    <bcf:citekey order="2">Sass2010</bcf:citekey>
+    <bcf:citekey order="3">Sass2010</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
