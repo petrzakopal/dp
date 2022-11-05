@@ -22,6 +22,8 @@
 
 🔗 [03.11.2022](notes/20221103.md) <-- spíše příspěvky do LaTeXu; 📄 [LaTeX dokument DP](/tex/dp.pdf)
 
+📄 [05.11.2022](/tex/dp.pdf) <-- psací den
+
 ## Progress
 
 _Coming soon..._

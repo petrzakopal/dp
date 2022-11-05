@@ -424,7 +424,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		\end{figure}
 
 		\fbar
-		\subsubsection{Generátory funkcí}
+		\subsubsection{Generátory funkcí}\label{subsubsec:generatory-funkci}
 		Oproti předchůdcům PLD, které pro generování funkcí používaly logická hradla tvořená CMOS tranzistory, využívají FPGA generátory funkcí.\par
 		Logickou funkci je možné popsat pravdivostní tabulkou, která má určitý počet vstupů a odpovídající počet výstupů. Dle \cite{Sass2010} je možné si představit, že se generátor dané funkce skládá ze samostatné statické paměti (SRAM), jejíž výstupy jsou přímo přivedeny na vstup multiplexeru (MUX). Signály výběru výstupů by odpovídaly vstupním proměnným a jednotlivé vstupy do MUX výstupům funkce.\par
 		Pro bližší pochopení funkce generátoru funkcí z předchozího odstavce je možné představit realizaci smyšlené logické funkce $\text{f} (x, y, z) = \bar{x}z + y$. Pravdivostní tabulka této smyšlené logické funkce je zobrazena v tab. \ref{tab:fpga-pravdivostni-tabulka-smyslene-funkce-generatoru-funkci}. Odpovídající realizace pomocí MUX a SRAM je zobrazena na obr. \ref{fig:fpga-function-generator}. Tato reprezentace se nazývá look-up table (LUT). Grafické znázornění inspirováno \cite{Sass2010}.
@@ -465,12 +465,48 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 	\vspace*{0.5cm}
 	Výhoda této reprezentace funkcí oproti logickým hradlům je, že doba zpoždění signálu (propagation delay) pro funkci je konstantní. Respektivě je konstantní, pokud funkci je možné realizovat jednou LUT. Pro relizace obecné funkce je zapotřebí multiplexer $2^{n}$ -> 1 a SRAM s počtem buněk $2^{n}$, kde $n$ je počet vstupních proměnných dané funkce. \cite{Sass2010}
 
-	\subsubsection{Paměťové elementy}
-		
+	\subsubsection{Paměťové elementy}\label{subsubsec:pametove-elementy}
+		Paměťové elementy jsou v FPGA realizovány pomocí D-klopných obvodů. Tyto obvody mohou při konfiguraci FPGA být nastaveny, že budou reagovat na nástupnou nebo sestupnou hranu časovacího signálu (clock, CLK) řídícího procesoru nebo na úroveň řídícího signálu (latch).\cite{Sass2010}\par
+		Protože typ latch je citlivý na úroveň signálu, může být problematické dovést požadovaný signál na vstup klopného obvodu v požadovaném čase. Velmi často jsou proto paměťové členy konfigurovány jako D-klopné obvody reagující na hranu. Pokud je používán signál CLK vyšších frekvencí, je D-klopný obvod reagující na hranu snadněji schopný reagovat v požadovaném čase. \cite{Sass2010}\par
+		Často jsou na vstup paměťových elementů připojeny výstupy multiplexerů \hyperref[subsubsec:generatory-funkci]{\textit{generátorů funkcí}}. \cite{Sass2010}
 
-		\subsection{Popis funkce}
+		\subsubsection{Logické buňky}
+			Logické buňky jsou elementy, skládájící se z \hyperref[subsubsec:generatory-funkci]{\textit{generátorů funkcí}} a \hyperref[subsubsec:generatory-funkci]{\textit{generátorů funkcí}}. Velmi často se počet logických buněk údává jako jeden ze základních parametrů FPGA, podle kterého je uživatel možný rozhodnout, zda je vhodný pro jeho aplikaci. Pomocí logické buňky nebo skupiny logických buněk je již možné vytvářet plnohodnotnou kombinační a sekvenčí logiku.\cite{Sass2010}
+
+		\subsubsection{Logické bloky}\label{subsubsec:logicke-bloky}
+			Logické bloky se skládají ze spojení několika logických buněk do jedné skupiny. Tato skupina buněk je obvykle na čipu geograficky blízko a proto dochází k minimalizaci zpoždění signálu. Velmi časté je, že jednotlivé bloky mohou mít již předkonfigurovanou funkci, jako je např. sčítačka, dělička nebo násobička. \cite{Sass2010}
+
+		\subsubsection{Propojení bloků}
+			Propojení bloků slouží ke spojení jednotlivých logických bloků a I/O. Pro spínání určených propojů jsou na čipu mezi jednotlivými propoji umístěny propojovací matice, resp. „přepínače“. Ty slouží ke spojení jinak oddělených propojů, logicých bloků a I/O. \cite{Sass2010}
+
+		\subsubsection{I/O bloky}
+				I/O bloky jsou obvykle umístěny na okraji designu FPGA. Slouží k přivedení resp. vyvedení signálů FPGA. \cite{Sass2010}
+
+		\subsubsection{Bloky speciálních funkcí}
+			Aby došlo např. ke snížení zpoždění signálu, který by bylo nutné vyvést z FPGA do externího CPU a naopak, jsou některé speciální funkce implementovány jako funkční bloky přímo do struktury FPGA. To umožňuje efektivní využití FPGA pro různorodé aplikace. \cite{Sass2010}\par
+			\textbf{Block RAM} (BRAM) je blok, který slouží k uchování dat. Sice by bylo možné vytvořit paměťový blok z \hyperref[subsubsec:logicke-bloky]{\textit{Logických bloků}}, ale docházelo by k omezení využití FPGA pro jeho původní aplikace a bylo by potřeba využít mnoho bloků. BRAM mají oddělený vstup a výstup, současně s odděleným CLK. Proto je možné do BRAM zároveň data zapisovat a zároveň z něj číst. \cite{Sass2010}\par
+			\textbf{DSP}, resp. digital signal processing bloky slouží ke zpracování digitálního signálu. V těchto blocích jsou implementované funkce AND, OR, NAND, NOT, násobičkya sčítačky. Mají nízkou spotřebu. DSP bloky jsou často umístěny geograficky blézko BRAM, které slouží jako „mezipaměti“ (buffer). \cite{Sass2010}\par
+			\textbf{Procesor} implementovaný do struktury FPGA snižuje časové zpoždění při obsluhování FPGA. \cite{Sass2010}\par
+			\textbf{Digital Clock Manager} slouží k vytvoření jiného, resp. nižšího taktovacího signálu CLK,oproti původnímu zdrojovému CLK, pro různé bloky v FPGA. \cite{Sass2010}\par
+			\textbf{Multi-Gigabit Transcievers} slouží k přenosu dat takovým způsobem, aby došlo k minimalizaci vlivu ručení na přenášená data. Obecně obstarávají optimální serializaci a paralelizaci dat. \cite{Sass2010}\par
+			Struktuře FPGA, která je obsauje všechny zdroje a funkcionalitu, potřebné pro kompletní realizaci aplikace, se nazývá \textit{platform FPGA}.
 		\subsection{Programování}
-		% VHDL vs HLS
+
+		\subsubsection{Forma tvorby algoritmu pro FPGA}\label{subsubsec:forma-tvorby-algoritmu-pro-fpga}
+		K programování, resp. konfiguraci FPGA je možné přistupovat z několika úrovní. Jednou z využívaných metod popisu požadovaného HW na FPGA je popis struktury/toku signálu obvody (structural/data flow circuits). K tomuto popisu je využíváno jazyků HDL, VHDL a Verilog (Hardware Description Language, VSIC HDL). V těchto jazycích je využíváno logických členů AND, OR, NOT nebo bloků sčítaček a násobiček. Forma popisu, jež naopak využívá vyššího programovacího jazyka než HDL je nazývána metoda popisu chování obvodů (behavioral circuits). Zatímco HDL slouží k popisu hardware s využitím nízké míry abstrakce, HLS je pro programátory značně příjemnější, protože využívá běžných procedurálních programovacích jazyků jako je C, C++ nebo Python. Tyto jazyky jsou následně přeloženy do HDL. Po překladu do HDL jsou provedeny kroky \textit{synthesis} (syntéza), \textit{place-and-rout} (umístění-a-pospojování), \textit{bitgen} (generace bitstreamu). \cite{Sass2010}\par
+		Při použití HLS může vzniknout situace, že bude vytvořen algoritmus, který bude takovým způsobem komplexní, že ho nebude možné syntetizovat na FPGA. Oproti tomu při použití popisu pomocí structural/data flow circuits, je prakticky vždy algoritmus syntetizovatelný. \cite{Sass2010}\par
+		V praxi je k tvorbě algoritmů často využíváno vyšších programovacích jazyků a HLS, protože je tento přístup pro značný počet vývojářů SW srozumitelnější. Dalším častým přístupem v praxi je použití specializovaných SW jako je MATLAB a Simulink, které při použití odpovídajících balíčků jsou schopny přeložit vytvořený algoritmus do HDL, který je poté možné dále zpracovat a použít pro konfiguraci FPGA.
+
+		\subsubsection{Konverze HDL na konfigurační Bitstream}
+			V části \hyperref[subsubsec:forma-tvorby-algoritmu-pro-fpga]{\textit{Forma tvorby algoritmu pro FPGA}} byly představeny dvě hlavní formy tvorby algoritmu pro FPGA. Tyto formy je však pro realizaci na FPGA nutné zpracovat.\par
+			Všechny vyšší úrovně reprezentace algoritmů jsou převedeny na HDL. Následným krokem je \textit{syntéza} (synthesis), která slouží k převodu HDL na tzv. \textit{netlist}. Při převodu je HDL převáděna na logické členy AND, OR apod. \cite{Sass2010}\par
+			Po vytvoření netlistu je nutné rozhodnout, jakým způsobem je možné a výhodné realizovat jednotlivé bloky v logických buňkách a LUT. Konečné sloučení členů závisí na rozsahu vstupů realizovatelných LUT. Proces seskupování logických členů a určování funkce LUT se nazývá mapování (MAP). Výsledkem MAP je opět netlist. Tento netlist však reprezentuje FPGA členy (LUT, klopné obvody apod.). \cite{Sass2010}\par
+			Po mapování následuje proces umisťování (placement), při kterém je rozhodováno, které logické bloky budou realizovat FPGA členy, získané v kroku MAP. \cite{Sass2010}\par
+			Bloky, které jsou umístěné ve struktuře FPGA je nutné spojit pomocí dostupných propojů na FPGA. Proces spojování a optimalizace propojů takovým způsobem, aby bylo minimalizováno časové zpoždění signálu, se nazývá \textit{routing}. Obvykle se proces slučuje s MAP do jedné fáze a nazývá se \textit{place-and-route} (PAR). \cite{Sass2010} \par
+			Posledním krokem je vytvoření binárního souboru, nazývaného \textit{bitstream}, který je poté vkládán do FPGA. Tento proces převede netlist z kroku PAR na nastavení SRAM v jednotlivých logických buňkách FPGA tak, aby byl vytvořen požadovaný design v FPGA. Proces také převede konfiguraci propojů a propojovacích matic do SRAM, ovládající příslušné propoje a matice. \cite{Sass2010}\par
+			Soubor \textit{bitstream} je poté možný pomocí daného nástroje „nahrát“ do FPGA.
+
+
 		\subsection{Využití}
 			\subsection{Spotřeba}
 			\subsection{Výpočetní výkon a propustnost}
