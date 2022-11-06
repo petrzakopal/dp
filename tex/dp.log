@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  6 NOV 2022 21:55
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  7 NOV 2022 00:15
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1755,7 +1755,12 @@ Overfull \hbox (2.09242pt too wide) in paragraph at lines 534--534
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10] [11]
+ [10]
+Overfull \hbox (5.13628pt too wide) in paragraph at lines 545--546
+[]\TU/TimesNewRoman(2)/m/n/10.95 Všechny pre-zen-to-vané způ-soby re-gu-lace v [[][][]11[][][]] byly před syn-té-zou re-a-li-zo-vány v pro-středí MATLAB™ 
+ []
+
+[11]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 548.
@@ -1799,15 +1804,15 @@ Here is how much of LuaTeX's memory you used:
  125094,2373549 words of node,token memory allocated
  906 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 29 attribute, 107 glue_spec, 16 attribute_list, 2 write, 8 pdf_action nodes
-   avail lists: 1:7,2:1726,3:561,4:168,5:283,6:128,7:8221,8:117,9:572,10:14,11:889,12:1
+   avail lists: 1:9,2:1727,3:561,4:168,5:283,6:127,7:8221,8:117,9:572,10:14,11:889,12:1
  71058 multiletter control sequences out of 65536+600000
  90 fonts using 26576799 bytes
- 84i,17n,90p,1672b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,17n,90p,1815b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on dp.pdf (27 pages, 995097 bytes).
+Output written on dp.pdf (27 pages, 996845 bytes).
 
-PDF statistics: 1073 PDF objects out of 1200 (max. 8388607)
- 744 compressed objects within 8 object streams
+PDF statistics: 1076 PDF objects out of 1200 (max. 8388607)
+ 747 compressed objects within 8 object streams
  84 named destinations out of 1000 (max. 131072)
  401 words of extra memory for PDF output out of 10000 (max. 100000000)
 
