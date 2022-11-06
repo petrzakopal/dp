@@ -110,29 +110,41 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4}Využití}{9}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}Spotřeba}{9}{subsection.3.4}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5}Spotřeba}{9}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.5}Výpočetní výkon a propustnost}{10}{subsection.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6}Výpočetní výkon a propustnost}{9}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.6}Využití}{10}{subsection.3.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.1}Aplikace v elektrtických pohonech}{9}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.1}Aplikace v elektrických pohonech}{10}{subsubsection.3.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7}Vývojová deska Digilent Zybo}{9}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.6.2}Aplikace v nepohonářských odvětví}{10}{subsubsection.3.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.7.1}Parametry a složení}{9}{subsubsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7}Vývojová deska Digilent Zybo}{10}{subsection.3.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.7.2}Možné alternativy}{9}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.1}Parametry a složení}{10}{subsubsection.3.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Matematický model stroje}{9}{section.4}%
+\contentsline {subsubsection}{\numberline {3.7.2}Možné alternativy}{10}{subsubsection.3.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Představení stroje}{9}{subsection.4.1}%
+\contentsline {section}{\numberline {4}Matematický model stroje}{10}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Odvození modelu}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.1}Představení stroje}{10}{subsection.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Optimalizace modelu}{9}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.2}Odvození modelu}{10}{subsection.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Program pro FPGA a CPU}{9}{section.5}%
+\contentsline {subsection}{\numberline {4.3}Optimalizace modelu}{10}{subsection.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Program pro FPGA a CPU}{10}{section.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.1}Použité nástroje}{10}{subsection.5.1}%
 \defcounter {refsection}{0}\relax 
@@ -155,6 +167,30 @@
 \contentsline {section}{\numberline {7}Dosažené výsledky}{10}{section.7}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{11}{section.7}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 

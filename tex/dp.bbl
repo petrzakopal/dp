@@ -117,6 +117,86 @@
       \verb https://www.xilinx.com/applications/adaptive-computing/what-is-accelerated-computing-and-why-is-it-important.html
       \endverb
     \endentry
+    \entry{rovere-sphery-vs-shapes}{incollection}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub}
+      \field{day}{14}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Sphery vs. shapes, the first raytraced game that is not software}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/JulianKemmerer/PipelineC-Graphics/blob/main/doc/Sphery-vs-Shapes.pdf
+      \endverb
+      \verb{url}
+      \verb https://github.com/JulianKemmerer/PipelineC-Graphics/blob/main/doc/Sphery-vs-Shapes.pdf
+      \endverb
+    \endentry
+    \entry{wikipedia-ray-tracing}{incollection}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Wikipedia}
+      \field{day}{6}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{title}{Ray tracing (graphics)}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Ray_tracing_(graphics)
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Ray_tracing_(graphics)
+      \endverb
+    \endentry
+    \entry{grover-reduction-of-power-consumption}{article}{}
+      \name{author}{2}{}{%
+        {{hash=07a43925bd2acc5cda2bb0c8b44a6d50}{%
+           family={Grover},
+           familyi={G\bibinitperiod},
+           given={Naresh},
+           giveni={N\bibinitperiod}}}%
+        {{hash=78f458057c10f22189822cb6e368b520}{%
+           family={K.Soni},
+           familyi={K\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{fullhash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{bibnamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{authorbibnamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{authornamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{authorfullhash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Field Programmable Gate Arrays FPGAs are highly desirable for implementation of digital systems due to their flexibility, programmability and low end product life cycle. In more than 20 years since the introduction of FPGA, research and development has produced dramatic improvements in FPGA speed and area efficiency, narrowing the gap between FPGAs and ASICs and making FPGAs the platform of choice for implementing digital circuits. FPGAs hold significant promise as a fast to market replacement. Unfortunately, the advantages of FPGAs are offset in many cases by their high power consumption and area. The goal is to reduce the power consumption without sacrificing much performance or incurring a large chip area so that the territories of FPGAs applications can expand more effectively. Reducing the power of FPGAs is the key to lowering packaging and cooling costs, improving device reliability, and opening the door to new markets such as mobile electronics. This paper presents the tips to lower down the static and dynamic power dissipation in FPGAs. It gives an overview of various techniques at system, device, and circuit and architecture level used for reduction of power consumption of FPGAs and their outcomes.}
+      \field{isbn}{2074-9023}
+      \field{journaltitle}{International journal of information engineering and electronic business}
+      \field{number}{5}
+      \field{title}{Reduction of Power Consumption in FPGAs - An Overview}
+      \field{volume}{4}
+      \field{year}{2012}
+      \field{pages}{50\bibrangedash 69}
+      \range{pages}{20}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
