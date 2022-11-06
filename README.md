@@ -24,6 +24,8 @@
 
 📄 [05.11.2022](/tex/dp.pdf) <-- psací den
 
+📄 [06.11.2022](/tex/dp.pdf) <-- psací den
+
 ## Progress
 
 _Coming soon..._
