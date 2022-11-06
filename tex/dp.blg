@@ -1,18 +1,18 @@
 [0] Config.pm:311> INFO - This is Biber 2.16
 [0] Config.pm:314> INFO - Logfile is 'dp.blg'
-[97] biber-darwin:340> INFO - === Sun Nov  6, 2022, 14:57:27
-[118] Biber.pm:415> INFO - Reading 'dp.bcf'
-[226] Biber.pm:949> INFO - Using all citekeys in bib section 0
-[244] Biber.pm:4340> INFO - Processing section 0
-[266] Biber.pm:4531> INFO - Looking for bibtex format file 'src/bib/zdroje.bib' for section 0
-[268] bibtex.pm:1689> INFO - LaTeX decoding ...
-[280] bibtex.pm:1494> INFO - Found BibTeX data source 'src/bib/zdroje.bib'
-[336] Utils.pm:395> WARN - ISBN '2074-9023' in entry 'grover-reduction-of-power-consumption' is invalid - run biber with '--validate_datamodel' for details.
-[342] Utils.pm:395> WARN - legacy year field '2017;2015;' in entry 'juan-fpgas' is not an integer - this will probably not sort properly.
-[343] Utils.pm:395> WARN - ISBN '9781439896990;1439896992;' in entry 'juan-fpgas' is invalid - run biber with '--validate_datamodel' for details.
-[363] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[363] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
-[363] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'cs-CZ'
-[376] bbl.pm:654> INFO - Writing 'dp.bbl' with encoding 'UTF-8'
-[379] bbl.pm:757> INFO - Output to dp.bbl
-[380] Biber.pm:128> INFO - WARNINGS: 3
+[115] biber-darwin:340> INFO - === Sun Nov  6, 2022, 20:05:57
+[139] Biber.pm:415> INFO - Reading 'dp.bcf'
+[270] Biber.pm:949> INFO - Using all citekeys in bib section 0
+[299] Biber.pm:4340> INFO - Processing section 0
+[315] Biber.pm:4531> INFO - Looking for bibtex format file 'src/bib/zdroje.bib' for section 0
+[317] bibtex.pm:1689> INFO - LaTeX decoding ...
+[332] bibtex.pm:1494> INFO - Found BibTeX data source 'src/bib/zdroje.bib'
+[395] Utils.pm:395> WARN - ISBN '2074-9023' in entry 'grover-reduction-of-power-consumption' is invalid - run biber with '--validate_datamodel' for details.
+[422] Utils.pm:395> WARN - legacy year field '2017;2015;' in entry 'juan-fpgas' is not an integer - this will probably not sort properly.
+[423] Utils.pm:395> WARN - ISBN '9781439896990;1439896992;' in entry 'juan-fpgas' is invalid - run biber with '--validate_datamodel' for details.
+[447] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
+[447] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[447] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'cs-CZ'
+[462] bbl.pm:654> INFO - Writing 'dp.bbl' with encoding 'UTF-8'
+[467] bbl.pm:757> INFO - Output to dp.bbl
+[468] Biber.pm:128> INFO - WARNINGS: 3

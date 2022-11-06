@@ -493,7 +493,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		\subsection{Programování}
 
 		\subsubsection{Forma tvorby algoritmu pro FPGA}\label{subsubsec:forma-tvorby-algoritmu-pro-fpga}
-		K programování, resp. konfiguraci FPGA je možné přistupovat z několika úrovní. Jednou z využívaných metod popisu požadovaného HW na FPGA je popis struktury/toku signálu obvody (structural/data flow circuits). K tomuto popisu je využíváno jazyků HDL, VHDL a Verilog (Hardware Description Language, VSIC HDL). V těchto jazycích je využíváno logických členů AND, OR, NOT nebo bloků sčítaček a násobiček. Forma popisu, jež naopak využívá vyššího programovacího jazyka než HDL je nazývána metoda popisu chování obvodů (behavioral circuits). Zatímco HDL slouží k popisu hardware s využitím nízké míry abstrakce, HLS je pro programátory značně příjemnější, protože využívá běžných procedurálních programovacích jazyků jako je C, C++ nebo Python. Tyto jazyky jsou následně přeloženy do HDL. Po překladu do HDL jsou provedeny kroky \textit{synthesis} (syntéza), \textit{place-and-rout} (umístění-a-pospojování), \textit{bitgen} (generace bitstreamu). \cite{Sass2010}\par
+		K programování, resp. konfiguraci FPGA je možné přistupovat z několika úrovní. Jednou z využívaných metod popisu požadovaného HW na FPGA je popis struktury/toku signálu obvody (structural/data flow circuits). K tomuto popisu je využíváno jazyků HDL, VHDL a Verilog (Hardware Description Language, VSIC HDL). V těchto jazycích je využíváno logických členů AND, OR, NOT nebo bloků sčítaček a násobiček. Forma popisu, jež naopak využívá vyššího programovacího jazyka než HDL je nazývána metoda popisu chování obvodů (behavioral circuits). Zatímco HDL slouží k popisu hardware s využitím nízké míry abstrakce, popis ve vyšších programovacích jazycích, které popis pomocí behavioral circuits umožňuje, je pro programátory značně příjemnější, protože využívá běžných procedurálních programovacích jazyků jako je C, C++ nebo Python. Tyto jazyky jsou následně přeloženy do HDL. Po překladu do HDL pomocí \textit{high level synthesis} (HLS) jsou provedeny kroky \textit{synthesis} (syntéza), \textit{place-and-rout} (umístění-a-pospojování) a \textit{bitgen} (generace bitstreamu). \cite{Sass2010}\par
 		Při použití HLS může vzniknout situace, že bude vytvořen algoritmus, který bude takovým způsobem komplexní, že ho nebude možné syntetizovat na FPGA. Oproti tomu při použití popisu pomocí structural/data flow circuits, je prakticky vždy algoritmus syntetizovatelný. \cite{Sass2010}\par
 		V praxi je k tvorbě algoritmů často využíváno vyšších programovacích jazyků a HLS, protože je tento přístup pro značný počet vývojářů SW srozumitelnější. Dalším častým přístupem v praxi je použití specializovaných SW jako je MATLAB™️ a Simulink, které při použití odpovídajících balíčků jsou schopny přeložit vytvořený algoritmus do HDL, který je poté možné dále zpracovat a použít pro konfiguraci FPGA.
 
@@ -506,8 +506,15 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			Posledním krokem je vytvoření binárního souboru, nazývaného \textit{bitstream}, který je poté vkládán do FPGA. Tento proces převede netlist z kroku PAR na nastavení SRAM v jednotlivých logických buňkách FPGA tak, aby byl vytvořen požadovaný design v FPGA. Proces také převede konfiguraci propojů a propojovacích matic do SRAM, ovládající příslušné propoje a matice. \cite{Sass2010}\par
 			Soubor \textit{bitstream} je poté možný pomocí daného nástroje „nahrát nakonfigurovat jím FPGA“.
 
+			
+			\begin{figure}[htbp!]
+				\centering
+					\includegraphics[width=1\textwidth]{src/pdf/fpga-hls-to-bitstream-flow-chart.pdf} 
+					\caption{Blokové schéma převodu aplikace, naprogramované v procedurálním jazyce, na bitstream, který je vhodný pro konfiguraci FPGA.}
+					\label{fig:fpga-hls-to-bitstream-flow-chart}
+			\end{figure}
 
-		
+		\fbar
 		\subsection{Spotřeba}
 			FPGA je využívano pro akceleraci aplikací také pro svou nízkou spotřebu energie. Oproti ASICs však FPGA má stále značnější spotřebu, proto je podnikán výzkum, který má za cíl jejich energetickou náročnost snížit ale zachovat jejich výkon a spolehlivost.\par
 			% Existuje mnoho článků na téma energy/power efficiency of fpgas ale v žádném není popsáno, proč je jeho spotřeba nižší, než v CPU
@@ -520,12 +527,22 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			Dynamická disipace je způsobena spínacími a vypínacími ztráty použitých tranzistorů (obvykle CMOS) a je závislá na použitém napětí, frekvenci a kapacitě přechodů, kterou je třeba nabít a vybít při spínání a vypínání tranzistorů. \cite{grover-reduction-of-power-consumption}
 			\subsection{Výpočetní výkon a propustnost}
 			\subsection{Využití}
+			Programovatelná logická hradlová pole se pro svoji nízkou spotřebu, vysoký výpočetní výkon a klesající cenu elektroniky začínají využívat mnohem častěji v mnoha odvětví, ve kterých bylo doposavaď využíváno CPU a GPU. Aplikace FPGA je možné v rámci této práce rozdělit na nepohonářské a pohonářské.
+
+			\subsubsection{Aplikace v nepohonářských odvětví}
+				Díky univerzalitě FPGAs je možné je využít v mnoha aplikacích různých odvětví. Stále se zvyšující požadavky na výpočetní výkon urychlují nasazování FPGAs do provozů, kde jsou v současné době instalovány CPU nebo GPU.\par
+				Poptávka po dostupnosti FPGA způsobila vznik Cloud služeb, které nabízí FPGA výkon on-demand. Jedním z velkých poskytovatelů je Amazon Web Services (AWS), který nabízí FPGA akceleraci v Cloudu. Tuto službu ocení především aplikace, které nejsou vázány na reálný hardware ale potřebují pouze dostupný výpočetní výkon, který mohou v průběhu tvorby, debuggingu či realizace aplikace měnit bez nutnosti pořizování výkonných a někdy drahých FPGA desek. Více o \textit{Amazon EC2 F1 Instances} služby virtuálních FPGA je dostupné na \cite{amazon-ec2-f1}.\par
+				Existuje mnoho výpočetně náročných aplikací jako jsou např. výpočty finančních modelů pro ekonomiku, výpočty pro bioinformatiku, seismické modelování při hledání vzácných surovin apod. Více informací o těchto výpočetně náročných aplikacích je možné získat v \cite{wim-high-performance-computing-using-fpgas}.\par
+				Na akceleraci zpracování audiovizuálních děl je převážně určeno GPU. Ovšem pro aplikace, v nichž je vyžadováno zpracování obrazu v reálném čase s minimální spotřebou energie a nízkou hmotností aplikace, je často využíváno FPGA. Aplikace využití FPGA pro vozidla, která analyzují okolní prostor jsou popsány v \cite{andina-advanced-features-and-industrial-applications-of-fpga}. Tyto aplikace nesou souhrnný název „inteligennt spaces applications“. Obvykle je pro analýzu okolního prostoru využíváno více kamer, z nichž každá obsahuje vlastní výpočetní jádro (FPGA). Díky tomu výpočetně náročné aplikace, jako např. analýza hloubky obrazu pro rozpoznání objektů, probíhá v FPGA a ostatní nenáročné výpočty a řízení v SW. \cite{andina-advanced-features-and-industrial-applications-of-fpga}\par
+				Protože momentálním trendem je snižování energetické náročnosti a zvyšování výpočetního výkonu dochází neustále k vývoji nových aplikací, které využívají FPGA pro akceleraci výpočetně náročných kroků, proto není možné všechny v tomto textu obsáhnout.
+
+
 			\subsubsection{Aplikace v elektrických pohonech}
 			% HIL
 			% Control
 			% Control and Extended Kaufmann Filter
-			\subsubsection{Aplikace v nepohonářských odvětví}
-	\subsection{Vývojová deska Digilent Zybo}
+			
+	\section{Vývojová deska Digilent Zybo}
 		\subsubsection{Parametry a složení}
 		% I/O
 		% FPGA

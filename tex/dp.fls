@@ -638,6 +638,9 @@ INPUT ./src/pdf/fpga-general-design.pdf
 INPUT ./src/pdf/fpga-function-generator.pdf
 INPUT ./src/pdf/fpga-function-generator.pdf
 INPUT ./src/pdf/fpga-function-generator.pdf
+INPUT ./src/pdf/fpga-hls-to-bitstream-flow-chart.pdf
+INPUT ./src/pdf/fpga-hls-to-bitstream-flow-chart.pdf
+INPUT ./src/pdf/fpga-hls-to-bitstream-flow-chart.pdf
 INPUT ./dp.aux
 INPUT ./dp.out
 INPUT ./dp.run.xml

@@ -197,6 +197,94 @@
       \field{pages}{50\bibrangedash 69}
       \range{pages}{20}
     \endentry
+    \entry{amazon-ec2-f1}{incollection}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Amazon AWS}
+      \field{langid}{english}
+      \field{title}{Amazon EC2 F1 Instances}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/ec2/instance-types/f1/)
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/ec2/instance-types/f1/)
+      \endverb
+    \endentry
+    \entry{wim-high-performance-computing-using-fpgas}{book}{}
+      \name{author}{2}{}{%
+        {{hash=1677f63d9a458d71bba87a78edcee5ec}{%
+           family={Vanderbauwhede},
+           familyi={V\bibinitperiod},
+           given={Wim},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2c1c67af73ac42961500d3ee1a460c76}{%
+           family={Benkrid},
+           familyi={B\bibinitperiod},
+           given={Khaled},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Publishing Company, Incorporated}%
+      }
+      \strng{namehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{fullhash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{bibnamehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{authorbibnamehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{authornamehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{authorfullhash}{601324d9214ad24f68cfeca33ba6e08d}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{High-Performance Computing using FPGA covers the area of high performance reconfigurable computing (HPRC). This book provides an overview of architectures, tools and applications for High-Performance Reconfigurable Computing (HPRC). FPGAs offer very high I/O bandwidth and fine-grained, custom and flexible parallelism and with the ever-increasing computational needs coupled with the frequency/power wall, the increasing maturity and capabilities of FPGAs, and the advent of multicore processors which has caused the acceptance of parallel computational models. The Part on architectures will introduce different FPGA-based HPC platforms: attached co-processor HPRC architectures such as the CHRECs Novo-G and EPCCs Maxwell systems; tightly coupled HRPC architectures, e.g. the Convey hybrid-core computer; reconfigurably networked HPRC architectures, e.g. the QPACE system, and standalone HPRC architectures such as EPFLs CONFETTI system. The Part on Tools will focus on high-level programming approaches for HPRC, with chapters on C-to-Gate tools (such as Impulse-C, AutoESL, Handel-C, MORA-C++); Graphical tools (MATLAB-Simulink, NI LabVIEW); Domain-specific languages, languages for heterogeneous computing(for example OpenCL, Microsofts Kiwi and Alchemy projects). The part on Applications will present case from several application domains where HPRC has been used successfully, such as Bioinformatics and Computational Biology; Financial Computing; Stencil computations; Information retrieval; Lattice QCD; Astrophysics simulations; Weather and climate modeling.}
+      \field{isbn}{1461417902}
+      \field{title}{High-Performance Computing Using FPGAs}
+      \field{year}{2013}
+    \endentry
+    \entry{andina-advanced-features-and-industrial-applications-of-fpga}{article}{}
+      \name{author}{3}{}{%
+        {{hash=bfae85860227d176670cd98ae7b2e87e}{%
+           family={Rodríguez-Andina},
+           familyi={R\bibinithyphendelim A\bibinitperiod},
+           given={Juan\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=640362be3eb00cffd71041b41bdda83c}{%
+           family={Valdés-Peña},
+           familyi={V\bibinithyphendelim P\bibinitperiod},
+           given={María\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=51c5caeacc8aea904e633c696518e025}{%
+           family={Moure},
+           familyi={M\bibinitperiod},
+           given={María\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{d8fa00535199236c4f5b116e95c5fb59}
+      \strng{fullhash}{d8fa00535199236c4f5b116e95c5fb59}
+      \strng{bibnamehash}{d8fa00535199236c4f5b116e95c5fb59}
+      \strng{authorbibnamehash}{d8fa00535199236c4f5b116e95c5fb59}
+      \strng{authornamehash}{d8fa00535199236c4f5b116e95c5fb59}
+      \strng{authorfullhash}{d8fa00535199236c4f5b116e95c5fb59}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Industrial Informatics}
+      \field{number}{4}
+      \field{title}{Advanced Features and Industrial Applications of FPGAs—A Review}
+      \field{volume}{11}
+      \field{year}{2015}
+      \field{pages}{853\bibrangedash 864}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/TII.2015.2431223
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
