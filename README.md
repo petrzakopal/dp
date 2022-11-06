@@ -38,11 +38,11 @@ _Coming soon..._
 
 ## Tech Stack
 
-- PetaLinux
-- Vitis
-- Vivado
-- Linux
-- VS Code
-- Figma
-- LaTeX
-- AutoCAD
+- PetaLinux - běžící na ARM vývojové desky Digilent
+- Vitis - pro programování kernelů a host aplikací
+- Vivado - pro design FPGA
+- Linux - běžící na serveru, kde dochází k syntéze a tvorbě aplikace
+- VS Code - v něm momentálně píši veškeré texty, poznámky a LaTeX dokument
+- Figma - pro vytváření názorných obrázků
+- LaTeX - pro sázení textu práce
+- AutoCAD - pro vytváření schémat
