@@ -209,10 +209,10 @@
       \field{urlyear}{2022}
       \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://aws.amazon.com/ec2/instance-types/f1/)
+      \verb https://aws.amazon.com/ec2/instance-types/f1/
       \endverb
       \verb{url}
-      \verb https://aws.amazon.com/ec2/instance-types/f1/)
+      \verb https://aws.amazon.com/ec2/instance-types/f1/
       \endverb
     \endentry
     \entry{wim-high-performance-computing-using-fpgas}{book}{}
@@ -283,6 +283,73 @@
       \range{pages}{12}
       \verb{doi}
       \verb 10.1109/TII.2015.2431223
+      \endverb
+    \endentry
+    \entry{mathworks-discovery-hil-simulation}{incollection}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The MathWorks, Inc.}
+      \field{langid}{english}
+      \field{title}{Hardware-in-the-Loop (HIL) Simulation}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.mathworks.com/discovery/hardware-in-the-loop-hil.html
+      \endverb
+      \verb{url}
+      \verb https://www.mathworks.com/discovery/hardware-in-the-loop-hil.html
+      \endverb
+    \endentry
+    \entry{naouar-fpga-based-current-controllers-for-ac-machine-drives}{article}{}
+      \name{author}{5}{}{%
+        {{hash=0246e1b97b78c14313dd2f90e8125862}{%
+           family={Naouar},
+           familyi={N\bibinitperiod},
+           given={Mohamed-Wissem},
+           giveni={M\bibinithyphendelim W\bibinitperiod}}}%
+        {{hash=b6776cac030e187d023e3f571686f171}{%
+           family={Monmasson},
+           familyi={M\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=505325cc860f283002510b5b363c6ed2}{%
+           family={Naassani},
+           familyi={N\bibinitperiod},
+           given={Ahmad\bibnamedelima Ammar},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=3362f2f34b6289a08a580daffeb5645d}{%
+           family={Slama-Belkhodja},
+           familyi={S\bibinithyphendelim B\bibinitperiod},
+           given={Ilhem},
+           giveni={I\bibinitperiod}}}%
+        {{hash=e9e73beeb5a12b0d6c1de5f96a23981d}{%
+           family={Patin},
+           familyi={P\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{fullhash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{bibnamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{authorbibnamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{authornamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{authorfullhash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Industrial Electronics}
+      \field{number}{4}
+      \field{title}{FPGA-Based Current Controllers for AC Machine Drives—A Review}
+      \field{volume}{54}
+      \field{year}{2007}
+      \field{pages}{1907\bibrangedash 1925}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1109/TIE.2007.898302
       \endverb
     \endentry
   \enddatalist
