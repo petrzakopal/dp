@@ -2141,19 +2141,18 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">src/bib/zdroje.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="3">Sass2010</bcf:citekey>
     <bcf:citekey order="4">Sass2010</bcf:citekey>
-    <bcf:citekey order="5">juan-fpgas</bcf:citekey>
-    <bcf:citekey order="6">Sass2010</bcf:citekey>
+    <bcf:citekey order="5">Sass2010</bcf:citekey>
+    <bcf:citekey order="6">juan-fpgas</bcf:citekey>
     <bcf:citekey order="7">Sass2010</bcf:citekey>
-    <bcf:citekey order="8">juan-fpgas</bcf:citekey>
+    <bcf:citekey order="8">Sass2010</bcf:citekey>
     <bcf:citekey order="9">juan-fpgas</bcf:citekey>
-    <bcf:citekey order="10">xilinx-accelerated-computing</bcf:citekey>
+    <bcf:citekey order="10">juan-fpgas</bcf:citekey>
     <bcf:citekey order="11">xilinx-accelerated-computing</bcf:citekey>
     <bcf:citekey order="12">xilinx-accelerated-computing</bcf:citekey>
     <bcf:citekey order="13">xilinx-accelerated-computing</bcf:citekey>
     <bcf:citekey order="14">xilinx-accelerated-computing</bcf:citekey>
-    <bcf:citekey order="15">Sass2010</bcf:citekey>
+    <bcf:citekey order="15">xilinx-accelerated-computing</bcf:citekey>
     <bcf:citekey order="16">Sass2010</bcf:citekey>
     <bcf:citekey order="17">Sass2010</bcf:citekey>
     <bcf:citekey order="18">Sass2010</bcf:citekey>
@@ -2178,26 +2177,29 @@
     <bcf:citekey order="37">Sass2010</bcf:citekey>
     <bcf:citekey order="38">Sass2010</bcf:citekey>
     <bcf:citekey order="39">Sass2010</bcf:citekey>
-    <bcf:citekey order="40">rovere-sphery-vs-shapes</bcf:citekey>
-    <bcf:citekey order="41">wikipedia-ray-tracing</bcf:citekey>
-    <bcf:citekey order="42">rovere-sphery-vs-shapes</bcf:citekey>
-    <bcf:citekey order="43">grover-reduction-of-power-consumption</bcf:citekey>
+    <bcf:citekey order="40">Sass2010</bcf:citekey>
+    <bcf:citekey order="41">rovere-sphery-vs-shapes</bcf:citekey>
+    <bcf:citekey order="42">wikipedia-ray-tracing</bcf:citekey>
+    <bcf:citekey order="43">rovere-sphery-vs-shapes</bcf:citekey>
     <bcf:citekey order="44">grover-reduction-of-power-consumption</bcf:citekey>
-    <bcf:citekey order="45">amazon-ec2-f1</bcf:citekey>
-    <bcf:citekey order="46">wim-high-performance-computing-using-fpgas</bcf:citekey>
-    <bcf:citekey order="47">andina-advanced-features-and-industrial-applications-of-fpga</bcf:citekey>
+    <bcf:citekey order="45">grover-reduction-of-power-consumption</bcf:citekey>
+    <bcf:citekey order="46">amazon-ec2-f1</bcf:citekey>
+    <bcf:citekey order="47">wim-high-performance-computing-using-fpgas</bcf:citekey>
     <bcf:citekey order="48">andina-advanced-features-and-industrial-applications-of-fpga</bcf:citekey>
     <bcf:citekey order="49">andina-advanced-features-and-industrial-applications-of-fpga</bcf:citekey>
-    <bcf:citekey order="50">mathworks-discovery-hil-simulation</bcf:citekey>
-    <bcf:citekey order="51">naouar-fpga-based-current-controllers-for-ac-machine-drives</bcf:citekey>
+    <bcf:citekey order="50">andina-advanced-features-and-industrial-applications-of-fpga</bcf:citekey>
+    <bcf:citekey order="51">mathworks-discovery-hil-simulation</bcf:citekey>
     <bcf:citekey order="52">naouar-fpga-based-current-controllers-for-ac-machine-drives</bcf:citekey>
     <bcf:citekey order="53">naouar-fpga-based-current-controllers-for-ac-machine-drives</bcf:citekey>
     <bcf:citekey order="54">naouar-fpga-based-current-controllers-for-ac-machine-drives</bcf:citekey>
-    <bcf:citekey order="55">digilent-zybo-7000-docs</bcf:citekey>
-    <bcf:citekey order="56">digilent-zybo-compare</bcf:citekey>
-    <bcf:citekey order="57">xilinx-zynq-7000-technical-reference-manual</bcf:citekey>
+    <bcf:citekey order="55">naouar-fpga-based-current-controllers-for-ac-machine-drives</bcf:citekey>
+    <bcf:citekey order="56">digilent-zybo-7000-docs</bcf:citekey>
+    <bcf:citekey order="57">digilent-zybo-compare</bcf:citekey>
     <bcf:citekey order="58">xilinx-zynq-7000-technical-reference-manual</bcf:citekey>
     <bcf:citekey order="59">xilinx-zynq-7000-technical-reference-manual</bcf:citekey>
+    <bcf:citekey order="60">xilinx-zynq-7000-technical-reference-manual</bcf:citekey>
+    <bcf:citekey order="61">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="62">digilent-zybo-reference-manual</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->

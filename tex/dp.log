@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  11 NOV 2022 14:21
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  11 NOV 2022 21:26
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1633,11 +1633,11 @@ Package fontspec Info: Font family 'TIMESNEWROMAN(0)' created for font 'TIMES
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
  (./dp.toc<<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 9.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 11.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 9.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 11.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )<<ot1.cmap>> [7])
@@ -1645,7 +1645,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
 \openout7 = dp.toc
  [8] (./dp.lof
-Overfull \hbox (3.56317pt too wide) in paragraph at lines 45--45
+Overfull \hbox (3.56317pt too wide) in paragraph at lines 47--47
  [][] [][][]\TU/TimesNewRoman(2)/m/n/10.95 Ukázka, ja-kým způ-so-bem re-a-li-zuje funkční ge-ne-rá-tor po-ža-do-va-nou funkci po-mocí SRAM 
  []
 
@@ -1667,7 +1667,7 @@ warning  (pdf backend): ignoring duplicate destination with the name 'page.1'
 
 ]
 warning  (file src/pdf/embedded-system-scheme.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/embedded-system-scheme.pdf, id=383, 845.1575pt x 597.23125pt>
+<src/pdf/embedded-system-scheme.pdf, id=394, 845.1575pt x 597.23125pt>
 File: src/pdf/embedded-system-scheme.pdf Graphic file (type pdf)
 <use src/pdf/embedded-system-scheme.pdf>
 Package luatex.def Info: src/pdf/embedded-system-scheme.pdf  used on input line 385.
@@ -1700,14 +1700,14 @@ Package fontspec Info: Font family 'TimesNewRomanItalic(0)' created for font
 
 ] [3<./src/pdf/embedded-system-scheme.pdf>] [4]
 warning  (file src/pdf/fpga-skladba.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-skladba.pdf, id=418, 1265.72874pt x 634.37pt>
+<src/pdf/fpga-skladba.pdf, id=429, 1265.72874pt x 634.37pt>
 File: src/pdf/fpga-skladba.pdf Graphic file (type pdf)
 <use src/pdf/fpga-skladba.pdf>
 Package luatex.def Info: src/pdf/fpga-skladba.pdf  used on input line 417.
 (luatex.def)             Requested size: 455.24411pt x 228.16006pt.
 
 warning  (file src/pdf/fpga-general-design.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-general-design.pdf, id=419, 917.4275pt x 591.20876pt>
+<src/pdf/fpga-general-design.pdf, id=430, 917.4275pt x 591.20876pt>
 File: src/pdf/fpga-general-design.pdf Graphic file (type pdf)
 <use src/pdf/fpga-general-design.pdf>
 Package luatex.def Info: src/pdf/fpga-general-design.pdf  used on input line 425.
@@ -1716,7 +1716,7 @@ Package luatex.def Info: src/pdf/fpga-general-design.pdf  used on input line 425
 
 <./src/pdf/fpga-skladba.pdf>]
 warning  (file src/pdf/fpga-function-generator.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-function-generator.pdf, id=592, 494.84875pt x 570.13pt>
+<src/pdf/fpga-function-generator.pdf, id=603, 494.84875pt x 570.13pt>
 File: src/pdf/fpga-function-generator.pdf Graphic file (type pdf)
 <use src/pdf/fpga-function-generator.pdf>
 Package luatex.def Info: src/pdf/fpga-function-generator.pdf  used on input line 463.
@@ -1737,7 +1737,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
 warning  (file src/pdf/fpga-hls-to-bitstream-flow-chart.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-hls-to-bitstream-flow-chart.pdf, id=824, 1388.18625pt x 153.57375pt>
+<src/pdf/fpga-hls-to-bitstream-flow-chart.pdf, id=836, 1388.18625pt x 153.57375pt>
 File: src/pdf/fpga-hls-to-bitstream-flow-chart.pdf Graphic file (type pdf)
 <use src/pdf/fpga-hls-to-bitstream-flow-chart.pdf>
 Package luatex.def Info: src/pdf/fpga-hls-to-bitstream-flow-chart.pdf  used on input line 516.
@@ -1761,27 +1761,42 @@ Overfull \hbox (5.13628pt too wide) in paragraph at lines 549--550
  []
 
 [11]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<src/jpg/digilent-zybo-foto-2.jpg, id=1041, 986.7264pt x 657.8979pt>
+File: src/jpg/digilent-zybo-foto-2.jpg Graphic file (type jpg)
+<use src/jpg/digilent-zybo-foto-2.jpg>
+Package luatex.def Info: src/jpg/digilent-zybo-foto-2.jpg  used on input line 558.
+(luatex.def)             Requested size: 386.96027pt x 258.00464pt.
+
+Underfull \vbox (badness 2096) has occurred while \output is active []
 
  [12
 
-]
-
-LaTeX Warning: Reference `zynq-block-diagram-detailed' on page 13 undefined on input line 581.
-
-<src/png/zynq-block-diagram-detailed.png, id=1040, 865.2325pt x 685.56125pt>
+<./src/jpg/digilent-zybo-foto-2.jpg>]
+<src/png/zynq-block-diagram-detailed.png, id=1053, 865.2325pt x 685.56125pt>
 File: src/png/zynq-block-diagram-detailed.png Graphic file (type png)
 <use src/png/zynq-block-diagram-detailed.png>
-Package luatex.def Info: src/png/zynq-block-diagram-detailed.png  used on input line 596.
+Package luatex.def Info: src/png/zynq-block-diagram-detailed.png  used on input line 601.
 (luatex.def)             Requested size: 409.71692pt x 324.64073pt.
 
-LaTeX Font Warning: Font shape `TU/TimesNewRomanItalic(0)/m/it' undefined
-(Font)              using `TU/TimesNewRomanItalic(0)/m/n' instead on input line 597.
 
+LaTeX Font Warning: Font shape `TU/TimesNewRomanItalic(0)/m/it' undefined
+(Font)              using `TU/TimesNewRomanItalic(0)/m/n' instead on input line 602.
+
+[13] [14<./src/png/zynq-block-diagram-detailed.png>]
+<src/jpg/digilent-zybo-foto-1-oznacene.jpg, id=1070, 5101.0575pt x 3403.71625pt>
+File: src/jpg/digilent-zybo-foto-1-oznacene.jpg Graphic file (type jpg)
+<use src/jpg/digilent-zybo-foto-1-oznacene.jpg>
+Package luatex.def Info: src/jpg/digilent-zybo-foto-1-oznacene.jpg  used on input line 611.
+(luatex.def)             Requested size: 455.24411pt x 303.72443pt.
+<src/jpg/digilent-zybo-foto-3.jpg, id=1071, 986.7264pt x 657.8979pt>
+File: src/jpg/digilent-zybo-foto-3.jpg Graphic file (type jpg)
+<use src/jpg/digilent-zybo-foto-3.jpg>
+Package luatex.def Info: src/jpg/digilent-zybo-foto-3.jpg  used on input line 618.
+(luatex.def)             Requested size: 455.24411pt x 303.53015pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13<./src/png/zynq-block-diagram-detailed.png>] [14] [15
+ [15<./src/jpg/digilent-zybo-foto-1-oznacene.jpg>] [16<./src/jpg/digilent-zybo-foto-3.jpg>] [17] [18] [19
 
 ]
 
@@ -1792,25 +1807,27 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 (biblatex)                Using the old, problematic definition.
 
 
-Overfull \hbox (4.15941pt too wide) in paragraph at lines 667--667
+Overfull \hbox (4.15941pt too wide) in paragraph at lines 719--719
 []\TU/TimesNewRoman(1)/m/n/10.95 Hardware-in-the-Loop (HIL) Si-mu-lation[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 The MathWorks, Inc.[] \TU/TimesNewRoman(1)/m/n/10.95 [On-line][]. [B.r.] [[]cit.[] 2022-11-06].
  []
 
 
-Overfull \hbox (26.46931pt too wide) in paragraph at lines 667--667
+Overfull \hbox (26.46931pt too wide) in paragraph at lines 719--719
 []\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Z7 Mi-gration Gu-ide[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-11].
  []
 
-[16
 
-] [17] [18
+Overfull \hbox (19.74677pt too wide) in paragraph at lines 719--719
+[]\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Re-fe-rence Ma-nual[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-11].
+ []
+
+[20
+
+] [21] [22
 
 ] (./dp.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `dp.out' has not changed.
 (rerunfilecheck)             Checksum: 8CD02C310676A404BBDFDDED7B430142;8057.
@@ -1820,19 +1837,19 @@ Package logreq Info: Writing requests to 'dp.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 52527 strings out of 478092
+ 52575 strings out of 478092
  125094,2373549 words of node,token memory allocated
- 942 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 35 attribute, 107 glue_spec, 19 attribute_list, 2 write, 11 pdf_action nodes
-   avail lists: 1:9,2:2149,3:777,4:169,5:285,6:134,7:8228,8:117,9:572,10:14,11:889,12:4
- 71081 multiletter control sequences out of 65536+600000
- 90 fonts using 26593759 bytes
+ 978 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 41 attribute, 107 glue_spec, 22 attribute_list, 2 write, 14 pdf_action nodes
+   avail lists: 1:7,2:2305,3:834,4:168,5:285,6:135,7:8234,8:117,9:919,10:14,11:889,12:4
+ 71103 multiletter control sequences out of 65536+600000
+ 90 fonts using 26608479 bytes
  84i,17n,90p,1815b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on dp.pdf (30 pages, 1252771 bytes).
+Output written on dp.pdf (34 pages, 7798232 bytes).
 
-PDF statistics: 1126 PDF objects out of 1200 (max. 8388607)
- 791 compressed objects within 8 object streams
- 95 named destinations out of 1000 (max. 131072)
+PDF statistics: 1169 PDF objects out of 1200 (max. 8388607)
+ 825 compressed objects within 9 object streams
+ 103 named destinations out of 1000 (max. 131072)
  417 words of extra memory for PDF output out of 10000 (max. 100000000)
 

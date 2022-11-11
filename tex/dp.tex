@@ -553,6 +553,13 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			V této práci je realizován vývoj aplikace na vývojové desce \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board} od firmy Digilent. \cite{digilent-zybo-7000-docs} Jedná se o model vývojové desky, který byl nahrazen novějšími variantami s označením \textit{ZYBO Z7-10} a \textit{ZYBO Z7-20}, které jsou stále v aktivním prodeji. Hlavním rozdílem představených desek je verze Zynq čipu, který v moderních deskách disponuje ARM procesorem s vyšší taktovací frekvencí a s modernějším FPGA s vyšším počtem LUT, klopných obvodů a s rozsáhlejší pamětí RAM apod. Bližší porovnání specifikací těchto desek je dostupné na \cite{digilent-zybo-compare}.\par
 			V další části textu jsou představeny významné komponenty vývojové desky \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}.
 
+			\begin{figure}[htbp!]
+				\centering
+					\includegraphics[width=0.85\textwidth]{src/jpg/digilent-zybo-foto-2.jpg} 
+					\caption{Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board.}
+					\label{fig:digilent-zybo-foto-2}
+			\end{figure}
+
 		\subsection{Základní přehled}
 		\subsubsection{CPU a FPGA čip}
 			Hlavní částí vývojové desky je čip, obsahující FPGA a CPU jednotky zakomponované v jedné polovodičové struktuře. Jak již bylo zmíněno v části \hyperref[subsec:hardware-accelerated-applications]{\textit{Hardware Accelerated Applications}}, tato struktura se nazývá heterogenní.\par
@@ -578,12 +585,10 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			\noindent\textbf{Blok IOP}\\
 			IOP se skládá ze standardizovaných rozhraní vhodných pro průmyslovou komunikaci. Obsahuje nař. GPIO, Gigabit Ethernet, dva bloky USB Controller, dva bloky SD/SDIO Controller pro bootování SD karty, dva bloky SPI Controller, dva bloky CAN Controller, dva bloky UART Controller a dva bloky I2C Controller.\par\vspace*{0.25cm}
 			\noindent\textbf{Blok Interconnect}\\
-			Blok Interconnect, resp. na obr. \ref{zynq-block-diagram-detailed} označený Central Interconnect slouží k propojení jednotlivých bloků SoC dle požadované technologie a rychlosti.\par\vspace*{0.25cm}
+			Blok Interconnect, resp. na obr. \ref{fig:zynq-block-diagram-detailed} označený Central Interconnect slouží k propojení jednotlivých bloků SoC dle požadované technologie a rychlosti.\par\vspace*{0.25cm}
 			\noindent\textbf{Blok PL}\\
 			Blok PL reprezentuje logické programovtelné pole (FPGA), v němž jsou zakomponovány další podpůrné bloky jako např. blok zpracování digitálních signálů, řízení taktovacích hodin, analogově digitální převodník (ADC) apod.\par\vspace*{0.35cm}
 			\noindent Veškeré technické specifikace, složení a parametry jmenovaných bloků a jsou uvedeny v \cite{xilinx-zynq-7000-technical-reference-manual}.
-
-
 			% \begin{figure}[htbp!]
 			% 	\centering
 			% 		\includegraphics[width=0.75\textwidth]{src/png/zynq-mp-core-dual.png} 
@@ -597,25 +602,72 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 					\caption{Detailní schéma čipu Zynq-7000, umístěného na vývojové desce \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}. (převzato z \cite{xilinx-zynq-7000-technical-reference-manual})}
 					\label{fig:zynq-block-diagram-detailed}
 			\end{figure}
-
+			\fbar
 			\subsubsection{Uspořádání vývojové desky Zybo Zynq-7000}
+				Na obr. \ref{fig:digilent-zybo-foto-1-oznacene} je zobrazen horní pohled na vývojovou desku, na které jsou vyznačeny významné části, kterým je vhodné věnovat při práci s deskou pozornost. Číselné označení koresponduje s označením a vysvětlivkou v tabulce \ref{tab:digilent-zybo-zynq-7000-description}. Na spodní části desky se nachází menší počet součástek, které by byly významné pro ovládání a práci s deskou. Nicméně pro doplnění je spodní strana desky zobrazena na obr. \ref{fig:digilent-zybo-foto-3}.
 
-			\begin{table}[H]
+				\begin{figure}[H]
+					\centering
+						\includegraphics[width=1\textwidth]{src/jpg/digilent-zybo-foto-1-oznacene.jpg} 
+						\caption{Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board vrchní pohled s vyznačením komponent.}
+						\label{fig:digilent-zybo-foto-1-oznacene}
+				\end{figure}
+
+				\begin{figure}[H]
+					\centering
+						\includegraphics[width=1\textwidth]{src/jpg/digilent-zybo-foto-3.jpg} 
+						\caption{Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board spodní pohled.}
+						\label{fig:digilent-zybo-foto-3}
+				\end{figure}
+
+				\fbar
+			\begin{table}[htbp!]
 				\centering
-				\caption{Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000.}
+				\caption{Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000. (informace a značení z \cite{digilent-zybo-reference-manual})}
 			  \vspace*{0.15cm}
-			%   \resizebox{\textwidth}{!}
+			   \resizebox{\textwidth}{!}
 				{
-				\begin{tabular}{!{\vrule width 2pt} c | c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+				\begin{tabular}{!{\vrule width 2pt} c | l | l !{\vrule width 2pt}}\noalign{\hrule height 2pt}
 				označení & popis &	poznámka \\
 				\noalign{\hrule height 2pt}
-				0 & Power Switch & galvanické sepnutí napájecího obvodu \\ \hline
-				
-				7 & 1 & 1 \\\noalign{\hrule height 2pt}
+				1 & Power Switch & galvanické sepnutí napájecího obvodu \\ \hline
+				2 & Power Select Jumper and Battery Header & výběr napájecího vstupu konektor, USB, baterie\\ \hline
+				3 & Shared UART/JTAG USB port & komunikace UART a JTAG debugging\\ \hline
+				4 & MIO LED & multiplexed LED – možnost výběru signálu\\ \hline
+				5 & MIO Pushbuttons (2) & multiplexed input\\ \hline
+				6 & MIO Pmod & možnost připojení periférií\\ \hline
+				7 & USB OTG Connectors & USB port typ A/micro USB (spodní část)\\ \hline
+				8 & Logic LEDs (4) & zobrazování 1/0\\ \hline
+				9 & Logic Slide Switches (4) & logický vstup 1/0\\ \hline
+				10 & USB OTG Host/Device Select Jumpers & výběr módu zařízení\\ \hline
+				11 & Standard Pmod & chráněné Pmod, limitace max. přenosu informace\\ \hline
+				12 & High-speed Pmods (3) & jako standard ale bez ochrany, vyšší rychlost\\ \hline
+				13 & Logic Pushbuttons (4) & logický vstup 1/0\\ \hline
+				14 & XADC Pmod & možnost  analog/digi input/output, spojeno s ADC v Zynq\\ \hline
+				15 & Processor Reset Pushbutton & reset PL, paměti v PS\\ \hline
+				16 & Logic Configuration reset Pushbutton & reset PL, zrušení DONE informace\\ \hline
+				17 & Audio Codec Connectors & stereo line in, mono mikrofon, stereo output\\ \hline
+				18 & Logic Configuration Done LED & signál o úspěšném dokončení konfigurace PL\\ \hline
+				19 & Board Power Good LED & 1/0, 1 – nominální napětí na všech sběrnicích\\ \hline
+				20 & JTAG Port for optional external cable & externí JTAG\\ \hline
+				21 & Programming Mode Jumper & výběr „programovacího vstupu“, SD karta, QSPI, JTAG\\ \hline
+				22 & Independent JTAG Mode Enable Jumper & JTAG mimo PS, viditelné pouze PL\\ \hline
+				23 & PLL Bypass Jumper & přemostění PLL (CLK), pro možnost konfigurace PLL\\ \hline
+				24 & VGA connector & připojení displaye\\ \hline
+				25 & microSD connector & na spodní straně\\ \hline
+				26 & HDMI Sink/Source Connector & input/ouput, nutné implementovat encoding a decoding v logice\\ \hline
+				27 & Ethernet RJ45 Connector & komunikace\\ \hline
+				28 & Power Jack & napájení 5 V/2,5 A\\ \hline
+				29 & TX/RX LED & indikace UART komunikace\\ \hline
+				30 & Xilinx Zynq SoC & srdce desky\\ \hline
+				31 & DDR2 Memory & RAM\\\noalign{\hrule height 2pt}
 				\end{tabular}
 				}
 				\label{tab:digilent-zybo-zynq-7000-description}
 			\end{table}
+
+
+			
 
 		\fbar
 		\subsection{Možné alternativy}
