@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  7 NOV 2022 00:15
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  11 NOV 2022 14:21
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1325,30 +1325,30 @@ Package csquotes Info: Redefining alias 'default' -> 'czech'.
  (./dp.aux)
 \openout1 = dp.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 184.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 184.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 185.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 185.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 184.
-LaTeX Font Info:    ... okay on input line 184.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
  (/usr/local/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count493
@@ -1368,7 +1368,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 184.
+Package hyperref Info: Link coloring ON on input line 185.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/local/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1378,9 +1378,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count499
 )
-LaTeX Info: Redefining \ref on input line 184.
-LaTeX Info: Redefining \pageref on input line 184.
-LaTeX Info: Redefining \nameref on input line 184.
+LaTeX Info: Redefining \ref on input line 185.
+LaTeX Info: Redefining \pageref on input line 185.
+LaTeX Info: Redefining \nameref on input line 185.
  (./dp.out) (./dp.out)
 \@outlinefile=\write6
 
@@ -1391,56 +1391,56 @@ Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 
 \symlegacymaths=\mathgroup7
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 184.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 184.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 184.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 184.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 184.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 184.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 184.
-LaTeX Font Info:    Redeclaring math accent \check on input line 184.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 184.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 184.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 184.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 184.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 184.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 185.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 185.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 185.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 185.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 185.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 185.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 185.
+LaTeX Font Info:    Redeclaring math accent \check on input line 185.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 185.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 185.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 185.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 185.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 185.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 184.
+(Font)              `operators' in the math version `normal' on input line 185.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 184.
+(Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 185.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 184.
+(Font)              `operators' in the math version `bold' on input line 185.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 184.
+(Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 185.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on input line 184.
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on input line 185.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line 184.
+(Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line 185.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/b/n on input line 184.
+(Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/b/n on input line 185.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/TimesNewRoman(0)/m/n on input line 184.
+(Font)                  OT1/cmss/m/n --> TU/TimesNewRoman(0)/m/n on input line 185.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/TimesNewRoman(1)/m/n on input line 184.
+(Font)                  OT1/cmtt/m/n --> TU/TimesNewRoman(1)/m/n on input line 185.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on input line 184.
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on input line 185.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/b/it on input line 184.
+(Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/b/it on input line 185.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/TimesNewRoman(0)/b/n on input line 184.
+(Font)                  OT1/cmss/bx/n --> TU/TimesNewRoman(0)/b/n on input line 185.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/TimesNewRoman(1)/b/n on input line 184.
+(Font)                  OT1/cmtt/m/n --> TU/TimesNewRoman(1)/b/n on input line 185.
 Package biblatex Info: Trying to load language 'czech' -> 'czech-iso'...
 Package biblatex Info: ... file 'czech-iso.lbx' found.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/biblatex-iso690/czech-iso.lbx
@@ -1497,8 +1497,8 @@ Package fontspec Info: Font family 'TimesNewRoman(2)' created for font 'Times
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
 )
-Package biblatex Info: Reference section=0 on input line 184.
-Package biblatex Info: Reference segment=0 on input line 184.
+Package biblatex Info: Reference section=0 on input line 185.
+Package biblatex Info: Reference segment=0 on input line 185.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
  (/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/lscape.sty
@@ -1550,60 +1550,60 @@ Package newfloat Info: `rotating' package detected.
 Couldn't patch \ttl@straight@ii
 Couldn't patch \ttl@straight@ii
 \c@lstlisting=\count500
-<src/misc/symbol_cvut_konturova_verze.pdf, id=186, 126.78568pt x 96.54268pt>
+<src/misc/symbol_cvut_konturova_verze.pdf, id=194, 126.78568pt x 96.54268pt>
 File: src/misc/symbol_cvut_konturova_verze.pdf Graphic file (type pdf)
 <use src/misc/symbol_cvut_konturova_verze.pdf>
-Package luatex.def Info: src/misc/symbol_cvut_konturova_verze.pdf  used on input line 237.
+Package luatex.def Info: src/misc/symbol_cvut_konturova_verze.pdf  used on input line 241.
 (luatex.def)             Requested size: 126.78535pt x 96.54243pt.
 [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./src/misc/symbol_cvut_konturova_verze.pdf>] [1]
-<src/docs/zadani_bez_podpisu.pdf, id=200, 597.50829pt x 845.04709pt>
+<src/docs/zadani_bez_podpisu.pdf, id=209, 597.50829pt x 845.04709pt>
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf>
-Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 290.
+Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 294.
 (luatex.def)             Requested size: 597.50682pt x 845.04503pt.
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf>
-Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 290.
+Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf  used on input line 294.
 (luatex.def)             Requested size: 597.50682pt x 845.04503pt.
-<src/docs/zadani_bez_podpisu.pdf, id=203, page=1, 597.50829pt x 845.04709pt>
+<src/docs/zadani_bez_podpisu.pdf, id=212, page=1, 597.50829pt x 845.04709pt>
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf, page 1>
-Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 290.
+Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 294.
 (luatex.def)             Requested size: 597.50682pt x 845.04503pt.
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf, page 1>
-Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 290.
+Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 294.
 (luatex.def)             Requested size: 597.53416pt x 845.08371pt.
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf, page 1>
-Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 290.
+Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 294.
 (luatex.def)             Requested size: 597.53416pt x 845.08371pt.
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf, page 1>
-Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 290.
+Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 294.
 (luatex.def)             Requested size: 597.53416pt x 845.08371pt.
 
 warning  (pdf backend): ignoring duplicate destination with the name 'page.'
 File: src/docs/zadani_bez_podpisu.pdf Graphic file (type pdf)
 <use src/docs/zadani_bez_podpisu.pdf, page 1>
-Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 290.
+Package luatex.def Info: src/docs/zadani_bez_podpisu.pdf , page1 used on input line 294.
 (luatex.def)             Requested size: 597.53416pt x 845.08371pt.
 [2<./src/docs/zadani_bez_podpisu.pdf>]
 warning  (pdf backend): ignoring duplicate destination with the name 'page.'
 [3]
-Overfull \hbox (3.09949pt too wide) in paragraph at lines 305--306
+Overfull \hbox (3.09949pt too wide) in paragraph at lines 309--310
 \TU/TimesNewRoman(2)/m/n/10.95 V Praze dne []   [] 
  []
 
 [5]
-Underfull \hbox (badness 1946) in paragraph at lines 324--327
+Underfull \hbox (badness 1946) in paragraph at lines 328--331
 \TU/TimesNewRoman(2)/m/n/10.95 Nam bib-en-dum com-modo port-ti-tor. Quisque
  []
 
 
-Underfull \hbox (badness 1946) in paragraph at lines 330--333
+Underfull \hbox (badness 1946) in paragraph at lines 334--337
 \TU/TimesNewRoman(2)/m/n/10.95 Nam bib-en-dum com-modo port-ti-tor. Quisque
  []
 
@@ -1633,11 +1633,11 @@ Package fontspec Info: Font family 'TIMESNEWROMAN(0)' created for font 'TIMES
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
  (./dp.toc<<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 7.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 9.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 7.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 9.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )<<ot1.cmap>> [7])
@@ -1645,7 +1645,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
 \openout7 = dp.toc
  [8] (./dp.lof
-Overfull \hbox (3.56317pt too wide) in paragraph at lines 43--43
+Overfull \hbox (3.56317pt too wide) in paragraph at lines 45--45
  [][] [][][]\TU/TimesNewRoman(2)/m/n/10.95 Ukázka, ja-kým způ-so-bem re-a-li-zuje funkční ge-ne-rá-tor po-ža-do-va-nou funkci po-mocí SRAM 
  []
 
@@ -1667,10 +1667,10 @@ warning  (pdf backend): ignoring duplicate destination with the name 'page.1'
 
 ]
 warning  (file src/pdf/embedded-system-scheme.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/embedded-system-scheme.pdf, id=365, 845.1575pt x 597.23125pt>
+<src/pdf/embedded-system-scheme.pdf, id=383, 845.1575pt x 597.23125pt>
 File: src/pdf/embedded-system-scheme.pdf Graphic file (type pdf)
 <use src/pdf/embedded-system-scheme.pdf>
-Package luatex.def Info: src/pdf/embedded-system-scheme.pdf  used on input line 381.
+Package luatex.def Info: src/pdf/embedded-system-scheme.pdf  used on input line 385.
 (luatex.def)             Requested size: 455.24411pt x 321.70723pt.
 
 Package fontspec Info: Could not resolve font "TimesNewRomanItalic/BI" (it
@@ -1700,29 +1700,29 @@ Package fontspec Info: Font family 'TimesNewRomanItalic(0)' created for font
 
 ] [3<./src/pdf/embedded-system-scheme.pdf>] [4]
 warning  (file src/pdf/fpga-skladba.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-skladba.pdf, id=401, 1265.72874pt x 634.37pt>
+<src/pdf/fpga-skladba.pdf, id=418, 1265.72874pt x 634.37pt>
 File: src/pdf/fpga-skladba.pdf Graphic file (type pdf)
 <use src/pdf/fpga-skladba.pdf>
-Package luatex.def Info: src/pdf/fpga-skladba.pdf  used on input line 413.
+Package luatex.def Info: src/pdf/fpga-skladba.pdf  used on input line 417.
 (luatex.def)             Requested size: 455.24411pt x 228.16006pt.
 
 warning  (file src/pdf/fpga-general-design.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-general-design.pdf, id=402, 917.4275pt x 591.20876pt>
+<src/pdf/fpga-general-design.pdf, id=419, 917.4275pt x 591.20876pt>
 File: src/pdf/fpga-general-design.pdf Graphic file (type pdf)
 <use src/pdf/fpga-general-design.pdf>
-Package luatex.def Info: src/pdf/fpga-general-design.pdf  used on input line 421.
+Package luatex.def Info: src/pdf/fpga-general-design.pdf  used on input line 425.
 (luatex.def)             Requested size: 455.24411pt x 293.36641pt.
 [5
 
 <./src/pdf/fpga-skladba.pdf>]
 warning  (file src/pdf/fpga-function-generator.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-function-generator.pdf, id=575, 494.84875pt x 570.13pt>
+<src/pdf/fpga-function-generator.pdf, id=592, 494.84875pt x 570.13pt>
 File: src/pdf/fpga-function-generator.pdf Graphic file (type pdf)
 <use src/pdf/fpga-function-generator.pdf>
-Package luatex.def Info: src/pdf/fpga-function-generator.pdf  used on input line 459.
+Package luatex.def Info: src/pdf/fpga-function-generator.pdf  used on input line 463.
 (luatex.def)             Requested size: 204.85846pt x 236.01668pt.
 
-Underfull \hbox (badness 1430) in paragraph at lines 460--460
+Underfull \hbox (badness 1430) in paragraph at lines 464--464
 \TU/TimesNewRomanItalic(0)/m/n/10 ge-ne-rá-tor po-ža-do-va-nou funkci po-mocí SRAM a
  []
 
@@ -1737,18 +1737,18 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
 warning  (file src/pdf/fpga-hls-to-bitstream-flow-chart.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/fpga-hls-to-bitstream-flow-chart.pdf, id=807, 1388.18625pt x 153.57375pt>
+<src/pdf/fpga-hls-to-bitstream-flow-chart.pdf, id=824, 1388.18625pt x 153.57375pt>
 File: src/pdf/fpga-hls-to-bitstream-flow-chart.pdf Graphic file (type pdf)
 <use src/pdf/fpga-hls-to-bitstream-flow-chart.pdf>
-Package luatex.def Info: src/pdf/fpga-hls-to-bitstream-flow-chart.pdf  used on input line 512.
+Package luatex.def Info: src/pdf/fpga-hls-to-bitstream-flow-chart.pdf  used on input line 516.
 (luatex.def)             Requested size: 455.24411pt x 50.36313pt.
 [9<./src/pdf/fpga-hls-to-bitstream-flow-chart.pdf>]
-Overfull \hbox (4.76561pt too wide) in paragraph at lines 527--528
+Overfull \hbox (4.76561pt too wide) in paragraph at lines 531--532
 []\TU/TimesNewRoman(2)/m/n/10.95 Dy-na-mická di-si-pace je způ-so-bena spí-na-cími a vy-pí-na-cími ztráty po-u-ži-tých tran-zis-torů (ob-vykle CMOS)
  []
 
 
-Overfull \hbox (2.09242pt too wide) in paragraph at lines 534--534
+Overfull \hbox (2.09242pt too wide) in paragraph at lines 538--538
 \TU/TimesNewRoman(2)/m/n/10.95 Jed-ním z vel-kých po-sky-to-va-telů je Ama-zon Web Ser-vi-ces (AWS), který na-bízí FPGA ak-ce-le-raci v Cloudu.
  []
 
@@ -1756,18 +1756,32 @@ Overfull \hbox (2.09242pt too wide) in paragraph at lines 534--534
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [10]
-Overfull \hbox (5.13628pt too wide) in paragraph at lines 545--546
+Overfull \hbox (5.13628pt too wide) in paragraph at lines 549--550
 []\TU/TimesNewRoman(2)/m/n/10.95 Všechny pre-zen-to-vané způ-soby re-gu-lace v [[][][]11[][][]] byly před syn-té-zou re-a-li-zo-vány v pro-středí MATLAB™ 
  []
 
 [11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 548.
+ [12
 
-[12
+]
 
-] [13
+LaTeX Warning: Reference `zynq-block-diagram-detailed' on page 13 undefined on input line 581.
+
+<src/png/zynq-block-diagram-detailed.png, id=1040, 865.2325pt x 685.56125pt>
+File: src/png/zynq-block-diagram-detailed.png Graphic file (type png)
+<use src/png/zynq-block-diagram-detailed.png>
+Package luatex.def Info: src/png/zynq-block-diagram-detailed.png  used on input line 596.
+(luatex.def)             Requested size: 409.71692pt x 324.64073pt.
+
+LaTeX Font Warning: Font shape `TU/TimesNewRomanItalic(0)/m/it' undefined
+(Font)              using `TU/TimesNewRomanItalic(0)/m/n' instead on input line 597.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13<./src/png/zynq-block-diagram-detailed.png>] [14] [15
 
 ]
 
@@ -1778,41 +1792,47 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 (biblatex)                Using the old, problematic definition.
 
 
-Overfull \hbox (9.46152pt too wide) in paragraph at lines 599--599
-[]\TU/TimesNewRoman(1)/m/n/10.95 What Is Ac-ce-le-ra-ted Com-pu-ting, and Why Is It Im-por-tant?[] In[]: \TU/TimesNewRoman(2)/m/it/10.95 Xi-linx[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-03].
- []
-
-
-Overfull \hbox (4.15941pt too wide) in paragraph at lines 599--599
+Overfull \hbox (4.15941pt too wide) in paragraph at lines 667--667
 []\TU/TimesNewRoman(1)/m/n/10.95 Hardware-in-the-Loop (HIL) Si-mu-lation[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 The MathWorks, Inc.[] \TU/TimesNewRoman(1)/m/n/10.95 [On-line][]. [B.r.] [[]cit.[] 2022-11-06].
  []
 
-[14
 
-] [15
+Overfull \hbox (26.46931pt too wide) in paragraph at lines 667--667
+[]\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Z7 Mi-gration Gu-ide[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-11].
+ []
+
+[16
+
+] [17] [18
 
 ] (./dp.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `dp.out' has not changed.
-(rerunfilecheck)             Checksum: 7B220F60892BE156BBE0F9F68F6C5D16;7644.
+(rerunfilecheck)             Checksum: 8CD02C310676A404BBDFDDED7B430142;8057.
 Package logreq Info: Writing requests to 'dp.run.xml'.
 
 \openout1 = dp.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 52487 strings out of 478092
+ 52527 strings out of 478092
  125094,2373549 words of node,token memory allocated
- 906 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 29 attribute, 107 glue_spec, 16 attribute_list, 2 write, 8 pdf_action nodes
-   avail lists: 1:9,2:1727,3:561,4:168,5:283,6:127,7:8221,8:117,9:572,10:14,11:889,12:1
- 71058 multiletter control sequences out of 65536+600000
- 90 fonts using 26576799 bytes
+ 942 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 35 attribute, 107 glue_spec, 19 attribute_list, 2 write, 11 pdf_action nodes
+   avail lists: 1:9,2:2149,3:777,4:169,5:285,6:134,7:8228,8:117,9:572,10:14,11:889,12:4
+ 71081 multiletter control sequences out of 65536+600000
+ 90 fonts using 26593759 bytes
  84i,17n,90p,1815b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on dp.pdf (27 pages, 996845 bytes).
+Output written on dp.pdf (30 pages, 1252771 bytes).
 
-PDF statistics: 1076 PDF objects out of 1200 (max. 8388607)
- 747 compressed objects within 8 object streams
- 84 named destinations out of 1000 (max. 131072)
- 401 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1126 PDF objects out of 1200 (max. 8388607)
+ 791 compressed objects within 8 object streams
+ 95 named destinations out of 1000 (max. 131072)
+ 417 words of extra memory for PDF output out of 10000 (max. 100000000)
 

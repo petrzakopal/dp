@@ -132,6 +132,7 @@
 \titleformat{\subsection}{\color{ctublue}\fontspec{Times New Roman}\fontsize{14}{14}\bfseries}{\thesubsection}{1.53em}{}%defining title sizes by word template
 \titleformat{\subsubsection}{\color{ctublue}\fontspec{Times New Roman}\fontsize{13}{13}\bfseries}{\thesubsubsection}{1em}{}%defining title sizes by word template
 
+
 \usepackage{ctable}%imports xtable with booktabs
 \usepackage{multicol}
 
@@ -190,6 +191,7 @@ literate={;}{{\textcolor{orange}{;}}}{1}
 
 \counterwithin{lstlisting}{section}%counter of lstlist - codes, reseting at each section%
 
+
 \renewcommand{\thefigure}{\thesection~-~\arabic{figure}}%defining style of countering
 \renewcommand{\thetable}{\thesection~-~\arabic{table}}
 \renewcommand{\theequation}{\thesection~-~\arabic{equation}}
@@ -204,6 +206,8 @@ literate={;}{{\textcolor{orange}{;}}}{1}
 \renewcommand*{\cftsubsubsecindent}{0em}%no indent for subsubsection
 \renewcommand*{\cftsubsecindent}{0em}%no indent for subsection
 \renewcommand*{\cftsecindent}{0em}%no indent for subsection
+
+
 
 \renewcommand*{\cftfigdotsep}{1}  % use dots in the figure entries and their step
 \renewcommand*{\cftfignumwidth}{4em}
@@ -389,7 +393,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		Tyto aplikace jsou využívaný v širokém spektru oborů jako je např. zpracování zvuku, videa, výpočtů apod. Tyto ASIC mohou také vykonávat potřebné rychlé výpočty pro matematické modely elektrických strojů, které jsou využívány např. pro HIL.\par
 		Než je tento specifický obvod vytvořen, je nutné jej navrhnout, vyzkoušet a odladit. K tomu slouží logická programovatelná pole, ve kterých je možné požadovaný HW navrhnut a odladit před velko produkcí ASIC. Pokud velko produkce není z ekonomických důvodů možná, jsou FPGA využívány i v produkční oblasti, kde je HW struktura, která by byla přítomna na ASIC, vytvořena přímo na FPGA.
 
-		\subsection{Hardware Accelerated Applications}
+		\subsection{Hardware Accelerated Applications}\label{subsec:hardware-accelerated-applications}
 		V mnoha aplikacích, nejen při řízení elektrických pohonů, je vyžadováno, aby výpočty nebo zpracování dat probíhalo vysokou rychlostí. Tento problém nemůže být většinou vyřešen použitím běžného procesoru (CPU), který je optimalizován na provádění obecných komplexních funkcí řízení běhu programu, komunikace či přesunu dat. V moderním světě dochází k exponenciálnímu nárůstu množství dat, které je potřeba zpracovat. Aby tyto data bylo možné v požadovaném čase zpracovat, je třeba využít specifický HW, který bude schopen požadavky rychlosti a výkonu uspokojit. Tento proces se nazývá \textit{Hardware Acceleration}. \cite{xilinx-accelerated-computing}\par
 		Princip hardwaerové akcelerace spočívá v přesunu výpočetně náročných aktivit na zvláštní oddělený hardware. Celkové řízení běhu aplikace a komunikace je ovšem stále přítomno na řídícím CPU. Oddělený hardware, na kterém dochází k akceleraci výpočtů je optimalizován na vykonávanou úlohu a jeho využití přináší zefektivnění běhu celkové aplikace. \cite{xilinx-accelerated-computing}\par
 		Struktura, ve které je využíváno více oddělených hardwarových procesorových a akceleračních jednotek, se často nazývá heterogenní. \cite{xilinx-accelerated-computing}\par
@@ -545,12 +549,76 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			Kromě HIL simulace je možné FPGA využít také pro řízení elektrických pohonů. Možnosti realizace řízení AC elektrických strojů pomocí FPGA a analogově digitálních převodníků (ADC) jsou prezentovány v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}. V dokumentu jsou popisovány tři realizace řízení, resp. regulace pohonu. Nejprve byla regulace realizována pomocí hystérézních on-off regulátorů, následně byly použity PI regulátory. Pomocí nich byl pohon regulován na základně měření a změny vektoru statorového proudu, resp. jeho složek $\alpha \beta$ po aplikování Clarkové transformace. Jako poslení prezentovaný způsob autoři realizovali model ovládání synchronního motoru na základě prediktivních regulátorů. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}\par Všechny prezentované způsoby regulace v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives} byly před syntézou realizovány v prostředí MATLAB™️ a Simulink. Tento způsob tvorby modelů a algoritmů je v praxi upřednostňován, protože umožňuje i expertům na řízení a regulaci pracovat na dané problematice bez znalostí mikroelektroniky, programování v HDL a způsobu fungování FPGA. Oproti tomu je třeba zvážit, jaké jsou požadavky na rychlost, výkonnost a optimalizované řízení aplikace a zdali použití předpřipravených knihoven a zjednodušených nástrojů nebude mít příliš značný vliv na rychlost výpočtu a tudíž zpracování dat a řízení v reálném čase. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}
 			
 	\section{Vývojová deska Digilent Zybo}
-		\subsubsection{Parametry a složení}
-		% I/O
-		% FPGA
-		% CPU
-		% RAM
-		\subsubsection{Možné alternativy}
+			Vývoj akcelerovaných aplikacích je možné realizovat na realativně velikém množství dostupného HW. V některých případech je design vývojových desek dokonce výrobcem uveřejňován a tudíž v případě dostatečných znalostí je dokonce možné si sestavit vlastní HW s dostupných komponent takovým způsobem, aby vyhovoval požadované embedded aplikaci. Výhodné ovšem je využít již připravená řešení vývojových desek, které zjednodušují prvotní tvorbu aplikace.\par
+			V této práci je realizován vývoj aplikace na vývojové desce \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board} od firmy Digilent. \cite{digilent-zybo-7000-docs} Jedná se o model vývojové desky, který byl nahrazen novějšími variantami s označením \textit{ZYBO Z7-10} a \textit{ZYBO Z7-20}, které jsou stále v aktivním prodeji. Hlavním rozdílem představených desek je verze Zynq čipu, který v moderních deskách disponuje ARM procesorem s vyšší taktovací frekvencí a s modernějším FPGA s vyšším počtem LUT, klopných obvodů a s rozsáhlejší pamětí RAM apod. Bližší porovnání specifikací těchto desek je dostupné na \cite{digilent-zybo-compare}.\par
+			V další části textu jsou představeny významné komponenty vývojové desky \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}.
+
+		\subsection{Základní přehled}
+		\subsubsection{CPU a FPGA čip}
+			Hlavní částí vývojové desky je čip, obsahující FPGA a CPU jednotky zakomponované v jedné polovodičové struktuře. Jak již bylo zmíněno v části \hyperref[subsec:hardware-accelerated-applications]{\textit{Hardware Accelerated Applications}}, tato struktura se nazývá heterogenní.\par
+			Deska obsahuje čip Xilinx Zynq-7000 (typ XC72010), který umožňuje pro vývoj aplikací použít SDK od firmy Xilinx. V tomto čipu je integrován dvou jádrový procesor ARM Cortex-9, který slouží jako host akcelerovaných aplikací na Xilinx FPGA sedmé série. Detailní schéma blokové architektury SoC s označním sběrnic a komunikace jednotlivých částí čipu je zobrazené na obr. \ref{fig:zynq-block-diagram-detailed}.\par
+			Z naznačené architektury je možné vyvodit, že se SoC skládá ze dvou hlavních částí, které je možné dále rozdělit na jednotlivé bloky:
+			\begin{itemize}
+				\item Processing System (PS),
+				\begin{itemize}
+					\item Application processor unit (APU),
+					\item Memory interfaces,
+					\item I/O peripherals (IOP),
+					\item Interconnect,
+				\end{itemize}
+				\item Programmable Logic (PL).
+			\end{itemize}
+			\vspace*{0.25cm}
+			\noindent\textbf{Blok PS}\\
+			Blok PS se skládá z dílčích bloků, které neslouží k akceleraci aplikací, ale k podpoře běhu hostitelského programu. Blok PS reprezentuje prakticky celou architekturu čipu vyjma části věnované PL.\par\vspace*{0.25cm}
+			\noindent\textbf{Blok APU}\\
+			Blok APU obsahuje CPU Cortex-A9 a další podpůrné bloky jako např. přímý přístup do paměti (DMA controller), Genral interrupt controller (GIC) pro maskování a ovládání přerušení, watchdog a další podpůrné bloky.\par\vspace*{0.25cm}
+			\noindent\textbf{Blok Memory interfaces}\\
+			Memory interfaces slouží k přístupu APU a PL k pamětím typu DDR3, DDR3L, DDR2 a LPDDR-2. Je možné také vybrat, zda šířka sběrnice bude 16 nebo 32 bitů. K dispozici jsou zakoponované kotroléry přenosu dat pro optimalizaci rychlosti, Static Memory Controller nebo Quad-SPI Controller.\par\vspace*{0.25cm}
+			\noindent\textbf{Blok IOP}\\
+			IOP se skládá ze standardizovaných rozhraní vhodných pro průmyslovou komunikaci. Obsahuje nař. GPIO, Gigabit Ethernet, dva bloky USB Controller, dva bloky SD/SDIO Controller pro bootování SD karty, dva bloky SPI Controller, dva bloky CAN Controller, dva bloky UART Controller a dva bloky I2C Controller.\par\vspace*{0.25cm}
+			\noindent\textbf{Blok Interconnect}\\
+			Blok Interconnect, resp. na obr. \ref{zynq-block-diagram-detailed} označený Central Interconnect slouží k propojení jednotlivých bloků SoC dle požadované technologie a rychlosti.\par\vspace*{0.25cm}
+			\noindent\textbf{Blok PL}\\
+			Blok PL reprezentuje logické programovtelné pole (FPGA), v němž jsou zakomponovány další podpůrné bloky jako např. blok zpracování digitálních signálů, řízení taktovacích hodin, analogově digitální převodník (ADC) apod.\par\vspace*{0.35cm}
+			\noindent Veškeré technické specifikace, složení a parametry jmenovaných bloků a jsou uvedeny v \cite{xilinx-zynq-7000-technical-reference-manual}.
+
+
+			% \begin{figure}[htbp!]
+			% 	\centering
+			% 		\includegraphics[width=0.75\textwidth]{src/png/zynq-mp-core-dual.png} 
+			% 		\caption{Blokové schéma čipu Zynq-7000, umístěného na vývojové desce \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}. (převzato z \cite{xilinx-zynq-7000-socs-with-hardware-and-software-programmability})}
+			% 		\label{fig:zynq-mp-core-dual}
+			% \end{figure}
+
+			\begin{figure}[htbp!]
+				\centering
+					\includegraphics[width=0.90\textwidth]{src/png/zynq-block-diagram-detailed.png} 
+					\caption{Detailní schéma čipu Zynq-7000, umístěného na vývojové desce \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}. (převzato z \cite{xilinx-zynq-7000-technical-reference-manual})}
+					\label{fig:zynq-block-diagram-detailed}
+			\end{figure}
+
+			\subsubsection{Uspořádání vývojové desky Zybo Zynq-7000}
+
+			\begin{table}[H]
+				\centering
+				\caption{Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000.}
+			  \vspace*{0.15cm}
+			%   \resizebox{\textwidth}{!}
+				{
+				\begin{tabular}{!{\vrule width 2pt} c | c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+				označení & popis &	poznámka \\
+				\noalign{\hrule height 2pt}
+				0 & Power Switch & galvanické sepnutí napájecího obvodu \\ \hline
+				
+				7 & 1 & 1 \\\noalign{\hrule height 2pt}
+				\end{tabular}
+				}
+				\label{tab:digilent-zybo-zynq-7000-description}
+			\end{table}
+
+		\fbar
+		\subsection{Možné alternativy}
 			% Novější verze Zybo
 			% Něco jiného
 			% Custom řešení - ZynQ Berry
