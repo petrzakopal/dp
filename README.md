@@ -46,7 +46,7 @@
 
 ---
 
-👨🏻‍💻 [15.11.2022](/code/simple-vaad/src/) <-- example code reverse engineering and commenting
+👨🏻‍💻 [15.11.2022](/notes/20221115.md) | [krnl_vadd.cpp](code/simple-vaad/src/krnl_vadd.cpp) | [vadd.cpp](code/simple-vaad/src/vadd.cpp) <-- example code reverse engineering and commenting
 
 **Comment:**
 _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a popisoval jsem si to do example kódu, udělám takto více example souborů abych znal možnosti, co jde a jak jde udělat_
