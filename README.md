@@ -12,21 +12,46 @@
 
 🔗 [13.10.2022](notes/20221013.md)
 
+---
+
 🔗 [14.10.2022](notes/20221014.md)
+
+---
 
 🔗 [29.10.2022](notes/20221029.md)
 
+---
+
 🔗 [30.10.2022](notes/20221030.md) <-- významný pokrok
+
+---
 
 🔗 [01.11.2022](notes/20221101.md) <-- významný pokrok
 
+---
+
 🔗 [03.11.2022](notes/20221103.md) <-- spíše příspěvky do LaTeXu; 📄 [LaTeX dokument DP](/tex/dp.pdf)
+
+---
 
 📄 [05.11.2022](/tex/dp.pdf) <-- psací den
 
+---
+
 📄 [06.11.2022](/tex/dp.pdf) <-- psací den
 
+---
+
 📄 [11.11.2022](/tex/dp.pdf) <-- převážně psací den
+
+---
+
+👨🏻‍💻 [15.11.2022](/code/simple-vaad/src/) <-- example code reverse engineering and commenting
+
+**Comment:**
+_prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a popisoval jsem si to do example kódu, udělám takto více example souborů abych znal možnosti, co jde a jak jde udělat_
+
+---
 
 ## Progress
 
