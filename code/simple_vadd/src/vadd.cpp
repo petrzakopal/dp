@@ -51,6 +51,7 @@ int main(int argc, char* argv[]) {
     std::string xclbinFilename = argv[1];
 
     // Compute the size of array in bytes
+    // sizeof(<data_type>) in ARM processors: https://developer.arm.com/documentation/dui0472/k/C-and-C---Implementation-Details/Basic-data-types-in-ARM-C-and-C--
     size_t size_in_bytes = DATA_SIZE * sizeof(int);
 
     // Creates a vector of DATA_SIZE elements with an initial value of 10 and 32
@@ -150,12 +151,16 @@ int main(int argc, char* argv[]) {
 
     // These commands will allocate memory on the Device. The cl::Buffer objects can
     // be used to reference the memory locations on the device.
+    // Allowed flags for cl::Buffer https://man.opencl.org/clCreateBuffer.html
+    // size_in_bytes is DATA_SIZE*sizeof(int) here 4096*
     OCL_CHECK(err, cl::Buffer buffer_a(context, CL_MEM_READ_ONLY, size_in_bytes, NULL, &err));
     OCL_CHECK(err, cl::Buffer buffer_b(context, CL_MEM_READ_ONLY, size_in_bytes, NULL, &err));
     OCL_CHECK(err, cl::Buffer buffer_result(context, CL_MEM_WRITE_ONLY, size_in_bytes, NULL, &err));
 
     // set the kernel Arguments
     int narg = 0;
+    // cl::Kernel::setArg(cl uint index, T value)
+    // Set the kernel argument; you do not need to specify the type as it is worked out from T using templates.
     OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_a));
     OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_b));
     OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_result));
@@ -165,6 +170,9 @@ int main(int argc, char* argv[]) {
     int* ptr_a;
     int* ptr_b;
     int* ptr_result;
+
+    // Enqueues a command to map a region of the buffer object given by buffer into the host address space and returns a pointer to this mapped regio
+    // https://registry.khronos.org/OpenCL/sdk/1.0/docs/man/xhtml/clEnqueueMapBuffer.html
     OCL_CHECK(err,
               ptr_a = (int*)q.enqueueMapBuffer(buffer_a, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
     OCL_CHECK(err,
@@ -176,6 +184,10 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_a, buffer_b}, 0 /* 0 means from host*/));
 
     // Launch the Kernel
+    // Enqueues a command to execute a kernel on a device.
+    // https://registry.khronos.org/OpenCL/sdk/1.0/docs/man/xhtml/clEnqueueTask.html
+    // https://kosobucki.pl/cl_doc/classcl_1_1CommandQueue.html#a19f0b52a87a8a33d1280ef9e8f5149f3 with example
+    // original https://github.khronos.org/OpenCL-CLHPP/classcl_1_1_command_queue.html#a287d13ca6eb15f904419871dfc440ca6
     OCL_CHECK(err, err = q.enqueueTask(krnl_vector_add));
 
     // The result of the previous kernel execution will need to be retrieved in
