@@ -195,9 +195,12 @@ int main(int argc, char* argv[]) {
     // source_results vector
     OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_result}, CL_MIGRATE_MEM_OBJECT_HOST));
 
+
+    // Blocks until all previously queued OpenCL commands in a command-queue are issued to the associated device and have completed.
     OCL_CHECK(err, q.finish());
 
     // Verify the result
+    // Calculate the same thing on CPU
     int match = 0;
     for (int i = 0; i < DATA_SIZE; i++) {
         int host_result = ptr_a[i] + ptr_b[i];
@@ -208,9 +211,11 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // Enqueues a command to unmap a previously mapped region of a memory object. 
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_a, ptr_a));
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_b, ptr_b));
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_result, ptr_result));
+    // Blocks until all previously queued OpenCL commands in a command-queue are issued to the associated device and have completed.
     OCL_CHECK(err, err = q.finish());
 
     std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
