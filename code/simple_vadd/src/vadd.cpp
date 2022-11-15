@@ -14,6 +14,7 @@
 * under the License.
 */
 
+// Function used to check if the function went well
 #define OCL_CHECK(error, call)                                                                   \
     call;                                                                                        \
     if (error != CL_SUCCESS) {                                                                   \
@@ -21,17 +22,24 @@
         exit(EXIT_FAILURE);                                                                      \
     }
 
+// Include libraries
 #include "vadd.h"
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
 
+// Defining data size same as in kernel
+// It is the size of the vector - in position - not in sizeof(variable_type)
 static const int DATA_SIZE = 4096;
 
+// Consntant static string of error message
 static const std::string error_message =
     "Error: Result mismatch:\n"
     "i = %d CPU result = %d Device result = %d\n";
 
+// argc = argument count
+// argv = argument vector
+// basically argc is number of arguments +1, because most programs append number of programm to the arguments vector, but not sure if this is the case
 int main(int argc, char* argv[]) {
     // TARGET_DEVICE macro needs to be passed from gcc command line
     if (argc != 2) {
@@ -39,6 +47,7 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
+    // Getting the name of the binary file which is passed as an argument in vector
     std::string xclbinFilename = argv[1];
 
     // Compute the size of array in bytes
@@ -49,7 +58,7 @@ int main(int argc, char* argv[]) {
 
     std::vector<cl::Device> devices;
     cl::Device device;
-    cl_int err;
+    cl_int err; // cl_int is defined type for OpenCL devices - has ALWAYS fixed size of 32 bits
     cl::Context context;
     cl::CommandQueue q;
     cl::Kernel krnl_vector_add;
@@ -59,13 +68,20 @@ int main(int argc, char* argv[]) {
 
     // traversing all Platforms To find Xilinx Platform and targeted
     // Device in Xilinx Platform
-    cl::Platform::get(&platforms);
+    cl::Platform::get(&platforms); // Gets list of available platforms and pastes the address of the firts one to variable platforms, which is an arrray, better std::vector
     for (size_t i = 0; (i < platforms.size()) & (found_device == false); i++) {
         cl::Platform platform = platforms[i];
         std::string platformName = platform.getInfo<CL_PLATFORM_NAME>();
+
+        // If found the platform name Xilinx
         if (platformName == "Xilinx") {
+            // Be sure thah devices vector is empty
             devices.clear();
+            // Gets list of devices for found Xilinx platform TYPE ACCELERATOR and pastes the device in devices vector
             platform.getDevices(CL_DEVICE_TYPE_ACCELERATOR, &devices);
+
+            // If there is some device found that matches the requirements (Xilinx and Accelerator)
+            // Put the device specs to cl::Device variable
             if (devices.size()) {
                 device = devices[0];
                 found_device = true;
