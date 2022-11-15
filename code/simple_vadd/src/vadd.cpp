@@ -96,31 +96,56 @@ int main(int argc, char* argv[]) {
 
     // Creating Context and Command Queue for selected device
     OCL_CHECK(err, context = cl::Context(device, NULL, NULL, NULL, &err));
+
+    // CL_QUEUE_PROFILING_ENABLE - profiling objects are enabled by this parameter passed to parameter properties of CommandQueue
+    // Event objects can be used to capture profiling information that measure execution time of a command. 
     OCL_CHECK(err, q = cl::CommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &err));
 
     std::cout << "INFO: Reading " << xclbinFilename << std::endl;
     FILE* fp;
+
+    // c_str Returns a pointer to an array that contains a null-terminated sequence of characters (i.e., a C-string) representing the current value of the string object.
+    // opening file
     if ((fp = fopen(xclbinFilename.c_str(), "r")) == nullptr) {
         printf("ERROR: %s xclbin not available please build\n", xclbinFilename.c_str());
         exit(EXIT_FAILURE);
     }
+
     // Load xclbin
     std::cout << "Loading: '" << xclbinFilename << "'\n";
+
+    // Loading binary file to bin_file
     std::ifstream bin_file(xclbinFilename, std::ifstream::binary);
-    bin_file.seekg(0, bin_file.end);
-    unsigned nb = bin_file.tellg();
-    bin_file.seekg(0, bin_file.beg);
-    char* buf = new char[nb];
+
+    // Sets the position of the next character to be extracted from the input stream.
+    // istream& seekg (streamoff off, ios_base::seekdir way); off = offset from way - where you are offseting from
+    // Basically moving pointer in the stream
+    bin_file.seekg(0, bin_file.end); 
+    unsigned nb = bin_file.tellg();  // Returns the position of the current character in the input stream.
+    bin_file.seekg(0, bin_file.beg); // Setting position of the next character to be extracted from the input stream
+    char* buf = new char[nb]; // Creating buffer/array with the length of the stream => bin_file
+
+    // buf - pointer of the array where the extracted characters are stored
+    // nb – number of characters to extract.
     bin_file.read(buf, nb);
 
     // Creating Program from Binary File
     cl::Program::Binaries bins;
+    // {} initialization of vector - array
+    // push_back - Adds a new element at the end of the vector, after its current last element.
     bins.push_back({buf, nb});
+
+    // Resizes devices vector to contain just one device, which is used
     devices.resize(1);
+    // OCL_CHECK wraps andn checks if function completed correctly
+
+    // cl:Program - Construct a program object from a list of devices and a per-device list of binaries.
+    // https://github.khronos.org/OpenCL-CLHPP/classcl_1_1_program.html#af804a4cb0e2dc844c0be0b0b76dbd25a
     OCL_CHECK(err, program = cl::Program(context, devices, bins, NULL, &err));
 
     // This call will get the kernel object from program. A kernel is an
     // OpenCL function that is executed on the FPGA.
+    // https://github.khronos.org/OpenCL-CLHPP/classcl_1_1_kernel.html#a351422a7e7125812c23610628b0f9de7
     OCL_CHECK(err, krnl_vector_add = cl::Kernel(program, "krnl_vadd", &err));
 
     // These commands will allocate memory on the Device. The cl::Buffer objects can
