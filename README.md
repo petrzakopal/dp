@@ -55,6 +55,10 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
+👨🏻‍💻 [18.11.2022](/notes/20221118.md) <-- kódící den + řešení debuggingu
+
+---
+
 ## Progress
 
 _Coming soon..._
