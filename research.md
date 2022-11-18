@@ -153,6 +153,12 @@ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
   sudo apt-get install gawk python build-essential gcc git make net-tools libncurses5-dev tftpd zlib1g-dev libssl-dev flex bison libselinux1 gnupg wget diffstat chrpath socat xterm autoconf libtool tar unzip texinfo zlib1g-dev gcc-multilib build-essential-dev zlib1g:i386 screen pax gzip
   ```
 
+  na 2022.1
+
+  ```bash
+  sudo apt-get install iproute2 gawk python3 python build-essential gcc git make net-tools libncurses5-dev tftpd zlib1g-dev libssl-dev flex bison libselinux1 gnupg wget git-core diffstat chrpath socat xterm autoconf libtool tar unzip texinfo zlib1g-dev gcc-multilib automake zlib1g:i386 screen pax gzip cpio python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3
+  ```
+
 - qemu_args.txt pro Zybo 7000 ve složce s bootem [Xilinx](https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Zynq-7000-PS-Arguments-for-QEMU)
 
 - how to boot petalinux on board xilinx support [Xilinx](https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide/Prerequisites?tocId=8b_X7EaE~qj1uYiTAxonPA)

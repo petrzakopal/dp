@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  11 NOV 2022 21:26
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  18 NOV 2022 16:29
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1807,18 +1807,23 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 (biblatex)                Using the old, problematic definition.
 
 
-Overfull \hbox (4.15941pt too wide) in paragraph at lines 719--719
+Overfull \hbox (4.15941pt too wide) in paragraph at lines 724--724
 []\TU/TimesNewRoman(1)/m/n/10.95 Hardware-in-the-Loop (HIL) Si-mu-lation[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 The MathWorks, Inc.[] \TU/TimesNewRoman(1)/m/n/10.95 [On-line][]. [B.r.] [[]cit.[] 2022-11-06].
  []
 
 
-Overfull \hbox (26.46931pt too wide) in paragraph at lines 719--719
+Overfull \hbox (26.46931pt too wide) in paragraph at lines 724--724
 []\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Z7 Mi-gration Gu-ide[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-11].
  []
 
 
-Overfull \hbox (19.74677pt too wide) in paragraph at lines 719--719
+Overfull \hbox (19.74677pt too wide) in paragraph at lines 724--724
 []\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Re-fe-rence Ma-nual[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-11].
+ []
+
+
+Overfull \hbox (4.86678pt too wide) in paragraph at lines 724--724
+[]\TU/TimesNewRoman(1)/m/n/10.95 XI-LINX, Inc. Vi-vado De-sign Su-ite User Gu-ide: Re-le-ase No-tes, In-stallation, and Li-censing (UG973)[].
  []
 
 [20
@@ -1830,26 +1835,26 @@ Overfull \hbox (19.74677pt too wide) in paragraph at lines 719--719
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `dp.out' has not changed.
-(rerunfilecheck)             Checksum: 8CD02C310676A404BBDFDDED7B430142;8057.
+(rerunfilecheck)             Checksum: AD32C9D685AF0E8668770A18C25F9955;8057.
 Package logreq Info: Writing requests to 'dp.run.xml'.
 
 \openout1 = dp.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 52575 strings out of 478092
+ 52587 strings out of 478092
  125094,2373549 words of node,token memory allocated
- 978 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 41 attribute, 107 glue_spec, 22 attribute_list, 2 write, 14 pdf_action nodes
-   avail lists: 1:7,2:2305,3:834,4:168,5:285,6:135,7:8234,8:117,9:919,10:14,11:889,12:4
- 71103 multiletter control sequences out of 65536+600000
- 90 fonts using 26608479 bytes
+ 1026 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 49 attribute, 107 glue_spec, 26 attribute_list, 2 write, 18 pdf_action nodes
+   avail lists: 1:8,2:2300,3:839,4:197,5:285,6:137,7:8237,8:125,9:919,10:15,11:889,12:5
+ 71112 multiletter control sequences out of 65536+600000
+ 90 fonts using 26612319 bytes
  84i,17n,90p,1815b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on dp.pdf (34 pages, 7798232 bytes).
+Output written on dp.pdf (34 pages, 7801642 bytes).
 
-PDF statistics: 1169 PDF objects out of 1200 (max. 8388607)
- 825 compressed objects within 9 object streams
- 103 named destinations out of 1000 (max. 131072)
+PDF statistics: 1191 PDF objects out of 1200 (max. 8388607)
+ 847 compressed objects within 9 object streams
+ 106 named destinations out of 1000 (max. 131072)
  417 words of extra memory for PDF output out of 10000 (max. 100000000)
 

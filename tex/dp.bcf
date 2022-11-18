@@ -2200,6 +2200,9 @@
     <bcf:citekey order="60">xilinx-zynq-7000-technical-reference-manual</bcf:citekey>
     <bcf:citekey order="61">digilent-zybo-reference-manual</bcf:citekey>
     <bcf:citekey order="62">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="63">xilinx-vivado-design-suite-user-guide-2022</bcf:citekey>
+    <bcf:citekey order="64">vitis-unified-software-platform-documentation-2022</bcf:citekey>
+    <bcf:citekey order="65">petalinux-tools-documentation-2022</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->

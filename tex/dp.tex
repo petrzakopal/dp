@@ -683,10 +683,15 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 
 \section{Program pro FPGA a CPU}
 	\subsection{Použité nástroje}
-		\subsubsection{Xilinx Vivado}
-		\subsubsection{Xilinx Vitis}
-		\subsubsection{Petalinux}
+		\subsubsection{Xilinx Vivado}\label{subsubsec:xilinx-vivado}
+		\subsubsection{Xilinx Vitis}\label{subsubsec:xilinx-vitis}
+		\subsubsection{PetaLinux}\label{subsubsec:petalinux}
 		\subsubsection{Programovací prostředí – operační systém Linux}
+			Pro práci s představenými vývojovými prostředími jako je \hyperref[subsubsec:xilinx-vivado]{Xilinx Vivado}, \hyperref[subsubsec:xilinx-vitis]{Xilinx Vitis} a \hyperref[subsubsec:petalinux]{PetaLinux} je nutné využívat podporovaných operačních systémů, které umožňují správnou funkci využitých nástrojů.\par
+			Jednotlivé požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. Pro nejnovější verze v době zpracování této práce jsou požadavky pro \hyperref[subsubsec:xilinx-vivado]{Xilinx Vivado} dostupné v \cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsubsec:xilinx-vitis]{Xilinx Vitis} v \cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsubsec:petalinux]{PetaLinux} je třeba dodržet systémové požadavky uvedené v \cite{petalinux-tools-documentation-2022}.
+			Pokud uživatel využívá starších verzí vývojových nástrojů, je doporučováno využít operační systém Linux. Pro tuto práci bylo využíván systém Ubuntu 18.04 LTS (Bionic Beaver), dostupný ke stažení na adrese \href{http://old-releases.ubuntu.com}{\textcolor{ctublue}{http://old-releases.ubuntu.com}}. V průběhu práce došlo k aktualizování původních starších verzí SW a vešekrá práce byla přenesena na novější verzi systému Ubuntu 20.04 LTS (Focal Fossa).\par
+			Je důležité poznamenta, že neplatí skutečnost, že když např. Vivado podporuje některou z novějších verzí Ubuntu, bude jí podporovat také PetaLinux. Vždy je doporučeno využívat starší verze a kontrolovat vzájemnou kompatibilitu, aby se předešlo zbytečné ztrátě času. Stahování SW, instalace a nastavování nástrojů je značně časově náročné.\par
+			V případě využívání představených nástrojů a systému Linux je třeba dbát na správné postupy instalací a v případě problémů využívat dostupné dokumentace. Značným problémem bývá nemožnost zápisu programu do složky, ne
 		% Jaké verze jsou momentálně podporované
 		% Co je třeba nainstalovat za balíčky před započetím instalace
 		% Jaký je flow aby byla možná příprava systému
@@ -696,7 +701,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
     % WorkFlow
     % Zjistit jak dát vstupem tlačítka a jak výstupy jako výstupy
 
-	\subsection{Tvorba Petalinux}
+	\subsection{Tvorba PetaLinux}
 	\subsection{Tvorba SW pro CPU a FPGA}
 
 \section{Představení pracoviště}

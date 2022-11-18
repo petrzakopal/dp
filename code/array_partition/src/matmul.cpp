@@ -78,7 +78,7 @@ count_loop:
                     result += A[row][col] * B[col][j];
                     temp_sum[j] = result;
                     if (col == size - 1) C[row][j] = result;
-                }
+                }   
             }
         }
     }
