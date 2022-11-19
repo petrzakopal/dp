@@ -55,7 +55,7 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
-👨🏻‍💻 [18.11.2022](/notes/20221118.md) <-- kódící den + řešení debuggingu
+👨🏻‍💻 [18.11.2022](/notes/20221118.md) <-- kódící den + řešení debuggingu + přišel jsem na to, jak má asi fungovat debugging ale mně nefunguje, nice, pozitivních 13 hodin stráveno nad nulovým posunem, jako vždy
 
 ---
 
