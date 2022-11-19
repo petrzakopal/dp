@@ -57,6 +57,10 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
+👨🏻‍💻 [18.11.2022](/notes/20221119.md) <-- snaha opět rozjet debugger
+
+---
+
 ## Progress
 
 _Coming soon..._

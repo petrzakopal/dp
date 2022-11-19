@@ -488,7 +488,7 @@
       \verb https://digilent.com/reference/programmable-logic/zybo/reference-manual
       \endverb
     \endentry
-    \entry{xilinx-vivado-design-suite-user-guide-2022}{incollection}{}
+    \entry{xilinx-downloads}{incollection}{}
       \name{author}{1}{}{%
         {{hash=751f6909b12cc240122891470ea09b53}{%
            family={Xilinx},
@@ -507,18 +507,18 @@
       \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{booktitle}{AMD Xilinx Downloads}
       \field{langid}{english}
-      \field{title}{Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)}
-      \field{urlday}{18}
+      \field{title}{Downloads}
+      \field{urlday}{19}
       \field{urlmonth}{11}
       \field{urlyear}{2022}
       \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/Requirements-and-Setup
+      \verb https://www.xilinx.com/support/download.html
       \endverb
       \verb{url}
-      \verb https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/Requirements-and-Setup
+      \verb https://www.xilinx.com/support/download.html
       \endverb
     \endentry
     \entry{vitis-unified-software-platform-documentation-2022}{incollection}{}
@@ -548,13 +548,13 @@
       \field{urlyear}{2022}
       \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Installation-Requirements
+      \verb https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/
       \endverb
       \verb{url}
-      \verb https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Installation-Requirements
+      \verb https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/
       \endverb
     \endentry
-    \entry{petalinux-tools-documentation-2022}{incollection}{}
+    \entry{xilinx-vivado-design-suite-user-guide-2022}{incollection}{}
       \name{author}{1}{}{%
         {{hash=751f6909b12cc240122891470ea09b53}{%
            family={Xilinx},
@@ -575,16 +575,49 @@
       \field{labeltitlesource}{title}
       \field{booktitle}{AMD Xilinx Documentation Portal}
       \field{langid}{english}
+      \field{title}{Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/
+      \endverb
+    \endentry
+    \entry{petalinux-tools-documentation-2022}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{5}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{langid}{english}
       \field{title}{PetaLinux Tools Documentation: Reference Guide (UG1144)}
       \field{urlday}{18}
       \field{urlmonth}{11}
       \field{urlyear}{2022}
       \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide/Setting-Up-Your-Environment
+      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
       \endverb
       \verb{url}
-      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide/Setting-Up-Your-Environment
+      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
       \endverb
     \endentry
     \entry{xilinx-zynq-7000-socs-with-hardware-and-software-programmability}{incollection}{}
@@ -601,9 +634,9 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{5}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{extraname}{6}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Website}
