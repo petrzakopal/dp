@@ -2,11 +2,9 @@
 
 ## Pracuji na
 
-- research ohledně FPGA (programování v HLS (C/Matlab/Simlink) nevo HDL/Verilog [research.md](/research.md)
-- rozfungování serveru a spojení se zybo
-  - jaký bude workflow tvoření programů na FPGA s použitím serveru
-  - jak se bude build exportovat, přenáše to lokální virtuálky a flashovat do sd karty - návod je na [github.com](https://github.com/Digilent/Petalinux-Zybo) jen na linux, vyzkoušet, jak moc safe je to na macOS
-  - šlo by vybuildit na serveru a přenést do macOS a flashnout SD kartu
+- zprovoznění SW-Debuggingu v qemu, možná HW-debuggingu ale SW je přednější
+- reverse engineering kódů
+- vyřešení, jak debuggovat kód, když nepůjde sw emulace
 
 ## Mé denní poznámky ✏️
 
