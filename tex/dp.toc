@@ -182,7 +182,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.3}Optimalizace modelu}{18}{subsection.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Program pro FPGA a CPU}{18}{section.6}%
+\contentsline {section}{\numberline {6}Aplikace pro FPGA a CPU}{18}{section.6}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {6.1}Použité nástroje}{18}{subsection.6.1}%
 \defcounter {refsection}{0}\relax 
@@ -200,17 +200,17 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}Tvorba HW architektury Xilinx Vivado}{18}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.2}Tvorba HW architektury Xilinx Vivado}{19}{subsection.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3}Tvorba PetaLinux}{18}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.3}Tvorba PetaLinux}{19}{subsection.6.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4}Tvorba SW pro CPU a FPGA}{18}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.4}Tvorba SW pro CPU a FPGA}{19}{subsection.6.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Představení pracoviště}{18}{section.7}%
+\contentsline {section}{\numberline {7}Představení pracoviště}{19}{section.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Dosažené výsledky}{18}{section.8}%
+\contentsline {section}{\numberline {8}Dosažené výsledky}{19}{section.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{19}{section.8}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{20}{section.8}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -364,10 +364,10 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{21}{section.8}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{22}{section.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{22}{appendix.1.A}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{23}{appendix.1.A}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{22}{subsection.1.A.1}%
+\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{23}{subsection.1.A.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{22}{subsection.1.A.2}%
+\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{23}{subsection.1.A.2}%

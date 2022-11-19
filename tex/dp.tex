@@ -681,8 +681,13 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 	\subsection{Odvození modelu}
 	\subsection{Optimalizace modelu}
 
-\section{Program pro FPGA a CPU}
+\section{Aplikace pro FPGA a CPU}
+V této části jsou představeny jednotlivé nástroje, využívané při tvorbě programu pro CPU a akcelerované aplikace na FPGA. Je důležité zmínit, že na tzv „host“ (ARM procesor) je skutečně spuštěný řídící program akcelerované aplikace. Na PL (FPGA) je poté vytvořen HW, který reprezentuje myšlené algoritmy aplikace. Proto není korektně správné mluvit o tom, že se vytváří program pro FPGA. Proto v této práci bude používáno označení pro vytváření HW na PL vytváření „kernel“.\par
+	Dále jsou v této části představeny postupy, které vedou k úspěšnému používání vývojových nástrojů. Poté je vysvětlena tvorba samostatné aplikace, která je hlavní náplní této práce.
 	\subsection{Použité nástroje}
+		Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Tento způsob závisí na použitém vývojovém nástroji HW. V této práci je využíváno SoC od firmy Xilinx, proto je výhodné využívat již připravené nástroje, které umožní snazší vývoj SW, tvorbu HW a přípravu systému na SoC.\par
+		Veškerý používaný SW v této práci od firmy Xilinx je po registraci volně dostupný ke stažení.\par
+		Tato část představuje jednotlivé použité nástroje firmy Xilinx a nastiňuje postupy, které je třeba dodržet k úspěšnému zprovoznění a používání nástrojů.
 		\subsubsection{Xilinx Vivado}\label{subsubsec:xilinx-vivado}
 		\subsubsection{Xilinx Vitis}\label{subsubsec:xilinx-vitis}
 		\subsubsection{PetaLinux}\label{subsubsec:petalinux}
@@ -691,7 +696,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			Jednotlivé požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. Pro nejnovější verze v době zpracování této práce jsou požadavky pro \hyperref[subsubsec:xilinx-vivado]{Xilinx Vivado} dostupné v \cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsubsec:xilinx-vitis]{Xilinx Vitis} v \cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsubsec:petalinux]{PetaLinux} je třeba dodržet systémové požadavky uvedené v \cite{petalinux-tools-documentation-2022}.
 			Pokud uživatel využívá starších verzí vývojových nástrojů, je doporučováno využít operační systém Linux. Pro tuto práci bylo využíván systém Ubuntu 18.04 LTS (Bionic Beaver), dostupný ke stažení na adrese \href{http://old-releases.ubuntu.com}{\textcolor{ctublue}{http://old-releases.ubuntu.com}}. V průběhu práce došlo k aktualizování původních starších verzí SW a vešekrá práce byla přenesena na novější verzi systému Ubuntu 20.04 LTS (Focal Fossa).\par
 			Je důležité poznamenta, že neplatí skutečnost, že když např. Vivado podporuje některou z novějších verzí Ubuntu, bude jí podporovat také PetaLinux. Vždy je doporučeno využívat starší verze a kontrolovat vzájemnou kompatibilitu, aby se předešlo zbytečné ztrátě času. Stahování SW, instalace a nastavování nástrojů je značně časově náročné.\par
-			V případě využívání představených nástrojů a systému Linux je třeba dbát na správné postupy instalací a v případě problémů využívat dostupné dokumentace. Značným problémem bývá nemožnost zápisu programu do složky, ne
+			V případě využívání představených nástrojů a systému Linux je třeba dbát na správné postupy instalací a v případě problémů využívat dostupné dokumentace.
 		% Jaké verze jsou momentálně podporované
 		% Co je třeba nainstalovat za balíčky před započetím instalace
 		% Jaký je flow aby byla možná příprava systému
