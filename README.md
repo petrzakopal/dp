@@ -57,7 +57,11 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
-👨🏻‍💻 [18.11.2022](/notes/20221119.md) <-- snaha opět rozjet debugger
+👨🏻‍💻 [19.11.2022](/notes/20221119.md) <-- snaha opět rozjet debugger
+
+---
+
+👨🏻‍💻 [19.11.2022](/notes/20221120.md) <-- převážně out of order den, ale napsal jsem něco do DP LaTeXu [PDF](/tex/dp.pdf), zkouším nápady z [19.11.2022](/notes/20221119.md)
 
 ---
 

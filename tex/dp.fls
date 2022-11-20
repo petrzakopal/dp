@@ -653,6 +653,9 @@ INPUT ./src/jpg/digilent-zybo-foto-1-oznacene.jpg
 INPUT ./src/jpg/digilent-zybo-foto-3.jpg
 INPUT ./src/jpg/digilent-zybo-foto-3.jpg
 INPUT ./src/jpg/digilent-zybo-foto-3.jpg
+INPUT ./src/png/vitis-development-flow.png
+INPUT ./src/png/vitis-development-flow.png
+INPUT ./src/png/vitis-development-flow.png
 INPUT ./dp.aux
 INPUT ./dp.out
 INPUT ./dp.run.xml
