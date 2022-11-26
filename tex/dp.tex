@@ -723,6 +723,14 @@ V této části jsou představeny jednotlivé nástroje, využívané při tvorb
 		% Jaký je flow aby byla možná příprava systému
 		% Proč zrovna linux Open Source
 	\subsection{Tvorba HW architektury Xilinx Vivado}
+		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí HLS C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K tvorbě platformy je využito SW Xilinx Vivado. V tomto programu je možné konfigurovat jednotlivé použité prvky jako je ZynQ jednotka, GPIO jednotky, DSP a další. Výsledkem tvorby platformy v této práci je vytvoření XSA souboru, který bude použit pro konfiguraci tvorby PetaLinux systému. Ve Vivado je možné také vytvářet aplikace přímo v VHDL, ale této funkcionality nebude v této práci využito.\par
+		V této sekci bude popsána tvorba platformy pro vývojovou desku Zybo Zynq-7000. Tvorba platformy pro jiné vývojové desky nebo zařízení je specifická pro daného výrobce a může se v nějakých případech lišit. Ovšem základní úkony jako je vložení potřebných bloků a celkový postup tvorby je zachován.\par
+		Postup tvorby platformy byl částečně převzat z \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}.
+
+		\subsubsection{Vivado Board Files}
+			Aby bylo možné snadněji vytvořit potřebnou HW architekturu, firmy většinou dodávají tzv. \textit{Board Files}, jež jsou soubory, obsahující různá přednastavení, konfigurace, informace a podmínky připojení IP bloků k reálným součástím. \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
+			Samozřejmě by bylo možné HW architekturu vytvořit i bez těchto předkonfigurovaných souborů, ovšem proces by byl značně náročnější. Pro používanou vývojovou desku Digilent Zybo Zynq-7000 je možné stáhnout tyto soubory z \cite{github-vivado-board-files-for-digilent-fpga-boards}. Způsob instalace board files je popsaný v oficiální dokumentaci firmy Digilent, Inc. v \cite{digilent-installing-vivado-vitis-and-digilent-board-files}.\par
+			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou HW architekturu pro akcelerovanou aplikaci.
 	% Basic popsání, možná si zjistit do hloubky co vše znamená
     % WorkFlow
     % Zjistit jak dát vstupem tlačítka a jak výstupy jako výstupy
