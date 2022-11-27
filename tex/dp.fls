@@ -674,6 +674,9 @@ INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-36.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png
+INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png
+INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png
+INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png
 INPUT ./dp.aux
 INPUT ./dp.out
 INPUT ./dp.run.xml

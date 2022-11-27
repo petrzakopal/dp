@@ -69,15 +69,7 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
-## Progress
-
-_Coming soon..._
-
-🟩 🟨 🟨 ⬜️ ⬜️ ⬜️ ⬜️ ⬜️ ⬜️ ⬜️ ⬜️ ⬜️ ⬜️ ◻️ ◻️ ◻️ ▫️ ▫️ ▫️
-
-0. Nápad
-1. Research
-2. Začal jsem pracovat na popsání FPGA, jejich bloků a částí, obecný teoretický základ nutný k pochopení FPGA, které bude dále programováno
+👨🏻‍💻 [27.11.2022](/notes/20221127.md) <-- poslední snaha rozjet kria a debugger, popisování vivado flow, vytváření MindMap ohledně tvorby modelu ASM v C++ a jeho konverze na akcelerovanou aplikaci
 
 ## Tech Stack
 
@@ -89,3 +81,4 @@ _Coming soon..._
 - Figma - pro vytváření názorných obrázků
 - LaTeX - pro sázení textu práce
 - AutoCAD - pro vytváření schémat
+- ExcaliDraw - na občasné interní nákresy / MindMap

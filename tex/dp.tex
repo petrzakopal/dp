@@ -788,6 +788,16 @@ V této části jsou představeny jednotlivé nástroje, využívané při tvorb
 			\label{fig:xilinx-vivado-flow-12}
 		\end{figure}
 
+		Po úspěšném propojení bloků je vhodné otevřít nastavení \textit{ZYNQ7 Processing System} a v záložce \textit{Interrupts} povolit nastavení \textit{Fabric Interrupts/PL-PS Interrupt Ports/IRQ\_F2P} přerušení. Následně do designu je nutné vložit další blok, řídící přerušení, se jménem \textit{AXI Interrupt Controller}, otevřít jeho nastavení a v sekci \textit{Processor Interrupt Type and Connection} změnit nastavení \textit{Interrupt Output Connection} z \textit{Bus} na \textit{Single}. Následně je opět možné spustit automatické propojení jednotlivých bloků s výchozím nastavením.\par
+		Aby byly přerušení funkční, je třeba propojit výstup bloku \textit{AXI Interrupt Controller} se jménem \textit{irq} se vstupem bloku \textit{ZYNQ7 Processing System} \textit{IRQ\_F2P}. Minimální funkční blokový design je zobrazen na obr. \ref{fig:xilinx-vivado-flow-17}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png}
+			\caption{Xilinx Vivado – minimální funkční design .}
+			\label{fig:xilinx-vivado-flow-17}
+		\end{figure}
+
 	% Basic popsání, možná si zjistit do hloubky co vše znamená
     % WorkFlow
     % Zjistit jak dát vstupem tlačítka a jak výstupy jako výstupy
