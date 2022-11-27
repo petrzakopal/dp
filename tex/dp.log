@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  27 NOV 2022 15:08
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  27 NOV 2022 15:12
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1846,12 +1846,13 @@ File: src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png Graphic file (type pn
 <use src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png>
 Package luatex.def Info: src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png  used on input line 786.
 (luatex.def)             Requested size: 386.96027pt x 236.66551pt.
-<src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png, id=1207, 1940.24875pt x 1188.44pt>
+ [23<./src/png/xilinx-vivado-flow/xilinx-vivado-flow-07.png>] [24<./src/png/xilinx-vivado-flow/xilinx-vivado-flow-36.png><./src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png>]
+<src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png, id=1219, 1940.24875pt x 1188.44pt>
 File: src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png Graphic file (type png)
 <use src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png>
-Package luatex.def Info: src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png  used on input line 796.
+Package luatex.def Info: src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png  used on input line 798.
 (luatex.def)             Requested size: 386.96027pt x 237.01283pt.
- [23<./src/png/xilinx-vivado-flow/xilinx-vivado-flow-07.png>] [24<./src/png/xilinx-vivado-flow/xilinx-vivado-flow-36.png><./src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png>] [25<./src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png>] [26
+ [25<./src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png>] [26
 
 ]
 
@@ -1862,29 +1863,29 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 (biblatex)                Using the old, problematic definition.
 
 
-Overfull \hbox (4.15941pt too wide) in paragraph at lines 826--826
+Overfull \hbox (4.15941pt too wide) in paragraph at lines 828--828
 []\TU/TimesNewRoman(1)/m/n/10.95 Hardware-in-the-Loop (HIL) Si-mu-lation[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 The MathWorks, Inc.[] \TU/TimesNewRoman(1)/m/n/10.95 [On-line][]. [B.r.] [[]cit.[] 2022-11-06].
  []
 
 
-Overfull \hbox (26.46931pt too wide) in paragraph at lines 826--826
+Overfull \hbox (26.46931pt too wide) in paragraph at lines 828--828
 []\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Z7 Mi-gration Gu-ide[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-11].
  []
 
 [27
 
 ]
-Overfull \hbox (19.74677pt too wide) in paragraph at lines 826--826
+Overfull \hbox (19.74677pt too wide) in paragraph at lines 828--828
 []\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Re-fe-rence Ma-nual[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. [B.r.] [[]cit.[] 2022-11-11].
  []
 
 
-Overfull \hbox (4.86678pt too wide) in paragraph at lines 826--826
+Overfull \hbox (4.86678pt too wide) in paragraph at lines 828--828
 []\TU/TimesNewRoman(1)/m/n/10.95 XI-LINX, Inc. Vi-vado De-sign Su-ite User Gu-ide: Re-le-ase No-tes, In-stallation, and Li-censing (UG973)[].
  []
 
 
-Overfull \hbox (30.16557pt too wide) in paragraph at lines 826--826
+Overfull \hbox (30.16557pt too wide) in paragraph at lines 828--828
 []\TU/TimesNewRoman(1)/m/n/10.95 DI-GI-LENT, Inc. Zybo Pe-ta-li-nux BSP Pro-ject, 2018[]. In[]: \TU/TimesNewRoman(2)/m/it/10.95 Gi-tHub.io[] \TU/TimesNewRoman(1)/m/n/10.95 [on-line][]. 29.03.2018 [[]cit.[] 2022-11-26].
  []
 
@@ -1911,10 +1912,10 @@ Here is how much of LuaTeX's memory you used:
  90 fonts using 26659679 bytes
  84i,17n,90p,1815b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on dp.pdf (41 pages, 15938320 bytes).
+Output written on dp.pdf (41 pages, 15938561 bytes).
 
-PDF statistics: 1319 PDF objects out of 1440 (max. 8388607)
- 950 compressed objects within 10 object streams
+PDF statistics: 1320 PDF objects out of 1440 (max. 8388607)
+ 951 compressed objects within 10 object streams
  130 named destinations out of 1000 (max. 131072)
  433 words of extra memory for PDF output out of 10000 (max. 100000000)
 
