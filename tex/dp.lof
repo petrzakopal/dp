@@ -158,7 +158,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~1}{\ignorespaces Blokový diagram tvorby spustitelné aplikace v prostředí Vitis. (převzato z \cite {vitis-unified-software-platform-documentation-2022}, upraveno)\relax }}{19}{figure.caption.13}%
+\contentsline {figure}{\numberline {6~-~1}{\ignorespaces Blokový diagram tvorby spustitelné aplikace v prostředí Vitis. (převzato z \cite {vitis-unified-software-platform-documentation-2022}, upraveno)\relax }}{20}{figure.caption.15}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -178,19 +178,25 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~2}{\ignorespaces Xilinx Vivado – volba typu projektu.\relax }}{21}{figure.caption.14}%
+\contentsline {figure}{\numberline {6~-~2}{\ignorespaces Xilinx Vivado – volba typu projektu.\relax }}{22}{figure.caption.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~3}{\ignorespaces Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.\relax }}{22}{figure.caption.15}%
+\contentsline {figure}{\numberline {6~-~3}{\ignorespaces Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.\relax }}{23}{figure.caption.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~4}{\ignorespaces Xilinx Vivado – vytváření Block Design.\relax }}{22}{figure.caption.16}%
+\contentsline {figure}{\numberline {6~-~4}{\ignorespaces Xilinx Vivado – vytváření Block Design.\relax }}{23}{figure.caption.18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~5}{\ignorespaces Xilinx Vivado – vložení bloku ZYNQ7 Processing System.\relax }}{23}{figure.caption.17}%
+\contentsline {figure}{\numberline {6~-~5}{\ignorespaces Xilinx Vivado – vložení bloku ZYNQ7 Processing System.\relax }}{24}{figure.caption.19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~6}{\ignorespaces Xilinx Vivado – nastavení výstupních taktovacích signálů.\relax }}{24}{figure.caption.18}%
+\contentsline {figure}{\numberline {6~-~6}{\ignorespaces Xilinx Vivado – nastavení výstupních taktovacích signálů.\relax }}{25}{figure.caption.20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~7}{\ignorespaces Xilinx Vivado – propojení bloků taktování.\relax }}{24}{figure.caption.19}%
+\contentsline {figure}{\numberline {6~-~7}{\ignorespaces Xilinx Vivado – propojení bloků taktování.\relax }}{25}{figure.caption.21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~8}{\ignorespaces Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.\relax }}{25}{figure.caption.20}%
+\contentsline {figure}{\numberline {6~-~8}{\ignorespaces Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.\relax }}{26}{figure.caption.22}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6~-~9}{\ignorespaces Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.\relax }}{27}{figure.caption.24}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6~-~10}{\ignorespaces Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.\relax }}{28}{figure.caption.25}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 

@@ -74,7 +74,7 @@
 \usepackage{placeins}%% for \FloatBarrier command that blocks floating with htbp! go over \FloatBarrier
 \usepackage{mathrsfs}%packagee for math symbols for Laplace, Z transform etc., usage \mathscr{Z}
 \usepackage{upgreek}%for upgreek symbols, specified tau \uptau
-
+\usepackage{physics}% for derivations \dd
 %this works only when using PDFLaTeX%
 \usepackage[list=true,listformat=simple]{subcaption}
 \usepackage[figurename=Obr.,font=small,labelfont=it,textfont=it]{caption} %for renaming figures instead of renewcommand, small for 11pt default is 10pt as needed in word template
@@ -677,9 +677,104 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			% Custom řešení - ZynQ Berry
 			%  [ZynQBerry](https://shop.trenz-electronic.de/en/TE0726-03-11C64-A-ZynqBerry-Module-with-Xilinx-Z-7007S-Single-Core-Raspberry-Pi-2-compatible) (velice zajímavější i díky ceně, ale možná by hodně cool bylo celé si udělat sám sestavu)
 
-\section{Matematický model stroje}
+\section{Model stroje}
+	Jak již bylo představeno v předchozích částech textu, akcelerované aplikace v FPGA je možné použít na různé účely. Součástí této práce je v PL realizovat akcelerovaný výpočet matematického modelu stroje. V této práci bude využito matematického modelu asynchronního motoru.
+	%% mám se v této celé kapitole více rozepsat o odvození modelu ASM
+	%% schéma, princip činnosti, napěťové a tokové rovnice
+	%% v optimalizace/úpravě modelu pro jazyk C++ mám se rozepsat o numerických metodách? RK4 bych použil
+	%% kde prosím naleznu odvození těch rovnic na model stator proud rotor tok
+	% clarkovy transformace - popsat
+	% goniometrické funkce jsou v pure c++ v knihovně cmath, ve vitis jsou v hls_math.h
+	% https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/Vitis-HLS-Math-Library
 	\subsection{Představení stroje}
-	\subsection{Odvození modelu}
+	\subsection{Matematický popis modelu stroje}
+	\begin{minipage}[t]{0.47\textwidth}
+        \vspace{\baselineskip}
+        \begin{table}[H]
+            \caption{Štítkové údaje stroje.}
+            \centering
+                \begin{tabular}{!{\vrule width 2pt} c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+                    $P_\text{n}$ & 12 kW \\ \hline
+                    $U_\text{n}$ & 380 V~\\ \hline
+                    $I_\text{n}$ & 22 A\\ \hline
+                    $n_\text{n}$ & 1460 min$^{-1}$ \\ \hline
+                    $f_\text{n}$ & 50 Hz \\ \hline
+                    $\cos(\varphi_\text{n})$ &  0.8 \\ \hline
+                    $p_\text{p}$ & 2 \\ \noalign{\hrule height 2pt}
+                \end{tabular}     
+            \label{tab:stitkove-udaje}
+        \end{table}
+        \end{minipage}% --- important, otherwise it wont be so nice
+        \hfill
+        \begin{minipage}[t]{0.47\textwidth}
+            \vspace{0pt}
+            \begin{table}[H]
+                \caption{Změřené parametry stroje.}
+                \centering
+                    \begin{tabular}{!{\vrule width 2pt} c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+                        $R_\text{1}$ & 370 m$\Omega$ \\ \hline
+                        $R_\text{2}$ & 225 m$\Omega$ \\ \hline
+                        $L_{1\sigma}$ & 2,27 mH \\ \hline
+                        $L_{2\sigma}$ & 2,27 mH \\ \hline
+                        $L_\text{m}$ & 82,5 mH \\ \hline
+                        $L_{1}$ & 84,77 mH \\ \hline
+                        $L_{2}$ & 84,77 mH \\ \hline $J$ & 0,4 kg$\cdot$m$^{2}$ \\ \noalign{\hrule height 2pt}
+                    \end{tabular}     
+                \label{tab:zmerene-parametry-stroje}
+            \end{table}
+        \end{minipage}
+
+        \vspace*{1cm}
+Kde $P_\text{n}$ (W) je jmenovitý výkon stroje, $I_\text{n}$ (A) je jmenovitý fázový proud stroje (efektivní hodnota), $U_\text{n}$ (V) je jmenovité sdružené napájací napětí stroje, $f_\text{n}$ (Hz) je jmenovitá napájecí frekvence stroje, $\cos(\varphi_\text{n})$ (-) je jmenovitý účinník stroje, $n_\text{n}$ (min$^{-1}$) jsou jmenovité otáčky stroje, $p_\text{p}$ (-) je počet polpárů stroje, $R_1$ ($\Omega$), resp. $R_2$ ($\Omega$) je statorový, resp. rotorový odpor, $L_{1\sigma}$ (H), resp. $L_{2\sigma}$ (H) je statorová, resp. rotorová rozptylová  indukčnost stroje, $L_\text{m}$ (H) je magnetizační indukčnost stroje, $L_1$ (H), resp. $L_2$ (H) je statorová, resp. rotorová indukčnost, $J$ (kg$\cdot$m$^{2}$) je moment setrvačnosti hřídele.\par
+V~případě tvorby modelu, je využit model založe na výpočtu složek vektorů statorového proudu $\underline{i_1}$ a rotorového toku $\underline{\psi_2}$ v~souřadnicovém systému $\alpha\beta$ spojeném se statorem. Tudíž při použití $\omega_k = 0$. Bude volena konstanta $K = 2/3$. Poté bude stavový popis systému vypadat následovně.
+
+\begin{equation}
+    \frac{\dd{}}{\dd{t}}
+    \begin{bmatrix}
+        i_{1\alpha}\\
+        i_{1\beta}\\
+        \psi_{2\alpha}\\
+        \psi_{2\beta}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        -\frac{R_2 L_\text{m}^{2} + L_2^2 R_1}{\sigma L_1 L_2^2} & 0 & \frac{L_\text{m} R_2}{\sigma L_1 L_2^2} & \frac{L_\text{m}}{\sigma L_1 L_2} \omega\\
+        0 & - \frac{R_2 L_\text{m}^2 + L_2^2 R_1}{\sigma L_1 L_2^2} & - \frac{L_\text{m}}{\sigma L_1 L_2} \omega & \frac{L_\text{m} R_2}{\sigma L_1 L_2^2}\\
+        \frac{L_\text{m} R_2}{L_2} & 0 & - \frac{R_2}{L_2} & -\omega\\
+        0 & \frac{L_\text{m} R_2}{L_2} & \omega -\frac{R_2}{L_2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        i_{1\alpha}\\
+        i_{1\beta}\\
+        \psi_{2\alpha}\\
+        \psi_{2\beta}
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        \frac{1}{\sigma L_1} & 0\\
+        0 & \frac{1}{\sigma L_1}\\
+        0 & 0\\
+        0 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1\alpha}\\
+        u_{2\beta}
+    \end{bmatrix}.
+\end{equation}
+Stavový popis je vhodné doplnit o~další rovnice, jež budou v~simulaci využity.
+
+\begin{equation}
+    M = \frac{3}{2} p_\text{p} \frac{L_\text{m}}{L_2} (\psi_{2\alpha} i_{1\beta} - \psi_{2\beta} i_{1\alpha}),
+\end{equation}
+
+\begin{equation}
+    M - M_\text{z} = J \frac{\dd{\Omega}}{\dd{t}},
+\end{equation}
+\begin{equation}
+    \omega = p_\text{p} \Omega,
+\end{equation}
+kde $\sigma = 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, $i_{1\alpha}$ (A) a $i_{1\beta}$ (A) jsou složky vektoru statorového proudu $\underline{i_1}$ (A), $\psi_{2\alpha}$ (Wb) a $\psi_{2\beta}$ (Wb) jsou složky vektoru rotorového magnetického toku $\underline{\psi_2}$ (Wb), $u_{1\alpha}$ (V) a $u_{1\beta}$ (V) jsou složky statorového napětí $\underline{u_1}$ (V), $p_\text{p}$ (-) je počet polpárů stroje, $\omega$ (s$^{-1}$) je elektrická úhlová rychlost hřídele, $\Omega$ (s$^{-1}$) je mechanická úhlová rychlost hřídele, $M$ je vnitřní elektromechanický moment stroje a $M_\text{z}$ (Nm) je moment zátěžný.
+
 	\subsection{Optimalizace modelu}
 
 \section{Aplikace pro FPGA a CPU}
@@ -800,6 +895,60 @@ V této části jsou představeny jednotlivé nástroje, využívané při tvorb
 			\label{fig:xilinx-vivado-flow-17}
 		\end{figure}
 
+		Nyní je možné přejít ze záložky \textit{Diagram} do záložky \textit{Platform Setup} kde je nutné nastavit určité potřebné konektory a výstupy. V záložce \textit{AXI Port} je nutné pro blok \textit{ZYNQ7 Processing System} nastavit parametry dle tabulky č. \ref{tab:vivado-platform-setup-axi}.
+
+
+		\begin{table}[H]
+			\centering
+			\caption{Ukázka nastavených AXI portů v Xilinx Vivado bloku \textit{ZYNQ7 Processing System}.}
+		  \vspace*{0.15cm}
+		
+			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
+			\noalign{\hrule height 2pt}
+			Name & Enabled & Memport & SP Tag\\
+			\noalign{\hrule height 2pt}
+			M\_AXI\_GP1 & X & M\_AXI\_GP & -\\ \hline
+			S\_AXI\_ACP & O & - & - \\ \hline
+			S\_AXI\_HP0 & X & S\_AXI\_HP & HP0 \\ \hline
+			S\_AXI\_HP1 & X & S\_AXI\_HP & HP1 \\ \hline
+			S\_AXI\_HP2 & X & S\_AXI\_HP & HP2 \\ \hline
+			S\_AXI\_HP3 & X & S\_AXI\_HP & HP3 \\\noalign{\hrule height 2pt}
+			\end{tabular}
+			\label{tab:vivado-platform-setup-axi}
+		\end{table}
+
+		Aby bylo možné zapisovat do globální paměti přes MAXI Adapter je nutné povolit funkci vybraných portů v bloku \textit{AXI Interconnect}. V této práci byly povoleny porty \textit{M01\_AXI} až \textit{M32\_AXI}.\par
+		Následně v záložce \textit{Clock} je nutné povolit \textit{clk\_outx}, kde $x \in <1,5>$, nastavit jejich odpovídající ID a jako výchozí použít taktovací signál 100 MHz.\par
+		Dále je v záložce \textit{Interrupt} nutné aktivovat výstup \textit{intr} bloku \textit{AXI Interrupt Controller}.\par
+		Aby bylo možné případně provádět HW-emulaci, je nutné v kartě \textit{Diagram} zvolit blok \textit{ZYNQ7 Processing System} a v záložce \textit{Block Properties} v nabídce \textit{SELECTED\_SIM\_MODEL} zvolit možnost tlm. \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}\par
+		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
+		Ovšem v této práci nebylo dosaženo funkční SW ani HW simulace z neznámých důvodů nemožnosti spuštění Emulátoru v prostředí Vitis. Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{scp} přesunuty potřebné soubory, jednalo se pouze o SW simulaci bez připojeného PL a tudíž nebylo možné algoritmy ověřit.\par
+		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
+		Před dalším pokračováním je možné design validovat ponocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již HW design vytvořen a nakonfigurován, je možné v kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create HDL Wrapper}. Zároveň dochází také k validaci designu. Pokud se vyskytují v designu různá kritická upozornění, která jsou zobrazena například na obr. \ref{fig:xilinx-vivado-flow-24} je stále možné pokračovat v tvorbě konečného produktu.\par
+		Po vytvoření \textit{HDL Wrapper} je možné v menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést a v případě pokračování v požadavku generování bitstreamu budou provedeny. Poté je v nabídce možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru nebo clusteru. Také je možné zvolit, kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V případě využívání osobního počítače autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z experimentálního zjištění, že v případě využívání vyššího počtu jader může dojít k neočekávané chybě a proces provádění úkolů bude bez vypsání jakékoliv informace ukončen a proces syntézy, implementace a generace bitstreamu bude nutné spustit a provést znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:xilinx-vivado-flow-29}.\par
+
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-24.png}
+			\caption{Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.}
+			\label{fig:xilinx-vivado-flow-24}
+		\end{figure}
+
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-29.png}
+			\caption{Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.}
+			\label{fig:xilinx-vivado-flow-29}
+		\end{figure}
+
+		Indikátor provádění jednotlivých procesů je umístěn v pravém horním rohu. Záznam prováděných procesů je poté umístěn v kartě \textit{Log}.\par
+		Po úspěšném provedení jednotlivých kroků je zobrazena nabídka, která umožňuje nahlédnout na vytvořený design. Tuto nabídku je možné zavřít aniž by byla vykonávána jakákoliv z nabízených možností.\par
+		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný HW i jeho emulaci. V nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v Xilinx Vitis pomocí V++. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v této části.\par
+		Po nastavení dodatečných informací platformy je možné jej vyexportovat do požadované lokace, kde bude dále využívána.
+
+
 	% Basic popsání, možná si zjistit do hloubky co vše znamená
     % WorkFlow
     % Zjistit jak dát vstupem tlačítka a jak výstupy jako výstupy
@@ -835,12 +984,10 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\subsection{Seznam symbolů}
 			\begin{description}
 			\item $\vec{F}$ (N) \hspace*{\parindent} vektor síly
-			
 		\end{description}
 	\subsection{Seznam zkratek}
 		\begin{description}
 			\item DCM \hspace*{\parindent} DC Master
-			
 		\end{description}
 	\end{appendices}
 \end{document}
