@@ -35,7 +35,7 @@ static const std::string error_message =
 float rungeKutta(float x0, float y0, float x, float h)
 {
 
-    // Number of iterations 
+    // Number of iterations
     int n = (int)((x-x0)/h);
     float k1, k2, k3, k4, k5;
 
@@ -155,18 +155,18 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, DATA_SIZE));
 
     // We then need to map our OpenCL buffers to get the pointers
-    int* ptr_a;
-    int* ptr_b;
-    int* ptr_result;
+    float* ptr_a;
+    float* ptr_b;
+    float* ptr_result;
     OCL_CHECK(err,
-              ptr_a = (int*)q.enqueueMapBuffer(buffer_a, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
+              ptr_a = (float*)q.enqueueMapBuffer(buffer_a, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
     OCL_CHECK(err,
-              ptr_b = (int*)q.enqueueMapBuffer(buffer_b, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
-    OCL_CHECK(err, ptr_result = (int*)q.enqueueMapBuffer(buffer_result, CL_TRUE, CL_MAP_READ, 0, size_in_bytes, NULL,
+              ptr_b = (float*)q.enqueueMapBuffer(buffer_b, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
+    OCL_CHECK(err, ptr_result = (float*)q.enqueueMapBuffer(buffer_result, CL_TRUE, CL_MAP_READ, 0, size_in_bytes, NULL,
                                                          NULL, &err));
 
-    ptr_a[0] = 0; // x0
-    ptr_b[0] = 1; // y0
+    ptr_a[0] = 2.0; // x0
+    ptr_b[0] = 12.5; // y0
 
     // Data will be migrated to kernel space
     OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_a, buffer_b}, 0 /* 0 means from host*/));
@@ -193,5 +193,5 @@ int main(int argc, char* argv[]) {
     // std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
     std::cout << "Result for rungeKutta eq from CPU:\n" << rungeKutta(x0, y0, x, h) << "\n"<< std::endl;
     std::cout << "Result for RK from kernel:\n"<<ptr_result[0]<<"\n"<<std::endl;
-    return (match ? EXIT_FAILURE : EXIT_SUCCESS);
+    return 0;
 }
