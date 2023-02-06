@@ -165,11 +165,8 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, ptr_result = (int*)q.enqueueMapBuffer(buffer_result, CL_TRUE, CL_MAP_READ, 0, size_in_bytes, NULL,
                                                          NULL, &err));
 
-    // Initialize the vectors used in the test
-    for (int i = 0; i < DATA_SIZE; i++) {
-        ptr_a[i] = rand() % DATA_SIZE;
-        ptr_b[i] = rand() % DATA_SIZE;
-    }
+    ptr_a[0] = 0; // x0
+    ptr_b[0] = 1; // y0
 
     // Data will be migrated to kernel space
     OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_a, buffer_b}, 0 /* 0 means from host*/));
@@ -184,20 +181,8 @@ int main(int argc, char* argv[]) {
 
     OCL_CHECK(err, q.finish());
 
-    // Verify the result
-    int match = 0;
-    for (int i = 0; i < DATA_SIZE; i++) {
-        int host_result = ptr_a[i] + ptr_b[i];
-        if (ptr_result[i] != host_result) {
-            printf(error_message.c_str(), i, host_result, ptr_result[i]);
-            match = 1;
-            break;
-        }
-    }
-
 
     float x0 = 0, y0 = 1, x = 2, h = 0.00002;
-
 
 
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_a, ptr_a));
@@ -205,8 +190,8 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_result, ptr_result));
     OCL_CHECK(err, err = q.finish());
 
-    std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
-    std::cout << "Result for rungeKutta eq from CPU:\n" << rungeKutta(x0, y0, x, h) << "\n"<< std:endl;
-    
+    // std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
+    std::cout << "Result for rungeKutta eq from CPU:\n" << rungeKutta(x0, y0, x, h) << "\n"<< std::endl;
+    std::cout << "Result for RK from kernel:\n"<<ptr_result[0]<<"\n"<<std:endl;
     return (match ? EXIT_FAILURE : EXIT_SUCCESS);
 }
