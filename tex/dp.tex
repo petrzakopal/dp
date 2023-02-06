@@ -373,7 +373,31 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 \newpage
 %konec úvodu
 
-	\section{Embedded Systems}
+	\section{System on a chip}
+	% co to je, proč to je
+	% typy postavené kolem  mikrokontroléru, mikroprocesoru a ASIC
+	% Aplikace Embedded system (existují i pro mobilní aplikce, osobní počítače)
+	System on a chip (SoC) je architektura čipu, využívající integrování všech možných částí/bloků systému na jeden čip. Tato integrace značně snižuje nároky na rozměry desek, na kterých jsou tyto SoC umístěny. Místo diskrétních čipů, obstarávající jednotlivé funkce je využito jednoho čipu s mnoha částmi vykonávající požadované funkce.\par
+	SoC se používá z důvodu snižování časové náročnosti přenosu dat mezi jednotlivými diskrétními čipy, protože integrování čipů di jedné polovodičové struktury představuje relativně veliké snížení nároků na kovové vodivé spoje.\par
+	Označení SoC může představovat mnoho architektur. Obecné rozdělení těchto architektur je následující:
+	\begin{itemize}
+		\item SoC využívající mikrokontroléru (CPU, RAM, ROM),
+		\item SoC využívající pouze mikroprocesoru (CPU, možné i GPU, jádra pro specializované výpočty),
+		\item SoC pro specifické aplikace (Application Specific Integrated Circuit – ASIC).
+	\end{itemize}
+	Jedná se tudíž o rozdělení dle hlavní výpočetní jednotky, resp. procesoru v čipu.\par
+	Pro řízení elektrických pohonů jsou nejvíce využívány SoC s mikrokontrolérem a ASIC.
+
+	\subsection{Application Specific Integrated Circuit}
+		Významnou část SoC tvoří \textit{Application Specific Integrated Circuits, popř. Hardware} (ASICs, ASHW). Při použití těchto SoC je využíváno přesvědčení, že pokud je architektura HW přímo specializovaná na jednu aplikaci, je vysoká pravděpodobnost, že ji bude vykonávat bezchybně, kvalitně a rychle.\par
+		Tyto aplikace jsou využívaný v širokém spektru oborů jako je např. zpracování zvuku, videa, výpočtů apod. Tyto ASIC mohou také vykonávat potřebné rychlé výpočty pro matematické modely elektrických strojů, které jsou využívány např. pro HIL.\par
+		Než je tento specifický obvod vytvořen, je nutné jej navrhnout, vyzkoušet a odladit. K tomu slouží logická programovatelná pole, ve kterých je možné požadovaný HW navrhnut a odladit před velko produkcí ASIC. Pokud velko produkce není z ekonomických důvodů možná, jsou FPGA využívány i v produkční oblasti, kde je HW struktura, která by byla přítomna na ASIC, vytvořena přímo na FPGA.
+
+
+	\subsection{Aplikace SoC}
+	Systémy na čipu se pro jejich výpočetní výkon, prostorovou a energetickou efektivnost využívají v mnoha aplikacích. Nejvýznamnější využití v problematice elektrických pohonů je v embedded systémech a hardwaerově akcelerovaných aplikacích. 
+
+	\subsubsection{Embedded Systems}
 	Embedded systémy je název pro skupinu zařízení, obecně systémů, které je možné charakterizovat jako specifické výpočetní zařízení, resp. počítače, které jsou určeny pro podporu funkce nebo řízení nějakého většího celku, produktu nebo fyzikálního systému. Oproti tomu osobní počítač je sice výpočetní zařízení, ale nelze mluvit o embedded systému, protože je určen pro mnoho univerzálních aplikací. \cite{Sass2010}\par
 	Dalším důležitým rozdílem mezi \textit{Embedded System} a obecným výpočetním zařízením je ten, že v případě embedded systému je interakce mezi systémem a uživatelem uměle omezena na základní ovládání či kontrolu funkce. Není předpokládáno, že by uživatel, jež aplikaci embedded systému využvá, výrazným způsobem zasahoval do jeho funkce. Naopak obecný výpočetní systém je uzpůsoben na podstatné zásahy uživatele. \cite{Sass2010} \cite{juan-fpgas}\par
 	Do embedded systému obecně vstupují vstupní signály, které jsou následně zpracovány a poté vybrané výsledky výpočtů jsou v podobě výstupní signálů výstupním produktem systému. Tyto produkty mohou pomocí akčních členů zasahovat do řízeného systému či aplikace. Vstupní signály většinou přicházejí ze speciálních snímačů, kompatibilních s embedded systémem (senzor teploty, senzor tlaku, senzor zrychlení, gyroskop apod.). Naopak jeho výstupem signály, vedoucí na konektory, na kterých se dle požadavků objevuje např. specifická hodnota napětí. Nebo mohou na výstupních pinech být připojené LED signalizace, komunikační sběrnice některých komunikačních systémů nebo výstupní LDC displaye. Způsob, kterým jsou kódovány vstupní a výstupní signály je většinou specificky určený aplikaci daného systému. \cite{Sass2010}\par
@@ -388,12 +412,8 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 	\end{figure}
 
 		\fbar
-		\subsection{Application Specific Integrated Circuit}
-		S tématem embedded systémů se pojí pojem hardware, který je určen pro jedinou aplikaci. Tato skupina zařízení se nazývá \textit{Application Specific Integrated Circuits, popř. Hardware} (ASICs, ASHW). V této oblasti je opět využíváno přesvědčení, že pokud je architektura HW přímo specializovaná na jednu aplikaci, je vysoká pravděpodobnost, že ji bude vykonávat bezchybně, kvalitně a rychle.\par
-		Tyto aplikace jsou využívaný v širokém spektru oborů jako je např. zpracování zvuku, videa, výpočtů apod. Tyto ASIC mohou také vykonávat potřebné rychlé výpočty pro matematické modely elektrických strojů, které jsou využívány např. pro HIL.\par
-		Než je tento specifický obvod vytvořen, je nutné jej navrhnout, vyzkoušet a odladit. K tomu slouží logická programovatelná pole, ve kterých je možné požadovaný HW navrhnut a odladit před velko produkcí ASIC. Pokud velko produkce není z ekonomických důvodů možná, jsou FPGA využívány i v produkční oblasti, kde je HW struktura, která by byla přítomna na ASIC, vytvořena přímo na FPGA.
 
-		\subsection{Hardware Accelerated Applications}\label{subsec:hardware-accelerated-applications}
+		\subsubsection{Hardware Accelerated Applications}\label{subsec:hardware-accelerated-applications}
 		V mnoha aplikacích, nejen při řízení elektrických pohonů, je vyžadováno, aby výpočty nebo zpracování dat probíhalo vysokou rychlostí. Tento problém nemůže být většinou vyřešen použitím běžného procesoru (CPU), který je optimalizován na provádění obecných komplexních funkcí řízení běhu programu, komunikace či přesunu dat. V moderním světě dochází k exponenciálnímu nárůstu množství dat, které je potřeba zpracovat. Aby tyto data bylo možné v požadovaném čase zpracovat, je třeba využít specifický HW, který bude schopen požadavky rychlosti a výkonu uspokojit. Tento proces se nazývá \textit{Hardware Acceleration}. \cite{xilinx-accelerated-computing}\par
 		Princip hardwaerové akcelerace spočívá v přesunu výpočetně náročných aktivit na zvláštní oddělený hardware. Celkové řízení běhu aplikace a komunikace je ovšem stále přítomno na řídícím CPU. Oddělený hardware, na kterém dochází k akceleraci výpočtů je optimalizován na vykonávanou úlohu a jeho využití přináší zefektivnění běhu celkové aplikace. \cite{xilinx-accelerated-computing}\par
 		Struktura, ve které je využíváno více oddělených hardwarových procesorových a akceleračních jednotek, se často nazývá heterogenní. \cite{xilinx-accelerated-computing}\par
@@ -402,6 +422,13 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		\textbf{Graphics Processing Units} (GPUs) jsou jednotky, které převážně slouží k akceleraci zpracování a renderování grafických úloh. V době rapidního rozvoje elektroniky a SW je možné využití GPUs v mnoha odvětví umělé inteligence (AI) či kreativních odvětích. GPUs jsou využívány v aplikacích, kde není kladen veliký důraz na nízkou odezvu (latenci). \cite{xilinx-accelerated-computing}\par
 		\textbf{Tensor Processing Units} (TPUs) jsou jednotky, které slouží k provádění algoritmů strojového učení (machine-learning, ML). Jejich přímé datové propojení umožňuje velmi rychlý a přímý přenost dat. Díky přímému připojení nevyžadují využití pamětí, kter= by přenos dat zpomalovali. \cite{xilinx-accelerated-computing}\par
 		\textbf{Field Programmable Gate Arrays} (FPGAs) jsou jednotky, ve kterých není při výrobě pevně daná HW struktura. To umožňuje vytvoření, resp. naprogramování HW dle požadavků akcelerované aplikace. FPGAs jsou využívány i v on-line výpočtech matematických modelů elektrických strojů. Při realizaci této práce je pro akceleraci využíváno právě těchto programovatelných polí.
+
+	\subsubsection{Výpočetní technika, mobilní zařízení a elektronika}
+	Krom odvětví elektrických pohonů jsou SoC využívány i pro běžné aplikace.\par
+	Protože jsou kladeny stále vyšší nároky na výpočetní rychlost a nižší cenu i ve spotřební elektronice jako jsou mobilní zařízení (mobilní telefony, osobní počítače), servery apod., začíná převažovat využívání SoC i v těchto oblastích.
+	Společnost Apple Inc. např. již prakticky ve všech jejich zařízeních používá vlastní navrhnutý SoC jako je A16 Bionic pro iPhone 14 Pro, Apple M1 a M2 pro tablety a počítače.\par
+	Díky specifickým řešením a vylepšeným architekturám (jádra SoC pro vysoký výkon a jádra pro ekonmickou spotřebu energie) bylo možné značně zvýšit výkon a snížit energetickou náročnost zařízení spotřební elektroniky.
+
 
 	\section{Programovatelné hradlové pole – FPGA}
 		\subsection{Vývoj FPGA z PLD}
@@ -550,8 +577,14 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			Kromě HIL simulace je možné FPGA využít také pro řízení elektrických pohonů. Možnosti realizace řízení AC elektrických strojů pomocí FPGA a analogově digitálních převodníků (ADC) jsou prezentovány v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}. V dokumentu jsou popisovány tři realizace řízení, resp. regulace pohonu. Nejprve byla regulace realizována pomocí hystérézních on-off regulátorů, následně byly použity PI regulátory. Pomocí nich byl pohon regulován na základně měření a změny vektoru statorového proudu, resp. jeho složek $\alpha \beta$ po aplikování Clarkové transformace. Jako poslení prezentovaný způsob autoři realizovali model ovládání synchronního motoru na základě prediktivních regulátorů. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}\par Všechny prezentované způsoby regulace v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives} byly před syntézou realizovány v prostředí MATLAB™️ a Simulink. Tento způsob tvorby modelů a algoritmů je v praxi upřednostňován, protože umožňuje i expertům na řízení a regulaci pracovat na dané problematice bez znalostí mikroelektroniky, programování v HDL a způsobu fungování FPGA. Oproti tomu je třeba zvážit, jaké jsou požadavky na rychlost, výkonnost a optimalizované řízení aplikace a zdali použití předpřipravených knihoven a zjednodušených nástrojů nebude mít příliš značný vliv na rychlost výpočtu a tudíž zpracování dat a řízení v reálném čase. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}
 			
 
-	\section{Porovnání dostupných SoC pro řízení elektrických pohonů}
-			V této kapitole budou představeny komerčně dostupné SoC, které je možné využít pro aplikace řízení elektrických pohonů či HIL.
+	\section{Porovnání dostupných SoC platforem pro řízení elektrických pohonů}
+			V této kapitole budou představeny smysluplné, komerčně dostupné SoC platformy, které je možné využít pro aplikace řízení elektrických pohonů či HIL. Výběr je zaměřen na SoC umístěný na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi, vlastnostmi by měla architektura disponovat a poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu na Printed Circuit Board (PCB). Z důvodu finanční náročnosti některých řešení bylo přistoupeno k prezentování SoC od firmy Xilinx, které jsou nižší ceny.
+
+			\subsection{Platforma využívající Spartan FPGA}
+
+			\subsection{Platforma využívající Artix}
+
+			\subsection{Platforma využívající ZynQ SoC}
 
 			% popsat že je ZynQ, Spartan, atd. atd. využít možného open Source řešení z poznámek
 
