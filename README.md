@@ -71,6 +71,10 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 👨🏻‍💻 [27.11.2022](/notes/20221127.md) <-- poslední snaha rozjet kria a debugger, popisování vivado flow, vytváření MindMap ohledně tvorby modelu ASM v C++ a jeho konverze na akcelerovanou aplikaci
 
+👨🏻‍💻 [29.11.2022](/notes/20221129.md)
+
+👨🏻‍💻 [06.02.2023](/notes/20230206.md)
+
 ## Tech Stack
 
 - PetaLinux - běžící na ARM vývojové desky Digilent
