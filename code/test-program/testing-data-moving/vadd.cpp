@@ -127,7 +127,7 @@ int main(int argc, char* argv[]) {
     float* ptr_a;
     float* ptr_b;
     float* ptr_result;
-    
+
     OCL_CHECK(err,
               ptr_a = (float*)q.enqueueMapBuffer(buffer_a, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
     OCL_CHECK(err,
@@ -159,6 +159,6 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_result, ptr_result));
     OCL_CHECK(err, err = q.finish());
 
-    std::cout << "Result for RK from kernel:\n"<<ptr_result[0]<<"\n"<<std::endl;
+    std::cout << "Result from kernel:\n"<<ptr_result[0]<<"\n"<<std::endl;
     return 0;
 }

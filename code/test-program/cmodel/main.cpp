@@ -33,8 +33,7 @@ float rungeKutta(float x0, float y0, float x, float h, float (*func)(float, floa
 
 int main()
 {
-int* test;
-test[0] = 2;
+
 float x0 = 0, y0 = 1, x = 2, h = 0.000001;
 
 std::cout << "Result for rungeKutta eq:\n" << rungeKutta(x0, y0, x, h, &dydx) << "\n";
@@ -43,7 +42,7 @@ for(int i = 1;i<=10;i++)
 {
     std::cout << rungeKutta(x0, y0, i, h, &dydx) << "\n";
 }
-std::cout <<"Test\n"<< &test;
+std::cout <<"Test\n";
 return 0;
 }
 
