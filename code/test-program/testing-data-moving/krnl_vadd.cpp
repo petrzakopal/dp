@@ -98,14 +98,36 @@ mem_rd:
 }
 
 
-static void compute(float number1, float number2)
+static float dydx(float x, float y)
 {
-	    out_stream << (number1+number2);
+	#pragma HLS INLINE
+    return((x-y)/2);
+}
+
+
+static void compute(hls::stream<float>& in1_stream,
+                        hls::stream<float>& in2_stream,
+                        hls::stream<float>& out_stream)
+{
+	 	float x0 = in1_stream.read();
+	    float y = in2_stream.read();
+
+	    out_stream << (x0+y);
+
+}
+
+static void compute(int data,
+                        
+                        hls::stream<float>& out_stream)
+{
+
+	    out_stream << data;
+
 }
 
 static void store_result(float* out, hls::stream<float>& out_stream) {
 mem_wr:
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 2; i++) {
 #pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
         out[i] = out_stream.read();
     }
@@ -114,15 +136,22 @@ mem_wr:
 extern "C" {
 
 
-void krnl_vadd(float in1, float in2, float* out) {
+void krnl_vadd(float* in1, float* in2, float* out, int size) {
 #pragma HLS INTERFACE m_axi port = in1 bundle = gmem0
 #pragma HLS INTERFACE m_axi port = in2 bundle = gmem1
 #pragma HLS INTERFACE m_axi port = out bundle = gmem0
 
+    static hls::stream<float> in1_stream("input_stream_1");
+    static hls::stream<float> in2_stream("input_stream_2");
     static hls::stream<float> out_stream("output_stream");
 
 #pragma HLS dataflow
-    compute(in1, in2, out_stream);
+    // dataflow pragma instruct compiler to run following three APIs in parallel
+    load_input(in1, in1_stream);
+    load_input(in2, in2_stream);
+   // rungeKutta(in1_stream, in2_stream, out_stream);
+    // compute(in1_stream, in2_stream, out_stream);
+    compute_test(size, out_stream)
     store_result(out, out_stream);
 }
 }

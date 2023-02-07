@@ -143,11 +143,10 @@ int main(int argc, char* argv[]) {
 
     // These commands will allocate memory on the Device. The cl::Buffer objects can
     // be used to reference the memory locations on the device.
+    OCL_CHECK(err, cl::Buffer buffer_a(context, CL_MEM_READ_ONLY, size_in_bytes, NULL, &err));
+    OCL_CHECK(err, cl::Buffer buffer_b(context, CL_MEM_READ_ONLY, size_in_bytes, NULL, &err));
     OCL_CHECK(err, cl::Buffer buffer_result(context, CL_MEM_WRITE_ONLY, size_in_bytes, NULL, &err));
 
-
-    float buffer_a = 2.0;
-    float buffer_b = 12.0;
     // set the kernel Arguments
     int narg = 0;
     OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_a));
@@ -155,12 +154,23 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_result));
     OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, DATA_SIZE));
 
-   
+    // We then need to map our OpenCL buffers to get the pointers
+    float* ptr_a;
+    float* ptr_b;
     float* ptr_result;
-  
-    OCL_CHECK(err, ptr_result = (float*)q.enqueueMapBuffer(buffer_result, CL_TRUE, CL_MAP_READ, 0, size_in_bytes, NULL, NULL, &err));
+    OCL_CHECK(err,
+              ptr_a = (float*)q.enqueueMapBuffer(buffer_a, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
+    OCL_CHECK(err,
+              ptr_b = (float*)q.enqueueMapBuffer(buffer_b, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
+    OCL_CHECK(err, ptr_result = (float*)q.enqueueMapBuffer(buffer_result, CL_TRUE, CL_MAP_READ, 0, size_in_bytes, NULL,
+                                                         NULL, &err));
 
-   
+    ptr_a[0] = 2.0; // x0
+    ptr_b[0] = 12.5; // y0
+
+    // Data will be migrated to kernel space
+    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_a, buffer_b}, 0 /* 0 means from host*/));
+
     // Launch the Kernel
     OCL_CHECK(err, err = q.enqueueTask(krnl_vector_add));
 
@@ -172,11 +182,15 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, q.finish());
 
 
+    float x0 = 0, y0 = 1, x = 2, h = 0.00002;
+
+
+    OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_a, ptr_a));
+    OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_b, ptr_b));
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_result, ptr_result));
     OCL_CHECK(err, err = q.finish());
 
     // std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
-    float x0 = 0, y0 = 1, x = 2, h = 0.00002;
     std::cout << "Result for rungeKutta eq from CPU:\n" << rungeKutta(x0, y0, x, h) << "\n"<< std::endl;
     std::cout << "Result for RK from kernel:\n"<<ptr_result[0]<<"\n"<<std::endl;
     return 0;
