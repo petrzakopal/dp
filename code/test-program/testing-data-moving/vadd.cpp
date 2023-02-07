@@ -1,70 +1,137 @@
-/**
-* Copyright (C) 2019-2021 Xilinx, Inc
-*
-* Licensed under the Apache License, Version 2.0 (the "License"). You may
-* not use this file except in compliance with the License. A copy of the
-* License is located at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-* License for the specific language governing permissions and limitations
-* under the License.
-*/
-// OpenCL utility layer include
-#include "xcl2.hpp"
-#include <vector>
+/*******************************************************************************
+Vendor: Petr Zakopal, CTU FEE
+Associated Filename: vadd.cpp
+Purpose: Test of RK4
 
-#define DATA_SIZE 4096
-#define INCR_VALUE 10
+*******************************************************************************
 
-int main(int argc, char** argv) {
+*******************************************************************************/
+
+#define OCL_CHECK(error, call)                                                                   \
+    call;                                                                                        \
+    if (error != CL_SUCCESS) {                                                                   \
+        printf("%s:%d Error calling " #call ", error code is: %d\n", __FILE__, __LINE__, error); \
+        exit(EXIT_FAILURE);                                                                      \
+    }
+
+#include "vadd.h"
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
+#include <cmath>
+
+static const int DATA_SIZE = 4096;
+
+static const std::string error_message =
+    "Error: Result mismatch:\n"
+    "i = %d CPU result = %d Device result = %d\n";
+
+    float dydx(float x, float y)
+{
+    return((x-y)/2);
+}
+
+// Runge Kutta RK4 Algorithmus
+float rungeKutta(float x0, float y0, float x, float h)
+{
+
+    // Number of iterations
+    int n = (int)((x-x0)/h);
+    float k1, k2, k3, k4, k5;
+
+    float y = y0;
+
+    // Iterating for number of iterations
+    for(int i = 1; i<=n;i++)
+    {
+        k1 = h*dydx(x0,y0);
+        k2 = h*dydx(x0 + 0.5*h, y + 0.5*k1);
+        k3 = h*dydx(x0 + 0.5*h, y + 0.5*k2);
+        k4 = h*dydx(x0 + h, y + k3);
+
+        // Updating the y and x values for new iteration
+        y = y + (1.0/6.0) * (k1 + 2*k2 + 2*k3 + k4);
+        x0 = x0 + h;
+    }
+
+    return y;
+}
+
+int main(int argc, char* argv[]) {
+    // TARGET_DEVICE macro needs to be passed from gcc command line
     if (argc != 2) {
-        std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
+        std::cout << "Usage: " << argv[0] << " <xclbin>" << std::endl;
         return EXIT_FAILURE;
     }
 
-    auto binaryFile = argv[1];
+    std::string xclbinFilename = argv[1];
 
-    // Allocate Memory in Host Memory
+    // Compute the size of array in bytes
+    size_t size_in_bytes = DATA_SIZE * sizeof(int);
+
+    // Creates a vector of DATA_SIZE elements with an initial value of 10 and 32
+    // using customized allocator for getting buffer alignment to 4k boundary
+
+    std::vector<cl::Device> devices;
     cl_int err;
     cl::Context context;
     cl::CommandQueue q;
-    cl::Kernel krnl_adder;
-    size_t vector_size_bytes = sizeof(int) * DATA_SIZE;
-    std::vector<int, aligned_allocator<int> > source_input(DATA_SIZE);
-    std::vector<int, aligned_allocator<int> > source_hw_results(DATA_SIZE);
-    std::vector<int, aligned_allocator<int> > source_sw_results(DATA_SIZE);
+    cl::Kernel krnl_vector_add;
+    cl::Program program;
+    std::vector<cl::Platform> platforms;
+    bool found_device = false;
 
-    // Create the test data and Software Result
-    for (int i = 0; i < DATA_SIZE; i++) {
-        source_input[i] = i;
-        source_sw_results[i] = i + INCR_VALUE;
-        source_hw_results[i] = 0;
+    // traversing all Platforms To find Xilinx Platform and targeted
+    // Device in Xilinx Platform
+    cl::Platform::get(&platforms);
+    for (size_t i = 0; (i < platforms.size()) & (found_device == false); i++) {
+        cl::Platform platform = platforms[i];
+        std::string platformName = platform.getInfo<CL_PLATFORM_NAME>();
+        if (platformName == "Xilinx") {
+            devices.clear();
+            platform.getDevices(CL_DEVICE_TYPE_ACCELERATOR, &devices);
+            if (devices.size()) {
+                found_device = true;
+                break;
+            }
+        }
+    }
+    if (found_device == false) {
+        std::cout << "Error: Unable to find Target Device " << std::endl;
+        return EXIT_FAILURE;
     }
 
-    // OPENCL HOST CODE AREA START
-    auto devices = xcl::get_xil_devices();
+    std::cout << "INFO: Reading " << xclbinFilename << std::endl;
+    FILE* fp;
+    if ((fp = fopen(xclbinFilename.c_str(), "r")) == nullptr) {
+        printf("ERROR: %s xclbin not available please build\n", xclbinFilename.c_str());
+        exit(EXIT_FAILURE);
+    }
+    // Load xclbin
+    std::cout << "Loading: '" << xclbinFilename << "'\n";
+    std::ifstream bin_file(xclbinFilename, std::ifstream::binary);
+    bin_file.seekg(0, bin_file.end);
+    unsigned nb = bin_file.tellg();
+    bin_file.seekg(0, bin_file.beg);
+    char* buf = new char[nb];
+    bin_file.read(buf, nb);
 
-    // Create Program and Kernel
-    auto fileBuf = xcl::read_binary_file(binaryFile);
-    cl::Program::Binaries bins{{fileBuf.data(), fileBuf.size()}};
+    // Creating Program from Binary File
+    cl::Program::Binaries bins;
+    bins.push_back({buf, nb});
     bool valid_device = false;
     for (unsigned int i = 0; i < devices.size(); i++) {
         auto device = devices[i];
         // Creating Context and Command Queue for selected Device
         OCL_CHECK(err, context = cl::Context(device, nullptr, nullptr, nullptr, &err));
         OCL_CHECK(err, q = cl::CommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &err));
-
         std::cout << "Trying to program device[" << i << "]: " << device.getInfo<CL_DEVICE_NAME>() << std::endl;
         cl::Program program(context, {device}, bins, nullptr, &err);
         if (err != CL_SUCCESS) {
             std::cout << "Failed to program device[" << i << "] with xclbin file!\n";
         } else {
             std::cout << "Device[" << i << "]: program successful!\n";
-            OCL_CHECK(err, krnl_adder = cl::Kernel(program, "adder", &err));
+            OCL_CHECK(err, krnl_vector_add = cl::Kernel(program, "krnl_vadd", &err));
             valid_device = true;
             break; // we break because we found a valid device
         }
@@ -74,45 +141,43 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
-    // Allocate Buffer in Global Memory
-    OCL_CHECK(err, cl::Buffer buffer_input(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, vector_size_bytes,
-                                           source_input.data(), &err));
-    OCL_CHECK(err, cl::Buffer buffer_output(context, CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, vector_size_bytes,
-                                            source_hw_results.data(), &err));
+    // These commands will allocate memory on the Device. The cl::Buffer objects can
+    // be used to reference the memory locations on the device.
+    OCL_CHECK(err, cl::Buffer buffer_result(context, CL_MEM_WRITE_ONLY, size_in_bytes, NULL, &err));
 
-    int inc = INCR_VALUE;
-    int size = DATA_SIZE;
-    // Set the Kernel Arguments
+
+    float buffer_a = 2.0;
+    float buffer_b = 12.0;
+    // set the kernel Arguments
     int narg = 0;
-    OCL_CHECK(err, err = krnl_adder.setArg(narg++, buffer_input));
-    OCL_CHECK(err, err = krnl_adder.setArg(narg++, buffer_output));
-    OCL_CHECK(err, err = krnl_adder.setArg(narg++, inc));
-    OCL_CHECK(err, err = krnl_adder.setArg(narg++, size));
+    OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_a));
+    OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_b));
+    OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, buffer_result));
+    OCL_CHECK(err, err = krnl_vector_add.setArg(narg++, DATA_SIZE));
 
-    // Copy input data to device global memory
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_input}, 0 /* 0 means from host*/));
+   
+    float* ptr_result;
+  
+    OCL_CHECK(err, ptr_result = (float*)q.enqueueMapBuffer(buffer_result, CL_TRUE, CL_MAP_READ, 0, size_in_bytes, NULL, NULL, &err));
 
+   
     // Launch the Kernel
-    OCL_CHECK(err, err = q.enqueueTask(krnl_adder));
+    OCL_CHECK(err, err = q.enqueueTask(krnl_vector_add));
 
-    // Copy Result from Device Global Memory to Host Local Memory
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_output}, CL_MIGRATE_MEM_OBJECT_HOST));
-    q.finish();
+    // The result of the previous kernel execution will need to be retrieved in
+    // order to view the results. This call will transfer the data from FPGA to
+    // source_results vector
+    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_result}, CL_MIGRATE_MEM_OBJECT_HOST));
 
-    // OPENCL HOST CODE AREA END
+    OCL_CHECK(err, q.finish());
 
-    // Compare the results of the Device to the simulation
-    int match = 0;
-    for (int i = 0; i < DATA_SIZE; i++) {
-        if (source_hw_results[i] != source_sw_results[i]) {
-            std::cout << "Error: Result mismatch" << std::endl;
-            std::cout << "i = " << i << " CPU result = " << source_sw_results[i]
-                      << " Device result = " << source_hw_results[i] << std::endl;
-            match = 1;
-            break;
-        }
-    }
 
-    std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
-    return (match ? EXIT_FAILURE : EXIT_SUCCESS);
+    OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_result, ptr_result));
+    OCL_CHECK(err, err = q.finish());
+
+    // std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
+    float x0 = 0, y0 = 1, x = 2, h = 0.00002;
+    std::cout << "Result for rungeKutta eq from CPU:\n" << rungeKutta(x0, y0, x, h) << "\n"<< std::endl;
+    std::cout << "Result for RK from kernel:\n"<<ptr_result[0]<<"\n"<<std::endl;
+    return 0;
 }
