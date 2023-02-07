@@ -26,37 +26,6 @@ static const std::string error_message =
     "Error: Result mismatch:\n"
     "i = %d CPU result = %d Device result = %d\n";
 
-    float dydx(float x, float y)
-{
-    return((x-y)/2);
-}
-
-// Runge Kutta RK4 Algorithmus
-float rungeKutta(float x0, float y0, float x, float h)
-{
-
-    // Number of iterations
-    int n = (int)((x-x0)/h);
-    float k1, k2, k3, k4, k5;
-
-    float y = y0;
-
-    // Iterating for number of iterations
-    for(int i = 1; i<=n;i++)
-    {
-        k1 = h*dydx(x0,y0);
-        k2 = h*dydx(x0 + 0.5*h, y + 0.5*k1);
-        k3 = h*dydx(x0 + 0.5*h, y + 0.5*k2);
-        k4 = h*dydx(x0 + h, y + k3);
-
-        // Updating the y and x values for new iteration
-        y = y + (1.0/6.0) * (k1 + 2*k2 + 2*k3 + k4);
-        x0 = x0 + h;
-    }
-
-    return y;
-}
-
 int main(int argc, char* argv[]) {
     // TARGET_DEVICE macro needs to be passed from gcc command line
     if (argc != 2) {
@@ -158,6 +127,7 @@ int main(int argc, char* argv[]) {
     float* ptr_a;
     float* ptr_b;
     float* ptr_result;
+    
     OCL_CHECK(err,
               ptr_a = (float*)q.enqueueMapBuffer(buffer_a, CL_TRUE, CL_MAP_WRITE, 0, size_in_bytes, NULL, NULL, &err));
     OCL_CHECK(err,
@@ -182,7 +152,6 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, q.finish());
 
 
-    float x0 = 0, y0 = 1, x = 2, h = 0.00002;
 
 
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_a, ptr_a));
@@ -190,8 +159,6 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_result, ptr_result));
     OCL_CHECK(err, err = q.finish());
 
-    // std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
-    std::cout << "Result for rungeKutta eq from CPU:\n" << rungeKutta(x0, y0, x, h) << "\n"<< std::endl;
     std::cout << "Result for RK from kernel:\n"<<ptr_result[0]<<"\n"<<std::endl;
     return 0;
 }
