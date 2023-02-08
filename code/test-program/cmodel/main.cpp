@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "modelFunctions.h"
+#include <vector>
 
 
 
@@ -30,9 +31,38 @@ float rungeKutta(float x0, float y0, float x, float h, float (*func)(float, floa
     return y;
 }
 
+typedef struct motorParameters
+{
+    float R1;
+    float R2;
+    float L1s;
+    float L2s;
+    float Lm;
+    float L1;
+    float L2;
+}motorParametersStruct;
+
+
+
+motorParameters initializeMotorParameters()
+{
+    motorParametersStruct motorParameters;
+    motorParameters.R1 = 48;
+
+    return motorParameters;
+}
+
 
 int main()
 {
+    motorParametersStruct motorParametersData;
+    motorParametersData.R1 = 12;
+    std::cout << "Motor parameter R1 is: " << motorParametersData.R1 << "\n";
+     std::vector<int> v = {7, 5, 16, 8};
+
+     motorParametersStruct motorParameters2;
+     motorParameters2 = initializeMotorParameters();
+     std::cout << "Motor parameters initialized from function R1 is: " << motorParameters2.R1 << "\n";
 
 float x0 = 0, y0 = 1, x = 2, h = 0.000001;
 
@@ -43,7 +73,23 @@ for(int i = 1;i<=10;i++)
     std::cout << rungeKutta(x0, y0, i, h, &dydx) << "\n";
 }
 std::cout <<"Test\n";
+std::cout << "vector:\n";
+std::cout << v.at(2) <<"\n";
+std::cout << v[2] <<"\n";
+  std::vector<int>* v_pointer;
+v_pointer = &v;
+std::cout << v_pointer->at(2) << "\n";
+ std::vector<int> &vr = *v_pointer; //Create a reference
+
+vr[2] = 28;
+vr = {1,14,56};
+  std::cout <<  vr[2]; //Normal access through reference
+  vr.push_back(13);
+  std::cout << "\npushed back\n";
+  std::cout <<  vr[3];
+  int testArray[] = {12,21,66};
+  std::cout <<"\n" << testArray[2];
+  testArray[3] = 44;
+  std::cout <<"\n" << testArray[3];
 return 0;
 }
-
-

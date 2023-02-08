@@ -3,4 +3,4 @@ run: main
 
 
 main: main.cpp
-	gcc main.cpp modelFunctions.cpp -o main -lstdc++ 
+	gcc -std=c++11 main.cpp modelFunctions.cpp -o main -lstdc++ 
