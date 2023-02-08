@@ -71,9 +71,21 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 👨🏻‍💻 [27.11.2022](/notes/20221127.md) <-- poslední snaha rozjet kria a debugger, popisování vivado flow, vytváření MindMap ohledně tvorby modelu ASM v C++ a jeho konverze na akcelerovanou aplikaci
 
+---
+
 👨🏻‍💻 [29.11.2022](/notes/20221129.md)
 
+---
+
 👨🏻‍💻 [06.02.2023](/notes/20230206.md)
+
+---
+
+👨🏻‍💻 [07.02.2023](/notes/20230207.md) <-- snaha o rozchození a pochopení migrace dat, vektory atd. atd.
+
+---
+
+👨🏻‍💻 [08.02.2023](/notes/20230208.md) <-- stále snaha o přenos dat, testování basic kódů c++, už trochu začínám chápat princip, pozor na omezení max 4 argumentů do kernelu v ZCU\_\_\_\_ (zynq 7000), přišel jsem na to omylem, v nějakých SoC je i více...
 
 ## Tech Stack
 
