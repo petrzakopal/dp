@@ -2,9 +2,8 @@
 
 ## Pracuji na
 
-- zprovoznění SW-Debuggingu v qemu, možná HW-debuggingu ale SW je přednější
-- reverse engineering kódů
-- vyřešení, jak debuggovat kód, když nepůjde sw emulace
+- řešení transferu dat v aplikaci host->kernel–>host
+- jak co nejefektivněji udělat model ASM, když nelze použít vektory a struktury jako v klasickém mikroprocesoru DSP - je to jiný přístup s FPGA, záleží i na funkčnosti FPGA, u zynq 7000 třeba je pevně definovaný počet argumentů kernelu, resp. nejde mi funkce když to chci změnit, nejdou používat snadno struktury a mix s polem, uložení proměnných v FPGA asi taky není možné, víc kernelů taky ne (pokud to PL nepodporuje)
 
 ## Mé denní poznámky ✏️
 
