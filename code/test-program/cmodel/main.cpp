@@ -91,5 +91,14 @@ vr = {1,14,56};
   std::cout <<"\n" << testArray[2];
   testArray[3] = 44;
   std::cout <<"\n" << testArray[3];
+    std::cout << "\ntest data\n";
+  std::cout << v.data() << "\n";
+
+  motorParametersStruct *pointerStruct;
+  pointerStruct = &motorParametersData;
+
+  std::cout << pointerStruct->R1 <<"\n";
+
+  std::cout << "motorParametersData adress: " << &motorParametersData << "\n";
 return 0;
 }
