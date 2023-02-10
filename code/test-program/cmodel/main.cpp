@@ -103,6 +103,25 @@ vr = {1,14,56};
 
   std::cout << (0 ? "FAILED" : "PASSES") << std::endl;
 
+motorParametersStruct *buf = NULL;
+std::cout << &buf<<"\n";
+std::cout << buf<<"\n";
+std::cout << "memalign"<<"\n";
+int err = posix_memalign((void **)&buf /*pointer to a location, where posix can store pointer to a memory*/, 4096 /*alignment*/, sizeof(motorParametersStruct) /*size*/); 
+buf->R1 = 852;
+buf->R2 = 1200;
+//*buf = &motorParameters;
+std::cout << buf->R1<<"\n";
+std::cout << buf->R2<<"\n";
+std::cout << (void **)&buf<<"\n";
+std::cout << &buf<<"\n";
+free(buf);
 
+
+
+
+// int *testovani = NULL;
+// std::cout << (void **)&testovani << "\n";
+// std::cout << &testovani << "\n";
 return 0;
 }
