@@ -102,5 +102,7 @@ vr = {1,14,56};
   std::cout << "motorParametersData adress: " << &motorParametersData << "\n";
 
   std::cout << (0 ? "FAILED" : "PASSES") << std::endl;
+
+
 return 0;
 }
