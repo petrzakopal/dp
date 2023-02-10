@@ -90,6 +90,10 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 👨🏻‍💻 [09.02.2023](/notes/20230209.md)
 
+---
+
+👨🏻‍💻 [10.02.2023](/notes/20230210.md) <-- docela veliký todo list, který chci splnit
+
 ## Tech Stack
 
 - PetaLinux - běžící na ARM vývojové desky Digilent
@@ -101,3 +105,6 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 - LaTeX - pro sázení textu práce
 - AutoCAD - pro vytváření schémat
 - ExcaliDraw - na občasné interní nákresy / MindMap
+- iTerm2 - Terminal [iterm2](https://iterm2.com/)
+- Oh My ZSH - konfigurace terminálu zsh [ohmyz](https://ohmyz.sh/)
+- powerlevel10k - nejlepší théma na zsh [powerlevel10k](https://github.com/romkatv/powerlevel10k)
