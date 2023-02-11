@@ -94,6 +94,8 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 👨🏻‍💻 [10.02.2023](/notes/20230210.md) <-- docela veliký todo list, který chci splnit
 
+👨🏻‍💻 [11.02.2023](/notes/20230211.md) <--jen úschova odkazů, večer možná na něčem zapracuji, chci zkusit zprovoznit GPIO na LED, možná bude nejlepší zkusit přímo flow dle návodů a ne flow od accelerated aplikace, problém je prostě s importem knihoven
+
 ## Tech Stack
 
 - PetaLinux - běžící na ARM vývojové desky Digilent
