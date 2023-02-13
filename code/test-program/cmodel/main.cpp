@@ -72,6 +72,8 @@ for(int i = 1;i<=10;i++)
 {
     std::cout << rungeKutta(x0, y0, i, h, &dydx) << "\n";
 }
+std::cout << "RK jako v FPGA:\n";
+std::cout  << rungeKutta(x0, y0, 10, h, &dydx) << "\n";
 std::cout <<"Test\n";
 std::cout << "vector:\n";
 std::cout << v.at(2) <<"\n";

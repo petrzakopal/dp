@@ -102,7 +102,11 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 _12.02.2023_ <-- nic jsem neudělal do DP, ani na státnice, musel jsem dodělat jeden web, ach jo... [Andělská Rapsodie](https://andelskarapsodie.cz) - pokud není žádný obsah, buďto jsem vypl hosting, expirovala domána, nebo ještě nebyl obsah publikován
 
-👨🏻‍💻 [13.02.2023](/notes/20230213.md)
+👨🏻‍💻 [13.02.2023](/notes/20230213.md) <-- - dnes hlavně pokusy o GPIO, začátky heldání optimalizace kernelu a host programu, zkouška kernelu a vstupního parametru funkce jako funkce + ke konci zkouška profilování
+
+---
+
+👨🏻‍💻 [14.02.2023](/notes/20230214.md)
 
 ## Tech Stack
 
