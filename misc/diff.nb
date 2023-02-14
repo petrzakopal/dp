@@ -1,0 +1,94 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2750,         86]
+NotebookOptionsPosition[      2277,         69]
+NotebookOutlinePosition[      2671,         85]
+CellTagsIndexPosition[      2628,         82]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"R1", "=", "48"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"res", "=", 
+   RowBox[{"out", "/.", 
+    RowBox[{
+     RowBox[{"NDSolve", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"out", "'"}], "[", "t", "]"}], "\[Equal]", 
+          RowBox[{"t", "*", "R1"}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"out", "[", "0", "]"}], "\[Equal]", "1"}]}], "}"}], ",", 
+       "out", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", "10"}], "}"}]}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"NumberForm", "[", 
+  RowBox[{
+   RowBox[{"res", "[", "2", "]"}], ",", "4"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.885402865954728*^9, 3.885402946939502*^9}, {
+  3.8854031963783197`*^9, 3.8854032849221163`*^9}, {3.8854033241792803`*^9, 
+  3.885403418469844*^9}, {3.885403470349289*^9, 3.8854035382499723`*^9}, {
+  3.8854036452019463`*^9, 3.8854036575659523`*^9}, {3.885403778329872*^9, 
+  3.885403778511417*^9}, {3.885403819957616*^9, 3.885403850232646*^9}, {
+  3.885403921885109*^9, 3.885403921948001*^9}},
+ CellLabel->"In[54]:=",ExpressionUUID->"362905d6-25fc-48f7-ab47-f23ab8dd59f6"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox["\<\"97.\"\>",
+   97.00000002926863,
+   AutoDelete->True],
+  NumberForm[#, 4]& ]], "Output",
+ CellChangeTimes->{3.885403850920766*^9, 3.8854039222088737`*^9},
+ CellLabel->
+  "Out[57]//NumberForm=",ExpressionUUID->"7c6a31b1-31d8-4425-9e1c-\
+061af8352558"]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{143, Automatic}, {Automatic, 4}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 13, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e03db99c-c97c-4f8f-a7e4-54502994553a"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1381, 33, 115, "Input",ExpressionUUID->"362905d6-25fc-48f7-ab47-f23ab8dd59f6"],
+Cell[1964, 57, 297, 9, 68, "Output",ExpressionUUID->"7c6a31b1-31d8-4425-9e1c-061af8352558"]
+}, Open  ]]
+}
+]
+*)
+

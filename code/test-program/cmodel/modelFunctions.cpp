@@ -1,7 +1,10 @@
 #include "modelFunctions.h"
 #include <cmath>
 // Defining the differential equation to be solved
-float dydx(float x, float y)
+
+
+// diff. equation is: dy/dt = t*R1
+float i1alpha(float t, float out, motorParametersStruct motorParameters)
 {
-    return((x-y)/2);
+ return (t * motorParameters.R1);
 }
