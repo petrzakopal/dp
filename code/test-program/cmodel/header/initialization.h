@@ -1,3 +1,4 @@
+#include <stdlib.h>
 /* initialization.h
     file for:
             initialization of parameters, structs and types
@@ -76,7 +77,7 @@ state matrix
 
 
 */
-typedef struct odeModelCoeffStruct
+typedef struct stateSpaceCoeffStruct
 {
 
     // state matrix
@@ -106,7 +107,7 @@ typedef struct odeModelCoeffStruct
     // end of input matrix
 
     
-}odeModelCoeffType;
+}stateSpaceCoeffType;
 
 
 /* MAIN MOTOR CLASS */
@@ -115,9 +116,38 @@ typedef struct odeModelCoeffStruct
 class MotorModelClass
 {
     public:
+
+    motorParametersType *bufStruct = NULL;
+    void motorAllocateMemory()
+    {
+        posix_memalign((void **)&bufStruct , 4096 , sizeof(motorParametersType) );
+    }
+
+    void setTestMotorParameters()
+    {
+    // motorParametersType *bufStruct = NULL;
+    // posix_memalign((void **)&bufStruct , 4096 , sizeof(motorParametersType) );
+    bufStruct->R1 = 0.370f; // Ohm, stator rezistance
+    bufStruct->R2 = 0.225f; // Ohm, rotor rezistance
+    bufStruct->L1s = 0.00227f; // H, stator leakage inductance
+    bufStruct->L2s = 0.00227f; // H, rotor leakage inductance
+    bufStruct->Lm = 0.0825f; // H, main flux inductance
+    bufStruct->L1 = 0.08477f; // H, inductance
+    bufStruct->L2 = 0.08477f; // H, inductance
+    bufStruct->sigma = 0.05283f; // = 0.0528396032, sigma = 1 - Lm^(2)/L1L2
+   
+    }
+   
+    // void setTestMotorParameters();
+    motorParametersType* getTestMotorParameters();
+
+
     motorParametersType motorParameters;
+    stateSpaceCoeffType stateSpaceCoeff;
 
     void setMotorParameters();
     motorParametersType getMotorParameters();
 
+    void setStateSpaceCoeff();
+    stateSpaceCoeffType getStateSpaceCoeff();
 };

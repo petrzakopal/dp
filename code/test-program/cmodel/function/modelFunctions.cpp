@@ -4,7 +4,7 @@
 
 
 // diff. equation is: dy/dt = t*R1
-float i1alpha(float t, float out, odeModelCoeffType odeModelCoeff, odeModelOutputType odeModelOutput)
+float i1alpha(float t, float out, stateSpaceCoeffType stateSpaceCoeff, odeModelOutputType odeModelOutput)
 {
  return (0);
 }

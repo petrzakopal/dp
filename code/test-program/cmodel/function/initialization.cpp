@@ -35,3 +35,20 @@ motorParametersType MotorModelClass::getMotorParameters()
 {
     return (motorParameters);
 }
+
+void MotorModelClass::setStateSpaceCoeff()
+{
+
+}
+
+stateSpaceCoeffType MotorModelClass::getStateSpaceCoeff()
+{
+    return (stateSpaceCoeff);
+}
+
+
+
+motorParametersType* MotorModelClass::getTestMotorParameters()
+{
+    return (bufStruct);
+}
