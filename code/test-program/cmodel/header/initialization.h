@@ -115,9 +115,9 @@ typedef struct odeModelCoeffStruct
 class MotorModelClass
 {
     public:
-    motorParametersType motorParametersData;
+    motorParametersType motorParameters;
 
-    void setMotorParameters(motorParametersType motorParameters);
+    void setMotorParameters();
     motorParametersType getMotorParameters();
 
 };
