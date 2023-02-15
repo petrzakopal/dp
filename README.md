@@ -106,7 +106,11 @@ _12.02.2023_ <-- nic jsem neudělal do DP, ani na státnice, musel jsem dodělat
 
 ---
 
-👨🏻‍💻 [14.02.2023](/notes/20230214.md)
+👨🏻‍💻 [14.02.2023](/notes/20230214.md) <-- pořád jsem zkoušel GPIO ale nejde to, zítra zkusím naposled bez návodu, kde se dává zvlášť gpio - použiji ty, co jsou v souboru hotové, pokud to nepůjde s testovacím souborem, zkusím zas odznova, zkoušel jsem připravovat model v C++ a rozvrhovat si to ve složce [cmodel](./code/test-program/cmodel/), nešel mi ale pořádně pochopit makefile, proto kompilaci zatím spouštím pomocí [script.sh](./code/test-program/cmodel/script.sh), dneska vivado a petalinuxy zabrali hodně času, u toho jsem dělal pořád něco jiného, dělal research proč nejde GPIO atd.
+
+---
+
+👨🏻‍💻 [15.02.2023](/notes/20230215.md)
 
 ## Tech Stack
 

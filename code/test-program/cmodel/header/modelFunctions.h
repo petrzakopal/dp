@@ -1,18 +1,6 @@
 #include <cmath>
+#include "parameterInitialization.h"
 
-
-// motorParameters type of struct
-// for defining motorParameters for a mathematical model
-typedef struct motorParameters
-{
-    float R1;
-    float R2;
-    float L1s;
-    float L2s;
-    float Lm;
-    float L1;
-    float L2;
-}motorParametersStruct;
 
 
 
