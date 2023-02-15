@@ -7,7 +7,7 @@
 int main()
 {
    // motorParametersType motorParametersData = initializeMotorParameters();
-   // motorParametersType motorParameters = initializeMotorParameters();; // testing purposes
+   // motorParametersType motorParameters = initializeMotorParameters(); // testing purposes
 
 
 MotorModelClass MotorModel;
@@ -20,13 +20,13 @@ float t = 2; // time of solution
 float h = 0.000001; // step of RK method
 std::cout << "Testing RK4\n" << "| ----------------------- |\n";
 
-// float a11 = -(( motorParameters.R2 * motorParameters.Lm * motorParameters.Lm) + ( motorParameters.L2 * motorParameters.L2 * motorParameters.R1) / (motorParameters.sigma * motorParameters.L1 * motorParameters.L2 * motorParameters.L2));
+float a11 = -(( MotorModel.getMotorParameters().R2 * MotorModel.getMotorParameters().Lm * MotorModel.getMotorParameters().Lm) + ( MotorModel.getMotorParameters().L2 * MotorModel.getMotorParameters().L2 * MotorModel.getMotorParameters().R1) / (MotorModel.getMotorParameters().sigma * MotorModel.getMotorParameters().L1 * MotorModel.getMotorParameters().L2 * MotorModel.getMotorParameters().L2));
 
 
 
 std::cout << "motor initialized parameters R1= "<< MotorModel.getMotorParameters().R1 << "\n";
 
-// std::cout << "a11= "<<a11<<"\n";
+std::cout << "a11= "<<a11<<"\n";
 // std::cout << "i1alpha: " << rungeKutta(t0, out0, t, h, motorParametersData, &i1alpha) << "\n";
 return 0;
 }
