@@ -1,7 +1,7 @@
-#include "../header/parameterInitialization.h"
+#include "../header/initialization.h"
 
-// Runge Kutta RK4 Algorithmus
-float rungeKutta(float t0, float out0, float t, float h, motorParametersStruct motorParameters, float (*func)(float, float, motorParametersStruct ))
+// Runge Kutta RK4 Algorithmus global algoritmus for one variable EQ, should be changed for 4 variables df/dt and two variables just f(t)
+float rungeKutta(float t0, float out0, float t, float h, motorParametersType motorParameters, float (*func)(float, float, motorParametersType ))
 {
 
     // Number of iterations 
@@ -24,4 +24,21 @@ float rungeKutta(float t0, float out0, float t, float h, motorParametersStruct m
     }
 
     return out;
+}
+
+
+
+
+// maybe in the future use struct type for inital condictions
+float mathModelRK4(float t, float step, odeInitialConditionsType odeInitialConditions, odeModelOutputType odeModelOutput)
+{
+    // Number of iterations 
+    int n = (int)((t-odeInitialConditions.t0)/step);
+
+    float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
+    float k1i1beta, k2i1beta, k3i1beta, k4i1beta;
+    float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
+    float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
+
+    return(0);
 }
