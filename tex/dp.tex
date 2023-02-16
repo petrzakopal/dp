@@ -962,6 +962,34 @@ V této části jsou představeny jednotlivé nástroje, využívané při tvorb
 		Aby bylo možné případně provádět HW-emulaci, je nutné v kartě \textit{Diagram} zvolit blok \textit{ZYNQ7 Processing System} a v záložce \textit{Block Properties} v nabídce \textit{SELECTED\_SIM\_MODEL} zvolit možnost tlm. \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}\par
 		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
 		Ovšem v této práci nebylo dosaženo funkční SW ani HW simulace z neznámých důvodů nemožnosti spuštění Emulátoru v prostředí Vitis. Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{scp} přesunuty potřebné soubory, jednalo se pouze o SW simulaci bez připojeného PL a tudíž nebylo možné algoritmy ověřit.\par
+		% vsunutý blok, zkontrolovat poté kontinuitu s předchozím textem
+		Pro zajištění funkčních GPIO (General Purpose Input/Output) pro ovládání LED signalizace, tlačítek a přepínačů, připojených na PL je nutné do blokového designu ještě z karty \textit{Board/Zybo/GPIO} vložit potřebné IP do designu. Po kliknutí pomocí pravého tlačítka myši na vybraný blok je nutné zvolit z nabídky \textit{Connect board component} a požadovaný GPIO interface. Blok \textit{AXI GPIO} je automaticky vložen do blokového designu a jeho přítomnost je signalizována na kartě \textit{Board/Zybo/GPIO} zvýraznění vložených bloků (ukázka na obr. \ref{fig:xilinx-vivado-flow-38}). Dle požadavku uživatele je možné vybrat zda bude využíváno \textit{GPIO} nebo \textit{GPIO2} rozhraní. Dle vybraného rozhraní budou poté adresovány jednotlivé výstupy a vstupy v \textit{Petalinux} příkazové řádce. Ukázka takto vytvořeného designu je na obr. \ref{fig:xilinx-vivado-flow-37}.
+
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.65\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-38.png}
+			\caption{Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit{Board/Zybo/GPIO}.}
+			\label{fig:xilinx-vivado-flow-38}
+		\end{figure}
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.95\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-37.png}
+			\caption{Xilinx Vivado – block design s využitím GPIO pro LED, BTN, SW propojených s PL.}
+			\label{fig:xilinx-vivado-flow-37}
+		\end{figure}
+
+		Rozdělení vstupů a výstupů do jednotlivých částí SoC – PS a PL je vyzobrazeno na obr.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.55\textwidth]{src/png/digilent-zybo-ps-pl-gpio.png}
+			\caption{Uspořádání připojení tlačítek, přepínačů a LED k PS a PL pro vývojovou desku Digilent Zybo. \cite{digilent-zybo-reference-manual}}
+			\label{fig:digilent-zybo-ps-pl-gpio}
+		\end{figure}
+
+
 		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
 		Před dalším pokračováním je možné design validovat ponocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již HW design vytvořen a nakonfigurován, je možné v kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create HDL Wrapper}. Zároveň dochází také k validaci designu. Pokud se vyskytují v designu různá kritická upozornění, která jsou zobrazena například na obr. \ref{fig:xilinx-vivado-flow-24} je stále možné pokračovat v tvorbě konečného produktu.\par
 		Po vytvoření \textit{HDL Wrapper} je možné v menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést a v případě pokračování v požadavku generování bitstreamu budou provedeny. Poté je v nabídce možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru nebo clusteru. Také je možné zvolit, kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V případě využívání osobního počítače autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z experimentálního zjištění, že v případě využívání vyššího počtu jader může dojít k neočekávané chybě a proces provádění úkolů bude bez vypsání jakékoliv informace ukončen a proces syntézy, implementace a generace bitstreamu bude nutné spustit a provést znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:xilinx-vivado-flow-29}.\par

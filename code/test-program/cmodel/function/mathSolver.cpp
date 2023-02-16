@@ -28,7 +28,7 @@ float rungeKutta(float t0, float out0, float t, float h, motorParametersType mot
 
 
 
-
+// step is better to get from host program, because kernel compilation takes much more longer than host program
 // maybe in the future use struct type for inital condictions
 float mathModelRK4(float t, float step, odeInitialConditionsType odeInitialConditions, odeModelOutputType odeModelOutput)
 {
