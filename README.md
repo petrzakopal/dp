@@ -100,7 +100,7 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
-_12.02.2023_ <-- nic jsem neudělal do DP, ani na státnice, musel jsem dodělat jeden web, ach jo... [Andělská Rapsodie](https://andelskarapsodie.cz) - pokud není žádný obsah, buďto jsem vypl hosting, expirovala domána, nebo ještě nebyl obsah publikován
+❌ _12.02.2023_ <-- nic jsem neudělal do DP, ani na státnice, musel jsem dodělat jeden web, ach jo... [Andělská Rapsodie](https://andelskarapsodie.cz) - pokud není žádný obsah, buďto jsem vypl hosting, expirovala domána, nebo ještě nebyl obsah publikován
 
 👨🏻‍💻 [13.02.2023](/notes/20230213.md) <-- - dnes hlavně pokusy o GPIO, začátky heldání optimalizace kernelu a host programu, zkouška kernelu a vstupního parametru funkce jako funkce + ke konci zkouška profilování
 
@@ -110,7 +110,11 @@ _12.02.2023_ <-- nic jsem neudělal do DP, ani na státnice, musel jsem dodělat
 
 ---
 
-👨🏻‍💻 [15.02.2023](/notes/20230215.md)
+👨🏻‍💻 [15.02.2023](/notes/20230215.md) <-- povedlo se GPIO push buttons a LED, ale ještě se nepovedlo push buttons + LED + switch, práce na modelu v [cmodel](./code/test-program/cmodel/), začátek porozumívání class v c++ a snaha toho využít při tvorbě modelu, snaha tvořit cmodel v c++ na pc jako kdyby to bylo na fpga a SoC - alokace paměti na 4k boundary atd., změna, že pro kompilaci testovacího modelu není využíván makefile ale [script.sh](./code/test-program/cmodel/script.sh), protože makefile pořádně nerozumím
+
+---
+
+👨🏻‍💻 [16.02.2023](/notes/20230216.md) <-- přidán seznam, co je třeba vyzkoušet aby bylo možné pokračovat a tvořit pohodlně cmodel
 
 ## Tech Stack
 
