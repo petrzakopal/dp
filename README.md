@@ -114,7 +114,7 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
-👨🏻‍💻 [16.02.2023](/notes/20230216.md) <-- přidán seznam, co je třeba vyzkoušet aby bylo možné pokračovat a tvořit pohodlně cmodel
+👨🏻‍💻 [16.02.2023](/notes/20230216.md) <-- přidán seznam, co je třeba vyzkoušet aby bylo možné pokračovat a tvořit pohodlně cmodel, napsal jsem něco do [dp.tex](./tex/dp.tex), něco vyscreenoval, zjistil. že je možné mít více akcelerovaných funkcí, resp. více kernelů, zprovoznil GPIO na switch, led, button, zprovoznil PMOD k PS, vyřešil jak je to s vstupem (dává se to na GND, nesmí být v breadbordu dioda, stačí R=120 Ohm), výstup taky v pohodě, na PS JF jsou totiž 200 Ohm rez. na ostatních ne, na to pozor, proto už radši rovnou vkládat rezistor automaticky
 
 ## Tech Stack
 
