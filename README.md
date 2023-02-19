@@ -2,8 +2,10 @@
 
 ## Pracuji na
 
-- řešení transferu dat v aplikaci host->kernel–>host
+- řešení transferu dat v aplikaci host->kernel–>host pro class
 - jak co nejefektivněji udělat model ASM, když nelze použít vektory a struktury jako v klasickém mikroprocesoru DSP - je to jiný přístup s FPGA, záleží i na funkčnosti FPGA, u zynq 7000 třeba je pevně definovaný počet argumentů kernelu, resp. nejde mi funkce když to chci změnit, nejdou používat snadno struktury a mix s polem, uložení proměnných v FPGA asi taky není možné, víc kernelů taky ne (pokud to PL nepodporuje)
+- zprovoznění PMOD napojených na PL
+- lze arduinem vytvořit nulu na PMOD při paralelním spojení nebo budu arduinem řídit MOSFET a vytvářet požadovaný signál
 
 ## Mé denní poznámky ✏️
 
@@ -115,6 +117,10 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 ---
 
 👨🏻‍💻 [16.02.2023](/notes/20230216.md) <-- přidán seznam, co je třeba vyzkoušet aby bylo možné pokračovat a tvořit pohodlně cmodel, napsal jsem něco do [dp.tex](./tex/dp.tex), něco vyscreenoval, zjistil. že je možné mít více akcelerovaných funkcí, resp. více kernelů, zprovoznil GPIO na switch, led, button, zprovoznil PMOD k PS, vyřešil jak je to s vstupem (dává se to na GND, nesmí být v breadbordu dioda, stačí R=120 Ohm), výstup taky v pohodě, na PS JF jsou totiž 200 Ohm rez. na ostatních ne, na to pozor, proto už radši rovnou vkládat rezistor automaticky
+
+---
+
+👨🏻‍💻 [19.02.2023](/notes/20230219.md) <--
 
 ## Tech Stack
 
