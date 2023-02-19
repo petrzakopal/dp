@@ -34,7 +34,7 @@ void MotorModelClass::odeInitialConditionsAllocateMemory()
 
 
 /*---------------------------------------------------------------------------------------*/
-/*-------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES --------------------*/
+/*---------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES -----------------------*/
 void MotorModelClass::odeModelVariablesAllocateMemory()
 {
     
