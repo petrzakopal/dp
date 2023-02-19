@@ -5,14 +5,10 @@
             declaration of functions to initialize values
 */
 
-// motorParameters type of struct
-// for defining motorParameters for a mathematical model
-// measured parameters
 
 
-
-
-
+/*---------------------------------------------------------------------------------------------------*/
+/*-------------------- TYPE/STRUCT FOR MOTOR MODEL PARAMETERS WHICH ARE MEASURED --------------------*/
 typedef struct motorParametersStruct
 {
     float R1;
@@ -23,16 +19,17 @@ typedef struct motorParametersStruct
     float L1;
     float L2;
     float sigma; // sigma = 1 - Lm^(2)/L1L2, it would be probably more clear to read value from struct, but it would mean more operations
+    int nOfPolePairs;
 }motorParametersType;
-
-
-//initialize motor parameters
-// motorParametersType initializeMotorParameters();
+/*---------------------------------------------------------------------------------------------------*/
 
 
 
 
-// inital conditions for solving ODE via numerical methods
+
+
+/*---------------------------------------------------------------------------------------------------*/
+/*-------------------- TYPE/STRUCT FOR INITIAL CONDITIONS FOR ODE SOLVING --------------------------*/
 typedef struct odeInitialConditionsStruct
 {
     float t0;
@@ -40,22 +37,31 @@ typedef struct odeInitialConditionsStruct
     float i1beta0;
     float psi2alpha0;
     float psi2beta0;
-    float u1alpha;
-    float u2alpha;
 }odeInitialConditionsType;
+/*---------------------------------------------------------------------------------------------------*/
 
 
-// output of ODE functions
-typedef struct odeModelOutputStruct
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*-------------------- TYPE/STRUCT FOR VARIABLE VARIABLES FOR ODE SOLVING ------------------------------------------*/
+typedef struct odeModelVariablesStruct
 {
     float i1alpha;
     float i1beta;
     float psi2alpha;
     float psi2beta;
-}odeModelOutputType;
+    float u1alpha;
+    float u2alpha;
+    float motorElectricalAngularVelocity; // it depends how it will be calculated, it is calculated in main.c now in for loop to array, for production it would be better to have it inside corresponding struct or input, depends how the model will be generated
+}odeModelVariablesType;
+/*------------------------------------------------------------------------------------------------------------------*/
 
 
 
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*-------------------- TYPE/STRUCT FOR STATE SPACE MATRIX COEFFICIENTS -------------------*/
 
 /* state space matrix coefficients
    they need to be calculated only once and very fast
@@ -100,54 +106,48 @@ typedef struct stateSpaceCoeffStruct
     float a33;
     float a34;
 
+    // fourth row
+    float a41;
+    float a42;
+    float a43;
+    float a44;
+
     // end of state matrix
 
     // input matrix
-    float b11; // same asi b22 in this model
+    float b11; // = b22
+    float b22;
     // end of input matrix
 
     
 }stateSpaceCoeffType;
+/*-----------------------------------------------------------------------------------------*/
 
 
-/* MAIN MOTOR CLASS */
 
-
+/*-----------------------------------------------------------*/
+/*-------------------- MAIN MODEL CLASS -------------------*/
 class MotorModelClass
 {
     public:
 
-    motorParametersType *bufStruct = NULL;
-    void motorAllocateMemory()
-    {
-        posix_memalign((void **)&bufStruct , 4096 , sizeof(motorParametersType) );
-    }
+    motorParametersType *motorParameters = NULL;
+    stateSpaceCoeffType *stateSpaceCoeff = NULL;
+    odeInitialConditionsType *odeInitialConditions = NULL;
+    odeModelVariablesType *odeModelVariables = NULL;
 
-    void setTestMotorParameters()
-    {
-    // motorParametersType *bufStruct = NULL;
-    // posix_memalign((void **)&bufStruct , 4096 , sizeof(motorParametersType) );
-    bufStruct->R1 = 0.370f; // Ohm, stator rezistance
-    bufStruct->R2 = 0.225f; // Ohm, rotor rezistance
-    bufStruct->L1s = 0.00227f; // H, stator leakage inductance
-    bufStruct->L2s = 0.00227f; // H, rotor leakage inductance
-    bufStruct->Lm = 0.0825f; // H, main flux inductance
-    bufStruct->L1 = 0.08477f; // H, inductance
-    bufStruct->L2 = 0.08477f; // H, inductance
-    bufStruct->sigma = 0.05283f; // = 0.0528396032, sigma = 1 - Lm^(2)/L1L2
-   
-    }
-   
-    // void setTestMotorParameters();
-    motorParametersType* getTestMotorParameters();
-
-
-    motorParametersType motorParameters;
-    stateSpaceCoeffType stateSpaceCoeff;
+    void motorParametersAllocateMemory();
+    void stateSpaceCoeffAllocateMemory();
+    void odeInitialConditionsAllocateMemory();
+    void odeModelVariablesAllocateMemory();
 
     void setMotorParameters();
-    motorParametersType getMotorParameters();
-
     void setStateSpaceCoeff();
-    stateSpaceCoeffType getStateSpaceCoeff();
+    void calculateStateSpaceCoeff(float motorElectricalAngularVelocity);
+
+    motorParametersType* getMotorParameters();
+    stateSpaceCoeffType* getStateSpaceCoeff();
+
+
 };
+/*-----------------------------------------------------------*/
