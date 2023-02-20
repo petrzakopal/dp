@@ -120,7 +120,7 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 
 ---
 
-👨🏻‍💻 [19.02.2023](/notes/20230219.md) <--
+👨🏻‍💻 [19.02.2023](/notes/20230219.md) <-- stále jsem zkoušel PMOD na PL ale nejde to, už to zkompilovalo v pohodě soubor, po odstranění ve vivado v `Sources/Utilities` soubor s koncovkou `dcp`, ale kernel nejede a ani tam nejsou vidět potřebné gpio výstupy v `/sys/class/gpio`, pracoval jsem na modelu
 
 ## Tech Stack
 
