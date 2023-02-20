@@ -28,16 +28,14 @@ typedef struct motorParametersStruct
 
 
 
-/*---------------------------------------------------------------------------------------------------*/
-/*-------------------- TYPE/STRUCT FOR INITIAL CONDITIONS FOR ODE SOLVING --------------------------*/
-typedef struct odeInitialConditionsStruct
+/*----------------------------------------------------------------------------------*/
+/*-------------------- TYPE/STRUCT FOR FOR ODE SETTINGS --------------------------*/
+typedef struct odeCalculationSettingsStruct
 {
-    float t0;
-    float i1alpha0;
-    float i1beta0;
-    float psi2alpha0;
-    float psi2beta0;
-}odeInitialConditionsType;
+    float initialCalculationTime;
+    float finalCalculationTime;
+    float calculationStep;
+}odeCalculationSettingsType;
 /*---------------------------------------------------------------------------------------------------*/
 
 
@@ -129,27 +127,27 @@ typedef struct stateSpaceCoeffStruct
 class MotorModelClass
 {
     public:
-
     motorParametersType *motorParameters = NULL;
     stateSpaceCoeffType *stateSpaceCoeff = NULL;
-    // odeInitialConditionsType *odeInitialConditions = NULL;
     modelVariablesType *modelVariables = NULL;
+    odeCalculationSettingsType *odeCalculationSettings = NULL;
 
     void motorParametersAllocateMemory();
     void stateSpaceCoeffAllocateMemory();
-    // void odeInitialConditionsAllocateMemory();
     void modelVariablesAllocateMemory();
+    void odeCalculationSettingsAllocateMemory();
 
     void setMotorParameters();
     void setStateSpaceCoeff();
     void calculateStateSpaceCoeff(float motorElectricalAngularVelocity);
     void setInitialModelVariables();
     void setModelVariable(float &variable, float input);
+    void setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput);
    
 
     motorParametersType* getMotorParameters();
     stateSpaceCoeffType* getStateSpaceCoeff();
-    modelVariablesType* getMotorVariables();
+    modelVariablesType* getMotorVariables(int indexOfSample);
 
 
 };

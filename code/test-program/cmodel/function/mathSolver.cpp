@@ -30,10 +30,10 @@ float rungeKutta(float t0, float out0, float t, float h, motorParametersType mot
 
 // step is better to get from host program, because kernel compilation takes much more longer than host program
 // maybe in the future use struct type for inital condictions
-float mathModelRK4(float t, float step, odeInitialConditionsType odeInitialConditions, modelVariablesType modelVariables)
+float mathModelRK4(float t, float step, modelVariablesType modelVariables)
 {
     // Number of iterations 
-    int n = (int)((t-odeInitialConditions.t0)/step);
+    // int n = (int)((t-odeInitialConditions.t0)/step);
 
     float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
     float k1i1beta, k2i1beta, k3i1beta, k4i1beta;

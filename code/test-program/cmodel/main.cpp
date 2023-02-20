@@ -13,50 +13,35 @@ int main()
 /*----------------------------------------------------------------------------------*/
 /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
 MotorModelClass MotorModel;
+MotorModel.odeCalculationSettingsAllocateMemory();
+MotorModel.setOdeCalculationSettings(0.0, 10.0, 0.0001); // initial time, final time, calculation step
 MotorModel.motorParametersAllocateMemory();
 MotorModel.stateSpaceCoeffAllocateMemory();
-// MotorModel.odeInitialConditionsAllocateMemory();
 MotorModel.modelVariablesAllocateMemory();
 MotorModel.setMotorParameters();
 MotorModel.setStateSpaceCoeff();
-MotorModel.setInitialModelVariables();
+
+
+
+
+
 /*----------------------------------------------------------------------------------*/
 
 
 /*------------------------------------------------------------------------*/
-/*-------------------- OLD RK4 VARIABLE DEFINITIONS ---------------------*/
-float t0 = 0; // starting time
-float out0 = 1; // starting output - basically => fce(t0) = out0
-float t = 2; // time of solution
-float h = 0.000001; // step of RK method
-/*------------------------------------------------------------------------*/
 
 
-// Following motorElectricalAngularVelocity is bad interpretation. Real value will be calculated based on torque etc.
-/*---------------------------------------------------------------------------------------*/
-/*--------------------- PLACEHOLDER FOR CALCULATING MOTOR VELOCITY ----------------------*/
-// Placeholder for creating motor angular velocity - this is input from external sensor or measured or desired velocity
-float* motorElectricalAngularVelocity;
-posix_memalign((void **)&motorElectricalAngularVelocity , 4096 , sizeof(float) );
-
-float rotorRPM = 0;
-for(int i = 0; i<=25; i++)
-{
-   
-   motorElectricalAngularVelocity[i] = (2 * PI * rotorRPM * MotorModel.getMotorParameters()->nOfPolePairs)/60; 
-   rotorRPM+= 1.5;
-   // std::cout << "motor electrical velocity "<< motorElectricalAngularVelocity[i] << " rad/s \n";
-}
-/*---------------------------------------------------------------------------------------*/
 
 
-// needs to be calculated every sample
-MotorModel.calculateStateSpaceCoeff(12);
+
 
 std::cout << "| ----------------------- |\n";
 
 
-
+// std::cout << "no of samples: "<< MotorModel.numberOfSamples<< "\n";
+// // Number of samples - this is ending time when you want to generate output based on time and not actual value
+// MotorModel.numberOfSamples = 250;
+// std::cout << "edited no of samples: "<< MotorModel.numberOfSamples<< "\n";
 /*---------------------------------------------------------*/
 /*-------------------- TEST OUTPUTS ----------------------*/
 
@@ -69,14 +54,31 @@ std::cout << "a14= " << MotorModel.getStateSpaceCoeff()->a14 <<"\n";
 std::cout << "a44= " << MotorModel.getStateSpaceCoeff()->a44 <<"\n";
 // std::cout << "i1alpha: " << rungeKutta(t0, out0, t, h, motorParametersData, &i1alpha) << "\n";
 
-std::cout << i1alpha(0,MotorModel.getStateSpaceCoeff(), MotorModel.getMotorVariables()) << "\n" ;
+// std::cout << i1alpha(0,MotorModel.getStateSpaceCoeff(), MotorModel.getMotorVariables()) << "\n" ;
 
+int actualSample = 0; // desired time for calculation
+
+// initial conditions will be saved to 
+
+std::cout << "Motor initial condition [0] for i1alpha: " <<MotorModel.getMotorVariables(0)->i1alpha << "\n";
 std::cout << "setting i1alpha\n";
-MotorModel.setModelVariable(MotorModel.getMotorVariables()->i1alpha, 85.56);
-std::cout << "i1alpha is: " << MotorModel.getMotorVariables()->i1alpha << "\n";
+MotorModel.setModelVariable(MotorModel.getMotorVariables(actualSample)->i1alpha, 12.5);
+std::cout << "i1alpha is: " << MotorModel.getMotorVariables(actualSample)->i1alpha << "\n";
+std::cout << "i1alpha at 3. position is: " << MotorModel.getMotorVariables(actualSample)->i1alpha << "\n";
 
-std::cout << "i1beta is: " << MotorModel.getMotorVariables()->i1beta << "\n";
+// needs to be calculated every sample
+// 12 is angular speed
+MotorModel.calculateStateSpaceCoeff(12);
+std::cout << "i1alpha after calculation= "<< i1alpha(MotorModel.getStateSpaceCoeff(), MotorModel.getMotorVariables(actualSample)) << "\n" ;
+std::cout << "i1beta is: " << MotorModel.getMotorVariables(actualSample)->i1beta << "\n";
 
+
+std::cout << "number of data: " << (int)(MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep << "\n";
+
+
+
+// MotorModel.setModelVariable(MotorModel.getMotorVariables(1)->i1alpha, 44);
+// std::cout << "index 1 of motor model variables: " << MotorModel.getMotorVariables(1)->i1alpha << "\n";
 /*---------------------------------------------------------*/
 
 

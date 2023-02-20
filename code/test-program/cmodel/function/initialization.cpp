@@ -23,13 +23,13 @@ void MotorModelClass::stateSpaceCoeffAllocateMemory()
 
 
 /*---------------------------------------------------------------------------------------*/
-/*-------------------- ALLOCATE MEMORY FOR ODE INITIAL CONDITIONS --------------------*/
-// void MotorModelClass::odeInitialConditionsAllocateMemory()
-// {
+/*-------------------- ALLOCATE MEMORY ODE SOLVE SETTINGS --------------------*/
+void MotorModelClass::odeCalculationSettingsAllocateMemory()
+{
     
-//     posix_memalign((void **)&odeInitialConditions , 4096 , sizeof(odeInitialConditionsType) );
+    posix_memalign((void **)&odeCalculationSettings , 4096 , sizeof(odeCalculationSettingsType) );
     
-// }
+}
 /*---------------------------------------------------------------------------------------*/
 
 
@@ -37,11 +37,23 @@ void MotorModelClass::stateSpaceCoeffAllocateMemory()
 /*---------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES -----------------------*/
 void MotorModelClass::modelVariablesAllocateMemory()
 {
+    posix_memalign((void **)&modelVariables , 4096 , (int)((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep) * sizeof(modelVariablesType) );
+
     
-    posix_memalign((void **)&modelVariables , 4096 , sizeof(modelVariablesType) );
     
 }
 /*---------------------------------------------------------------------------------------*/
+
+
+ void MotorModelClass::setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput)
+ {
+    
+    odeCalculationSettings->initialCalculationTime = initialCalculationTimeInput;
+    odeCalculationSettings->finalCalculationTime = finalCalculationTimeInput;
+    odeCalculationSettings->calculationStep = calculationStepInput;
+
+ }
+
 
 /*----------------------------------------------------------------------*/
 /*-------------------- SET MOTOR MODEL PARAMETERS --------------------*/
@@ -137,22 +149,23 @@ motorParametersType* MotorModelClass::getMotorParameters()
 
 /*-----------------------------------------------------------------------*/
 /*------------------------ GET MOTOR VARIABLES ------------------------*/
-modelVariablesType* MotorModelClass::getMotorVariables()
+modelVariablesType* MotorModelClass::getMotorVariables(int numberOfSampleInput)
 {
-    return(modelVariables);
+    return(&modelVariables[numberOfSampleInput]);
 }
 /*-----------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------*/
 /*--------------------- SET INITIAL MODEL VARIABLES ---------------------*/
 // Maybe in the future there will be used odeInitialConditions and allocate memory function preceding this part of function definitions.
+// Saving initial conditions to index=0, but the starting time can be different from index=0, but calculation will be start from index=0
 void MotorModelClass::setInitialModelVariables()
 {
-    modelVariables->i1alpha = 0;
-    modelVariables->i1beta = 0;
-    modelVariables->psi2alpha = 0;
-    modelVariables->u1alpha = 0;
-    modelVariables-> u2alpha = 0;
+    modelVariables[0].i1alpha = 0;
+    modelVariables[0].i1beta = 0;
+    modelVariables[0].psi2alpha = 0;
+    modelVariables[0].u1alpha = 0;
+    modelVariables[0].u2alpha = 0;
 }
 /*-----------------------------------------------------------------------*/
 
@@ -164,3 +177,5 @@ void MotorModelClass::setModelVariable(float &variable, float input)
     variable = input;
 }
 /*---------------------------------------------------------------*/
+
+
