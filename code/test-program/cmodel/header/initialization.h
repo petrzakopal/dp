@@ -43,8 +43,8 @@ typedef struct odeInitialConditionsStruct
 
 
 /*------------------------------------------------------------------------------------------------------------------*/
-/*-------------------- TYPE/STRUCT FOR VARIABLE VARIABLES FOR ODE SOLVING ------------------------------------------*/
-typedef struct odeModelVariablesStruct
+/*-------------------- TYPE/STRUCT FOR VARIABLE VARIABLES FOR MODEL/ODE SOLVING ------------------------------------------*/
+typedef struct ModelVariablesStruct
 {
     float i1alpha;
     float i1beta;
@@ -52,8 +52,7 @@ typedef struct odeModelVariablesStruct
     float psi2beta;
     float u1alpha;
     float u2alpha;
-    float motorElectricalAngularVelocity; // it depends how it will be calculated, it is calculated in main.c now in for loop to array, for production it would be better to have it inside corresponding struct or input, depends how the model will be generated
-}odeModelVariablesType;
+}ModelVariablesType;
 /*------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -134,12 +133,12 @@ class MotorModelClass
     motorParametersType *motorParameters = NULL;
     stateSpaceCoeffType *stateSpaceCoeff = NULL;
     odeInitialConditionsType *odeInitialConditions = NULL;
-    odeModelVariablesType *odeModelVariables = NULL;
+    ModelVariablesType *ModelVariables = NULL;
 
     void motorParametersAllocateMemory();
     void stateSpaceCoeffAllocateMemory();
     void odeInitialConditionsAllocateMemory();
-    void odeModelVariablesAllocateMemory();
+    void ModelVariablesAllocateMemory();
 
     void setMotorParameters();
     void setStateSpaceCoeff();

@@ -35,10 +35,10 @@ void MotorModelClass::odeInitialConditionsAllocateMemory()
 
 /*---------------------------------------------------------------------------------------*/
 /*---------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES -----------------------*/
-void MotorModelClass::odeModelVariablesAllocateMemory()
+void MotorModelClass::ModelVariablesAllocateMemory()
 {
     
-    posix_memalign((void **)&odeModelVariables , 4096 , sizeof(odeModelVariablesType) );
+    posix_memalign((void **)&ModelVariables , 4096 , sizeof(ModelVariablesType) );
     
 }
 /*---------------------------------------------------------------------------------------*/

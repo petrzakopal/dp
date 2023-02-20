@@ -16,7 +16,7 @@ MotorModelClass MotorModel;
 MotorModel.motorParametersAllocateMemory();
 MotorModel.stateSpaceCoeffAllocateMemory();
 MotorModel.odeInitialConditionsAllocateMemory();
-MotorModel.odeModelVariablesAllocateMemory();
+MotorModel.ModelVariablesAllocateMemory();
 MotorModel.setMotorParameters();
 MotorModel.setStateSpaceCoeff();
 /*----------------------------------------------------------------------------------*/
@@ -30,6 +30,8 @@ float t = 2; // time of solution
 float h = 0.000001; // step of RK method
 /*------------------------------------------------------------------------*/
 
+
+// Following motorElectricalAngularVelocity is bad interpretation. Real value will be calculated based on torque etc.
 /*---------------------------------------------------------------------------------------*/
 /*--------------------- PLACEHOLDER FOR CALCULATING MOTOR VELOCITY ----------------------*/
 // Placeholder for creating motor angular velocity - this is input from external sensor or measured or desired velocity
