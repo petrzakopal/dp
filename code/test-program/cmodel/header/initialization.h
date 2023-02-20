@@ -147,7 +147,7 @@ class MotorModelClass
 
     motorParametersType* getMotorParameters();
     stateSpaceCoeffType* getStateSpaceCoeff();
-    modelVariablesType* getMotorVariables(int indexOfSample);
+    modelVariablesType* getMotorVariable(int indexOfSample);
 
 
 };

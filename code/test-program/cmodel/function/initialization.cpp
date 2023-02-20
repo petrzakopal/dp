@@ -37,7 +37,7 @@ void MotorModelClass::odeCalculationSettingsAllocateMemory()
 /*---------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES -----------------------*/
 void MotorModelClass::modelVariablesAllocateMemory()
 {
-    posix_memalign((void **)&modelVariables , 4096 , (int)((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep) * sizeof(modelVariablesType) );
+    posix_memalign((void **)&modelVariables , 4096 , ((int)((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep)+1) * sizeof(modelVariablesType) );
 
     
     
@@ -149,7 +149,7 @@ motorParametersType* MotorModelClass::getMotorParameters()
 
 /*-----------------------------------------------------------------------*/
 /*------------------------ GET MOTOR VARIABLES ------------------------*/
-modelVariablesType* MotorModelClass::getMotorVariables(int numberOfSampleInput)
+modelVariablesType* MotorModelClass::getMotorVariable(int numberOfSampleInput)
 {
     return(&modelVariables[numberOfSampleInput]);
 }
