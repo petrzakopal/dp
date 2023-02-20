@@ -9,6 +9,10 @@
 
 ## Mé denní poznámky ✏️
 
+👨🏻‍💻 [21.02.2023](/notes/20230221.md)
+
+---
+
 👨🏻‍💻 ⚙️ [20.02.2023](/notes/20230220.md) <-- **povedlo se JB PMOD z FPGA!!!** (asi po 3 dnech konečně) takže budu zkoušet další PMOD a vložím do designu asi všechny, i když bude možné v budoucnu asi nějaký použít na SPI, I2C atd. to ještě nemám vytestované, ráce na cmodelu [cmodel](./code/test-program/cmodel/), vytváření `MotorModel` API ⚙️
 
 ---
