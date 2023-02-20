@@ -44,7 +44,7 @@ typedef struct odeInitialConditionsStruct
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*-------------------- TYPE/STRUCT FOR VARIABLE VARIABLES FOR MODEL/ODE SOLVING ------------------------------------------*/
-typedef struct ModelVariablesStruct
+typedef struct modelVariablesStruct
 {
     float i1alpha;
     float i1beta;
@@ -52,7 +52,7 @@ typedef struct ModelVariablesStruct
     float psi2beta;
     float u1alpha;
     float u2alpha;
-}ModelVariablesType;
+}modelVariablesType;
 /*------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -132,20 +132,24 @@ class MotorModelClass
 
     motorParametersType *motorParameters = NULL;
     stateSpaceCoeffType *stateSpaceCoeff = NULL;
-    odeInitialConditionsType *odeInitialConditions = NULL;
-    ModelVariablesType *ModelVariables = NULL;
+    // odeInitialConditionsType *odeInitialConditions = NULL;
+    modelVariablesType *modelVariables = NULL;
 
     void motorParametersAllocateMemory();
     void stateSpaceCoeffAllocateMemory();
-    void odeInitialConditionsAllocateMemory();
-    void ModelVariablesAllocateMemory();
+    // void odeInitialConditionsAllocateMemory();
+    void modelVariablesAllocateMemory();
 
     void setMotorParameters();
     void setStateSpaceCoeff();
     void calculateStateSpaceCoeff(float motorElectricalAngularVelocity);
+    void setInitialModelVariables();
+    void setModelVariable(float &variable, float input);
+   
 
     motorParametersType* getMotorParameters();
     stateSpaceCoeffType* getStateSpaceCoeff();
+    modelVariablesType* getMotorVariables();
 
 
 };

@@ -24,21 +24,21 @@ void MotorModelClass::stateSpaceCoeffAllocateMemory()
 
 /*---------------------------------------------------------------------------------------*/
 /*-------------------- ALLOCATE MEMORY FOR ODE INITIAL CONDITIONS --------------------*/
-void MotorModelClass::odeInitialConditionsAllocateMemory()
-{
+// void MotorModelClass::odeInitialConditionsAllocateMemory()
+// {
     
-    posix_memalign((void **)&odeInitialConditions , 4096 , sizeof(odeInitialConditionsType) );
+//     posix_memalign((void **)&odeInitialConditions , 4096 , sizeof(odeInitialConditionsType) );
     
-}
+// }
 /*---------------------------------------------------------------------------------------*/
 
 
 /*---------------------------------------------------------------------------------------*/
 /*---------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES -----------------------*/
-void MotorModelClass::ModelVariablesAllocateMemory()
+void MotorModelClass::modelVariablesAllocateMemory()
 {
     
-    posix_memalign((void **)&ModelVariables , 4096 , sizeof(ModelVariablesType) );
+    posix_memalign((void **)&modelVariables , 4096 , sizeof(modelVariablesType) );
     
 }
 /*---------------------------------------------------------------------------------------*/
@@ -127,8 +127,40 @@ stateSpaceCoeffType* MotorModelClass::getStateSpaceCoeff()
 
 
 /*-----------------------------------------------------------------------*/
-/*-------------------- GET MOTOR PARAMETERS --------------------*/
+/*------------------------ GET MOTOR PARAMETERS ------------------------*/
 motorParametersType* MotorModelClass::getMotorParameters()
 {
     return (motorParameters);
 }
+/*-----------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------------*/
+/*------------------------ GET MOTOR VARIABLES ------------------------*/
+modelVariablesType* MotorModelClass::getMotorVariables()
+{
+    return(modelVariables);
+}
+/*-----------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------*/
+/*--------------------- SET INITIAL MODEL VARIABLES ---------------------*/
+// Maybe in the future there will be used odeInitialConditions and allocate memory function preceding this part of function definitions.
+void MotorModelClass::setInitialModelVariables()
+{
+    modelVariables->i1alpha = 0;
+    modelVariables->i1beta = 0;
+    modelVariables->psi2alpha = 0;
+    modelVariables->u1alpha = 0;
+    modelVariables-> u2alpha = 0;
+}
+/*-----------------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------*/
+/*--------------------- SET MODEL VARIABLE ---------------------*/
+void MotorModelClass::setModelVariable(float &variable, float input)
+{
+    variable = input;
+}
+/*---------------------------------------------------------------*/
