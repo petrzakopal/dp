@@ -2,6 +2,9 @@
 #include <cmath>
 #include <stdlib.h>
 #include <iostream>
+#include "../header/transformation.h"
+
+#define PI 3.141592 
 
 
 /*---------------------------------------------------------------------------------------*/
@@ -37,15 +40,27 @@ void MotorModelClass::odeCalculationSettingsAllocateMemory()
 
 
 /*---------------------------------------------------------------------------------------*/
-/*---------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES -----------------------*/
-void MotorModelClass::modelVariablesAllocateMemory()
+
+
+/*----------------------  -----------------------*/
+void MotorModelClass::voltageGeneratorDataAllocateMemory()
 {
-    posix_memalign((void **)&modelVariables , 4096 , ((int)((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep)) * sizeof(modelVariablesType) );
+    posix_memalign((void **)&voltageGeneratorData , 4096 , ((int)ceil(((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep))) * sizeof(voltageGeneratorData) );
 
     
     
 }
 /*---------------------------------------------------------------------------------------*/
+
+
+
+void MotorModelClass::modelVariablesAllocateMemory()
+{
+    posix_memalign((void **)&modelVariables , 4096 , ((int)ceil(((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep))) * sizeof(modelVariablesType) );
+
+    
+    
+}
 
 
  void MotorModelClass::setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput)
@@ -179,7 +194,7 @@ void MotorModelClass::setInitialModelVariables()
 
 /*---------------------------------------------------------------*/
 /*--------------------- SET MODEL VARIABLE ---------------------*/
-void MotorModelClass::setModelVariable(float &variable, float input)
+void MotorModelClass::setVariable(float &variable, float input)
 {
     variable = input;
 }
@@ -242,6 +257,59 @@ float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVa
     return(calculationTime*2);
  }
 
+
+
+ float MotorModelClass::voltageGenerator(float calculationTime, float phase, float amplitude, float frequency)
+ {
+    return(amplitude * sin(2 * PI * frequency * calculationTime + phase));
+ }
+
+ voltageGeneratorType* MotorModelClass::getVoltage(int numberOfSampleInput)
+{
+    return(&voltageGeneratorData[numberOfSampleInput]);
+}
+
+
+
+
+void MotorModelClass::precalculateVoltageSource(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency)
+{
+    int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
+    float time = odeCalculationSettings->initialCalculationTime;
+    for(int i = 0; i<=n;i++)
+    {
+        setVariable(getVoltage(i)->u1, voltageGenerator(time, 0, amplitude, frequency));
+       
+
+        setVariable(getVoltage(i)->u2, voltageGenerator(time, 2.0943, amplitude, frequency));
+       
+        setVariable(getVoltage(i)->u3, voltageGenerator(time, -2.0943, amplitude, frequency));
+        time = time + odeCalculationSettings->calculationStep;
+    }
+    
+}
+
+
+void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings)
+{
+    int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
+    float time = odeCalculationSettings->initialCalculationTime;
+
+    TransformationClass Transformation;
+    for(int i = 0; i<=n;i++)
+    {
+        setVariable(getVoltage(i)->u1alpha, Transformation.clarkeTransform1(getVoltage(i)->u1, getVoltage(i)->u2, getVoltage(i)->u3, 0.666));
+
+    
+        setVariable(getVoltage(i)->u1beta, Transformation.clarkeTransform2(getVoltage(i)->u1, getVoltage(i)->u2, getVoltage(i)->u3, 0.666));
+
+        time = time + odeCalculationSettings->calculationStep;
+
+    }
+    
+}
+
+
  void MotorModelClass::mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters)
  {
 
@@ -255,7 +323,7 @@ float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVa
     float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
     float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
 
-    int n = (odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep;
+    int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
     float halfCalculationStep = odeCalculationSettings->calculationStep/2;
 
     for(int i = 0; i<n; i++ )

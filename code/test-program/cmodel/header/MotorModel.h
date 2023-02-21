@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <cmath>
+// #include "transformation.h"
 /* MotorModel.h
    basic model of asynchronous motor not for regulation but for motor model simulation
 */
@@ -58,7 +59,15 @@ typedef struct modelVariablesStruct
 /*------------------------------------------------------------------------------------------------------------------*/
 
 
+typedef struct voltageGeneratorStruct
+{
+    float u1;
+    float u2;
+    float u3;
+    float u1alpha;
+    float u1beta;
 
+}voltageGeneratorType;
 
 
 /*-----------------------------------------------------------------------------------------*/
@@ -135,19 +144,23 @@ class MotorModelClass
     stateSpaceCoeffType *stateSpaceCoeff = NULL;
     modelVariablesType *modelVariables = NULL;
     odeCalculationSettingsType *odeCalculationSettings = NULL;
+    voltageGeneratorType *voltageGeneratorData = NULL;
+
 
     void motorParametersAllocateMemory();
     void stateSpaceCoeffAllocateMemory();
     void modelVariablesAllocateMemory();
     void odeCalculationSettingsAllocateMemory();
+    void voltageGeneratorDataAllocateMemory();
 
     void setMotorParameters();
     void setStateSpaceCoeff();
     void calculateStateSpaceCoeff(stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters, float motorElectricalAngularVelocity);
     void setInitialModelVariables();
-    void setModelVariable(float &variable, float input);
+    void setVariable(float &variable, float input);
     void setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput);
    
+    voltageGeneratorType* getVoltage(int numberOfSampleInput);
 
     motorParametersType* getMotorParameters();
     stateSpaceCoeffType* getStateSpaceCoeff();
@@ -174,6 +187,12 @@ class MotorModelClass
     // RK4 in here, but maybe change files because of hwo kernel is managed to save resources
 
     void mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters);
+
+    float voltageGenerator(float calculationTime, float phase, float amplitude, float frequency);
+
+    void precalculateVoltageSource(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency);
+
+    void precalculateVoltageClarke(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings);
 
 };
 /*-----------------------------------------------------------*/
