@@ -202,19 +202,17 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {6.2}Matematický popis modelu stroje}{17}{subsection.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3}Optimalizace modelu}{18}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Aplikace pro FPGA a CPU}{19}{section.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Aplikace pro FPGA a CPU}{18}{section.7}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.1}Použité nástroje}{18}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.1}Použité nástroje}{19}{subsection.7.1}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {7.1.1}Xilinx Vivado}{18}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Xilinx Vivado}{19}{subsubsection.7.1.1}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {7.1.2}Xilinx Vitis}{18}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.2}Xilinx Vitis}{19}{subsubsection.7.1.2}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -228,23 +226,11 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {7.1.3}PetaLinux}{19}{subsubsection.7.1.3}%
+\contentsline {subsubsection}{\numberline {7.1.3}PetaLinux}{20}{subsubsection.7.1.3}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {7.1.4}Programovací prostředí – operační systém Linux}{20}{subsubsection.7.1.4}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2}Tvorba HW architektury Xilinx Vivado}{20}{subsection.7.2}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {7.2.1}Vivado Board Files}{20}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.1.4}Programovací prostředí – operační systém Linux}{21}{subsubsection.7.1.4}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -252,7 +238,19 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {7.2.2}Tvorba HW architektury pro Digilent Zybo Zynq-7000 vývojovou desku}{21}{subsubsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2}Tvorba HW architektury Xilinx Vivado}{21}{subsection.7.2}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.2.1}Vivado Board Files}{21}{subsubsection.7.2.1}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.2.2}Tvorba HW architektury pro Digilent Zybo Zynq-7000 vývojovou desku}{22}{subsubsection.7.2.2}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -264,11 +262,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {7.4.1}Upravený postup debuggingu PL}{29}{subsubsection.7.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Představení pracoviště}{30}{section.8}%
+\contentsline {section}{\numberline {8}Představení pracoviště}{31}{section.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9}Dosažené výsledky}{30}{section.9}%
+\contentsline {section}{\numberline {9}Dosažené výsledky}{31}{section.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{31}{section.9}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{32}{section.9}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -486,10 +484,10 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{33}{section.9}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{34}{section.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{34}{appendix.1.A}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{35}{appendix.1.A}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{34}{subsection.1.A.1}%
+\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{35}{subsection.1.A.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{34}{subsection.1.A.2}%
+\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{35}{subsection.1.A.2}%

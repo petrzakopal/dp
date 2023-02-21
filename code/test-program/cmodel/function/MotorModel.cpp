@@ -1,4 +1,7 @@
-#include "../header/initialization.h"
+#include "../header/MotorModel.h"
+#include <cmath>
+#include <stdlib.h>
+#include <iostream>
 
 
 /*---------------------------------------------------------------------------------------*/
@@ -37,7 +40,7 @@ void MotorModelClass::odeCalculationSettingsAllocateMemory()
 /*---------------------- ALLOCATE MEMORY FOR ODE MODEL VARIABLES -----------------------*/
 void MotorModelClass::modelVariablesAllocateMemory()
 {
-    posix_memalign((void **)&modelVariables , 4096 , ((int)((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep)+1) * sizeof(modelVariablesType) );
+    posix_memalign((void **)&modelVariables , 4096 , ((int)((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep)) * sizeof(modelVariablesType) );
 
     
     
@@ -57,6 +60,7 @@ void MotorModelClass::modelVariablesAllocateMemory()
 
 /*----------------------------------------------------------------------*/
 /*-------------------- SET MOTOR MODEL PARAMETERS --------------------*/
+// maybe move to main.c
 void MotorModelClass::setMotorParameters()
 {
     motorParameters->R1 = 0.370f; // Ohm, stator rezistance
@@ -68,6 +72,7 @@ void MotorModelClass::setMotorParameters()
     motorParameters->L2 = 0.08477f; // H, inductance
     motorParameters->sigma = 0.05283f; // = 0.0528396032, sigma = 1 - Lm^(2)/L1L2
     motorParameters->nOfPolePairs = 2; // number of pole pairs
+    motorParameters->momentOfIntertia = 0.4; // J, moment of inertia
 }
 /*----------------------------------------------------------------------*/
 
@@ -116,7 +121,7 @@ void MotorModelClass::setStateSpaceCoeff()
 /* Some coefficients are changing with angular velocity of motor, so to provide more resources/time efficient calculation
     calculate some of the coefficients only once and some every new time sample
 */
-void MotorModelClass::calculateStateSpaceCoeff(float motorElectricalAngularVelocity)
+void MotorModelClass::calculateStateSpaceCoeff(stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters, float motorElectricalAngularVelocity)
 {
     stateSpaceCoeff->a14 = (motorParameters->Lm * motorElectricalAngularVelocity)/(motorParameters->sigma * motorParameters->L1 * motorParameters->L2);
     stateSpaceCoeff->a23 = - stateSpaceCoeff->a14;
@@ -165,7 +170,10 @@ void MotorModelClass::setInitialModelVariables()
     modelVariables[0].i1beta = 0;
     modelVariables[0].psi2alpha = 0;
     modelVariables[0].u1alpha = 0;
-    modelVariables[0].u2alpha = 0;
+    modelVariables[0].u1beta = 0;
+    modelVariables[0].motorTorque = 0;
+    modelVariables[0].loadTorque = 0;
+    modelVariables[0].motorMechanicalAngularVelocity = 0;
 }
 /*-----------------------------------------------------------------------*/
 
@@ -179,3 +187,78 @@ void MotorModelClass::setModelVariable(float &variable, float input)
 /*---------------------------------------------------------------*/
 
 
+
+// Defining the differential equation to be solved
+
+
+
+float MotorModelClass::i1alpha(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float u1alpha)
+{
+    
+    return((stateSpaceCoeff->a11 * i1alpha /* + stateSpaceCoeff->a12 * i1beta => is 0 */ + stateSpaceCoeff->a13 * psi2alpha + stateSpaceCoeff->a14 * psi2beta) + stateSpaceCoeff->b11 * u1alpha);
+ 
+}
+
+float MotorModelClass::i1beta(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float u1beta)
+{
+    
+    return((stateSpaceCoeff->a21 * i1alpha + stateSpaceCoeff->a22 * i1beta + stateSpaceCoeff->a23 * psi2alpha + stateSpaceCoeff->a24 * psi2beta)+stateSpaceCoeff->b22 * u1beta);
+ 
+}
+
+float MotorModelClass::psi2alpha(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta)
+{
+    return(stateSpaceCoeff->a31 * i1alpha /* + stateSpaceCoeff->a32 * i1beta*/ /* = 0*/ + stateSpaceCoeff->a33 * psi2alpha + stateSpaceCoeff->a34 * psi2beta);
+}
+
+
+float MotorModelClass::psi2beta(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta)
+{
+    return(/*stateSpaceCoeff->a41 * i1alpha = 0 */ + stateSpaceCoeff->a42 * i1beta + stateSpaceCoeff->a43 * psi2alpha + stateSpaceCoeff->a44 * psi2beta);
+}
+
+
+float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVariablesType *modelVariables)
+{
+    return(3/2 * motorParameters->nOfPolePairs * (motorParameters->Lm/motorParameters->L2) * (modelVariables->psi2alpha * modelVariables->i1beta - modelVariables->psi2beta * modelVariables->i1alpha));
+}
+
+ float MotorModelClass::motorMechanicalAngularVelocity(motorParametersType *motorParameters, modelVariablesType *modelVariables)
+ {
+    return((modelVariables->motorTorque - modelVariables->loadTorque)/motorParameters->momentOfIntertia);
+ }
+
+ float MotorModelClass::motorElectricalAngularVelocity(float motorMechanicalAngularVelocity)
+ {
+    return((motorParameters->nOfPolePairs * motorMechanicalAngularVelocity));
+ }
+
+ void MotorModelClass::mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters)
+ {
+
+
+
+
+
+
+    float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
+    float k1i1beta, k2i1beta, k3i1beta, k4i1beta;
+    float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
+    float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
+
+    int n = (odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep;
+
+    for(int i = 0; i<n; i++ )
+    {
+        k1i1alpha =  i1alpha(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getMotorVariable(i)->u1alpha);
+        k1i1beta =  i1beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getMotorVariable(i)->u1alpha);
+        k1i1beta =  i1beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getMotorVariable(i)->u1alpha);
+
+
+
+        // std::cout << "k1i1alpha= " << k1i1alpha << "\n";
+
+        calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, 2);
+    }
+
+ }

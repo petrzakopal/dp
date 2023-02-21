@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cmath>
-#include "header/modelFunctions.h"
 #include <vector>
 #include "header/mathSolver.h"
+#include "header/MotorModel.h"
 
 #define PI 3.141592 
 
@@ -64,25 +64,32 @@ int actualSample = 0; // desired time for calculation
 std::cout << "Motor initial condition [0] for i1alpha: " <<MotorModel.getMotorVariable(0)->i1alpha << "\n";
 std::cout << "setting i1alpha\n";
 MotorModel.setModelVariable(MotorModel.getMotorVariable(actualSample)->i1alpha, 12.5);
+MotorModel.setModelVariable(MotorModel.getMotorVariable(1)->i1alpha, 32.5);
 std::cout << "i1alpha is: " << MotorModel.getMotorVariable(actualSample)->i1alpha << "\n";
 std::cout << "i1alpha at 3. position is: " << MotorModel.getMotorVariable(actualSample)->i1alpha << "\n";
 
-// needs to be calculated every sample
+// needs to be calculated every sample/change of time in a for loop iteration of RK4
 // 12 is angular speed
-MotorModel.calculateStateSpaceCoeff(12);
-std::cout << "i1alpha after calculation= "<< i1alpha(MotorModel.getStateSpaceCoeff(), MotorModel.getMotorVariable(actualSample)) << "\n" ;
+// MotorModel.calculateStateSpaceCoeff(12);
+
+
+std::cout << "i1alpha after calculation= "<< MotorModel.i1alpha(MotorModel.getStateSpaceCoeff(), MotorModel.getMotorVariable(actualSample)->i1alpha, MotorModel.getMotorVariable(actualSample)->i1beta, MotorModel.getMotorVariable(actualSample)->psi2alpha, MotorModel.getMotorVariable(actualSample)->psi2beta, MotorModel.getMotorVariable(actualSample)->u1alpha) << "\n" ;
+
+
 std::cout << "i1beta is: " << MotorModel.getMotorVariable(actualSample)->i1beta << "\n";
 
 
-std::cout << "number of modelVariables: " << ((int)(MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep+1) << "\n";
+std::cout << "number of modelVariables: " << ((int)(MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep) << "\n";
 std::cout << "number of iterations: " << ((int)(MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep) << "\n";
 
-
-
+std::cout << "torque is= " << MotorModel.motorTorque(MotorModel.motorParameters,MotorModel.getMotorVariable(actualSample)) << "\n";
 // MotorModel.setModelVariable(MotorModel.getMotorVariable(1)->i1alpha, 44);
 // std::cout << "index 1 of motor model variables: " << MotorModel.getMotorVariable(1)->i1alpha << "\n";
-/*---------------------------------------------------------*/
 
+MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
+
+std::cout << "test state space coeff= " << MotorModel.getStateSpaceCoeff()->a14 << "\n";
+/*---------------------------------------------------------*/
 
 return 0;
 }

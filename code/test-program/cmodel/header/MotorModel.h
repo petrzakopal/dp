@@ -1,8 +1,7 @@
 #include <stdlib.h>
-/* initialization.h
-    file for:
-            initialization of parameters, structs and types
-            declaration of functions to initialize values
+#include <cmath>
+/* MotorModel.h
+   basic model of asynchronous motor not for regulation but for motor model simulation
 */
 
 
@@ -20,6 +19,7 @@ typedef struct motorParametersStruct
     float L2;
     float sigma; // sigma = 1 - Lm^(2)/L1L2, it would be probably more clear to read value from struct, but it would mean more operations
     int nOfPolePairs;
+    float momentOfIntertia;
 }motorParametersType;
 /*---------------------------------------------------------------------------------------------------*/
 
@@ -49,7 +49,11 @@ typedef struct modelVariablesStruct
     float psi2alpha;
     float psi2beta;
     float u1alpha;
-    float u2alpha;
+    float u1beta;
+    float motorTorque;
+    float loadTorque;
+    float motorMechanicalAngularVelocity;
+    float time;
 }modelVariablesType;
 /*------------------------------------------------------------------------------------------------------------------*/
 
@@ -139,7 +143,7 @@ class MotorModelClass
 
     void setMotorParameters();
     void setStateSpaceCoeff();
-    void calculateStateSpaceCoeff(float motorElectricalAngularVelocity);
+    void calculateStateSpaceCoeff(stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters, float motorElectricalAngularVelocity);
     void setInitialModelVariables();
     void setModelVariable(float &variable, float input);
     void setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput);
@@ -149,6 +153,23 @@ class MotorModelClass
     stateSpaceCoeffType* getStateSpaceCoeff();
     modelVariablesType* getMotorVariable(int indexOfSample);
 
+    float i1alpha(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float u1alpha);
+
+    float i1beta(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float u1beta);
+
+    float psi2alpha(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta);
+
+    float psi2beta(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta);
+
+    float motorTorque(motorParametersType *motorParameters, modelVariablesType *modelVariables);
+
+    float motorMechanicalAngularVelocity(motorParametersType *motorParameters, modelVariablesType *modelVariables);
+
+    float motorElectricalAngularVelocity(float motorMechanicalAngularVelocity);
+
+    // RK4 in here, but maybe change files because of hwo kernel is managed to save resources
+
+    void mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters);
 
 };
 /*-----------------------------------------------------------*/

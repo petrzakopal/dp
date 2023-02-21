@@ -797,7 +797,7 @@ V~případě tvorby modelu, je využit model založe na výpočtu složek vektor
     \end{bmatrix}
     \begin{bmatrix}
         u_{1\alpha}\\
-        u_{2\beta}
+        u_{1\beta}
     \end{bmatrix}.
 \end{equation}
 Stavový popis je vhodné doplnit o~další rovnice, jež budou v~simulaci využity.
@@ -814,7 +814,6 @@ Stavový popis je vhodné doplnit o~další rovnice, jež budou v~simulaci využ
 \end{equation}
 kde $\sigma = 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, $i_{1\alpha}$ (A) a $i_{1\beta}$ (A) jsou složky vektoru statorového proudu $\underline{i_1}$ (A), $\psi_{2\alpha}$ (Wb) a $\psi_{2\beta}$ (Wb) jsou složky vektoru rotorového magnetického toku $\underline{\psi_2}$ (Wb), $u_{1\alpha}$ (V) a $u_{1\beta}$ (V) jsou složky statorového napětí $\underline{u_1}$ (V), $p_\text{p}$ (-) je počet polpárů stroje, $\omega$ (s$^{-1}$) je elektrická úhlová rychlost hřídele, $\Omega$ (s$^{-1}$) je mechanická úhlová rychlost hřídele, $M$ je vnitřní elektromechanický moment stroje a $M_\text{z}$ (Nm) je moment zátěžný.
 
-	\subsection{Optimalizace modelu}
 
 \section{Aplikace pro FPGA a CPU}
 V této části jsou představeny jednotlivé nástroje, využívané při tvorbě programu pro CPU a akcelerované aplikace na FPGA. Je důležité zmínit, že na tzv. „host“ (ARM procesor) je skutečně možné spustit řídící program akcelerované aplikace. Na PL (FPGA) je ovšem vytvořen HW, který reprezentuje myšlené algoritmy aplikace. Proto není korektně správné mluvit o tom, že se vytváří program pro FPGA. Proto v této práci bude používáno označení pro vytváření HW na PL vytváření „kernel“.\par
