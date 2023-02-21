@@ -73,7 +73,7 @@ std::cout << "i1alpha at 3. position is: " << MotorModel.getMotorVariable(actual
 // MotorModel.calculateStateSpaceCoeff(12);
 
 
-std::cout << "i1alpha after calculation= "<< MotorModel.i1alpha(MotorModel.getStateSpaceCoeff(), MotorModel.getMotorVariable(actualSample)->i1alpha, MotorModel.getMotorVariable(actualSample)->i1beta, MotorModel.getMotorVariable(actualSample)->psi2alpha, MotorModel.getMotorVariable(actualSample)->psi2beta, MotorModel.getMotorVariable(actualSample)->u1alpha) << "\n" ;
+std::cout << "i1alpha after calculation= "<< MotorModel.i1alpha(MotorModel.getStateSpaceCoeff(), MotorModel.getMotorVariable(actualSample)->i1alpha, MotorModel.getMotorVariable(actualSample)->i1beta, MotorModel.getMotorVariable(actualSample)->psi2alpha, MotorModel.getMotorVariable(actualSample)->psi2beta, MotorModel.u1alpha(0)) << "\n" ;
 
 
 std::cout << "i1beta is: " << MotorModel.getMotorVariable(actualSample)->i1beta << "\n";

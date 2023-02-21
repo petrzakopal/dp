@@ -35,6 +35,7 @@ typedef struct odeCalculationSettingsStruct
     float initialCalculationTime;
     float finalCalculationTime;
     float calculationStep;
+    float calculationTime;
 }odeCalculationSettingsType;
 /*---------------------------------------------------------------------------------------------------*/
 
@@ -48,12 +49,11 @@ typedef struct modelVariablesStruct
     float i1beta;
     float psi2alpha;
     float psi2beta;
-    float u1alpha;
-    float u1beta;
+    // float u1alpha;
+    // float u1beta;
     float motorTorque;
     float loadTorque;
     float motorMechanicalAngularVelocity;
-    float time;
 }modelVariablesType;
 /*------------------------------------------------------------------------------------------------------------------*/
 
@@ -166,6 +166,10 @@ class MotorModelClass
     float motorMechanicalAngularVelocity(motorParametersType *motorParameters, modelVariablesType *modelVariables);
 
     float motorElectricalAngularVelocity(float motorMechanicalAngularVelocity);
+
+    float u1alpha(float calculationTime);
+
+    float u1beta(float calculationTime);
 
     // RK4 in here, but maybe change files because of hwo kernel is managed to save resources
 

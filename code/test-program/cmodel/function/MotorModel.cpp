@@ -54,6 +54,7 @@ void MotorModelClass::modelVariablesAllocateMemory()
     odeCalculationSettings->initialCalculationTime = initialCalculationTimeInput;
     odeCalculationSettings->finalCalculationTime = finalCalculationTimeInput;
     odeCalculationSettings->calculationStep = calculationStepInput;
+    odeCalculationSettings->calculationTime = initialCalculationTimeInput;
 
  }
 
@@ -169,8 +170,6 @@ void MotorModelClass::setInitialModelVariables()
     modelVariables[0].i1alpha = 0;
     modelVariables[0].i1beta = 0;
     modelVariables[0].psi2alpha = 0;
-    modelVariables[0].u1alpha = 0;
-    modelVariables[0].u1beta = 0;
     modelVariables[0].motorTorque = 0;
     modelVariables[0].loadTorque = 0;
     modelVariables[0].motorMechanicalAngularVelocity = 0;
@@ -233,6 +232,16 @@ float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVa
     return((motorParameters->nOfPolePairs * motorMechanicalAngularVelocity));
  }
 
+ float MotorModelClass::u1alpha(float calculationTime)
+ {
+    return(calculationTime*2);
+ }
+
+  float MotorModelClass::u1beta(float calculationTime)
+ {
+    return(calculationTime*2);
+ }
+
  void MotorModelClass::mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters)
  {
 
@@ -247,17 +256,24 @@ float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVa
     float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
 
     int n = (odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep;
+    float halfCalculationStep = odeCalculationSettings->calculationStep/2;
 
     for(int i = 0; i<n; i++ )
     {
-        k1i1alpha =  i1alpha(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getMotorVariable(i)->u1alpha);
-        k1i1beta =  i1beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getMotorVariable(i)->u1alpha);
-        k1i1beta =  i1beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getMotorVariable(i)->u1alpha);
 
+        
+        // for now there will be externally calculated time, implement later - to calculate time in an array, length based on number of iterations
 
+        k1i1alpha =  i1alpha(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, u1alpha(odeCalculationSettings->calculationTime));
+        k1i1beta =  i1beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, u1beta(odeCalculationSettings->calculationTime));
+        k1psi2alpha =  psi2alpha(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta);
+        k1psi2beta =  psi2beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta);
+
+        k2i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)), u1alpha(odeCalculationSettings->calculationTime));
 
         // std::cout << "k1i1alpha= " << k1i1alpha << "\n";
 
+        odeCalculationSettings->calculationTime = odeCalculationSettings->calculationTime + odeCalculationSettings->calculationStep;
         calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, 2);
     }
 
