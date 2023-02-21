@@ -146,6 +146,8 @@ class MotorModelClass
     odeCalculationSettingsType *odeCalculationSettings = NULL;
     voltageGeneratorType *voltageGeneratorData = NULL;
 
+    float *testFloatPointeruClass = NULL;
+
 
     void motorParametersAllocateMemory();
     void stateSpaceCoeffAllocateMemory();

@@ -119,7 +119,7 @@ std::cout << "test state space coeff= " << MotorModel.getStateSpaceCoeff()->a14 
 
 // precalculating voltages in a kernel
 /*--------------------------------------------------------------------------------------------------------------------------------*/
-MotorModel.precalculateVoltageSource(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings,325, 50);
+MotorModel.precalculateVoltageSource(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings, 325, 50);
 MotorModel.precalculateVoltageClarke(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings);
 
 std::cout << "motor voltage u1 at 20: " << MotorModel.getVoltage(20)->u1 << "\n";
@@ -157,6 +157,15 @@ std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(20)-
 // std::cout << "clarke transform output 2= " << Transformation.clarkeTransformData->output2 << "\n";
 
 /*--------------------------------------------------------------------------------------------------------------------------------*/
+float testValue = 5;
+
+std::cout << "testpointer: " << MotorModel.testFloatPointeruClass << "\n";
+std::cout << "testpointer: " << MotorModel.testFloatPointeruClass << "\n";
+MotorModel.testFloatPointeruClass = &testValue;
+
+std::cout << "testpointer after value: " << *(MotorModel.testFloatPointeruClass) << "\n";
+
+
 
 /*---------------------------------------------------------*/
 
