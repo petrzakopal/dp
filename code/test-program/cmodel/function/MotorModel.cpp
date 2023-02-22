@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "../header/transformation.h"
+#include <fstream>
 
 #define PI 3.141592 
 
@@ -45,7 +46,7 @@ void MotorModelClass::odeCalculationSettingsAllocateMemory()
 /*----------------------  -----------------------*/
 void MotorModelClass::voltageGeneratorDataAllocateMemory()
 {
-    posix_memalign((void **)&voltageGeneratorData , 4096 , ((int)ceil(((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep))) * sizeof(voltageGeneratorData) );
+    posix_memalign((void **)&voltageGeneratorData , 4096 , ((int)ceil(((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep))) * sizeof(voltageGeneratorType) );
 
     
     
@@ -186,7 +187,7 @@ void MotorModelClass::setInitialModelVariables()
     modelVariables[0].i1beta = 0;
     modelVariables[0].psi2alpha = 0;
     modelVariables[0].motorTorque = 0;
-    modelVariables[0].loadTorque = 0;
+    modelVariables[0].loadTorque = 0.;
     modelVariables[0].motorMechanicalAngularVelocity = 0;
 }
 /*-----------------------------------------------------------------------*/
@@ -206,6 +207,8 @@ void MotorModelClass::setVariable(float &variable, float input)
 
 
 
+/*----------------------------------------------------------------------------------------------------*/
+/*--------------------- DIFFERENTIAL EQUATIONS FROM STATE SPACE MODEL DEFINITION ---------------------*/
 float MotorModelClass::i1alpha(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float u1alpha)
 {
     
@@ -231,51 +234,70 @@ float MotorModelClass::psi2beta(stateSpaceCoeffType *stateSpaceCoeff, float i1al
     return(/*stateSpaceCoeff->a41 * i1alpha = 0 */ + stateSpaceCoeff->a42 * i1beta + stateSpaceCoeff->a43 * psi2alpha + stateSpaceCoeff->a44 * psi2beta);
 }
 
+/*----------------------------------------------------------------------------------------------------*/
 
+
+
+
+/*******************************************************************************************************/
+/*---------------------------- MOTOR MODEL EQUATIONS FOR COMPLETE MODEL -----------------------------*/
+
+/*-----------------------------------------------------------------------------------------*/
+/*---------------------------- MOTOR ELECTROMAGNETIC TORQUE -----------------------------*/
 float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVariablesType *modelVariables)
 {
-    return(3/2 * motorParameters->nOfPolePairs * (motorParameters->Lm/motorParameters->L2) * (modelVariables->psi2alpha * modelVariables->i1beta - modelVariables->psi2beta * modelVariables->i1alpha));
+    return(3/2 * motorParameters->nOfPolePairs * (motorParameters->Lm / motorParameters->L2) * (modelVariables->psi2alpha * modelVariables->i1beta - modelVariables->psi2beta * modelVariables->i1alpha));
 }
+/*-----------------------------------------------------------------------------------------*/
 
- float MotorModelClass::motorMechanicalAngularVelocity(motorParametersType *motorParameters, modelVariablesType *modelVariables)
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------- MOTOR MECHANICAL ANGULAR VELOCITY DIFFERENTIAL EQUATION -----------------------------*/
+// TO BE SOLVED BY RK4 AFTER MAIN STATE SPACE CALCULATION
+ float MotorModelClass::motorMechanicalAngularVelocity(float motorTorque, motorParametersType *motorParameters, modelVariablesType *modelVariables)
  {
-    return((modelVariables->motorTorque - modelVariables->loadTorque)/motorParameters->momentOfIntertia);
+    return((motorTorque - modelVariables->loadTorque)/motorParameters->momentOfIntertia);
  }
 
+ /*-------------------------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------*/
+/*---------------------------- MOTOR ELECTRICAL ANGULAR VELOCITY -----------------------------*/
  float MotorModelClass::motorElectricalAngularVelocity(float motorMechanicalAngularVelocity)
  {
     return((motorParameters->nOfPolePairs * motorMechanicalAngularVelocity));
  }
+ /*---------------------------------------------------------------------------------------------*/
 
- float MotorModelClass::u1alpha(float calculationTime)
- {
-    return(calculationTime*2);
- }
-
-  float MotorModelClass::u1beta(float calculationTime)
- {
-    return(calculationTime*2);
- }
+/*******************************************************************************************************/
 
 
 
+
+/*---------------------------------------------------------------------------------------------*/
+/*------------------------------ VOTAGE SINUS SOURCE GENERATOR -------------------------------*/
  float MotorModelClass::voltageGenerator(float calculationTime, float phase, float amplitude, float frequency)
  {
-    return(amplitude * sin(2 * PI * frequency * calculationTime + phase));
+    return(amplitude * sin((2 * PI * frequency * calculationTime) + phase));
  }
+ /*---------------------------------------------------------------------------------------------*/
 
+/*--------------------------------------------------------------------------------------*/
+/*------------------------------ VOTAGE VARIABLE GETTER -------------------------------*/
  voltageGeneratorType* MotorModelClass::getVoltage(int numberOfSampleInput)
 {
     return(&voltageGeneratorData[numberOfSampleInput]);
 }
+/*--------------------------------------------------------------------------------------*/
 
 
-
-
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ PRE CALCULATING SOURCE VOLTAGE THROUGH TIME BASED OD NUMBER OF ITERATIONS -------------------------------*/
 void MotorModelClass::precalculateVoltageSource(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency)
 {
     int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
     float time = odeCalculationSettings->initialCalculationTime;
+
     for(int i = 0; i<=n;i++)
     {
         setVariable(getVoltage(i)->u1, voltageGenerator(time, 0, amplitude, frequency));
@@ -288,8 +310,11 @@ void MotorModelClass::precalculateVoltageSource(voltageGeneratorType *voltageGen
     }
     
 }
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 
 
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ PRE CALCULATING CLARKE VOLTAGE THROUGH TIME BASED OD NUMBER OF ITERATIONS -------------------------------*/
 void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings)
 {
     int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
@@ -308,41 +333,143 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
     }
     
 }
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
 
 
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ MAIN STATE SPACE MODEL PLUS TORQUE PLUS VELOCITY CALCULATIONS WITH RK4s FOR ODE --------------------------------*/
  void MotorModelClass::mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters)
  {
+// do kernelu se budou muset namapovat všechny dotčené proměnné => todo: vyřešit, které budou vstupovat díky classe a ne jako vstup jao v c++
 
 
-
-
-
-
+    std::ofstream myfile;
+    myfile.open ("output.csv");
+    myfile<< "time,i1alpha,u1alpha\n";
+    /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+    /*|||||||||||||||||||||||| RK4 FOR STATE SPACE MODEL ||||||||||||||||||||||||*/
     float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
     float k1i1beta, k2i1beta, k3i1beta, k4i1beta;
     float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
     float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
+    /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+
 
     int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
     float halfCalculationStep = odeCalculationSettings->calculationStep/2;
-
+    
+    calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, motorElectricalAngularVelocity(getMotorVariable(0)->motorMechanicalAngularVelocity));
     for(int i = 0; i<n; i++ )
     {
 
-        
+       
         // for now there will be externally calculated time, implement later - to calculate time in an array, length based on number of iterations
 
-        k1i1alpha =  i1alpha(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, u1alpha(odeCalculationSettings->calculationTime));
-        k1i1beta =  i1beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, u1beta(odeCalculationSettings->calculationTime));
+        k1i1alpha =  i1alpha(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getVoltage(i)->u1alpha);
+        k1i1beta =  i1beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta, getVoltage(i)->u1beta);
         k1psi2alpha =  psi2alpha(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta);
         k1psi2beta =  psi2beta(getStateSpaceCoeff(), getMotorVariable(i)->i1alpha, getMotorVariable(i)->i1beta, getMotorVariable(i)->psi2alpha, getMotorVariable(i)->psi2beta);
+        
+        // std::cout << "iteration: "<< i << " k1i1alpha from loop: " << k1i1alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k1i1beta from loop: " << k1i1beta <<"\n";
+        // std::cout << "iteration: "<< i << " k1psi2alpha from loop: " << k1psi2alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k1psi2beta from loop: " << k1psi2beta <<"\n";
 
-        k2i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)), u1alpha(odeCalculationSettings->calculationTime));
+
+        /*------------------------------------------------------------------------------------------------------------------------------------*/
+       
+       
+        // std::cout <<"iteration: "<< i <<  " k2i1alpha from loop: " << k2i1alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k2i1beta from loop: " << k2i1beta <<"\n";
+        // std::cout << "iteration: "<< i << " k2psi2alpha from loop: " << k2psi2alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k2psi2beta from loop: " << k2psi2beta <<"\n";
+       
+        k2i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)), getVoltage(i)->u1alpha);
+
+
+        k2i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)), getVoltage(i)->u1alpha);
+
+        k2psi2alpha =  psi2alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)));
+
+        k2psi2beta =  psi2beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)));
+        /*------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+        // std::cout << "iteration: "<< i << " k3i1alpha from loop: " << k3i1alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k3i1beta from loop: " << k3i1beta <<"\n";
+        // std::cout << "iteration: "<< i << " k3psi2alpha from loop: " << k3psi2alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k3psi2beta from loop: " << k3psi2beta <<"\n";
+
+        k3i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)), getVoltage(i)->u1alpha);
+
+        k3i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)), getVoltage(i)->u1alpha);
+
+        k3psi2alpha =  psi2alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)));
+
+        k3psi2beta =  psi2beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)));
+        /*------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+        // std::cout << "iteration: "<< i << " k4i1alpha from loop: " << k4i1alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k4i1beta from loop: " << k4i1beta <<"\n";
+        // std::cout << "iteration: "<< i << " k4psi2alpha from loop: " << k4psi2alpha <<"\n";
+        // std::cout << "iteration: "<< i << " k4psi2beta from loop: " << k4psi2beta <<"\n";
+
+        k4i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)), getVoltage(i)->u1alpha);
+
+        k4i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)), getVoltage(i)->u1alpha);
+
+        k4psi2alpha =  psi2alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)));
+
+        k4psi2beta =  psi2beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)));
+        /*------------------------------------------------------------------------------------------------------------------------------------*/
+
+        // nevím zda tu mám nechat i nebo i+1
+        setVariable(getMotorVariable(i)->i1alpha,(getMotorVariable(i)->i1alpha + odeCalculationSettings->calculationStep/6 *(k1i1alpha + 2* k2i1alpha + 2* k3i1alpha + k4i1alpha)));
+
+        setVariable(getMotorVariable(i)->i1beta,(getMotorVariable(i)->i1beta + odeCalculationSettings->calculationStep/6 *(k1i1beta + 2* k2i1beta + 2* k3i1beta + k4i1beta)));
+
+        setVariable(getMotorVariable(i)->psi2alpha,(getMotorVariable(i)->psi2alpha + odeCalculationSettings->calculationStep/6 *(k1psi2alpha + 2* k2psi2alpha + 2* k3psi2alpha + k4psi2alpha)));
+
+        setVariable(getMotorVariable(i)->psi2beta,(getMotorVariable(i)->psi2beta + odeCalculationSettings->calculationStep/6 *(k1psi2beta + 2* k2psi2beta + 2* k3psi2beta + k4psi2beta)));
+        /*------------------------------------------------------------------------------------------------------------------------------------*/
 
         // std::cout << "k1i1alpha= " << k1i1alpha << "\n";
 
+        
+
+        // calculating torque
+        setVariable(getMotorVariable(i)->motorTorque, motorTorque(motorParameters, getMotorVariable(i)));
+
+        // std::cout << "motor torque from loop: " << getMotorVariable(i)->motorTorque <<"\n";
+        // std::cout << "k2i1alpha from loop: " << k2i1alpha <<"\n";
+        std::cout << "calculation time: " <<  odeCalculationSettings->calculationTime << "\n";
+        std::cout << "i1alpha from loop: " << getMotorVariable(i)->i1alpha <<"\n";
+        myfile<<odeCalculationSettings->calculationTime<< ","<< getMotorVariable(i)->i1alpha<< "," << getVoltage(i)->u1 << "\n";
+
+        /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+        /*|||||||||||||||||||||||| VELOCITY BY INTEGRATION||||||||||||||||||||||||*/
+        /* assumptions:
+        getMotorVariable(i)->motorTorque at (i) is constant value
+        getMotorVariable(i)->loadTorque at (i) is a constant value
+        momentOfIntertia from motorParameters at (i) is a constant value
+       */
+        setVariable(getMotorVariable(i)->motorMechanicalAngularVelocity, (1/motorParameters->momentOfIntertia)*(getMotorVariable(i)->motorTorque - getMotorVariable(i)->loadTorque)*(odeCalculationSettings->calculationTime-odeCalculationSettings->initialCalculationTime));
+
+        
+        
+        // here the angular velocity needs to be calculated - new RK4 in state space RK4
+        calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, motorElectricalAngularVelocity(getMotorVariable(i)->motorMechanicalAngularVelocity));
+
+
+        
+
         odeCalculationSettings->calculationTime = odeCalculationSettings->calculationTime + odeCalculationSettings->calculationStep;
-        calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, 2);
+
+        /*------------------------------------------------------------------------------------------------------------------------------------*/
     }
+
+    myfile.close();
 
  }

@@ -146,7 +146,7 @@ class MotorModelClass
     odeCalculationSettingsType *odeCalculationSettings = NULL;
     voltageGeneratorType *voltageGeneratorData = NULL;
 
-    float *testFloatPointeruClass = NULL;
+    
 
 
     void motorParametersAllocateMemory();
@@ -163,38 +163,32 @@ class MotorModelClass
     void setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput);
    
     voltageGeneratorType* getVoltage(int numberOfSampleInput);
-
     motorParametersType* getMotorParameters();
     stateSpaceCoeffType* getStateSpaceCoeff();
     modelVariablesType* getMotorVariable(int indexOfSample);
 
     float i1alpha(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float u1alpha);
-
     float i1beta(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float u1beta);
-
     float psi2alpha(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta);
-
     float psi2beta(stateSpaceCoeffType *stateSpaceCoeff, float i1alpha, float i1beta, float psi2alpha, float psi2beta);
 
     float motorTorque(motorParametersType *motorParameters, modelVariablesType *modelVariables);
-
-    float motorMechanicalAngularVelocity(motorParametersType *motorParameters, modelVariablesType *modelVariables);
-
+    float motorMechanicalAngularVelocity(float motorTorque, motorParametersType *motorParameters, modelVariablesType *modelVariables);
     float motorElectricalAngularVelocity(float motorMechanicalAngularVelocity);
 
-    float u1alpha(float calculationTime);
-
-    float u1beta(float calculationTime);
-
-    // RK4 in here, but maybe change files because of hwo kernel is managed to save resources
-
-    void mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters);
 
     float voltageGenerator(float calculationTime, float phase, float amplitude, float frequency);
 
     void precalculateVoltageSource(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency);
 
     void precalculateVoltageClarke(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings);
+
+
+    /*-------------------------------------------------------------------------------------------------------------------*/
+    void mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters);
+    /*-------------------------------------------------------------------------------------------------------------------*/
+
+    
 
 };
 /*-----------------------------------------------------------*/
