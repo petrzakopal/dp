@@ -4,6 +4,7 @@
 #include "header/mathSolver.h"
 #include "header/MotorModel.h"
 #include "header/transformation.h"
+#include <fcntl.h>
 
 #define PI 3.141592 
 
@@ -11,6 +12,13 @@
 int main()
 {
 
+int exportfd = open("./output.csv", O_WRONLY);
+   if (exportfd < 0)
+    {
+        std::cout << "Cannot open GPIO to export it\n";
+        exit(1);
+    }
+// close(exportfd);
 
 /*----------------------------------------------------------------------------------*/
 /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
