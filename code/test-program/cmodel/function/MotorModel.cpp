@@ -426,13 +426,13 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         /*------------------------------------------------------------------------------------------------------------------------------------*/
 
         // nevím zda tu mám nechat i nebo i+1
-        setVariable(getMotorVariable(i)->i1alpha,(getMotorVariable(i)->i1alpha + odeCalculationSettings->calculationStep/6 *(k1i1alpha + 2* k2i1alpha + 2* k3i1alpha + k4i1alpha)));
+        setVariable(getMotorVariable(i+1)->i1alpha,(getMotorVariable(i)->i1alpha + odeCalculationSettings->calculationStep/6 *(k1i1alpha + 2* k2i1alpha + 2* k3i1alpha + k4i1alpha)));
 
-        setVariable(getMotorVariable(i)->i1beta,(getMotorVariable(i)->i1beta + odeCalculationSettings->calculationStep/6 *(k1i1beta + 2* k2i1beta + 2* k3i1beta + k4i1beta)));
+        setVariable(getMotorVariable(i+1)->i1beta,(getMotorVariable(i)->i1beta + odeCalculationSettings->calculationStep/6 *(k1i1beta + 2* k2i1beta + 2* k3i1beta + k4i1beta)));
 
-        setVariable(getMotorVariable(i)->psi2alpha,(getMotorVariable(i)->psi2alpha + odeCalculationSettings->calculationStep/6 *(k1psi2alpha + 2* k2psi2alpha + 2* k3psi2alpha + k4psi2alpha)));
+        setVariable(getMotorVariable(i+1)->psi2alpha,(getMotorVariable(i)->psi2alpha + odeCalculationSettings->calculationStep/6 *(k1psi2alpha + 2* k2psi2alpha + 2* k3psi2alpha + k4psi2alpha)));
 
-        setVariable(getMotorVariable(i)->psi2beta,(getMotorVariable(i)->psi2beta + odeCalculationSettings->calculationStep/6 *(k1psi2beta + 2* k2psi2beta + 2* k3psi2beta + k4psi2beta)));
+        setVariable(getMotorVariable(i+1)->psi2beta,(getMotorVariable(i)->psi2beta + odeCalculationSettings->calculationStep/6 *(k1psi2beta + 2* k2psi2beta + 2* k3psi2beta + k4psi2beta)));
         /*------------------------------------------------------------------------------------------------------------------------------------*/
 
         // std::cout << "k1i1alpha= " << k1i1alpha << "\n";
