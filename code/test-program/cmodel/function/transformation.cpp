@@ -29,7 +29,7 @@ void TransformationClass::clarkeTransform(clarkeTransformType *clarkeTransformDa
 /*-------------------------------- CALTULATION OF CLARKE TRANSFORM BASED ON INPUT VALUES ----------------------------------*/
 float TransformationClass::clarkeTransform1(float input1, float input2, float input3, float transformConstant)
 {
-    return(transformConstant * (input1 - 0.5 * input2 - 0.5 * input3));
+    return(transformConstant * (input1 - (0.5 * input2) - (0.5 * input3)));
 }
 float TransformationClass::clarkeTransform2(float input1, float input2, float input3, float transformConstant)
 {

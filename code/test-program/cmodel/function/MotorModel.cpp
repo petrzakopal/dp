@@ -98,7 +98,7 @@ void MotorModelClass::setMotorParameters()
 /*-------------------- STATIC STATE SPACE COEFFICIENT CALCULATION --------------------*/
 void MotorModelClass::setStateSpaceCoeff()
 {
-    stateSpaceCoeff->a11 =  -(( motorParameters->R2 * motorParameters->Lm * motorParameters->Lm) + ( motorParameters->L2 * motorParameters->L2 * motorParameters->R1) / (motorParameters->sigma * motorParameters->L1 * motorParameters->L2 * motorParameters->L2));
+    stateSpaceCoeff->a11 =  -((( motorParameters->R2 * motorParameters->Lm * motorParameters->Lm) + ( motorParameters->L2 * motorParameters->L2 * motorParameters->R1)) / (motorParameters->sigma * motorParameters->L1 * motorParameters->L2 * motorParameters->L2));
 
     stateSpaceCoeff->a12 = 0; // same asi a21 = 0;
     stateSpaceCoeff->a13 = (motorParameters->Lm * motorParameters->R2)/(motorParameters->sigma * motorParameters->L1 * motorParameters->L2 * motorParameters->L2);
@@ -318,17 +318,16 @@ void MotorModelClass::precalculateVoltageSource(voltageGeneratorType *voltageGen
 void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings)
 {
     int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
-    float time = odeCalculationSettings->initialCalculationTime;
 
     TransformationClass Transformation;
     for(int i = 0; i<=n;i++)
     {
-        setVariable(getVoltage(i)->u1alpha, Transformation.clarkeTransform1(getVoltage(i)->u1, getVoltage(i)->u2, getVoltage(i)->u3, 0.666));
+        setVariable(getVoltage(i)->u1alpha, Transformation.clarkeTransform1(getVoltage(i)->u1, getVoltage(i)->u2, getVoltage(i)->u3, 0.6667));
 
     
-        setVariable(getVoltage(i)->u1beta, Transformation.clarkeTransform2(getVoltage(i)->u1, getVoltage(i)->u2, getVoltage(i)->u3, 0.666));
+        setVariable(getVoltage(i)->u1beta, Transformation.clarkeTransform2(getVoltage(i)->u1, getVoltage(i)->u2, getVoltage(i)->u3, 0.6667));
 
-        time = time + odeCalculationSettings->calculationStep;
+
 
     }
     
@@ -345,7 +344,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 
     std::ofstream myfile;
     myfile.open ("output.csv");
-    myfile<< "time,i1alpha,u1alpha,motorTorque\n";
+    myfile<< "time,i1alpha,u1alpha,motorTorque,motorMechanicalAngularVelocity\n";
     /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     /*|||||||||||||||||||||||| RK4 FOR STATE SPACE MODEL ||||||||||||||||||||||||*/
     float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
@@ -455,9 +454,11 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         getMotorVariable(i)->loadTorque at (i) is a constant value
         momentOfIntertia from motorParameters at (i) is a constant value
        */
-        setVariable(getMotorVariable(i+1)->motorMechanicalAngularVelocity, (1/motorParameters->momentOfIntertia)*(getMotorVariable(i+1)->motorTorque - getMotorVariable(i+1)->loadTorque)*(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep-odeCalculationSettings->initialCalculationTime));
+        // setVariable(getMotorVariable(i+1)->motorMechanicalAngularVelocity, (1/motorParameters->momentOfIntertia)*(getMotorVariable(i+1)->motorTorque - getMotorVariable(i+1)->loadTorque)*(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep-odeCalculationSettings->initialCalculationTime));
 
-         myfile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << "\n";
+        setVariable(getMotorVariable(i+1)->motorMechanicalAngularVelocity, ((1/motorParameters->momentOfIntertia)*(getMotorVariable(i+1)->motorTorque - getMotorVariable(i+1)->loadTorque)*(odeCalculationSettings->calculationStep))+getMotorVariable(i)->motorMechanicalAngularVelocity);
+
+         myfile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << ","<< getMotorVariable(i+1)->motorMechanicalAngularVelocity << "\n";
 
         
         
