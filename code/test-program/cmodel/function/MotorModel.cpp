@@ -246,7 +246,7 @@ float MotorModelClass::psi2beta(stateSpaceCoeffType *stateSpaceCoeff, float i1al
 /*---------------------------- MOTOR ELECTROMAGNETIC TORQUE -----------------------------*/
 float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVariablesType *modelVariables)
 {
-    return(3/2 * motorParameters->nOfPolePairs * (motorParameters->Lm / motorParameters->L2) * (modelVariables->psi2alpha * modelVariables->i1beta - modelVariables->psi2beta * modelVariables->i1alpha));
+    return(1.5 * motorParameters->nOfPolePairs * (motorParameters->Lm / motorParameters->L2) * (modelVariables->psi2alpha * modelVariables->i1beta - modelVariables->psi2beta * modelVariables->i1alpha));
 }
 /*-----------------------------------------------------------------------------------------*/
 
@@ -345,7 +345,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 
     std::ofstream myfile;
     myfile.open ("output.csv");
-    myfile<< "time,i1alpha,u1alpha\n";
+    myfile<< "time,i1alpha,u1alpha,motorTorque\n";
     /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     /*|||||||||||||||||||||||| RK4 FOR STATE SPACE MODEL ||||||||||||||||||||||||*/
     float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
@@ -387,7 +387,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         k2i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)), getVoltage(i)->u1alpha);
 
 
-        k2i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)), getVoltage(i)->u1alpha);
+        k2i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)), getVoltage(i)->u1beta);
 
         k2psi2alpha =  psi2alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k1i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k1i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k1psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k1psi2beta)));
 
@@ -402,7 +402,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 
         k3i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)), getVoltage(i)->u1alpha);
 
-        k3i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)), getVoltage(i)->u1alpha);
+        k3i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)), getVoltage(i)->u1beta);
 
         k3psi2alpha =  psi2alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(halfCalculationStep*k2i1alpha)), (getMotorVariable(i)->i1beta+(halfCalculationStep*k2i1beta)), (getMotorVariable(i)->psi2alpha+(halfCalculationStep * k2psi2alpha)), (getMotorVariable(i)->psi2beta + (halfCalculationStep * k2psi2beta)));
 
@@ -418,7 +418,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 
         k4i1alpha =  i1alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)), getVoltage(i)->u1alpha);
 
-        k4i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)), getVoltage(i)->u1alpha);
+        k4i1beta =  i1beta(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)), getVoltage(i)->u1beta);
 
         k4psi2alpha =  psi2alpha(getStateSpaceCoeff(), (getMotorVariable(i)->i1alpha+(odeCalculationSettings->calculationStep*k3i1alpha)), (getMotorVariable(i)->i1beta+(odeCalculationSettings->calculationStep*k3i1beta)), (getMotorVariable(i)->psi2alpha+(odeCalculationSettings->calculationStep * k3psi2alpha)), (getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep * k3psi2beta)));
 
@@ -426,13 +426,13 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         /*------------------------------------------------------------------------------------------------------------------------------------*/
 
         // nevím zda tu mám nechat i nebo i+1
-        setVariable(getMotorVariable(i+1)->i1alpha,(getMotorVariable(i)->i1alpha + odeCalculationSettings->calculationStep/6 *(k1i1alpha + 2* k2i1alpha + 2* k3i1alpha + k4i1alpha)));
+        setVariable(getMotorVariable(i+1)->i1alpha,(getMotorVariable(i)->i1alpha + (odeCalculationSettings->calculationStep / 6) *(k1i1alpha + 2* k2i1alpha + 2* k3i1alpha + k4i1alpha)));
 
-        setVariable(getMotorVariable(i+1)->i1beta,(getMotorVariable(i)->i1beta + odeCalculationSettings->calculationStep/6 *(k1i1beta + 2* k2i1beta + 2* k3i1beta + k4i1beta)));
+        setVariable(getMotorVariable(i+1)->i1beta,(getMotorVariable(i)->i1beta + (odeCalculationSettings->calculationStep / 6) *(k1i1beta + 2* k2i1beta + 2* k3i1beta + k4i1beta)));
 
-        setVariable(getMotorVariable(i+1)->psi2alpha,(getMotorVariable(i)->psi2alpha + odeCalculationSettings->calculationStep/6 *(k1psi2alpha + 2* k2psi2alpha + 2* k3psi2alpha + k4psi2alpha)));
+        setVariable(getMotorVariable(i+1)->psi2alpha,(getMotorVariable(i)->psi2alpha + (odeCalculationSettings->calculationStep / 6) *(k1psi2alpha + 2* k2psi2alpha + 2* k3psi2alpha + k4psi2alpha)));
 
-        setVariable(getMotorVariable(i+1)->psi2beta,(getMotorVariable(i)->psi2beta + odeCalculationSettings->calculationStep/6 *(k1psi2beta + 2* k2psi2beta + 2* k3psi2beta + k4psi2beta)));
+        setVariable(getMotorVariable(i+1)->psi2beta,(getMotorVariable(i)->psi2beta + (odeCalculationSettings->calculationStep / 6) *(k1psi2beta + 2* k2psi2beta + 2* k3psi2beta + k4psi2beta)));
         /*------------------------------------------------------------------------------------------------------------------------------------*/
 
         // std::cout << "k1i1alpha= " << k1i1alpha << "\n";
@@ -440,13 +440,13 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         
 
         // calculating torque
-        setVariable(getMotorVariable(i)->motorTorque, motorTorque(motorParameters, getMotorVariable(i)));
+        setVariable(getMotorVariable(i+1)->motorTorque, motorTorque(motorParameters, getMotorVariable(i+1)));
 
         // std::cout << "motor torque from loop: " << getMotorVariable(i)->motorTorque <<"\n";
         // std::cout << "k2i1alpha from loop: " << k2i1alpha <<"\n";
-        std::cout << "calculation time: " <<  odeCalculationSettings->calculationTime << "\n";
-        std::cout << "i1alpha from loop: " << getMotorVariable(i)->i1alpha <<"\n";
-        myfile<<odeCalculationSettings->calculationTime<< ","<< getMotorVariable(i)->i1alpha<< "," << getVoltage(i)->u1 << "\n";
+        // std::cout << "calculation time: " <<  odeCalculationSettings->calculationTime << "\n";
+        // std::cout << "i1alpha from loop: " << getMotorVariable(i)->i1alpha <<"\n";
+       
 
         /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
         /*|||||||||||||||||||||||| VELOCITY BY INTEGRATION||||||||||||||||||||||||*/
@@ -455,12 +455,14 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         getMotorVariable(i)->loadTorque at (i) is a constant value
         momentOfIntertia from motorParameters at (i) is a constant value
        */
-        setVariable(getMotorVariable(i)->motorMechanicalAngularVelocity, (1/motorParameters->momentOfIntertia)*(getMotorVariable(i)->motorTorque - getMotorVariable(i)->loadTorque)*(odeCalculationSettings->calculationTime-odeCalculationSettings->initialCalculationTime));
+        setVariable(getMotorVariable(i+1)->motorMechanicalAngularVelocity, (1/motorParameters->momentOfIntertia)*(getMotorVariable(i+1)->motorTorque - getMotorVariable(i+1)->loadTorque)*(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep-odeCalculationSettings->initialCalculationTime));
+
+         myfile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << "\n";
 
         
         
         // here the angular velocity needs to be calculated - new RK4 in state space RK4
-        calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, motorElectricalAngularVelocity(getMotorVariable(i)->motorMechanicalAngularVelocity));
+        calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, motorElectricalAngularVelocity(getMotorVariable(i+1)->motorMechanicalAngularVelocity));
 
 
         
