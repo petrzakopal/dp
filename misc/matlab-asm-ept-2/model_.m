@@ -1,0 +1,15 @@
+Pn=12000; % Jmenovity vykon stroje (W)
+Un=380; % Jmenovite napeti kotvy (V)
+In=22; % Jmenovity proud kotvy (A)
+nn=1460; % Jmenovite otacky stroje (min-1)
+pp=2; % Pocet polparu
+R1=370e-3; % Statorovy odpor vinuti (Ohm)
+R2=225e-3; % Rotorovy odpor vinuti (Ohm)
+L1sigma=2.27e-3; % Rozptylova indukcnost statoroveho vinuti (H)
+L2sigma=2.27e-3; % Rozptylova indukcnost rotoroveho vinuti (H)
+Lm=82.5e-3; % Magnetizacni indukcnost (H)
+L1=L1sigma+Lm; % Statorova indukcnost (H)
+L2=L2sigma+Lm; % Rotorova indukcnost (H)
+J=0.4; % Moment setrvacnosti hridele (kg*m^(2))
+sigma=1-Lm^(2)/(L1*L2); %Koeficient rozptylu
+f=50; % Napajeci frekvence
