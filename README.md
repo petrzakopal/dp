@@ -9,11 +9,11 @@
 
 ## Mé denní poznámky ✏️
 
-🐛 [22.02.2023](/notes/20230222.md)
+🐛 [22.02.2023](/notes/20230222.md) <-- pozor PŘESUN CMODEL NA [cmodel](./code/cmodel/)
 
 ---
 
-👨🏻‍💻 [21.02.2023](/notes/20230221.md) <-- konečně jsem zas přišel na PMOD z PL, dodělal jsem [cmodel](./code/test-program/cmodel/) ale je tam nějaká chyba asi v RK nebo nějak tak, je třeba to vyřešit, než to půjde do zynq, leaky memory by měli být odstraněny (to mi něco házelo jako lepší hodnoty, ale pak to ustřelilo a nebo byl segmentation fault), kontroluji to pomocí mathemtiky [mathematika](./misc/diff.nb), stačí spustit a nahraje to vyexportovaný soubor z c++, na další dny je hlavní úkol design pro všechny pmod, v budoucnu třeba přerušení, timery, SPI a I2C (lepší SPI, I2C není na kritické operace), také napsat do hostu driver na zápis do GPIO a čtení... v přechozích dnech byl odkaz na wiki attlasian xilinx, hlavní úkol je však **debugging cmodelu**
+👨🏻‍💻 [21.02.2023](/notes/20230221.md) <-- konečně jsem zas přišel na PMOD z PL, dodělal jsem (NOVÝ ODKAZ 20220222 [cmodel](./code/cmodel/)) , starý odkaz -> [cmodel](./code/test-program/cmodel/) ale je tam nějaká chyba asi v RK nebo nějak tak, je třeba to vyřešit, než to půjde do zynq, leaky memory by měli být odstraněny (to mi něco házelo jako lepší hodnoty, ale pak to ustřelilo a nebo byl segmentation fault), kontroluji to pomocí mathemtiky [mathematika](./misc/diff.nb), stačí spustit a nahraje to vyexportovaný soubor z c++, na další dny je hlavní úkol design pro všechny pmod, v budoucnu třeba přerušení, timery, SPI a I2C (lepší SPI, I2C není na kritické operace), také napsat do hostu driver na zápis do GPIO a čtení... v přechozích dnech byl odkaz na wiki attlasian xilinx, hlavní úkol je však **debugging cmodelu**
 
 ---
 
