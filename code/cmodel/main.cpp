@@ -34,7 +34,26 @@ MotorModel.setOdeCalculationSettings(0, 1, 0.00001); // initial time, final time
 MotorModel.motorParametersAllocateMemory();
 MotorModel.stateSpaceCoeffAllocateMemory();
 MotorModel.modelVariablesAllocateMemory(); // on index [0] there are initialConditions, RK4 starts from 1 to <=n when n is (final-initial)/step
-MotorModel.setMotorParameters();
+
+
+
+
+
+/*-------------------- USE FUNCTION WITH HARDCODED VALUE OF MOTOR OR SET IT MANUALLY ---------------------*/
+
+// MotorModel.setMotorParameters(); // hardcoded values
+MotorModel.motorParameters->R1 = 0.370f; // Ohm, stator rezistance
+MotorModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
+MotorModel.motorParameters->L1s = 0.00227f; // H, stator leakage inductance
+MotorModel.motorParameters->L2s = 0.00227f; // H, rotor leakage inductance
+MotorModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
+MotorModel.motorParameters->L1 = 0.08477f; // H, inductance
+MotorModel.motorParameters->L2 = 0.08477f; // H, inductance
+MotorModel.motorParameters->sigma = 0.05283f; // = 0.0528396032, sigma = 1 - Lm^(2)/L1L2
+MotorModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+MotorModel.motorParameters->momentOfIntertia = 0.4; // J, moment of inertia
+/*--------------------------------------------------------------------------------------------------------*/
+
 MotorModel.setStateSpaceCoeff();
 MotorModel.voltageGeneratorDataAllocateMemory();
 
@@ -65,7 +84,7 @@ std::cout << "number of iterations: " << numberOfIterations << "\n";
 
 
 
-std::cout << "test state space coeff= " << MotorModel.getStateSpaceCoeff()->a14 << "\n";
+std::cout << "test state space coeff= " << MotorModel.getStateSpaceCoeff()->a13 << "\n";
 
 MotorModel.voltageGeneratorData->voltageFrequency = 50;
 MotorModel.voltageGeneratorData->voltageAmplitude = 325.26;
@@ -97,8 +116,8 @@ MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.mode
 
 
 // use for defining parameters not in class function (it is just for fun to have it in class, maybe change later, need to ask by boss)
-MotorModel.motorParameters->R1 = 25;
-std::cout << "motor parameters changed R1 = " << MotorModel.motorParameters->R1 << "\n";
+// MotorModel.motorParameters->R1 = 25;
+// std::cout << "motor parameters changed R1 = " << MotorModel.motorParameters->R1 << "\n";
 
 free(MotorModel.motorParameters);
 free(MotorModel.stateSpaceCoeff);
