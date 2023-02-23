@@ -6,6 +6,18 @@
 #include "header/transformation.h"
 
 
+
+/* POZOR V ZYBO NA VKLÁDÁNÍ HEADER FILES V KERNELU */
+/*
+
+je třeba dělat include #include "function/MotorModel.cpp"
+a uvnitř cpp mít #include "../header/MotorModel.h"
+jinak to nejde
+
+také je problém v případě, že v MotorModel.cpp includuji transformation a ono to bere, že se to redefinovává i když to tak není, to je probléma  hodí to u v++ error
+
+*/
+
 #define PI 3.141592 
 
 
@@ -45,23 +57,26 @@ std::cout << "| ----------------------- |\n";
 /*---------------------------------------------------------*/
 /*-------------------- TEST OUTPUTS ----------------------*/
 
-
+int numberOfIterations = MotorModel.numberOfIterations();
 
 
 std::cout << "number of modelVariables: " << ((int)ceil((MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep)) << "\n";
-std::cout << "number of iterations: " << ((int)ceil((MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep)) << "\n";
+std::cout << "number of iterations: " << numberOfIterations << "\n";
 
 
 
 std::cout << "test state space coeff= " << MotorModel.getStateSpaceCoeff()->a14 << "\n";
 
+MotorModel.voltageGeneratorData->voltageFrequency = 50;
+MotorModel.voltageGeneratorData->voltageAmplitude = 325.26;
 
+std::cout << "voltage frequency: " <<MotorModel.voltageGeneratorData->voltageFrequency<< "\n";
 
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 
 // precalculating voltages in a kernel
 /*--------------------------------------------------------------------------------------------------------------------------------*/
-MotorModel.precalculateVoltageSource(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings, 325.26, 50);
+MotorModel.precalculateVoltageSource(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings, MotorModel.voltageGeneratorData->voltageAmplitude, MotorModel.voltageGeneratorData->voltageFrequency);
 MotorModel.precalculateVoltageClarke(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings);
 
 std::cout << "motor voltage u1 at 0: " << MotorModel.getVoltage(0)->u1 << "\n";
@@ -73,9 +88,17 @@ std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->
 
 MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
 
+// MotorModel.setVariable(MotorModel.getVoltage(0)->u1, 2500);
+// std::cout << "motor voltage u1 at 0: " << MotorModel.getVoltage(0)->u1 << "\n";
+
 // std::cout << "motor variable from calc: "<<MotorModel.getMotorVariable(0)->i1alpha<<"\n";
 // std::cout << "torque is= " << MotorModel.motorTorque(MotorModel.motorParameters,MotorModel.getMotorVariable(800)) << "\n";
 // std::cout << "motor variable mechanicalAngularVelocity: "<<MotorModel.getMotorVariable(800)->motorMechanicalAngularVelocity<<"\n";
+
+
+// use for defining parameters not in class function (it is just for fun to have it in class, maybe change later, need to ask by boss)
+MotorModel.motorParameters->R1 = 25;
+std::cout << "motor parameters changed R1 = " << MotorModel.motorParameters->R1 << "\n";
 
 free(MotorModel.motorParameters);
 free(MotorModel.stateSpaceCoeff);

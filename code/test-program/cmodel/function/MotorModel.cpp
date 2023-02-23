@@ -8,6 +8,11 @@
 #define PI 3.141592 
 
 
+int MotorModelClass::numberOfIterations()
+{
+    return(((int)ceil(((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep))));
+}
+
 /*---------------------------------------------------------------------------------------*/
 /*-------------------- ALLOCATE MEMORY FOR STATE SPACE COEFFICIENTS --------------------*/
 void MotorModelClass::motorParametersAllocateMemory()

@@ -66,6 +66,8 @@ typedef struct voltageGeneratorStruct
     float u3;
     float u1alpha;
     float u1beta;
+    float voltageFrequency;
+    float voltageAmplitude;
 
 }voltageGeneratorType;
 
@@ -189,6 +191,6 @@ class MotorModelClass
     /*-------------------------------------------------------------------------------------------------------------------*/
 
     
-
+    int numberOfIterations();
 };
 /*-----------------------------------------------------------*/
