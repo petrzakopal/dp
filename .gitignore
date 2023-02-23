@@ -1,0 +1,10 @@
+zybo-pmod-gpio
+*system*
+*hw_link
+RemoteSystemsTempFiles
+IDE.log
+xrc.log
+.analytics
+.metadata
+.Xil
+ip_cache/
