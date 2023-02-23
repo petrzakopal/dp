@@ -6,3 +6,4 @@ Tato větev obsahuje zálohy aktuálních kódů, které vkládám do SoC. Toto 
 ```bash
 git config --global credential.helper store
 ```
+Poté zadat jméno a heslo (Access token).
