@@ -9,7 +9,11 @@
 
 ## Mé denní poznámky ✏️
 
-🐛 [22.02.2023](/notes/20230222.md) <-- pozor PŘESUN CMODEL NA [cmodel](./code/cmodel/)
+👨🏻‍💻 [23.02.2023](/notes/20230223.md)
+
+---
+
+🐛 [22.02.2023](/notes/20230222.md) <-- pozor PŘESUN CMODEL NA [cmodel](./code/cmodel/), pracoval jsema opravil jsem c model v pc, udělal jsem GPIO JB->JE na PL v block design, přenáším kód do SoC ohledně modelu, to je i todo na zítra, todo je udělat krom toho, že jsem zatím pro dnešek udělal backup pro kód [proxmox-backup](./code/proxmox-backup/) z SoC, tak udělat čistou branch a to mít na proxmoxu a pushovat asi odtamtud... vyzkoušet si nejdřív na novém repo... návod je popsán třeba zde [stack overflow](https://stackoverflow.com/questions/61906358/can-i-create-a-new-branch-which-does-not-have-any-files-from-the-master-branch) nebo na [stack overflow 2](https://stackoverflow.com/questions/13969050/creating-a-new-empty-branch-for-a-new-project/13969482#13969482)
 
 ---
 
