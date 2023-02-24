@@ -75,7 +75,7 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     /*-----------------------------------------------------------------------------------------*/
 
     /*-------------------------------- OPENCL KERNEL CREATION ---------------------------------*/
-    cl::Kernel krnl_GenerateVoltage;
+    cl::Kernel krnl_GenerateVoltageSource;
     cl::Kernel krnl_compute2;
     /*----------------------------------------------------------------------------------------*/
 
@@ -179,7 +179,7 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
             // This call will get the kernel object from program. A kernel is an
             // OpenCL function that is executed on the FPGA.
-            OCL_CHECK(err, krnl_GenerateVoltage = cl::Kernel(program, "krnl_GenerateVoltage", &err)); // assign to krnl_compute the new PL kernel, which is found in kernel_main and called kernel_main
+            OCL_CHECK(err, krnl_GenerateVoltageSource = cl::Kernel(program, "krnl_GenerateVoltageSource", &err)); // assign to krnl_compute the new PL kernel, which is found in kernel_main and called kernel_main
 
             // testing second kernel
             OCL_CHECK(err, krnl_compute2 = cl::Kernel(program, "krnl_main2", &err));
@@ -212,7 +212,8 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
     MotorModelClass MotorModel;
     MotorModel.odeCalculationSettingsAllocateMemory();
-    MotorModel.setOdeCalculationSettings(0, 1, 0.00001); // initial time, final time, calculation step; if you want to calculate just one sample at a time (in for cycle of RK4), use (0, 1, 1)
+    MotorModel.setOdeCalculationSettings(0, 1, 0.0001); // initial time, final time, calculation step; if you want to calculate just one sample at a time (in for cycle of RK4), use (0, 1, 1)
+    MotorModel.odeCalculationSettings->numberOfIterations =  MotorModel.numberOfIterations();
     MotorModel.motorParametersAllocateMemory();
     MotorModel.stateSpaceCoeffAllocateMemory();
     MotorModel.modelVariablesAllocateMemory(); // on index [0] there are initialConditions, RK4 starts from 1 to <=n when n is (final-initial)/step
@@ -244,7 +245,7 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
     /*----------------------------------------------------------------------------------*/
 
-    int numberOfIterations = MotorModel.numberOfIterations();
+    
 
     MotorModel.voltageGeneratorData->voltageFrequency = 50;
     MotorModel.voltageGeneratorData->voltageAmplitude = 325.26;
@@ -256,42 +257,51 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
     std::cout << "test state space coeff= " << MotorModel.getStateSpaceCoeff()->a13 << "\n";
 
-    std::cout << "number of modelVariables: " << ((int)ceil((MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep)) << "\n";
+    std::cout << "number of modelVariables: " <<  MotorModel.odeCalculationSettings->numberOfIterations << "\n";
     /*----------------------------------------------------------------------------------*/
 
 
-    OCL_CHECK(err, cl::Buffer buffer_voltageGeneratorData(context, CL_MEM_USE_HOST_PTR, numberOfIterations * sizeof(voltageGeneratorType),MotorModel.voltageGeneratorData,&err));
+    OCL_CHECK(err, cl::Buffer buffer_voltageGeneratorData(context, CL_MEM_USE_HOST_PTR, MotorModel.odeCalculationSettings->numberOfIterations * sizeof(voltageGeneratorType),MotorModel.voltageGeneratorData,&err));
     OCL_CHECK(err, cl::Buffer buffer_odeCalculationSettings(context, CL_MEM_USE_HOST_PTR, sizeof(odeCalculationSettingsType),MotorModel.odeCalculationSettings,&err));
+
+    // OCL_CHECK(err, cl::Buffer buffer_numberOfIterations(context, CL_MEM_READ_ONLY, sizeof(int),NULL,&err));
+
+
+    
 
 
     std::cout << "test voltage free data= " << MotorModel.voltageGeneratorData->u1 << "\n";
     int narg = 0;
-    OCL_CHECK(err, err = krnl_GenerateVoltage.setArg(narg++, buffer_voltageGeneratorData));
-    OCL_CHECK(err, err = krnl_GenerateVoltage.setArg(narg++, buffer_odeCalculationSettings));
+    OCL_CHECK(err, err = krnl_GenerateVoltageSource.setArg(narg++, buffer_voltageGeneratorData));
+    OCL_CHECK(err, err = krnl_GenerateVoltageSource.setArg(narg++, buffer_odeCalculationSettings));
 
     // Data will be migrated to kernel space
     OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_voltageGeneratorData, buffer_odeCalculationSettings}, 0 /* 0 means from host*/));
 
 
     // Launch the Kernel
-    OCL_CHECK(err, err = q.enqueueTask(krnl_GenerateVoltage));
+    OCL_CHECK(err, err = q.enqueueTask(krnl_GenerateVoltageSource));
 
     OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_voltageGeneratorData}, CL_MIGRATE_MEM_OBJECT_HOST));
 
     OCL_CHECK(err, q.finish());
 
-    std::cout << "motor voltage u1 at 0: " << MotorModel.getVoltage(0)->u1 << "\n";
+
+    for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
+    {
+        std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1 << "\n";
+    }
     std::cout << "motor clarke voltage u1alpha at 20: " << MotorModel.getVoltage(0)->u1alpha << "\n";
     std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->u1beta << "\n";
 
     
     
 
-
+    free(MotorModel.odeCalculationSettings);
     free(MotorModel.motorParameters);
     free(MotorModel.stateSpaceCoeff);
     free(MotorModel.modelVariables);
-    free(MotorModel.odeCalculationSettings);
+    
     free(MotorModel.voltageGeneratorData);
 
     range.end(); // profiling 
