@@ -34,14 +34,11 @@ typedef struct modelCVVariablesStruct
     float psi2alpha;
     float psi2beta;
     float motorElectricalAngularVelocity;
-
-    // vector regulation paste in a separate type struct
-    // float psi2;
-    // float u1alpha;
-    // float u1beta;
-    // float u1d;
-    // float u1q;
-
+    float *inputI1;
+    float *inputI2;
+    float *inputI3;
+    float *inputMotorMechanicalAngularVelocity;
+    float *inputTime;
 }modelCVVariablesType;
 /*------------------------------------------------------------------------------------------------------------------*/
 
