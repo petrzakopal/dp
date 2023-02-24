@@ -112,9 +112,9 @@ void CurVelModelClass::CurVelModelCalculate(modelCVCoeffType *modelCVCoeff, mode
 
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
-    modelCVVariables->psi2alpha = modelCVVariables->psi2alpha + (odeCVCalculationSettings->calculationStep / 6) * (k1psi2alpha + 2 * k2psi2alpha + 2 * k3psi2alpha + k4psi2alpha);
+    modelCVVariables->psi2alpha = modelCVVariables->psi2alpha + ((odeCVCalculationSettings->calculationStep / 6) * (k1psi2alpha + 2 * k2psi2alpha + 2 * k3psi2alpha + k4psi2alpha));
 
-    modelCVVariables->psi2beta = modelCVVariables->psi2beta + (odeCVCalculationSettings->calculationStep / 6) * (k1psi2beta + 2 * k2psi2beta + 2 * k3psi2beta + k4psi2beta);
+    modelCVVariables->psi2beta = modelCVVariables->psi2beta + ((odeCVCalculationSettings->calculationStep / 6) * (k1psi2beta + 2 * k2psi2beta + 2 * k3psi2beta + k4psi2beta));
     
 
 

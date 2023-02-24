@@ -7,6 +7,10 @@
 
 
 
+#include <fstream>
+
+
+
 /* POZOR V ZYBO NA VKLÁDÁNÍ HEADER FILES V KERNELU */
 /*
 
@@ -29,8 +33,9 @@ int main()
 /*----------------------------------------------------------------------------------*/
 /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
 MotorModelClass MotorModel;
+float globalCalculationStep = 0.0001;
 MotorModel.odeCalculationSettingsAllocateMemory();
-MotorModel.setOdeCalculationSettings(0, 1, 0.001); // initial time, final time, calculation step; if you want to calculate just one sample at a time (in for cycle of RK4), use (0, 1, 1)
+MotorModel.setOdeCalculationSettings(0, 1, globalCalculationStep); // initial time, final time, calculation step; if you want to calculate just one sample at a time (in for cycle of RK4), use (0, 1, 1)
 MotorModel.motorParametersAllocateMemory();
 MotorModel.stateSpaceCoeffAllocateMemory();
 MotorModel.modelVariablesAllocateMemory(); // on index [0] there are initialConditions, RK4 starts from 1 to <=n when n is (final-initial)/step
@@ -125,11 +130,11 @@ MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.mode
 
 
 
-free(MotorModel.motorParameters);
-free(MotorModel.stateSpaceCoeff);
-free(MotorModel.modelVariables);
-free(MotorModel.odeCalculationSettings);
-free(MotorModel.voltageGeneratorData);
+// free(MotorModel.motorParameters);
+// free(MotorModel.stateSpaceCoeff);
+// free(MotorModel.modelVariables);
+// free(MotorModel.odeCalculationSettings);
+// free(MotorModel.voltageGeneratorData);
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 /*||||||||||||||||||||||||||||||||||||||||||||| END OF ASM MOTOR GENERATION |||||||||||||||||||||||||||||||||||||||||||||*/
@@ -141,7 +146,7 @@ CurVelModel.motorCoeffAllocateMemory();
 CurVelModel.modelCVVariablesAllocateMemory();
 CurVelModel.odeCVCalculationSettingsAllocateMemory();
 
-CurVelModel.odeCVCalculationSettings->calculationStep = 0.001;
+CurVelModel.odeCVCalculationSettings->calculationStep = globalCalculationStep;
 
 
 CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
@@ -154,22 +159,56 @@ CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorPar
 
 std::cout << "CurVelModel.modelCVCoeff->R2DL2: " << CurVelModel.modelCVCoeff->R2DL2 << "\n";
 
-CurVelModel.modelCVVariables->i1alpha = 15;
-CurVelModel.modelCVVariables->i1beta = 3;
-CurVelModel.modelCVVariables->motorElectricalAngularVelocity = 50;
-CurVelModel.modelCVVariables->psi2alpha = 0;
-CurVelModel.modelCVVariables->psi2beta = 0;
+std::cout << "MotorModel.getMotorVariable(0)->i1alpha: " << MotorModel.getMotorVariable(2)->i1alpha << "\n";
 
-CurVelModel.CurVelModelCalculate(CurVelModel.modelCVCoeff, CurVelModel.modelCVVariables, CurVelModel.odeCVCalculationSettings);
+    std::ofstream modelCVOutputDataFile;
+    modelCVOutputDataFile.open ("outputCurVel.csv",std::ofstream::out | std::ofstream::trunc);
+    modelCVOutputDataFile<< "time,|psi2|,i1alpha,motorMechanicalAngularVelocity\n";
 
 
-std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
-std::cout << "psi2beta: " << CurVelModel.modelCVVariables->psi2beta << "\n";
+    float psi2Amplitude = 0;
+    float timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
+
+for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
+{
+
+    timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep;
+
+    CurVelModel.modelCVVariables->i1alpha = MotorModel.getMotorVariable(i)->i1alpha;
+    CurVelModel.modelCVVariables->i1beta = MotorModel.getMotorVariable(i)->i1beta;
+    CurVelModel.modelCVVariables->motorElectricalAngularVelocity = MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity * MotorModel.motorParameters->nOfPolePairs;
+
+    CurVelModel.CurVelModelCalculate(CurVelModel.modelCVCoeff, CurVelModel.modelCVVariables, CurVelModel.odeCVCalculationSettings);
+
+    // std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
+    // std::cout << "psi2beta: " << CurVelModel.modelCVVariables->psi2beta << "\n";
+
+
+    psi2Amplitude = sqrt((CurVelModel.modelCVVariables->psi2alpha * CurVelModel.modelCVVariables->psi2alpha) + (CurVelModel.modelCVVariables->psi2beta * CurVelModel.modelCVVariables->psi2beta));
+
+    // std::cout << "|psi2| = " << psi2Amplitude << "\n";
+    // std::cout << i <<"\n";
+    modelCVOutputDataFile << timeCV << "," << psi2Amplitude <<","<<MotorModel.getMotorVariable(i)->i1alpha << "," << MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity <<"\n";
+}
+
+
+
+
+// std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
+// std::cout << "psi2beta: " << CurVelModel.modelCVVariables->psi2beta << "\n";
 
 free(CurVelModel.motorParameters);
 free(CurVelModel.modelCVCoeff);
 free(CurVelModel.modelCVVariables);
 free(CurVelModel.odeCVCalculationSettings);
+
+
+
+free(MotorModel.motorParameters);
+free(MotorModel.stateSpaceCoeff);
+free(MotorModel.modelVariables);
+free(MotorModel.odeCalculationSettings);
+free(MotorModel.voltageGeneratorData);
 /*---------------------------------------------------------*/
 
 return 0;
