@@ -37,6 +37,7 @@ typedef struct odeCalculationSettingsStruct
     float finalCalculationTime;
     float calculationStep;
     float calculationTime;
+    int numberOfIterations;
 }odeCalculationSettingsType;
 /*---------------------------------------------------------------------------------------------------*/
 

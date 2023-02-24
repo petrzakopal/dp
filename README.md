@@ -9,7 +9,11 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻 [23.02.2023](/notes/20230223.md)
+👨🏻‍💻 [24.02.2023](/notes/20230224.md)
+
+---
+
+👨🏻‍💻 [23.02.2023](/notes/20230223.md) <-- vypadá to, jako že jsem toho moc neudělal, ale řešil jsem problém s prázdnou větví repozitáře a zabuggovaného Vitisu, když už to skoro bylo vše v pohodě, vznikl problém, že v ZynQ je příliš málo LUTS a API motoru, které jsem udělal je k ničemu, protože musím rozdělat ještě více funkce na další části a hledat další možné optimalizace, snad to půjde, je taky divný problém s tím, že se nevygenerují všechny samply napětí nebo když se změní jejich počet tak je problém s čištění pamětí, algoritmy jsou stále stejné a po debuggingu pomocí `leaks` v macOS není žádná chyba. toto je asiu random chyba optimalizace pomocí pragma, budu řešit později, zkusím udělat co nejdříve pouze I-n model a ten akcelerovat.... **pro lepší výpočty a a akceleraci aplikací a modelu doporučuji [Xilinx Kria – Vision AI - levnější ale málo PMOD](https://cz.mouser.com/ProductDetail/Xilinx/SK-KV260-G?qs=DRkmTr78QATF92lTPoHh8Q%3D%3D), [Xilinx Kria Robotics – dražší ale vhodnější pro řízení pohonů](https://cz.mouser.com/ProductDetail/Xilinx/SK-KR260-G?qs=t7xnP681wgWGuCVg0VyR9A%3D%3D)** => obě desky mají veliký počet LUTs - 256K oproti Zybo, které používáme 17,6 K a vyšší zybo s cenou jako kria poté 53,2 K..., vyřešil jsem také skoro prakticky headless workflow na buildění, pomáhám si však ještě někdy IDE...
 
 ---
 
