@@ -290,9 +290,11 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
     {
         std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1 << "\n";
+        std::cout << "motor voltage u2 at " << i << " : " << MotorModel.getVoltage(i)->u2 << "\n";
+        std::cout << "motor voltage u3 at " << i << " : " << MotorModel.getVoltage(i)->u3 << "\n";
     }
-    std::cout << "motor clarke voltage u1alpha at 20: " << MotorModel.getVoltage(0)->u1alpha << "\n";
-    std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->u1beta << "\n";
+    // std::cout << "motor clarke voltage u1alpha at 20: " << MotorModel.getVoltage(0)->u1alpha << "\n";
+    // std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->u1beta << "\n";
 
     
     
@@ -301,7 +303,6 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     free(MotorModel.motorParameters);
     free(MotorModel.stateSpaceCoeff);
     free(MotorModel.modelVariables);
-    
     free(MotorModel.voltageGeneratorData);
 
     range.end(); // profiling 
