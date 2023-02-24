@@ -158,3 +158,4 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 - iTerm2 - Terminal [iterm2](https://iterm2.com/)
 - Oh My ZSH - konfigurace terminálu zsh [ohmyz](https://ohmyz.sh/)
 - powerlevel10k - nejlepší théma na zsh [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- tmux - terminal multiplexer [tmux](https://github.com/tmux/tmux/wiki), [cheatsheet](https://tmuxcheatsheet.com/)
