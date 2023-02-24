@@ -2,10 +2,11 @@
 
 ## Pracuji na
 
-- řešení transferu dat v aplikaci host->kernel–>host pro class
-- jak co nejefektivněji udělat model ASM, když nelze použít vektory a struktury jako v klasickém mikroprocesoru DSP - je to jiný přístup s FPGA, záleží i na funkčnosti FPGA, u zynq 7000 třeba je pevně definovaný počet argumentů kernelu, resp. nejde mi funkce když to chci změnit, nejdou používat snadno struktury a mix s polem, uložení proměnných v FPGA asi taky není možné, víc kernelů taky ne (pokud to PL nepodporuje)
-- zprovoznění PMOD napojených na PL
-- lze arduinem vytvořit nulu na PMOD při paralelním spojení nebo budu arduinem řídit MOSFET a vytvářet požadovaný signál
+- přesun I-n modelu do FPGA
+- hledání jak funguje timer a přerušení a jak dělat akvizici dat do zybo pomocí PMOD GPIO a XADC pro otáčková resp. proudová čidla
+- začít dělat regulátor a výstup pro měnič v cmodelu...
+- momentální cíl -> model do FPGA, zkusit reakci na předpočítaná data, po úspěchu začít modelovat regulátory, SVM, výstup na měnič, výstup z pmod
+- lze arduinem vytvořit nulu na PMOD při paralelním spojení nebo budu arduinem řídit MOSFET a vytvářet požadovaný signál (modelování vstupů do fpga / výstupů z motoru)
 
 ## Mé denní poznámky ✏️
 
