@@ -5,8 +5,8 @@
 #include "header/transformation.h"
 #include "header/CurVelModel.h"
 
-
-
+#include <string>
+#include <iostream>
 #include <fstream>
 
 
@@ -107,10 +107,6 @@ std::cout << "motor voltage u1 at 0: " << MotorModel.getVoltage(0)->u1 << "\n";
 std::cout << "motor clarke voltage u1alpha at 20: " << MotorModel.getVoltage(0)->u1alpha << "\n";
 std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->u1beta << "\n";
 
-    // for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
-    // {
-    //     std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1 << "\n";
-    // }
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 
 MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
@@ -129,87 +125,300 @@ MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.mode
 
 
 
-
+/*------------------------------------------------------------------------*/
+/*-------------------- FREE THE POINTERS TO MEMORY ----------------------*/
 // free(MotorModel.motorParameters);
 // free(MotorModel.stateSpaceCoeff);
 // free(MotorModel.modelVariables);
 // free(MotorModel.odeCalculationSettings);
 // free(MotorModel.voltageGeneratorData);
+/*------------------------------------------------------------------------*/
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 /*||||||||||||||||||||||||||||||||||||||||||||| END OF ASM MOTOR GENERATION |||||||||||||||||||||||||||||||||||||||||||||*/
 
 
+
+/*||||||||||||||||||||||||||||||||||||||||||||||||| CURRENT - VELOCITY MOTOR MODEL DIRECTLY FROM ASM MOTOR |||||||||||||||||||||||||||||||||||||||||||||||||*/
+/*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+
+/*----------------------------------------------------------------------------------------*/
+/*-------------------- DEFINING CLASS OBJECT AND ALLOCATING MEMORY ----------------------*/
 CurVelModelClass CurVelModel;
 CurVelModel.motorParametersAllocateMemory();
 CurVelModel.motorCoeffAllocateMemory();
 CurVelModel.modelCVVariablesAllocateMemory();
 CurVelModel.odeCVCalculationSettingsAllocateMemory();
+/*----------------------------------------------------------------------------------------*/
 
-CurVelModel.odeCVCalculationSettings->calculationStep = globalCalculationStep;
 
-
+/*----------------------------------------------------------------------------------------*/
+/*------------------------------ DEFINING INPUT PARAMETERS ------------------------------*/
+CurVelModel.odeCVCalculationSettings->calculationStep = globalCalculationStep; // just a helper variable defined on top of this file to hava the same number of samples for ASM motor model and Current-Velocity model
 CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
 CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
 CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
 CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+/*----------------------------------------------------------------------------------------*/
 
+
+/*----------------------------------------------------------------------------------------*/
+/*------------------------------ PRECALCULATING MODEL COEFF ------------------------------*/
 CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
+/*----------------------------------------------------------------------------------------*/
 
 
-std::cout << "CurVelModel.modelCVCoeff->R2DL2: " << CurVelModel.modelCVCoeff->R2DL2 << "\n";
+// std::cout << "CurVelModel.modelCVCoeff->R2DL2: " << CurVelModel.modelCVCoeff->R2DL2 << "\n";
 
-std::cout << "MotorModel.getMotorVariable(0)->i1alpha: " << MotorModel.getMotorVariable(2)->i1alpha << "\n";
-
-    std::ofstream modelCVOutputDataFile;
-    modelCVOutputDataFile.open ("outputCurVel.csv",std::ofstream::out | std::ofstream::trunc);
-    modelCVOutputDataFile<< "time,|psi2|,i1alpha,motorMechanicalAngularVelocity\n";
+// std::cout << "MotorModel.getMotorVariable(0)->i1alpha: " << MotorModel.getMotorVariable(2)->i1alpha << "\n";
 
 
-    float psi2Amplitude = 0;
-    float timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
 
+/*----------------------------------------------------------------------------------------*/
+/*----------------------------- FINE EXPORT FILE PREPARATION -----------------------------*/
+std::ofstream modelCVOutputDataFile;
+modelCVOutputDataFile.open ("outputCurVel.csv",std::ofstream::out | std::ofstream::trunc);
+modelCVOutputDataFile<< "time,|psi2|,i1alpha,motorMechanicalAngularVelocity\n";
+/*----------------------------------------------------------------------------------------*/
+
+
+
+float psi2Amplitude = 0; // helper variables to have cleader code, mybe change later, but is used to eliminate multiple calculations of amplitude os psi2
+float timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
+
+
+/*************************************************************************************************/
+/*------------------------------ MAIN MODEL LOOP FOR KNOWN INPUTS ------------------------------*/
+
+// if there is no known input for next step, the program needs to wait for the interrupt and data acquisition, but in this cmodel on PC we work with „predefined data“ to make some progress
 for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
 {
 
-    timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep;
+    timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep; // time calculation for data output and graphs
 
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------ GETTING TRANSFORMED CURRENTS ALPHA, BETA AND VELOCITY DIRECTLY FROM ASM MODEL ------------------------------*/
     CurVelModel.modelCVVariables->i1alpha = MotorModel.getMotorVariable(i)->i1alpha;
     CurVelModel.modelCVVariables->i1beta = MotorModel.getMotorVariable(i)->i1beta;
     CurVelModel.modelCVVariables->motorElectricalAngularVelocity = MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity * MotorModel.motorParameters->nOfPolePairs;
+    /*-------------------------------------------------------------------------------------------------------------------------------------------*/
 
+    /*---------------------------------------------------------------------------------------*/
+    /*------------------------------ RK4 ODE SOLVING FUNCTION ------------------------------*/
     CurVelModel.CurVelModelCalculate(CurVelModel.modelCVCoeff, CurVelModel.modelCVVariables, CurVelModel.odeCVCalculationSettings);
-
-    // std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
-    // std::cout << "psi2beta: " << CurVelModel.modelCVVariables->psi2beta << "\n";
+    /*--------------------------------------------------------------------------------------*/
 
 
+    /*------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------ MORE DATA TUNING AND OUTPUT TO A FINE EXPORTED FILE ------------------------------*/
     psi2Amplitude = sqrt((CurVelModel.modelCVVariables->psi2alpha * CurVelModel.modelCVVariables->psi2alpha) + (CurVelModel.modelCVVariables->psi2beta * CurVelModel.modelCVVariables->psi2beta));
 
-    // std::cout << "|psi2| = " << psi2Amplitude << "\n";
-    // std::cout << i <<"\n";
     modelCVOutputDataFile << timeCV << "," << psi2Amplitude <<","<<MotorModel.getMotorVariable(i)->i1alpha << "," << MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity <<"\n";
+    /*----------------------------------------------------------------------------------------------------------------*/
+
 }
+/**************************************************************************************************/
 
-
-
-
-// std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
-// std::cout << "psi2beta: " << CurVelModel.modelCVVariables->psi2beta << "\n";
+modelCVOutputDataFile.close(); // closing fine export file
 
 free(CurVelModel.motorParameters);
 free(CurVelModel.modelCVCoeff);
 free(CurVelModel.modelCVVariables);
 free(CurVelModel.odeCVCalculationSettings);
+/*|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+/*||||||||||||||||||||||||||||||||||||||||||||||||| END OF CURRENT - VELOCITY MOTOR MODEL DIRECTLY FROM ASM MOTOR |||||||||||||||||||||||||||||||||||||||||||||||||*/
+
+
+/*||||||||||||||||||||||||||||||||||||||||||||||||| CURRENT - VELOCITY MOTOR MODEL FROM ACQUIRED DATA „MODELATION“ |||||||||||||||||||||||||||||||||||||||||||||||||*/
+/*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+
+
+/*------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ MODELING OUTPUT DATA / INPUT DATA FROM SENSORS ------------------------------*/
+std::ofstream outputData;
+outputData.open ("outputData.csv",std::ofstream::out | std::ofstream::trunc);
 
 
 
-free(MotorModel.motorParameters);
+TransformationClass Transformation;
+float i1a, i1b, i1c, motorMechanicalAngularVelocity;
+timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
+for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
+{
+    timeCV = timeCV + globalCalculationStep;
+    
+    // std::cout << Transformation.inverseClarkeTransform1(MotorModel.getMotorVariable(i)->i1alpha,MotorModel.getMotorVariable(i)->i1beta, 0.6667) << "\n";
+    // std::cout << Transformation.inverseClarkeTransform2(MotorModel.getMotorVariable(i)->i1alpha,MotorModel.getMotorVariable(i)->i1beta, 0.6667) << "\n";
+    // std::cout << Transformation.inverseClarkeTransform3(MotorModel.getMotorVariable(i)->i1alpha,MotorModel.getMotorVariable(i)->i1beta, 0.6667) << "\n";
+    i1a = Transformation.inverseClarkeTransform1(MotorModel.getMotorVariable(i)->i1alpha,MotorModel.getMotorVariable(i)->i1beta);
+    i1b = Transformation.inverseClarkeTransform2(MotorModel.getMotorVariable(i)->i1alpha,MotorModel.getMotorVariable(i)->i1beta);
+    i1c = Transformation.inverseClarkeTransform3(MotorModel.getMotorVariable(i)->i1alpha,MotorModel.getMotorVariable(i)->i1beta);
+    motorMechanicalAngularVelocity = MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity;
+    outputData<< timeCV << "," << i1a << "," << i1b << "," << i1c << "," << motorMechanicalAngularVelocity<< ","; // lightweight format - one line, data divided by „,“, will be imported back to cmodel, could be done better, but this is lightweight and not meant to be read by a human
+    // the structure of data is important – the structure is supposed when importing data to new variables
+
+    
+}
+outputData.close(); // closing lightweight data sensor export
+/*--------------------------------------------------------------------------------------------------------*/
+
+
+
+/*------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ LOADING DATA FROM A LIGHTWEIGHT EXPORT FORMAT ------------------------------*/
+
+float *inputTime;
+float *inputI1;
+float *inputI2;
+float *inputI3;
+float *inputMotorMechanicalAngularVelocity;
+posix_memalign((void **)&inputTime , 4096 , MotorModel.odeCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI1 , 4096 , MotorModel.odeCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI2 , 4096 , MotorModel.odeCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI3 , 4096 , MotorModel.odeCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , MotorModel.odeCalculationSettings->numberOfIterations*sizeof(float) );
+
+std::ifstream inputData( "outputData.csv" );
+
+int switchReadingIndex = 0;
+int timeIndex = 0;
+int i1Aindex = 0;
+int i1Bindex = 0;
+int i1Cindex = 0;
+int motorMechanicalAngularVelocityIndex = 0;
+
+for( std::string line; std::getline( inputData, line, ','); )
+{
+
+
+        // data structure is important, defined in a lightweight export file like {time,i1,i2,i3,motorMechanicalAngularVelocity}
+         switch(switchReadingIndex)
+            {
+                case 0:
+               
+                inputTime[timeIndex] = std::stof (line, NULL);
+                timeIndex++;
+                switchReadingIndex++;
+                break;
+
+                case 1:
+
+                inputI1[i1Aindex] = std::stof (line, NULL);
+                i1Aindex++;
+                switchReadingIndex++;
+                break;
+
+
+                case 2:
+
+                inputI2[i1Bindex] = std::stof (line, NULL);
+                i1Bindex++;
+                switchReadingIndex++;
+                break;
+
+                case 3:
+
+                inputI3[i1Cindex] = std::stof (line, NULL);
+                i1Cindex++;
+                switchReadingIndex++;
+                break;
+
+                case 4:
+
+                inputMotorMechanicalAngularVelocity[motorMechanicalAngularVelocityIndex] = std::stof (line, NULL);
+                motorMechanicalAngularVelocityIndex++;
+                switchReadingIndex = 0;
+                break;
+
+        }
+    
+  
+}
+inputData.close(); // close that file
+/*------------------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ DEFINING CLASS OBJECT AND ALLOCATING MEMORY FOR SECOND I-N MODEL ------------------------------*/
+CurVelModelClass CurVelModel2;
+CurVelModel2.motorParametersAllocateMemory();
+CurVelModel2.motorCoeffAllocateMemory();
+CurVelModel2.modelCVVariablesAllocateMemory();
+CurVelModel2.odeCVCalculationSettingsAllocateMemory();
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------------------------------------------------*/
+/*------------------------------ DEFINING CLASS PARAMETERS AND COEFFICIENTS ------------------------------*/
+CurVelModel2.odeCVCalculationSettings->calculationStep = globalCalculationStep;
+CurVelModel2.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
+CurVelModel2.motorParameters->Lm = 0.0825f; // H, main flux inductance
+CurVelModel2.motorParameters->L2 = 0.08477f; // H, inductance
+CurVelModel2.motorParameters->nOfPolePairs = 2; // number of pole pairs
+CurVelModel2.calculateMotorCVCoeff(CurVelModel2.modelCVCoeff, CurVelModel2.motorParameters);
+/*---------------------------------------------------------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*------------------------------ PREPARIND DATA EXPORT FOR GRAPHS AND TESTING ------------------------------*/
+std::ofstream modelCVOutputDataFile2;
+
+modelCVOutputDataFile2.open("outputCurVel2.csv",std::ofstream::out | std::ofstream::trunc);
+modelCVOutputDataFile2<< "time,|psi2|,i1alpha,motorMechanicalAngularVelocity\n";
+/*-----------------------------------------------------------------------------------------------------------*/
+
+
+
+
+psi2Amplitude = 0;
+timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
+
+
+/****************************************************************************************************/
+/*------------------------------ MAIN MODEL LOOP FOR ACQUIRED INPUTS ------------------------------*/
+for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
+{
+
+    timeCV = timeCV + CurVelModel2.odeCVCalculationSettings->calculationStep;
+
+    CurVelModel2.modelCVVariables->i1alpha = Transformation.clarkeTransform1(inputI1[i], inputI2[i], inputI3[i], 0.6667);
+    CurVelModel2.modelCVVariables->i1beta = Transformation.clarkeTransform2(inputI1[i], inputI2[i], inputI3[i], 0.6667);
+    CurVelModel2.modelCVVariables->motorElectricalAngularVelocity = inputMotorMechanicalAngularVelocity[i] * MotorModel.motorParameters->nOfPolePairs;
+
+    CurVelModel2.CurVelModelCalculate(CurVelModel2.modelCVCoeff, CurVelModel2.modelCVVariables, CurVelModel2.odeCVCalculationSettings);
+
+    // std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
+    // std::cout << "psi2beta: " << CurVelModel2.modelCVVariables->psi2beta << "\n";
+
+
+    psi2Amplitude = sqrt((CurVelModel2.modelCVVariables->psi2alpha * CurVelModel2.modelCVVariables->psi2alpha) + (CurVelModel2.modelCVVariables->psi2beta * CurVelModel2.modelCVVariables->psi2beta));
+
+    // std::cout << "|psi2| = " << psi2Amplitude << "\n";
+    // std::cout << i <<"\n";
+    modelCVOutputDataFile2 << timeCV << "," << psi2Amplitude <<","<<MotorModel.getMotorVariable(i)->i1alpha << "," << MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity <<"\n";
+}
+/****************************************************************************************************/
+
+modelCVOutputDataFile2.close(); // close export file
+
+
+
+
+/*---------------------------------------------------------*/
+
+
+free(CurVelModel2.motorParameters);
+free(CurVelModel2.modelCVCoeff);
+free(CurVelModel2.modelCVVariables);
+free(CurVelModel2.odeCVCalculationSettings);
+
+free(MotorModel.motorParameters); // used in I-n model 2. for acquired data, needs to be freed here
+
+// could be freed after ASM model, but better be together with motorParameters for better visibility
 free(MotorModel.stateSpaceCoeff);
 free(MotorModel.modelVariables);
 free(MotorModel.odeCalculationSettings);
 free(MotorModel.voltageGeneratorData);
-/*---------------------------------------------------------*/
-
 return 0;
 }

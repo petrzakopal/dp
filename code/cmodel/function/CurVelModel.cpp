@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <iostream>
 #include "../header/transformation.h"
-#include <fstream>
 
 
 /*-------------------------------------------------------------------------------------------*/
@@ -65,7 +64,7 @@ float CurVelModelClass::psi2beta(modelCVCoeffType *modelCVCoeff, float i1alpha, 
 }
 /*-------------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------*/
 /*-------------------- ALLOCATE MEMORY ODE SOLVE SETTINGS --------------------*/
 void CurVelModelClass::odeCVCalculationSettingsAllocateMemory()
 {
@@ -76,46 +75,51 @@ void CurVelModelClass::odeCVCalculationSettingsAllocateMemory()
 /*---------------------------------------------------------------------------------------*/
 
 
-
+/*-------------------------------------------------------------------------------------------*/
+/*-------------------- CURRENT VELOCITY MODEL ODE RK4 SOLUTION FUNCTION --------------------*/
 void CurVelModelClass::CurVelModelCalculate(modelCVCoeffType *modelCVCoeff, modelCVVariablesType *modelCVVariables, odeCVCalculationSettingsType *odeCVCalculationSettings)
 {
+
+    // coefficients for RK4
     float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
     float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
 
+    // helper variable to reduce calculation fo the same value
     float halfCalculationStep = odeCVCalculationSettings->calculationStep/2;
 
 
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
     k1psi2alpha = psi2alpha(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, modelCVVariables->psi2alpha, modelCVVariables->psi2beta, modelCVVariables->motorElectricalAngularVelocity);
 
     k1psi2beta = psi2beta(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, modelCVVariables->psi2alpha, modelCVVariables->psi2beta, modelCVVariables->motorElectricalAngularVelocity);
-
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
-
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
     k2psi2alpha = psi2alpha(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, (modelCVVariables->psi2alpha + (halfCalculationStep * k1psi2alpha)), (modelCVVariables->psi2beta + (halfCalculationStep * k1psi2beta)), modelCVVariables->motorElectricalAngularVelocity);
 
     k2psi2beta = psi2beta(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, (modelCVVariables->psi2alpha + (halfCalculationStep * k1psi2alpha)), (modelCVVariables->psi2beta + (halfCalculationStep * k1psi2beta)), modelCVVariables->motorElectricalAngularVelocity);
-
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
     k3psi2alpha = psi2alpha(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, (modelCVVariables->psi2alpha + (halfCalculationStep * k2psi2alpha)), (modelCVVariables->psi2beta + (halfCalculationStep * k2psi2beta)), modelCVVariables->motorElectricalAngularVelocity);
 
     k3psi2beta = psi2beta(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, (modelCVVariables->psi2alpha + (halfCalculationStep * k2psi2alpha)), (modelCVVariables->psi2beta + (halfCalculationStep * k2psi2beta)), modelCVVariables->motorElectricalAngularVelocity);
-
-
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
     k4psi2alpha = psi2alpha(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, (modelCVVariables->psi2alpha + (odeCVCalculationSettings->calculationStep * k3psi2alpha)), (modelCVVariables->psi2beta + (odeCVCalculationSettings->calculationStep * k3psi2beta)), modelCVVariables->motorElectricalAngularVelocity);
 
     k4psi2beta = psi2beta(modelCVCoeff, modelCVVariables->i1alpha, modelCVVariables->i1beta, (modelCVVariables->psi2alpha + (odeCVCalculationSettings->calculationStep * k3psi2alpha)), (modelCVVariables->psi2beta + (odeCVCalculationSettings->calculationStep * k3psi2beta)), modelCVVariables->motorElectricalAngularVelocity);
-
-
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
+
+
+    // updating the values based on calculated coefficients
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
     modelCVVariables->psi2alpha = modelCVVariables->psi2alpha + ((odeCVCalculationSettings->calculationStep / 6) * (k1psi2alpha + 2 * k2psi2alpha + 2 * k3psi2alpha + k4psi2alpha));
 
     modelCVVariables->psi2beta = modelCVVariables->psi2beta + ((odeCVCalculationSettings->calculationStep / 6) * (k1psi2beta + 2 * k2psi2beta + 2 * k3psi2beta + k4psi2beta));
-    
-
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
 
 }
+/*-------------------------------------------------------------------------------------------*/

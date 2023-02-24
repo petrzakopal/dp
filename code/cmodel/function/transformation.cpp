@@ -41,17 +41,17 @@ float TransformationClass::clarkeTransform2(float input1, float input2, float in
 
 /*---------------------------------------------------------------------------------------------------------------------------*/
 /*-------------------------------- CALTULATION OF REVERSE CLARKE TRANSFORM BASED ON INPUT VALUES ----------------------------------*/
-float TransformationClass::reverseClarkeTransform1(float inputAlpha, float inputBeta, float transformConstant)
+float TransformationClass::inverseClarkeTransform1(float inputAlpha, float inputBeta)
 {
     return(inputAlpha);
 }
 
-float TransformationClass::reverseClarkeTransform2(float inputAlpha, float inputBeta, float transformConstant)
+float TransformationClass::inverseClarkeTransform2(float inputAlpha, float inputBeta)
 {
     return((-0.5 * inputAlpha) + 0.866 * inputBeta);
 }
 
-float TransformationClass::reverseClarkeTransform3(float inputAlpha, float inputBeta, float transformConstant)
+float TransformationClass::inverseClarkeTransform3(float inputAlpha, float inputBeta)
 {
     return((-0.5 * inputAlpha) - 0.866 * inputBeta); // or -(xa + xb)
 }
@@ -75,12 +75,12 @@ float TransformationClass::parkTransform2(float inputAlpha, float inputBeta, flo
 
 /*---------------------------------------------------------------------------------------------------------------------------*/
 /*-------------------------------- CALTULATION OF INVERSE PARK TRANSFORM BASED ON INPUT VALUES ----------------------------------*/
-float TransformationClass::reverseParkTransform1(float inputD, float inputQ, float transformAngle)
+float TransformationClass::inverseParkTransform1(float inputD, float inputQ, float transformAngle)
 {
     return((inputD * cos(transformAngle)) - (inputQ * sin(transformAngle)));
 }
 
-float TransformationClass::reverseParkTransform2(float inputD, float inputQ, float transformAngle)
+float TransformationClass::inverseParkTransform2(float inputD, float inputQ, float transformAngle)
 {
     return((inputD * sin(transformAngle)) + (inputQ * cos(transformAngle)));
 }
