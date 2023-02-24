@@ -3,7 +3,8 @@
 #include <hls_math.h>
 #include <stdlib.h>
 #include <iostream>
-#include "../header/transformation.h"
+// #include "../header/transformation.h"
+#include "transformation.cpp"
 #include <fstream>
 
 

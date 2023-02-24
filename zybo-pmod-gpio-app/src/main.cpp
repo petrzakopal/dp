@@ -76,7 +76,7 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
     /*-------------------------------- OPENCL KERNEL CREATION ---------------------------------*/
     cl::Kernel krnl_GenerateVoltageSource;
-    cl::Kernel krnl_compute2;
+    cl::Kernel krnl_GenerateVoltageAlphaBeta;
     /*----------------------------------------------------------------------------------------*/
 
    
@@ -182,7 +182,7 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
             OCL_CHECK(err, krnl_GenerateVoltageSource = cl::Kernel(program, "krnl_GenerateVoltageSource", &err)); // assign to krnl_compute the new PL kernel, which is found in kernel_main and called kernel_main
 
             // testing second kernel
-            OCL_CHECK(err, krnl_compute2 = cl::Kernel(program, "krnl_main2", &err));
+            OCL_CHECK(err, krnl_GenerateVoltageAlphaBeta = cl::Kernel(program, "krnl_GenerateVoltageAlphaBeta", &err));
 
             valid_device = true;
 
@@ -297,6 +297,29 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     // std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->u1beta << "\n";
 
     
+
+
+    narg = 0;
+    OCL_CHECK(err, err = krnl_GenerateVoltageAlphaBeta.setArg(narg++, buffer_voltageGeneratorData));
+    OCL_CHECK(err, err = krnl_GenerateVoltageAlphaBeta.setArg(narg++, buffer_odeCalculationSettings));
+
+    // Data will be migrated to kernel space
+    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_voltageGeneratorData, buffer_odeCalculationSettings}, 0 /* 0 means from host*/));
+
+
+    // Launch the Kernel
+    OCL_CHECK(err, err = q.enqueueTask(krnl_GenerateVoltageAlphaBeta));
+
+    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_voltageGeneratorData}, CL_MIGRATE_MEM_OBJECT_HOST));
+
+    OCL_CHECK(err, q.finish());
+
+
+     for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
+    {
+        std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1alpha << "\n";
+        std::cout << "motor voltage u2 at " << i << " : " << MotorModel.getVoltage(i)->u1beta << "\n";
+    }
     
 
     free(MotorModel.odeCalculationSettings);

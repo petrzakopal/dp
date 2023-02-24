@@ -26,10 +26,10 @@ extern "C" {
 void krnl_GenerateVoltageSource(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings) {
 
 
-MotorModelClass MotorModel;
+// MotorModelClass MotorModel;
 
-MotorModel.odeCalculationSettings = odeCalculationSettings;
-MotorModel.voltageGeneratorData = voltageGeneratorData;
+// MotorModel.odeCalculationSettings = odeCalculationSettings;
+// MotorModel.voltageGeneratorData = voltageGeneratorData;
 
 
 
@@ -38,15 +38,15 @@ MotorModel.voltageGeneratorData = voltageGeneratorData;
 
     // local variable for tracking time
     float time = odeCalculationSettings->initialCalculationTime;
-    float voltageAmplitude = MotorModel.voltageGeneratorData->voltageAmplitude;
-    float voltageFrequency = MotorModel.voltageGeneratorData->voltageFrequency;
-    int numberOfIterations = MotorModel.odeCalculationSettings->numberOfIterations;
+    float voltageAmplitude = voltageGeneratorData->voltageAmplitude;
+    float voltageFrequency = voltageGeneratorData->voltageFrequency;
+    int numberOfIterations = odeCalculationSettings->numberOfIterations;
     float phaseU2 = 2.0943;
     float phaseU3 = 2.0943;
     // float generatedVoltage;
     for(int i = 0; i<=numberOfIterations;i++)
     {
-        #pragma HLS dependence variable= MotorModel.voltageGeneratorData type=inter false
+        #pragma HLS dependence variable= voltageGeneratorData type=inter false
         #pragma HLS dependence variable=voltageFrequency type=intra false
         #pragma HLS dependence variable=voltageAmplitude type=intra false
         #pragma HLS dependence variable=phaseU2 type=intra false
@@ -54,19 +54,12 @@ MotorModel.voltageGeneratorData = voltageGeneratorData;
         #pragma HLS loop_tripcount min=numberOfIterations
         #pragma HLS performance target_ti= numberOfIterations;
        
-        MotorModel.voltageGeneratorData[i].u1 = MotorModel.voltageGenerator(time, 0, voltageAmplitude,  voltageFrequency);
-        
+        voltageGeneratorData[i].u1 = voltageAmplitude * sinf((2 * PI * voltageFrequency * time) + 0);
 
-        MotorModel.voltageGeneratorData[i].u2 = MotorModel.voltageGenerator(time, phaseU2, voltageAmplitude,  voltageFrequency);
+        voltageGeneratorData[i].u2 = voltageAmplitude * sinf((2 * PI * voltageFrequency * time) + phaseU2);
 
-        MotorModel.voltageGeneratorData[i].u3 = MotorModel.voltageGenerator(time, phaseU3, voltageAmplitude,  voltageFrequency);
+        voltageGeneratorData[i].u3 = voltageAmplitude * sinf((2 * PI * voltageFrequency * time) + phaseU3);
 
-        // MotorModel.voltageGeneratorData[i].u1= (voltageAmplitude * sinf((2 * PI * voltageFrequency * time) + 0));
-
-        // MotorModel.voltageGeneratorData[i].u2= (voltageAmplitude * sinf((2 * PI * voltageFrequency * time) + phaseU2));
-
-        // MotorModel.voltageGeneratorData[i].u3= (voltageAmplitude * sinf((2 * PI * voltageFrequency * time) + phaseU3));
-       
        
         time = time + odeCalculationSettings->calculationStep;
     }
@@ -78,9 +71,34 @@ MotorModel.voltageGeneratorData = voltageGeneratorData;
 
 
 
-void krnl_main2()
+void krnl_GenerateVoltageAlphaBeta(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings)
 {
-   
+
+    // MotorModelClass MotorModel;
+
+    // MotorModel.odeCalculationSettings = odeCalculationSettings;
+    // MotorModel.voltageGeneratorData = voltageGeneratorData;
+
+     int numberOfIterations = odeCalculationSettings->numberOfIterations;
+
+
+    for(int i = 0; i<=numberOfIterations;i++)
+    {
+        // #pragma HLS dependence variable= MotorModel.voltageGeneratorData type=inter false
+        #pragma HLS loop_tripcount min=numberOfIterations
+        #pragma HLS performance target_ti= numberOfIterations;
+
+
+        voltageGeneratorData[i].u1alpha = 0.6667 * (voltageGeneratorData[i].u1 - (0.5 * voltageGeneratorData[i].u2) - (0.5 * voltageGeneratorData[i].u3));
+
+
+    
+        voltageGeneratorData[i].u1beta = 0.6667 * (0.866 * voltageGeneratorData[i].u1 - 0.866 * voltageGeneratorData[i].u3);
+
+    
+
+    }
+
 }
 
 
