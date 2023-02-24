@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-#include "header/mathSolver.h"
 #include "header/MotorModel.h"
 #include "header/transformation.h"
+#include "header/CurVelModel.h"
 
 
 
@@ -23,8 +23,8 @@ také je problém v případě, že v MotorModel.cpp includuji transformation a 
 
 int main()
 {
-
-
+/*||||||||||||||||||||||||||||||||||||||||||||||||| ASM MOTOR GENERATION |||||||||||||||||||||||||||||||||||||||||||||||||*/
+/*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 
 /*----------------------------------------------------------------------------------*/
 /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
@@ -76,11 +76,9 @@ std::cout << "| ----------------------- |\n";
 /*---------------------------------------------------------*/
 /*-------------------- TEST OUTPUTS ----------------------*/
 
-int numberOfIterations = MotorModel.numberOfIterations();
-MotorModel.odeCalculationSettings->numberOfIterations = numberOfIterations;
+MotorModel.odeCalculationSettings->numberOfIterations = MotorModel.numberOfIterations();
 
-std::cout << "number of modelVariables: " << ((int)ceil((MotorModel.odeCalculationSettings->finalCalculationTime - MotorModel.odeCalculationSettings->initialCalculationTime)/MotorModel.odeCalculationSettings->calculationStep)) << "\n";
-std::cout << "number of iterations: " << numberOfIterations << "\n";
+std::cout << "number of iterations: " << MotorModel.odeCalculationSettings->numberOfIterations << "\n";
 
 
 
@@ -104,10 +102,10 @@ std::cout << "motor voltage u1 at 0: " << MotorModel.getVoltage(0)->u1 << "\n";
 std::cout << "motor clarke voltage u1alpha at 20: " << MotorModel.getVoltage(0)->u1alpha << "\n";
 std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->u1beta << "\n";
 
-    for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
-    {
-        std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1 << "\n";
-    }
+    // for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
+    // {
+    //     std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1 << "\n";
+    // }
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 
 MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
@@ -124,7 +122,6 @@ MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.mode
 // MotorModel.motorParameters->R1 = 25;
 // std::cout << "motor parameters changed R1 = " << MotorModel.motorParameters->R1 << "\n";
 
-std::cout << MotorModel.voltageGeneratorData[210].u1 << "\n";
 
 
 
@@ -134,7 +131,45 @@ free(MotorModel.modelVariables);
 free(MotorModel.odeCalculationSettings);
 free(MotorModel.voltageGeneratorData);
 
+/*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+/*||||||||||||||||||||||||||||||||||||||||||||| END OF ASM MOTOR GENERATION |||||||||||||||||||||||||||||||||||||||||||||*/
 
+
+CurVelModelClass CurVelModel;
+CurVelModel.motorParametersAllocateMemory();
+CurVelModel.motorCoeffAllocateMemory();
+CurVelModel.modelCVVariablesAllocateMemory();
+CurVelModel.odeCVCalculationSettingsAllocateMemory();
+
+CurVelModel.odeCVCalculationSettings->calculationStep = 0.001;
+
+
+CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
+CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
+CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
+CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+
+CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
+
+
+std::cout << "CurVelModel.modelCVCoeff->R2DL2: " << CurVelModel.modelCVCoeff->R2DL2 << "\n";
+
+CurVelModel.modelCVVariables->i1alpha = 15;
+CurVelModel.modelCVVariables->i1beta = 3;
+CurVelModel.modelCVVariables->motorElectricalAngularVelocity = 50;
+CurVelModel.modelCVVariables->psi2alpha = 0;
+CurVelModel.modelCVVariables->psi2beta = 0;
+
+CurVelModel.CurVelModelCalculate(CurVelModel.modelCVCoeff, CurVelModel.modelCVVariables, CurVelModel.odeCVCalculationSettings);
+
+
+std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
+std::cout << "psi2beta: " << CurVelModel.modelCVVariables->psi2beta << "\n";
+
+free(CurVelModel.motorParameters);
+free(CurVelModel.modelCVCoeff);
+free(CurVelModel.modelCVVariables);
+free(CurVelModel.odeCVCalculationSettings);
 /*---------------------------------------------------------*/
 
 return 0;
