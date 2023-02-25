@@ -10,6 +10,10 @@
 
 ## Mé denní poznámky ✏️
 
+👨🏻‍💻 [25.02.2023](/notes/20230225.md)
+
+---
+
 👨🏻‍💻 [24.02.2023](/notes/20230224.md) <-- zjištěno, že opravdu ASM model nebude moci být v zybo, nevejde se tam ani generování napětí s mojí všemožnou optimalizací pomocí pragma direktiv a rozdělení funkce na prvočinitele, udělal jsem [cmodel](/code/cmodel/) I-n model a nasimuloval data z ASM přímo do I-n modelu v alpha beta, oddebugoval, poté vyexportoval data z ASM modelu do 123 (ABC) souřadnic a poté zpět nahrál do programu jako vstupní data a choval se k nim jako data acquired z čidel a zkontroloval další funkci I-n modelu a Clark transformace, výsledky / rozdíly v hodnotách jsou zobrazeny v grafech v [mathematika diff.nb](/misc/diff.nb), **POKUD** požadavek na ASM model v FPGA akcelerovaný, je třeba využít např. [Xilinx Kria Robotics – dražší ale vhodnější pro řízení pohonů](https://cz.mouser.com/ProductDetail/Xilinx/SK-KR260-G?qs=t7xnP681wgWGuCVg0VyR9A%3D%3D), asi by bylo nejvíce vhodné...
 
 ---

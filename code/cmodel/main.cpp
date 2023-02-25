@@ -176,6 +176,8 @@ CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorPar
 
 
 
+// this output is shifted from ASM by one sample, for outputCurVel 0. sample I use initialTime+step, because you solve diff equations from initial conditions forward
+
 /*----------------------------------------------------------------------------------------*/
 /*----------------------------- FINE EXPORT FILE PREPARATION -----------------------------*/
 std::ofstream modelCVOutputDataFile;
@@ -193,7 +195,7 @@ float timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
 /*------------------------------ MAIN MODEL LOOP FOR KNOWN INPUTS ------------------------------*/
 
 // if there is no known input for next step, the program needs to wait for the interrupt and data acquisition, but in this cmodel on PC we work with „predefined data“ to make some progress
-for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
+for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
 {
 
     timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep; // time calculation for data output and graphs
@@ -245,7 +247,7 @@ outputData.open ("outputData.csv",std::ofstream::out | std::ofstream::trunc);
 TransformationClass Transformation;
 float i1a, i1b, i1c, motorMechanicalAngularVelocity;
 timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
-for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
+for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
 {
     timeCV = timeCV + globalCalculationStep;
     
@@ -379,8 +381,9 @@ timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
 
 /****************************************************************************************************/
 /*------------------------------ MAIN MODEL LOOP FOR ACQUIRED INPUTS ------------------------------*/
-for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
+for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
 {
+
 
     timeCV = timeCV + CurVelModel2.odeCVCalculationSettings->calculationStep;
 
@@ -388,16 +391,21 @@ for(int i = 1; i<= MotorModel.odeCalculationSettings->numberOfIterations; i++)
     CurVelModel2.modelCVVariables->i1beta = Transformation.clarkeTransform2(CurVelModel2.modelCVVariables->inputI1[i], CurVelModel2.modelCVVariables->inputI2[i], CurVelModel2.modelCVVariables->inputI3[i], 0.6667);
     CurVelModel2.modelCVVariables->motorElectricalAngularVelocity = CurVelModel2.modelCVVariables->inputMotorMechanicalAngularVelocity[i] * CurVelModel2.motorParameters->nOfPolePairs;
 
+ std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
     CurVelModel2.CurVelModelCalculate(CurVelModel2.modelCVCoeff, CurVelModel2.modelCVVariables, CurVelModel2.odeCVCalculationSettings);
+ std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
 
+    std::cout << "i1beta: " << CurVelModel2.modelCVVariables->i1beta << "\n";
     // std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
     // std::cout << "psi2beta: " << CurVelModel2.modelCVVariables->psi2beta << "\n";
 
 
     psi2Amplitude = sqrt((CurVelModel2.modelCVVariables->psi2alpha * CurVelModel2.modelCVVariables->psi2alpha) + (CurVelModel2.modelCVVariables->psi2beta * CurVelModel2.modelCVVariables->psi2beta));
 
-    // std::cout << "|psi2| = " << psi2Amplitude << "\n";
-    // std::cout << i <<"\n";
+    // std::cout << "inputI1[" << i << "]: " << CurVelModel2.modelCVVariables->inputI1[i] << "\n";
+    // std::cout << "inputI2[" << i << "]: " << CurVelModel2.modelCVVariables->inputI2[i] << "\n";
+    std::cout << "|psi2| = " << psi2Amplitude << "\n";
+    std::cout << i <<"\n";
     modelCVOutputDataFile2 << timeCV << "," << psi2Amplitude <<","<<MotorModel.getMotorVariable(i)->i1alpha << "," << MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity <<"\n";
 }
 /****************************************************************************************************/

@@ -21,6 +21,7 @@ typedef struct modelCVCoeffStruct
 {
     float R2MLmDL2;
     float R2DL2;
+    int nOfPolePairs;
 }modelCVCoeffType;
 /*---------------------------------------------------------------------------------------------------*/
 
@@ -33,6 +34,7 @@ typedef struct modelCVVariablesStruct
     float i1beta;
     float psi2alpha;
     float psi2beta;
+    float psi2Amplitude;
     float motorElectricalAngularVelocity;
     float *inputI1;
     float *inputI2;
