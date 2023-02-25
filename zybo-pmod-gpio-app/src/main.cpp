@@ -37,6 +37,8 @@ static const int DATA_SIZE = 4096; // Size of Arrrays etc. Change later
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <fcntl.h>
+#include<unistd.h>
 
 
 
@@ -396,6 +398,84 @@ CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
     free(inputMotorMechanicalAngularVelocity);
     free(CurVelModel.modelCVVariables);
     free(CurVelModel.odeCVCalculationSettings);
+
+/*---------------------------------------------------------------------------*/
+/*------------------------------ TESTING GPIO ------------------------------*/
+float inputKeyboardValue;
+ printf("Enter your desired value\n");
+    scanf("%f", &inputKeyboardValue);
+
+    printf("You have entered: %f\n\r", inputKeyboardValue);
+
+    int valuefd, exportfd, directionfd;
+  
+    printf("GPIO test running...\n");
+  
+    // The GPIO has to be exported to be able to see it
+    // in sysfs
+  
+    exportfd = open("/sys/class/gpio/export", O_WRONLY);
+    if (exportfd < 0)
+    {
+        printf("Cannot open GPIO to export it\n");
+        exit(1);
+    }
+  
+    write(exportfd, "980", 4);
+    close(exportfd);
+  
+    printf("GPIO exported successfully\n");
+  
+    // Update the direction of the GPIO to be an output
+  
+    directionfd = open("/sys/class/gpio/gpio980/direction", O_RDWR);
+    if (directionfd < 0)
+    {
+        printf("Cannot open GPIO direction it\n");
+        exit(1);
+    }
+  
+    write(directionfd, "out", 4);
+    close(directionfd);
+  
+    printf("GPIO direction set as output successfully\n");
+  
+    // Get the GPIO value ready to be toggled
+  
+    valuefd = open("/sys/class/gpio/gpio980/value", O_RDWR);
+    if (valuefd < 0)
+    {
+        printf("Cannot open GPIO value\n");
+        exit(1);
+    }
+
+    write(valuefd,"1", 2);
+    sleep(3);
+    write(valuefd,"0", 2);
+    close(valuefd);
+
+    directionfd = open("/sys/class/gpio/gpio980/direction", O_RDWR);
+    if (directionfd < 0)
+    {
+        printf("Cannot open GPIO direction it\n");
+        exit(1);
+    }
+
+    write(directionfd, "in", 4);
+    close(directionfd);
+
+    exportfd = open("/sys/class/gpio/unexport", O_WRONLY);
+    if (exportfd < 0)
+    {
+        printf("Cannot open GPIO to unexport it\n");
+        exit(1);
+    }
+  
+    write(exportfd, "980", 4);
+    close(exportfd);
+  
+    printf("GPIO unexported successfully\n");
+/*---------------------------------------------------------------------------*/
 
     range.end(); // profiling 
     return 0;
