@@ -19,7 +19,6 @@ Purpose: Host program
 /*----------------------------------------------------------------------------*/
 /*--------------------------- CONSTANT DEFINITION ---------------------------*/
 #define PI 3.141592
-static const int DATA_SIZE = 4096; // Size of Arrrays etc. Change later
 /*----------------------------------------------------------------------------*/
 
 
@@ -68,9 +67,6 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     }
 
     std::string xclbinFilename = argv[1];
-
-    // Compute the size of array in bytes
-    size_t size_in_bytes = DATA_SIZE * sizeof(float);
 
     /*-------------------------------------------------------------------------------------*/
     /*-------------------------------- OPENCL DEFINITIONS ---------------------------------*/
@@ -254,15 +250,36 @@ float *inputMotorMechanicalAngularVelocity;
 
 float *psi2Amplitude;
 
+float *psi2alpha;
+float *psi2beta;
 
+
+
+
+
+
+
+int modeSelection = 0;
+printf("Select mode:\n0 - preloaded data\n1 - keyboard input data\n");
+scanf("%i", &modeSelection);
+
+printf("You have selected: %i\n\r", modeSelection);
+
+if(modeSelection == 0)
+{
+
+    
 posix_memalign((void **)&inputTime , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputI1 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputI2 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputI3 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 
-posix_memalign((void **)&psi2Amplitude , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-
+    /*------------------------------ LOADING DATA STREAM ------------------------------*/
+printf("------------------------------------\n\r");
+printf("Preloaded data mode\n");
+printf("------------------------------------\n\r");
 std::ifstream inputData( "outputData.csv" );
 
 int switchReadingIndex = 0;
@@ -319,16 +336,57 @@ for( std::string line; std::getline( inputData, line, ','); )
     
   
 }
-inputData.close(); // close that file
+    inputData.close(); // close that file
+
+/*------------------------------ LOADING DATA STREAM ------------------------------*/
 /*------------------------------------------------------------------------------------------------------------*/
+}
+else if(modeSelection == 1)
+{
+    
+    printf("Keyboard input data mode\n\r");
+    printf("------------------------------------\n\r");
+    printf("Insert data divded by {space symbol}\n\r");
+    printf("I1 I2 I3 MechanicalAngularVelocity \n\r");
+    CurVelModel.odeCVCalculationSettings->numberOfIterations = 1;
+
+    
+posix_memalign((void **)&inputTime , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI1 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI2 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI3 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+inputTime[0] = 0;
+
+    scanf("%f %f %f %f", inputI1, inputI2, inputI3, inputMotorMechanicalAngularVelocity);
+    printf("------------------------------------\n\r");
+    printf("You have entered:\n\r");
+    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\r", inputI1[0], inputI2[0], inputI3[0], inputMotorMechanicalAngularVelocity[0]);
+    printf("------------------------------------\n\r");
+}
+
+
+    
+posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&psi2Amplitude , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+
+
+psi2alpha[0] = 0;
+psi2beta[0] = 0;
+psi2Amplitude[0] = 0;
 
 
 
-CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
 
+
+
+/*------------------------------------------------------------------------------------------------------------*/
+    //first type kernel
     OCL_CHECK(err, cl::Buffer buffer_odeCVCalculationSettings(context, CL_MEM_USE_HOST_PTR, sizeof(odeCVCalculationSettingsType),CurVelModel.odeCVCalculationSettings,&err));
 
-    OCL_CHECK(err, cl::Buffer buffer_modelCVVariables(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVVariablesType),CurVelModel.modelCVVariables,&err));
+    // OCL_CHECK(err, cl::Buffer buffer_modelCVVariables(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVVariablesType),CurVelModel.modelCVVariables,&err)); // enable for first type kernel
 
     OCL_CHECK(err, cl::Buffer buffer_modelCVCoeff(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVCoeffType),CurVelModel.modelCVCoeff,&err));
 
@@ -342,7 +400,12 @@ CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
 
     OCL_CHECK(err, cl::Buffer buffer_psi2Amplitude(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2Amplitude,&err));
 
-    // // OCL_CHECK(err, cl::Buffer buffer_numberOfIterations(context, CL_MEM_READ_ONLY, sizeof(int),NULL,&err));
+
+    //second type kernel – disable for first type kernel
+    OCL_CHECK(err, cl::Buffer buffer_psi2alpha(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2alpha,&err));
+
+    OCL_CHECK(err, cl::Buffer buffer_psi2beta(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2beta,&err));
+
 
 
     
@@ -350,7 +413,7 @@ CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
 
     int narg = 0;
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_odeCVCalculationSettings));
-    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVVariables));
+    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVVariables)); // enable for first type kernel
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVCoeff));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI1));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI2));
@@ -358,17 +421,27 @@ CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputMotorMechanicalAngularVelocity));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2Amplitude));
 
+    //second type kernel - disable for frst type kernel
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2alpha));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2beta));
+
     // Data will be migrated to kernel space
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings, buffer_modelCVVariables,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2Amplitude}, 0 /* 0 means from host*/));
+    // delete buffer_psi2alpha and buffer_psi2beta for first type kernel
+    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings, buffer_modelCVVariables,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2Amplitude, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
 
+    /*------------------------------------------------------------------------------------------------------------*/
 
+    xrt::profile::user_range rangeKernel("Phase 2", "Kernel run"); // profiling 
     // Launch the Kernel
     OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
-
-    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_modelCVVariables, buffer_psi2Amplitude}, CL_MIGRATE_MEM_OBJECT_HOST));
-
+    
+    OCL_CHECK(err, q.enqueueMigrateMemObjects({ buffer_psi2Amplitude}, CL_MIGRATE_MEM_OBJECT_HOST));
+    rangeKernel.end();
     OCL_CHECK(err, q.finish());
 
+
+
+    // data output
     std::ofstream modelCVOutputDataFile2;
     modelCVOutputDataFile2.open("outputCurVel2.csv",std::ofstream::out | std::ofstream::trunc);
     modelCVOutputDataFile2<< "time,|psi2|\n";
@@ -386,8 +459,10 @@ CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
 
     modelCVOutputDataFile2.close();
 
-    std::cout << "the end is here\n";
+    std::cout << "the end of the most useful program is here\n";
     
+
+    // free the memory
     free(CurVelModel.motorParameters);
     free(CurVelModel.modelCVCoeff);
     free(inputTime);
@@ -400,12 +475,10 @@ CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
     free(CurVelModel.odeCVCalculationSettings);
 
 /*---------------------------------------------------------------------------*/
-/*------------------------------ TESTING GPIO ------------------------------*/
-float inputKeyboardValue;
- printf("Enter your desired value\n");
-    scanf("%f", &inputKeyboardValue);
 
-    printf("You have entered: %f\n\r", inputKeyboardValue);
+  std::cout << "random testing code phase\n";
+/*------------------------------ TESTING GPIO ------------------------------*/
+
 
     int valuefd, exportfd, directionfd;
   
