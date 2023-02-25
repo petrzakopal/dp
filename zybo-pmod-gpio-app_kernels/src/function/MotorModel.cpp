@@ -1,12 +1,9 @@
 #include "../header/MotorModel.h"
-// #include <cmath>
 #include <hls_math.h>
 #include <stdlib.h>
 #include <iostream>
-// #include "../header/transformation.h"
 #include "transformation.cpp"
 #include <fstream>
-
 
 #define PI 3.141592 
 
@@ -286,7 +283,7 @@ float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVa
 /*------------------------------ VOTAGE SINUS SOURCE GENERATOR -------------------------------*/
  float MotorModelClass::voltageGenerator(float calculationTime, float phase, float amplitude, float frequency)
  {
-    return(amplitude * sinf((2 * PI * frequency * calculationTime) + phase));
+    return(amplitude * sin((2 * PI * frequency * calculationTime) + phase));
  }
  /*---------------------------------------------------------------------------------------------*/
 
@@ -308,10 +305,9 @@ void MotorModelClass::precalculateVoltageSource(voltageGeneratorType *voltageGen
 
     // local variable for tracking time
     float time = odeCalculationSettings->initialCalculationTime;
-#pragma HLS dataflow
+
     for(int i = 0; i<=n;i++)
     {
-        
         setVariable(getVoltage(i)->u1, voltageGenerator(time, 0, amplitude, frequency));
        
 
@@ -354,9 +350,9 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 // do kernelu se budou muset namapovat všechny dotčené proměnné => todo: vyřešit, které budou vstupovat díky classe a ne jako vstup jao v c++
 
 
-    // std::ofstream modelOutputDataFile;
-    // modelOutputDataFile.open ("output.csv");
-    // modelOutputDataFile<< "time,i1alpha,u1alpha,motorTorque,motorMechanicalAngularVelocity\n";
+    std::ofstream modelOutputDataFile;
+    modelOutputDataFile.open ("outputASM.csv", std::ofstream::out | std::ofstream::trunc);
+    modelOutputDataFile<< "time,i1alpha,u1alpha,motorTorque,motorMechanicalAngularVelocity,|psi2|\n";
     /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     /*|||||||||||||||||||||||| RK4 FOR STATE SPACE MODEL ||||||||||||||||||||||||*/
     float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
@@ -463,7 +459,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         // calculating mechanical velocity
         setVariable(getMotorVariable(i+1)->motorMechanicalAngularVelocity, ((1/motorParameters->momentOfIntertia)*(getMotorVariable(i+1)->motorTorque - getMotorVariable(i+1)->loadTorque)*(odeCalculationSettings->calculationStep))+getMotorVariable(i)->motorMechanicalAngularVelocity);
 
-        //  modelOutputDataFile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << ","<< getMotorVariable(i+1)->motorMechanicalAngularVelocity << "\n";
+         modelOutputDataFile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << ","<< getMotorVariable(i+1)->motorMechanicalAngularVelocity <<"," <<sqrt((getMotorVariable(i+1)->psi2alpha * getMotorVariable(i+1)->psi2alpha)+(getMotorVariable(i+1)->psi2beta *getMotorVariable(i+1)->psi2beta)) << "\n";
 
         
         
@@ -478,6 +474,6 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         /*------------------------------------------------------------------------------------------------------------------------------------*/
     }
 
-    // modelOutputDataFile.close();
+    modelOutputDataFile.close();
 
  }

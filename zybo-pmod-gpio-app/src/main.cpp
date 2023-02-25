@@ -31,8 +31,15 @@ static const int DATA_SIZE = 4096; // Size of Arrrays etc. Change later
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
-#include <cmath>
-#include "header/MotorModel.h"
+#include <hls_math.h>
+// #include "header/MotorModel.h"
+#include "header/CurVelModel.h"
+#include <string>
+#include <iostream>
+#include <fstream>
+
+
+
 #include "header/transformation.h"
 #include "experimental/xrt_profile.h" // for profiling host program
 /*----------------------------------------------------------------------------*/
@@ -75,8 +82,8 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     /*-----------------------------------------------------------------------------------------*/
 
     /*-------------------------------- OPENCL KERNEL CREATION ---------------------------------*/
-    cl::Kernel krnl_GenerateVoltageSource;
-    cl::Kernel krnl_GenerateVoltageAlphaBeta;
+    cl::Kernel krnl_calculateCurVelModel;
+    // cl::Kernel krnl_GenerateVoltageAlphaBeta;
     /*----------------------------------------------------------------------------------------*/
 
    
@@ -179,10 +186,7 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
             // This call will get the kernel object from program. A kernel is an
             // OpenCL function that is executed on the FPGA.
-            OCL_CHECK(err, krnl_GenerateVoltageSource = cl::Kernel(program, "krnl_GenerateVoltageSource", &err)); // assign to krnl_compute the new PL kernel, which is found in kernel_main and called kernel_main
-
-            // testing second kernel
-            OCL_CHECK(err, krnl_GenerateVoltageAlphaBeta = cl::Kernel(program, "krnl_GenerateVoltageAlphaBeta", &err));
+            OCL_CHECK(err, krnl_calculateCurVelModel = cl::Kernel(program, "krnl_calculateCurVelModel", &err)); // assign to krnl_compute the new PL kernel, which is found in kernel_main and called kernel_main
 
             valid_device = true;
 
@@ -208,125 +212,190 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
     
 
 
-    /*----------------------------------------------------------------------------------*/
-    /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
-    MotorModelClass MotorModel;
-    MotorModel.odeCalculationSettingsAllocateMemory();
-    MotorModel.setOdeCalculationSettings(0, 1, 0.0001); // initial time, final time, calculation step; if you want to calculate just one sample at a time (in for cycle of RK4), use (0, 1, 1)
-    MotorModel.odeCalculationSettings->numberOfIterations =  MotorModel.numberOfIterations();
-    MotorModel.motorParametersAllocateMemory();
-    MotorModel.stateSpaceCoeffAllocateMemory();
-    MotorModel.modelVariablesAllocateMemory(); // on index [0] there are initialConditions, RK4 starts from 1 to <=n when n is (final-initial)/step
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ DEFINING CLASS OBJECT AND ALLOCATING MEMORY FOR SECOND I-N MODEL ------------------------------*/
+    CurVelModelClass CurVelModel;
+    CurVelModel.motorParametersAllocateMemory();
+    CurVelModel.motorCoeffAllocateMemory();
+    CurVelModel.modelCVVariablesAllocateMemory();
+    CurVelModel.odeCVCalculationSettingsAllocateMemory();
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+   
+
+    
+
+    
+    CurVelModel.odeCVCalculationSettings->calculationStep = 0.0001;
+    CurVelModel.odeCVCalculationSettings->initialCalculationTime = 0;
+    CurVelModel.odeCVCalculationSettings->finalCalculationTime = 1;
+    CurVelModel.odeCVCalculationSettings->numberOfIterations = ((int)ceil(((CurVelModel.odeCVCalculationSettings->finalCalculationTime -  CurVelModel.odeCVCalculationSettings->initialCalculationTime)/ CurVelModel.odeCVCalculationSettings->calculationStep)));
+    CurVelModel.modelCVVariables->psi2Amplitude = 0;
+
+/*---------------------------------------------------------------------------------------------------------*/
+/*------------------------------ DEFINING CLASS PARAMETERS AND COEFFICIENTS ------------------------------*/
+    CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
+    CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
+    CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
+    CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+    CurVelModel.modelCVCoeff->nOfPolePairs = 2;
+    CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
+/*---------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ LOADING DATA FROM A LIGHTWEIGHT EXPORT FORMAT ------------------------------*/
+
+float *inputTime;
+float *inputI1;
+float *inputI2;
+float *inputI3;
+float *inputMotorMechanicalAngularVelocity;
+
+float *psi2Amplitude;
+
+
+posix_memalign((void **)&inputTime , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI1 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI2 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputI3 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+
+posix_memalign((void **)&psi2Amplitude , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+
+std::ifstream inputData( "outputData.csv" );
+
+int switchReadingIndex = 0;
+int timeIndex = 0;
+int i1Aindex = 0;
+int i1Bindex = 0;
+int i1Cindex = 0;
+int motorMechanicalAngularVelocityIndex = 0;
+
+for( std::string line; std::getline( inputData, line, ','); )
+{
+
+
+        // data structure is important, defined in a lightweight export file like {time,i1,i2,i3,motorMechanicalAngularVelocity}
+         switch(switchReadingIndex)
+            {
+                case 0:
+               
+                inputTime[timeIndex] = std::stof (line, NULL);
+                timeIndex++;
+                switchReadingIndex++;
+                break;
+
+                case 1:
+
+                inputI1[i1Aindex] = std::stof (line, NULL);
+                i1Aindex++;
+                switchReadingIndex++;
+                break;
+
+
+                case 2:
+
+                inputI2[i1Bindex] = std::stof (line, NULL);
+                i1Bindex++;
+                switchReadingIndex++;
+                break;
+
+                case 3:
+
+                inputI3[i1Cindex] = std::stof (line, NULL);
+                i1Cindex++;
+                switchReadingIndex++;
+                break;
+
+                case 4:
+
+                inputMotorMechanicalAngularVelocity[motorMechanicalAngularVelocityIndex] = std::stof (line, NULL);
+                motorMechanicalAngularVelocityIndex++;
+                switchReadingIndex = 0;
+                break;
+
+        }
+    
+  
+}
+inputData.close(); // close that file
+/*------------------------------------------------------------------------------------------------------------*/
 
 
 
 
 
-    /*-------------------- USE FUNCTION WITH HARDCODED VALUE OF MOTOR OR SET IT MANUALLY ---------------------*/
+    OCL_CHECK(err, cl::Buffer buffer_odeCVCalculationSettings(context, CL_MEM_USE_HOST_PTR, sizeof(odeCVCalculationSettingsType),CurVelModel.odeCVCalculationSettings,&err));
 
-    // MotorModel.setMotorParameters(); // hardcoded values
-    MotorModel.motorParameters->R1 = 0.370f; // Ohm, stator rezistance
-    MotorModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
-    MotorModel.motorParameters->L1s = 0.00227f; // H, stator leakage inductance
-    MotorModel.motorParameters->L2s = 0.00227f; // H, rotor leakage inductance
-    MotorModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
-    MotorModel.motorParameters->L1 = 0.08477f; // H, inductance
-    MotorModel.motorParameters->L2 = 0.08477f; // H, inductance
-    MotorModel.motorParameters->sigma = 0.05283f; // = 0.0528396032, sigma = 1 - Lm^(2)/L1L2
-    MotorModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
-    MotorModel.motorParameters->momentOfIntertia = 0.4; // J, moment of inertia
-    /*--------------------------------------------------------------------------------------------------------*/
+    OCL_CHECK(err, cl::Buffer buffer_modelCVVariables(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVVariablesType),CurVelModel.modelCVVariables,&err));
+
+    OCL_CHECK(err, cl::Buffer buffer_modelCVCoeff(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVCoeffType),CurVelModel.modelCVCoeff,&err));
+
+    OCL_CHECK(err, cl::Buffer buffer_inputI1(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputI1,&err));
+
+    OCL_CHECK(err, cl::Buffer buffer_inputI2(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputI2,&err));
+
+    OCL_CHECK(err, cl::Buffer buffer_inputI3(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputI3,&err));
+
+    OCL_CHECK(err, cl::Buffer buffer_inputMotorMechanicalAngularVelocity(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputMotorMechanicalAngularVelocity,&err));
+
+    OCL_CHECK(err, cl::Buffer buffer_psi2Amplitude(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2Amplitude,&err));
+
+    // // OCL_CHECK(err, cl::Buffer buffer_numberOfIterations(context, CL_MEM_READ_ONLY, sizeof(int),NULL,&err));
 
 
     
 
-    MotorModel.setStateSpaceCoeff();
-    MotorModel.voltageGeneratorDataAllocateMemory();
 
-    /*----------------------------------------------------------------------------------*/
-
-    
-
-    MotorModel.voltageGeneratorData->voltageFrequency = 50;
-    MotorModel.voltageGeneratorData->voltageAmplitude = 325.26;
-
-/*----------------------------------------------------------------------------------*/
-
-    /*----------------------------------------------------------------------------------*/
-    /*--------------------------------- TEST OUTPUTS ----------------------------------*/
-
-    std::cout << "test state space coeff= " << MotorModel.getStateSpaceCoeff()->a13 << "\n";
-
-    std::cout << "number of modelVariables: " <<  MotorModel.odeCalculationSettings->numberOfIterations << "\n";
-    /*----------------------------------------------------------------------------------*/
-
-
-    OCL_CHECK(err, cl::Buffer buffer_voltageGeneratorData(context, CL_MEM_USE_HOST_PTR, MotorModel.odeCalculationSettings->numberOfIterations * sizeof(voltageGeneratorType),MotorModel.voltageGeneratorData,&err));
-    OCL_CHECK(err, cl::Buffer buffer_odeCalculationSettings(context, CL_MEM_USE_HOST_PTR, sizeof(odeCalculationSettingsType),MotorModel.odeCalculationSettings,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_numberOfIterations(context, CL_MEM_READ_ONLY, sizeof(int),NULL,&err));
-
-
-    
-
-
-    std::cout << "test voltage free data= " << MotorModel.voltageGeneratorData->u1 << "\n";
     int narg = 0;
-    OCL_CHECK(err, err = krnl_GenerateVoltageSource.setArg(narg++, buffer_voltageGeneratorData));
-    OCL_CHECK(err, err = krnl_GenerateVoltageSource.setArg(narg++, buffer_odeCalculationSettings));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_odeCVCalculationSettings));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVVariables));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVCoeff));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI1));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI2));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI3));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputMotorMechanicalAngularVelocity));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2Amplitude));
 
     // Data will be migrated to kernel space
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_voltageGeneratorData, buffer_odeCalculationSettings}, 0 /* 0 means from host*/));
+    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings, buffer_modelCVVariables,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2Amplitude}, 0 /* 0 means from host*/));
 
 
     // Launch the Kernel
-    OCL_CHECK(err, err = q.enqueueTask(krnl_GenerateVoltageSource));
+    OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
 
-    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_voltageGeneratorData}, CL_MIGRATE_MEM_OBJECT_HOST));
-
-    OCL_CHECK(err, q.finish());
-
-
-    for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
-    {
-        std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1 << "\n";
-        std::cout << "motor voltage u2 at " << i << " : " << MotorModel.getVoltage(i)->u2 << "\n";
-        std::cout << "motor voltage u3 at " << i << " : " << MotorModel.getVoltage(i)->u3 << "\n";
-    }
-    // std::cout << "motor clarke voltage u1alpha at 20: " << MotorModel.getVoltage(0)->u1alpha << "\n";
-    // std::cout << "motor clarke voltage u1beta at 20: " << MotorModel.getVoltage(0)->u1beta << "\n";
-
-    
-
-
-    narg = 0;
-    OCL_CHECK(err, err = krnl_GenerateVoltageAlphaBeta.setArg(narg++, buffer_voltageGeneratorData));
-    OCL_CHECK(err, err = krnl_GenerateVoltageAlphaBeta.setArg(narg++, buffer_odeCalculationSettings));
-
-    // Data will be migrated to kernel space
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_voltageGeneratorData, buffer_odeCalculationSettings}, 0 /* 0 means from host*/));
-
-
-    // Launch the Kernel
-    OCL_CHECK(err, err = q.enqueueTask(krnl_GenerateVoltageAlphaBeta));
-
-    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_voltageGeneratorData}, CL_MIGRATE_MEM_OBJECT_HOST));
+    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_modelCVVariables, buffer_psi2Amplitude}, CL_MIGRATE_MEM_OBJECT_HOST));
 
     OCL_CHECK(err, q.finish());
 
-
-     for(int i = 0; i<= MotorModel.odeCalculationSettings->numberOfIterations;i++)
-    {
-        std::cout << "motor voltage u1 at " << i << " : " << MotorModel.getVoltage(i)->u1alpha << "\n";
-        std::cout << "motor voltage u2 at " << i << " : " << MotorModel.getVoltage(i)->u1beta << "\n";
+    std::ofstream modelCVOutputDataFile2;
+    modelCVOutputDataFile2.open("outputCurVel2.csv",std::ofstream::out | std::ofstream::trunc);
+    modelCVOutputDataFile2<< "time,|psi2|\n";
+    float timeCV = CurVelModel.odeCVCalculationSettings->initialCalculationTime;
+    for(int i = 0; i<=CurVelModel.odeCVCalculationSettings->numberOfIterations;i++ )
+    {   
+        timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep;
+        std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude[i] << "\n";
+        modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude[i]<<"\n";
     }
-    
 
-    free(MotorModel.odeCalculationSettings);
-    free(MotorModel.motorParameters);
-    free(MotorModel.stateSpaceCoeff);
-    free(MotorModel.modelVariables);
-    free(MotorModel.voltageGeneratorData);
+    modelCVOutputDataFile2.close();
+    // for(int i = 0; i<=CurVelModel.odeCVCalculationSettings->numberOfIterations;i++ )
+    // {
+    //     std::cout << "inputI1: " << inputI1[i] << "\n";
+    // }
+
+    std::cout << "the end is here\n";
+    
+    free(CurVelModel.motorParameters);
+    free(CurVelModel.modelCVCoeff);
+    free(inputTime);
+    free(inputI1);
+    free(inputI2);
+    free(inputI3);
+    free(psi2Amplitude);
+    free(inputMotorMechanicalAngularVelocity);
+    free(CurVelModel.modelCVVariables);
+    free(CurVelModel.odeCVCalculationSettings);
 
     range.end(); // profiling 
     return 0;

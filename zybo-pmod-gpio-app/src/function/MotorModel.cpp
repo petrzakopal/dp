@@ -1,5 +1,5 @@
 #include "../header/MotorModel.h"
-#include <cmath>
+#include <hls_math.h>
 #include <stdlib.h>
 #include <iostream>
 #include "../header/transformation.h"
@@ -351,8 +351,8 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 
 
     std::ofstream modelOutputDataFile;
-    modelOutputDataFile.open ("output.csv");
-    modelOutputDataFile<< "time,i1alpha,u1alpha,motorTorque,motorMechanicalAngularVelocity\n";
+    modelOutputDataFile.open ("outputASM.csv", std::ofstream::out | std::ofstream::trunc);
+    modelOutputDataFile<< "time,i1alpha,u1alpha,motorTorque,motorMechanicalAngularVelocity,|psi2|\n";
     /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     /*|||||||||||||||||||||||| RK4 FOR STATE SPACE MODEL ||||||||||||||||||||||||*/
     float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
@@ -459,7 +459,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         // calculating mechanical velocity
         setVariable(getMotorVariable(i+1)->motorMechanicalAngularVelocity, ((1/motorParameters->momentOfIntertia)*(getMotorVariable(i+1)->motorTorque - getMotorVariable(i+1)->loadTorque)*(odeCalculationSettings->calculationStep))+getMotorVariable(i)->motorMechanicalAngularVelocity);
 
-         modelOutputDataFile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << ","<< getMotorVariable(i+1)->motorMechanicalAngularVelocity << "\n";
+         modelOutputDataFile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << ","<< getMotorVariable(i+1)->motorMechanicalAngularVelocity <<"," <<sqrt((getMotorVariable(i+1)->psi2alpha * getMotorVariable(i+1)->psi2alpha)+(getMotorVariable(i+1)->psi2beta *getMotorVariable(i+1)->psi2beta)) << "\n";
 
         
         

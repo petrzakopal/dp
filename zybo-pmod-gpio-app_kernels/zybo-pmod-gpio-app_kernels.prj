@@ -2,47 +2,55 @@
 <hwkernel:HwKernelProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hwkernel="http://www.xilinx.com/acceleration/hwkernel" name="zybo-pmod-gpio-app_kernels" platform="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/zybo-pmod-gpio/export/zybo-pmod-gpio/zybo-pmod-gpio.xpfm" platformUID="xilinx:zybo:name:0.0(custom)" systemProject="zybo-pmod-gpio-app_system" cpu="">
   <configuration name="Emulation-SW" id="com.xilinx.ide.accel.config.hwkernel.sw_emu.2082352697" dirty="true">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" kernelDebug="true">
-      <kernels name="krnl_GenerateVoltageSource" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
-      </kernels>
-      <kernels name="krnl_GenerateVoltageAlphaBeta" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
+      <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
+        <args name="odeCVCalculationSettings" master="true"/>
+        <args name="modelCVVariables" master="true"/>
+        <args name="modelCVCoeff" master="true"/>
+        <args name="inputI1" master="true"/>
+        <args name="inputI2" master="true"/>
+        <args name="inputI3" master="true"/>
+        <args name="inputMotorMechanicalAngularVelocity" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
       </kernels>
     </configBuildOptions>
   </configuration>
   <configuration name="Emulation-HW" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1699647226" dirty="true">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" kernelDebug="true" target="hw_emu">
-      <kernels name="krnl_GenerateVoltageSource" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
-      </kernels>
-      <kernels name="krnl_GenerateVoltageAlphaBeta" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
+      <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
+        <args name="odeCVCalculationSettings" master="true"/>
+        <args name="modelCVVariables" master="true"/>
+        <args name="modelCVCoeff" master="true"/>
+        <args name="inputI1" master="true"/>
+        <args name="inputI2" master="true"/>
+        <args name="inputI3" master="true"/>
+        <args name="inputMotorMechanicalAngularVelocity" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
       </kernels>
     </configBuildOptions>
   </configuration>
   <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.66980607">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_s" reportLevel="2" target="hw">
-      <kernels name="krnl_GenerateVoltageSource" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
-      </kernels>
-      <kernels name="krnl_GenerateVoltageAlphaBeta" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
+      <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
+        <args name="odeCVCalculationSettings" master="true"/>
+        <args name="modelCVVariables" master="true"/>
+        <args name="modelCVCoeff" master="true"/>
+        <args name="inputI1" master="true"/>
+        <args name="inputI2" master="true"/>
+        <args name="inputI3" master="true"/>
+        <args name="inputMotorMechanicalAngularVelocity" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
       </kernels>
     </configBuildOptions>
     <lastBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_s" reportLevel="2" target="hw">
-      <kernels name="krnl_GenerateVoltageSource" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
-      </kernels>
-      <kernels name="krnl_GenerateVoltageAlphaBeta" sourceFile="src/krnl_main.cpp">
-        <args name="voltageGeneratorData" master="true"/>
-        <args name="odeCalculationSettings" master="true"/>
+      <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
+        <args name="odeCVCalculationSettings" master="true"/>
+        <args name="modelCVVariables" master="true"/>
+        <args name="modelCVCoeff" master="true"/>
+        <args name="inputI1" master="true"/>
+        <args name="inputI2" master="true"/>
+        <args name="inputI3" master="true"/>
+        <args name="inputMotorMechanicalAngularVelocity" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
       </kernels>
     </lastBuildOptions>
   </configuration>
