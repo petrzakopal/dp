@@ -31,8 +31,9 @@ float timeCV = odeCVCalculationSettings->initialCalculationTime;
 
 /****************************************************************************************************/
 /*------------------------------ MAIN MODEL LOOP FOR ACQUIRED INPUTS ------------------------------*/
-for(int i = 0; i<= odeCVCalculationSettings->numberOfIterations; i++)
+for(int i = 0; i< odeCVCalculationSettings->numberOfIterations; i++)
 {
+    #pragma HLS performance target_ti=101
 
     timeCV = timeCV + odeCVCalculationSettings->calculationStep;
 

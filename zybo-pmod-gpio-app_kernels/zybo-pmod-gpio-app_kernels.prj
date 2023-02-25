@@ -29,7 +29,7 @@
     </configBuildOptions>
   </configuration>
   <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.66980607">
-    <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_s" reportLevel="2" target="hw">
+    <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
         <args name="odeCVCalculationSettings" master="true"/>
         <args name="modelCVVariables" master="true"/>
@@ -41,7 +41,7 @@
         <args name="psi2Amplitude" master="true"/>
       </kernels>
     </configBuildOptions>
-    <lastBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_s" reportLevel="2" target="hw">
+    <lastBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
         <args name="odeCVCalculationSettings" master="true"/>
         <args name="modelCVVariables" master="true"/>

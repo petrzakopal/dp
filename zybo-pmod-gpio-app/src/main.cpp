@@ -322,7 +322,7 @@ inputData.close(); // close that file
 
 
 
-
+CurVelModel.odeCVCalculationSettings->numberOfIterations = 2;
 
     OCL_CHECK(err, cl::Buffer buffer_odeCVCalculationSettings(context, CL_MEM_USE_HOST_PTR, sizeof(odeCVCalculationSettingsType),CurVelModel.odeCVCalculationSettings,&err));
 
@@ -371,18 +371,18 @@ inputData.close(); // close that file
     modelCVOutputDataFile2.open("outputCurVel2.csv",std::ofstream::out | std::ofstream::trunc);
     modelCVOutputDataFile2<< "time,|psi2|\n";
     float timeCV = CurVelModel.odeCVCalculationSettings->initialCalculationTime;
-    for(int i = 0; i<=CurVelModel.odeCVCalculationSettings->numberOfIterations;i++ )
+    for(int i = 0; i<CurVelModel.odeCVCalculationSettings->numberOfIterations;i++ )
     {   
         timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep;
         std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude[i] << "\n";
+
+        std::cout << "inputI1[" << i << "]: "<< inputI1[i] << "\n";
+
+
         modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude[i]<<"\n";
     }
 
     modelCVOutputDataFile2.close();
-    // for(int i = 0; i<=CurVelModel.odeCVCalculationSettings->numberOfIterations;i++ )
-    // {
-    //     std::cout << "inputI1: " << inputI1[i] << "\n";
-    // }
 
     std::cout << "the end is here\n";
     
