@@ -10,7 +10,7 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻 [25.02.2023](/notes/20230225.md)
+👨🏻‍💻 [25.02.2023](/notes/20230225.md) <-- zjištění dne **DIGILENT ZYBO SE ZÁKLADNÍM ZYNQ 7000 NENÍ VHODNÉ NA AKCELEROVÁNÍ NĚJAKÝCH SLOŽITÝCH APLIKACÍ A MODELŮ, SPÍŠE NA SEZNÁMENÍ SE S PRINCIPEM, JAK TAKOVÉ PROGRAMOVÁNÍ, HLS, MODELOVÁNÍ A PŘÍSTUPY FUNGUJÍ**, vidím jako nemožné akcelerovat více než 20 % celkového modelu a bloků pro řízení
 
 ---
 
