@@ -533,6 +533,40 @@
       \verb https://digilent.com/reference/programmable-logic/zybo/reference-manual
       \endverb
     \endentry
+    \entry{kobrle-elektricke-pohony}{book}{}
+      \name{author}{2}{}{%
+        {{hash=df455503b24471d1c50b4a056d9fe820}{%
+           family={Kobrle},
+           familyi={K\bibinitperiod},
+           given={Pavel},
+           giveni={P\bibinitperiod}}}%
+        {{hash=60d79c52a409e5fe3227e8a0bda3f534}{%
+           family={Pavelka},
+           familyi={P\bibinitperiod},
+           given={Jiří},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {V Praze}%
+      }
+      \list{publisher}{1}{%
+        {České vysoké učení technické}%
+      }
+      \strng{namehash}{cf00d2531f7cecfabd21f0aad23e4fb2}
+      \strng{fullhash}{cf00d2531f7cecfabd21f0aad23e4fb2}
+      \strng{bibnamehash}{cf00d2531f7cecfabd21f0aad23e4fb2}
+      \strng{authorbibnamehash}{cf00d2531f7cecfabd21f0aad23e4fb2}
+      \strng{authornamehash}{cf00d2531f7cecfabd21f0aad23e4fb2}
+      \strng{authorfullhash}{cf00d2531f7cecfabd21f0aad23e4fb2}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3. přepracované vydání}
+      \field{isbn}{978-80-01-06007-0}
+      \field{title}{Elektrické pohony a jejich řízení}
+      \field{year}{2016}
+    \endentry
     \entry{xilinx-downloads}{incollection}{}
       \name{author}{1}{}{%
         {{hash=751f6909b12cc240122891470ea09b53}{%
@@ -581,8 +615,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{3}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{AMD Xilinx Documentation Portal}
@@ -680,8 +714,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{6}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{AMD Xilinx Documentation Portal}

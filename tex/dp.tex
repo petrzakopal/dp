@@ -717,7 +717,9 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			%  [ZynQBerry](https://shop.trenz-electronic.de/en/TE0726-03-11C64-A-ZynqBerry-Module-with-Xilinx-Z-7007S-Single-Core-Raspberry-Pi-2-compatible) (velice zajímavější i díky ceně, ale možná by hodně cool bylo celé si udělat sám sestavu)
 
 \section{Model stroje}
-	Jak již bylo představeno v předchozích částech textu, akcelerované aplikace v FPGA je možné použít na různé účely. Součástí této práce je v PL realizovat akcelerovaný výpočet matematického modelu stroje. V této práci bude využito matematického modelu asynchronního motoru.
+	Jak již bylo představeno v předchozích částech textu, akcelerované aplikace v FPGA je možné použít na různé účely. Součástí této práce je v PL realizovat akcelerovaný výpočet matematického modelu stroje. V této práci bude využito matematického modelu asynchronního motoru.\par
+	Pokud FPGA v Soc obsahuje dostatečné množství LUT, je možné realizovat akcelerovaný výpočet „kompletního“ matematického modelu, ve kterém např. dochází k simulovanému generování vstupního napětí, jehož popis pomocí rovnic je představen v části \hyperref[subsec:matematicky-popis-kompletniho-modelu-stroje]{\textit{Matematický popis „kompletního“ modelu stroje}}.\par
+	Pokud je využíváno SoC s FPGA obsahující nedostatečný počet LUT, jako např. používaná vývojová deska Digilent Zybo 1. generace (pouze 17 600 LUTs), není možné výhodně FPGA použít pro akcelerované výpočty. Ovšem počet LUTs je dostačující pro realizaci I-n modelu a výpočet velikosti rotorového toku motoru $\varphi_2$.
 	%% mám se v této celé kapitole více rozepsat o odvození modelu ASM
 	%% schéma, princip činnosti, napěťové a tokové rovnice
 	%% v optimalizace/úpravě modelu pro jazyk C++ mám se rozepsat o numerických metodách? RK4 bych použil
@@ -726,7 +728,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 	% goniometrické funkce jsou v pure c++ v knihovně cmath, ve vitis jsou v hls_math.h
 	% https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/Vitis-HLS-Math-Library
 	\subsection{Představení stroje}
-	\subsection{Matematický popis modelu stroje}
+	\subsection{Matematický popis „kompletního“ modelu stroje}\label{subsec:matematicky-popis-kompletniho-modelu-stroje}
 	\begin{minipage}[t]{0.47\textwidth}
         \vspace{\baselineskip}
         \begin{table}[H]
@@ -813,6 +815,51 @@ Stavový popis je vhodné doplnit o~další rovnice, jež budou v~simulaci využ
     \omega = p_\text{p} \Omega,
 \end{equation}
 kde $\sigma = 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, $i_{1\alpha}$ (A) a $i_{1\beta}$ (A) jsou složky vektoru statorového proudu $\underline{i_1}$ (A), $\psi_{2\alpha}$ (Wb) a $\psi_{2\beta}$ (Wb) jsou složky vektoru rotorového magnetického toku $\underline{\psi_2}$ (Wb), $u_{1\alpha}$ (V) a $u_{1\beta}$ (V) jsou složky statorového napětí $\underline{u_1}$ (V), $p_\text{p}$ (-) je počet polpárů stroje, $\omega$ (s$^{-1}$) je elektrická úhlová rychlost hřídele, $\Omega$ (s$^{-1}$) je mechanická úhlová rychlost hřídele, $M$ je vnitřní elektromechanický moment stroje a $M_\text{z}$ (Nm) je moment zátěžný.
+
+	\subsection{I-n model asynchronního motoru}
+		Jak již bylo v předcházejících částech zmíněno, pokud není k dispozici dostatečný počet LUTs pro výpočet kompletního matematického modelu, je možné využít SoC/FPGA na výpočet např. proudově-otáčkového, resp. $I$-$n$ modelu.\par
+		Popis $I$-$n$ modelu vychází ze základních rovnic, popisující asynchronní motor, uvedených např. v \cite{kobrle-elektricke-pohony} (rovnice jsou upraveny a přeznačeny dle moderních konvencí ale význam zůstává zachován). V teorii prostorových vektorů je možné tedy psát soustavu rovnic
+
+		\begin{equation}
+			\underline{u_{1}^{k}} = R_1 \underline{i_{1}^{k}} + \frac{\dd{\underline{\psi_1^{k}}}}{\dd{t}} + \text{j} \omega_k \underline{\psi_1^{k}},
+		\end{equation}
+		\begin{equation}
+			\underline{u_{2}^{k}} = R_2 \underline{i_{2}^{k}} + \frac{\dd{\underline{\psi_2^{k}}}}{\dd{t}} + \text{j} (\omega_k - \omega) \underline{\psi_2^{k}},
+		\end{equation}
+	
+		\begin{equation}
+			\underline{\psi_1^{k}} = L_1 \underline{i_1^{k}} + L_\text{m} \underline{i_2^{k}},
+		\end{equation}
+	
+		\begin{equation}
+			\underline{\psi_2^{k}} = L_2 \underline{i_2^{k}} + L_\text{m} \underline{i_1^{k}},
+		\end{equation}
+
+		kde $\underline{u_{1}^{k}}$ (V) je prostorový vektor statorového napětí, $\underline{u_{2}^{k}}$ (V) je prostorový vektor rotorového napětí, $\underline{i_{1}^{k}}$ (A) je prostorový vektor statorového proudu, $\underline{i_{2}^{k}}$ (A) je prostorový vektor rotorového proudu, $\underline{\psi_1^{k}}$ (Wb) je prostorový vektor magnetického toku statoru, $\underline{\psi_2^{k}}$ (Wb) je prostorový vektor magnetického toku rotoru, $\omega$ (s$^{-1}$) je úhlová rychlost otáčení rotoru, $\omega_k$ (s$^{-1}$) je úhlová rychlost otáčení použitého souřadnicového systému, $R_1$ ($\Omega$), resp. $R_2$ ($\Omega$) je rezistivita statorového, resp. rotorového vinutí, $L_1$ (H), resp. $L_2$ (H) je statorová, resp. rotorová indukčnost a $L_\text{m}$ (H) je hlavní magnetizační indukčnost.\par
+		I-n model vychází z předpokladu, že otáčivá úhlová rychlost souřadnicového systému $\omega_k$ = 0 a tudíž model bude odvozován v souřadnicovém systému spojeným se statorem (souřadnicový systém $\alpha \beta$). Poté po vzolení daného souřadnicového systému pro soustavu rovnic platí
+
+		\begin{equation}
+			\underline{u_{1}^{\alpha \beta}} = R_1 \underline{i_{1}^{\alpha \beta}} + \frac{\dd{\underline{\psi_1^{\alpha \beta}}}}{\dd{t}},
+		\end{equation}
+		\begin{equation}\label{eq:alphabeta-napeti-rotor-rovnice-i-n-model}
+			\underline{u_{2}^{\alpha \beta}} = R_2 \underline{i_{2}^{\alpha \beta}} + \frac{\dd{\underline{\psi_2^{\alpha \beta}}}}{\dd{t}} - \text{j} \omega \underline{\psi_2^{\alpha \beta}},
+		\end{equation}
+	
+		\begin{equation}
+			\underline{\psi_1^{\alpha \beta}} = L_1 \underline{i_1^{\alpha \beta}} + L_\text{m} \underline{i_2^{\alpha \beta}},
+		\end{equation}
+	
+		\begin{equation}\label{eq:alphabeta-tok-rotor-rovnice-i-n-model}
+			\underline{\psi_2^{\alpha \beta}} = L_2 \underline{i_2^{\alpha \beta}} + L_\text{m} \underline{i_1^{\alpha \beta}}.
+		\end{equation}
+
+		V případě řízení asynchronního motoru s kotvou nakrátko orientovaného na rotorový tok je dále z rovnice \ref{eq:alphabeta-tok-rotor-rovnice-i-n-model} vyjádřen prostorový vektor $\underline{i_2^{\alpha \beta}}$, který je dále dosazen do upravené rovnice \ref{eq:alphabeta-napeti-rotor-rovnice-i-n-model}, u které je přepokládáno, že $\underline{u_{2}^{\alpha \beta}}$ = 0.
+		Výsledná diferenciální rovnice pro prostorový vektor rotorového magnetického toku je
+
+		\begin{equation}
+			\frac{\dd{\underline{\psi^{\alpha \beta}}}}{\dd{t}} = \frac{R_2}{L_2}L_m i_1^{\alpha \beta} + j \omega \underline{\psi_2^{\alpha \beta}} - \frac{R_2}{L_2} \underline{\psi_2^{\alpha \beta}}
+		\end{equation}
+
 
 
 \section{Aplikace pro FPGA a CPU}
