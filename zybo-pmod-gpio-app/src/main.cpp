@@ -224,10 +224,10 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
     
     CurVelModel.odeCVCalculationSettings->calculationStep = 0.0001;
+    CurVelModel.odeCVCalculationSettings->halfCalculationStep = CurVelModel.odeCVCalculationSettings->calculationStep/2;
     CurVelModel.odeCVCalculationSettings->initialCalculationTime = 0;
     CurVelModel.odeCVCalculationSettings->finalCalculationTime = 1;
     CurVelModel.odeCVCalculationSettings->numberOfIterations = ((int)ceil(((CurVelModel.odeCVCalculationSettings->finalCalculationTime -  CurVelModel.odeCVCalculationSettings->initialCalculationTime)/ CurVelModel.odeCVCalculationSettings->calculationStep)));
-    CurVelModel.modelCVVariables->psi2Amplitude = 0;
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*------------------------------ DEFINING CLASS PARAMETERS AND COEFFICIENTS ------------------------------*/
@@ -248,7 +248,8 @@ float *inputI2;
 float *inputI3;
 float *inputMotorMechanicalAngularVelocity;
 
-float *psi2Amplitude;
+// float *psi2Amplitude;
+// float *transformAngle;
 
 float *psi2alpha;
 float *psi2beta;
@@ -274,7 +275,10 @@ posix_memalign((void **)&inputI1 , 4096 , CurVelModel.odeCVCalculationSettings->
 posix_memalign((void **)&inputI2 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputI3 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+
+
 
     /*------------------------------ LOADING DATA STREAM ------------------------------*/
 printf("------------------------------------\n\r");
@@ -356,7 +360,10 @@ posix_memalign((void **)&inputI1 , 4096 , CurVelModel.odeCVCalculationSettings->
 posix_memalign((void **)&inputI2 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputI3 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+
+
 inputTime[0] = 0;
 
     scanf("%f %f %f %f", inputI1, inputI2, inputI3, inputMotorMechanicalAngularVelocity);
@@ -368,14 +375,15 @@ inputTime[0] = 0;
 
 
     
-posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&psi2Amplitude , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+// posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+// posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+// posix_memalign((void **)&psi2Amplitude , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 
 
-psi2alpha[0] = 0;
-psi2beta[0] = 0;
-psi2Amplitude[0] = 0;
+// psi2alpha[0] = 0;
+// psi2beta[0] = 0;
+// psi2Amplitude[0] = 0;
+// transformAngle[0] = 0;
 
 
 
@@ -398,13 +406,14 @@ psi2Amplitude[0] = 0;
 
     OCL_CHECK(err, cl::Buffer buffer_inputMotorMechanicalAngularVelocity(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputMotorMechanicalAngularVelocity,&err));
 
-    OCL_CHECK(err, cl::Buffer buffer_psi2Amplitude(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2Amplitude,&err));
+    // OCL_CHECK(err, cl::Buffer buffer_psi2Amplitude(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2Amplitude,&err));
 
 
     //second type kernel – disable for first type kernel
     OCL_CHECK(err, cl::Buffer buffer_psi2alpha(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2alpha,&err));
 
     OCL_CHECK(err, cl::Buffer buffer_psi2beta(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2beta,&err));
+    // OCL_CHECK(err, cl::Buffer buffer_transformAngle(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),transformAngle,&err));
 
 
 
@@ -419,15 +428,18 @@ psi2Amplitude[0] = 0;
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI2));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI3));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputMotorMechanicalAngularVelocity));
-    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2Amplitude));
+    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2Amplitude));
 
-    //second type kernel - disable for frst type kernel
+    // //second type kernel - disable for frst type kernel
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2alpha));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2beta));
+    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_transformAngle));
+  
 
     // Data will be migrated to kernel space
     // delete buffer_psi2alpha and buffer_psi2beta for first type kernel
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings, buffer_modelCVVariables,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2Amplitude, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
+    // delete buffer_modelCVVariables for second type kernel and add for first type
+    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
 
     /*------------------------------------------------------------------------------------------------------------*/
 
@@ -435,7 +447,7 @@ psi2Amplitude[0] = 0;
     // Launch the Kernel
     OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
     
-    OCL_CHECK(err, q.enqueueMigrateMemObjects({ buffer_psi2Amplitude}, CL_MIGRATE_MEM_OBJECT_HOST));
+    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_psi2alpha, buffer_psi2beta}, CL_MIGRATE_MEM_OBJECT_HOST));
     rangeKernel.end();
     OCL_CHECK(err, q.finish());
 
@@ -445,16 +457,24 @@ psi2Amplitude[0] = 0;
     std::ofstream modelCVOutputDataFile2;
     modelCVOutputDataFile2.open("outputCurVel2.csv",std::ofstream::out | std::ofstream::trunc);
     modelCVOutputDataFile2<< "time,|psi2|\n";
+    float psi2Amplitude;
+    float transformAngle;
     float timeCV = CurVelModel.odeCVCalculationSettings->initialCalculationTime;
+
     for(int i = 0; i<CurVelModel.odeCVCalculationSettings->numberOfIterations;i++ )
     {   
         timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep;
-        std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude[i] << "\n";
 
-        std::cout << "inputI1[" << i << "]: "<< inputI1[i] << "\n";
+        psi2Amplitude = sqrtf(psi2alpha[i] * psi2alpha[i] + psi2beta[i] * psi2beta[i] );
 
+        std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude << "\n";
 
-        modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude[i]<<"\n";
+        // std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude[i] << "\n";
+        // std::cout << "transformAngle[" << i << "]: "<< transformAngle[i] << "\n";
+        // std::cout << "inputI1[" << i << "]: "<< inputI1[i] << "\n";
+        
+
+        // modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude[i]<<"\n";
     }
 
     modelCVOutputDataFile2.close();
@@ -469,7 +489,7 @@ psi2Amplitude[0] = 0;
     free(inputI1);
     free(inputI2);
     free(inputI3);
-    free(psi2Amplitude);
+    // free(psi2Amplitude);
     free(inputMotorMechanicalAngularVelocity);
     free(CurVelModel.modelCVVariables);
     free(CurVelModel.odeCVCalculationSettings);

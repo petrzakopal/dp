@@ -19,7 +19,7 @@ extern "C" {
 
 
 // first type kernel
-// void krnl_calculateCurVelModel(odeCVCalculationSettingsType *odeCVCalculationSettings,modelCVVariablesType *modelCVVariables, modelCVCoeffType *modelCVCoeff, float *inputI1, float *inputI2, float *inputI3, float *inputMotorMechanicalAngularVelocity, float * psi2Amplitude ) {
+// void krnl_calculateCurVelModel(odeCVCalculationSettingsType *odeCVCalculationSettings,modelCVVariablesType *modelCVVariables, modelCVCoeffType *modelCVCoeff, float *inputI1, float *inputI2, float *inputI3, float *inputMotorMechanicalAngularVelocity, float * psi2Amplitude, float *transformAngle ) {
 
 // CurVelModelClass CurVelModel;
 // TransformationClass Transformation;
@@ -45,6 +45,9 @@ extern "C" {
 
 //     psi2Amplitude[i] = sqrtf((modelCVVariables->psi2alpha * modelCVVariables->psi2alpha) + (modelCVVariables->psi2beta * modelCVVariables->psi2beta));
 
+//     transformAngle[i] = atanf(modelCVVariables->psi2beta/modelCVVariables->psi2alpha);
+    
+
     
 // /****************************************************************************************************/
 
@@ -60,16 +63,14 @@ extern "C" {
 
 
 // second type kernel
-void krnl_calculateCurVelModel(odeCVCalculationSettingsType *odeCVCalculationSettings, modelCVCoeffType *modelCVCoeff, float *inputI1, float *inputI2, float *inputI3, float *inputMotorMechanicalAngularVelocity, float * psi2Amplitude, float *psi2alpha, float *psi2beta) {
+void krnl_calculateCurVelModel(odeCVCalculationSettingsType *odeCVCalculationSettings, modelCVCoeffType *modelCVCoeff, float *inputI1, float *inputI2, float *inputI3, float *inputMotorMechanicalAngularVelocity, float *psi2alpha, float *psi2beta) {
 
 CurVelModelClass CurVelModel;
-TransformationClass Transformation;
 
-float timeCV = odeCVCalculationSettings->initialCalculationTime;
+// float timeCV = odeCVCalculationSettings->initialCalculationTime;
 float i1alpha;
 float i1beta;
 float motorElectricalAngularVelocity;
-float halfCaclculationStep = odeCVCalculationSettings->calculationStep/2;
 
 
 
@@ -77,10 +78,10 @@ float halfCaclculationStep = odeCVCalculationSettings->calculationStep/2;
 /*------------------------------ MAIN MODEL LOOP FOR ACQUIRED INPUTS ------------------------------*/
 for(int i = 0; i< odeCVCalculationSettings->numberOfIterations; i++)
 {
-    #pragma HLS performance target_ti=100
+    #pragma HLS performance target_ti=273
     #pragma HLS loop_tripcount max=odeCVCalculationSettings->numberOfIterations
 
-    timeCV = timeCV + odeCVCalculationSettings->calculationStep;
+    // timeCV = timeCV + odeCVCalculationSettings->calculationStep;
 
     i1alpha = (0.667 * (inputI1[i] - (0.5 * inputI2[i]) - (0.5 * inputI3[i])));
     i1beta = (0.6667 * (0.866 * inputI2[i] - 0.866 *  inputI3[i]));
@@ -92,31 +93,31 @@ for(int i = 0; i< odeCVCalculationSettings->numberOfIterations; i++)
     float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
 
     // helper variable to reduce calculation fo the same value
-    float halfCalculationStep = odeCVCalculationSettings->calculationStep/2;
+    // float halfCalculationStep = odeCVCalculationSettings->calculationStep/2;
 
 
     /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k1psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, psi2alpha[i], psi2beta[i], motorElectricalAngularVelocity);
+    k1psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, psi2alpha[i],  psi2beta[i], motorElectricalAngularVelocity);
 
-    k1psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, psi2alpha[i], psi2beta[i], motorElectricalAngularVelocity);
+    k1psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, psi2alpha[i],  psi2beta[i], motorElectricalAngularVelocity);
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k2psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (halfCalculationStep * k1psi2alpha)), (psi2beta[i] + (halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
+    k2psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->halfCalculationStep * k1psi2alpha)), ( psi2beta[i] + (odeCVCalculationSettings->halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
 
-    k2psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (halfCalculationStep * k1psi2alpha)), (psi2beta[i] + (halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
+    k2psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->halfCalculationStep * k1psi2alpha)), ( psi2beta[i] + (odeCVCalculationSettings->halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k3psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (halfCalculationStep * k2psi2alpha)), (psi2beta[i] + (halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
+    k3psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->halfCalculationStep * k2psi2alpha)), ( psi2beta[i] + (odeCVCalculationSettings->halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
 
-    k3psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (halfCalculationStep * k2psi2alpha)), (psi2beta[i] + (halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
+    k3psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->halfCalculationStep * k2psi2alpha)), ( psi2beta[i] + (odeCVCalculationSettings->halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k4psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->calculationStep * k3psi2alpha)), (psi2beta[i] + (odeCVCalculationSettings->calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
+    k4psi2alpha = CurVelModel.psi2alpha(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->calculationStep * k3psi2alpha)), ( psi2beta[i] + (odeCVCalculationSettings->calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
 
-    k4psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->calculationStep * k3psi2alpha)), (psi2beta[i] + (odeCVCalculationSettings->calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
+    k4psi2beta = CurVelModel.psi2beta(modelCVCoeff, i1alpha, i1beta, (psi2alpha[i] + (odeCVCalculationSettings->calculationStep * k3psi2alpha)), ( psi2beta[i] + (odeCVCalculationSettings->calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
     /*------------------------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -127,9 +128,6 @@ for(int i = 0; i< odeCVCalculationSettings->numberOfIterations; i++)
 
     psi2beta[i] = psi2beta[i] + ((odeCVCalculationSettings->calculationStep / 6) * (k1psi2beta + 2 * k2psi2beta + 2 * k3psi2beta + k4psi2beta));
 
-    psi2Amplitude[i] = sqrtf((psi2alpha[i] * psi2alpha[i]) + (psi2beta[i] * psi2beta[i]));
-
-    
 /****************************************************************************************************/
 
 
