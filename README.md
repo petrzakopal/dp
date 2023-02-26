@@ -10,7 +10,11 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻 [25.02.2023](/notes/20230225.md) <-- zjištění dne **DIGILENT ZYBO SE ZÁKLADNÍM ZYNQ 7000 NENÍ VHODNÉ NA AKCELEROVÁNÍ NĚJAKÝCH SLOŽITÝCH APLIKACÍ A MODELŮ, SPÍŠE NA SEZNÁMENÍ SE S PRINCIPEM, JAK TAKOVÉ PROGRAMOVÁNÍ, HLS, MODELOVÁNÍ A PŘÍSTUPY FUNGUJÍ**, vidím jako nemožné akcelerovat více než 20 % celkového modelu a bloků pro řízení
+👨🏻‍💻 [26.02.2023](/notes/20230226.md)
+
+---
+
+👨🏻‍💻 [25.02.2023](/notes/20230225.md) <-- zjištění dne **DIGILENT ZYBO SE ZÁKLADNÍM ZYNQ 7000 NENÍ VHODNÉ NA AKCELEROVÁNÍ NĚJAKÝCH SLOŽITÝCH APLIKACÍ A MODELŮ, SPÍŠE NA SEZNÁMENÍ SE S PRINCIPEM, JAK TAKOVÉ PROGRAMOVÁNÍ, HLS, MODELOVÁNÍ A PŘÍSTUPY FUNGUJÍ**, vidím jako nemožné akcelerovat více než 20 % celkového modelu a bloků pro řízení, - zkusil jsem ještě udělat I-n model, v kernelu je jen RK4 a v procesoru vypočítávám amplitudu a atan2, do FPGA se to vejde jen tak tak, zkoušel jsem udělat také streamy a snažil se udělat optimalizaci čtení dat aby jednotlivé děje mohli být paralelně, ale moc to nešlo a bylo to ještě horší, pomocí různých optimalizací kódů a postupů se tam fakt vešel jen I-n model RK4, což je slabota, pokud by to bylo možné použít v průmyslu, chtělo by to pak paralelně počítat třeba regulátory, odvazbení, zrychleně SVM atd. atd. na to tento ZynQ SoC FPGA PL je relativně slabý..., ztratil jsem ale část kódu a model nefunguje tak, jak by měl => zatím to vypadá, že jsem se spletl zase v kernelu (přepsal jsem se, no tak to nechám buildit asi teďka do 5 hodin do rána... FPGA 💛), už mi z toho, jak pořád dělám na diplomce s malým posunem docela hrabe... 🤓, pardon.
 
 ---
 
