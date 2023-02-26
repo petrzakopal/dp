@@ -69,8 +69,8 @@ float i1beta;
 float motorElectricalAngularVelocity;
 float halfCaclculationStep = odeCVCalculationSettings->calculationStep/2;
 
-float psi2alpha = 0;
-float psi2beta = 0;
+float psi2alpha = psi2alphaOut[0];
+float psi2beta = psi2betaOut[0];
 
 /****************************************************************************************************/
 /*------------------------------ MAIN MODEL LOOP FOR ACQUIRED INPUTS ------------------------------*/

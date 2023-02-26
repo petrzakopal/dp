@@ -277,7 +277,8 @@ posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelMode
 posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
 
-
+psi2alpha[0] = 0;
+psi2beta[0] = 0;
 
     /*------------------------------ LOADING DATA STREAM ------------------------------*/
 printf("------------------------------------\n\r");
@@ -349,8 +350,8 @@ else if(modeSelection == 1)
     
     printf("Keyboard input data mode\n\r");
     printf("------------------------------------\n\r");
-    printf("Insert data divded by {space symbol}\n\r");
-    printf("I1 I2 I3 MechanicalAngularVelocity \n\r");
+    printf("Insert data divided by {space symbol}\n\r");
+    printf("I1 I2 I3 MechanicalAngularVelocity psi2alpha[0] psi2beta[0] \n\r");
     CurVelModel.odeCVCalculationSettings->numberOfIterations = 1;
 
     
@@ -365,10 +366,10 @@ posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings-
 
 inputTime[0] = 0;
 
-    scanf("%f %f %f %f", inputI1, inputI2, inputI3, inputMotorMechanicalAngularVelocity);
+    scanf("%f %f %f %f %f %f", inputI1, inputI2, inputI3, inputMotorMechanicalAngularVelocity, psi2alpha, psi2beta);
     printf("------------------------------------\n\r");
     printf("You have entered:\n\r");
-    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\r", inputI1[0], inputI2[0], inputI3[0], inputMotorMechanicalAngularVelocity[0]);
+    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\r,\n\rpsi2alpha[0] = %f\n\rpsi2beta = %f", inputI1[0], inputI2[0], inputI3[0], inputMotorMechanicalAngularVelocity[0], psi2alpha[0], psi2beta[0]);
     printf("------------------------------------\n\r");
 }
 
@@ -489,6 +490,8 @@ inputTime[0] = 0;
     free(inputI2);
     free(inputI3);
     // free(psi2Amplitude);
+    free(psi2alpha);
+    free(psi2beta);
     free(inputMotorMechanicalAngularVelocity);
     free(CurVelModel.modelCVVariables);
     free(CurVelModel.odeCVCalculationSettings);
