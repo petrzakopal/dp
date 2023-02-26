@@ -373,12 +373,20 @@ modelCVOutputDataFile2<< "time,|psi2|,i1alpha,motorMechanicalAngularVelocity\n";
 /*-----------------------------------------------------------------------------------------------------------*/
 
 
+std::cout<< &CurVelModel2.modelCVVariables->psi2alpha << "\n";
+int modeSelection = 0;
+printf("Select mode:\n0 - preloaded data\n1 - keyboard input data\n");
+scanf("%i", &modeSelection);
+
+printf("You have selected: %i\n\r", modeSelection);
 
 
 psi2Amplitude = 0;
+float transformAngle = 0;
 timeCV = MotorModel.odeCalculationSettings->initialCalculationTime;
 
-
+if(modeSelection == 0)
+{
 /****************************************************************************************************/
 /*------------------------------ MAIN MODEL LOOP FOR ACQUIRED INPUTS ------------------------------*/
 for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
@@ -401,17 +409,60 @@ for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
 
 
     psi2Amplitude = sqrt((CurVelModel2.modelCVVariables->psi2alpha * CurVelModel2.modelCVVariables->psi2alpha) + (CurVelModel2.modelCVVariables->psi2beta * CurVelModel2.modelCVVariables->psi2beta));
+    transformAngle = atan2f(CurVelModel2.modelCVVariables->psi2beta, CurVelModel2.modelCVVariables->psi2alpha);
 
     // std::cout << "inputI1[" << i << "]: " << CurVelModel2.modelCVVariables->inputI1[i] << "\n";
     // std::cout << "inputI2[" << i << "]: " << CurVelModel2.modelCVVariables->inputI2[i] << "\n";
-    std::cout << "|psi2| = " << psi2Amplitude << "\n";
-    std::cout << i <<"\n";
-    modelCVOutputDataFile2 << timeCV << "," << psi2Amplitude <<","<<MotorModel.getMotorVariable(i)->i1alpha << "," << MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity <<"\n";
+    std::cout << "|psi2|[" << i <<"] " << " = " << psi2Amplitude << "\n";
+    std::cout << "transformAngle[" << i <<"] " << " = " << transformAngle << "\n";
+
 }
 /****************************************************************************************************/
 
 modelCVOutputDataFile2.close(); // close export file
+}
+else if(modeSelection == 1)
+{
 
+
+    printf("Keyboard input data mode\n\r");
+    printf("------------------------------------\n\r");
+    printf("Insert data divided by {space symbol}\n\r");
+    printf("I1 I2 I3 MechanicalAngularVelocity psi2alpha[0] psi2beta[0] \n\r");
+    CurVelModel.odeCVCalculationSettings->numberOfIterations = 1;
+
+    scanf("%f %f %f %f %f %f", CurVelModel2.modelCVVariables->inputI1, CurVelModel2.modelCVVariables->inputI2, CurVelModel2.modelCVVariables->inputI3, CurVelModel2.modelCVVariables->inputMotorMechanicalAngularVelocity, &CurVelModel2.modelCVVariables->psi2alpha, &CurVelModel2.modelCVVariables->psi2beta);
+
+
+    printf("------------------------------------\n\r");
+    printf("You have entered:\n\r");
+    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\rpsi2alpha[0] = %f\n\rpsi2beta = %f\n\r", CurVelModel2.modelCVVariables->inputI1[0], CurVelModel2.modelCVVariables->inputI2[0], CurVelModel2.modelCVVariables->inputI3[0], CurVelModel2.modelCVVariables->inputMotorMechanicalAngularVelocity[0], CurVelModel2.modelCVVariables->psi2alpha, CurVelModel2.modelCVVariables->psi2beta);
+    printf("------------------------------------\n\r");
+
+    for(int i = 0; i< CurVelModel.odeCVCalculationSettings->numberOfIterations; i++)
+    {
+    timeCV = timeCV + CurVelModel2.odeCVCalculationSettings->calculationStep;
+
+    CurVelModel2.modelCVVariables->i1alpha = Transformation.clarkeTransform1(CurVelModel2.modelCVVariables->inputI1[i], CurVelModel2.modelCVVariables->inputI2[i], CurVelModel2.modelCVVariables->inputI3[i], 0.6667);
+    CurVelModel2.modelCVVariables->i1beta = Transformation.clarkeTransform2(CurVelModel2.modelCVVariables->inputI1[i], CurVelModel2.modelCVVariables->inputI2[i], CurVelModel2.modelCVVariables->inputI3[i], 0.6667);
+    CurVelModel2.modelCVVariables->motorElectricalAngularVelocity = CurVelModel2.modelCVVariables->inputMotorMechanicalAngularVelocity[i] * CurVelModel2.motorParameters->nOfPolePairs;
+
+    
+
+    CurVelModel2.CurVelModelCalculate(CurVelModel2.modelCVCoeff, CurVelModel2.modelCVVariables, CurVelModel2.odeCVCalculationSettings);
+
+    psi2Amplitude = sqrt((CurVelModel2.modelCVVariables->psi2alpha * CurVelModel2.modelCVVariables->psi2alpha) + (CurVelModel2.modelCVVariables->psi2beta * CurVelModel2.modelCVVariables->psi2beta));
+     transformAngle = atan2f(CurVelModel2.modelCVVariables->psi2beta, CurVelModel2.modelCVVariables->psi2alpha);
+
+    
+    std::cout << "|psi2|[" << i <<"] " << " = " << psi2Amplitude << "\n";
+    std::cout << "transformAngle[" << i <<"] " << " = " << transformAngle << "\n";
+    
+    }
+
+    
+
+}
 
 
 
@@ -435,5 +486,9 @@ free(MotorModel.stateSpaceCoeff);
 free(MotorModel.modelVariables);
 free(MotorModel.odeCalculationSettings);
 free(MotorModel.voltageGeneratorData);
+
+
+
+
 return 0;
 }
