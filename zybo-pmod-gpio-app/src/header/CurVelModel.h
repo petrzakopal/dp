@@ -50,9 +50,13 @@ typedef struct odeCVCalculationSettingsStruct
     float calculationStep;
     float calculationTime;
     int numberOfIterations;
-    float halfCalculationStep;
 }odeCVCalculationSettingsType;
 /*---------------------------------------------------------------------------------------------------*/
+typedef struct resultsStruct
+{
+    float psi2alpha;
+    float psi2beta;
+}resultsType;
 
 class CurVelModelClass
 {
@@ -63,7 +67,7 @@ class CurVelModelClass
     modelCVVariablesType *modelCVVariables = NULL;
     odeCVCalculationSettingsType *odeCVCalculationSettings = NULL;
 
-   
+    resultsType * curVelModelResults = NULL;
 
     void odeCVCalculationSettingsAllocateMemory();
 

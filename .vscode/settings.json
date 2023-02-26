@@ -91,6 +91,7 @@
         "stop_token": "cpp",
         "syncstream": "cpp",
         "typeindex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "*.ch": "cpp"
     }
 }

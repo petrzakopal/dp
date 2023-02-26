@@ -41,7 +41,6 @@ Purpose: Host program
 
 
 
-#include "header/transformation.h"
 #include "experimental/xrt_profile.h" // for profiling host program
 /*----------------------------------------------------------------------------*/
 
@@ -224,7 +223,7 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
     
     CurVelModel.odeCVCalculationSettings->calculationStep = 0.0001;
-    CurVelModel.odeCVCalculationSettings->halfCalculationStep = CurVelModel.odeCVCalculationSettings->calculationStep/2;
+    
     CurVelModel.odeCVCalculationSettings->initialCalculationTime = 0;
     CurVelModel.odeCVCalculationSettings->finalCalculationTime = 1;
     CurVelModel.odeCVCalculationSettings->numberOfIterations = ((int)ceil(((CurVelModel.odeCVCalculationSettings->finalCalculationTime -  CurVelModel.odeCVCalculationSettings->initialCalculationTime)/ CurVelModel.odeCVCalculationSettings->calculationStep)));
@@ -456,7 +455,7 @@ inputTime[0] = 0;
     // data output
     std::ofstream modelCVOutputDataFile2;
     modelCVOutputDataFile2.open("outputCurVel2.csv",std::ofstream::out | std::ofstream::trunc);
-    modelCVOutputDataFile2<< "time,|psi2|\n";
+    modelCVOutputDataFile2<< "time,|psi2|,transformAngle\n";
     float psi2Amplitude;
     float transformAngle;
     float timeCV = CurVelModel.odeCVCalculationSettings->initialCalculationTime;
@@ -466,15 +465,15 @@ inputTime[0] = 0;
         timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep;
 
         psi2Amplitude = sqrtf(psi2alpha[i] * psi2alpha[i] + psi2beta[i] * psi2beta[i] );
-
+        transformAngle = atan2f(psi2beta[i],psi2alpha[i]);
         std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude << "\n";
 
         // std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude[i] << "\n";
-        // std::cout << "transformAngle[" << i << "]: "<< transformAngle[i] << "\n";
+        std::cout << "transformAngle[" << i << "]: "<< transformAngle << "\n";
         // std::cout << "inputI1[" << i << "]: "<< inputI1[i] << "\n";
         
 
-        // modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude[i]<<"\n";
+        modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude<<","<<transformAngle<<"\n";
     }
 
     modelCVOutputDataFile2.close();

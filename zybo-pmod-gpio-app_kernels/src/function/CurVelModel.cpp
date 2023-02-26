@@ -1,8 +1,8 @@
 #include "../header/CurVelModel.h"
-#include <hls_math.h>
+#include <cmath>
 #include <stdlib.h>
-// #include <iostream>
-// #include "../header/transformation.h"
+#include <iostream>
+#include "../header/transformation.h"
 
 
 /*-------------------------------------------------------------------------------------------*/

@@ -9,8 +9,8 @@
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
-        <args name="psi2alpha" master="true"/>
-        <args name="psi2beta" master="true"/>
+        <args name="psi2alphaOut" master="true"/>
+        <args name="psi2betaOut" master="true"/>
       </kernels>
     </configBuildOptions>
   </configuration>
@@ -23,12 +23,12 @@
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
-        <args name="psi2alpha" master="true"/>
-        <args name="psi2beta" master="true"/>
+        <args name="psi2alphaOut" master="true"/>
+        <args name="psi2betaOut" master="true"/>
       </kernels>
     </configBuildOptions>
   </configuration>
-  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.66980607" dirty="true">
+  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.66980607">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
         <args name="odeCVCalculationSettings" master="true"/>
@@ -37,8 +37,8 @@
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
-        <args name="psi2alpha" master="true"/>
-        <args name="psi2beta" master="true"/>
+        <args name="psi2alphaOut" master="true"/>
+        <args name="psi2betaOut" master="true"/>
       </kernels>
     </configBuildOptions>
     <lastBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
@@ -49,8 +49,8 @@
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
-        <args name="psi2alpha" master="true"/>
-        <args name="psi2beta" master="true"/>
+        <args name="psi2alphaOut" master="true"/>
+        <args name="psi2betaOut" master="true"/>
       </kernels>
     </lastBuildOptions>
   </configuration>
