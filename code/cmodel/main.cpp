@@ -182,7 +182,7 @@ CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorPar
 /*----------------------------- FINE EXPORT FILE PREPARATION -----------------------------*/
 std::ofstream modelCVOutputDataFile;
 modelCVOutputDataFile.open ("outputCurVel.csv",std::ofstream::out | std::ofstream::trunc);
-modelCVOutputDataFile<< "time,|psi2|,i1alpha,motorMechanicalAngularVelocity\n";
+modelCVOutputDataFile<< "time,|psi2|,i1alpha,motorMechanicalAngularVelocity,psi2alpha,psi2beta\n";
 /*----------------------------------------------------------------------------------------*/
 
 
@@ -217,7 +217,7 @@ for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
     /*------------------------------ MORE DATA TUNING AND OUTPUT TO A FINE EXPORTED FILE ------------------------------*/
     psi2Amplitude = sqrt((CurVelModel.modelCVVariables->psi2alpha * CurVelModel.modelCVVariables->psi2alpha) + (CurVelModel.modelCVVariables->psi2beta * CurVelModel.modelCVVariables->psi2beta));
 
-    modelCVOutputDataFile << timeCV << "," << psi2Amplitude <<","<<MotorModel.getMotorVariable(i)->i1alpha << "," << MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity <<"\n";
+    modelCVOutputDataFile << timeCV << "," << psi2Amplitude <<","<<MotorModel.getMotorVariable(i)->i1alpha << "," << MotorModel.getMotorVariable(i)->motorMechanicalAngularVelocity <<","<< CurVelModel.modelCVVariables->psi2alpha <<","<<CurVelModel.modelCVVariables->psi2beta<< "\n";
     /*----------------------------------------------------------------------------------------------------------------*/
 
 }
