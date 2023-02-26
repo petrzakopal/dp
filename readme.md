@@ -15,3 +15,19 @@ Když se zadává hodnota ručně, tak nesedí moc výpočet, protože není zad
 git config --global credential.helper store
 ```
 Poté zadat jméno a heslo (Access token).
+
+## Pro profilování dalších věcí spojených s transferem dat
+a ješte v `hw_link` v IDE Explorer->C/C++ Build Settings->V++ Kernel Linker->Command Window Input
+za v++ dopsat `--profile profile.cfg`.
+
+
+```cfg
+#zybo-pmod-gpio-app_system/Hardware/profile.cfg
+[profile]
+data=all:all:all
+memory=all
+stall=all:all
+exec=all:all
+aie=all
+
+```

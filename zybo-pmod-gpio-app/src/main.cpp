@@ -369,7 +369,7 @@ inputTime[0] = 0;
     scanf("%f %f %f %f %f %f", inputI1, inputI2, inputI3, inputMotorMechanicalAngularVelocity, psi2alpha, psi2beta);
     printf("------------------------------------\n\r");
     printf("You have entered:\n\r");
-    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\r,\n\rpsi2alpha[0] = %f\n\rpsi2beta = %f", inputI1[0], inputI2[0], inputI3[0], inputMotorMechanicalAngularVelocity[0], psi2alpha[0], psi2beta[0]);
+    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\rpsi2alpha[0] = %f\n\rpsi2beta = %f\n\r", inputI1[0], inputI2[0], inputI3[0], inputMotorMechanicalAngularVelocity[0], psi2alpha[0], psi2beta[0]);
     printf("------------------------------------\n\r");
 }
 
