@@ -61,7 +61,6 @@ extern "C" {
 void krnl_calculateCurVelModel(odeCVCalculationSettingsType *odeCVCalculationSettings, modelCVCoeffType *modelCVCoeff, float *inputI1, float *inputI2, float *inputI3, float *inputMotorMechanicalAngularVelocity, float *psi2alphaOut, float *psi2betaOut) {
 
 CurVelModelClass CurVelModel;
-TransformationClass Transformation;
 
 float timeCV = odeCVCalculationSettings->initialCalculationTime;
 float i1alpha;
