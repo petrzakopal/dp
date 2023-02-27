@@ -10,7 +10,11 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻 [26.02.2023](/notes/20230226.md)
+👨🏻‍💻 [27.02.2023](/notes/20230227.md)
+
+---
+
+👨🏻‍💻 [26.02.2023](/notes/20230226.md) <-- pracoval jsem opět na vylepšení kernelu, snaha o větší optimalizaci ale nepovedla se, problém, že i poté po vrácení kódu nešla vůbec syntéza - moc LUTs, hledal jsem opět interrupts, připravil si bloky regulátoru, připravil design timeru, brainstorming obr. [program brainstorm flow](./notes/images/20230226/20230226_brainstorm-program-flow.png), zjišťoval více informací o profilování a vyprofiloval dva druhy aplikace, problém je, že když se poté udělal znovu kernel s profilováním, nebylo dostatek LUTs a bylo třeba profilování kernelu zrušit, do host programu atan2f, vyzkoušel fixed pointy atd., připravil simulační flow v [cmodel](./code/cmodel/) jako v SoC.
 
 ---
 
