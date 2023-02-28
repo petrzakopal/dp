@@ -11,7 +11,7 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻 [28.02.2023](/notes/20230228.md)
+👨🏻‍💻 [28.02.2023](/notes/20230228.md) <-- stále snaha o interrupt ohledně timeru - na pravidelnou akvizici dat
 
 ---
 
