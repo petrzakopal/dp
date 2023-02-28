@@ -2,6 +2,7 @@
 
 ## Pracuji na
 
+- interrupts + timers
 - přesun I-n modelu do FPGA
 - hledání jak funguje timer a přerušení a jak dělat akvizici dat do zybo pomocí PMOD GPIO a XADC pro otáčková resp. proudová čidla
 - začít dělat regulátor a výstup pro měnič v cmodelu...
@@ -9,6 +10,10 @@
 - lze arduinem vytvořit nulu na PMOD při paralelním spojení nebo budu arduinem řídit MOSFET a vytvářet požadovaný signál (modelování vstupů do fpga / výstupů z motoru)
 
 ## Mé denní poznámky ✏️
+
+👨🏻‍💻 [28.02.2023](/notes/20230228.md)
+
+---
 
 👨🏻‍💻 [27.02.2023](/notes/20230227.md) <-- celý den řeším interrupty, tudíž vlastně i timer, problém je v tom, že v bare-metal aplikaci je to docela easy a knihovny jdou naimportovat, v linuxu - tudíž aby mohlo být využito FPGA jako akcelerace, to není tak easy a je třeba využít buďto custom Linux driverů a nebo UIO a různých vrstev linuxu a registrů a dalšího designu ve vivado atd., našel jsem fajn článek na LinkedIn o tom, ale chybí tam část, jak si člověk dělá vlastní IP blok do vivado, to neumím pořádně a nerozumím tomu, ta část bez custom ip bloku nějak fungovala, ještě jsem nezkoumal pořádně C++ kód, resp. hledal jsem jak to funguje a nějaké odkazy, ale pořádně to nemám rozmyšleno, zatím tedy přerušení se nějak rozchodilo od gpio ale ne od timeru, to budu muset vyřešit..., vypadá to jako málo práce, ale je to docela dost na pochopení náročné, ne jako PIC, v návodu jsem jednu větu četl asi 15x a stejně to nechápu (ohledně custom IP ve vivado)
 
