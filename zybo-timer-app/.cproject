@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.settings">
+        		
+        <cconfiguration id="com.xilinx.ide.accel.config.sw_emu.armv7l.1784584309">
+            			
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.sw_emu.armv7l.1784584309" moduleId="org.eclipse.cdt.core.settings" name="Emulation-SW">
+                				
+                <externalSettings/>
+                				
+                <extensions>
+                    					
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    				
+                </extensions>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                				
+                <configuration buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" description="" id="com.xilinx.ide.accel.config.sw_emu.armv7l.1784584309" name="Emulation-SW" parent="com.xilinx.ide.accel.config.sw_emu.armv7l">
+                    					
+                    <folderInfo id="com.xilinx.ide.accel.config.sw_emu.armv7l.1784584309." name="/" resourcePath="">
+                        						
+                        <toolChain id="com.xilinx.ide.accel.toolchain.sw_emu.debug.armv7l.2014166208" name="Accelerated Host Application Toolchain (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.toolchain.sw_emu.debug.armv7l">
+                            							
+                            <targetPlatform id="com.xilinx.ide.accel.config.sw_emu.armv7l.1784584309..13960145" name=""/>
+                            							
+                            <builder buildPath="${workspace_loc:/zybo-timer-app}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1000992016" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-SW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.783171111" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.sw_emu.debug.armv7l.15655651" name="GCC Host Compiler (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.sw_emu.debug.armv7l">
+                                								
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.armv7l.1117607509" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.armv7l"/>
+                                								
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.armv7l.1004341542" superClass="com.xilinx.ide.accel.managedbuild.input.c.armv7l"/>
+                                							
+                            </tool>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.armv7l.861995541" name="GCC Host Linker (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.armv7l">
+                                								
+                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1802283461" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+                                    									
+                                    <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                                    									
+                                    <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                                    								
+                                </inputType>
+                                							
+                            </tool>
+                            						
+                        </toolChain>
+                        					
+                    </folderInfo>
+                    					
+                    <sourceEntries>
+                        						
+                        <entry excluding="_ide" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        					
+                    </sourceEntries>
+                    				
+                </configuration>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+            		
+        </cconfiguration>
+        		
+        <cconfiguration id="com.xilinx.ide.accel.config.hw_emu.armv7l.1805358941">
+            			
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hw_emu.armv7l.1805358941" moduleId="org.eclipse.cdt.core.settings" name="Emulation-HW">
+                				
+                <externalSettings/>
+                				
+                <extensions>
+                    					
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    				
+                </extensions>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                				
+                <configuration buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" description="" id="com.xilinx.ide.accel.config.hw_emu.armv7l.1805358941" name="Emulation-HW" parent="com.xilinx.ide.accel.config.hw_emu.armv7l">
+                    					
+                    <folderInfo id="com.xilinx.ide.accel.config.hw_emu.armv7l.1805358941." name="/" resourcePath="">
+                        						
+                        <toolChain id="com.xilinx.ide.accel.toolchain.hw_emu.debug.armv7l.979059036" name="Accelerated Host Application Toolchain (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.toolchain.hw_emu.debug.armv7l">
+                            							
+                            <targetPlatform id="com.xilinx.ide.accel.config.hw_emu.armv7l.1805358941..1312497863" name=""/>
+                            							
+                            <builder buildPath="${workspace_loc:/zybo-timer-app}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.439737568" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-HW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.2020791646" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.hw_emu.debug.armv7l.1203408148" name="GCC Host Compiler (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.hw_emu.debug.armv7l">
+                                								
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.armv7l.1441558155" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.armv7l"/>
+                                								
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.armv7l.863764864" superClass="com.xilinx.ide.accel.managedbuild.input.c.armv7l"/>
+                                							
+                            </tool>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.armv7l.978147170" name="GCC Host Linker (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.armv7l">
+                                								
+                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.782578709" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+                                    									
+                                    <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                                    									
+                                    <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                                    								
+                                </inputType>
+                                							
+                            </tool>
+                            						
+                        </toolChain>
+                        					
+                    </folderInfo>
+                    					
+                    <sourceEntries>
+                        						
+                        <entry excluding="_ide" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        					
+                    </sourceEntries>
+                    				
+                </configuration>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+            		
+        </cconfiguration>
+        		
+        <cconfiguration id="com.xilinx.ide.accel.config.hw.armv7l.578326216">
+            			
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hw.armv7l.578326216" moduleId="org.eclipse.cdt.core.settings" name="Hardware">
+                				
+                <externalSettings/>
+                				
+                <extensions>
+                    					
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    				
+                </extensions>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                				
+                <configuration artifactExtension="" artifactName="${ProjName}" buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" cleanCommand="rm -rf" description="" id="com.xilinx.ide.accel.config.hw.armv7l.578326216" name="Hardware" parent="com.xilinx.ide.accel.config.hw.armv7l">
+                    					
+                    <folderInfo id="com.xilinx.ide.accel.config.hw.armv7l.578326216." name="/" resourcePath="">
+                        						
+                        <toolChain id="com.xilinx.ide.accel.toolchain.hw.armv7l.113486049" name="Accelerated Host Application Toolchain (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.toolchain.hw.armv7l">
+                            							
+                            <targetPlatform id="com.xilinx.ide.accel.config.hw.armv7l.578326216..254192140" name=""/>
+                            							
+                            <builder buildPath="${workspace_loc:/zybo-timer-app}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.534515839" managedBuildOn="true" name="Accelerated Host Application Builder.Hardware" superClass="com.xilinx.ide.accel.builder.host"/>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.1354941630" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.hw.armv7l.858496565" name="GCC Host Compiler (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.hw.armv7l">
+                                								
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.armv7l.55557638" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.armv7l"/>
+                                								
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.armv7l.144164272" superClass="com.xilinx.ide.accel.managedbuild.input.c.armv7l"/>
+                                							
+                            </tool>
+                            							
+                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.armv7l.748256174" name="GCC Host Linker (ARMv7-A for A9/A53 - 32 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.armv7l">
+                                								
+                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1606406260" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+                                    									
+                                    <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                                    									
+                                    <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                                    								
+                                </inputType>
+                                							
+                            </tool>
+                            						
+                        </toolChain>
+                        					
+                    </folderInfo>
+                    					
+                    <sourceEntries>
+                        						
+                        <entry excluding="_ide" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        					
+                    </sourceEntries>
+                    				
+                </configuration>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+            		
+        </cconfiguration>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+    	
+    <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        		
+        <project id="zybo-timer-app.com.xilinx.ide.accel.hostProject.armv7l.136417336" name="Accelerated Host Application Project (ARMv7-A for A9/A53 - 32 bit)" projectType="com.xilinx.ide.accel.hostProject.armv7l"/>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="scannerConfiguration">
+        		
+        <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.pathentry"/>
+    	
+    <storageModule moduleId="refreshScope"/>
+    
+</cproject>

@@ -95,6 +95,7 @@
         "*.ch": "cpp",
         "netfwd": "cpp",
         "hash_map": "cpp",
-        "hash_set": "cpp"
+        "hash_set": "cpp",
+        "xtmrctr.c": "cpp"
     }
 }

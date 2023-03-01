@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hostApp:AcceleratedHostProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hostApp="http://www.xilinx.com/acceleration/hostApplication" name="zybo-timer-app" location="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/zybo-timer-app" platform="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/zybo-timer/export/zybo-timer/zybo-timer.xpfm" platformUID="xilinx:zybo:name:0.0(custom)" systemProject="zybo-timer-app_system" sysConfig="zybo-timer" cpu="linux_domain" cpuInstance="cortex-a9" os="linux" flow="EMBEDDED_ACCELERATION">
+  <configuration name="Emulation-SW" id="com.xilinx.ide.accel.config.sw_emu.armv7l.1784584309" dirty="true">
+    <configBuildOptions xsi:type="hostApp:HostApplicationOptions"/>
+  </configuration>
+  <configuration name="Emulation-HW" id="com.xilinx.ide.accel.config.hw_emu.armv7l.1805358941" dirty="true">
+    <configBuildOptions xsi:type="hostApp:HostApplicationOptions" target="hw_emu"/>
+  </configuration>
+  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hw.armv7l.578326216">
+    <configBuildOptions xsi:type="hostApp:HostApplicationOptions" target="hw"/>
+    <lastBuildOptions xsi:type="hostApp:HostApplicationOptions" target="hw"/>
+  </configuration>
+</hostApp:AcceleratedHostProject>
