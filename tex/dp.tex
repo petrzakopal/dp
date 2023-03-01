@@ -836,7 +836,7 @@ kde $\sigma = 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, $i_{1\alpha}$ (
 		\end{equation}
 
 		kde $\underline{u_{1}^{k}}$ (V) je prostorový vektor statorového napětí, $\underline{u_{2}^{k}}$ (V) je prostorový vektor rotorového napětí, $\underline{i_{1}^{k}}$ (A) je prostorový vektor statorového proudu, $\underline{i_{2}^{k}}$ (A) je prostorový vektor rotorového proudu, $\underline{\psi_1^{k}}$ (Wb) je prostorový vektor magnetického toku statoru, $\underline{\psi_2^{k}}$ (Wb) je prostorový vektor magnetického toku rotoru, $\omega$ (s$^{-1}$) je úhlová rychlost otáčení rotoru, $\omega_k$ (s$^{-1}$) je úhlová rychlost otáčení použitého souřadnicového systému, $R_1$ ($\Omega$), resp. $R_2$ ($\Omega$) je rezistivita statorového, resp. rotorového vinutí, $L_1$ (H), resp. $L_2$ (H) je statorová, resp. rotorová indukčnost a $L_\text{m}$ (H) je hlavní magnetizační indukčnost.\par
-		I-n model vychází z předpokladu, že otáčivá úhlová rychlost souřadnicového systému $\omega_k$ = 0 a tudíž model bude odvozován v souřadnicovém systému spojeným se statorem (souřadnicový systém $\alpha \beta$). Poté po vzolení daného souřadnicového systému pro soustavu rovnic platí
+		I-n model vychází z předpokladu, že otáčivá úhlová rychlost souřadnicového systému $\omega_k$ = 0 a tudíž model bude odvozován v souřadnicovém systému spojeným se statorem (souřadnicový systém $\alpha \beta$). Po vzolení daného souřadnicového systému pro soustavu rovnic platí
 
 		\begin{equation}
 			\underline{u_{1}^{\alpha \beta}} = R_1 \underline{i_{1}^{\alpha \beta}} + \frac{\dd{\underline{\psi_1^{\alpha \beta}}}}{\dd{t}},
@@ -857,9 +857,16 @@ kde $\sigma = 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, $i_{1\alpha}$ (
 		Výsledná diferenciální rovnice pro prostorový vektor rotorového magnetického toku je
 
 		\begin{equation}
-			\frac{\dd{\underline{\psi^{\alpha \beta}}}}{\dd{t}} = \frac{R_2}{L_2}L_m i_1^{\alpha \beta} + j \omega \underline{\psi_2^{\alpha \beta}} - \frac{R_2}{L_2} \underline{\psi_2^{\alpha \beta}}
+			\frac{\dd{\underline{\psi_{2}^{\alpha \beta}}}}{\dd{t}} = \frac{R_2}{L_2}L_\text{m} i_1^{\alpha \beta} + j \omega \underline{\psi_2^{\alpha \beta}} - \frac{R_2}{L_2} \underline{\psi_2^{\alpha \beta}}.
 		\end{equation}
 
+		Rozepsáním představené diferenciální rovnice do reálné a imaginární složky vznikne soustava diferenciálních rovnic, kterou je třeba řešit.
+
+		\begin{equation}
+			\begin{gathered}
+				\frac{\dd{\underline{\psi_{2\alpha}}}}{\dd{t}} = \frac{L_\text{m} R_2}{L_2} i_{1\alpha} - \frac{R_2}{L_2} \psi_{2\alpha} - \omega \psi_{2\beta},\\\frac{\dd{\underline{\psi_{2\beta}}}}{\dd{t}} = \frac{L_\text{m} R_2}{L_2} i_{1\beta} - \frac{R_2}{L_2} \psi_{2\beta} + \omega \psi_{2\alpha}.
+			\end{gathered}
+		\end{equation}
 
 
 \section{Aplikace pro FPGA a CPU}

@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻 [28.02.2023](/notes/20230228.md) <-- stále snaha o interrupt ohledně timeru - na pravidelnou akvizici dat
+👨🏻‍💻 [01.03.2023](/notes/20230301.md)
+
+---
+
+👨🏻‍💻 [28.02.2023](/notes/20230228.md) <-- stále snaha o interrupt ohledně timeru - na pravidelnou akvizici dat, řešil jsem interrupty, buildil jsem petalinux a design, protože se zase oběvil `dcp` soubor a já si ho nevšiml, ztratil jsem 3 hodiny, problém s interrupty, XADC atd., **POVEDLO SE** jako rozchození interruptu a běhu timeru v linuxu, viz video [YouTube](https://youtu.be/3upD2LAqUCk), nepsal jsem ještě nikam postup, ale ve videu o něm trochu mluvím, ale určitě to bude třeba si zapsat, už je toho moc...
 
 ---
 

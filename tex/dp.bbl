@@ -910,6 +910,237 @@
       \verb https://github.com/Digilent/Petalinux-Zybo
       \endverb
     \endentry
+    \entry{messinger-roy-gpio-and-petalinux-part-1}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3646c7aeea09d3b1af3d76dfbbb9740e}{%
+           family={Messinger},
+           familyi={M\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{fullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{bibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorbibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{LinkedIn Article}
+      \field{day}{20}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{title}{GPIO and Petalinux - Part 1}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-1-roy-messinger/
+      \endverb
+      \verb{url}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-1-roy-messinger/
+      \endverb
+    \endentry
+    \entry{messinger-roy-gpio-and-petalinux-part-2}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3646c7aeea09d3b1af3d76dfbbb9740e}{%
+           family={Messinger},
+           familyi={M\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{fullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{bibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorbibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{LinkedIn Article}
+      \field{day}{27}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{title}{GPIO and Petalinux - Part 2}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-2-roy-messinger/
+      \endverb
+      \verb{url}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-2-roy-messinger/
+      \endverb
+    \endentry
+    \entry{messinger-roy-gpio-and-petalinux-part-3}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3646c7aeea09d3b1af3d76dfbbb9740e}{%
+           family={Messinger},
+           familyi={M\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{fullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{bibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorbibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{LinkedIn Article}
+      \field{day}{23}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{GPIO and Petalinux - Part 3 (Go, UIO, Go!)}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-3-go-uio-roy-messinger/
+      \endverb
+      \verb{url}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-3-go-uio-roy-messinger/
+      \endverb
+    \endentry
+    \entry{xilinx-wiki-atlassian-gpio-user-space-app}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=5d88b0bffb5a0ba7e4824bc280ad27d3}{%
+           family={Admin},
+           familyi={A\bibinitperiod},
+           given={Confluence\bibnamedelima Wiki},
+           giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=8b0946217d1a061cdb5a786cd8dfb61b}{%
+           family={O'Neal},
+           familyi={O\bibinitperiod},
+           given={Terry},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{fullhash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{bibnamehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{authorbibnamehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{authornamehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{authorfullhash}{ae2699e980d0489b4416695a69016ba3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Wiki}
+      \field{day}{14}
+      \field{langid}{english}
+      \field{month}{1}
+      \field{title}{GPIO User Space App}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842142/GPIO+User+Space+App
+      \endverb
+      \verb{url}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842142/GPIO+User+Space+App
+      \endverb
+    \endentry
+    \entry{xilinx-docs-zynq-7000-reference-manual}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=994f3e122145764b71d4aa0e84e1a2eb}{%
+           family={Inc.},
+           familyi={I\bibinitperiod},
+           given={Xilinx},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{fullhash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{bibnamehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{authorbibnamehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{authornamehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{authorfullhash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Documentation Portal}
+      \field{day}{2}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{title}{Zynq-7000 SoC Technical Reference Manual (UG585)}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/v/u/en-US/ug585-Zynq-7000-TRM
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/v/u/en-US/ug585-Zynq-7000-TRM
+      \endverb
+    \endentry
+    \entry{lipcak-bauer-ept-moodle}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=8106e7c795d705e1610eace6512a8ae6}{%
+           family={Lipčák},
+           familyi={L\bibinitperiod},
+           given={Ondřej},
+           giveni={O\bibinitperiod}}}%
+        {{hash=d44b88edbc4a6e2154a4fc92e21f00df}{%
+           family={Bauer},
+           familyi={B\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{fullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{bibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authorbibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authornamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authorfullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Materiál k přednáškám předmětu B1M14EPT}
+      \field{langid}{czech}
+      \field{title}{Doprovodný materiál k přednáškám}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://moodle.cvut.cz
+      \endverb
+      \verb{url}
+      \verb https://moodle.cvut.cz
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
