@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻 [01.03.2023](/notes/20230301.md)
+👨🏻‍💻[02.03.2023](/notes/20230302.md)
+
+---
+
+👨🏻‍💻 🧑🏻‍🎓 [01.03.2023](/notes/20230301.md) <-- řešení interruptu, proxmox schování MAC adresy VM za Proxmox server, řešení možnosti využití multithreadingu, konzultace na katedře
 
 ---
 
