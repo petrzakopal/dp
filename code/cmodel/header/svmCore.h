@@ -53,7 +53,7 @@ class svmCoreClass
 
     float generateActualValueTriangleWave(TriangleWaveSettingsType *triangleWaveSettings);
 
-    bool comparationLevelTriangleWaveComparation();
+    bool comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue);
 };
 
 

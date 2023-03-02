@@ -33,7 +33,7 @@ float svmCoreClass::createCompareLevel(float levelConstant, float commonModeVolt
 }
 
 
- float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *triangleWaveSettings)
+float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *triangleWaveSettings)
  {
 
         float triangleActualValue; // maybe put in triangleWaveSettings, do not know, this should be used only as a local variable
@@ -49,3 +49,16 @@ float svmCoreClass::createCompareLevel(float levelConstant, float commonModeVolt
         return(triangleActualValue);
  }
 
+
+
+ bool svmCoreClass::comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue)
+ {
+    if(compareLevel>=triangleWaveValue)
+    {
+        return(true);
+    }
+    else
+    {
+        return(false);
+    }
+ }

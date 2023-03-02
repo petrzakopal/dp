@@ -1,7 +1,7 @@
 // @file testComparation.cpp
 // compilation command: gcc -std=c++14 testComparation.cpp -o run/testComparation -lstdc++ ./../function/svmCore.cpp
 
-
+#include "./../header/MotorModel.h"
 #include "./../header/svmCore.h"
 #include <stdio.h>
 #include <iostream>
@@ -19,43 +19,100 @@ int main()
     svmCore.triangleWaveSettingsAllocateMemory();
 
 
-    svmCore.phaseWantedVoltage->u1a = 230;
-    svmCore.phaseWantedVoltage->u1b = - 153;
-    svmCore.phaseWantedVoltage->u1c = -153;
+    // svmCore.phaseWantedVoltage->u1a = 230;
+    // svmCore.phaseWantedVoltage->u1b = - 153;
+    // svmCore.phaseWantedVoltage->u1c = -153;
 
 
     svmCore.triangleWaveSettings->waveAmplitude = 1;
     svmCore.triangleWaveSettings->calculationStep = 0.00001;
-    svmCore.triangleWaveSettings->wavePeriod = 0.001;
-    svmCore.triangleWaveSettings->calculationTime = 0; 
+    svmCore.triangleWaveSettings->wavePeriod = 0.1;
+    svmCore.triangleWaveSettings->calculationTime = 0;
+    float globalFinalCalculationTime = 1;
 
-    float commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.phaseWantedVoltage);
+    MotorModelClass MotorModel;
 
-    std::cout << svmCore.createCompareLevel(270, commonModeVoltage, svmCore.phaseWantedVoltage->u1a) << "\n";
+   
+    
+
+    MotorModel.odeCalculationSettingsAllocateMemory();
+    MotorModel.setOdeCalculationSettings(svmCore.triangleWaveSettings->calculationTime, globalFinalCalculationTime, svmCore.triangleWaveSettings->calculationStep);
+
+    MotorModel.voltageGeneratorDataAllocateMemory();
+    MotorModel.voltageGeneratorData->voltageFrequency = 50;
+    MotorModel.voltageGeneratorData->voltageAmplitude = 325.26;
+
+
+    MotorModel.precalculateVoltageSource(MotorModel.odeCalculationSettings, MotorModel.voltageGeneratorData->voltageAmplitude, MotorModel.voltageGeneratorData->voltageFrequency);
+
+    // for(int i = 0;i<250; i++)
+    // {
+    //     std::cout << "Motor voltage: " << MotorModel.getVoltage(i)->u1 << "\n";
+    // }
+
+    // float commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.phaseWantedVoltage);
+    float commonModeVoltage;
+    float compareLevel;
+    float trianglePoint;
+
+    
 
 
     // for testing
 
     // file output streaming
     std::ofstream triangleWaveData;
+    std::ofstream switchCompareData;
     triangleWaveData.open ("outputData/triangleWaveData.csv",std::ofstream::out | std::ofstream::trunc);
+     switchCompareData.open ("outputData/switchCompareData.csv",std::ofstream::out | std::ofstream::trunc);
 
-    int maxIterations = ((int)ceil(((1 - 0)/svmCore.triangleWaveSettings->calculationStep)));
+    // creating just one period now, in normal program there would be reset of svmCore.triangleWaveSettings->calculationTime and not sawing data
+    int maxIterations = ((int)ceil(((svmCore.triangleWaveSettings->wavePeriod - 0)/svmCore.triangleWaveSettings->calculationStep)));
 
-    for(int i = 0; i<maxIterations;i++)
+
+    for(int i = 0; i<maxIterations;i++) // when implemented for testing
+    // while(true) // this would be main while backgrund program
     {
-        float trianglePoint;
+        
+
         trianglePoint = svmCore.generateActualValueTriangleWave(svmCore.triangleWaveSettings);
-        std::cout << "triangle wave actual value:" << trianglePoint << "\n";
+
+
+        svmCore.phaseWantedVoltage->u1a = MotorModel.getVoltage(i)->u1;
+        svmCore.phaseWantedVoltage->u1b = MotorModel.getVoltage(i)->u2;
+        svmCore.phaseWantedVoltage->u1c = MotorModel.getVoltage(i)->u3;
+
+        commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.phaseWantedVoltage);
+
+
+        svmCore.phaseWantedVoltage->u1a = MotorModel.getVoltage(i)->u1;
+        compareLevel = svmCore.createCompareLevel(230, commonModeVoltage, svmCore.phaseWantedVoltage->u1a);
+
+        svmCore.invertorSwitch->sw1 = svmCore.comparationLevelTriangleWaveComparation(compareLevel, trianglePoint);
+
+        
         triangleWaveData << svmCore.triangleWaveSettings->calculationTime << "," << trianglePoint << "\n";
+
+        switchCompareData << svmCore.triangleWaveSettings->calculationTime << "," << commonModeVoltage << "," << compareLevel << "," << svmCore.invertorSwitch->sw1 << "\n";
+
+        // when implemeted in main program probably
+        if(svmCore.triangleWaveSettings->calculationTime >=  svmCore.triangleWaveSettings->wavePeriod)
+        {
+            svmCore.triangleWaveSettings->calculationTime = 0;
+        }
+
     }
     triangleWaveData.close(); // close streaming file
-   
+    switchCompareData.close();
 
 
 
     free(svmCore.phaseWantedVoltage);
     free(svmCore.invertorSwitch);
     free(svmCore.triangleWaveSettings);
+    free(MotorModel.voltageGeneratorData);
+    free(MotorModel.odeCalculationSettings);
+
+    
     return (0);
 }

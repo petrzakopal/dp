@@ -103,7 +103,7 @@ std::cout << "voltage frequency: " <<MotorModel.voltageGeneratorData->voltageFre
 
 // precalculating voltages in a kernel
 /*--------------------------------------------------------------------------------------------------------------------------------*/
-MotorModel.precalculateVoltageSource(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings, MotorModel.voltageGeneratorData->voltageAmplitude, MotorModel.voltageGeneratorData->voltageFrequency);
+MotorModel.precalculateVoltageSource(MotorModel.odeCalculationSettings, MotorModel.voltageGeneratorData->voltageAmplitude, MotorModel.voltageGeneratorData->voltageFrequency);
 MotorModel.precalculateVoltageClarke(MotorModel.voltageGeneratorData, MotorModel.odeCalculationSettings);
 
 std::cout << "motor voltage u1 at 0: " << MotorModel.getVoltage(0)->u1 << "\n";

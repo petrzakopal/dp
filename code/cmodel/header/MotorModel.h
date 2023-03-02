@@ -182,7 +182,7 @@ class MotorModelClass
 
     float voltageGenerator(float calculationTime, float phase, float amplitude, float frequency);
 
-    void precalculateVoltageSource(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency);
+    void precalculateVoltageSource(odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency);
 
     void precalculateVoltageClarke(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings);
 

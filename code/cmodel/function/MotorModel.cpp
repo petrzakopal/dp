@@ -298,7 +298,7 @@ float MotorModelClass::motorTorque(motorParametersType *motorParameters, modelVa
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ PRE CALCULATING SOURCE VOLTAGE THROUGH TIME BASED OD NUMBER OF ITERATIONS -------------------------------*/
-void MotorModelClass::precalculateVoltageSource(voltageGeneratorType *voltageGeneratorData, odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency)
+void MotorModelClass::precalculateVoltageSource(odeCalculationSettingsType *odeCalculationSettings, float amplitude, float frequency)
 {
     // number of iterations based on initialCalculationTime and finalCalculationTime and calculationStep
     int n = ceil((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep);
