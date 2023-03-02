@@ -1,4 +1,7 @@
+// @file triangleWave.cpp
 // test program for triangle wave creation, need to implement in a class for FOC
+// source for math explanations of functions
+// https://en.m.wikipedia.org/wiki/Triangle_wave
 
 #include <stdio.h>
 #include <iostream>
