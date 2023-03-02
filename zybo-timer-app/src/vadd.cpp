@@ -89,9 +89,10 @@ int main(int argc, char* argv[]) {
     uiod = "/dev/uio1";
     int fd;
     int irq_on = 1;
+    int breaking = 0;
     // uint32_t info = 1; /* unmask */
     /* Open the UIO device file */
-    fd = open(uiod, O_RDWR);
+    fd = open(uiod, O_RDWR | O_NONBLOCK);
     if (fd < 1) {
         perror("open\n");
         printf("Invalid UIO device file:%s.\n", uiod);
@@ -116,14 +117,23 @@ int main(int argc, char* argv[]) {
 
     printf("before reading\n");
     /* Wait for interrupt */
-        ssize_t nb = read(fd, &info, sizeof(info));
+      
         printf("right after reading\n");
-         value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
+        while(1)
+        {
+              ssize_t nb = read(fd, &info, sizeof(info));
+             value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
         printf("timer counter register: %08x\n", value);
         if (nb == (ssize_t)sizeof(info)) {
             /* Do something in response to the interrupt. */
             printf("Interrupt #%u!\n", info);
-        }    
+            break;
+        } 
+
+       
+
+        }
+       
     *((unsigned *)(ptr)) = 0X1C0;
      write(fd, &irq_on, sizeof(irq_on));
     *((unsigned *)(ptr + 0x4)) = 0XAFFFFFFF;
