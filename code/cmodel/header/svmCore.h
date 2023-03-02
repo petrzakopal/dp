@@ -13,15 +13,47 @@ typedef struct
 }PhaseWantedVoltageType;
 
 
+
+typedef struct
+{
+    bool sw1;
+    bool sw2;
+    bool sw3;
+    bool sw4;
+    bool sw5;
+}InvertorSwitchType;
+
+
+
+typedef struct
+{
+    float waveAmplitude;
+    float wavePeriod;
+    float calculationStep;
+    float calculationTime;
+
+}TriangleWaveSettingsType;
+
+
+
 class svmCoreClass
 {
     public:
     PhaseWantedVoltageType *phaseWantedVoltage = NULL;
+    InvertorSwitchType *invertorSwitch = NULL;
+    TriangleWaveSettingsType *triangleWaveSettings = NULL;
 
     void phaseWantedVoltageAllocateMemory();
+    void invertorSwitchAllocateMemory();
+    void triangleWaveSettingsAllocateMemory();
 
-    float minMaxCommonModeVoltage(PhaseWantedVoltageType *phaseWantedVoltage );
+    float minMaxCommonModeVoltage(PhaseWantedVoltageType *phaseWantedVoltage);
 
+    float createCompareLevel(float levelConstant, float commonModeVoltage, float phaseWantedVoltage);
+
+    float generateActualValueTriangleWave(TriangleWaveSettingsType *triangleWaveSettings);
+
+    bool comparationLevelTriangleWaveComparation();
 };
 
 
