@@ -32,9 +32,6 @@ int main()
     float commonModeVoltage;
     float compareLevel;
     float trianglePoint;
-    CurVelModel.modelCVVariables->psi2alpha = 0;
-    CurVelModel.modelCVVariables->psi2beta = 0;
-    CurVelModel.modelCVVariables->transformAngle = 0;
     /*-------------------------------------------------------------*/
     
 
@@ -64,7 +61,7 @@ int main()
 
 
     /*-------------------- SPACE VECTOR MODULATION CORE ---------------------*/
-    svmCore.phaseWantedVoltageAllocateMemory();
+    // svmCore.phaseWantedVoltageAllocateMemory(); // depracated
     svmCore.invertorSwitchAllocateMemory();
     svmCore.triangleWaveSettingsAllocateMemory();
     svmCore.coreInternalVariablesAllocateMemory();
@@ -75,8 +72,12 @@ int main()
     /*---------------------------------------------------*/
     /****************************************************************/
 
-
-
+    /*------------------------------------------------------------------------------------------*/
+    /*-------------------- CURRENT VELOCITY MODEL SETTINGS/ INITIAL VALUES ---------------------*/
+    CurVelModel.modelCVVariables->psi2alpha = 0;
+    CurVelModel.modelCVVariables->psi2beta = 0;
+    CurVelModel.modelCVVariables->transformAngle = 0;
+    /*------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------*/
     /*-------------------- TRIANGLE WAVE SETTINGS ---------------------*/
@@ -173,7 +174,14 @@ int main()
 
 
         // inverse Clark
+        svmCore.coreInternalVariables->u1a = Transformation.inverseClarkeTransform1(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
+        svmCore.coreInternalVariables->u1b = Transformation.inverseClarkeTransform2(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
+        svmCore.coreInternalVariables->u1c = Transformation.inverseClarkeTransform3(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
 
+
+        std::cout << "u1a: " << svmCore.coreInternalVariables->u1a << "\n";
+        std::cout << "u1b: " << svmCore.coreInternalVariables->u1b << "\n";
+        std::cout << "u1c: " << svmCore.coreInternalVariables->u1c << "\n";
     }
 
 
@@ -188,13 +196,14 @@ int main()
     free(CurVelModel.modelCVCoeff);
     free(CurVelModel.modelCVVariables);
     free(CurVelModel.odeCVCalculationSettings);
-    free(svmCore.phaseWantedVoltage);
+    // free(svmCore.phaseWantedVoltage); // deprecated
     free(svmCore.invertorSwitch);
     free(svmCore.triangleWaveSettings);
     free(Regulator.fluxRegulator);
     free(Regulator.velocityRegulator);
     free(Regulator.iqRegulator);
     free(Regulator.idRegulator);
+    free(svmCore.coreInternalVariables);
     /*-----------------------------------------------------------*/
     
 }
