@@ -62,9 +62,13 @@ ax.spines[['right', 'top']].set_visible(False)
 plt.plot(df.calculationTime,df.sw1, color=ctuRed)
 plt.plot(df.calculationTime,df.compareLevel, color=ctuBlue)
 
+# saving figure
+# figure_first.savefig("test-fig.pdf", dpi=50)
+
+# here ends first figure, because second figure starts right after
 
 # naming new figure to not paste figure to same subplot, it would be basted if just number value would be used instead of name inf plt.figure("HER WRITE YOUR FIGURE NAME")
-plt.figure("New figure")
+figure_second = plt.figure("New figure")
 plt.plot(df.calculationTime,df.commonModeVoltage, color=ctuBlue)
 
 # show all plots and figures which were not shown

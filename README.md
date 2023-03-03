@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻[02.03.2023](/notes/20230302.md) <-- práce na FOC SVM, min max metody, komparační úrovně, testové příklady v [cmodel/testmodules](./code/cmodel/testModules/)
+👨🏻‍💻[03.03.2023](/notes/20230303.md)
+
+---
+
+👨🏻‍💻 🐍 [02.03.2023](/notes/20230302.md) <-- práce na FOC SVM, min max metody, komparační úrovně, testové příklady v [cmodel/testmodules](./code/cmodel/testModules/), vyřešení testovího plotění grafů, protože mathematika na 100 k hodnot je na zobrazení moc pomalá a matlab musí být aktuálně nasměrován myslím do adresáře odkud má část data, takže využit `python` [graph.py](./code/cmodel/testModules/graph.py)
 
 ---
 
