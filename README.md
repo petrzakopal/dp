@@ -11,7 +11,7 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻[02.03.2023](/notes/20230302.md)
+👨🏻‍💻[02.03.2023](/notes/20230302.md) <-- práce na FOC SVM, min max metody, komparační úrovně, testové příklady v [cmodel/testmodules](./code/cmodel/testModules/)
 
 ---
 

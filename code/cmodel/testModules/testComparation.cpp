@@ -25,8 +25,8 @@ int main()
 
 
     svmCore.triangleWaveSettings->waveAmplitude = 1;
-    svmCore.triangleWaveSettings->calculationStep = 0.00001;
-    svmCore.triangleWaveSettings->wavePeriod = 0.1;
+    svmCore.triangleWaveSettings->calculationStep = 0.000001;
+    svmCore.triangleWaveSettings->wavePeriod = 0.0001;
     svmCore.triangleWaveSettings->calculationTime = 0;
     float globalFinalCalculationTime = 1;
 
@@ -67,8 +67,7 @@ int main()
      switchCompareData.open ("outputData/switchCompareData.csv",std::ofstream::out | std::ofstream::trunc);
 
     // creating just one period now, in normal program there would be reset of svmCore.triangleWaveSettings->calculationTime and not sawing data
-    int maxIterations = ((int)ceil(((svmCore.triangleWaveSettings->wavePeriod - 0)/svmCore.triangleWaveSettings->calculationStep)));
-
+    int maxIterations = ((int)ceil(((1 - 0)/svmCore.triangleWaveSettings->calculationStep)));
 
     for(int i = 0; i<maxIterations;i++) // when implemented for testing
     // while(true) // this would be main while backgrund program
@@ -86,7 +85,7 @@ int main()
 
 
         svmCore.phaseWantedVoltage->u1a = MotorModel.getVoltage(i)->u1;
-        compareLevel = svmCore.createCompareLevel(230, commonModeVoltage, svmCore.phaseWantedVoltage->u1a);
+        compareLevel = svmCore.createCompareLevel(287, commonModeVoltage, svmCore.phaseWantedVoltage->u1a);
 
         svmCore.invertorSwitch->sw1 = svmCore.comparationLevelTriangleWaveComparation(compareLevel, trianglePoint);
 
@@ -96,10 +95,10 @@ int main()
         switchCompareData << svmCore.triangleWaveSettings->calculationTime << "," << commonModeVoltage << "," << compareLevel << "," << svmCore.invertorSwitch->sw1 << "\n";
 
         // when implemeted in main program probably
-        if(svmCore.triangleWaveSettings->calculationTime >=  svmCore.triangleWaveSettings->wavePeriod)
-        {
-            svmCore.triangleWaveSettings->calculationTime = 0;
-        }
+        // if(svmCore.triangleWaveSettings->calculationTime >=  svmCore.triangleWaveSettings->wavePeriod)
+        // {
+        //     svmCore.triangleWaveSettings->calculationTime = 0;
+        // }
 
     }
     triangleWaveData.close(); // close streaming file
