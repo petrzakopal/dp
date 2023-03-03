@@ -135,6 +135,7 @@ int main()
     for(int i = 0; i<1;i++)
     {
         
+        // calculating values from regulators
         Regulator.regCalculate(Regulator.fluxRegulator);
         Regulator.regCalculate(Regulator.velocityRegulator);
         std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
