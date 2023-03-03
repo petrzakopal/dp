@@ -30,6 +30,7 @@ typedef struct
     bool sw3;
     bool sw4;
     bool sw5;
+    bool sw6;
 }InvertorSwitchType;
 
 

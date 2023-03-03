@@ -32,6 +32,7 @@ int main()
     float commonModeVoltage;
     float compareLevel;
     float trianglePoint;
+    float minMaxCommonModeVoltageConstant = 287;
     /*-------------------------------------------------------------*/
     
 
@@ -153,11 +154,14 @@ int main()
 
         // here or at the end update dynamic saturation for iq regulator
 
+
+         /* console output for testing purposes */
+        /*--------------------------------------------------------------*/
         std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
         std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
         std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
         std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
-
+        /*--------------------------------------------------------------*/
 
         // this is not necessary, but for cleaner code it is good, but change maybe because of SoC constrains
 
@@ -178,10 +182,46 @@ int main()
         svmCore.coreInternalVariables->u1b = Transformation.inverseClarkeTransform2(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
         svmCore.coreInternalVariables->u1c = Transformation.inverseClarkeTransform3(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
 
-
+        /* console output for testing purposes */
+        /*--------------------------------------------------------------*/
         std::cout << "u1a: " << svmCore.coreInternalVariables->u1a << "\n";
         std::cout << "u1b: " << svmCore.coreInternalVariables->u1b << "\n";
         std::cout << "u1c: " << svmCore.coreInternalVariables->u1c << "\n";
+         /*--------------------------------------------------------------*/
+
+        trianglePoint = svmCore.generateActualValueTriangleWave(svmCore.triangleWaveSettings);
+
+        commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.coreInternalVariables);
+
+
+        // phase 1 sw1
+        svmCore.invertorSwitch->sw1 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1a), trianglePoint);
+
+        // phase 2 sw3
+        svmCore.invertorSwitch->sw3 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1b), trianglePoint);
+
+        // phase 3 sw5
+        svmCore.invertorSwitch->sw5 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1c), trianglePoint);
+
+
+        // not needed in simualation
+        svmCore.invertorSwitch->sw4 = ~svmCore.invertorSwitch->sw1;
+        svmCore.invertorSwitch->sw6 = ~svmCore.invertorSwitch->sw3;
+        svmCore.invertorSwitch->sw2 = ~svmCore.invertorSwitch->sw5;
+
+
+
+         /* console output for testing purposes */
+        /*--------------------------------------------------------------*/
+        std::cout << "sw1: " << svmCore.invertorSwitch->sw1 << "\n";
+        std::cout << "sw2: " << svmCore.invertorSwitch->sw2 << "\n";
+        std::cout << "sw3: " << svmCore.invertorSwitch->sw3 << "\n";
+        std::cout << "sw4: " << svmCore.invertorSwitch->sw4 << "\n";
+        std::cout << "sw5: " << svmCore.invertorSwitch->sw5 << "\n";
+        std::cout << "sw6: " << svmCore.invertorSwitch->sw6 << "\n";
+        /*--------------------------------------------------------------*/
+
+
     }
 
 
