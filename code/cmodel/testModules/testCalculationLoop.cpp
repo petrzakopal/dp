@@ -107,7 +107,7 @@ int main()
     Regulator.idRegulator->kp = 22.3961;
     Regulator.idRegulator->kAntiWindUp = 0;
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
-    Regulator.idRegulator->saturationOutput = 0;
+    Regulator.idRegulator->saturationOutput = - Udcmax;
 
     // iq regulator
     Regulator.iqRegulator->saturationOutputMin = -Udcmax;
@@ -122,14 +122,14 @@ int main()
     /*-------------------- WANTED VALUES INPUT ---------------------*/
 
     // now hardcoded, change later
-    Regulator.fluxRegulator->wanted = 0.9;
-    Regulator.velocityRegulator->wanted = 100;
+    Regulator.fluxRegulator->wantedValue = 0.9;
+    Regulator.velocityRegulator->wantedValue = 100;
     /*--------------------------------------------------------------*/
 
-    Regulator.fluxRegulator->measured = 0;
-    Regulator.velocityRegulator->measured = 0;
-    Regulator.idRegulator->measured = 0;
-    Regulator.iqRegulator->measured = 0;
+    Regulator.fluxRegulator->measuredValue = 0;
+    Regulator.velocityRegulator->measuredValue = 0;
+    Regulator.idRegulator->measuredValue = 0;
+    Regulator.iqRegulator->measuredValue = 0;
 
 
     for(int i = 0; i<1;i++)
@@ -138,8 +138,22 @@ int main()
         // calculating values from regulators
         Regulator.regCalculate(Regulator.fluxRegulator);
         Regulator.regCalculate(Regulator.velocityRegulator);
+
+        Regulator.idRegulator->wantedValue = Regulator.fluxRegulator->saturationOutput;
+        Regulator.iqRegulator->wantedValue = Regulator.velocityRegulator->saturationOutput;
+
+        Regulator.regCalculate(Regulator.idRegulator);
+        Regulator.regCalculate(Regulator.velocityRegulator);
+
         std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
         std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
+        std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
+        std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
+
+
+        // decoupling is missed now
+
+        
 
     }
 
