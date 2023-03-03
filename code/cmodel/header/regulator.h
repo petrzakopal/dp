@@ -25,8 +25,8 @@ typedef struct
     float kp; // proportional constant value
     float ki; // integral constant value
     float kAntiWindUp; // anti-windup constant value
-    int saturationOutputMax; // restriction in saturation block - maximum
-    int saturationOutputMin; // restriction in saturation block - minimum
+    float saturationOutputMax; // restriction in saturation block - maximum
+    float saturationOutputMin; // restriction in saturation block - minimum
     char stav; // stav v automatu pro reseni spousteni regulatoru
 }RegulatorType;
 
@@ -43,7 +43,7 @@ class RegulatorClass
 
         /*-----------------------------------------------------------------------------------------------------*/
         /*------------------------------- ALLOCATE MEMORY FOR REGULATOR DATA ---------------------------------*/
-        void regulatorAllocateMemory(RegulatorType *regulatorData);
+        void regulatorAllocateMemory();
         /*----------------------------------------------------------------------------------------------------*/
         
 

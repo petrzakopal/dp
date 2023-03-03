@@ -1,11 +1,18 @@
 #include "../header/regulator.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
 
 /*-----------------------------------------------------------------------------------------------------*/
 /*------------------------------- ALLOCATE MEMORY FOR REGULATOR DATA ---------------------------------*/
-void RegulatorClass::regulatorAllocateMemory(RegulatorType *regulatorData)
+void RegulatorClass::regulatorAllocateMemory()
 {
-        posix_memalign((void **)&regulatorData , 4096 , sizeof(RegulatorType) );
+        posix_memalign((void **)&fluxRegulator , 4096 , sizeof(RegulatorType) );
+        posix_memalign((void **)&velocityRegulator , 4096 , sizeof(RegulatorType) );
+        posix_memalign((void **)&idRegulator , 4096 , sizeof(RegulatorType) );
+        posix_memalign((void **)&iqRegulator , 4096 , sizeof(RegulatorType) );
+ 
+        
 }
 /*-----------------------------------------------------------------------------------------------------*/
 
