@@ -33,11 +33,10 @@ int main()
     MotorModelClass MotorModel;
 
    
-    
-
     MotorModel.odeCalculationSettingsAllocateMemory();
     MotorModel.setOdeCalculationSettings(svmCore.triangleWaveSettings->calculationTime, globalFinalCalculationTime, svmCore.triangleWaveSettings->calculationStep);
 
+    // setting voltage generator
     MotorModel.voltageGeneratorDataAllocateMemory();
     MotorModel.voltageGeneratorData->voltageFrequency = 50;
     MotorModel.voltageGeneratorData->voltageAmplitude = 325.26;
@@ -45,20 +44,14 @@ int main()
 
     MotorModel.precalculateVoltageSource(MotorModel.odeCalculationSettings, MotorModel.voltageGeneratorData->voltageAmplitude, MotorModel.voltageGeneratorData->voltageFrequency);
 
-    // for(int i = 0;i<250; i++)
-    // {
-    //     std::cout << "Motor voltage: " << MotorModel.getVoltage(i)->u1 << "\n";
-    // }
 
-    // float commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.phaseWantedVoltage);
+
+    // internal variables for cleaner code
     float commonModeVoltage;
     float compareLevel;
     float trianglePoint;
 
-    
 
-
-    // for testing
 
     // file output streaming
     std::ofstream triangleWaveData;
@@ -66,35 +59,41 @@ int main()
     triangleWaveData.open ("outputData/triangleWaveData.csv",std::ofstream::out | std::ofstream::trunc);
      switchCompareData.open ("outputData/switchCompareData.csv",std::ofstream::out | std::ofstream::trunc);
 
-    // creating just one period now, in normal program there would be reset of svmCore.triangleWaveSettings->calculationTime and not sawing data
-    int maxIterations = ((int)ceil(((1 - 0)/svmCore.triangleWaveSettings->calculationStep)));
+    // creating the same ammount of data as for volage
+    // in normal ebnedded scenario, there would be an infinite loop of program and triangle wave with some period, after which it could reset the iteration counter for which it generates voltage. so the "time value" which translates for generated voltage of ASM, in this example, as a iteration number would start again, so there would be period after period and so on, the motor would go still forward, because it would not be precalculated as is in this example, in this example the calculation time and number of iterations are connected together, in real example there would be no interation number for voltage asm level and/or currents, because it would be calculated from actual values
+    int maxIterations = ((int)ceil(((globalFinalCalculationTime - 0)/svmCore.triangleWaveSettings->calculationStep)));
 
     for(int i = 0; i<maxIterations;i++) // when implemented for testing
     // while(true) // this would be main while backgrund program
     {
         
-
+        // generating actual value - point on a triangle wave based on settings and mainly on actual time for wave which is determined by triangleWaveSettings->calculationTime which is iterated automatically every time this function is run, it basically can run forever because this function only return back value and does not store anything
         trianglePoint = svmCore.generateActualValueTriangleWave(svmCore.triangleWaveSettings);
 
 
+
+        // only in this example getting value from precalculated voltage, in real example it would be an array of just one value for every voltage, it would minimze the memory needed for data storing and basically there is no need to store previous data of a measured voltage...
         svmCore.phaseWantedVoltage->u1a = MotorModel.getVoltage(i)->u1;
         svmCore.phaseWantedVoltage->u1b = MotorModel.getVoltage(i)->u2;
         svmCore.phaseWantedVoltage->u1c = MotorModel.getVoltage(i)->u3;
 
+        // calculating commonModeVoltage to be subtracted from wanted voltage which is output from regulators/clark/park
         commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.phaseWantedVoltage);
 
-
-        svmCore.phaseWantedVoltage->u1a = MotorModel.getVoltage(i)->u1;
+       // creating compare lvl for one phase, there would normally be 3 phase voltage - for every voltage compareLevel local helper variable
         compareLevel = svmCore.createCompareLevel(287, commonModeVoltage, svmCore.phaseWantedVoltage->u1a);
 
+        // comparation of edited voltage called "prdele" with actual triangle value from triangle generator
         svmCore.invertorSwitch->sw1 = svmCore.comparationLevelTriangleWaveComparation(compareLevel, trianglePoint);
 
-        
+        // output data for testing just triangle wave
         triangleWaveData << svmCore.triangleWaveSettings->calculationTime << "," << trianglePoint << "\n";
 
+
+        // output data for more interresting and data packed testing
         switchCompareData << svmCore.triangleWaveSettings->calculationTime << "," << commonModeVoltage << "," << compareLevel << "," << svmCore.invertorSwitch->sw1 << "\n";
 
-        // when implemeted in main program probably
+        // when implemeted in main program probably could be but does not have to be, function generateActualValueTriangleWave generates values infinitely
         // if(svmCore.triangleWaveSettings->calculationTime >=  svmCore.triangleWaveSettings->wavePeriod)
         // {
         //     svmCore.triangleWaveSettings->calculationTime = 0;
@@ -102,10 +101,11 @@ int main()
 
     }
     triangleWaveData.close(); // close streaming file
-    switchCompareData.close();
+    switchCompareData.close(); // close steraming file
 
 
 
+    // freeing pointers in memory to avoid memory leaks
     free(svmCore.phaseWantedVoltage);
     free(svmCore.invertorSwitch);
     free(svmCore.triangleWaveSettings);
