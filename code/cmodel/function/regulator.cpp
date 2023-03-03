@@ -38,7 +38,7 @@ float RegulatorClass::regSaturationBlock(float saturationInput, float saturation
 
 void RegulatorClass::regCalculate(RegulatorType *regulatorData)
 {
-    regulatorData->eDif = regulatorData->wanted - regulatorData->measured;
+    regulatorData->eDif = regulatorData->wantedValue - regulatorData->measuredValue;
     regulatorData->saturationInput = regulatorData->eDif * regulatorData->kp + regulatorData->iSum;
     regulatorData->saturationOutput = regSaturationBlock(regulatorData->saturationInput, regulatorData->saturationOutputMin, regulatorData->saturationOutputMax);
     regulatorData->antiWindUpDif = regulatorData->saturationOutput - regulatorData->saturationInput;

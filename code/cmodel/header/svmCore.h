@@ -4,15 +4,24 @@
 #ifndef SVMCORE_H
 #define	SVMCORE_H
 
+// deprecated
+// typedef struct
+// {
+//     float u1a;
+//     float u1b;
+//     float u1c;
+// }PhaseWantedVoltageType;
 
 typedef struct
 {
+    float u1d;
+    float u1q;
+    float u1alpha;
+    float u1beta;
     float u1a;
     float u1b;
     float u1c;
-}PhaseWantedVoltageType;
-
-
+}CoreInternalVariablesType;
 
 typedef struct
 {
@@ -39,15 +48,17 @@ typedef struct
 class svmCoreClass
 {
     public:
-    PhaseWantedVoltageType *phaseWantedVoltage = NULL;
+    // PhaseWantedVoltageType *phaseWantedVoltage = NULL; // deprecated
     InvertorSwitchType *invertorSwitch = NULL;
     TriangleWaveSettingsType *triangleWaveSettings = NULL;
+    CoreInternalVariablesType *coreInternalVariables = NULL;
 
-    void phaseWantedVoltageAllocateMemory();
+    // void phaseWantedVoltageAllocateMemory(); // deprecated
     void invertorSwitchAllocateMemory();
     void triangleWaveSettingsAllocateMemory();
+    void coreInternalVariablesAllocateMemory();
 
-    float minMaxCommonModeVoltage(PhaseWantedVoltageType *phaseWantedVoltage);
+    float minMaxCommonModeVoltage(CoreInternalVariablesType *CoreInternalVariables);
 
     float createCompareLevel(float levelConstant, float commonModeVoltage, float phaseWantedVoltage);
 

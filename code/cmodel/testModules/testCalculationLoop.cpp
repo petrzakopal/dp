@@ -20,6 +20,7 @@ int main()
     svmCoreClass svmCore;
     CurVelModelClass CurVelModel;
     RegulatorClass Regulator;
+    TransformationClass Transformation;
     /*-------------------------------------------------------------*/
 
     /*-----------------------------------------------------------*/
@@ -31,6 +32,9 @@ int main()
     float commonModeVoltage;
     float compareLevel;
     float trianglePoint;
+    CurVelModel.modelCVVariables->psi2alpha = 0;
+    CurVelModel.modelCVVariables->psi2beta = 0;
+    CurVelModel.modelCVVariables->transformAngle = 0;
     /*-------------------------------------------------------------*/
     
 
@@ -63,6 +67,7 @@ int main()
     svmCore.phaseWantedVoltageAllocateMemory();
     svmCore.invertorSwitchAllocateMemory();
     svmCore.triangleWaveSettingsAllocateMemory();
+    svmCore.coreInternalVariablesAllocateMemory();
     /*----------------------------------------------------------------------*/
 
     /*-------------------- REGULATORS ---------------------*/
@@ -145,15 +150,29 @@ int main()
         Regulator.regCalculate(Regulator.idRegulator);
         Regulator.regCalculate(Regulator.velocityRegulator);
 
+        // here or at the end update dynamic saturation for iq regulator
+
         std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
         std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
         std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
         std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
 
 
-        // decoupling is missed now
+        // this is not necessary, but for cleaner code it is good, but change maybe because of SoC constrains
 
-        
+        svmCore.coreInternalVariables->u1d = Regulator.idRegulator->saturationOutput;
+        svmCore.coreInternalVariables->u1q = Regulator.iqRegulator->saturationOutput;
+
+
+        // decoupling is missing now
+
+
+        // inverse Park
+        svmCore.coreInternalVariables->u1alpha = Transformation.inverseParkTransform1(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
+        svmCore.coreInternalVariables->u1beta = Transformation.inverseParkTransform2(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
+
+
+        // inverse Clark
 
     }
 

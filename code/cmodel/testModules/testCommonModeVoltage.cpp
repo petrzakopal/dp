@@ -14,16 +14,17 @@ svmCoreClass svmCore;
 int main()
 {
 
-svmCore.phaseWantedVoltageAllocateMemory();
-svmCore.phaseWantedVoltage->u1a = 230;
-svmCore.phaseWantedVoltage->u1b = - 153;
-svmCore.phaseWantedVoltage->u1c = -153;
+svmCore.coreInternalVariablesAllocateMemory();
+// svmCore.phaseWantedVoltageAllocateMemory(); // depracated
+svmCore.coreInternalVariables->u1a = 230;
+svmCore.coreInternalVariables->u1b = - 153;
+svmCore.coreInternalVariables->u1c = -153;
 // which value to subtract from wanted voltage to get compare levels
-float testValue = svmCore.minMaxCommonModeVoltage(svmCore.phaseWantedVoltage);
+float testValue = svmCore.minMaxCommonModeVoltage(svmCore.coreInternalVariables);
 
 std::cout << "min max common mode signal to subtract is = " << testValue << "\n"; 
 
-free(svmCore.phaseWantedVoltage);
+free(svmCore.coreInternalVariables);
 
 
 return(0);

@@ -16,8 +16,8 @@
 typedef struct
 {
     float saturationInput; // input to saturation block
-    float wanted; // wanted value
-    float measured; // real value
+    float wantedValue; // wanted value
+    float measuredValue; // real value
     float saturationOutput; // out from regulator - action value
     float antiWindUpDif; // regulatory error for anti-windup
     float eDif; // regulatory error

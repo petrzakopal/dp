@@ -34,6 +34,7 @@ typedef struct modelCVVariablesStruct
     float i1beta;
     float psi2alpha;
     float psi2beta;
+    float transformAngle;
     float psi2Amplitude;
     float motorElectricalAngularVelocity;
     float *inputI1;

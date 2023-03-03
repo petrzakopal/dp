@@ -3,11 +3,11 @@
 #include <iostream>
 #include "../header/svmCore.h"
 
-
-void svmCoreClass::phaseWantedVoltageAllocateMemory()
-{
-    posix_memalign((void **)&phaseWantedVoltage , 4096 , sizeof(PhaseWantedVoltageType) );
-}
+// deprecated
+// void svmCoreClass::phaseWantedVoltageAllocateMemory()
+// {
+//     posix_memalign((void **)&phaseWantedVoltage , 4096 , sizeof(PhaseWantedVoltageType) );
+// }
 
 
 void svmCoreClass::invertorSwitchAllocateMemory()
@@ -21,9 +21,15 @@ void svmCoreClass::triangleWaveSettingsAllocateMemory()
     posix_memalign((void **)&triangleWaveSettings , 4096 , sizeof(TriangleWaveSettingsType) );
 }
 
-float svmCoreClass::minMaxCommonModeVoltage(PhaseWantedVoltageType *phaseWantedVoltage)
+
+void svmCoreClass::coreInternalVariablesAllocateMemory()
 {
-    return(((fmax(fmax(phaseWantedVoltage->u1a, phaseWantedVoltage->u1b), phaseWantedVoltage->u1c ) ) + (fmin(fmin(phaseWantedVoltage->u1a, phaseWantedVoltage->u1b), phaseWantedVoltage->u1c ) ))/2);
+    posix_memalign((void **)&coreInternalVariables , 4096 , sizeof(CoreInternalVariablesType) );
+}
+
+float svmCoreClass::minMaxCommonModeVoltage(CoreInternalVariablesType *CoreInternalVariables)
+{
+    return(((fmax(fmax(CoreInternalVariables->u1a, CoreInternalVariables->u1b), CoreInternalVariables->u1c ) ) + (fmin(fmin(CoreInternalVariables->u1a, CoreInternalVariables->u1b), CoreInternalVariables->u1c ) ))/2);
 }
 
 
@@ -48,6 +54,8 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 
         return(triangleActualValue);
  }
+
+
 
 
 

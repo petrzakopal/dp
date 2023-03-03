@@ -1,5 +1,5 @@
 // @file testComparation.cpp
-// compilation command: gcc -std=c++14 testComparation.cpp -o run/testComparation -lstdc++ ./../function/svmCore.cpp
+// compilation command: gcc -std=c++14 testComparation.cpp -o run/testComparation -lstdc++ ./../function/svmCore.cpp ./../function/MotorModel.cpp ./../function/transformation.cpp
 
 #include "./../header/MotorModel.h"
 #include "./../header/svmCore.h"
@@ -14,9 +14,10 @@ int main()
 {
 
     svmCoreClass svmCore;
-    svmCore.phaseWantedVoltageAllocateMemory();
+    // svmCore.phaseWantedVoltageAllocateMemory(); // deprecated
     svmCore.invertorSwitchAllocateMemory();
     svmCore.triangleWaveSettingsAllocateMemory();
+    svmCore.coreInternalVariablesAllocateMemory();
 
 
     // svmCore.phaseWantedVoltage->u1a = 230;
@@ -73,15 +74,15 @@ int main()
 
 
         // only in this example getting value from precalculated voltage, in real example it would be an array of just one value for every voltage, it would minimze the memory needed for data storing and basically there is no need to store previous data of a measured voltage...
-        svmCore.phaseWantedVoltage->u1a = MotorModel.getVoltage(i)->u1;
-        svmCore.phaseWantedVoltage->u1b = MotorModel.getVoltage(i)->u2;
-        svmCore.phaseWantedVoltage->u1c = MotorModel.getVoltage(i)->u3;
+        svmCore.coreInternalVariables->u1a = MotorModel.getVoltage(i)->u1;
+        svmCore.coreInternalVariables->u1b = MotorModel.getVoltage(i)->u2;
+        svmCore.coreInternalVariables->u1c = MotorModel.getVoltage(i)->u3;
 
         // calculating commonModeVoltage to be subtracted from wanted voltage which is output from regulators/clark/park
-        commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.phaseWantedVoltage);
+        commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.coreInternalVariables);
 
        // creating compare lvl for one phase, there would normally be 3 phase voltage - for every voltage compareLevel local helper variable
-        compareLevel = svmCore.createCompareLevel(287, commonModeVoltage, svmCore.phaseWantedVoltage->u1a);
+        compareLevel = svmCore.createCompareLevel(287, commonModeVoltage, svmCore.coreInternalVariables->u1a);
 
         // comparation of edited voltage called "prdele" with actual triangle value from triangle generator
         svmCore.invertorSwitch->sw1 = svmCore.comparationLevelTriangleWaveComparation(compareLevel, trianglePoint);
@@ -106,7 +107,7 @@ int main()
 
 
     // freeing pointers in memory to avoid memory leaks
-    free(svmCore.phaseWantedVoltage);
+    free(svmCore.coreInternalVariables);
     free(svmCore.invertorSwitch);
     free(svmCore.triangleWaveSettings);
     free(MotorModel.voltageGeneratorData);
