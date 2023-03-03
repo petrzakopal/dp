@@ -59,7 +59,7 @@ class svmCoreClass
     void triangleWaveSettingsAllocateMemory();
     void coreInternalVariablesAllocateMemory();
 
-    float minMaxCommonModeVoltage(CoreInternalVariablesType *CoreInternalVariables);
+    float minMaxCommonModeVoltage(CoreInternalVariablesType *coreInternalVariables);
 
     float createCompareLevel(float levelConstant, float commonModeVoltage, float phaseWantedVoltage);
 

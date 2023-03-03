@@ -27,9 +27,9 @@ void svmCoreClass::coreInternalVariablesAllocateMemory()
     posix_memalign((void **)&coreInternalVariables , 4096 , sizeof(CoreInternalVariablesType) );
 }
 
-float svmCoreClass::minMaxCommonModeVoltage(CoreInternalVariablesType *CoreInternalVariables)
+float svmCoreClass::minMaxCommonModeVoltage(CoreInternalVariablesType *coreInternalVariables)
 {
-    return(((fmax(fmax(CoreInternalVariables->u1a, CoreInternalVariables->u1b), CoreInternalVariables->u1c ) ) + (fmin(fmin(CoreInternalVariables->u1a, CoreInternalVariables->u1b), CoreInternalVariables->u1c ) ))/2);
+    return(((fmax(fmax(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ) + (fmin(fmin(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ))/2);
 }
 
 

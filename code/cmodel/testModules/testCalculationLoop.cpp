@@ -1,5 +1,5 @@
 // @file testCalculationLoop.cpp
-// compilation command: gcc -std=c++14 testCalculationLoop.cpp -o run/testCalculationLoop -lstdc++ ./../function/svmCore.cpp ./../function/MotorModel.cpp ./../function/transformation.cpp ./../function/CurVelModel.cpp ./../function/regulator.cpp
+// compilation command: gcc -std=c++14 testCalculationLoop.cpp -o run/testCalculationLoop -lstdc++ ./../function/svmCore.cpp ./../function/MotorModel.cpp ./../function/transformation.cpp ./../function/CurVelModel.cpp ./../function/regulator.cpp ./../function/invertor.cpp
 
 
 #include "./../header/MotorModel.h"
@@ -7,10 +7,13 @@
 #include "./../header/svmCore.h"
 #include "./../header/CurVelModel.h"
 #include "./../header/regulator.h"
+#include "./../header/invertor.h"
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
+
+#define PI 3.141592
 
 int main()
 {
@@ -21,6 +24,7 @@ int main()
     CurVelModelClass CurVelModel;
     RegulatorClass Regulator;
     TransformationClass Transformation;
+    InvertorClass Invertor;
     /*-------------------------------------------------------------*/
 
     /*-----------------------------------------------------------*/
@@ -33,6 +37,8 @@ int main()
     float compareLevel;
     float trianglePoint;
     float minMaxCommonModeVoltageConstant = 287;
+    float uS = 400;
+    float uDC = ((3 * sqrt(2))/PI) * uS;
     /*-------------------------------------------------------------*/
     
 
@@ -221,6 +227,15 @@ int main()
         std::cout << "sw6: " << svmCore.invertorSwitch->sw6 << "\n";
         /*--------------------------------------------------------------*/
 
+        // invertor voltage reconstruction for phase A, B, C
+        Invertor.invertorReconstructVoltages(svmCore.invertorSwitch, svmCore.coreInternalVariables, uDC);
+
+         /* console output for testing purposes */
+        /*--------------------------------------------------------------*/
+        std::cout << "reconstructed u1a: " << svmCore.coreInternalVariables->u1a << "\n";
+        std::cout << "reconstructed u1b: " << svmCore.coreInternalVariables->u1b << "\n";
+        std::cout << "reconstructed u1c: " << svmCore.coreInternalVariables->u1c << "\n";
+        /*--------------------------------------------------------------*/
 
     }
 
