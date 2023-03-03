@@ -77,7 +77,29 @@ int main()
     /*-------------------- REGULATORS ---------------------*/
     Regulator.regulatorAllocateMemory();
     /*---------------------------------------------------*/
+
+
+     /*-------------------- INVERTOR ---------------------*/
+     Invertor.reconstrutedInvertorOutputVoltageAllocateMemory();
+
     /****************************************************************/
+
+
+    /*----------------------------- SET ASYNCHRONOUS MOTOR PARAMETERS FOR MODEL ------------------------------*/
+    // MotorModel.setMotorParameters(); // hardcoded values
+    MotorModel.motorParameters->R1 = 0.370f; // Ohm, stator rezistance
+    MotorModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
+    MotorModel.motorParameters->L1s = 0.00227f; // H, stator leakage inductance
+    MotorModel.motorParameters->L2s = 0.00227f; // H, rotor leakage inductance
+    MotorModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
+    MotorModel.motorParameters->L1 = 0.08477f; // H, inductance
+    MotorModel.motorParameters->L2 = 0.08477f; // H, inductance
+    MotorModel.motorParameters->sigma = 0.05283f; // = 0.0528396032, sigma = 1 - Lm^(2)/L1L2
+    MotorModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+    MotorModel.motorParameters->momentOfIntertia = 0.4; // J, moment of inertia
+    MotorModel.setStateSpaceCoeff();
+    MotorModel.odeCalculationSettings->numberOfIterations = MotorModel.numberOfIterations();
+    /*--------------------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------------------*/
     /*-------------------- CURRENT VELOCITY MODEL SETTINGS/ INITIAL VALUES ---------------------*/
@@ -228,14 +250,19 @@ int main()
         /*--------------------------------------------------------------*/
 
         // invertor voltage reconstruction for phase A, B, C
-        Invertor.invertorReconstructVoltages(svmCore.invertorSwitch, svmCore.coreInternalVariables, uDC);
+        Invertor.invertorReconstructVoltages(svmCore.invertorSwitch, Invertor.reconstructedInvertorOutputVoltage, uDC);
 
          /* console output for testing purposes */
         /*--------------------------------------------------------------*/
-        std::cout << "reconstructed u1a: " << svmCore.coreInternalVariables->u1a << "\n";
-        std::cout << "reconstructed u1b: " << svmCore.coreInternalVariables->u1b << "\n";
-        std::cout << "reconstructed u1c: " << svmCore.coreInternalVariables->u1c << "\n";
+        std::cout << "reconstructed u1a: " << Invertor.reconstructedInvertorOutputVoltage->u1a << "\n";
+        std::cout << "reconstructed u1b: " << Invertor.reconstructedInvertorOutputVoltage->u1b << "\n";
+        std::cout << "reconstructed u1c: " << Invertor.reconstructedInvertorOutputVoltage->u1c << "\n";
         /*--------------------------------------------------------------*/
+
+
+        // clarke for motor model
+
+
 
     }
 
@@ -258,6 +285,7 @@ int main()
     free(Regulator.velocityRegulator);
     free(Regulator.iqRegulator);
     free(Regulator.idRegulator);
+    free(Invertor.reconstructedInvertorOutputVoltage);
     free(svmCore.coreInternalVariables);
     /*-----------------------------------------------------------*/
     

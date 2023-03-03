@@ -5,10 +5,20 @@
 #ifndef INVERTOR_H
 #define	INVERTOR_H
 
+
+typedef struct
+{
+    float u1a;
+    float u1b;
+    float u1c;
+}ReconstructedInvertorOutputVoltageType;
+
 class InvertorClass
 {
     public:
-        void invertorReconstructVoltages(InvertorSwitchType *invertorSwitch, CoreInternalVariablesType *CoreInternalVariables, float uDC);
+        ReconstructedInvertorOutputVoltageType *reconstructedInvertorOutputVoltage;
+        void reconstrutedInvertorOutputVoltageAllocateMemory();
+        void invertorReconstructVoltages(InvertorSwitchType *invertorSwitch, ReconstructedInvertorOutputVoltageType *ReconstructedInvertorOutputVoltage, float uDC);
 };
 
 
