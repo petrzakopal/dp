@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-👨🏻‍💻[03.03.2023](/notes/20230303.md)
+👨🏻‍💻 [04.03.2023](/notes/20230304.md)
+
+---
+
+💻 [03.03.2023](/notes/20230303.md) <-- úprava a kompletace c++ modelu v [cmodel](./code/cmodel/testModules/testCalculationLoop.cpp)
 
 ---
 

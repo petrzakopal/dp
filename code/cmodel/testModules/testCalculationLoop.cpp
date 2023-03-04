@@ -325,6 +325,8 @@ int main()
         Regulator.fluxRegulator->measuredValue = CurVelModel.modelCVVariables->psi2Amplitude;
         Regulator.velocityRegulator->measuredValue = MotorModel.modelVariables->motorMechanicalAngularVelocity;
 
+        globalSimulationData << globalSimulationTime << "," << CurVelModel.modelCVVariables->psi2Amplitude << "," << CurVelModel.modelCVVariables->i1alpha << "," << CurVelModel.modelCVVariables->i1beta << "," << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," << MotorModel.modelVariables->motorTorque << "\n";
+
         globalSimulationTime = globalSimulationTime + globalCalculationStep;
 
         // globalSimulationData << << "\n";
