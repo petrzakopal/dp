@@ -459,11 +459,11 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         // calculating torque
         setVariable(getMotorVariable(i+1)->motorTorque, motorTorque(motorParameters, getMotorVariable(i+1)));
 
-        std::cout << "motor torque from loop: " << getMotorVariable(i)->motorTorque <<"\n";
-        std::cout << "k2i1alpha from loop: " << k2i1alpha <<"\n";
-        std::cout << "calculation time: " <<  odeCalculationSettings->calculationTime << "\n";
-        std::cout << "i1alpha from loop: " << getMotorVariable(i)->i1alpha <<"\n";
-        std::cout << "i1beta from loop: " << getMotorVariable(i)->i1beta <<"\n";
+        // std::cout << "motor torque from loop: " << getMotorVariable(i)->motorTorque <<"\n";
+        // std::cout << "k2i1alpha from loop: " << k2i1alpha <<"\n";
+        // std::cout << "calculation time: " <<  odeCalculationSettings->calculationTime << "\n";
+        // std::cout << "i1alpha from loop: " << getMotorVariable(i)->i1alpha <<"\n";
+        // std::cout << "i1beta from loop: " << getMotorVariable(i)->i1beta <<"\n";
        
 
         // calculating mechanical velocity
@@ -619,8 +619,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 
         //  modelOutputDataFile<<(odeCalculationSettings->calculationTime+odeCalculationSettings->calculationStep)<< ","<< getMotorVariable(i+1)->i1alpha<< "," << getVoltage(i+1)->u1<< "," << getMotorVariable(i+1)->motorTorque << ","<< getMotorVariable(i+1)->motorMechanicalAngularVelocity <<"," <<sqrt((getMotorVariable(i+1)->psi2alpha * getMotorVariable(i+1)->psi2alpha)+(getMotorVariable(i+1)->psi2beta *getMotorVariable(i+1)->psi2beta)) << "\n";
 
-        
-        
+          
         // updating stateSpaceCoeff with new electrical angular velocity
         calculateStateSpaceCoeff(stateSpaceCoeff, motorParameters, motorElectricalAngularVelocity(getMotorVariable(1)->motorMechanicalAngularVelocity));
 

@@ -44,6 +44,7 @@ plt.xticks(fontsize=15, weight=700)
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 
 plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue)
+plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed)
 # plt.plot(df.globalSimulationTime, df.idRegulatorClampingStatus, color=ctuRed)
 # plt.plot(df.globalSimulationTime, df.fluxRegulatorClampingStatus, color=ctuGreen)
 # plt.plot(df.globalSimulationTime, df.idRegulatorMeasuredValue, color=ctuOrange)

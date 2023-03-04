@@ -417,8 +417,8 @@ for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
     // std::cout << "inputI1[" << i << "]: " << CurVelModel2.modelCVVariables->inputI1[i] << "\n";
     // std::cout << "inputI2[" << i << "]: " << CurVelModel2.modelCVVariables->inputI2[i] << "\n";
 
-    std::cout << "|psi2|[" << i <<"] " << " = " << psi2Amplitude << "\n";
-    std::cout << "transformAngle[" << i <<"] " << " = " << transformAngle << "\n";
+    // std::cout << "|psi2|[" << i <<"] " << " = " << psi2Amplitude << "\n";
+    // std::cout << "transformAngle[" << i <<"] " << " = " << transformAngle << "\n";
 
 }
 /****************************************************************************************************/
@@ -456,11 +456,11 @@ else if(modeSelection == 1)
     CurVelModel2.CurVelModelCalculate(CurVelModel2.modelCVCoeff, CurVelModel2.modelCVVariables, CurVelModel2.odeCVCalculationSettings);
 
     psi2Amplitude = sqrt((CurVelModel2.modelCVVariables->psi2alpha * CurVelModel2.modelCVVariables->psi2alpha) + (CurVelModel2.modelCVVariables->psi2beta * CurVelModel2.modelCVVariables->psi2beta));
-     transformAngle = atan2f(CurVelModel2.modelCVVariables->psi2beta, CurVelModel2.modelCVVariables->psi2alpha);
+    transformAngle = atan2f(CurVelModel2.modelCVVariables->psi2beta, CurVelModel2.modelCVVariables->psi2alpha);
 
     
-    std::cout << "|psi2|[" << i <<"] " << " = " << psi2Amplitude << "\n";
-    std::cout << "transformAngle[" << i <<"] " << " = " << transformAngle << "\n";
+    // std::cout << "|psi2|[" << i <<"] " << " = " << psi2Amplitude << "\n";
+    // std::cout << "transformAngle[" << i <<"] " << " = " << transformAngle << "\n";
     
     }
 

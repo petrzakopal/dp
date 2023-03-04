@@ -197,7 +197,7 @@ int main()
 
     // now hardcoded, change later
     Regulator.fluxRegulator->wantedValue = 1;
-    Regulator.velocityRegulator->wantedValue = 0;
+    Regulator.velocityRegulator->wantedValue = 50;
     Regulator.idRegulator->wantedValue = 0;
     Regulator.iqRegulator->wantedValue = 0;
     /*--------------------------------------------------------------*/
@@ -207,11 +207,18 @@ int main()
     Regulator.idRegulator->measuredValue = 0;
     Regulator.iqRegulator->measuredValue = 0;
 
+
     std::ofstream globalSimulationData;
     globalSimulationData.open("outputData/globalSimulationData.csv",std::ofstream::out | std::ofstream::trunc);
     for(int i = 0; i<1000000;i++)
     {
 
+        // if(i == 600000)
+        // {
+        //     Regulator.velocityRegulator->wantedValue = 50;
+        // }
+
+        
         Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
         Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
         
@@ -219,11 +226,13 @@ int main()
         Regulator.regCalculate(Regulator.fluxRegulator);
         Regulator.regCalculate(Regulator.velocityRegulator);
 
+        
+
         Regulator.idRegulator->wantedValue = Regulator.fluxRegulator->saturationOutput;
         Regulator.iqRegulator->wantedValue = Regulator.velocityRegulator->saturationOutput;
 
         Regulator.regCalculate(Regulator.idRegulator);
-        Regulator.regCalculate(Regulator.velocityRegulator);
+        Regulator.regCalculate(Regulator.iqRegulator);
 
         // here or at the end update dynamic saturation for iq regulator
 
