@@ -15,7 +15,7 @@
 
 ---
 
-💻 [03.03.2023](/notes/20230303.md) <-- úprava a kompletace c++ modelu v [cmodel](./code/cmodel/testModules/testCalculationLoop.cpp)
+💻 [03.03.2023](/notes/20230303.md) <-- úprava a kompletace c++ modelu v [cmodel](./code/cmodel/testModules/testCalculationLoop.cpp), příprava kontrolních grafů cmodelu v pythonu [simulationGraph](./code/cmodel/testModules/simulationGraph.py)
 
 ---
 
