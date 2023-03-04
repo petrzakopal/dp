@@ -6,13 +6,16 @@
 #include "./../header/svmCore.h"
 
 
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- MEMORY ALLOCATION FOR INVERTOR OUTPUT PHASE VOLTAGE IN SIMULATION ---------------------------------*/
  void InvertorClass::reconstrutedInvertorOutputVoltageAllocateMemory()
  {
     posix_memalign((void **)&reconstructedInvertorOutputVoltage , 4096 , sizeof(ReconstructedInvertorOutputVoltageType) );
  }
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
 
-
-
+/*--------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- INVERTOR OUTPUT PHASE VOLTAGE IN SIMULATION ---------------------------------*/
 void InvertorClass::invertorReconstructVoltages(InvertorSwitchType *invertorSwitch, ReconstructedInvertorOutputVoltageType *reconstructedInvertorOutputVoltage, float uDC)
 {
     float uDCd3 = (uDC)/3;
@@ -22,3 +25,5 @@ void InvertorClass::invertorReconstructVoltages(InvertorSwitchType *invertorSwit
     reconstructedInvertorOutputVoltage->u1c = uDCd3 * (- (invertorSwitch->sw1) - ( invertorSwitch->sw3) + (2 * invertorSwitch->sw5));
   
 }
+/*--------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- INVERTOR OUTPUT PHASE VOLTAGE IN SIMULATION ---------------------------------*/

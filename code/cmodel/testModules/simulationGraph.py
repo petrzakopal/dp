@@ -1,4 +1,5 @@
 # importing dependencies
+# GRAPH USED IN A CONJUCTION WITH testCalculationLoop file program
 import pandas as pd
 from matplotlib import pyplot as plt
 

@@ -27,65 +27,56 @@ void MotorModelClass::motorParametersAllocateMemory()
 /*-------------------- ALLOCATE MEMORY FOR STATE SPACE COEFFICIENTS --------------------*/
 void MotorModelClass::stateSpaceCoeffAllocateMemory()
 {
-    
     posix_memalign((void **)&stateSpaceCoeff , 4096 , sizeof(stateSpaceCoeffType) );
-    
 }
 /*---------------------------------------------------------------------------------------*/
 
 
-/*---------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------*/
 /*-------------------- ALLOCATE MEMORY ODE SOLVE SETTINGS --------------------*/
 void MotorModelClass::odeCalculationSettingsAllocateMemory()
-{
-    
+{ 
     posix_memalign((void **)&odeCalculationSettings , 4096 , sizeof(odeCalculationSettingsType) );
-    
 }
 /*---------------------------------------------------------------------------------------*/
 
 
-/*---------------------------------------------------------------------------------------*/
-
-
-/*----------------------  -----------------------*/
+/*-------------------------------------------------------------------------------------*/
+/*---------------------- ALLOCATE MEMORY FOR VOLTAGE GENERATOR -----------------------*/
 void MotorModelClass::voltageGeneratorDataAllocateMemory()
 {
     posix_memalign((void **)&voltageGeneratorData , 4096 , ((int)ceil(((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep))) * sizeof(voltageGeneratorType) );
-
-    
-    
 }
 /*---------------------------------------------------------------------------------------*/
 
 
-
+/*---------------------------------------------------------------------------------------*/
+/*---------------------- ALLOCATE MEMORY FOR ASM MODEL VARIABLES -----------------------*/
 void MotorModelClass::modelVariablesAllocateMemory()
 {
     posix_memalign((void **)&modelVariables , 4096 , ((int)ceil(((odeCalculationSettings->finalCalculationTime - odeCalculationSettings->initialCalculationTime)/odeCalculationSettings->calculationStep))) * sizeof(modelVariablesType) );
-
-    
-    
 }
+/*-------------------------------------------------------------------------------------*/
 
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------- ALLOCATE MEMORY FOR ASM MODEL VARIABLES FOR ONLINE CALCULATION = NOT PRECALCULATED VOLTAGE -----------------------*/
 void MotorModelClass::modelVariablesForOnlineCalculationAllocateMemory()
 {
     posix_memalign((void **)&modelVariables , 4096 , 2 * sizeof(modelVariablesType) );
-
-    
-    
 }
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
 
-
- void MotorModelClass::setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput)
- {
-    
+/*---------------------------------------------------------------------------------*/
+/*---------------------- SETTING ODE CALCULATION SETTINGS -----------------------*/
+void MotorModelClass::setOdeCalculationSettings(float initialCalculationTimeInput, float finalCalculationTimeInput, float calculationStepInput)
+{  
     odeCalculationSettings->initialCalculationTime = initialCalculationTimeInput;
     odeCalculationSettings->finalCalculationTime = finalCalculationTimeInput;
     odeCalculationSettings->calculationStep = calculationStepInput;
     odeCalculationSettings->calculationTime = initialCalculationTimeInput;
+}
+/*----------------------------------------------------------------------------------*/
 
- }
 
 
 /*----------------------------------------------------------------------*/
@@ -491,7 +482,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
 
 
 
- /*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+ /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ ACTUAL VALUE MAIN STATE SPACE MODEL PLUS TORQUE PLUS VELOCITY CALCULATIONS WITH RK4s FOR ODE --------------------------------*/
  void MotorModelClass::mathModelCalculateOnlineValue(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters)
  {
@@ -632,8 +623,8 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         setVariable(getMotorVariable(0)->psi2beta, getMotorVariable(1)->psi2beta);
 
         
-        // // updating time
-        // odeCalculationSettings->calculationTime = odeCalculationSettings->calculationTime + odeCalculationSettings->calculationStep;
+        // updating time
+        // odeCalculationSettings->calculationTime = odeCalculationSettings->calculationTime + odeCalculationSettings->calculationStep; // moved to main online loop
 
         /*------------------------------------------------------------------------------------------------------------------------------------*/
     

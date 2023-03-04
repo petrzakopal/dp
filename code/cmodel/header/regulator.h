@@ -5,14 +5,9 @@
 #include <stdlib.h>
 
 
-/*NASTAVENE VYCHOZI HODNOTY KONSTANT REGULATORU */
-// #define DEF_HODNOTA_KP 0.0190
-// #define DEF_HODNOTA_KI 0.0001098
-// #define DEF_HODNOTA_KC 0.0001098
-// #define DEF_HODNOTA_UMAX 127
-// #define DEF_HODNOTA_UMIN -127
-// #define DEF_HODNOTA_TAU 173
 
+/*----------------------------------------------------------------------*/
+/*-------------------- TYPE/STRUCT FOR REGULATORS --------------------*/
 typedef struct
 {
     float saturationInput; // input to saturation block
@@ -31,6 +26,7 @@ typedef struct
     bool saturationCheckStatus;
     bool signCheckStatus;
 }RegulatorType;
+/*----------------------------------------------------------------------*/
 
 
 class RegulatorClass
@@ -48,11 +44,12 @@ class RegulatorClass
         void regulatorAllocateMemory();
         /*----------------------------------------------------------------------------------------------------*/
         
-
+        /*-----------------------------------------------------------------------------------------------------*/
+        /*------------------------------- ANTI WIND UP CHECKS + ENABLE STATUS ---------------------------------*/
         void checkSaturationStatus(RegulatorType *regulatorData);
-
         void checkSignStatus(RegulatorType *regulatorData);
         void enableClamping(RegulatorType *regulatorData);
+        /*-----------------------------------------------------------------------------------------------------*/
 
         /*-----------------------------------------------------------------------------------------------------*/
         /*------------------------------ SATURATION BLOCK INSERTED IN REGULATOR ------------------------------*/
@@ -65,7 +62,7 @@ class RegulatorClass
         void regCalculate(RegulatorType *regulatorData);
         /*--------------------------------------------------------------------------------------*/
 
-};
+};  
 
 #endif	/* REGULATOR_H */
 

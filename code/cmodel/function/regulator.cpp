@@ -16,6 +16,9 @@ void RegulatorClass::regulatorAllocateMemory()
 }
 /*-----------------------------------------------------------------------------------------------------*/
 
+
+/*----------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- REGULATOR SATURATION BLOCK TO SIMULATE ACTUATOR SATURATION ---------------------------------*/
 float RegulatorClass::regSaturationBlock(float saturationInput, float saturationOutputMin, float saturationOutputMax)
 {
         float localSaturationInput = saturationInput;
@@ -32,7 +35,11 @@ float RegulatorClass::regSaturationBlock(float saturationInput, float saturation
         return(localSaturationInput);
 
 }
+/*----------------------------------------------------------------------------------------------------------------------------*/
 
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- STATUS CHECK IF THE SATURATION HAPPENED - USED FOR ANTI WINDUP VIA CLAMPLING ---------------------------------*/
 void RegulatorClass::checkSaturationStatus(RegulatorType *regulatorData)
 {
     if(regulatorData->saturationInput == regulatorData->saturationOutput)
@@ -44,7 +51,10 @@ void RegulatorClass::checkSaturationStatus(RegulatorType *regulatorData)
         regulatorData->saturationCheckStatus = true; // saturation did happen
     }
 }
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- STATUS CHECK OF SIGNS FROM ERROR AND SATURATION INPUT - USED FOR ANTI WINDUP VIA CLAMPLING ---------------------------------*/
 void RegulatorClass::checkSignStatus(RegulatorType *regulatorData)
 {
     if(((regulatorData->eDif > 0) and (regulatorData->saturationInput > 0)) or ((regulatorData->eDif < 0) and (regulatorData->saturationInput < 0)))
@@ -56,7 +66,11 @@ void RegulatorClass::checkSignStatus(RegulatorType *regulatorData)
         regulatorData->signCheckStatus = false;
     }
 }
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- ENABLING CLAMPING BASED OF PRECEDING STATUSS CHECKS ---------------------------------*/
 void RegulatorClass::enableClamping(RegulatorType *regulatorData)
 {
     if((regulatorData->saturationCheckStatus == true) and (regulatorData->signCheckStatus == true))
@@ -68,8 +82,11 @@ void RegulatorClass::enableClamping(RegulatorType *regulatorData)
         regulatorData->clampingStatus = false;
     }
 }
+/*----------------------------------------------------------------------------------------------------------------------*/
 
-// with back calculation antiwind up
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*------------------------------- ANTI WIND UP VIA BACK CALCULATION - DEPRACATED ---------------------------------*/
 // void RegulatorClass::regCalculate(RegulatorType *regulatorData)
 // {
 //     regulatorData->eDif = regulatorData->wantedValue - regulatorData->measuredValue;
@@ -78,8 +95,10 @@ void RegulatorClass::enableClamping(RegulatorType *regulatorData)
 //     regulatorData->antiWindUpDif = regulatorData->saturationOutput - regulatorData->saturationInput;
 //     regulatorData->iSum = regulatorData->iSum + (regulatorData->eDif * regulatorData->ki) + (regulatorData->antiWindUpDif * regulatorData->kAntiWindUp);
 // }
+/*------------------------------------------------------------------------------------------------------------------*/
 
-// with clamping
+/*-------------------------------------------------------------------------------------------------*/
+/*------------------------------- ANTI WIND UP VIA BACK CLAMPING ---------------------------------*/
 void RegulatorClass::regCalculate(RegulatorType *regulatorData)
 {
     regulatorData->eDif = regulatorData->wantedValue - regulatorData->measuredValue;
@@ -99,3 +118,4 @@ void RegulatorClass::regCalculate(RegulatorType *regulatorData)
         regulatorData->iSum = regulatorData->iSum + (regulatorData->eDif * regulatorData->ki);
     }
 }
+/*-------------------------------------------------------------------------------------------------*/
