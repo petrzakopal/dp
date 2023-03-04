@@ -139,7 +139,7 @@ int main()
     // flux regulator
     Regulator.fluxRegulator->ki = 30300;
     Regulator.fluxRegulator->kp = 11410;
-    Regulator.fluxRegulator->kAntiWindUp = 0;
+    Regulator.fluxRegulator->kAntiWindUp = 0.5;
     Regulator.fluxRegulator->saturationOutputMax = 10.9482;
     Regulator.fluxRegulator->saturationOutputMin = 0;
     Regulator.fluxRegulator->saturationOutput = 0;
@@ -147,7 +147,7 @@ int main()
     // velocity regulator
     Regulator.velocityRegulator->ki = 4650000;
     Regulator.velocityRegulator->kp = 37500;
-    Regulator.velocityRegulator->kAntiWindUp = 0;
+    Regulator.velocityRegulator->kAntiWindUp = 0.5;
     Regulator.velocityRegulator->saturationOutputMax = 29.1228;
     Regulator.velocityRegulator->saturationOutputMin = 0;
     Regulator.velocityRegulator->saturationOutput = 0;
@@ -155,7 +155,7 @@ int main()
     // id regulator
     Regulator.idRegulator->ki = 2915.6;
     Regulator.idRegulator->kp = 22.3961;
-    Regulator.idRegulator->kAntiWindUp = 0;
+    Regulator.idRegulator->kAntiWindUp = 0.5;
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
     Regulator.idRegulator->saturationOutput = - Udcmax;
 
@@ -163,7 +163,7 @@ int main()
     Regulator.iqRegulator->saturationOutputMin = -Udcmax;
     Regulator.iqRegulator->ki = 2915.6;
     Regulator.iqRegulator->kp = 22.3961;
-    Regulator.iqRegulator->kAntiWindUp = 0;
+    Regulator.iqRegulator->kAntiWindUp = 0.5;
     Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
     Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
     /*--------------------------------------------------------------*/
