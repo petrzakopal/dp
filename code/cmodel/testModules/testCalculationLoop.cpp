@@ -17,6 +17,23 @@
 
 int main()
 {
+
+    /*------------------------------------------------------------*/
+    /*-------------------- PROGRAM SETTINGS ---------------------*/
+    int verboseOutput = false;
+    std::cout << "\n\r------------------------------------------\n";
+    std::cout << "Select verbose output:\n0 - disabled\n1 - enabled\n";
+    std::cout << "------------------------------------------\n";
+    scanf("%i", &verboseOutput);
+    /*------------------------------------------------------------*/
+
+
+
+
+
+
+
+
     /*-------------------------------------------------------------*/
     /*-------------------- CLASS DEFINITIONS ---------------------*/
     MotorModelClass MotorModel;
@@ -139,14 +156,14 @@ int main()
     // flux regulator
     Regulator.fluxRegulator->ki = 30300;
     Regulator.fluxRegulator->kp = 11410;
-    Regulator.fluxRegulator->kAntiWindUp = 0.5;
+    Regulator.fluxRegulator->kAntiWindUp = 0; // 2.000045
     Regulator.fluxRegulator->saturationOutputMax = 10.9482;
     Regulator.fluxRegulator->saturationOutputMin = 0;
     Regulator.fluxRegulator->saturationOutput = 0;
 
     // velocity regulator
     Regulator.velocityRegulator->ki = 4650000;
-    Regulator.velocityRegulator->kp = 37500;
+    Regulator.velocityRegulator->kp = 3720;
     Regulator.velocityRegulator->kAntiWindUp = 0.5;
     Regulator.velocityRegulator->saturationOutputMax = 29.1228;
     Regulator.velocityRegulator->saturationOutputMin = 0;
@@ -155,7 +172,7 @@ int main()
     // id regulator
     Regulator.idRegulator->ki = 2915.6;
     Regulator.idRegulator->kp = 22.3961;
-    Regulator.idRegulator->kAntiWindUp = 0.5;
+    Regulator.idRegulator->kAntiWindUp = 2.0194; // 2.0194
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
     Regulator.idRegulator->saturationOutput = - Udcmax;
 
@@ -163,7 +180,7 @@ int main()
     Regulator.iqRegulator->saturationOutputMin = -Udcmax;
     Regulator.iqRegulator->ki = 2915.6;
     Regulator.iqRegulator->kp = 22.3961;
-    Regulator.iqRegulator->kAntiWindUp = 0.5;
+    Regulator.iqRegulator->kAntiWindUp = 2;
     Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
     Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
     /*--------------------------------------------------------------*/
@@ -183,7 +200,7 @@ int main()
 
     std::ofstream globalSimulationData;
     globalSimulationData.open("outputData/globalSimulationData.csv",std::ofstream::out | std::ofstream::trunc);
-    for(int i = 0; i<50000;i++)
+    for(int i = 0; i<1000000;i++)
     {
 
         Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
@@ -201,14 +218,17 @@ int main()
 
         // here or at the end update dynamic saturation for iq regulator
 
-
-         /* console output for testing purposes */
-        /*--------------------------------------------------------------*/
-        std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
-        std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
-        std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
-        std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
-        /*--------------------------------------------------------------*/
+        if(verboseOutput)
+        {
+            /* console output for testing purposes */
+            /*--------------------------------------------------------------*/
+            std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
+            std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
+            std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
+            std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
+            /*--------------------------------------------------------------*/
+        }
+        
 
         // this is not necessary, but for cleaner code it is good, but change maybe because of SoC constrains
 
@@ -223,21 +243,28 @@ int main()
         svmCore.coreInternalVariables->u1alpha = Transformation.inverseParkTransform1(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
         svmCore.coreInternalVariables->u1beta = Transformation.inverseParkTransform2(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
 
-
-        std::cout << "u1alpha from regulator: " << svmCore.coreInternalVariables->u1alpha << "\n";
-        std::cout << "u1beta from regulator: " << svmCore.coreInternalVariables->u1beta << "\n";
+        if(verboseOutput)
+        {
+            std::cout << "u1alpha from regulator: " << svmCore.coreInternalVariables->u1alpha << "\n";
+            std::cout << "u1beta from regulator: " << svmCore.coreInternalVariables->u1beta << "\n";
+        }
+        
 
         // inverse Clark
         svmCore.coreInternalVariables->u1a = Transformation.inverseClarkeTransform1(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
         svmCore.coreInternalVariables->u1b = Transformation.inverseClarkeTransform2(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
         svmCore.coreInternalVariables->u1c = Transformation.inverseClarkeTransform3(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
 
-        /* console output for testing purposes */
-        /*--------------------------------------------------------------*/
-        std::cout << "u1a: " << svmCore.coreInternalVariables->u1a << "\n";
-        std::cout << "u1b: " << svmCore.coreInternalVariables->u1b << "\n";
-        std::cout << "u1c: " << svmCore.coreInternalVariables->u1c << "\n";
+        if(verboseOutput)
+        {
+            /* console output for testing purposes */
+            /*--------------------------------------------------------------*/
+            std::cout << "u1a: " << svmCore.coreInternalVariables->u1a << "\n";
+            std::cout << "u1b: " << svmCore.coreInternalVariables->u1b << "\n";
+            std::cout << "u1c: " << svmCore.coreInternalVariables->u1c << "\n";
          /*--------------------------------------------------------------*/
+        }
+        
 
         trianglePoint = svmCore.generateActualValueTriangleWave(svmCore.triangleWaveSettings);
 
@@ -260,26 +287,34 @@ int main()
         svmCore.invertorSwitch->sw2 = ~svmCore.invertorSwitch->sw5;
 
 
-
-         /* console output for testing purposes */
+        if(verboseOutput)
+        {
+             /* console output for testing purposes */
+            /*--------------------------------------------------------------*/
+            std::cout << "sw1: " << svmCore.invertorSwitch->sw1 << "\n";
+            std::cout << "sw2: " << svmCore.invertorSwitch->sw2 << "\n";
+            std::cout << "sw3: " << svmCore.invertorSwitch->sw3 << "\n";
+            std::cout << "sw4: " << svmCore.invertorSwitch->sw4 << "\n";
+            std::cout << "sw5: " << svmCore.invertorSwitch->sw5 << "\n";
+            std::cout << "sw6: " << svmCore.invertorSwitch->sw6 << "\n";
         /*--------------------------------------------------------------*/
-        std::cout << "sw1: " << svmCore.invertorSwitch->sw1 << "\n";
-        std::cout << "sw2: " << svmCore.invertorSwitch->sw2 << "\n";
-        std::cout << "sw3: " << svmCore.invertorSwitch->sw3 << "\n";
-        std::cout << "sw4: " << svmCore.invertorSwitch->sw4 << "\n";
-        std::cout << "sw5: " << svmCore.invertorSwitch->sw5 << "\n";
-        std::cout << "sw6: " << svmCore.invertorSwitch->sw6 << "\n";
-        /*--------------------------------------------------------------*/
+        }
+       
 
         // invertor voltage reconstruction for phase A, B, C
         Invertor.invertorReconstructVoltages(svmCore.invertorSwitch, Invertor.reconstructedInvertorOutputVoltage, uDC);
 
-         /* console output for testing purposes */
+
+        if(verboseOutput)
+        {
+            /* console output for testing purposes */
+            /*--------------------------------------------------------------*/
+            std::cout << "reconstructed u1a: " << Invertor.reconstructedInvertorOutputVoltage->u1a << "\n";
+            std::cout << "reconstructed u1b: " << Invertor.reconstructedInvertorOutputVoltage->u1b << "\n";
+            std::cout << "reconstructed u1c: " << Invertor.reconstructedInvertorOutputVoltage->u1c << "\n";
         /*--------------------------------------------------------------*/
-        std::cout << "reconstructed u1a: " << Invertor.reconstructedInvertorOutputVoltage->u1a << "\n";
-        std::cout << "reconstructed u1b: " << Invertor.reconstructedInvertorOutputVoltage->u1b << "\n";
-        std::cout << "reconstructed u1c: " << Invertor.reconstructedInvertorOutputVoltage->u1c << "\n";
-        /*--------------------------------------------------------------*/
+        }
+        
 
 
         // clarke for motor model
@@ -287,21 +322,28 @@ int main()
 
         MotorModel.modelVariables->u1beta = Transformation.clarkeTransform2(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
 
-         std::cout << "u1alpha to motor: " << MotorModel.modelVariables->u1alpha << "\n";
-         std::cout << "u1beta to motor: " << MotorModel.modelVariables->u1beta << "\n";
+        if(verboseOutput)
+        {
+            std::cout << "u1alpha to motor: " << MotorModel.modelVariables->u1alpha << "\n";
+            std::cout << "u1beta to motor: " << MotorModel.modelVariables->u1beta << "\n";
+        }
+        
 
 
         MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
 
        
 
-    
-        std::cout << "ASM i1alpha: " << MotorModel.modelVariables->i1alpha << "\n";
-        std::cout << "ASM i1beta: " << MotorModel.modelVariables->i1beta << "\n";
-        std::cout << "ASM motorTorque: " << MotorModel.modelVariables->motorTorque<< "\n";
-        std::cout << "ASM motorMechanicalAngularVelocity: " << MotorModel.modelVariables->motorMechanicalAngularVelocity << "\n";
-        std::cout << "ASM psi2alpha: " << MotorModel.modelVariables->psi2alpha << "\n";
-        std::cout << "ASM psi2beta: " << MotorModel.modelVariables->psi2beta << "\n";
+        if(verboseOutput)
+        {
+            std::cout << "ASM i1alpha: " << MotorModel.modelVariables->i1alpha << "\n";
+            std::cout << "ASM i1beta: " << MotorModel.modelVariables->i1beta << "\n";
+            std::cout << "ASM motorTorque: " << MotorModel.modelVariables->motorTorque<< "\n";
+            std::cout << "ASM motorMechanicalAngularVelocity: " << MotorModel.modelVariables->motorMechanicalAngularVelocity << "\n";
+            std::cout << "ASM psi2alpha: " << MotorModel.modelVariables->psi2alpha << "\n";
+            std::cout << "ASM psi2beta: " << MotorModel.modelVariables->psi2beta << "\n";
+        }
+        
 
 
         // skipnu asi inverse clark, protože bych pak dělal clark a pak zas park.... možná poté jen jako to udělám
@@ -312,9 +354,12 @@ int main()
 
         CurVelModel.CurVelModelCalculate(CurVelModel.modelCVCoeff, CurVelModel.modelCVVariables, CurVelModel.odeCVCalculationSettings);
 
-
-        std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
-        std::cout << "i1beta: " << CurVelModel.modelCVVariables->i1beta << "\n";
+        if(verboseOutput)
+        {
+            std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
+            std::cout << "i1beta: " << CurVelModel.modelCVVariables->i1beta << "\n";
+        }
+        
 
 
         CurVelModel.modelCVVariables->psi2Amplitude = sqrt((CurVelModel.modelCVVariables->psi2alpha * CurVelModel.modelCVVariables->psi2alpha) + (CurVelModel.modelCVVariables->psi2beta * CurVelModel.modelCVVariables->psi2beta));
@@ -329,8 +374,12 @@ int main()
 
         globalSimulationTime = globalSimulationTime + globalCalculationStep;
 
-        // globalSimulationData << << "\n";
-         std::cout << "------------------------------------------------------"<< "\n";
+
+        if(verboseOutput)
+       {
+            std::cout << "------------------------------------------------------"<< "\n";
+       }
+       
 
     }
     globalSimulationData.close();

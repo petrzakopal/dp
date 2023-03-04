@@ -24,7 +24,7 @@ plt.rcParams["figure.autolayout"] = True
 
 # defining which columns are in inported CSV
 columns = ["globalSimulationTime", "psi2amplitude", "i1alpha", "i1beta", "motorMechanicalAngularVelocity", "motorTorque"]
-df = pd.read_csv("./outputData/globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=50000)
+df = pd.read_csv("./outputData/globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=1000000)
 
 # print out part of the csv files as a text to terminal
 print("Contents in csv file:", df)
