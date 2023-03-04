@@ -51,8 +51,8 @@ typedef struct modelVariablesStruct
     float i1beta;
     float psi2alpha;
     float psi2beta;
-    // float u1alpha;
-    // float u1beta;
+    float u1alpha;
+    float u1beta;
     float motorTorque;
     float loadTorque;
     float motorMechanicalAngularVelocity;
@@ -148,15 +148,17 @@ class MotorModelClass
     modelVariablesType *modelVariables = NULL;
     odeCalculationSettingsType *odeCalculationSettings = NULL;
     voltageGeneratorType *voltageGeneratorData = NULL;
-
+    
     
 
 
     void motorParametersAllocateMemory();
     void stateSpaceCoeffAllocateMemory();
     void modelVariablesAllocateMemory();
+    void modelVariablesForOnlineCalculationAllocateMemory();
     void odeCalculationSettingsAllocateMemory();
     void voltageGeneratorDataAllocateMemory();
+
 
     void setMotorParameters();
     void setStateSpaceCoeff();
@@ -189,6 +191,8 @@ class MotorModelClass
 
     /*-------------------------------------------------------------------------------------------------------------------*/
     void mathModelCalculate(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters);
+
+    void mathModelCalculateOnlineValue(odeCalculationSettingsType *odeCalculationSettings, modelVariablesType *modelVariables, stateSpaceCoeffType *stateSpaceCoeff, motorParametersType *motorParameters);
     /*-------------------------------------------------------------------------------------------------------------------*/
 
     

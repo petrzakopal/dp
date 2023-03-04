@@ -39,6 +39,7 @@ int main()
     float minMaxCommonModeVoltageConstant = 287;
     float uS = 400;
     float uDC = ((3 * sqrt(2))/PI) * uS;
+    float globalSimulationTime = globalInitialCalculationTime;
     /*-------------------------------------------------------------*/
     
 
@@ -51,11 +52,11 @@ int main()
     
 
     // needed for further memory allocation
-    MotorModel.setOdeCalculationSettings(globalInitialCalculationTime, globalFinalCalculationTime, 1);
+    MotorModel.setOdeCalculationSettings(globalInitialCalculationTime, globalFinalCalculationTime, globalCalculationStep);
 
     MotorModel.motorParametersAllocateMemory();
     MotorModel.stateSpaceCoeffAllocateMemory();
-    MotorModel.modelVariablesAllocateMemory();
+    MotorModel.modelVariablesForOnlineCalculationAllocateMemory();
     // MotorModel.voltageGeneratorDataAllocateMemory();
     /*-------------------- END OF ASYNCHRONOUS MOTOR MODEL ---------------------*/
 
@@ -99,13 +100,27 @@ int main()
     MotorModel.motorParameters->momentOfIntertia = 0.4; // J, moment of inertia
     MotorModel.setStateSpaceCoeff();
     MotorModel.odeCalculationSettings->numberOfIterations = MotorModel.numberOfIterations();
-    /*--------------------------------------------------------------------------------------------------------*/
+    MotorModel.modelVariables->i1alpha = 0;
+    MotorModel.modelVariables->i1beta = 0;
+    MotorModel.modelVariables->psi2alpha = 0;
+    MotorModel.modelVariables->psi2beta = 0;
+    MotorModel.modelVariables->loadTorque = 0;
+    MotorModel.modelVariables->motorMechanicalAngularVelocity = 0;
+    MotorModel.modelVariables->motorTorque = 0;
+    MotorModel.modelVariables->u1alpha = 0;
+    MotorModel.modelVariables->u1beta = 0;
 
     /*------------------------------------------------------------------------------------------*/
     /*-------------------- CURRENT VELOCITY MODEL SETTINGS/ INITIAL VALUES ---------------------*/
     CurVelModel.modelCVVariables->psi2alpha = 0;
     CurVelModel.modelCVVariables->psi2beta = 0;
     CurVelModel.modelCVVariables->transformAngle = 0;
+    CurVelModel.odeCVCalculationSettings->calculationStep = globalCalculationStep; // just a helper variable defined on top of this file to hava the same number of samples for ASM motor model and Current-Velocity model
+    CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
+    CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
+    CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
+    CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+    CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
     /*------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------*/
@@ -158,7 +173,7 @@ int main()
 
     // now hardcoded, change later
     Regulator.fluxRegulator->wantedValue = 0.9;
-    Regulator.velocityRegulator->wantedValue = 100;
+    Regulator.velocityRegulator->wantedValue = 0;
     /*--------------------------------------------------------------*/
 
     Regulator.fluxRegulator->measuredValue = 0;
@@ -166,9 +181,13 @@ int main()
     Regulator.idRegulator->measuredValue = 0;
     Regulator.iqRegulator->measuredValue = 0;
 
-
-    for(int i = 0; i<1;i++)
+    std::ofstream globalSimulationData;
+    globalSimulationData.open("outputData/globalSimulationData.csv",std::ofstream::out | std::ofstream::trunc);
+    for(int i = 0; i<50000;i++)
     {
+
+        Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
+        Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
         
         // calculating values from regulators
         Regulator.regCalculate(Regulator.fluxRegulator);
@@ -204,6 +223,9 @@ int main()
         svmCore.coreInternalVariables->u1alpha = Transformation.inverseParkTransform1(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
         svmCore.coreInternalVariables->u1beta = Transformation.inverseParkTransform2(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
 
+
+        std::cout << "u1alpha from regulator: " << svmCore.coreInternalVariables->u1alpha << "\n";
+        std::cout << "u1beta from regulator: " << svmCore.coreInternalVariables->u1beta << "\n";
 
         // inverse Clark
         svmCore.coreInternalVariables->u1a = Transformation.inverseClarkeTransform1(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
@@ -261,11 +283,125 @@ int main()
 
 
         // clarke for motor model
+        MotorModel.modelVariables->u1alpha = Transformation.clarkeTransform1(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
+
+        MotorModel.modelVariables->u1beta = Transformation.clarkeTransform2(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
+
+         std::cout << "u1alpha to motor: " << MotorModel.modelVariables->u1alpha << "\n";
+         std::cout << "u1beta to motor: " << MotorModel.modelVariables->u1beta << "\n";
 
 
+        // MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
+
+
+        MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
+
+        // float i1alphaTemp;
+        // float i1betaTemp;
+        // float psi2alphaTemp;
+        // float psi2betaTemp;
+
+        // float k1i1alpha, k2i1alpha, k3i1alpha, k4i1alpha;
+        // float k1i1beta, k2i1beta, k3i1beta, k4i1beta;
+        // float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
+        // float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
+
+        // float halfCalculationStep = MotorModel.odeCalculationSettings->calculationStep/2;
+
+        // std::cout << "Half calculation step: " <<halfCalculationStep << "\n";
+
+        // MotorModel.calculateStateSpaceCoeff(MotorModel.stateSpaceCoeff, MotorModel.motorParameters, MotorModel.motorElectricalAngularVelocity(MotorModel.modelVariables->motorMechanicalAngularVelocity));
+
+
+        // k1i1alpha =  MotorModel.i1alpha(MotorModel.getStateSpaceCoeff(), MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta, MotorModel.modelVariables->psi2alpha, MotorModel.modelVariables->psi2beta, MotorModel.modelVariables->u1alpha);
+        // k1i1beta =  MotorModel.i1beta(MotorModel.getStateSpaceCoeff(), MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta, MotorModel.modelVariables->psi2alpha, MotorModel.modelVariables->psi2beta, MotorModel.modelVariables->u1beta);
+        // k1psi2alpha =  MotorModel.psi2alpha(MotorModel.getStateSpaceCoeff(), MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta, MotorModel.modelVariables->psi2alpha, MotorModel.modelVariables->psi2beta);
+        // k1psi2beta =  MotorModel.psi2beta(MotorModel.getStateSpaceCoeff(), MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta, MotorModel.modelVariables->psi2alpha, MotorModel.modelVariables->psi2beta);
+
+
+
+        // k2i1alpha =   MotorModel.i1alpha( MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k1i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k1i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k1psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k1psi2beta)), MotorModel.modelVariables->u1alpha);
+
+
+        // k2i1beta =   MotorModel.i1beta( MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k1i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k1i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k1psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k1psi2beta)), MotorModel.modelVariables->u1beta);
+
+        // k2psi2alpha =   MotorModel.psi2alpha( MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k1i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k1i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k1psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k1psi2beta)));
+
+        // k2psi2beta =   MotorModel.psi2beta( MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k1i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k1i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k1psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k1psi2beta)));
+
+
+
+        //  k3i1alpha =  MotorModel.i1alpha(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k2i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k2i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k2psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k2psi2beta)), MotorModel.modelVariables->u1alpha);
+
+        // k3i1beta =  MotorModel.i1beta(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k2i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k2i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k2psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k2psi2beta)), MotorModel.modelVariables->u1beta);
+
+        // k3psi2alpha =  MotorModel.psi2alpha(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k2i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k2i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k2psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k2psi2beta)));
+
+        // k3psi2beta =  MotorModel.psi2beta(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(halfCalculationStep*k2i1alpha)), (MotorModel.modelVariables->i1beta+(halfCalculationStep*k2i1beta)), (MotorModel.modelVariables->psi2alpha+(halfCalculationStep * k2psi2alpha)), (MotorModel.modelVariables->psi2beta + (halfCalculationStep * k2psi2beta)));
+
+
+        // k4i1alpha =  MotorModel.i1alpha(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(MotorModel.odeCalculationSettings->calculationStep*k3i1alpha)), (MotorModel.modelVariables->i1beta+(MotorModel.odeCalculationSettings->calculationStep*k3i1beta)), (MotorModel.modelVariables->psi2alpha+(MotorModel.odeCalculationSettings->calculationStep * k3psi2alpha)), (MotorModel.modelVariables->psi2beta + (MotorModel.odeCalculationSettings->calculationStep * k3psi2beta)), MotorModel.modelVariables->u1alpha);
+
+        // k4i1beta =  MotorModel.i1beta(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(MotorModel.odeCalculationSettings->calculationStep*k3i1alpha)), (MotorModel.modelVariables->i1beta+(MotorModel.odeCalculationSettings->calculationStep*k3i1beta)), (MotorModel.modelVariables->psi2alpha+(MotorModel.odeCalculationSettings->calculationStep * k3psi2alpha)), (MotorModel.modelVariables->psi2beta + (MotorModel.odeCalculationSettings->calculationStep * k3psi2beta)), MotorModel.modelVariables->u1beta);
+
+        // k4psi2alpha =  MotorModel.psi2alpha(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(MotorModel.odeCalculationSettings->calculationStep*k3i1alpha)), (MotorModel.modelVariables->i1beta+(MotorModel.odeCalculationSettings->calculationStep*k3i1beta)), (MotorModel.modelVariables->psi2alpha+(MotorModel.odeCalculationSettings->calculationStep * k3psi2alpha)), (MotorModel.modelVariables->psi2beta + (MotorModel.odeCalculationSettings->calculationStep * k3psi2beta)));
+
+        // k4psi2beta =  MotorModel.psi2beta(MotorModel.getStateSpaceCoeff(), (MotorModel.modelVariables->i1alpha+(MotorModel.odeCalculationSettings->calculationStep*k3i1alpha)), (MotorModel.modelVariables->i1beta+(MotorModel.odeCalculationSettings->calculationStep*k3i1beta)), (MotorModel.modelVariables->psi2alpha+(MotorModel.odeCalculationSettings->calculationStep * k3psi2alpha)), (MotorModel.modelVariables->psi2beta + (MotorModel.odeCalculationSettings->calculationStep * k3psi2beta)));
+
+
+        // MotorModel.modelVariables->i1alpha = MotorModel.modelVariables->i1alpha + (MotorModel.odeCalculationSettings->calculationStep / 6) *(k1i1alpha + 2* k2i1alpha + 2* k3i1alpha + k4i1alpha);
+
+        // MotorModel.modelVariables->i1beta = (MotorModel.modelVariables->i1beta + (MotorModel.odeCalculationSettings->calculationStep / 6) *(k1i1beta + 2* k2i1beta + 2* k3i1beta + k4i1beta));
+
+        // MotorModel.modelVariables->psi2alpha = MotorModel.modelVariables->psi2alpha + (MotorModel.odeCalculationSettings->calculationStep / 6) *(k1psi2alpha + 2* k2psi2alpha + 2* k3psi2alpha + k4psi2alpha);
+
+        // MotorModel.modelVariables->psi2beta = MotorModel.modelVariables->psi2beta + (MotorModel.odeCalculationSettings->calculationStep / 6) *(k1psi2beta + 2* k2psi2beta + 2* k3psi2beta + k4psi2beta);
+
+        
+
+        // MotorModel.modelVariables->motorTorque =  MotorModel.motorTorque(MotorModel.motorParameters, MotorModel.modelVariables);
+
+        // MotorModel.modelVariables->motorMechanicalAngularVelocity = ((1/MotorModel.motorParameters->momentOfIntertia)*( MotorModel.modelVariables->motorTorque - MotorModel.modelVariables->loadTorque)*( MotorModel.odeCalculationSettings->calculationStep))+MotorModel.modelVariables->motorMechanicalAngularVelocity;
+
+        // MotorModel.calculateStateSpaceCoeff(MotorModel.stateSpaceCoeff, MotorModel.motorParameters, MotorModel.motorElectricalAngularVelocity(MotorModel.modelVariables->motorMechanicalAngularVelocity));
+
+    
+        std::cout << "ASM i1alpha: " << MotorModel.modelVariables->i1alpha << "\n";
+        std::cout << "ASM i1beta: " << MotorModel.modelVariables->i1beta << "\n";
+        std::cout << "ASM motorTorque: " << MotorModel.modelVariables->motorTorque<< "\n";
+        std::cout << "ASM motorMechanicalAngularVelocity: " << MotorModel.modelVariables->motorMechanicalAngularVelocity << "\n";
+        std::cout << "ASM psi2alpha: " << MotorModel.modelVariables->psi2alpha << "\n";
+        std::cout << "ASM psi2beta: " << MotorModel.modelVariables->psi2beta << "\n";
+
+
+        // skipnu asi inverse clark, protože bych pak dělal clark a pak zas park.... možná poté jen jako to udělám
+
+        CurVelModel.modelCVVariables->i1alpha = MotorModel.modelVariables->i1alpha;
+        CurVelModel.modelCVVariables->i1beta = MotorModel.modelVariables->i1beta;
+        CurVelModel.modelCVVariables->motorElectricalAngularVelocity = MotorModel.modelVariables->motorMechanicalAngularVelocity * CurVelModel.motorParameters->nOfPolePairs;
+
+        CurVelModel.CurVelModelCalculate(CurVelModel.modelCVCoeff, CurVelModel.modelCVVariables, CurVelModel.odeCVCalculationSettings);
+
+
+        std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
+        std::cout << "i1beta: " << CurVelModel.modelCVVariables->i1beta << "\n";
+
+
+        CurVelModel.modelCVVariables->psi2Amplitude = sqrt((CurVelModel.modelCVVariables->psi2alpha * CurVelModel.modelCVVariables->psi2alpha) + (CurVelModel.modelCVVariables->psi2beta * CurVelModel.modelCVVariables->psi2beta));
+        CurVelModel.modelCVVariables->transformAngle = atan2f(CurVelModel.modelCVVariables->psi2beta, CurVelModel.modelCVVariables->psi2alpha);
+
+        Regulator.idRegulator->measuredValue = Transformation.parkTransform1(CurVelModel.modelCVVariables->psi2alpha, CurVelModel.modelCVVariables->psi2beta, CurVelModel.modelCVVariables->transformAngle);
+        Regulator.iqRegulator->measuredValue = Transformation.parkTransform2(CurVelModel.modelCVVariables->psi2alpha, CurVelModel.modelCVVariables->psi2beta, CurVelModel.modelCVVariables->transformAngle);
+        Regulator.fluxRegulator->measuredValue = CurVelModel.modelCVVariables->psi2Amplitude;
+        Regulator.velocityRegulator->measuredValue = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+
+        globalSimulationTime = globalSimulationTime + globalCalculationStep;
+
+        // globalSimulationData << << "\n";
+         std::cout << "------------------------------------------------------"<< "\n";
 
     }
-
+    globalSimulationData.close();
 
     /*-----------------------------------------------------------*/
     /*-------------------- MEMORY FREEING ---------------------*/

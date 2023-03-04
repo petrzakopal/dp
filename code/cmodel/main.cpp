@@ -34,7 +34,7 @@ int main()
 /*----------------------------------------------------------------------------------*/
 /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
 MotorModelClass MotorModel;
-float globalCalculationStep = 0.0001;
+float globalCalculationStep = 0.000001;
 float globalInitialCalculationTime = 0;
 float globalFinalCalculationTime = 1;
 MotorModel.odeCalculationSettingsAllocateMemory();
@@ -126,7 +126,9 @@ MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.mode
 // MotorModel.motorParameters->R1 = 25;
 // std::cout << "motor parameters changed R1 = " << MotorModel.motorParameters->R1 << "\n";
 
-
+// MotorModel.voltageGeneratorData->u1alpha = 360.145;
+// MotorModel.voltageGeneratorData->u1beta = 0;
+// MotorModel.mathModelCalculate(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
 
 /*------------------------------------------------------------------------*/
 /*-------------------- FREE THE POINTERS TO MEMORY ----------------------*/
@@ -400,11 +402,11 @@ for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
     CurVelModel2.modelCVVariables->i1beta = Transformation.clarkeTransform2(CurVelModel2.modelCVVariables->inputI1[i], CurVelModel2.modelCVVariables->inputI2[i], CurVelModel2.modelCVVariables->inputI3[i], 0.6667);
     CurVelModel2.modelCVVariables->motorElectricalAngularVelocity = CurVelModel2.modelCVVariables->inputMotorMechanicalAngularVelocity[i] * CurVelModel2.motorParameters->nOfPolePairs;
 
- std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
-    CurVelModel2.CurVelModelCalculate(CurVelModel2.modelCVCoeff, CurVelModel2.modelCVVariables, CurVelModel2.odeCVCalculationSettings);
- std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
+//  std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
+//     CurVelModel2.CurVelModelCalculate(CurVelModel2.modelCVCoeff, CurVelModel2.modelCVVariables, CurVelModel2.odeCVCalculationSettings);
+//  std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
 
-    std::cout << "i1beta: " << CurVelModel2.modelCVVariables->i1beta << "\n";
+//     std::cout << "i1beta: " << CurVelModel2.modelCVVariables->i1beta << "\n";
     // std::cout << "psi2alpha: " << CurVelModel2.modelCVVariables->psi2alpha << "\n";
     // std::cout << "psi2beta: " << CurVelModel2.modelCVVariables->psi2beta << "\n";
 
@@ -414,6 +416,7 @@ for(int i = 0; i< MotorModel.odeCalculationSettings->numberOfIterations; i++)
 
     // std::cout << "inputI1[" << i << "]: " << CurVelModel2.modelCVVariables->inputI1[i] << "\n";
     // std::cout << "inputI2[" << i << "]: " << CurVelModel2.modelCVVariables->inputI2[i] << "\n";
+
     std::cout << "|psi2|[" << i <<"] " << " = " << psi2Amplitude << "\n";
     std::cout << "transformAngle[" << i <<"] " << " = " << transformAngle << "\n";
 
