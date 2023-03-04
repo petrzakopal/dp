@@ -23,7 +23,7 @@ plt.rcParams["figure.figsize"] = [15, 6]
 plt.rcParams["figure.autolayout"] = True
 
 # defining which columns are in inported CSV
-columns = ["globalSimulationTime", "psi2amplitude", "i1alpha", "i1beta", "motorMechanicalAngularVelocity", "motorTorque", "clampingStatus"]
+columns = ["globalSimulationTime", "psi2amplitude", "i1alpha", "i1beta", "motorMechanicalAngularVelocity", "motorTorque", "idRegulatorClampingStatus", "fluxRegulatorClampingStatus", "idRegulatorMeasuredValue", "idRegulatorWantedValue"]
 df = pd.read_csv("./outputData/globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=1000000)
 
 # print out part of the csv files as a text to terminal
@@ -35,7 +35,7 @@ plt.title("psi2amplitude", fontsize=30, fontweight=700)
 
 # ax = axis, but subplot is here mainly for deleting some axis on top and right
 ax = plt.subplot(111)
-
+ax.spines[['right', 'top']].set_visible(False)
 # formating ticks, there can be used fontweight="bold"
 plt.yticks(fontsize=15, fontweight=700)
 plt.xticks(fontsize=15, weight=700)
@@ -44,5 +44,8 @@ plt.xticks(fontsize=15, weight=700)
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 
 plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue)
-plt.plot(df.globalSimulationTime, df.clampingStatus, color=ctuRed)
+# plt.plot(df.globalSimulationTime, df.idRegulatorClampingStatus, color=ctuRed)
+# plt.plot(df.globalSimulationTime, df.fluxRegulatorClampingStatus, color=ctuGreen)
+# plt.plot(df.globalSimulationTime, df.idRegulatorMeasuredValue, color=ctuOrange)
+# plt.plot(df.globalSimulationTime, df.idRegulatorWantedValue, color=ctuGreenyBlue)
 plt.show()

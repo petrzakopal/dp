@@ -47,7 +47,7 @@ void RegulatorClass::checkSaturationStatus(RegulatorType *regulatorData)
 
 void RegulatorClass::checkSignStatus(RegulatorType *regulatorData)
 {
-    if(((regulatorData->eDif > 0) && (regulatorData->saturationInput > 0)) || ((regulatorData->eDif < 0) && (regulatorData->saturationInput < 0)))
+    if(((regulatorData->eDif > 0) and (regulatorData->saturationInput > 0)) or ((regulatorData->eDif < 0) and (regulatorData->saturationInput < 0)))
     {
         regulatorData->signCheckStatus = true;
     }
@@ -59,7 +59,7 @@ void RegulatorClass::checkSignStatus(RegulatorType *regulatorData)
 
 void RegulatorClass::enableClamping(RegulatorType *regulatorData)
 {
-    if((regulatorData->saturationCheckStatus == true) && (regulatorData->signCheckStatus == true))
+    if((regulatorData->saturationCheckStatus == true) and (regulatorData->signCheckStatus == true))
     {
         regulatorData->clampingStatus = true;
     }
@@ -83,19 +83,19 @@ void RegulatorClass::enableClamping(RegulatorType *regulatorData)
 void RegulatorClass::regCalculate(RegulatorType *regulatorData)
 {
     regulatorData->eDif = regulatorData->wantedValue - regulatorData->measuredValue;
-    regulatorData->saturationInput = regulatorData->eDif * regulatorData->kp + regulatorData->iSum;
+    regulatorData->saturationInput = (regulatorData->eDif * regulatorData->kp) + regulatorData->iSum;
     regulatorData->saturationOutput = regSaturationBlock(regulatorData->saturationInput, regulatorData->saturationOutputMin, regulatorData->saturationOutputMax);
 
     checkSaturationStatus(regulatorData);
     checkSignStatus(regulatorData);
     enableClamping(regulatorData);
 
-    if(regulatorData->clampingStatus)
+    if(regulatorData->clampingStatus == true)
     {
         regulatorData->iSum = regulatorData->iSum;
     }
     else
     {
-        regulatorData->iSum = regulatorData->iSum + (regulatorData->eDif * regulatorData->ki);;
+        regulatorData->iSum = regulatorData->iSum + (regulatorData->eDif * regulatorData->ki);
     }
 }

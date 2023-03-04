@@ -154,43 +154,52 @@ int main()
     float Udcmax = 311.87;
 
     // flux regulator
-    Regulator.fluxRegulator->ki = 30300;
-    Regulator.fluxRegulator->kp = 11410;
-    // Regulator.fluxRegulator->kAntiWindUp = 0; // 2.000045 // depracated
+    Regulator.fluxRegulator->ki = 30300; // 30300
+    Regulator.fluxRegulator->kp = 11410; //11410
     Regulator.fluxRegulator->saturationOutputMax = 16.4223;
     Regulator.fluxRegulator->saturationOutputMin = 0;
     Regulator.fluxRegulator->saturationOutput = 0;
+    Regulator.fluxRegulator->clampingStatus = false;
+    Regulator.fluxRegulator->saturationCheckStatus = false;
+    Regulator.fluxRegulator->signCheckStatus = false;
 
     // velocity regulator
-    Regulator.velocityRegulator->ki = 4650000;
-    Regulator.velocityRegulator->kp = 3720;
-    // Regulator.velocityRegulator->kAntiWindUp = 0.5; // depracated
+    Regulator.velocityRegulator->ki = 4650000; // 4650000
+    Regulator.velocityRegulator->kp = 3720; // 3720
     Regulator.velocityRegulator->saturationOutputMax = 29.1228;
     Regulator.velocityRegulator->saturationOutputMin = -29.1228;
     Regulator.velocityRegulator->saturationOutput = 0;
+    Regulator.velocityRegulator->clampingStatus = false;
+    Regulator.velocityRegulator->saturationCheckStatus = false;
+    Regulator.velocityRegulator->signCheckStatus = false;
 
     // id regulator
-    Regulator.idRegulator->ki = 2915.6;
-    Regulator.idRegulator->kp = 22.3961;
-    // Regulator.idRegulator->kAntiWindUp = 2.0194; // 2.0194 // depracated
+    Regulator.idRegulator->ki = 2915.6; // 2915.6
+    Regulator.idRegulator->kp = 22.3961;// 22.3961
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
     Regulator.idRegulator->saturationOutput = - Udcmax;
+    Regulator.idRegulator->clampingStatus = false;
+    Regulator.idRegulator->saturationCheckStatus = false;
+    Regulator.idRegulator->signCheckStatus = false;
 
     // iq regulator
-    Regulator.iqRegulator->saturationOutputMin = -Udcmax;
-    Regulator.iqRegulator->ki = 2915.6;
-    Regulator.iqRegulator->kp = 22.3961;
-    // Regulator.iqRegulator->kAntiWindUp = 2; // depracated
+    Regulator.iqRegulator->ki = 2915.6; // 2915.6
+    Regulator.iqRegulator->kp = 22.3961; // 22.3961
     Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
     Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
+    Regulator.iqRegulator->clampingStatus = false;
+    Regulator.iqRegulator->saturationCheckStatus = false;
+    Regulator.iqRegulator->signCheckStatus = false;
     /*--------------------------------------------------------------*/
 
     /*--------------------------------------------------------------*/
     /*-------------------- WANTED VALUES INPUT ---------------------*/
 
     // now hardcoded, change later
-    Regulator.fluxRegulator->wantedValue = 0.9;
+    Regulator.fluxRegulator->wantedValue = 1;
     Regulator.velocityRegulator->wantedValue = 0;
+    Regulator.idRegulator->wantedValue = 0;
+    Regulator.iqRegulator->wantedValue = 0;
     /*--------------------------------------------------------------*/
 
     Regulator.fluxRegulator->measuredValue = 0;
@@ -225,6 +234,7 @@ int main()
             std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
             std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
             std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
+            std::cout << "id regulator wanted value: " << Regulator.idRegulator->wantedValue << "\n";
             std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
             /*--------------------------------------------------------------*/
         }
@@ -365,12 +375,15 @@ int main()
         CurVelModel.modelCVVariables->psi2Amplitude = sqrt((CurVelModel.modelCVVariables->psi2alpha * CurVelModel.modelCVVariables->psi2alpha) + (CurVelModel.modelCVVariables->psi2beta * CurVelModel.modelCVVariables->psi2beta));
         CurVelModel.modelCVVariables->transformAngle = atan2f(CurVelModel.modelCVVariables->psi2beta, CurVelModel.modelCVVariables->psi2alpha);
 
-        Regulator.idRegulator->measuredValue = Transformation.parkTransform1(CurVelModel.modelCVVariables->psi2alpha, CurVelModel.modelCVVariables->psi2beta, CurVelModel.modelCVVariables->transformAngle);
-        Regulator.iqRegulator->measuredValue = Transformation.parkTransform2(CurVelModel.modelCVVariables->psi2alpha, CurVelModel.modelCVVariables->psi2beta, CurVelModel.modelCVVariables->transformAngle);
+        Regulator.idRegulator->measuredValue = Transformation.parkTransform1(CurVelModel.modelCVVariables->i1alpha, CurVelModel.modelCVVariables->i1beta, CurVelModel.modelCVVariables->transformAngle);
+
+        Regulator.iqRegulator->measuredValue = Transformation.parkTransform2(CurVelModel.modelCVVariables->i1alpha, CurVelModel.modelCVVariables->i1beta, CurVelModel.modelCVVariables->transformAngle);
+
         Regulator.fluxRegulator->measuredValue = CurVelModel.modelCVVariables->psi2Amplitude;
+
         Regulator.velocityRegulator->measuredValue = MotorModel.modelVariables->motorMechanicalAngularVelocity;
 
-        globalSimulationData << globalSimulationTime << "," << CurVelModel.modelCVVariables->psi2Amplitude << "," << CurVelModel.modelCVVariables->i1alpha << "," << CurVelModel.modelCVVariables->i1beta << "," << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," << MotorModel.modelVariables->motorTorque << "," << Regulator.idRegulator->clampingStatus << "\n";
+        globalSimulationData << globalSimulationTime << "," << CurVelModel.modelCVVariables->psi2Amplitude << "," << CurVelModel.modelCVVariables->i1alpha << "," << CurVelModel.modelCVVariables->i1beta << "," << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," << MotorModel.modelVariables->motorTorque << "," << Regulator.idRegulator->clampingStatus << "," << Regulator.fluxRegulator->clampingStatus <<  "," << Regulator.idRegulator->measuredValue << "," << Regulator.idRegulator->wantedValue << "\n";
 
         globalSimulationTime = globalSimulationTime + globalCalculationStep;
 
