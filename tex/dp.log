@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  28 FEB 2023 17:59
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  4 MAR 2023 22:17
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1951,19 +1951,19 @@ Package logreq Info: Writing requests to 'dp.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 53459 strings out of 478092
+ 53462 strings out of 478092
  125094,2373549 words of node,token memory allocated
- 1314 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 125 attribute, 107 glue_spec, 64 attribute_list, 2 write, 28 pdf_action nodes
-   avail lists: 1:9,2:2485,3:963,4:170,5:348,6:170,7:8578,8:119,9:1319,10:16,11:954,12:5
- 71821 multiletter control sequences out of 65536+600000
- 90 fonts using 26719199 bytes
+ 1326 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 127 attribute, 107 glue_spec, 65 attribute_list, 2 write, 29 pdf_action nodes
+   avail lists: 1:9,2:2483,3:963,4:170,5:348,6:171,7:8579,8:129,9:1319,10:16,11:954,12:5
+ 71823 multiletter control sequences out of 65536+600000
+ 90 fonts using 26720479 bytes
  84i,17n,90p,1815b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on dp.pdf (49 pages, 21665967 bytes).
+Output written on dp.pdf (49 pages, 21666410 bytes).
 
-PDF statistics: 1490 PDF objects out of 1728 (max. 8388607)
- 1095 compressed objects within 11 object streams
- 176 named destinations out of 1000 (max. 131072)
+PDF statistics: 1494 PDF objects out of 1728 (max. 8388607)
+ 1099 compressed objects within 11 object streams
+ 177 named destinations out of 1000 (max. 131072)
  497 words of extra memory for PDF output out of 10000 (max. 100000000)
 

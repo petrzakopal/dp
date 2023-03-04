@@ -1141,6 +1141,39 @@
       \verb https://moodle.cvut.cz
       \endverb
     \endentry
+    \entry{mathworks-antiwindup-clamping}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=8687eae34a3830fc0c113d9d65382e90}{%
+           family={The\bibnamedelima MathWorks},
+           familyi={T\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{fullhash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{bibnamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authorbibnamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authornamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authorfullhash}{8687eae34a3830fc0c113d9d65382e90}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The MathWorks, Inc. Videos and Webinars}
+      \field{langid}{english}
+      \field{title}{Understanding PID Control, Part 2: Anti-windup for PID control}
+      \field{urlday}{4}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.mathworks.com/videos/understanding-pid-control-part-2-expanding-beyond-a-simple-integral-1528310418260.html
+      \endverb
+      \verb{url}
+      \verb https://www.mathworks.com/videos/understanding-pid-control-part-2-expanding-beyond-a-simple-integral-1528310418260.html
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
