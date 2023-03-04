@@ -19,15 +19,17 @@ typedef struct
     float wantedValue; // wanted value
     float measuredValue; // real value
     float saturationOutput; // out from regulator - action value
-    float antiWindUpDif; // regulatory error for anti-windup
+    float antiWindUpDif; // regulatory error for anti-windup // depracated
     float eDif; // regulatory error
     float iSum; // integration - suma
     float kp; // proportional constant value
     float ki; // integral constant value
-    float kAntiWindUp; // anti-windup constant value
+    // float kAntiWindUp; // anti-windup constant value // depracated
     float saturationOutputMax; // restriction in saturation block - maximum
     float saturationOutputMin; // restriction in saturation block - minimum
-    char stav; // stav v automatu pro reseni spousteni regulatoru
+    bool clampingStatus;
+    bool saturationCheckStatus;
+    bool signCheckStatus;
 }RegulatorType;
 
 
@@ -47,8 +49,10 @@ class RegulatorClass
         /*----------------------------------------------------------------------------------------------------*/
         
 
+        void checkSaturationStatus(RegulatorType *regulatorData);
 
-
+        void checkSignStatus(RegulatorType *regulatorData);
+        void enableClamping(RegulatorType *regulatorData);
 
         /*-----------------------------------------------------------------------------------------------------*/
         /*------------------------------ SATURATION BLOCK INSERTED IN REGULATOR ------------------------------*/
