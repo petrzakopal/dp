@@ -11,6 +11,10 @@
 
 ## Mé denní poznámky ✏️
 
+❌ [05.03.2023](/) <-- práce na zakázce, oddech od diplomky
+
+---
+
 👨🏻‍💻 🐛 [04.03.2023](/notes/20230304.md) <-- debugging [testCalculationLoop](./code/cmodel/testModules/testCalculationLoop.cpp), byl problém s regulátory, chyby ve vložení hodnot do transformací vlivem kopírování nebo nepozornosti, polish kódu
 
 ---
