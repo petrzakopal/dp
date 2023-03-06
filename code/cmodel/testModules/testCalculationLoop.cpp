@@ -13,8 +13,26 @@
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
+#include <chrono>
+
+#include <thread>
+#include <mutex>
+#include <future>
 
 #define PI 3.141592
+
+
+
+void threadRegulator(RegulatorType *fluxRegulator, RegulatorType *idRegulator)
+{
+    RegulatorClass Regulator;
+    Regulator.regCalculate(fluxRegulator);
+    idRegulator->wantedValue = fluxRegulator->saturationOutput;
+    Regulator.regCalculate(idRegulator);
+}
+
+
+
 
 int main()
 {
@@ -228,15 +246,22 @@ int main()
     globalSimulationData.open("outputData/globalSimulationData.csv",std::ofstream::out | std::ofstream::trunc);
     /*-------------------------------------------------------------------*/
 
+
+
+
+    std::chrono::time_point<std::chrono::system_clock> startTime;
+    std::chrono::time_point<std::chrono::system_clock> endTime;
+
     /***************************************************************/
     /*-------------------- MAIN PROGRAM LOOP ---------------------*/
     // in reality there would be while(true) used
     // this is simulation, number of iterations sets basically ending time for a simulation
     // global initial and final time does not have effect here
     // even numbe of allocated memory is edited for simulation - maximum of two iterations of variables to use in a functions (0) and (1) index, mainly in ASM motor model loop named MotorModelClass::mathModelCalculateOnlineValue
-
+    startTime = std::chrono::system_clock::now();
     for(int i = 0; i<1000000;i++)
     {
+
 
         // change wanted value of velocity somewhere in time
         // if(i == 600000)
@@ -250,11 +275,12 @@ int main()
         Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
          /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-
+      
         /*----------------------------------------------------------------------------------*/
         /*-------------------- FLUX AND VELOCITY REGULATOR CALCULATION ---------------------*/
         // TODO: test threads
         Regulator.regCalculate(Regulator.fluxRegulator);
+        // std::thread regulatorThread(&threadRegulator,Regulator.fluxRegulator, Regulator.idRegulator);
         Regulator.regCalculate(Regulator.velocityRegulator);
         /*----------------------------------------------------------------------------------*/
 
@@ -265,12 +291,16 @@ int main()
         Regulator.iqRegulator->wantedValue = Regulator.velocityRegulator->saturationOutput;
         /*--------------------------------------------------------------------------------------------------------*/
 
+        
+
         /*---------------------------------------------------------------------------*/
         /*-------------------- ID AND IQ REGULATOR CALCULATION ---------------------*/
         Regulator.regCalculate(Regulator.idRegulator);
         Regulator.regCalculate(Regulator.iqRegulator);
         /*---------------------------------------------------------------------------*/
-
+        
+        // regulatorThread.join();
+        
        
         /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
         if(verboseOutput)
@@ -299,12 +329,21 @@ int main()
 
         /*----------------------------------------------------------------------------------------*/
 
+        
         /*---------------------------------------------------------------------------------------------------------*/
         /*-------------------- INVERSE FROM CALCULATED/DECOUPLED VALUES FROM DQ TO ALPHA BETA ---------------------*/
         // inverse Park
         svmCore.coreInternalVariables->u1alpha = Transformation.inverseParkTransform1(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
+
+        // async testing
+        // std::future<float> asyncInversePark1 = std::async(std::launch::async, &TransformationClass::inverseParkTransform1, &Transformation, svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
+        // std::future<float> asyncInversePark2 = std::async(std::launch::async, &TransformationClass::inverseParkTransform2, &Transformation,svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
         svmCore.coreInternalVariables->u1beta = Transformation.inverseParkTransform2(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
         /*---------------------------------------------------------------------------------------------------------*/
+        
+        // async testing
+        // svmCore.coreInternalVariables->u1alpha = asyncInversePark1.get();
+        // svmCore.coreInternalVariables->u1beta = asyncInversePark2.get();
 
 
         /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
@@ -314,7 +353,7 @@ int main()
             std::cout << "u1beta from regulator: " << svmCore.coreInternalVariables->u1beta << "\n";
         }
         /*-------------------------------------------------------------------------------------------------------*/
-
+    
         
 
         /*-----------------------------------------------------------------------------------------------------------------------------*/
@@ -341,6 +380,7 @@ int main()
 
         // common mode voltage ((Umin + Umax) /2)
         commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.coreInternalVariables);
+        
 
         /*-------------------- COMPARING SIGNAL (UABC - COMMON_MODE_VOLTAGE) WITH TRIANGLE WAVE AND CREATING SWITCH SIGNALS BASED ON SVM ---------------------*/
         // phase 1 sw1
@@ -349,9 +389,12 @@ int main()
         // phase 2 sw3
         svmCore.invertorSwitch->sw3 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1b), trianglePoint);
 
+       
         // phase 3 sw5
         svmCore.invertorSwitch->sw5 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1c), trianglePoint);
 
+        
+        
 
         // not needed in simualation
         // just inverted values from switches in the same branches in invertor
@@ -503,11 +546,13 @@ int main()
         /*-------------------------------------------------------------------------------------------------------*/
 
     }
+   endTime = std::chrono::system_clock::now();
     /*-------------------- OUTPUT CSV DATA FILE CLOSING ---------------------*/
     globalSimulationData.close();
     /*----------------------------------------------------------------------*/
 
-
+    std::chrono::duration<double> diffTime = endTime - startTime;
+    std::cout << "Time for the execution is: " << diffTime.count() << "\n";
 
     /*-----------------------------------------------------------*/
     /*-------------------- MEMORY FREEING ---------------------*/
@@ -532,3 +577,6 @@ int main()
     /*-----------------------------------------------------------*/
     
 }
+
+
+

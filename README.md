@@ -11,6 +11,10 @@
 
 ## Mé denní poznámky ✏️
 
+👨🏻‍💻 🔎 [06.03.2023](/notes/20230306.md) <-- dělal jsem research ohledně zrychlení linuxu a běhu apliakcí fpga + ps, bude třeba patch RT na petalinux - vyzkoušet to, pro nejrychlejší obsluhu přerušení bude nejlepší si napsat svůj linux driver, v petalinuxu se to nazývá `kernel module` do aplikace na host (host.cpp) je třeba přidat část, která bude řešit že při vyslání `SIGTERM` neboli `ctrl+c` tak nastaví vše na nulu a program zastaví/motor zastaví
+
+---
+
 ❌ [05.03.2023](/) <-- práce na zakázce, oddech od diplomky
 
 ---
