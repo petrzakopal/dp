@@ -34,7 +34,7 @@ int main()
 /*----------------------------------------------------------------------------------*/
 /*-------------------- INITIALIZATION VIA MOTORMODEL CLASS API ---------------------*/
 MotorModelClass MotorModel;
-float globalCalculationStep = 0.000001;
+float globalCalculationStep = 0.0001; //0.000001
 float globalInitialCalculationTime = 0;
 float globalFinalCalculationTime = 1;
 MotorModel.odeCalculationSettingsAllocateMemory();
