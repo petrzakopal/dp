@@ -62,6 +62,11 @@ ALL TIMES.
 #include <unistd.h>
 #include <sys/mman.h>
 #include <fcntl.h>
+#include <poll.h>
+
+/*------------------------*/
+/* MULTITHREADING*/
+#include <future> //FUTURES CAN return value
 
 /*----------------------*/
 #define IN 0
@@ -92,7 +97,16 @@ int main(int argc, char* argv[]) {
     int breaking = 0;
     // uint32_t info = 1; /* unmask */
     /* Open the UIO device file */
-    fd = open(uiod, O_RDWR | O_NONBLOCK);
+    // fd = open(uiod, O_RDWR | O_NONBLOCK); // when using read()
+    fd = open(uiod, O_RDWR | O_NONBLOCK); // when using poll()
+
+    
+        struct pollfd fds = {
+            .fd = fd,
+            .events = POLLIN | POLLOUT,
+        };
+
+
     if (fd < 1) {
         perror("open\n");
         printf("Invalid UIO device file:%s.\n", uiod);
@@ -103,7 +117,9 @@ int main(int argc, char* argv[]) {
     ptr = mmap(NULL, TIMER_MAP_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
     value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
     printf("timer counter register: %08x\n", value);
-
+    std::cout << "sizeof(ptr)= " << sizeof(ptr) << "\n";
+    std::cout << "sizeof(fd)= " << sizeof(fd) << "\n";
+    
     /* Enable All Interrupts */
     printf("Enable Interrupt and Start for the first time!\n");
     *((unsigned *)(ptr)) = 0X0;
@@ -121,18 +137,39 @@ int main(int argc, char* argv[]) {
         printf("right after reading\n");
         while(1)
         {
-              ssize_t nb = read(fd, &info, sizeof(info));
-             value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
-        printf("timer counter register: %08x\n", value);
-        if (nb == (ssize_t)sizeof(info)) {
-            /* Do something in response to the interrupt. */
-            printf("Interrupt #%u!\n", info);
-            break;
-        } 
 
-       
+
+        // when used non blocking read O_NONBLOCK
+        // ssize_t nb = read(fd, &info, sizeof(info));
+        // value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
+        // printf("timer counter register: %08x\n", value);
+        // if (nb == (ssize_t)sizeof(info))
+        // {
+        //     /* Do something in response to the interrupt. */
+        //     printf("Interrupt #%u!\n", info);
+        //     break;
+        // } 
+
+        
+         int ret = poll(&fds, 1, -1);
+
+         value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
+            printf("timer counter register: %08x\n", value);
+        if (ret >= 1) {
+            ssize_t nb = read(fd, &info, sizeof(info));
+            
+
+            if (nb == (ssize_t)sizeof(info)) {
+                /* Do something in response to the interrupt. */
+               printf("Interrupt #%u!\n", info);
+            break;
+            }
+
 
         }
+
+        }
+       
        
     *((unsigned *)(ptr)) = 0X1C0;
      write(fd, &irq_on, sizeof(irq_on));

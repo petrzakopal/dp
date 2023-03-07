@@ -1,7 +1,7 @@
 /*******************************************************************************
 Author: FEE CTU
 Purpose: Host program
-
+Comment: Refactoring for HLS
 *******************************************************************************/
 
 /*----------------------------------------------------------------------------*/
@@ -211,31 +211,37 @@ xrt::profile::user_range range("Phase 1", "Start of execution to context creatio
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ DEFINING CLASS OBJECT AND ALLOCATING MEMORY FOR SECOND I-N MODEL ------------------------------*/
-    CurVelModelClass CurVelModel;
-    CurVelModel.motorParametersAllocateMemory();
-    CurVelModel.motorCoeffAllocateMemory();
-    CurVelModel.modelCVVariablesAllocateMemory();
-    CurVelModel.odeCVCalculationSettingsAllocateMemory();
+    // CurVelModelClass CurVelModel;
 /*-------------------------------------------------------------------------------------------------------------------------------*/
    
+float *odeCVCalculationSettingsArray;
+// int *numberOfIterations;
+posix_memalign((void **)&odeCVCalculationSettingsArray , 4096 , 5*sizeof(float) );
+// posix_memalign((void **)&numberOfIterations , 4096 , 4*sizeof(int) );
+odeCVCalculationSettingsArray[0] = 0; // initialCalculationTime
+odeCVCalculationSettingsArray[1] = 1; // finalCalculationTime
+odeCVCalculationSettingsArray[2] = 0.0001; // calculationStep
+odeCVCalculationSettingsArray[3] = 0; // calculationTime
+odeCVCalculationSettingsArray[4] = (int)ceil(((odeCVCalculationSettingsArray[1] - odeCVCalculationSettingsArray[0])/odeCVCalculationSettingsArray[2]));
 
-    
 
-    
-    CurVelModel.odeCVCalculationSettings->calculationStep = 0.0001;
-    
-    CurVelModel.odeCVCalculationSettings->initialCalculationTime = 0;
-    CurVelModel.odeCVCalculationSettings->finalCalculationTime = 1;
-    CurVelModel.odeCVCalculationSettings->numberOfIterations = ((int)ceil(((CurVelModel.odeCVCalculationSettings->finalCalculationTime -  CurVelModel.odeCVCalculationSettings->initialCalculationTime)/ CurVelModel.odeCVCalculationSettings->calculationStep)));
+float *motorParametersArray;
+posix_memalign((void **)&motorParametersArray , 4096 , 4*sizeof(float) );
+motorParametersArray[0] = 0.225f; // R2
+motorParametersArray[1] = 0.0825f; // Lm
+motorParametersArray[2] = 0.08477f;  // L2
+motorParametersArray[3] = 2; // nOfPolePairs
 
-/*---------------------------------------------------------------------------------------------------------*/
-/*------------------------------ DEFINING CLASS PARAMETERS AND COEFFICIENTS ------------------------------*/
-    CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
-    CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
-    CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
-    CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
-    CurVelModel.modelCVCoeff->nOfPolePairs = 2;
-    CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
+float * modelCVCoeffArray;
+posix_memalign((void **)&modelCVCoeffArray , 4096 , 3*sizeof(float) );
+modelCVCoeffArray[0] = motorParametersArray[0]/motorParametersArray[2]; // R2DL2
+modelCVCoeffArray[1] = (motorParametersArray[0] * motorParametersArray[1])/motorParametersArray[2]; // R2MLmDL2
+modelCVCoeffArray[2] = 2;
+
+
+float *modelCVVariablesArray;
+posix_memalign((void **)&modelCVVariablesArray , 4096 , 12*sizeof(float) );
+
 /*---------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------------------*/
@@ -269,13 +275,13 @@ if(modeSelection == 0)
 {
 
     
-posix_memalign((void **)&inputTime , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputI1 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputI2 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputI3 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputTime , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputI1 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputI2 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 
 psi2alpha[0] = 0;
 psi2beta[0] = 0;
@@ -352,16 +358,16 @@ else if(modeSelection == 1)
     printf("------------------------------------\n\r");
     printf("Insert data divided by {space symbol}\n\r");
     printf("I1 I2 I3 MechanicalAngularVelocity psi2alpha[0] psi2beta[0] \n\r");
-    CurVelModel.odeCVCalculationSettings->numberOfIterations = 1;
+    odeCVCalculationSettingsArray[4] = 1;
 
     
-posix_memalign((void **)&inputTime , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputI1 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputI2 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputI3 , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
+posix_memalign((void **)&inputTime , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputI1 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputI2 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 
 
 inputTime[0] = 0;
@@ -392,27 +398,27 @@ inputTime[0] = 0;
 
 /*------------------------------------------------------------------------------------------------------------*/
     //first type kernel
-    OCL_CHECK(err, cl::Buffer buffer_odeCVCalculationSettings(context, CL_MEM_USE_HOST_PTR, sizeof(odeCVCalculationSettingsType),CurVelModel.odeCVCalculationSettings,&err));
+    OCL_CHECK(err, cl::Buffer buffer_odeCVCalculationSettings(context, CL_MEM_USE_HOST_PTR, 4*sizeof(float),odeCVCalculationSettingsArray,&err));
 
     // OCL_CHECK(err, cl::Buffer buffer_modelCVVariables(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVVariablesType),CurVelModel.modelCVVariables,&err)); // enable for first type kernel
 
-    OCL_CHECK(err, cl::Buffer buffer_modelCVCoeff(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVCoeffType),CurVelModel.modelCVCoeff,&err));
+    OCL_CHECK(err, cl::Buffer buffer_modelCVCoeff(context, CL_MEM_USE_HOST_PTR, 3*sizeof(float),modelCVCoeffArray,&err));
 
-    OCL_CHECK(err, cl::Buffer buffer_inputI1(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputI1,&err));
+    OCL_CHECK(err, cl::Buffer buffer_inputI1(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputI1,&err));
 
-    OCL_CHECK(err, cl::Buffer buffer_inputI2(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputI2,&err));
+    OCL_CHECK(err, cl::Buffer buffer_inputI2(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputI2,&err));
 
-    OCL_CHECK(err, cl::Buffer buffer_inputI3(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputI3,&err));
+    OCL_CHECK(err, cl::Buffer buffer_inputI3(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputI3,&err));
 
-    OCL_CHECK(err, cl::Buffer buffer_inputMotorMechanicalAngularVelocity(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),inputMotorMechanicalAngularVelocity,&err));
+    OCL_CHECK(err, cl::Buffer buffer_inputMotorMechanicalAngularVelocity(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputMotorMechanicalAngularVelocity,&err));
 
     // OCL_CHECK(err, cl::Buffer buffer_psi2Amplitude(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2Amplitude,&err));
 
 
     //second type kernel – disable for first type kernel
-    OCL_CHECK(err, cl::Buffer buffer_psi2alpha(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2alpha,&err));
+    OCL_CHECK(err, cl::Buffer buffer_psi2alpha(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),psi2alpha,&err));
 
-    OCL_CHECK(err, cl::Buffer buffer_psi2beta(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2beta,&err));
+    OCL_CHECK(err, cl::Buffer buffer_psi2beta(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),psi2beta,&err));
     // OCL_CHECK(err, cl::Buffer buffer_transformAngle(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),transformAngle,&err));
 
 
@@ -459,11 +465,11 @@ inputTime[0] = 0;
     modelCVOutputDataFile2<< "time,|psi2|,transformAngle\n";
     float psi2Amplitude;
     float transformAngle;
-    float timeCV = CurVelModel.odeCVCalculationSettings->initialCalculationTime;
+    float timeCV = odeCVCalculationSettingsArray[0];
 
-    for(int i = 0; i<CurVelModel.odeCVCalculationSettings->numberOfIterations;i++ )
+    for(int i = 0; i<odeCVCalculationSettingsArray[4];i++ )
     {   
-        timeCV = timeCV + CurVelModel.odeCVCalculationSettings->calculationStep;
+        timeCV = timeCV + odeCVCalculationSettingsArray[2];
 
         psi2Amplitude = sqrtf(psi2alpha[i] * psi2alpha[i] + psi2beta[i] * psi2beta[i] );
         transformAngle = atan2f(psi2beta[i],psi2alpha[i]);
@@ -483,8 +489,8 @@ inputTime[0] = 0;
     
 
     // free the memory
-    free(CurVelModel.motorParameters);
-    free(CurVelModel.modelCVCoeff);
+    free(motorParametersArray);
+    free(modelCVCoeffArray);
     free(inputTime);
     free(inputI1);
     free(inputI2);
@@ -493,8 +499,8 @@ inputTime[0] = 0;
     free(psi2alpha);
     free(psi2beta);
     free(inputMotorMechanicalAngularVelocity);
-    free(CurVelModel.modelCVVariables);
-    free(CurVelModel.odeCVCalculationSettings);
+    free(modelCVVariablesArray);
+    free(odeCVCalculationSettingsArray);
 
 /*---------------------------------------------------------------------------*/
 

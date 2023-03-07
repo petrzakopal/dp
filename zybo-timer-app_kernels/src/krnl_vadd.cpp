@@ -82,8 +82,21 @@ Input Vector 2 from Global Memory --->|             |      |__|
 // Includes
 #include <stdint.h>
 #include <hls_stream.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <poll.h>
+#include <fstream>
+#include <iostream>
 
 #define DATA_SIZE 4096
+#define IN 0
+#define OUT 1
+
+#define TIMER_MAP_SIZE 0x10000
+#define TIMER_0_CTR_REG 0x08
 
 // TRIPCOUNT identifier
 const int c_size = DATA_SIZE;
@@ -129,7 +142,7 @@ extern "C" {
         size (input)  --> Number of elements in vector
 */
 
-void krnl_vadd(uint32_t* in1, uint32_t* in2, uint32_t* out, int size) {
+void krnl_vadd(uint32_t* in1, uint32_t* in2, uint32_t* out, int size, void *ptr) {
 #pragma HLS INTERFACE m_axi port = in1 bundle = gmem0
 #pragma HLS INTERFACE m_axi port = in2 bundle = gmem1
 #pragma HLS INTERFACE m_axi port = out bundle = gmem0
@@ -138,11 +151,16 @@ void krnl_vadd(uint32_t* in1, uint32_t* in2, uint32_t* out, int size) {
     static hls::stream<uint32_t> in2_stream("input_stream_2");
     static hls::stream<uint32_t> out_stream("output_stream");
 
+
+
+
 #pragma HLS dataflow
     // dataflow pragma instruct compiler to run following three APIs in parallel
     load_input(in1, in1_stream, size);
     load_input(in2, in2_stream, size);
     compute_add(in1_stream, in2_stream, out_stream, size);
     store_result(out, out_stream, size);
+
+
 }
 }

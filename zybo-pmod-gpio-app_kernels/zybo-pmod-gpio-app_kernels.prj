@@ -3,8 +3,8 @@
   <configuration name="Emulation-SW" id="com.xilinx.ide.accel.config.hwkernel.sw_emu.2082352697" dirty="true">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" kernelDebug="true">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
-        <args name="odeCVCalculationSettings" master="true"/>
-        <args name="modelCVCoeff" master="true"/>
+        <args name="odeCVCalculationSettingsArray" master="true"/>
+        <args name="modelCVCoeffArray" master="true"/>
         <args name="inputI1" master="true"/>
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
@@ -17,8 +17,8 @@
   <configuration name="Emulation-HW" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1699647226" dirty="true">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" kernelDebug="true" target="hw_emu">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
-        <args name="odeCVCalculationSettings" master="true"/>
-        <args name="modelCVCoeff" master="true"/>
+        <args name="odeCVCalculationSettingsArray" master="true"/>
+        <args name="modelCVCoeffArray" master="true"/>
         <args name="inputI1" master="true"/>
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
@@ -31,8 +31,8 @@
   <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.66980607">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
-        <args name="odeCVCalculationSettings" master="true"/>
-        <args name="modelCVCoeff" master="true"/>
+        <args name="odeCVCalculationSettingsArray" master="true"/>
+        <args name="modelCVCoeffArray" master="true"/>
         <args name="inputI1" master="true"/>
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
@@ -43,8 +43,8 @@
     </configBuildOptions>
     <lastBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
-        <args name="odeCVCalculationSettings" master="true"/>
-        <args name="modelCVCoeff" master="true"/>
+        <args name="odeCVCalculationSettingsArray" master="true"/>
+        <args name="modelCVCoeffArray" master="true"/>
         <args name="inputI1" master="true"/>
         <args name="inputI2" master="true"/>
         <args name="inputI3" master="true"/>
