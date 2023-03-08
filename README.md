@@ -11,6 +11,10 @@
 
 ## Mé denní poznámky ✏️
 
+🐧 [07.03.2023](/notes/20230307.md) <-- snaha o RT patch linuxu, nepodařilo se, snaha vyzkoušet několik variant, nevyšlo to, zítra ještě jedna varianta a pak prohlásím, jako Xilinx, že neposkytují na toto podporu i když se to někomu podařilo...., vylepšení kódu na I-n model v zybo - udělán víc basic jen s pomocí arrays..., je divné že i při vitis_analyzer syntéze atan2f a sqrtf v kernelu ukazuje mnoho využití LUTs ale v realitě to funguje a syntetizovalo se to, demo na [YouTube](https://youtu.be/MlzqgY1zWvk)
+
+---
+
 👨🏻‍💻 🔎 [06.03.2023](/notes/20230306.md) <-- dělal jsem research ohledně zrychlení linuxu a běhu apliakcí fpga + ps, bude třeba patch RT na petalinux - vyzkoušet to, pro nejrychlejší obsluhu přerušení bude nejlepší si napsat svůj linux driver, v petalinuxu se to nazývá `kernel module` do aplikace na host (host.cpp) je třeba přidat část, která bude řešit že při vyslání `SIGTERM` neboli `ctrl+c` tak nastaví vše na nulu a program zastaví/motor zastaví
 
 ---
