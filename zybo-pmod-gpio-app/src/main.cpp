@@ -244,6 +244,9 @@ posix_memalign((void **)&modelCVVariablesArray , 4096 , 12*sizeof(float) );
 
 /*---------------------------------------------------------------------------------------------------------*/
 
+float *psi2AmplitudeOut;
+float * transformAngleOut;
+
 /*------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ LOADING DATA FROM A LIGHTWEIGHT EXPORT FORMAT ------------------------------*/
 
@@ -282,6 +285,8 @@ posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeo
 posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&psi2AmplitudeOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&transformAngleOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 
 psi2alpha[0] = 0;
 psi2beta[0] = 0;
@@ -348,6 +353,7 @@ for( std::string line; std::getline( inputData, line, ','); )
 }
     inputData.close(); // close that file
 
+
 /*------------------------------ LOADING DATA STREAM ------------------------------*/
 /*------------------------------------------------------------------------------------------------------------*/
 }
@@ -368,6 +374,8 @@ posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeo
 posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&psi2AmplitudeOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+posix_memalign((void **)&transformAngleOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 
 
 inputTime[0] = 0;
@@ -377,6 +385,9 @@ inputTime[0] = 0;
     printf("You have entered:\n\r");
     printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\rpsi2alpha[0] = %f\n\rpsi2beta = %f\n\r", inputI1[0], inputI2[0], inputI3[0], inputMotorMechanicalAngularVelocity[0], psi2alpha[0], psi2beta[0]);
     printf("------------------------------------\n\r");
+
+
+
 }
 
 
@@ -402,6 +413,7 @@ inputTime[0] = 0;
 
     // OCL_CHECK(err, cl::Buffer buffer_modelCVVariables(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVVariablesType),CurVelModel.modelCVVariables,&err)); // enable for first type kernel
 
+    
     OCL_CHECK(err, cl::Buffer buffer_modelCVCoeff(context, CL_MEM_USE_HOST_PTR, 3*sizeof(float),modelCVCoeffArray,&err));
 
     OCL_CHECK(err, cl::Buffer buffer_inputI1(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputI1,&err));
@@ -421,9 +433,9 @@ inputTime[0] = 0;
     OCL_CHECK(err, cl::Buffer buffer_psi2beta(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),psi2beta,&err));
     // OCL_CHECK(err, cl::Buffer buffer_transformAngle(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),transformAngle,&err));
 
+    OCL_CHECK(err, cl::Buffer buffer_psi2AmplitudeOut(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),psi2AmplitudeOut,&err));
 
-
-    
+    OCL_CHECK(err, cl::Buffer buffer_transformAngleOut(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),transformAngleOut,&err));
 
 
     int narg = 0;
@@ -440,12 +452,13 @@ inputTime[0] = 0;
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2alpha));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2beta));
     // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_transformAngle));
-  
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2AmplitudeOut));
+    OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_transformAngleOut));
 
     // Data will be migrated to kernel space
     // delete buffer_psi2alpha and buffer_psi2beta for first type kernel
     // delete buffer_modelCVVariables for second type kernel and add for first type
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
+    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta, buffer_psi2AmplitudeOut, buffer_transformAngleOut}, 0 /* 0 means from host*/));
 
     /*------------------------------------------------------------------------------------------------------------*/
 
@@ -453,7 +466,7 @@ inputTime[0] = 0;
     // Launch the Kernel
     OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
     
-    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_psi2alpha, buffer_psi2beta}, CL_MIGRATE_MEM_OBJECT_HOST));
+    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_psi2alpha, buffer_psi2beta, buffer_psi2AmplitudeOut, buffer_transformAngleOut}, CL_MIGRATE_MEM_OBJECT_HOST));
     rangeKernel.end();
     OCL_CHECK(err, q.finish());
 
@@ -467,6 +480,7 @@ inputTime[0] = 0;
     float transformAngle;
     float timeCV = odeCVCalculationSettingsArray[0];
 
+    // hsot data psi2Amplitude and transformAngle
     for(int i = 0; i<odeCVCalculationSettingsArray[4];i++ )
     {   
         timeCV = timeCV + odeCVCalculationSettingsArray[2];
@@ -482,8 +496,27 @@ inputTime[0] = 0;
 
         modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude<<","<<transformAngle<<"\n";
     }
-
     modelCVOutputDataFile2.close();
+
+
+    // kernel data psi2Amplitude and transformAngle
+     for(int i = 0; i<odeCVCalculationSettingsArray[4];i++ )
+    {   
+        timeCV = timeCV + odeCVCalculationSettingsArray[2];
+
+        std::cout << "----------------------------------------\n\r";
+        std:: cout << "results from kernel:\n";
+        std::cout << "----------------------------------------\n\r";
+
+        std::cout << "psi2Amplitude index "<< i << " : " << psi2AmplitudeOut[i] << "\n";
+
+       
+        std::cout << "transformAngle[" << i << "]: "<< transformAngleOut[i] << "\n";
+        
+        
+    }
+
+   
 
     std::cout << "the end of the most useful program is here\n";
     
@@ -501,6 +534,8 @@ inputTime[0] = 0;
     free(inputMotorMechanicalAngularVelocity);
     free(modelCVVariablesArray);
     free(odeCVCalculationSettingsArray);
+    free(psi2AmplitudeOut);
+    free(transformAngleOut);
 
 /*---------------------------------------------------------------------------*/
 

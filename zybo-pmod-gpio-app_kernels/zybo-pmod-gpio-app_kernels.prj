@@ -11,6 +11,8 @@
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
         <args name="psi2alphaOut" master="true"/>
         <args name="psi2betaOut" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
+        <args name="transformAngle" master="true"/>
       </kernels>
     </configBuildOptions>
   </configuration>
@@ -25,10 +27,12 @@
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
         <args name="psi2alphaOut" master="true"/>
         <args name="psi2betaOut" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
+        <args name="transformAngle" master="true"/>
       </kernels>
     </configBuildOptions>
   </configuration>
-  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.66980607">
+  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.66980607" dirty="true">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp">
         <args name="odeCVCalculationSettingsArray" master="true"/>
@@ -39,6 +43,8 @@
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
         <args name="psi2alphaOut" master="true"/>
         <args name="psi2betaOut" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
+        <args name="transformAngle" master="true"/>
       </kernels>
     </configBuildOptions>
     <lastBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" reportLevel="2" target="hw">
@@ -51,6 +57,8 @@
         <args name="inputMotorMechanicalAngularVelocity" master="true"/>
         <args name="psi2alphaOut" master="true"/>
         <args name="psi2betaOut" master="true"/>
+        <args name="psi2Amplitude" master="true"/>
+        <args name="transformAngle" master="true"/>
       </kernels>
     </lastBuildOptions>
   </configuration>

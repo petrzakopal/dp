@@ -9,3 +9,4 @@ xrc.log
 .Xil
 ip_cache/
 zybo-timer
+zybo-pmod-int
