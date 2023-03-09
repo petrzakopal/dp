@@ -11,6 +11,14 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [09.03.2023](/notes/20230309.md)
+
+---
+
+🐧 [08.03.2023](/notes/20230308.md) <-- linux patch se povedl, sepsán postup a snaha tvorby většího vivado designu a refactoring kódu na SoC
+
+---
+
 🐧 [07.03.2023](/notes/20230307.md) <-- snaha o RT patch linuxu, nepodařilo se, snaha vyzkoušet několik variant, nevyšlo to, zítra ještě jedna varianta a pak prohlásím, jako Xilinx, že neposkytují na toto podporu i když se to někomu podařilo...., vylepšení kódu na I-n model v zybo - udělán víc basic jen s pomocí arrays..., je divné že i při vitis_analyzer syntéze atan2f a sqrtf v kernelu ukazuje mnoho využití LUTs ale v realitě to funguje a syntetizovalo se to, demo na [YouTube](https://youtu.be/MlzqgY1zWvk)
 
 ---
