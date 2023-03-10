@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [09.03.2023](/notes/20230309.md)
+💻 [10.03.2023](/notes/20230310.md)
+
+---
+
+💻 [09.03.2023](/notes/20230309.md) <-- snaha buildu velikého designu a hledání informací o tom jak zrychli kernel a udělat free running kernel
 
 ---
 
