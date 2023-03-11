@@ -10,3 +10,4 @@ xrc.log
 ip_cache/
 zybo-timer
 zybo-pmod-int
+zybo-rt

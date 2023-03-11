@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project>
     	
-    <configuration id="com.xilinx.ide.accel.config.sw_emu.armv7l.1000670723" name="Emulation-SW">
+    <configuration id="com.xilinx.ide.accel.config.sw_emu.armv7l.487997292" name="Emulation-SW">
         		
         <extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
             			
@@ -25,7 +25,7 @@
         	
     </configuration>
     	
-    <configuration id="com.xilinx.ide.accel.config.hw_emu.armv7l.719299455" name="Emulation-HW">
+    <configuration id="com.xilinx.ide.accel.config.hw_emu.armv7l.313174038" name="Emulation-HW">
         		
         <extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
             			
@@ -49,7 +49,7 @@
         	
     </configuration>
     	
-    <configuration id="com.xilinx.ide.accel.config.hw.armv7l.1402250078" name="Hardware">
+    <configuration id="com.xilinx.ide.accel.config.hw.armv7l.1008458399" name="Hardware">
         		
         <extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
             			
