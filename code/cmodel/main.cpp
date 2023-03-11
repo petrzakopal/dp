@@ -25,9 +25,21 @@ také je problém v případě, že v MotorModel.cpp includuji transformation a 
 
 #define PI 3.141592 
 
+//  void loadVariable(float variableIn, float *variableOut)
+// {
+//     *variableOut = variableIn;
+// }
 
 int main()
 {
+
+// float input = 25;
+// float output[1];
+
+// loadVariable(input, output);
+
+// std::cout << "output is ouput: " << output[0] << "\n\r";
+
 /*||||||||||||||||||||||||||||||||||||||||||||||||| ASM MOTOR GENERATION |||||||||||||||||||||||||||||||||||||||||||||||||*/
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 

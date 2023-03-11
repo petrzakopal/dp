@@ -395,7 +395,13 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 
 
 	\subsection{Aplikace SoC}
-	Systémy na čipu se pro jejich výpočetní výkon, prostorovou a energetickou efektivnost využívají v mnoha aplikacích. Nejvýznamnější využití v problematice elektrických pohonů je v embedded systémech a hardwaerově akcelerovaných aplikacích. 
+	Systémy na čipu se pro jejich výpočetní výkon, prostorovou a energetickou efektivnost využívají v mnoha aplikacích. Nejvýznamnější využití v problematice elektrických pohonů je v embedded systémech a hardwaerově akcelerovaných aplikacích.
+
+	\section{System on Modules}
+
+	System on modules (SOMs) je architektura, využívající SoC jako hlavní součásti. SOMs se oproti SoC již dodávají na PCB a krom dříve zmíněných SoC mají na desce umístěné další komponenty, které jsou pro danou aplikaci SOM vyžadovány. \cite{xilinx-what-is-a-som}\par
+	SOMs se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom SOM taktéž podpůrnou desku s dalšími obecnými komponenty, které jsou vhodné pro vývoj standardních aplikací. Pokud zákazník již pomocí vývojové desky odladil svoji vytvářenou aplikaci, může zakoupit samostatný SOM a podpůrnou desku (tzv. baseboard) pro danou aplikaci navrhnou tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tudíž se snižuje cena konečného výrobku o odstraněné nevyužívané komponenty.\par
+	Výrobce \textit{Kria KR260 Robotics Starter Kit}, použité v této práci dodává k produktu rozsáhlou dokumentaci, podle které je možné danou podpůrnou desku sestavit. Jako příklad individuálně vytvořené baseboard je vhodné uvést open source projekt od firmy \textit{Antmicro Ltd}. Tato firma vydala open source design baseboardu pro zařízení \textit{Kria K26}, které je předchůdcem \textit{KR260}, a bylo určeno pro akcelerování audiovizuálních aplikací. Dokumentace a vytvořený návrh je dostupný na \cite{antmicro-open-source-kria-k26-baseboard}.
 
 	\subsubsection{Embedded Systems}
 	Embedded systémy je název pro skupinu zařízení, obecně systémů, které je možné charakterizovat jako specifické výpočetní zařízení, resp. počítače, které jsou určeny pro podporu funkce nebo řízení nějakého většího celku, produktu nebo fyzikálního systému. Oproti tomu osobní počítač je sice výpočetní zařízení, ale nelze mluvit o embedded systému, protože je určen pro mnoho univerzálních aplikací. \cite{Sass2010}\par
@@ -577,14 +583,16 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			Kromě HIL simulace je možné FPGA využít také pro řízení elektrických pohonů. Možnosti realizace řízení AC elektrických strojů pomocí FPGA a analogově digitálních převodníků (ADC) jsou prezentovány v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}. V dokumentu jsou popisovány tři realizace řízení, resp. regulace pohonu. Nejprve byla regulace realizována pomocí hystérézních on-off regulátorů, následně byly použity PI regulátory. Pomocí nich byl pohon regulován na základně měření a změny vektoru statorového proudu, resp. jeho složek $\alpha \beta$ po aplikování Clarkové transformace. Jako poslení prezentovaný způsob autoři realizovali model ovládání synchronního motoru na základě prediktivních regulátorů. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}\par Všechny prezentované způsoby regulace v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives} byly před syntézou realizovány v prostředí MATLAB™️ a Simulink. Tento způsob tvorby modelů a algoritmů je v praxi upřednostňován, protože umožňuje i expertům na řízení a regulaci pracovat na dané problematice bez znalostí mikroelektroniky, programování v HDL a způsobu fungování FPGA. Oproti tomu je třeba zvážit, jaké jsou požadavky na rychlost, výkonnost a optimalizované řízení aplikace a zdali použití předpřipravených knihoven a zjednodušených nástrojů nebude mít příliš značný vliv na rychlost výpočtu a tudíž zpracování dat a řízení v reálném čase. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}
 			
 
-	\section{Porovnání dostupných SoC platforem pro řízení elektrických pohonů}
+	\section{Porovnání dostupných SoC/SoM platforem pro řízení elektrických pohonů}
 			V této kapitole budou představeny smysluplné, komerčně dostupné SoC platformy, které je možné využít pro aplikace řízení elektrických pohonů či HIL. Výběr je zaměřen na SoC umístěný na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi, vlastnostmi by měla architektura disponovat a poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu na Printed Circuit Board (PCB). Z důvodu finanční náročnosti některých řešení bylo přistoupeno k prezentování SoC od firmy Xilinx, které jsou nižší ceny.
 
-			\subsection{Platforma využívající Spartan FPGA}
+			
 
 			\subsection{Platforma využívající Artix}
 
 			\subsection{Platforma využívající ZynQ SoC}
+
+			\subsection{Platforma využívající SOM Kria KR260}
 
 			% popsat že je ZynQ, Spartan, atd. atd. využít možného open Source řešení z poznámek
 
@@ -710,7 +718,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			
 
 		\fbar
-		\subsection{Možné alternativy}
+		\subsection{Vývojová deska Kria KR260}
 			% Novější verze Zybo
 			% Něco jiného
 			% Custom řešení - ZynQ Berry

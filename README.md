@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [10.03.2023](/notes/20230310.md)
+❌ [10.03.2023](/) <-- snažil jsem se použít registry v kernelu ale nějak to nejde, zkusil jsem požáda o informaci AI a stejně nic, poté jsem musel jít pryč
+
+---
+
+💻 [10.03.2023](/notes/20230310.md) <-- snaha o namapování registrů a rozchození dalšího kernelu
 
 ---
 
