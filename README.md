@@ -11,11 +11,15 @@
 
 ## Mé denní poznámky ✏️
 
-❌ [11.03.2023](/) <- dělal jsem na zakázce a zkoušel jsem dostat se zas z kernelu do registrů, dostal jsem se z PS zas do registru, resp. do adresy, ale z PL to nejde, protože to nejde brát jako subprogram ale jako IP ve vivadu, kde i když vložím adresu jako argument a pak dereferencuji v kernelu a vložím hodnotu, tak že dojde ke změně hodnoty v PS procesoru, musel bych si udělat proměnnou, jejíž hodnota by se pak v PS vkládala do té hodnoty na adrese
+🚗 [13.03.2023](/notes/20230313.md) <-- přesun pracoviště na fakultu
 
 ---
 
-❌ [10.03.2023](/) <-- snažil jsem se použít registry v kernelu ale nějak to nejde, zkusil jsem požáda o informaci AI a stejně nic, poté jsem musel jít pryč
+❌ [12.03.2023](/) <- dělal jsem na zakázce a zkoušel jsem dostat se zas z kernelu do registrů, dostal jsem se z PS zas do registru, resp. do adresy, ale z PL to nejde, protože to nejde brát jako subprogram ale jako IP ve vivadu, kde i když vložím adresu jako argument a pak dereferencuji v kernelu a vložím hodnotu, tak že dojde ke změně hodnoty v PS procesoru, musel bych si udělat proměnnou, jejíž hodnota by se pak v PS vkládala do té hodnoty na adrese
+
+---
+
+❌ [11.03.2023](/) <-- snažil jsem se použít registry v kernelu ale nějak to nejde, zkusil jsem požáda o informaci AI a stejně nic, poté jsem musel jít pryč
 
 ---
 
