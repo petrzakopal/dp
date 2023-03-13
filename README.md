@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-🚗 [13.03.2023](/notes/20230313.md) <-- přesun pracoviště na fakultu
+💻 [14.03.2023](/notes/20230314.md)
+
+---
+
+🚗 [13.03.2023](/notes/20230313.md) <-- přesun pracoviště na fakultu, zkoušení pointerů, todo na další dny než přijde deska je začít psát linux driver na interrupts a začít zkoumat kria a začít kontrolovat text v [dp.tex](./tex/dp.tex) a začít začleňovat více KRIA
 
 ---
 
