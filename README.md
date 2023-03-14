@@ -11,7 +11,7 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [14.03.2023](/notes/20230314.md)
+💻 [14.03.2023](/notes/20230314.md) <-- práce na rozchození pracoviště se serverem ve škole, proxmox nastavení a virtuálky matlabu pro pracovníky katedry, vytvoření účtů, nastavení port routingu..., vytvoření prvního testovacího kernel modulu, snaha o jeho build, ještě není otestován [mymodule_edited.c](./notes/code/20230314/mymodule_edited.c), popsání postupu
 
 ---
 
