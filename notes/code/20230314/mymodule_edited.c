@@ -11,8 +11,8 @@ MODULE_DESCRIPTION
     ("mymodule - just test of a linux kernel module");
 
 #define DRIVER_NAME "mymodule"
-#define GPIO_REQUEST_NUMBER 980
-#define GPIO_NAME_IDENTIFICATION "zybo-gpio-980"
+#define GPIO_REQUEST_NUMBER 1012
+#define GPIO_NAME_IDENTIFICATION "zybo-gpio-1012"
 
 
 /* Global Variables */
@@ -41,7 +41,7 @@ static irq_handler_t gpio_irq_handler(unsigned int irq, void *dev_id, struct pt_
 
 static int __init mymodule_init(void)
 {
-	printk("<1>gpio_irq: Loading moduule... \n");
+	printk("gpio_irq: Loading moduule... \n");
 	
     /* Setup the gpio */
     if(gpio_request(GPIO_REQUEST_NUMBER,GPIO_NAME_IDENTIFICATION))
@@ -58,7 +58,7 @@ static int __init mymodule_init(void)
         return (-1);
     }
 
-    /* Setup the interrupt to get the number of PIN of interrupt */
+    // /* Setup the interrupt to get the number of PIN of interrupt */
     irq_number = gpio_to_irq(GPIO_REQUEST_NUMBER);
 
 
