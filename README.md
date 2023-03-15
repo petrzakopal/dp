@@ -11,7 +11,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [15.03.2023](/notes/20230315.md)
+💻 [16.03.2023](/notes/20230316.md)
+
+---
+
+💻 [15.03.2023](/notes/20230315.md) <-- práce a snaha ohledně rozchození linux kernel driveru, ale asi to zatím nejde, problém s petalinuxem, problém s patchnutým linuxem, že má jiný source a já to ještě v makefile neumím, snaha zajistit interrupt v example souboru mymodule, třeba dodtat informace do device-tree atd., na další den bude postup takový, že se vybuildil linux bez interruptů a bude se zkoušet jen testovací [mymodule_edited.c](./notes/code/20230314/mymodule_edited.c) a také ze stránky ohledně tutoriálu ohledně device zápisu [http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/](http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/), je třeba zjistit, zda nemusí být interrupt v HDF udělán aby se na něj mohl dle mymodule_edited.c připojit ale byl stále vidět jako gpio a nebo to nejde a bude muset být jako interrupt, ale pak zase nebude jasné jeho číslo..., také jsem si nakreslil možné varianty akvizice dat, další den je třeba se pobavit s vedoucím
 
 ---
 
