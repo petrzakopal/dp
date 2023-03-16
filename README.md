@@ -2,16 +2,22 @@
 
 ## Pracuji na
 
-- interrupts + timers
+- ⚡️ _zkoumám_ interrupts + timers
 - přesun I-n modelu do FPGA
-- hledání jak funguje timer a přerušení a jak dělat akvizici dat do zybo pomocí PMOD GPIO a XADC pro otáčková resp. proudová čidla
-- začít dělat regulátor a výstup pro měnič v cmodelu...
-- momentální cíl -> model do FPGA, zkusit reakci na předpočítaná data, po úspěchu začít modelovat regulátory, SVM, výstup na měnič, výstup z pmod
+- ✅ _akvizize dat nejspíše v dalším vlákně programu pomocí timeru a jeho přerušení a mutexů, to vlákno bude nekonečné a spojí se až na konci programmu_ hledání jak funguje timer a přerušení a jak dělat akvizici dat do zybo pomocí PMOD GPIO a XADC pro otáčková resp. proudová čidla
+- najít proudová a otáčková vhodná čidla nebo jak to naemulovat něčím dalším
+- ✅ začít dělat regulátor a výstup pro měnič v cmodelu...
+- ✅ momentální cíl -> model do FPGA, zkusit reakci na předpočítaná data, po úspěchu začít modelovat regulátory, SVM, výstup na měnič, výstup z pmod
 - lze arduinem vytvořit nulu na PMOD při paralelním spojení nebo budu arduinem řídit MOSFET a vytvářet požadovaný signál (modelování vstupů do fpga / výstupů z motoru)
+- a další...
 
 ## Mé denní poznámky ✏️
 
-💻 [16.03.2023](/notes/20230316.md)
+💻 [17.03.2023](/notes/20230317.md)
+
+---
+
+💻 [16.03.2023](/notes/20230316.md) <-- snaha o linux kernel driver, rozchodil jsem tutorial driver (character), zkkopíroval uio generic a zksuil upravit a vyhodit nějaké věci, to fungovalo částečně, po restartu pak spadlo a zaseklo se, driver example z petalinuxu se sekne a je CPU stall, zkusím ještě jeden poslední, pak vše budu řešit v userspacu a změřím si to asi, četl jsem si nějaké info o kria kr260, že to bude jiné a bude jiný flow, je tam rozdíl v bootovaní a image atd., bude to ještě hell, ale je to progresivnější než zybo od digilentu, je to dobré napsat do DP a porovnat, protože kria KV260 myslím dle press release vyšla 2021 a kr260 v 2022, rozdíl je hlavně v carrier board, jinak SOM by mělo být stejné
 
 ---
 
