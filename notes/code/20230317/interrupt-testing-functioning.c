@@ -13,17 +13,14 @@
  * 4. for the first run following command with starting addresses edited to your needs of timer address,
  *    ending addreses can be found in AXI Timer v2.0 LogiCORE IP Product Guide (PG079)
  *    (https://www.xilinx.com/content/dam/xilinx/support/documents/ip_documentation/axi_timer/v2_0/pg079-axi-timer.pdf)
- *    1. "devmem 0x42800004 w 0xAFFFFFFF&&devmem 0x42800000 w 0xE0&&devmem 0x42800008 w 0x0&&devmem 0x42800000 w 0xC0"
+ *    1. "devmem 0x42800000 w 0x1C0&&echo 0x1 > /dev/uio2&&devmem 0x42800004 w 0xAFFFFFFF&&devmem 0x42800000 w 0xE0&&devmem 0x42800008 w 0x0&&devmem 0x42800000 w 0xC0", note taht the command "echo 0x1 > dev/uio<YOUR NUMBER>" should not evoke incrementing number of interrupts
  * 5. watch the timer counter register change
- * 6. after time, there will be an interrupt in AXI TIMER, but not in "/proc/interrupts", it will be only counted when using command
+ * 6. after time, there will be an interrupt in AXI TIMER, it will show in "/proc/interrupts", if not shown in "/proc/interrupts", it will be only counted when using command
  *    "echo 0x1 > /dev/uio<YOUR NUMBER>", where <YOUR NUMBER> depends on your uio devices and architecture, when testing on our kernel and DT the command was used as follows
- *     "echo 0x1 > /dev/uio2"
- * 7. The number of interrupts in "/proc/interrupts" will be incremented. But note, that in this version of module the interrupt number in "/proc/interrupts" will be incremented every time when using "echo 0x1 > /dev/uio<YOUR NUMBER>"!
- * 8. After clearing interrupt via preceeding command, you can start the timer again "devmem 0x42800004 w 0xAFFFFFFF&&devmem 0x42800000 w 0xE0&&devmem 0x42800008 w 0x0&&devmem 0x42800000 w 0xC0"
- * 9. Better approach after first interrupt is to use command: "devmem 0x42800000 w 0x1C0&&echo 0x1 > /dev/uio2&&devmem 0x42800004 w 0xAFFFFFFF&&devmem 0x42800000 w 0xE0&&devmem 0x42800008 w 0x0&&devmem 0x42800000 w 0xC0"
- * 10. And the number of interrupts in "/proc/interrupts" will increment automatically.
+ *     "echo 0x1 > /dev/uio2", but the command in step 4.1. should manage handling/enabling interrupt
+ * 7. The number of interrupts in "/proc/interrupts" will be incremented automatically when using propper command (from section 4.1.).
  * 
- * TODO: Need to rewrite preceeding manual about first command devmem 0x42800000 w 0x1C0
+ * TODO: Polish code and better understand it. Change name showing in "cat /proc/interrupts"
 */
 
 
