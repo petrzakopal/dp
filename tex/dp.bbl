@@ -121,7 +121,7 @@
       \verb https://www.xilinx.com/products/som/kria/kr260-robotics-starter-kit.html
       \endverb
     \endentry
-    \entry{antmicro-open-source-kria-k26-baseboard}{incollection}{}
+    \entry{kria-som-carrier-card-design-guide-2022}{incollection}{}
       \name{author}{1}{}{%
         {{hash=751f6909b12cc240122891470ea09b53}{%
            family={Xilinx},
@@ -138,6 +138,80 @@
       \field{extraname}{3}
       \field{sortinit}{9}
       \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{27}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Kria SOM Carrier Card Design Guide (UG1091)}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1091-carrier-card-design/Introduction
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1091-carrier-card-design/Introduction
+      \endverb
+    \endentry
+    \entry{kria-k26-som-ds}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{26}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Kria K26 SOM Data Sheet (DS987)}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ds987-k26-som
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ds987-k26-som
+      \endverb
+    \endentry
+    \entry{antmicro-open-source-kria-k26-carrier-card}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{5}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{GitHub}
@@ -252,6 +326,82 @@
       \verb https://www.xilinx.com/applications/adaptive-computing/what-is-accelerated-computing-and-why-is-it-important.html
       \endverb
     \endentry
+    \entry{ieee-selective-harmonic-elimination-nvidia}{article}{}
+      \name{author}{4}{}{%
+        {{hash=94f549b3de0aeab6822803a0c8e72908}{%
+           family={Nalcaci},
+           familyi={N\bibinitperiod},
+           given={Gamze},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4be5f3897634a5fcaff6fc353037f0d6}{%
+           family={Yildirim},
+           familyi={Y\bibinitperiod},
+           given={Doğan},
+           giveni={D\bibinitperiod}}}%
+        {{hash=60b4996064b175c2160531c7b6276785}{%
+           family={Cadirci},
+           familyi={C\bibinitperiod},
+           given={Isik},
+           giveni={I\bibinitperiod}}}%
+        {{hash=d3bc972203d8b75e9f85174117a88e67}{%
+           family={Ermis},
+           familyi={E\bibinitperiod},
+           given={Muammer},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{fullhash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{bibnamehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{authorbibnamehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{authornamehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{authorfullhash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Industry Applications}
+      \field{number}{4}
+      \field{title}{Selective Harmonic Elimination for Variable Frequency Traction Motor Drives Using Harris Hawks Optimization}
+      \field{volume}{58}
+      \field{year}{2022}
+      \field{pages}{4778\bibrangedash 4791}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/TIA.2022.3174828
+      \endverb
+    \endentry
+    \entry{apple-explore-the-new-architecture-of-apple-silicon-macs}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3325b015fbae57ba74629a53f1ead961}{%
+           family={Apple},
+           familyi={A\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{bibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorbibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authornamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhash}{3325b015fbae57ba74629a53f1ead961}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Apple WWDC Video}
+      \field{langid}{english}
+      \field{title}{Explore the new system architecture of Apple silicon Macs}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://developer.apple.com/videos/play/wwdc2020/10686/
+      \endverb
+      \verb{url}
+      \verb https://developer.apple.com/videos/play/wwdc2020/10686/
+      \endverb
+    \endentry
     \entry{pang-beginning-fpga}{book}{}
       \name{author}{3}{}{%
         {{hash=98560bcbea5dfa554d4bd1c913b57cb6}{%
@@ -298,8 +448,8 @@
       \endverb
     \endentry
     \entry{rovere-sphery-vs-shapes}{incollection}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{booktitle}{GitHub}
       \field{day}{14}
@@ -450,8 +600,8 @@
       \strng{authorbibnamehash}{d8fa00535199236c4f5b116e95c5fb59}
       \strng{authornamehash}{d8fa00535199236c4f5b116e95c5fb59}
       \strng{authorfullhash}{d8fa00535199236c4f5b116e95c5fb59}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Industrial Informatics}
@@ -466,8 +616,8 @@
       \endverb
     \endentry
     \entry{mathworks-discovery-hil-simulation}{incollection}{}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labeltitlesource}{title}
       \field{booktitle}{The MathWorks, Inc.}
       \field{langid}{english}
@@ -612,9 +762,9 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{4}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{extraname}{6}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Documentation}
@@ -650,8 +800,8 @@
       \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
       \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
       \field{extraname}{3}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Digilent Documentation}
@@ -716,7 +866,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{5}
+      \field{extraname}{7}
       \field{sortinit}{7}
       \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
@@ -749,7 +899,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{6}
+      \field{extraname}{8}
       \field{sortinit}{7}
       \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
@@ -782,7 +932,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{7}
+      \field{extraname}{9}
       \field{sortinit}{8}
       \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
@@ -815,7 +965,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{8}
+      \field{extraname}{10}
       \field{sortinit}{8}
       \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
@@ -848,7 +998,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{9}
+      \field{extraname}{11}
       \field{sortinit}{8}
       \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
@@ -918,8 +1068,8 @@
       \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
       \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
       \field{extraname}{4}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{GitHub.io}
@@ -955,8 +1105,8 @@
       \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
       \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
       \field{extraname}{5}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Digilent Reference}
@@ -987,7 +1137,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{10}
+      \field{extraname}{12}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}

@@ -248,11 +248,11 @@ literate={;}{{\textcolor{orange}{;}}}{1}
 	\vspace{3cm}
 	
 	
-	{\Large\textbf{Možnosti využití FPGA pro řízení pohonů}}
+	{\Large\textbf{Možnosti využití SoC platformy procesorů pro řízení elektrických pohonů}}
 	
 	\vspace{1cm}
 	
-	{\Large\textbf{Usage of FPGA for controlling electric drives}}
+	{\Large\textbf{Possibilities of Using SoC Platform Processors for Controlling Electric Drives}}
 	
 	\vspace{2cm}
 	
@@ -373,7 +373,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 \newpage
 %konec úvodu
 
-	\section{System on a chip}
+\section{System on a chip}
 	% co to je, proč to je
 	% typy postavené kolem  mikrokontroléru, mikroprocesoru a ASIC
 	% Aplikace Embedded system (existují i pro mobilní aplikace, osobní počítače)
@@ -386,28 +386,29 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		\item SoC pro specifické aplikace (Application Specific Integrated Circuit – ASIC).
 	\end{itemize}
 	Jedná se tudíž o rozdělení dle hlavní výpočetní jednotky, resp. procesoru v čipu. \cite{tomshardware-system-on-chip}\par
-	Pro řízení elektrických pohonů jsou nejvíce využívány SoC s mikrokontrolérem a ASIC.
+	Z uvedených rozdělení jsou pro řízení elektrických pohonů nejvíce využívány SoC s mikrokontrolérem a ASIC.
 
 	\subsection{Application Specific Integrated Circuit}
 		Významnou část SoC tvoří \textit{Application Specific Integrated Circuits, popř. Hardware} (ASICs, ASHW). Při použití těchto SoC je využíváno přesvědčení, že pokud je architektura HW přímo specializovaná na jednu aplikaci, je vysoká pravděpodobnost, že ji bude vykonávat bezchybně, kvalitně a rychle.\par
-		Tyto aplikace jsou využívaný v širokém spektru oborů jako je např. zpracování zvuku, videa, výpočtů apod. Tyto ASIC mohou také vykonávat potřebné rychlé výpočty pro matematické modely elektrických strojů, které jsou využívány např. pro HIL.\par
-		Než je tento specifický obvod vytvořen, je nutné jej navrhnout, vyzkoušet a odladit. K tomu slouží logická programovatelná pole, ve kterých je možné požadovaný HW navrhnut a odladit před velko produkcí ASIC. Pokud velko produkce není z ekonomických důvodů možná, jsou FPGA využívány i v produkční oblasti, kde je HW struktura, která by byla přítomna na ASIC, vytvořena přímo na FPGA.
+		Tyto aplikace jsou využívány v širokém spektru oborů jako je např. zpracování zvuku, videa, výpočtů apod. Tyto ASIC mohou také vykonávat potřebné rychlé výpočty pro matematické modely elektrických strojů, které jsou využívány např. pro HIL.\par
+		Než je tento specifický obvod vytvořen, je nutné jej navrhnout, vyzkoušet a odladit. K tomu slouží logická programovatelná pole, ve kterých je možné požadovaný HW navrhnut a odladit před velko produkcí ASIC. Pokud velko produkce není z ekonomických důvodů možná, jsou FPGA využívány přímo v produkci s jejichž pomocí je vytvořena HW struktura, která by byla přítomna na ASIC.
 
 
 	\subsection{Aplikace SoC}
 	Systémy na čipu se pro jejich výpočetní výkon, prostorovou a energetickou efektivnost využívají v mnoha aplikacích. Nejvýznamnější využití v problematice elektrických pohonů je v embedded systémech a hardwaerově akcelerovaných aplikacích.
 
-	\section{System on Modules}
+\section{System on Modules}
 
-	System on modules (SOMs) je architektura, využívající SoC jako hlavní součásti. SOMs se oproti SoC již dodávají na PCB a krom dříve zmíněných SoC mají na desce umístěné další komponenty, které jsou pro danou aplikaci SOM vyžadovány. \cite{xilinx-what-is-a-som}\par
-	SOMs se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom SOM taktéž podpůrnou desku s dalšími obecnými komponenty, které jsou vhodné pro vývoj standardních aplikací. Pokud zákazník již pomocí vývojové desky odladil svoji vytvářenou aplikaci, může zakoupit samostatný SOM a podpůrnou desku (tzv. baseboard) pro danou aplikaci navrhnou tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tudíž se snižuje cena konečného výrobku o odstraněné nevyužívané komponenty.\par
-	Výrobce \textit{Kria KR260 Robotics Starter Kit}, použité v této práci dodává k produktu rozsáhlou dokumentaci, podle které je možné danou podpůrnou desku sestavit. Jako příklad individuálně vytvořené baseboard je vhodné uvést open source projekt od firmy \textit{Antmicro Ltd}. Tato firma vydala open source design baseboardu pro zařízení \textit{Kria K26}, které je předchůdcem \textit{KR260}, a bylo určeno pro akcelerování audiovizuálních aplikací. Dokumentace a vytvořený návrh je dostupný na \cite{antmicro-open-source-kria-k26-baseboard}.
+	System on modules (SOMs) je architektura jejíž jednou z hlavních součástí je dříve zmiňovaný SoC. SOMs se oproti SoC již dodávají na PCB a kromě SoC mají na desce umístěné další komponenty, které jsou pro danou aplikaci vyžadovány. \cite{xilinx-what-is-a-som}\par
+	SOMs se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom SOM taktéž podpůrnou desku s dalšími obecnými komponenty, jež jsou vhodné pro vývoj standardních aplikací. Pokud zákazník již pomocí vývojové desky odladil vytvářenou aplikaci, může zakoupit samostatný SOM a podpůrnou desku (tzv. carrier card) pro danou aplikaci navrhnou tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tudíž se snižuje cena konečného výrobku o komponenty, které byly z carrier card při návrhu odstraněny pro jejich nevyužití.\par
+	Výrobce platformy \textit{Kria KR260 Robotics Starter Kit}, použité v této práci, dodává k produktu rozsáhlou dokumentaci \cite{kria-som-carrier-card-design-guide-2022} \cite{kria-k26-som-ds}, podle které je možné individuální carrier card sestavit. \par
+	Příkladem individuálně vytvořené carrier card je open source projekt od firmy \textit{Antmicro Ltd}. Tato firma vydala open source design carrier cardu pro zařízení \textit{Kria K26}, které je předchůdcem \textit{KR260}, a bylo určeno pro akcelerování audiovizuálních aplikací. Využívá však totožný SOM ale rozdílný carrier card. Dokumentace a vytvořený návrh je dostupný z \cite{antmicro-open-source-kria-k26-carrier-card}.
 
 	\subsubsection{Embedded Systems}
-	Embedded systémy je název pro skupinu zařízení, obecně systémů, které je možné charakterizovat jako specifické výpočetní zařízení, resp. počítače, které jsou určeny pro podporu funkce nebo řízení nějakého většího celku, produktu nebo fyzikálního systému. Oproti tomu osobní počítač je sice výpočetní zařízení, ale nelze mluvit o embedded systému, protože je určen pro mnoho univerzálních aplikací. \cite{Sass2010}\par
+	Embedded systéms je název pro skupinu zařízení, obecně systémů, které je možné charakterizovat jako specifické výpočetní zařízení, resp. počítače, které jsou určeny pro podporu funkce nebo řízení nějakého většího celku, produktu nebo fyzikálního systému. Oproti tomu osobní počítač je sice výpočetní zařízení, ale nelze mluvit o embedded systému, protože je určen pro mnoho univerzálních aplikací. \cite{Sass2010}\par
 	Dalším důležitým rozdílem mezi \textit{Embedded System} a obecným výpočetním zařízením je ten, že v případě embedded systému je interakce mezi systémem a uživatelem uměle omezena na základní ovládání či kontrolu funkce. Není předpokládáno, že by uživatel, jež aplikaci embedded systému využvá, výrazným způsobem zasahoval do jeho funkce. Naopak obecný výpočetní systém je uzpůsoben na podstatné zásahy uživatele. \cite{Sass2010} \cite{juan-fpgas}\par
-	Do embedded systému obecně vstupují vstupní signály, které jsou následně zpracovány a poté vybrané výsledky výpočtů jsou v podobě výstupní signálů výstupním produktem systému. Tyto produkty mohou pomocí akčních členů zasahovat do řízeného systému či aplikace. Vstupní signály většinou přicházejí ze speciálních snímačů, kompatibilních s embedded systémem (senzor teploty, senzor tlaku, senzor zrychlení, gyroskop apod.). Naopak jeho výstupem signály, vedoucí na konektory, na kterých se dle požadavků objevuje např. specifická hodnota napětí. Nebo mohou na výstupních pinech být připojené LED signalizace, komunikační sběrnice některých komunikačních systémů nebo výstupní LDC displaye. Způsob, kterým jsou kódovány vstupní a výstupní signály je většinou specificky určený aplikaci daného systému. \cite{Sass2010}\par
-	K obecnému výpočetnímu systému je možné připojit vstupní periferie klasických osbních počítačů – myš, klávesnice, mikrofon. Jako hlavní výstupní periferie obecného systému je monitor. Jeho komunikace s periferiemi je většinou standardizována tak, aby bylo možné periferie libovolně zaměňovat bez změny funkčnosti. \cite{Sass2010}.\par
+	Do embedded systému vstupují signály, které jsou následně zpracovány a poté vybrané výsledky výpočtů jsou v podobě výstupní signálů výstupním produktem systému. Tyto produkty mohou pomocí akčních členů zasahovat do řízeného systému. Vstupní signály většinou přicházejí ze speciálních snímačů, kompatibilních s embedded systémem (senzor teploty, senzor tlaku, senzor zrychlení, gyroskop, senzory proudu, inkrementální čidla apod.). Naopak jeho výstupní signály jsou například specifická ovládací hodnota napětí, proudu nebo jiné veličiny. Také mohou být na výstupních pinech připojené LED signalizace, komunikační sběrnice některých komunikačních systémů nebo výstupní LDC displaye. Způsob, kterým jsou kódovány vstupní a výstupní signály, je většinou specificky určený daným řízeným systémem. \cite{Sass2010}\par
+	K obecnému výpočetnímu systému je možné připojit vstupní periferie klasických osbních počítačů – myš, klávesnice, mikrofon. Komunikace embedded systému s periferiemi je většinou standardizována tak, aby bylo možné periferie libovolně zaměňovat bez změny funkčnosti. \cite{Sass2010}.\par
 	Na obrázku \ref{fig:embedded-system-scheme} je zobrazeno názorné blokové schéma řízení fyzikálního systému pomocí embedded systému. Tyto bloky mezi sebou komunikují pomocí digitálních signálů. Pokud tyto signály nejsou digitální, musí se před zpracováním v embedded systému zdiskretizovat.
 
 	\begin{figure}[htbp!]
@@ -420,25 +421,28 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		\fbar
 
 		\subsubsection{Hardware Accelerated Applications}\label{subsec:hardware-accelerated-applications}
-		V mnoha aplikacích, nejen při řízení elektrických pohonů, je vyžadováno, aby výpočty nebo zpracování dat probíhalo vysokou rychlostí. Tento problém nemůže být většinou vyřešen použitím běžného procesoru (CPU), který je optimalizován na provádění obecných komplexních funkcí řízení běhu programu, komunikace či přesunu dat. V moderním světě dochází k exponenciálnímu nárůstu množství dat, které je potřeba zpracovat. Aby tyto data bylo možné v požadovaném čase zpracovat, je třeba využít specifický HW, který bude schopen požadavky rychlosti a výkonu uspokojit. Tento proces se nazývá \textit{Hardware Acceleration}. \cite{xilinx-accelerated-computing}\par
-		Princip hardwaerové akcelerace spočívá v přesunu výpočetně náročných aktivit na zvláštní oddělený hardware. Celkové řízení běhu aplikace a komunikace je ovšem stále přítomno na řídícím CPU. Oddělený hardware, na kterém dochází k akceleraci výpočtů je optimalizován na vykonávanou úlohu a jeho využití přináší zefektivnění běhu celkové aplikace. \cite{xilinx-accelerated-computing}\par
-		Struktura, ve které je využíváno více oddělených hardwarových procesorových a akceleračních jednotek, se často nazývá heterogenní. \cite{xilinx-accelerated-computing}\par
-		Hardwaerová akcelerace poskytuje rychlejší výpočty než CPU, protože využívá značné úrovně paralelismu výpočtů. Oproti tomu klasické CPU vykonává jednotlivé instrukce sériově. I v případě, že CPU má více jader a využívá více vláken, nemůže se úrovni paralelismu při dané energetické náročnosti HW vyrovnat.\par
+		V mnoha aplikacích, nejen při řízení elektrických pohonů, je vyžadováno, aby výpočty nebo zpracování dat probíhalo vysokou rychlostí. Tento problém nemůže být většinou vyřešen použitím běžného procesoru (CPU), který je optimalizován na provádění obecných komplexních funkcí, řízení běhu uživatelského programu, komunikaci či přesun dat. V moderním světě dochází k exponenciálnímu nárůstu množství dat, které je potřeba zpracovat. Aby tyto data bylo možné v požadovaném čase zpracovat, je třeba využít specifický HW a přístup, který bude schopen požadavky rychlosti a výkonu uspokojit. Tento přístup se nazývá \textit{Hardware Acceleration} (hardwaerová akcelerace). \cite{xilinx-accelerated-computing}\par
+		Princip hardwaerové akcelerace spočívá v přesunu výpočetně náročných aktivit na specifický a oddělený hardware. Celkové řízení běhu aplikace a komunikace je ovšem stále vykonáváno řídícím CPU. Oddělený hardware, na kterém dochází k akceleraci výpočtů, je optimalizován na vykonávanou úlohu a jeho využití přináší zefektivnění běhu celkové aplikace. \cite{xilinx-accelerated-computing}\par
+		Struktura, ve které je využíváno více fyzicky oddělených procesorových a hardwaerových akceleračních jednotek, se často nazývá heterogenní. \cite{xilinx-accelerated-computing}\par
+		Hardwaerová akcelerace poskytuje rychlejší výpočty než CPU, protože využívá maximální paralelizace výpočtů. Klasické CPU však vykonává jednotlivé instrukce sériově. I v případě, že CPU má více jader a využívá více vláken, nemůže se úrovni paralelismu při dané energetické náročnosti HW vyrovnat.
 		Pro HW akceleraci je v mnoha oblastech využíváno několik druhů jednotek, které jsou optimální pro dané aplikace.\par
 		\textbf{Graphics Processing Units} (GPUs) jsou jednotky, které převážně slouží k akceleraci zpracování a renderování grafických úloh. V době rapidního rozvoje elektroniky a SW je možné využití GPUs v mnoha odvětví umělé inteligence (AI) či kreativních odvětích. GPUs jsou využívány v aplikacích, kde není kladen veliký důraz na nízkou odezvu (latenci). \cite{xilinx-accelerated-computing}\par
 		\textbf{Tensor Processing Units} (TPUs) jsou jednotky, které slouží k provádění algoritmů strojového učení (machine-learning, ML). Jejich přímé datové propojení umožňuje velmi rychlý a přímý přenost dat. Díky přímému připojení nevyžadují využití pamětí, kter= by přenos dat zpomalovali. \cite{xilinx-accelerated-computing}\par
-		\textbf{Field Programmable Gate Arrays} (FPGAs) jsou jednotky, ve kterých není při výrobě pevně daná HW struktura. To umožňuje vytvoření, resp. naprogramování HW dle požadavků akcelerované aplikace. FPGAs jsou využívány i v on-line výpočtech matematických modelů elektrických strojů. Při realizaci této práce je pro akceleraci využíváno právě těchto programovatelných polí.
+		\textbf{Field Programmable Gate Arrays} (FPGAs) jsou jednotky, ve kterých není při výrobě pevně daná HW struktura. To umožňuje vytvoření, resp. naprogramování HW dle požadavků akcelerované aplikace. FPGAs jsou využívány i v on-line výpočtech matematických modelů elektrických strojů. Při realizaci této práce je pro akceleraci využíváno právě těchto programovatelných polí.\\ \\
+		\noindent Porovnání časové náročnosti matematických výpočtů pro selektivní eliminaci harmonických složek v trakci pomocí CPU a GPU (graphics processing unit) je provedeno v \cite{ieee-selective-harmonic-elimination-nvidia}.\par
+		Z článku vyplývá že využitím GPU skutečně dochází k snížení potřebného času na oředstavený výpočet. V některých případech se jedná o snížení výpočetního času z 183 ms (při použití CPU) na 0,81 ms (při použití NVIDIA Titan V GPU). Díky využití GPU je tedy možné algoritmus provádět v reálném čase v lokomotivě.
 
 	\subsubsection{Výpočetní technika, mobilní zařízení a elektronika}
-	Krom odvětví elektrických pohonů jsou SoC využívány i pro běžné aplikace.\par
-	Protože jsou kladeny stále vyšší nároky na výpočetní rychlost a nižší cenu i ve spotřební elektronice jako jsou mobilní zařízení (mobilní telefony, osobní počítače), servery apod., začíná převažovat využívání SoC i v těchto oblastích.
-	Společnost Apple Inc. např. již prakticky ve všech jejich zařízeních používá vlastní navrhnutý SoC jako je A16 Bionic pro iPhone 14 Pro, Apple M1 a M2 pro tablety a počítače.\par
-	Díky specifickým řešením a vylepšeným architekturám (jádra SoC pro vysoký výkon a jádra pro ekonmickou spotřebu energie) bylo možné značně zvýšit výkon a snížit energetickou náročnost zařízení spotřební elektroniky.
+	Krom odvětví elektrických pohonů jsou SoC využívány i pro běžné aplikace spotřební elektroniky.\par
+	Protože jsou kladeny stále vyšší nároky na výpočetní rychlost a nižší cenu ve spotřební elektronice jako jsou mobilní zařízení (mobilní telefony, osobní počítače), servery apod., začíná převažovat využívání SoC i v těchto oblastích.\par
+	Společnost Apple Inc. např. již prakticky ve všech novějších zařízeních používá individuálně navrhnutý SoC.\par
+	Příkladem je A16 Bionic pro iPhone 14 Pro, Apple M1 a M2 pro tablety a počítače.\par
+	Díky specifickým řešením a vylepšeným architekturám (jádra SoC pro vysoký výkon a jádra pro ekonomickou spotřebu energie) bylo možné značně zvýšit výkon a snížit energetickou náročnost zařízení spotřební elektroniky. \cite{apple-explore-the-new-architecture-of-apple-silicon-macs}
 
 
 	\section{Programovatelné hradlové pole – FPGA}
 		\subsection{Vývoj FPGA z PLD}
-		Programovatelné hradlové pole jsou zařízení, jejichž historický vývoj stojí na programovatelných logických zařízení (programmable logic devices, PLD). První PLD fungovala na principu Booleových funkcí součtu násobení (sum of products). Tyto zařízení obsahovala matici více vstupových bloků AND a OR. Programování požadované probíhalo pomocí přerušování vstupů do těchto logických bloků. Později byly do PLA přidány D klopné obvody s multiplexory. Díky těmto součástím bylo možné vytvářet logické kombinační a sekvenční obvody, resp. automaty. Posledním vylepšením PLA, které stálo před zrodem FPGA, spočívalo v umístění více PLA bloků (skládajících se z AND, OR, multiplexeru a D klopného obvodu) na jeden integrovaný čip. Programovatelné spojení různých PLA bloků a výstupů umožnilo vytvořit požadovanou funkci. \cite{Sass2010}\par
+		Programovatelné hradlové pole jsou zařízení, jejichž historický vývoj stojí na programovatelných logických zařízení (programmable logic devices, PLD). První PLD fungovala na principu Booleových funkcí součtu násobení (sum of products). Tato zařízení obsahovala matici více vstupových bloků AND a OR. Programování požadované funkce probíhalo pomocí přerušování vstupů do těchto logických bloků. Později byly do PLA přidány D klopné obvody s multiplexory. Díky těmto součástím bylo možné vytvářet logické kombinační a sekvenční obvody, resp. automaty. Posledním vylepšením PLA, které stálo před zrodem FPGA, spočívalo v umístění více PLA bloků (skládajících se z AND, OR, multiplexeru a D klopného obvodu) na jeden integrovaný čip. Programovatelné spojení různých PLA bloků a výstupů umožnilo vytvořit požadovanou funkci. \cite{Sass2010}\par
 
 		\subsection{Aktuální složení FPGA}
 		Moderní FPGA se skládají z 2D matice propojených programovatelných logických bloků, bloků speciálních funkcí a propojů vytvořených pomocí CMOS technologie. Po obvodě FPGA jsou rozmístěny vstupní a výstupní piny (I/O), připojené na zvláštní logické bloky. Použité logické bloky se skládají z mnoha logických buněk, které se skládají z generátorů funkcí a paměťových elementů. \cite{Sass2010}\par
