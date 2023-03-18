@@ -19,6 +19,42 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
+    \entry{tomshardware-system-on-chip}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=92aaceff6df8d347e3f06cb62c80e5a9}{%
+           family={Harding},
+           familyi={H\bibinitperiod},
+           given={Scharon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{fullhash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{bibnamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{authorbibnamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{authornamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{authorfullhash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Blog post}
+      \field{day}{11}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{title}{What Is an SoC? A Basic Definition}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.tomshardware.com/reviews/glossary-soc-system-on-chip-definition,5890.html
+      \endverb
+      \verb{url}
+      \verb https://www.tomshardware.com/reviews/glossary-soc-system-on-chip-definition,5890.html
+      \endverb
+    \endentry
     \entry{xilinx-what-is-a-som}{incollection}{}
       \name{author}{1}{}{%
         {{hash=751f6909b12cc240122891470ea09b53}{%
@@ -34,8 +70,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{1}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Website}
@@ -67,8 +103,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{2}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Website}
@@ -100,8 +136,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{3}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{GitHub}
@@ -143,8 +179,8 @@
       \strng{authorbibnamehash}{0ddb1a35936ae3df84886a7791c95a0b}
       \strng{authornamehash}{0ddb1a35936ae3df84886a7791c95a0b}
       \strng{authorfullhash}{0ddb1a35936ae3df84886a7791c95a0b}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{0123743338}
@@ -284,8 +320,8 @@
       \endverb
     \endentry
     \entry{wikipedia-ray-tracing}{incollection}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{booktitle}{Wikipedia}
       \field{day}{6}
@@ -481,8 +517,8 @@
       \strng{authorbibnamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
       \strng{authornamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
       \strng{authorfullhash}{2c4446e1c7c6722464bfcc9b9a6d023e}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Industrial Electronics}

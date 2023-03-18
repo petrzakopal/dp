@@ -376,16 +376,16 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 	\section{System on a chip}
 	% co to je, proč to je
 	% typy postavené kolem  mikrokontroléru, mikroprocesoru a ASIC
-	% Aplikace Embedded system (existují i pro mobilní aplikce, osobní počítače)
-	System on a chip (SoC) je architektura čipu, využívající integrování všech možných částí/bloků systému na jeden čip. Tato integrace značně snižuje nároky na rozměry desek, na kterých jsou tyto SoC umístěny. Místo diskrétních čipů, obstarávající jednotlivé funkce je využito jednoho čipu s mnoha částmi vykonávající požadované funkce.\par
-	SoC se používá z důvodu snižování časové náročnosti přenosu dat mezi jednotlivými diskrétními čipy, protože integrování čipů di jedné polovodičové struktury představuje relativně veliké snížení nároků na kovové vodivé spoje.\par
-	Označení SoC může představovat mnoho architektur. Obecné rozdělení těchto architektur je následující:
+	% Aplikace Embedded system (existují i pro mobilní aplikace, osobní počítače)
+	System on a chip (SoC) je architektura čipu, využívající takovou konstrukci, kdy jsou integrovány různé části/bloky systému na jeden čip. Integrace prvků na jeden čip značně snižuje nároky na rozměry nosičů, na kterých jsou tyto SoC umístěny. Místo diskrétních čipů, obstarávající jednotlivé funkce, je využito jednoho čipu s mnoha částmi vykonávající požadované funkce.\par
+	Protože integrování čipů do jedné polovodičové struktury představuje relativně veliké snížení nároků na kovové vodivé spoje a snižuje časovou náročnost a zvyšuje rychlost přenosu dat, je SoC upřednostňováno před metalicky spojenými diskrétními částmi vykonávající dané operace.\par
+	Označení SoC může představovat mnoho architektur. Obecné rozdělení, nalezitelné v literatuře a veřejných zdrojích, těchto architektur je následující:
 	\begin{itemize}
 		\item SoC využívající mikrokontroléru (CPU, RAM, ROM),
 		\item SoC využívající pouze mikroprocesoru (CPU, možné i GPU, jádra pro specializované výpočty),
 		\item SoC pro specifické aplikace (Application Specific Integrated Circuit – ASIC).
 	\end{itemize}
-	Jedná se tudíž o rozdělení dle hlavní výpočetní jednotky, resp. procesoru v čipu.\par
+	Jedná se tudíž o rozdělení dle hlavní výpočetní jednotky, resp. procesoru v čipu. \cite{tomshardware-system-on-chip}\par
 	Pro řízení elektrických pohonů jsou nejvíce využívány SoC s mikrokontrolérem a ASIC.
 
 	\subsection{Application Specific Integrated Circuit}
@@ -918,14 +918,16 @@ V této části jsou představeny jednotlivé nástroje, využívané při tvorb
 		% Jaký je flow aby byla možná příprava systému
 		% Proč zrovna linux Open Source
 	\subsection{Tvorba HW architektury Xilinx Vivado}
-		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí HLS C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K tvorbě platformy je využito SW Xilinx Vivado. V tomto programu je možné konfigurovat jednotlivé použité prvky jako je ZynQ jednotka, GPIO jednotky, DSP a další. Výsledkem tvorby platformy v této práci je vytvoření XSA souboru, který bude použit pro konfiguraci tvorby PetaLinux systému. Ve Vivado je možné také vytvářet aplikace přímo v VHDL, ale této funkcionality nebude v této práci využito.\par
-		V této sekci bude popsána tvorba platformy pro vývojovou desku Zybo Zynq-7000. Tvorba platformy pro jiné vývojové desky nebo zařízení je specifická pro daného výrobce a může se v nějakých případech lišit. Ovšem základní úkony jako je vložení potřebných bloků a celkový postup tvorby je zachován.\par
+		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí HLS C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K tvorbě platformy je využit SW Xilinx Vivado. V tomto programu je možné konfigurovat jednotlivé použité prvky jako je ZynQ jednotka, GPIO jednotky a další. Výsledkem tvorby platformy v této práci je vytvoření XSA souboru, který bude použit pro konfiguraci tvorby PetaLinux systému. Ve Vivado je možné také vytvářet aplikace přímo v VHDL, ale této funkcionality nebude v této práci využito.\par
+		Tvorba HW pro různé platformy (Digilent Zybo vs Xilinx Kria KR260) má různé specifikace a různý postup.
+		V této sekci bude popsána tvorba platformy pro vývojovou desku Zybo Zynq-7000 a taktéž Xilinx Kria KR260 Starter Kit. Tvorba platformy pro jiné vývojové desky nebo zařízení je specifická pro daného výrobce a může se v nějakých případech lišit. Ovšem základní úkony jako je vložení potřebných bloků a celkový postup tvorby je zachován.\par
 		Postup tvorby platformy byl částečně převzat z \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}.
 
 		\subsubsection{Vivado Board Files}\label{subsubsec:vivado-board-files}
 			Aby bylo možné snadněji vytvořit potřebnou HW architekturu, firmy většinou dodávají tzv. \textit{Board Files}, jež jsou soubory, obsahující různá přednastavení, konfigurace, informace a podmínky připojení IP bloků k reálným součástím. \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
 			Samozřejmě by bylo možné HW architekturu vytvořit i bez těchto předkonfigurovaných souborů, ovšem proces by byl značně náročnější. Pro používanou vývojovou desku Digilent Zybo Zynq-7000 je možné stáhnout tyto soubory z \cite{github-vivado-board-files-for-digilent-fpga-boards}. Způsob instalace board files je popsaný v oficiální dokumentaci firmy Digilent, Inc. v \cite{digilent-installing-vivado-vitis-and-digilent-board-files}.\par
-			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou HW architekturu pro akcelerovanou aplikaci.
+			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou HW architekturu pro akcelerovanou aplikaci.\par
+			Pro vývojovou desku Xilinx Kria KR260 Starter Kit výrobce dodává Board files již s instalací Vivado.
 		
 		\subsubsection{Tvorba HW architektury pro Digilent Zybo Zynq-7000 vývojovou desku}
 		V této části bude představen postup tvorby HW architektury pro vývojovou desku Digilent Zybo Zynq-7000. V případě, že je požadováno aktivování dalších speciálních bloků v čipu, např. pro specifickou akcelerovanou aplikaci, je třeba do blokového designu vložit odpovídající prvky, které zajistí potřebnou funkcionalitu.\par
