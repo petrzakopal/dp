@@ -13,7 +13,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [18.03.2023](/notes/20230318.md)
+💻 [19.03.2023](/notes/20230319.md)
+
+---
+
+💻 [18.03.2023](/notes/20230318.md) <-- řešení problému xdc pro mapování pinů (větrák), buildění petalinuxu, potřebuje to víc místa na disku než zybo, nějak jsem opravoval [dp.tex](./tex/dp.tex)
 
 ---
 
