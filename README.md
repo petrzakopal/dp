@@ -13,7 +13,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [19.03.2023](/notes/20230319.md)
+💻 [20.03.2023](/notes/20230320.md) <--
+
+---
+
+💻 [19.03.2023](/notes/20230319.md) <-- povedlo se rozchodit linux, testovací appka, pak jsem začal dělat novou strukturu projektů na serveru a přestalo mi fungovat napojení věcí na jednotlivé buildy, začínám znovu, popsal jsem / vypsal jsem z hackster.io postup tvorby a opravil tam chyby, začínám dělat v excelu popis na piny package FPGA a schematics pro PMOD atd., inspirace z hackster, zjištěn problém s eth0, musí se dělat zatím vždycky `ifup eth0` a pak až kria dashboard
 
 ---
 
