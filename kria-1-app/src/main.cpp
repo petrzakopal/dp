@@ -49,7 +49,7 @@ Comment: Refactoring for HLS
 
 // Define the function to be called when ctrl-c (SIGINT) is sent to process
 void signal_callback_handler(int signum) {
-   std::cout << "Caught signal " << signum << "\n";
+   std::cout << "\nCaught signal " << signum << "\n";
    // Terminate program
    exit(signum);
 }
@@ -546,84 +546,4 @@ inputTime[0] = 0;
     free(psi2AmplitudeOut);
     free(transformAngleOut);
 
-/*---------------------------------------------------------------------------*/
-
-  std::cout << "random testing code phase\n";
-/*------------------------------ TESTING GPIO ------------------------------*/
-
-
-    int valuefd, exportfd, directionfd;
-  
-    printf("GPIO test running...\n");
-  
-    // The GPIO has to be exported to be able to see it
-    // in sysfs
-  
-    exportfd = open("/sys/class/gpio/export", O_WRONLY);
-    if (exportfd < 0)
-    {
-        printf("Cannot open GPIO to export it\n");
-        exit(1);
-    }
-  
-    write(exportfd, "980", 4);
-    close(exportfd);
-  
-    printf("GPIO exported successfully\n");
-  
-    // Update the direction of the GPIO to be an output
-  
-    directionfd = open("/sys/class/gpio/gpio980/direction", O_RDWR);
-    if (directionfd < 0)
-    {
-        printf("Cannot open GPIO direction it\n");
-        exit(1);
-    }
-  
-    write(directionfd, "out", 4);
-    close(directionfd);
-  
-    printf("GPIO direction set as output successfully\n");
-  
-    // Get the GPIO value ready to be toggled
-  
-    valuefd = open("/sys/class/gpio/gpio980/value", O_RDWR);
-    if (valuefd < 0)
-    {
-        printf("Cannot open GPIO value\n");
-        exit(1);
-    }
-
-    write(valuefd,"1", 2);
-    sleep(3);
-    write(valuefd,"0", 2);
-    close(valuefd);
-
-    directionfd = open("/sys/class/gpio/gpio980/direction", O_RDWR);
-    if (directionfd < 0)
-    {
-        printf("Cannot open GPIO direction it\n");
-        exit(1);
-    }
-
-    write(directionfd, "in", 4);
-    close(directionfd);
-
-    exportfd = open("/sys/class/gpio/unexport", O_WRONLY);
-    if (exportfd < 0)
-    {
-        printf("Cannot open GPIO to unexport it\n");
-        exit(1);
-    }
-  
-    write(exportfd, "980", 4);
-    close(exportfd);
-  
-    printf("GPIO unexported successfully\n");
-/*---------------------------------------------------------------------------*/
-
-    range.end(); // profiling 
-    return 0;
-
- 
 }

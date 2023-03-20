@@ -11,3 +11,5 @@ ip_cache/
 zybo-timer
 zybo-pmod-int
 zybo-rt
+*platform*
+zybo-no-rt-same-hw

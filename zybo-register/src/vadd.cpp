@@ -21,7 +21,7 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <poll.h>
-#include <cstdlib>
+// #include <cstdlib>
 #include <signal.h>
 
 static const int DATA_SIZE = 4096;
