@@ -449,25 +449,24 @@ inputTime[0] = 0;
 
     int narg = 0;
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_odeCVCalculationSettings));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVVariables)); // enable for first type kernel
+
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVCoeff));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI1));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI2));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI3));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputMotorMechanicalAngularVelocity));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2Amplitude));
+
 
     // //second type kernel - disable for frst type kernel
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2alpha));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2beta));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_transformAngle));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2AmplitudeOut));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_transformAngleOut));
 
     // Data will be migrated to kernel space
     // delete buffer_psi2alpha and buffer_psi2beta for first type kernel
     // delete buffer_modelCVVariables for second type kernel and add for first type
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta, buffer_psi2AmplitudeOut, buffer_transformAngleOut}, 0 /* 0 means from host*/));
+    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
 
     /*------------------------------------------------------------------------------------------------------------*/
 
@@ -475,7 +474,7 @@ inputTime[0] = 0;
     // Launch the Kernel
     OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
     
-    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_psi2alpha, buffer_psi2beta, buffer_psi2AmplitudeOut, buffer_transformAngleOut}, CL_MIGRATE_MEM_OBJECT_HOST));
+    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_psi2AmplitudeOut, buffer_transformAngleOut}, CL_MIGRATE_MEM_OBJECT_HOST));
     rangeKernel.end();
     OCL_CHECK(err, q.finish());
 
@@ -489,23 +488,6 @@ inputTime[0] = 0;
     float transformAngle;
     float timeCV = odeCVCalculationSettingsArray[0];
 
-    // hsot data psi2Amplitude and transformAngle
-    for(int i = 0; i<odeCVCalculationSettingsArray[4];i++ )
-    {   
-        timeCV = timeCV + odeCVCalculationSettingsArray[2];
-
-        psi2Amplitude = sqrtf(psi2alpha[i] * psi2alpha[i] + psi2beta[i] * psi2beta[i] );
-        transformAngle = atan2f(psi2beta[i],psi2alpha[i]);
-        std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude << "\n";
-
-        // std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude[i] << "\n";
-        std::cout << "transformAngle[" << i << "]: "<< transformAngle << "\n";
-        // std::cout << "inputI1[" << i << "]: "<< inputI1[i] << "\n";
-        
-
-        modelCVOutputDataFile2<<timeCV<<","<<psi2Amplitude<<","<<transformAngle<<"\n";
-    }
-    modelCVOutputDataFile2.close();
 
 
     // kernel data psi2Amplitude and transformAngle
@@ -521,12 +503,36 @@ inputTime[0] = 0;
 
        
         std::cout << "transformAngle[" << i << "]: "<< transformAngleOut[i] << "\n";
-        
+         modelCVOutputDataFile2<<timeCV<<","<<psi2AmplitudeOut[i]<<","<<transformAngleOut[i]<<"\n";
         
     }
 
    
+    modelCVOutputDataFile2.close();
+    std::cout << "sleeping for 5 secs\n";
+    sleep(5);
+    // testing kernel multiple executions with the same data
+    int maxKernelIterations = 500;
+    std::cout << "running kernel for " << maxKernelIterations << "\n";
+    for(int i = 0; i<maxKernelIterations;i++)
+    {
+        inputI1[0] = i;
+        inputI2[0] = -i+5;
+        inputI3[0] = -i-5;
+        inputMotorMechanicalAngularVelocity[0] = 0;
+        psi2alpha[0] = 0;
+        psi2beta[0] = 0;
+        OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
+         // Launch the Kernel
+        OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
+      
+        OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_psi2AmplitudeOut, buffer_transformAngleOut}, CL_MIGRATE_MEM_OBJECT_HOST));
+        OCL_CHECK(err, q.finish());
 
+        std::cout << "transformAngle[" << i << "]: "<< transformAngleOut[i] << "\n";
+        modelCVOutputDataFile2<<timeCV<<","<<psi2AmplitudeOut[i]<<","<<transformAngleOut[i]<<"\n";
+    }
+    std::cout << "ran kernel for " << maxKernelIterations << "\n";
     std::cout << "the end of the most useful program is here\n";
     
 
@@ -537,7 +543,6 @@ inputTime[0] = 0;
     free(inputI1);
     free(inputI2);
     free(inputI3);
-    // free(psi2Amplitude);
     free(psi2alpha);
     free(psi2beta);
     free(inputMotorMechanicalAngularVelocity);
