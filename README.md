@@ -13,7 +13,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [21.03.2023](/notes/20230321.md)
+💻 [22.03.2023](/notes/20230322.md) <--
+
+---
+
+💻 [21.03.2023](/notes/20230321.md) <-- snaha vylepšit curvel model a přijít na to, proč kernel tak dlouho trvá, kernel je rychlý, ale trvá přenos dat a enqueue věcí, dodělání excelu na pmod, otestoval jsem i vec-add, taky to nebylo nic moc s tím přenosem dat, musím zmenšit počet přenášených bufferů
 
 ---
 
