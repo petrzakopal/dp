@@ -13,7 +13,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [20.03.2023](/notes/20230320.md) <--
+💻 [21.03.2023](/notes/20230321.md)
+
+---
+
+💻 [20.03.2023](/notes/20230320.md) <-- rozchození starší verze curvel model, snaha o optimalizaci - bude muset přijít na řadu optimalizace v podobě hls::stream, popis dole, vytvoření skriptů na transfer dat server -> pc -> kria a na transport analytik kria -> pc -> server, začátek lepší přípravy pinoutu v excelu
 
 ---
 
