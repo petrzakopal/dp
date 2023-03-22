@@ -3,7 +3,6 @@
 	<name>kria-1-app</name>
 	<comment></comment>
 	<projects>
-		<project>kria-1-platform</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
