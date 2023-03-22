@@ -1,0 +1,3 @@
+
+¡
+vadd$3c8f9f9b-3e27-4123-a57b-ee776a47d40c"ò/tools/Xilinx/Vitis/2022.2/bin/unwrapped/lnx64.o/v++  --vivado.prop "run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}" --advanced.misc "report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}" --advanced.misc "report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}" --target sw_emu --compile -I../src --config vadd-compile.cfg -obuild/vadd.xo ../src/vector_addition.cpp 

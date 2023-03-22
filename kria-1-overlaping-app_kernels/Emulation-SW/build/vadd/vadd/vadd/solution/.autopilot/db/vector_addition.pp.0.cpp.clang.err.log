@@ -1,0 +1,16 @@
+/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd/vadd.tcl:29:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=top_XLX_SEP_ PragmaContext=directive_XLX_SEP_ PragmaFunction=vadd_XLX_SEP_ PragmaOptions=name=vadd_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLSDIRECTIVE TOP name=vadd
+        ^
+/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:34:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=loop_tripcount_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=vadd_XLX_SEP_ PragmaOptions=min = c_len max = c_len_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS LOOP_TRIPCOUNT min = c_len max = c_len
+        ^
+/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:40:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=loop_tripcount_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=vadd_XLX_SEP_ PragmaOptions=min = c_size max = c_size_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
+        ^
+/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:46:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=loop_tripcount_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=vadd_XLX_SEP_ PragmaOptions=min = c_size max = c_size_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
+        ^
+/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:52:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=loop_tripcount_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=vadd_XLX_SEP_ PragmaOptions=min = c_size max = c_size_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS LOOP_TRIPCOUNT min = c_size max = c_size
+        ^
+5 warnings generated.

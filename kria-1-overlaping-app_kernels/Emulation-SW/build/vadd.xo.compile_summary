@@ -1,0 +1,168 @@
+<ENTRY>
+{
+ "thisFile": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd.xo.compile_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed Mar 22 21:26:34 2023",
+ "timestampMillis": "1679516794582",
+ "buildStep": {
+  "cmdId": "ad5f5af3-69a2-4169-81ce-4175c94607d6",
+  "name": "v++",
+  "logFile": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd.steps.log",
+  "commandLine": "/tools/Xilinx/Vitis/2022.2/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" --target sw_emu --compile -I../src --config vadd-compile.cfg -obuild/vadd.xo ../src/vector_addition.cpp ",
+  "args": [
+   "--target",
+   "sw_emu",
+   "--compile",
+   "-I../src",
+   "--config",
+   "vadd-compile.cfg",
+   "-obuild/vadd.xo",
+   "../src/vector_addition.cpp"
+  ],
+  "iniFiles": [
+   {
+    "path": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/vadd-compile.cfg",
+    "content": "platform=/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-platform/export/kria-1-platform/kria-1-platform.xpfm\nsave-temps=1\nkernel=vadd\ndebug=1\nmessageDb=build/vadd.mdb\ntemp_dir=build\nreport_dir=build/reports\nlog_dir=build/logs\n\n[advanced]\nmisc=solution_name=vadd"
+   }
+  ],
+  "cwd": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Mar 22 21:26:34 2023",
+ "timestampMillis": "1679516794582",
+ "status": {
+  "cmdId": "ad5f5af3-69a2-4169-81ce-4175c94607d6",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Wed Mar 22 21:26:36 2023",
+ "timestampMillis": "1679516796854",
+ "buildSummary": {
+  "hardwarePlatform": "kria-1-platform.xpfm",
+  "hardwareDsa": "kria_bd_wrapper.xsa",
+  "platformDirectory": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-platform/export/kria-1-platform",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_COMPILE",
+  "target": "TT_SW_EMU",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "vadd",
+     "file": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2022.2. SW Build 3671529 on 2022-10-13-17:52:11"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Mar 22 21:26:36 2023",
+ "timestampMillis": "1679516796913",
+ "buildStep": {
+  "cmdId": "2c99c631-3124-4118-b0ef-badb1cecca19",
+  "name": "vitis_hls",
+  "logFile": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd/vitis_hls.log",
+  "commandLine": "vitis_hls -f /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd/vadd.tcl -messageDb vitis_hls.pb",
+  "args": [
+   "vitis_hls",
+   "-f",
+   "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd/vadd.tcl",
+   "-messageDb",
+   "vitis_hls.pb"
+  ],
+  "iniFiles": [],
+  "cwd": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Mar 22 21:26:36 2023",
+ "timestampMillis": "1679516796914",
+ "status": {
+  "cmdId": "2c99c631-3124-4118-b0ef-badb1cecca19",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Mar 22 21:27:35 2023",
+ "timestampMillis": "1679516855637",
+ "status": {
+  "cmdId": "2c99c631-3124-4118-b0ef-badb1cecca19",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Mar 22 21:27:35 2023",
+ "timestampMillis": "1679516855690",
+ "status": {
+  "cmdId": "ad5f5af3-69a2-4169-81ce-4175c94607d6",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Mar 22 21:27:35 2023",
+ "timestampMillis": "1679516855890",
+ "report": {
+  "path": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/reports/vadd/vadd_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Mar 22 21:27:35 2023",
+ "timestampMillis": "1679516855891",
+ "report": {
+  "path": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

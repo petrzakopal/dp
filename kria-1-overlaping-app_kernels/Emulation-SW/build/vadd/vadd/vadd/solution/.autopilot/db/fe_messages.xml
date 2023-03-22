@@ -1,0 +1,18 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd/vadd.tcl:29:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="vadd" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=vadd" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:34:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="vadd" ARG_PragmaIsValid="1" ARG_PragmaOptions="min = c_len max = c_len" ARG_PragmaType="loop_tripcount" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:40:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="vadd" ARG_PragmaIsValid="1" ARG_PragmaOptions="min = c_size max = c_size" ARG_PragmaType="loop_tripcount" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:46:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="vadd" ARG_PragmaIsValid="1" ARG_PragmaOptions="min = c_size max = c_size" ARG_PragmaType="loop_tripcount" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp:52:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="vadd" ARG_PragmaIsValid="1" ARG_PragmaOptions="min = c_size max = c_size" ARG_PragmaType="loop_tripcount" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+

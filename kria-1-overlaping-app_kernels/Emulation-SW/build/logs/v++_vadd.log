@@ -1,0 +1,16 @@
+INFO: [v++ 60-1306] Additional information associated with this v++ compile can be found at:
+	Reports: /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/reports/vadd
+	Log files: /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/logs/vadd
+INFO: [v++ 60-1548] Creating build summary session with primary output /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd.xo.compile_summary, at Wed Mar 22 21:26:35 2023
+INFO: [v++ 60-1315] Creating rulecheck session with output '/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/reports/vadd/vadd_guidance.html', at Wed Mar 22 21:26:35 2023
+INFO: [v++ 60-895]   Target platform: /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-platform/export/kria-1-platform/kria-1-platform.xpfm
+INFO: [v++ 60-1578]   This platform contains Xilinx Shell Archive '/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-platform/export/kria-1-platform/hw/kria_bd_wrapper.xsa'
+INFO: [v++ 60-585] Compiling for software emulation target
+INFO: [v++ 60-423]   Target device: kria-1-platform
+INFO: [v++ 60-242] Creating kernel: 'vadd'
+INFO: [v++ 60-594] Finished kernel compilation
+INFO: [v++ 60-586] Created build/vadd.xo
+INFO: [v++ 60-2343] Use the vitis_analyzer tool to visualize and navigate the relevant reports. Run the following command. 
+    vitis_analyzer /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd.xo.compile_summary 
+INFO: [v++ 60-791] Total elapsed time: 0h 1m 11s
+INFO: [v++ 60-1653] Closing dispatch client.
