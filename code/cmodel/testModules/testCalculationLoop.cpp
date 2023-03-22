@@ -112,7 +112,7 @@ int main()
 
 
      /*-------------------- INVERTOR ---------------------*/
-     Invertor.reconstrutedInvertorOutputVoltageAllocateMemory();
+     Invertor.reconstructedInvertorOutputVoltageAllocateMemory();
 
     /****************************************************************/
 

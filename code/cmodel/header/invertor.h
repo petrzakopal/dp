@@ -23,7 +23,7 @@ class InvertorClass
 
         /*-------------------------------------------------------------------------------------------------------------------*/
         /*------------------------------- ALLOCATE MEMORY FOR INVEROTR PHASE VOLTAGE OUTPUT ---------------------------------*/
-        void reconstrutedInvertorOutputVoltageAllocateMemory();
+        void reconstructedInvertorOutputVoltageAllocateMemory();
         /*-------------------------------------------------------------------------------------------------------------------*/
 
 

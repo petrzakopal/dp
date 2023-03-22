@@ -8,7 +8,7 @@
 
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------- MEMORY ALLOCATION FOR INVERTOR OUTPUT PHASE VOLTAGE IN SIMULATION ---------------------------------*/
- void InvertorClass::reconstrutedInvertorOutputVoltageAllocateMemory()
+ void InvertorClass::reconstructedInvertorOutputVoltageAllocateMemory()
  {
     posix_memalign((void **)&reconstructedInvertorOutputVoltage , 4096 , sizeof(ReconstructedInvertorOutputVoltageType) );
  }
