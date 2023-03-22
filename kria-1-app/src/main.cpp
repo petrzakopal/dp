@@ -31,14 +31,19 @@ Comment: Refactoring for HLS
 #include <iostream>
 #include <stdlib.h>
 #include <hls_math.h>
-// #include "header/MotorModel.h"
-#include "header/CurVelModel.h"
+
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <fcntl.h>
 #include <unistd.h>
 #include <signal.h>
+#include "header/MotorModel.h"
+#include "header/CurVelModel.h"
+#include "header/regulator.h"
+// #include "header/svmCore.h" // already in invertor
+#include "header/transformation.h"
+#include "header/invertor.h"
 
 
 
@@ -218,11 +223,77 @@ int main(int argc, char* argv[]) {
     
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ DEFINING CLASS OBJECT AND ALLOCATING MEMORY FOR SECOND I-N MODEL ------------------------------*/
-    // CurVelModelClass CurVelModel;
 /*-------------------------------------------------------------------------------------------------------------------------------*/
-   
+
+/*-------------------------------------------------------------*/
+/*-------------------- CLASS DEFINITIONS ---------------------*/
+MotorModelClass MotorModel;
+svmCoreClass svmCore;
+RegulatorClass Regulator;
+TransformationClass Transformation;
+InvertorClass Invertor;
+/*-------------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------*/
+/*-------------------- GLOBAL SETTINGS ---------------------*/
+// global settings which will be translated in additional parameters
+float globalCalculationStep = 0.000001;
+float globalInitialCalculationTime = 0;
+float globalFinalCalculationTime = 1;
+float commonModeVoltage;
+float compareLevel;
+float trianglePoint;
+float minMaxCommonModeVoltageConstant = 287;
+float uS = 400;
+float uDC = ((3 * sqrt(2))/PI) * uS;
+float globalSimulationTime = globalInitialCalculationTime;
+/*-------------------------------------------------------------*/
+
+
+
+
+/*-------------------- ASYNCHRONOUS MOTOR MODEL ---------------------*/
+MotorModel.odeCalculationSettingsAllocateMemory();
+    
+
+// needed for further memory allocation
+MotorModel.setOdeCalculationSettings(globalInitialCalculationTime, globalFinalCalculationTime, globalCalculationStep);
+
+MotorModel.motorParametersAllocateMemory();
+MotorModel.stateSpaceCoeffAllocateMemory();
+MotorModel.modelVariablesForOnlineCalculationAllocateMemory();
+/*-------------------- END OF ASYNCHRONOUS MOTOR MODEL ---------------------*/
+/*-------------------- SPACE VECTOR MODULATION CORE ---------------------*/
+// svmCore.phaseWantedVoltageAllocateMemory(); // depracated
+svmCore.invertorSwitchAllocateMemory(); 
+svmCore.triangleWaveSettingsAllocateMemory();
+svmCore.coreInternalVariablesAllocateMemory();
+/*----------------------------------------------------------------------*/
+
+// Not fancy definitions in the PS, maybe change later in the future
 float *odeCVCalculationSettingsArray;
 // int *numberOfIterations;
 posix_memalign((void **)&odeCVCalculationSettingsArray , 4096 , 5*sizeof(float) );
@@ -231,9 +302,11 @@ odeCVCalculationSettingsArray[0] = 0; // initialCalculationTime
 odeCVCalculationSettingsArray[1] = 1; // finalCalculationTime
 odeCVCalculationSettingsArray[2] = 0.0001; // calculationStep
 odeCVCalculationSettingsArray[3] = 0; // calculationTime
-odeCVCalculationSettingsArray[4] = (int)ceil(((odeCVCalculationSettingsArray[1] - odeCVCalculationSettingsArray[0])/odeCVCalculationSettingsArray[2]));
+odeCVCalculationSettingsArray[4] = (int)ceil(((odeCVCalculationSettingsArray[1] - odeCVCalculationSettingsArray[0])/odeCVCalculationSettingsArray[2])); // number of iterations - should not be used in a realtime model
 
-
+/**
+ * Model Parameters
+*/
 float *motorParametersArray;
 posix_memalign((void **)&motorParametersArray , 4096 , 4*sizeof(float) );
 motorParametersArray[0] = 0.225f; // R2
@@ -245,15 +318,106 @@ float * modelCVCoeffArray;
 posix_memalign((void **)&modelCVCoeffArray , 4096 , 3*sizeof(float) );
 modelCVCoeffArray[0] = motorParametersArray[0]/motorParametersArray[2]; // R2DL2
 modelCVCoeffArray[1] = (motorParametersArray[0] * motorParametersArray[1])/motorParametersArray[2]; // R2MLmDL2
-modelCVCoeffArray[2] = 2;
+modelCVCoeffArray[2] = 2; // number of pole pairs
 
+
+
+
+/*-------------------- REGULATORS ---------------------*/
+Regulator.regulatorAllocateMemory();
+/*---------------------------------------------------*/
+
+
+/*-------------------- INVERTOR ---------------------*/
+Invertor.reconstructedInvertorOutputVoltageAllocateMemory();
+/*-------------------------------------------------*/
+
+
+
+
+
+/*------------------------------------------------------------------*/
+/*-------------------- TRIANGLE WAVE SETTINGS ---------------------*/
+svmCore.triangleWaveSettings->waveAmplitude = 1;
+svmCore.triangleWaveSettings->calculationStep = 0.000001;
+svmCore.triangleWaveSettings->wavePeriod = 0.0001;
+svmCore.triangleWaveSettings->calculationTime = 0;
+/*------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------*/
+/*-------------------- IVNVERTOR MODEL SETTINGS ---------------------*/
+float Udcmax = 311.87;
+/*--------------------------------------------------------------------*/
+
+
+/****************************************************************/
+/*-------------------- REGULATOR SETTINGS ---------------------*/
+    
+
+/*-------------------- FLUX REGULATOR ---------------------*/
+Regulator.fluxRegulator->ki = 30300; // 30300
+Regulator.fluxRegulator->kp = 11410; //11410
+Regulator.fluxRegulator->saturationOutputMax = 16.4223;
+Regulator.fluxRegulator->saturationOutputMin = 0;
+Regulator.fluxRegulator->saturationOutput = 0;
+Regulator.fluxRegulator->clampingStatus = false;
+Regulator.fluxRegulator->saturationCheckStatus = false;
+Regulator.fluxRegulator->signCheckStatus = false;
+Regulator.fluxRegulator->measuredValue = 0;
+/*------------------------------------------------------*/
+
+/*-------------------- VELOCITY REGULATOR ---------------------*/
+Regulator.velocityRegulator->ki = 4650000; // 4650000
+Regulator.velocityRegulator->kp = 3720; // 3720
+Regulator.velocityRegulator->saturationOutputMax = 29.1228;
+Regulator.velocityRegulator->saturationOutputMin = -29.1228;
+Regulator.velocityRegulator->saturationOutput = 0;
+Regulator.velocityRegulator->clampingStatus = false;
+Regulator.velocityRegulator->saturationCheckStatus = false;
+Regulator.velocityRegulator->signCheckStatus = false;
+Regulator.velocityRegulator->measuredValue = 0;
+/*------------------------------------------------------*/
+
+/*-------------------- ID REGULATOR ---------------------*/
+Regulator.idRegulator->ki = 2915.6; // 2915.6
+Regulator.idRegulator->kp = 22.3961;// 22.3961
+Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
+Regulator.idRegulator->saturationOutput = - Udcmax;
+Regulator.idRegulator->clampingStatus = false;
+Regulator.idRegulator->saturationCheckStatus = false;
+Regulator.idRegulator->signCheckStatus = false;
+Regulator.idRegulator->measuredValue = 0;
+/*------------------------------------------------------*/
+
+/*-------------------- IQ REGULATOR ---------------------*/
+Regulator.iqRegulator->ki = 2915.6; // 2915.6
+Regulator.iqRegulator->kp = 22.3961; // 22.3961
+Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
+Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
+Regulator.iqRegulator->clampingStatus = false;
+Regulator.iqRegulator->saturationCheckStatus = false;
+Regulator.iqRegulator->signCheckStatus = false;
+Regulator.iqRegulator->measuredValue = 0;
+/*------------------------------------------------------*/
+
+/****************************************************************/
+
+
+
+
+/*--------------------------------------------------------------*/
+/*-------------------- WANTED VALUES INPUT ---------------------*/
+// now hardcoded, change later
+Regulator.fluxRegulator->wantedValue = 1;
+Regulator.velocityRegulator->wantedValue = 50;
+Regulator.idRegulator->wantedValue = 0;
+Regulator.iqRegulator->wantedValue = 0;
+/*--------------------------------------------------------------*/
 
 
 
 /*---------------------------------------------------------------------------------------------------------*/
 
-float *psi2AmplitudeOut;
-float * transformAngleOut;
 
 /*------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ LOADING DATA FROM A LIGHTWEIGHT EXPORT FORMAT ------------------------------*/
@@ -263,11 +427,6 @@ float *inputI1;
 float *inputI2;
 float *inputI3;
 float *inputMotorMechanicalAngularVelocity;
-
-// float *inputI1Temp;
-// float *inputI2Temp;
-// float *inputI3Temp;
-// float *inputMotorMechanicalAngularVelocityTemp;
 
 float *psi2alpha;
 float *psi2beta;
@@ -288,92 +447,83 @@ if(modeSelection == 0)
 {
 
     
-posix_memalign((void **)&inputTime , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputI1 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputI2 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputTime , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputI1 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputI2 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
 
-// posix_memalign((void **)&inputI1Temp , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-// posix_memalign((void **)&inputI2Temp , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-// posix_memalign((void **)&inputI3Temp , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-// posix_memalign((void **)&inputMotorMechanicalAngularVelocityTemp , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-
-
-posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&psi2AmplitudeOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&transformAngleOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-
-psi2alpha[0] = 0;
-psi2beta[0] = 0;
+    psi2alpha[0] = 0;
+    psi2beta[0] = 0;
 
     /*------------------------------ LOADING DATA STREAM ------------------------------*/
-printf("------------------------------------\n\r");
-printf("Preloaded data mode\n");
-printf("------------------------------------\n\r");
-std::ifstream inputData( "outputData.csv" );
+    printf("------------------------------------\n\r");
+    printf("Preloaded data mode\n");
+    printf("------------------------------------\n\r");
+    std::ifstream inputData( "outputData.csv" );
 
-int switchReadingIndex = 0;
-int timeIndex = 0;
-int i1Aindex = 0;
-int i1Bindex = 0;
-int i1Cindex = 0;
-int motorMechanicalAngularVelocityIndex = 0;
+    int switchReadingIndex = 0;
+    int timeIndex = 0;
+    int i1Aindex = 0;
+    int i1Bindex = 0;
+    int i1Cindex = 0;
+    int motorMechanicalAngularVelocityIndex = 0;
 
-for( std::string line; std::getline( inputData, line, ','); )
-{
+        for( std::string line; std::getline( inputData, line, ','); )
+        {
 
 
-        // data structure is important, defined in a lightweight export file like {time,i1,i2,i3,motorMechanicalAngularVelocity}
-         switch(switchReadingIndex)
-            {
-                case 0:
+            // data structure is important, defined in a lightweight export file like {time,i1,i2,i3,motorMechanicalAngularVelocity}
+            switch(switchReadingIndex)
+                {
+                    case 0:
                
-                inputTime[timeIndex] = std::stof (line, NULL);
-                timeIndex++;
-                switchReadingIndex++;
-                break;
+                    inputTime[timeIndex] = std::stof (line, NULL);
+                    timeIndex++;
+                    switchReadingIndex++;
+                    break;
 
-                case 1:
+                    case 1:
 
-                inputI1[i1Aindex] = std::stof (line, NULL);
-                i1Aindex++;
-                switchReadingIndex++;
-                break;
+                    inputI1[i1Aindex] = std::stof (line, NULL);
+                    i1Aindex++;
+                    switchReadingIndex++;
+                    break;
 
 
-                case 2:
+                    case 2:
 
-                inputI2[i1Bindex] = std::stof (line, NULL);
-                i1Bindex++;
-                switchReadingIndex++;
-                break;
+                    inputI2[i1Bindex] = std::stof (line, NULL);
+                    i1Bindex++;
+                    switchReadingIndex++;
+                    break;
 
-                case 3:
+                    case 3:
 
-                inputI3[i1Cindex] = std::stof (line, NULL);
-                i1Cindex++;
-                switchReadingIndex++;
-                break;
+                    inputI3[i1Cindex] = std::stof (line, NULL);
+                    i1Cindex++;
+                    switchReadingIndex++;
+                    break;
 
-                case 4:
+                    case 4:
 
-                inputMotorMechanicalAngularVelocity[motorMechanicalAngularVelocityIndex] = std::stof (line, NULL);
-                motorMechanicalAngularVelocityIndex++;
-                switchReadingIndex = 0;
-                break;
+                    inputMotorMechanicalAngularVelocity[motorMechanicalAngularVelocityIndex] = std::stof (line, NULL);
+                    motorMechanicalAngularVelocityIndex++;
+                    switchReadingIndex = 0;
+                    break;
 
-        }
+            }
     
 
-}
+        }
     inputData.close(); // close that file
 
-
+}
 /*------------------------------ LOADING DATA STREAM ------------------------------*/
 /*------------------------------------------------------------------------------------------------------------*/
-}
+
 else if(modeSelection == 1)
 {
     
@@ -384,18 +534,14 @@ else if(modeSelection == 1)
     odeCVCalculationSettingsArray[4] = 1;
 
     
-posix_memalign((void **)&inputTime , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputI1 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputI2 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&psi2AmplitudeOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-posix_memalign((void **)&transformAngleOut , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
-
-
-inputTime[0] = 0;
+    posix_memalign((void **)&inputTime , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputI1 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputI2 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputI3 , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&inputMotorMechanicalAngularVelocity , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&psi2alpha , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    posix_memalign((void **)&psi2beta , 4096 , odeCVCalculationSettingsArray[4]*sizeof(float) );
+    inputTime[0] = 0;
 
     scanf("%f %f %f %f %f %f", inputI1, inputI2, inputI3, inputMotorMechanicalAngularVelocity, psi2alpha, psi2beta);
     printf("------------------------------------\n\r");
@@ -408,94 +554,111 @@ inputTime[0] = 0;
 }
 
 
-    
-// posix_memalign((void **)&psi2alpha , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-// posix_memalign((void **)&psi2beta , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-// posix_memalign((void **)&psi2Amplitude , 4096 , CurVelModel.odeCVCalculationSettings->numberOfIterations*sizeof(float) );
-
-
-// psi2alpha[0] = 0;
-// psi2beta[0] = 0;
-// psi2Amplitude[0] = 0;
-// transformAngle[0] = 0;
-
-
 float *masterInput;
-posix_memalign((void **)&masterInput , 4096 , (14)*sizeof(float) );
+posix_memalign((void **)&masterInput , 4096 , (58)*sizeof(float) );
 float *masterOutput;
-posix_memalign((void **)&masterOutput , 4096 , (2)*sizeof(float) );
+posix_memalign((void **)&masterOutput , 4096 , (16)*sizeof(float) );
 
-masterInput[0] = odeCVCalculationSettingsArray[0];
-masterInput[1] = odeCVCalculationSettingsArray[1];
-masterInput[2] = odeCVCalculationSettingsArray[2];
-masterInput[3] = odeCVCalculationSettingsArray[3];
-masterInput[4] = odeCVCalculationSettingsArray[4];
-masterInput[5] = modelCVCoeffArray[0];
-masterInput[6] = modelCVCoeffArray[1];
-masterInput[7] = modelCVCoeffArray[2];
+masterInput[0] = odeCVCalculationSettingsArray[0]; // initialCalculationTime
+masterInput[1] = odeCVCalculationSettingsArray[1]; // finalCalculationTime
+masterInput[2] = odeCVCalculationSettingsArray[2]; // calculationStep
+masterInput[3] = odeCVCalculationSettingsArray[3]; // calculationTime
+masterInput[4] = odeCVCalculationSettingsArray[4]; // number of iterations - should not be used in a realtime model
+masterInput[5] = modelCVCoeffArray[0]; // R2DL2
+masterInput[6] = modelCVCoeffArray[1]; // R2MLmDL2
+masterInput[7] = modelCVCoeffArray[2]; // number of pole pairs
 masterInput[8] = inputI1[0];
 masterInput[9] = inputI2[0];
 masterInput[10] = inputI3[0];
 masterInput[11] = inputMotorMechanicalAngularVelocity[0];
-masterInput[12] = psi2alpha[0];
-masterInput[13] = psi2beta[0];
+masterInput[12] = masterOutput[2]; // psi2alpha - will not be used in realtime app (will be in kernel)
+masterInput[13] = masterOutput[3];  //psi2beta - will not be used in realtime app (will be in kernel)
+masterInput[14] = svmCore.triangleWaveSettings->waveAmplitude;
+masterInput[15] = svmCore.triangleWaveSettings->calculationStep;
+masterInput[16] = svmCore.triangleWaveSettings->wavePeriod;
+masterInput[17] = svmCore.triangleWaveSettings->calculationTime = 0;
+masterInput[18] =  Udcmax;
+masterInput[19] = Regulator.fluxRegulator->ki;
+masterInput[20] = Regulator.fluxRegulator->kp;
+masterInput[21] = Regulator.fluxRegulator->saturationOutputMax;
+masterInput[22] = Regulator.fluxRegulator->saturationOutputMin;
+masterInput[23] = Regulator.fluxRegulator->saturationOutput;
+masterInput[24] = Regulator.fluxRegulator->clampingStatus;
+masterInput[25] = Regulator.fluxRegulator->saturationCheckStatus;
+masterInput[26] = Regulator.fluxRegulator->signCheckStatus;
+masterInput[27] = Regulator.fluxRegulator->measuredValue;
+masterInput[28] = Regulator.velocityRegulator->ki;
+masterInput[29] = Regulator.velocityRegulator->kp;
+masterInput[30] = Regulator.velocityRegulator->saturationOutputMax;
+masterInput[31] = Regulator.velocityRegulator->saturationOutputMin;
+masterInput[32] = Regulator.velocityRegulator->saturationOutput;
+masterInput[33] = Regulator.velocityRegulator->clampingStatus;
+masterInput[34] = Regulator.velocityRegulator->saturationCheckStatus;
+masterInput[35] = Regulator.velocityRegulator->signCheckStatus;
+masterInput[36] = Regulator.idRegulator->ki;
+masterInput[37] = Regulator.idRegulator->kp;
+masterInput[38] = Regulator.idRegulator->saturationOutputMax;
+masterInput[39] = Regulator.idRegulator->saturationOutput;
+masterInput[40] = Regulator.idRegulator->clampingStatus;
+masterInput[41] = Regulator.idRegulator->saturationCheckStatus;
+masterInput[42] = Regulator.idRegulator->signCheckStatus;
+masterInput[43] = Regulator.idRegulator->measuredValue;
+masterInput[44] = Regulator.iqRegulator->ki;
+masterInput[45] = Regulator.iqRegulator->kp;
+masterInput[46] = Regulator.iqRegulator->saturationOutputMax;
+masterInput[47] = Regulator.iqRegulator->saturationOutputMin;
+masterInput[48] = Regulator.iqRegulator->clampingStatus;
+masterInput[49] = Regulator.iqRegulator->saturationCheckStatus;
+masterInput[50] = Regulator.iqRegulator->signCheckStatus;
+masterInput[51] = Regulator.iqRegulator->measuredValue;
+masterInput[52] = Regulator.fluxRegulator->wantedValue;
+masterInput[53] = Regulator.velocityRegulator->wantedValue;
+masterInput[54] = Regulator.idRegulator->wantedValue;
+masterInput[55] = Regulator.iqRegulator->wantedValue;
 
 
-std::cout << "master input 9 " << masterInput[9] << "\n";
-/*------------------------------------------------------------------------------------------------------------*/
-    // OCL_CHECK(err, cl::Buffer buffer_odeCVCalculationSettings(context, CL_MEM_USE_HOST_PTR, 5*sizeof(float),odeCVCalculationSettingsArray,&err));
-    
-    // OCL_CHECK(err, cl::Buffer buffer_modelCVCoeff(context, CL_MEM_USE_HOST_PTR, 3*sizeof(float),modelCVCoeffArray,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_inputI1(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputI1,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_inputI2(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputI2,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_inputI3(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputI3,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_inputMotorMechanicalAngularVelocity(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),inputMotorMechanicalAngularVelocity,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_psi2alpha(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),psi2alpha,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_psi2beta(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),psi2beta,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_psi2AmplitudeOut(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),psi2AmplitudeOut,&err));
-
-    // OCL_CHECK(err, cl::Buffer buffer_transformAngleOut(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float),transformAngleOut,&err));
 
     OCL_CHECK(err, cl::Buffer buffer_masterInput(context, CL_MEM_USE_HOST_PTR, 14*sizeof(float),masterInput,&err));
-    OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_USE_HOST_PTR, 2*sizeof(float),masterOutput,&err));
+    OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_USE_HOST_PTR, 4*sizeof(float),masterOutput,&err));
 
 
     int narg = 0;
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_odeCVCalculationSettings));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_modelCVCoeff));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI1));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI2));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputI3));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_inputMotorMechanicalAngularVelocity));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2alpha));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2beta));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_psi2AmplitudeOut));
-    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_transformAngleOut));
 
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterInput));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterOutput));
 
+    masterOutput[2] = 0;
+    masterOutput[3] = 0;
+    if(modeSelection == 1)
+    {
+        std::cout << "Selected mode: " << modeSelection << "\n";
+        masterInput[8] = inputI1[0];
+        masterInput[9] = inputI2[0];
+        masterInput[10] = inputI3[0];
+        masterInput[11] = inputMotorMechanicalAngularVelocity[0];
+        masterInput[12] = masterOutput[2];
+        masterInput[13] = masterOutput[3];
+
+        // Data will be migrated to kernel space
+        OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput, buffer_masterOutput}, 0 /* 0 means from host*/));
+        // Launch the Kernel
+        OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
+    
+        OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_masterOutput}, CL_MIGRATE_MEM_OBJECT_HOST));
+        OCL_CHECK(err, q.finish());
+        std::cout << "----------------------------------------\n\r";
+        std::cout << "psi2Amplitude"<< " : " << masterOutput[0] << "\n";
+        std::cout << "transformAngle : " << masterOutput[1] << "\n";
+        std::cout << "----------------------------------------\n\r";
+    }
 
 
-    // Data will be migrated to kernel space
-    // delete buffer_psi2alpha and buffer_psi2beta for first type kernel
-    // delete buffer_modelCVVariables for second type kernel and add for first type
-    OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput, buffer_masterOutput}, 0 /* 0 means from host*/));
+
+   
 
     /*------------------------------------------------------------------------------------------------------------*/
 
-    // Launch the Kernel
-    OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
-    
-    OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_masterOutput}, CL_MIGRATE_MEM_OBJECT_HOST));
-    OCL_CHECK(err, q.finish());
+  
 
 
 
@@ -523,36 +686,43 @@ std::cout << "master input 9 " << masterInput[9] << "\n";
    
     // modelCVOutputDataFile2.close();
 
-    std::cout << "psi2Amplitude"<< " : " << masterOutput[0] << "\n";
-    std::cout << "transformAngle : " << masterOutput[1] << "\n";
+    
+ // data output
+    std::ofstream modelCVOutputDataFile2;
+    modelCVOutputDataFile2.open("outputCurVel2.csv",std::ofstream::out | std::ofstream::trunc);
+    modelCVOutputDataFile2<< "time,|psi2|,transformAngle\n";
+    float timeCV = odeCVCalculationSettingsArray[0];
+    if(modeSelection == 0)
+    {
+        std::cout << "Selected mode: " << modeSelection << "\n";
+        for(int i = 0;i<odeCVCalculationSettingsArray[4]-1;i++)
+        {
 
+            timeCV = timeCV + odeCVCalculationSettingsArray[2];
+            masterInput[8] = inputI1[i];
+            masterInput[9] = inputI2[i];
+            masterInput[10] = inputI3[i];
+            masterInput[11] = inputMotorMechanicalAngularVelocity[i];
+            masterInput[12] = masterOutput[2];
+            masterInput[13] = masterOutput[3];
 
-    // std::cout << "sleeping for 5 secs\n";
-    // sleep(5);
-    // // testing kernel multiple executions with the same data
-    // int maxKernelIterations = 500;
-    // std::cout << "running kernel for " << maxKernelIterations << "\n";
-    // for(int i = 0; i<maxKernelIterations;i++)
-    // {
+            // Data will be migrated to kernel space
+            OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput, buffer_masterOutput}, 0 /* 0 means from host*/));
+            // Launch the Kernel
+            OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
+    
+            OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_masterOutput}, CL_MIGRATE_MEM_OBJECT_HOST));
+            OCL_CHECK(err, q.finish());
+            std::cout << "----------------------------------------\n\r";
+            std::cout << "psi2Amplitude"<< " : " << masterOutput[0] << "\n";
+            std::cout << "transformAngle : " << masterOutput[1] << "\n";
+            std::cout << "----------------------------------------\n\r";
+            modelCVOutputDataFile2<<timeCV<<","<<masterOutput[0]<<","<<masterOutput[1]<<"\n";
+    }
+    }
+    modelCVOutputDataFile2.close();
 
-    //     inputI1[i] =  inputI1Temp[i];
-    //     inputI2[i] =  inputI2Temp[i];
-    //     inputI3[i] =  inputI3Temp[i];
-    //     inputMotorMechanicalAngularVelocity[i] = inputMotorMechanicalAngularVelocityTemp[i];
-       
-    //     OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings,buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
-    //      // Launch the Kernel
-    //     OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
-      
-    //     OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_psi2AmplitudeOut, buffer_transformAngleOut}, CL_MIGRATE_MEM_OBJECT_HOST));
-    //     OCL_CHECK(err, q.finish());
-
-
-    //      std::cout << "psi2Amplitude index "<< i << " : " << psi2AmplitudeOut[i] << "\n";
-    //     std::cout << "transformAngle[" << i << "]: "<< transformAngleOut[i] << "\n";
-    //     modelCVOutputDataFile2<<timeCV<<","<<psi2AmplitudeOut[i]<<","<<transformAngleOut[i]<<"\n";
-    // }
-    // std::cout << "ran kernel for " << maxKernelIterations << "\n";
+   
     std::cout << "the end of the most useful program is here\n";
     
 
@@ -567,8 +737,23 @@ std::cout << "master input 9 " << masterInput[9] << "\n";
     free(psi2beta);
     free(inputMotorMechanicalAngularVelocity);
     free(odeCVCalculationSettingsArray);
-    free(psi2AmplitudeOut);
-    free(transformAngleOut);
+    // free(psi2AmplitudeOut);
+    // free(transformAngleOut);
     free(masterInput);
     free(masterOutput);
+
+
+    free(MotorModel.odeCalculationSettings);
+    free(MotorModel.stateSpaceCoeff);
+    free(MotorModel.motorParameters);
+   
+    free(MotorModel.modelVariables);
+    free(svmCore.invertorSwitch);
+    free(svmCore.triangleWaveSettings);
+    free(Regulator.fluxRegulator);
+    free(Regulator.velocityRegulator);
+    free(Regulator.iqRegulator);
+    free(Regulator.idRegulator);
+    free(Invertor.reconstructedInvertorOutputVoltage);
+    free(svmCore.coreInternalVariables);
 }

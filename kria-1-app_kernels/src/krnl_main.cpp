@@ -175,9 +175,13 @@ float k4psi2betaTemp1;
 static void outputProductsCalc( float *masterOutput, float *psi2alphaOut, float *psi2betaOut)
 {
     
-          
-            masterOutput[0] = sqrtf((*psi2alphaOut * *psi2alphaOut) + (*psi2betaOut * *psi2betaOut));
-            masterOutput[1] = atan2f(*psi2betaOut, *psi2alphaOut);
+            float psi2alphaOutTemp = *psi2alphaOut;
+            float psi2betaOutTemp = *psi2betaOut;
+
+            masterOutput[0] = sqrtf((psi2alphaOutTemp * psi2alphaOutTemp) + (psi2betaOutTemp * psi2betaOutTemp));
+            masterOutput[1] = atan2f(psi2betaOutTemp, psi2alphaOutTemp);
+            masterOutput[2] = psi2alphaOutTemp;
+            masterOutput[3] = psi2betaOutTemp;
 
 }
 
