@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [23.03.2023](/notes/20230323.md) <-- řešení SPI ADC, nového designu vivado, přidávání výpočtů do kernelu pro řízení pohonu, testování buildů
+
+---
+
 💻 [22.03.2023](/notes/20230322.md) <-- snaha optimalizovat, zásek v buildění, IDE už nefunguje, používám jen na tvorbu makefilů, vše jedu přes terminál - nejdřív jen kria-1-app, pak kria-1-app_kernels a nakonec kria-1-app_system_hw_link a vše jedu jako `make -j20 all`, po tom co si zítra změřím kolik času trval přenos old, kdy nebyly jen dva vektory a když jsou jen dva vektory, tak budu pokračovat v přepisování cmodelu do hls, na čase jsou regulátory..., opravoval jsem texty v dp.tex, v pc jsou ve složce two-vectors způsob pro dva vektory, který právě poměřím s mnoha vektory (arrays), myslím, že budou asi rychlejší i jen ty dva, i když to není logické, protože je možnost méně paralelismu, ale je třeba méně volat přesuny zas mezi paměťmi, nejelšpí by bylo přesouvat nejméně 2 MB dat aby byla linka využita, 2 GB i víc, ale to nejde v realtimu
 
 ---
