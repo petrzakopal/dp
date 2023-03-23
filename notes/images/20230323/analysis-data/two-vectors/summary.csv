@@ -1,0 +1,254 @@
+Profile Summary
+Generated on: 2021-11-19 09:36:56
+Msec since Epoch: 1637343416945
+Profiled application: 
+Target platform: Xilinx
+Tool version: 2022.2
+XRT build version: 2.14.0
+Build version branch: 2022.2
+Build version hash: 43926231f7183688add2dccfd391b36a1f000bea
+Build version date: N/A
+Target devices: edge-0
+Flow mode: System Run
+
+OpenCL API Calls
+API Name,Number Of Calls,Total Time (ms),Minimum Time (ms),Average Time (ms),Maximum Time (ms),
+clCreateBuffer,2,0.229542,0.05408,0.114771,0.175462,
+clCreateCommandQueue,1,0.02981,0.02981,0.02981,0.02981,
+clCreateContext,1,2.92535,2.92535,2.92535,2.92535,
+clCreateKernel,1,4.67956,4.67956,4.67956,4.67956,
+clCreateProgramWithBinary,1,73.8558,73.8558,73.8558,73.8558,
+clEnqueueMigrateMemObjects,2,0.544606,0.031751,0.272303,0.512855,
+clEnqueueTask,1,0.326603,0.326603,0.326603,0.326603,
+clFinish,1,0.112411,0.112411,0.112411,0.112411,
+clGetDeviceIDs,2,0.01989,0.0084,0.009945,0.01149,
+clGetDeviceInfo,2,0.04368,0.00979,0.02184,0.03389,
+clGetPlatformIDs,2,0.05136,0.01058,0.02568,0.04078,
+clGetPlatformInfo,2,0.02204,0.00959,0.01102,0.01245,
+clReleaseCommandQueue,1,0.0173,0.0173,0.0173,0.0173,
+clReleaseContext,1,0.062211,0.062211,0.062211,0.062211,
+clReleaseDevice,4,0.0457,0.01009,0.011425,0.01457,
+clReleaseKernel,1,1.50804,1.50804,1.50804,1.50804,
+clReleaseMemObject,8,0.123241,0.010691,0.0154051,0.02559,
+clReleaseProgram,1,0.0164,0.0164,0.0164,0.0164,
+clRetainDevice,4,0.060551,0.00833,0.0151378,0.032301,
+clRetainMemObject,6,0.08032,0.0098,0.0133867,0.02102,
+clSetKernelArg,2,0.03404,0.01186,0.01702,0.02218,
+
+Kernel Execution
+Kernel,Number Of Enqueues,Total Time (ms),Minimum Time (ms),Average Time (ms),Maximum Time (ms),
+krnl_calculateCurVelModel,1,0.234093,0.234093,0.234093,0.234093,
+
+Top Kernel Execution
+Kernel Instance Address,Kernel,Context ID,Command Queue ID,Device,Start Time (ms),Duration (ms),Global Work Size,Local Work Size,
+187650515795712,krnl_calculateCurVelModel,0,0,edge-0,10430,0.234093,1:1:1,1:1:1,
+
+Top Memory Writes: Host to Global Memory
+Buffer Address,Context ID,Command Queue ID,Start Time (ms),Duration (ms),Buffer Size (KB),Writing Rate(MB/s),
+0,0,0,82.2943,0.686917,10485.8,15265,
+34749014016,0,0,10429.8,0.090141,0.072,0.798749,
+0,0,0,10429.6,0.077271,0.016,0.207063,
+0,0,0,10429.8,0.02662,0.056,2.10368,
+
+Top Memory Reads: Host to Global Memory
+Buffer Address,Context ID,Command Queue ID,Start Time (ms),Duration (ms),Buffer Size (KB),Reading Rate(MB/s),
+34749018112,0,0,10430.3,0.072961,0.016,0.219295,
+0,0,0,10430.4,0.0245,0.016,0.653061,
+
+Data Transfer: Host to Global Memory
+Context:Number of Devices,Transfer Type,Number Of Buffer Transfers,Transfer Rate (MB/s),Average Bandwidth Utilization (%),Average Buffer Size (KB),Total Time (ms),Average Time (ms),
+context0:1,READ,2,0.328336,0.00170564,0.016,0.097461,0.0487305,
+context0:1,WRITE,4,11903,61.8336,2621.48,0.880949,0.220237,
+
+Compute Unit Utilization
+Device,Compute Unit,Kernel,Global Work Size,Local Work Size,Number Of Calls,Dataflow Execution,Max Overlapping Executions,Dataflow Acceleration,Total Time (ms),Minimum Time (ms),Average Time (ms),Maximum Time (ms),Clock Frequency (MHz),
+edge-0,krnl_calculateCurVelModel_1,krnl_calculateCurVelModel,1:1:1,1:1:1,1,Yes,1,1.000000x,0.0183402,0.0183502,0.0183402,0.0183502,99.999,
+
+
+
+
+
+Data Transfer: Kernels to Global Memory
+Device,Compute Unit/Port Name,Kernel Arguments,Memory Resources,Transfer Type,Number Of Transfers,Transfer Rate (MB/s),Bandwidth Utilization With Respect To Current Port Configuration (%),Bandwidth Utilization With Respect To Ideal Port Configuration (%),Maximum Achievable BW on Current Port Configuration (MB/s),Maximum Theoretical BW on Ideal Port Configuration (MB/s),Average Size (KB),Average Latency (ns),
+edge-0,krnl_calculateCurVelModel_1/m_axi_gmem0,,DDR,READ,2,58.8229,14.7059,0.306369,399.996,19200,0.02,62.5,
+edge-0,krnl_calculateCurVelModel_1/m_axi_gmem1,,DDR,WRITE,1,44.444,2.77778,0.231479,1599.98,19200,0.016,36,
+
+Top Data Transfer: Kernels to Global Memory
+Device,Compute Unit,Number of Transfers,Average Bytes per Transfer,Transfer Efficiency (%),Total Data Transfer (MB),Total Write (MB),Total Read (MB),Total Transfer Rate (MB/s),
+edge-0,krnl_calculateCurVelModel_1,2,20,0.488281,4e-05,0,4e-05,58.8229,
+
+
+
+TITLE:Native API Calls
+SECTION:API Calls,Native API Calls
+COLUMN:<html>API Name</html>,string,Name of Native XRT API,
+COLUMN:<html>Number<br>Of Calls</html>,int,Number of calls to API,
+COLUMN:<html>Total<br>Time (ms)</html>,float,Total execution time (in ms),
+COLUMN:<html>Minimum<br>Time (ms)</html>,float,Minimum execution time (in ms),
+COLUMN:<html>Average<br>Time (ms)</html>,float,Average execution time (in ms),
+COLUMN:<html>Maximum<br>Time (ms)</html>,float,Maximum execution time (in ms),
+ENTRY:xrt::bo::address,17,0.149061,0.00193,0.00876829,0.071881,
+ENTRY:xrt::bo::bo,3,2.86537,0.02959,0.955123,2.72844,
+ENTRY:xrt::bo::sync,4,0.809398,0.02371,0.202349,0.684447,
+ENTRY:xrt::device::device,1,0.543376,0.543376,0.543376,0.543376,
+ENTRY:xrt::device::load_xclbin,1,44.4368,44.4368,44.4368,44.4368,
+ENTRY:xrt::device::reset,1,0.033411,0.033411,0.033411,0.033411,
+ENTRY:xrt::kernel::kernel,1,0.468635,0.468635,0.468635,0.468635,
+ENTRY:xrt::run::run,1,0.107921,0.107921,0.107921,0.107921,
+ENTRY:xrt::run::start,1,0.043221,0.043221,0.043221,0.043221,
+
+TITLE:Host Reads from Global Memory
+SECTION:Host Data Transfers,Host Reads from Global Memory
+COLUMN:<html>Number<br>of Reads</html>,int,Number of host reads (note: may contain OpenCL printf transfers),
+COLUMN:<html>Maximum<br>Buffer<br>Size (KB)</html>,float,Maximum buffer size of host reads,
+COLUMN:<html>Minimum<br>Buffer<br>Size (KB)</html>,float,Minimum buffer size of host reads,
+COLUMN:<html>Average<br>Buffer<br>Size (KB)</html>,float,Average buffer size of host reads: Average Size = (Total KB) / (Number of Transfers),
+COLUMN:<html>Transfer<br>Rate (MB/s)</html>,float,Rate of host reads (in MB/s): Transfer Rate = (Total Bytes) / (Total Time in us),
+COLUMN:<html>Average<br>Bandwidth<br>Utilization (%)</html>,float,Average bandwidth of host reads: Bandwidth Utilization (%) = (100 * Transfer Rate) / (Max. Theoretical Rate),
+COLUMN:<html>Maximum<br>Time (ms)</html>,float,Maximum time of a single host read,
+COLUMN:<html>Minimum<br>Time (ms)</html>,float,Minimum time of a single host read,
+COLUMN:<html>Total<br>Time (ms)</html>,float,Combined time of all host reads,
+COLUMN:<html>Average<br>Time (ms)</html>,float,Average of read durations (in ms),
+ENTRY:2,0.016,0.016,0.016,0.328336,0.00170564,0.072961,0.0245,0.097461,0.0487305,
+
+TITLE:Host Writes to Global Memory
+SECTION:Host Data Transfers,Host Writes to Global Memory
+COLUMN:<html>Number<br>of Writes</html>,int,Number of host writes,
+COLUMN:<html>Maximum<br>Buffer<br>Size (KB)</html>,float,Maximum buffer size of host writes,
+COLUMN:<html>Minimum<br>Buffer<br>Size (KB)</html>,float,Minimum buffer size of host writes,
+COLUMN:<html>Average<br>Buffer<br>Size (KB)</html>,float,Average buffer size of host writes: Average Size = (Total KB) / (Number of Transfers),
+COLUMN:<html>Transfer<br>Rate (MB/s)</html>,float,Rate of host writes (in MB/s): Transfer Rate = (Total Bytes) / (Total Time in us),
+COLUMN:<html>Average<br>Bandwidth<br>Utilization (%)</html>,float,Average bandwidth of host writes: Bandwidth Utilization (%) = (100 * Transfer Rate) / (Max. Theoretical Rate),
+COLUMN:<html>Maximum<br>Time (ms)</html>,float,Maximum time of a single host write,
+COLUMN:<html>Minimum<br>Time (ms)</html>,float,Minimum time of a single host write,
+COLUMN:<html>Total<br>Time (ms)</html>,float,Combined time of all host write,
+COLUMN:<html>Average<br>Time (ms)</html>,float,Average of write durations (in ms),
+ENTRY:4,10485.8,0.016,2621.48,11903,61.8336,0.686917,0.02662,0.880949,0.220237,
+
+TITLE:Top Memory Reads: Host from Global Memory
+SECTION:Host Data Transfers,Top Memory Reads
+COLUMN:<html>Start<br>Time (ms)</html>,float,Start time of read transfer (in ms),
+COLUMN:<html>Buffer<br>Size (KB)</html>,float,Size of read transfer (in KB),
+COLUMN:<html>Duration (ms)</html>,float,Duration of read transfer (in ms),
+COLUMN:<html>Reading<br>Rate (MB/s)</html>,float,Transfer rate of reads: Reading Rate = (Buffer Size) / (Duration),
+ENTRY:10430.3,0.016,0.072961,0.219295,
+ENTRY:10430.4,0.016,0.0245,0.653061,
+
+TITLE:Top Memory Writes: Host to Global Memory
+SECTION:Host Data Transfers,Top Memory Writes
+COLUMN:<html>Start<br>Time (ms)</html>,float,Start time of write transfer (in ms),
+COLUMN:<html>Buffer<br>Size (KB)</html>,float,Size of write transfer (in KB),
+COLUMN:<html>Duration (ms)</html>,float,Duration of write transfer (in ms),
+COLUMN:<html>Writing<br>Rate (MB/s)</html>,float,Transfer rate of writes: Writing Rate = (Buffer Size) / (Duration),
+ENTRY:82.2943,10485.8,0.686917,15265,
+ENTRY:10429.8,0.072,0.090141,0.798749,
+ENTRY:10429.6,0.016,0.077271,0.207063,
+ENTRY:10429.8,0.056,0.02662,2.10368,
+
+TITLE:HAL API Calls
+SECTION:API Calls,HAL API Calls
+COLUMN:<html>API Name</html>,string,Name of HAL XRT API,
+COLUMN:<html>Number<br>Of Calls</html>,int,Number of calls to API,
+COLUMN:<html>Total<br>Time (ms)</html>,float,Total execution time (in ms),
+COLUMN:<html>Minimum<br>Time (ms)</html>,float,Minimum execution time (in ms),
+COLUMN:<html>Average<br>Time (ms)</html>,float,Average execution time (in ms),
+COLUMN:<html>Maximum<br>Time (ms)</html>,float,Maximum execution time (in ms),
+ENTRY:xclAllocBO,4,2.81102,0.043481,0.702755,2.6064,
+ENTRY:xclAllocUserPtrBO,2,0.109861,0.01997,0.0549305,0.089891,
+ENTRY:xclClose,2,0.046751,0.02313,0.0233755,0.023621,
+ENTRY:xclCloseContext,2,0.084791,0.03987,0.0423955,0.044921,
+ENTRY:xclExecBuf,2,0.041781,0.017731,0.0208905,0.02405,
+ENTRY:xclExecWait,1,0.063071,0.063071,0.063071,0.063071,
+ENTRY:xclFreeBO,5,0.142341,0.01542,0.0284682,0.04517,
+ENTRY:xclGetBOProperties,3,0.05234,0.00932,0.0174467,0.03081,
+ENTRY:xclLoadXclbin,1,38.0215,38.0215,38.0215,38.0215,
+ENTRY:xclMapBO,4,0.194702,0.03039,0.0486755,0.087571,
+ENTRY:xclOpen,3,1.51999,0.304763,0.506662,0.688757,
+ENTRY:xclOpenContext,2,0.191042,0.087261,0.095521,0.103781,
+ENTRY:xclProbe,4,1.24682,0.177282,0.311706,0.416784,
+ENTRY:xclRead,107,0.484445,0.00333,0.00452752,0.02593,
+ENTRY:xclSyncBO,5,0.739707,0.01259,0.147941,0.672557,
+ENTRY:xclWrite,201,1.46214,0.003301,0.00727433,0.095181,
+
+Guidance Parameters
+Parameter,Element,Value,
+DEVICE_EXEC_TIME,edge-0,0.234093,
+CU_CALLS,edge-0|krnl_calculateCurVelModel_1,1,
+NUM_MONITORS,edge-0|XCL_PERF_MON_MEMORY|2,2,
+NUM_MONITORS,edge-0|XCL_PERF_MON_ACCEL|1,1,
+NUM_MONITORS,edge-0|XCL_PERF_MON_STR|0,0,
+MEMORY_USAGE,edge-0|HPC0,0,
+MEMORY_USAGE,edge-0|HPC1,0,
+MEMORY_USAGE,edge-0|HP0,1,
+MEMORY_USAGE,edge-0|HP1,0,
+MEMORY_USAGE,edge-0|HP2,0,
+MEMORY_USAGE,edge-0|HP3,0,
+PLRAM_DEVICE,all,0,
+HBM_DEVICE,all,0,
+KDMA_DEVICE,all,0,
+P2P_DEVICE,all,0,
+PORT_BIT_WIDTH,krnl_calculateCurVelModel_1/m_axi_gmem0,32,
+PORT_BIT_WIDTH,krnl_calculateCurVelModel_1/m_axi_gmem1,128,
+KERNEL_COUNT,krnl_calculateCurVelModel,1,
+TRACE_MEMORY,all,TS2MM,
+TRACE_BUFFER_FULL,edge-0,false
+MEMORY_TYPE_BIT_WIDTH,edge-0|DDR,64,
+APPLICATION_RUN_TIME_MS,all,10462.4,
+MIGRATE_MEM,host,2,
+P2P_HOST_TRANSFERS,host,0,
+OBJECTS_RELEASED,all,1,
+CU_CONTEXT_EN,all,0,
+MAX_PARALLEL_KERNEL_ENQUEUES,krnl_calculateCurVelModel,1,
+COMMAND_QUEUE_OOO,187650515817264,0,
+KERNEL_BUFFER_INFO,krnl_calculateCurVelModel|masterInput|HP0|1,56,
+KERNEL_BUFFER_INFO,krnl_calculateCurVelModel|masterOutput|HP0|1,16,
+BUFFER_RD_ACTIVE_TIME_MS,all,0.097461,
+BUFFER_WR_ACTIVE_TIME_MS,all,0.880949,
+BUFFER_TX_ACTIVE_TIME_MS,all,0.631256,
+TOTAL_KERNEL_RUN_TIME_MS,all,0.0183402,
+XRT_INI_SETTING,opencl_trace,1,Generation of trace of OpenCL APIs and memory transfers
+XRT_INI_SETTING,device_counters,0,Hardware counters added to summary file
+XRT_INI_SETTING,host_trace,1,Enable the top level of host trace
+XRT_INI_SETTING,native_xrt_trace,0,Generation of Native XRT API function trace
+XRT_INI_SETTING,xrt_trace,1,Generation of hardware SHIM function trace
+XRT_INI_SETTING,device_trace,fine,Collection of data from PL monitors and added to summary and trace
+XRT_INI_SETTING,power_profile,0,Polling of power data during execution of application
+XRT_INI_SETTING,power_profile_interval_ms,20,Interval for reading power data (in ms)
+XRT_INI_SETTING,stall_trace,all,Enables hardware generation of stalls in compute units
+XRT_INI_SETTING,trace_buffer_size,10M,Size of buffer to allocate for trace (memory offload only)
+XRT_INI_SETTING,verbosity,4,Verbosity level
+XRT_INI_SETTING,continuous_trace,0,Continuous offloading of trace from memory to host
+XRT_INI_SETTING,trace_buffer_offload_interval_ms,10,Interval for reading of device data to host (in ms)
+XRT_INI_SETTING,trace_file_dump_interval_s,5,Interval for dumping files to host (in s)
+XRT_INI_SETTING,lop_trace,1,Generation of lower overhead OpenCL trace. Should not be used with other OpenCL options.
+XRT_INI_SETTING,debug_mode,batch,Debug mode (emulation only)
+XRT_INI_SETTING,aie_trace,0,Generation of AI Engine trace
+XRT_INI_SETTING,aie_trace_buffer_size,8M,Size of buffer to allocate for AI Engine trace
+XRT_INI_SETTING,aie_trace_metrics,functions,Configuration level used for AI Engine trace
+XRT_INI_SETTING,aie_trace_periodic_offload,1,Periodic offloading of aie trace from memory to host
+XRT_INI_SETTING,aie_trace_buffer_offload_interval_ms,10,Interval for reading of device aie trace data to host (in ms)
+XRT_INI_SETTING,aie_trace_file_dump_interval_s,5,Interval for dumping aie trace files to host (in s)
+XRT_INI_SETTING,aie_profile,0,Generation of AI Engine profiling
+XRT_INI_SETTING,aie_profile_interval_us,1000,Interval for reading AI Engine profile counters (in us)
+XRT_INI_SETTING,aie_profile_core_metrics,,Metric set for AI Engine core modules
+XRT_INI_SETTING,aie_profile_memory_metrics,,Metric set for AI Engine memory modules
+XRT_INI_SETTING,aie_profile_interface_metrics,,Metric set for AI Engine interface tiles
+XRT_INI_SETTING,aie_status,0,Generation of AI Engine debug/status
+XRT_INI_SETTING,aie_status_interval_us,1000,Interval for reading AI Engine debug/status registers (in us)
+XRT_INI_SETTING,vitis_ai_profile,0,Generation of Vitis AI summary and trace (Vitis AI designs only)
+XRT_INI_SETTING,AIE_profile_settings.interval_us,1000,Interval for reading AI Engine profile counters (in us)
+XRT_INI_SETTING,AIE_profile_settings.graph_based_aie_metrics,,Metric set for profiling AI Engine processor modules per graph
+XRT_INI_SETTING,AIE_profile_settings.graph_based_aie_memory_metrics,,Metric set for profiling AI Engine memory modules per graph
+XRT_INI_SETTING,AIE_profile_settings.tile_based_aie_metrics,,Metric set for profiling AI Engine processor modules per tile
+XRT_INI_SETTING,AIE_profile_settings.tile_based_aie_memory_metrics,,Metric set for profiling AI Engine memory modules per tile
+XRT_INI_SETTING,AIE_profile_settings.tile_based_interface_tile_metrics,,Metric set for profiling AI Engine interface tiles per tile
+XRT_INI_SETTING,AIE_trace_settings.start_type,time,Type of delay to use in AI Engine trace
+XRT_INI_SETTING,AIE_trace_settings.start_time,0,Start delay for AI Engine trace
+XRT_INI_SETTING,AIE_trace_settings.start_iteration,1,Iteration count when graph type delay is used in AI Engine Trace
+XRT_INI_SETTING,AIE_trace_settings.graph_based_aie_tile_metrics,,Configuration level used for AI Engine trace per graph
+XRT_INI_SETTING,AIE_trace_settings.tile_based_aie_tile_metrics,,Configuration level used for AI Engine trace per tile
+XRT_INI_SETTING,AIE_trace_settings.buffer_size,8M,Size of buffer to allocate for AI Engine trace
+XRT_INI_SETTING,AIE_trace_settings.periodic_offload,1,Periodic offloading of AI Engine trace from memory to host
+XRT_INI_SETTING,AIE_trace_settings.reuse_buffer,0,Enable use of circular buffer for AI Engine trace
+XRT_INI_SETTING,AIE_trace_settings.buffer_offload_interval_us,100,Interval for reading of device AI Engine trace data to host (in us)
+XRT_INI_SETTING,AIE_trace_settings.file_dump_interval_s,5,Interval for dumping AI Engine trace files to host (in s)
