@@ -354,7 +354,7 @@ TriangleWaveSettingsType triangleWaveSettings;
 InvertorSwitchType invertorSwitch;
 
 // local variables
-float timeCV = masterInput[0];
+float timeCV = masterInput[3];
 float calculationStep = masterInput[2];
 float R2MLmDL2 = masterInput[6];
 float R2DL2 = masterInput[5];
