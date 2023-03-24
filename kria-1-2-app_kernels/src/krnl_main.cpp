@@ -66,7 +66,7 @@ static void sliceInternalVariables8Parts(float variableIn, float *variableOut)
 * @brief Function to compute new psi2alpha and psi2beta values based on RK4 method
 */
 
-static void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, float inputI2, float inputI3, float numberOfPolePairs, float *R2MLmDL2Temp, float *R2DL2Temp, int numberOfIterationsTemp1, float inputMotorMechanicalAngularVelocity, float timeCV, float calculationStep, float halfCalculationStep, float *i1AlphaBeta)
+static void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, float inputI2, float inputI3, float numberOfPolePairs, float *R2MLmDL2Temp, float *R2DL2Temp, float inputMotorMechanicalAngularVelocity, float timeCV, float calculationStep, float halfCalculationStep, float *i1AlphaBeta)
 {
     
 
@@ -89,14 +89,13 @@ static void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, floa
     float i1alpha;
     float i1beta;
     float motorElectricalAngularVelocity;
-    int numberOfIterations = numberOfIterationsTemp1;
 
     float k4psi2alphaTemp1;
     float k4psi2betaTemp1;
 
 
     #pragma HLS performance target_ti=1
-    #pragma HLS loop_tripcount max=numberOfIterations
+    #pragma HLS loop_tripcount max=1
     
 
     
@@ -104,8 +103,6 @@ static void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, floa
     sliceInternalVariables8Parts(*psi2beta, psi2betaTemp);
 
 
-
-    timeCV = timeCV + calculationStep;
 
     i1alpha = (0.667 * (inputI1 - (0.5 * inputI2) - (0.5 * inputI3)));
     i1beta = (0.6667 * (0.866 * inputI2 - 0.866 *  inputI3));
@@ -308,7 +305,7 @@ static float minMaxCommonModeVoltage(CoreInternalVariablesType *coreInternalVari
 }
 
 
-static float comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue)
+static bool comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue)
 {
     if(compareLevel>=triangleWaveValue)
     {
@@ -416,6 +413,10 @@ idRegulator.wantedValue = masterInput[54];
 iqRegulator.wantedValue = masterInput[55];
 float uDC = masterInput[56];
 float minMaxCommonModeVoltageConstant = masterInput[57];
+fluxRegulator.iSum = masterInput[58];
+velocityRegulator.iSum = masterInput[59];
+idRegulator.iSum = masterInput[60];
+iqRegulator.iSum = masterInput[61];
 
 
 
@@ -437,7 +438,7 @@ sliceInternalVariables8Parts(R2DL2, R2DL2Temp);
 
 
 // computing Cur-Vel model (not using API)
-computeCurVel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, numberOfIterationsTemp, inputMotorMechanicalAngularVelocity, timeCV, calculationStep, halfCalculationStep, i1AlphaBeta);
+computeCurVel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, timeCV, calculationStep, halfCalculationStep, i1AlphaBeta);
 outputCurVelProductsCalc(&transformAngle, &psi2amplitude,psi2alpha_ptr, psi2beta_ptr);
 
 // regulator new values + constrains
@@ -505,13 +506,32 @@ masterOutput[4] = invertorSwitch.sw5;
 masterOutput[5] = invertorSwitch.sw6;
 masterOutput[6] = *psi2alpha_ptr;
 masterOutput[7] = *psi2beta_ptr;
+masterOutput[8] = triangleWaveSettings.calculationTime;
+masterOutput[9] = idRegulator.saturationOutput;
+masterOutput[10] = fluxRegulator.iSum;
+masterOutput[11] = velocityRegulator.iSum;
+masterOutput[12] = idRegulator.iSum;
+masterOutput[13] = iqRegulator.iSum;
+masterOutput[14] = psi2amplitude;
+masterOutput[15] = transformAngle;
 
 
-// old
-masterOutput[0] = psi2amplitude;
-masterOutput[1] = transformAngle;
-masterOutput[2] = *psi2alpha_ptr;
-masterOutput[3] = *psi2beta_ptr;
+// debugging variables
+masterOutput[16] = fluxRegulator.clampingStatus;
+masterOutput[17] = fluxRegulator.measuredValue;
+masterOutput[18] = velocityRegulator.saturationOutput;
+masterOutput[19] = velocityRegulator.clampingStatus;
+masterOutput[20] = velocityRegulator.measuredValue;
+masterOutput[21] = velocityRegulator.eDif;
+masterOutput[22] = velocityRegulator.wantedValue;
+masterOutput[23] = idRegulator.measuredValue;
+masterOutput[24] = iqRegulator.clampingStatus;
+masterOutput[25] = iqRegulator.measuredValue;
+masterOutput[26] = fluxRegulator.measuredValue;
+masterOutput[27] = idRegulator.measuredValue;
+masterOutput[28] = iqRegulator.wantedValue;
+masterOutput[29] = trianglePoint;
+masterOutput[30] = idRegulator.clampingStatus;
 
 
 }

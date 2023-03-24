@@ -1,2 +1,0 @@
-performing high-level synthesis for kernel: vadd
-Log file: /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd/vitis_hls.log

@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<Runs Version="1" Minor="0">
-	<Run Id="vadd" LaunchDir="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/Emulation-SW/build/vadd/vadd" FlowId="Build_IP" FromStepId="vitis_hls" ToStepId="vitis_hls"/>
-</Runs>
-

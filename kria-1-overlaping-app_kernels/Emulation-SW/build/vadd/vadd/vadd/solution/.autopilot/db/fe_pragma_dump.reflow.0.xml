@@ -1,6 +1,0 @@
-<pragmas>
-<pragma file="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp" line="34" pragmaType="loop_tripcount" parentfunction="vadd" min="4" max="4" avg="4"/>
-<pragma file="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp" line="40" pragmaType="loop_tripcount" parentfunction="vadd" min="256" max="256" avg="256"/>
-<pragma file="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp" line="46" pragmaType="loop_tripcount" parentfunction="vadd" min="256" max="256" avg="256"/>
-<pragma file="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-overlaping-app_kernels/src/vector_addition.cpp" line="52" pragmaType="loop_tripcount" parentfunction="vadd" min="256" max="256" avg="256"/>
-</pragmas>
