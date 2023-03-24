@@ -158,11 +158,9 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.5}Výpočetní výkon a propustnost}{11}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.5}Využití}{11}{subsection.4.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.6}Využití}{11}{subsection.4.6}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.6.1}Aplikace v nepohonářských odvětví}{12}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.5.1}Aplikace v nepohonářských odvětví}{11}{subsubsection.4.5.1}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -172,7 +170,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.6.2}Aplikace v elektrických pohonech}{12}{subsubsection.4.6.2}%
+\contentsline {subsubsection}{\numberline {4.5.2}Aplikace v elektrických pohonech}{12}{subsubsection.4.5.2}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -188,11 +186,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5}Porovnání dostupných SoC/SoM platforem pro řízení elektrických pohonů}{14}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Platforma využívající Artix}{14}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.1}Platforma využívající ZynQ SoC}{14}{subsection.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Platforma využívající ZynQ SoC}{14}{subsection.5.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Platforma využívající SOM Kria KR260}{14}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.2}Platforma využívající SOM Kria KR260}{14}{subsection.5.2}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6}Vývojová deska Digilent Zybo}{14}{section.6}%
 \babel@toc {czech}{}\relax 
@@ -282,7 +278,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {8.4}Tvorba SW pro CPU a FPGA}{33}{subsection.8.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {8.4.1}Upravený postup debuggingu PL}{33}{subsubsection.8.4.1}%
+\contentsline {subsubsection}{\numberline {8.4.1}Upravený postup debuggingu PL pro Digilent Zybo}{33}{subsubsection.8.4.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {9}Představení pracoviště}{34}{section.9}%
 \defcounter {refsection}{0}\relax 

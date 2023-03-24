@@ -541,65 +541,62 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		V praxi je k tvorbě algoritmů často využíváno vyšších programovacích jazyků a HLS, protože je tento přístup pro značný počet vývojářů SW srozumitelnější. Dalším častým přístupem v praxi je použití specializovaných SW jako je MATLAB™️ a Simulink, které jsou schopny při použití odpovídajících balíčků přeložit vytvořený algoritmus do HDL, který je poté možné dále zpracovat a použít pro konfiguraci FPGA. Ovšem využití přístupu se SW MATLAB™️ je třeba disponovat podporovaným HW, který disponuje dostatečným počtem zdrojů v FPGA struktuře. Tento přístup je značně finančně náročný v ohledu licence SW a taktéž vlivem vyšší ceny HW s větším počtem zdrojů.
 
 		\subsubsection{Konverze HDL na konfigurační Bitstream}
-			V části \hyperref[subsubsec:forma-tvorby-algoritmu-pro-fpga]{\textit{Forma tvorby algoritmu pro FPGA}} byly představeny dvě hlavní formy tvorby algoritmu pro FPGA. Aby bylo možné algoritmy na FPGA „umístit“, je třeba jejich vytvořenou rezprezentaci dále zpracovat.\par
+			V části \hyperref[subsubsec:forma-tvorby-algoritmu-pro-fpga]{\textit{Forma tvorby algoritmu pro FPGA}} byly představeny dvě hlavní formy tvorby algoritmu pro FPGA. Aby bylo možné algoritmy na FPGA „umístit“, je třeba vytvořenou rezprezentaci dále zpracovat.\par
 			Všechny vyšší úrovně reprezentace algoritmů jsou převedeny na HDL. Následným krokem je \textit{syntéza} (synthesis), která slouží k převodu HDL na tzv. \textit{netlist}. Při převodu je HDL převáděna na logické členy AND, OR apod. \cite{Sass2010}\par
 			Po vytvoření netlistu je nutné rozhodnout, jakým způsobem je možné a výhodné realizovat jednotlivé bloky v logických buňkách a LUT. Konečné sloučení členů závisí na rozsahu vstupů realizovatelných LUT. Proces seskupování logických členů a určování funkce LUT se nazývá mapování (MAP). Výsledkem MAP je opět netlist. Tento netlist však reprezentuje FPGA členy (LUT, klopné obvody apod.). \cite{Sass2010}\par
-			Po mapování následuje proces umisťování (placement), při kterém je rozhodováno, které logické bloky budou realizovat FPGA členy, získané v kroku MAP. \cite{Sass2010}\par
-			Bloky, které jsou umístěné ve struktuře FPGA je nutné spojit pomocí dostupných propojů na FPGA. Proces spojování a optimalizace propojů takovým způsobem, aby bylo minimalizováno časové zpoždění signálu, se nazývá \textit{routing}. Obvykle se proces slučuje s MAP do jedné fáze a nazývá se \textit{place-and-route}~(PAR). \cite{Sass2010} \par
-			Posledním krokem je vytvoření binárního souboru, nazývaného \textit{bitstream}, který je poté vkládán do FPGA. Tento proces převede netlist z kroku PAR na nastavení SRAM v jednotlivých logických buňkách FPGA tak, aby byl vytvořen požadovaný design v FPGA. Proces také převede konfiguraci propojů a propojovacích matic do SRAM, ovládající příslušné propoje a matice. \cite{Sass2010}\par
-			Soubor \textit{bitstream} je poté možný pomocí daného nástroje „nahrát nakonfigurovat jím FPGA“.
+			Po mapování následuje proces umisťování (placement) při kterém je rozhodováno které z logických bloky budou realizovat FPGA členy, získané v kroku MAP. \cite{Sass2010}\par
+			Bloky, které jsou umístěny ve struktuře FPGA je nutné spojit pomocí dostupných propojů na FPGA. Proces spojování a optimalizace propojů takovým způsobem, aby bylo minimalizováno časové zpoždění signálu, se nazývá \textit{routing}. Obvykle se proces slučuje s MAP do jedné fáze a nazývá se \textit{place-and-route}~(PAR). \cite{Sass2010} \par
+			Posledním krokem je vytvoření binárního souboru, nazývaného \textit{bitstream}, který je poté „programováno“ FPGA. Tento proces převede netlist z kroku PAR na nastavení SRAM v jednotlivých logických buňkách FPGA tak, aby byl vytvořen požadovaný design v FPGA. Proces převede konfiguraci propojů a propojovacích matic do SRAM, ovládající příslušné propoje a matice. \cite{Sass2010}\par
 
 			
 			\begin{figure}[htbp!]
 				\centering
 					\includegraphics[width=1\textwidth]{src/pdf/fpga-hls-to-bitstream-flow-chart.pdf} 
-					\caption{Blokové schéma převodu aplikace, naprogramované v procedurálním jazyce, na bitstream, který je vhodný pro konfiguraci FPGA.}
+					\caption{Blokové schéma převodu aplikace, naprogramované v procedurálním jazyce, na bitstream, kterým je konfigurováno FPGA.}
 					\label{fig:fpga-hls-to-bitstream-flow-chart}
 			\end{figure}
 
 		\fbar
 		\subsection{Spotřeba}
-			FPGA je využívano pro akceleraci aplikací také pro svou nízkou spotřebu energie. Oproti ASICs však FPGA má stále značnější spotřebu, proto je podnikán výzkum, který má za cíl jejich energetickou náročnost snížit ale zachovat jejich výkon a spolehlivost.\par
+			FPGA je využívano pro akceleraci aplikací pro svou nízkou spotřebu energie oproti CPU nebo GPU. Ovšem oproti ASICs FPGA má stále značnější spotřebu, proto je podnikán výzkum, který má za cíl jejich energetickou náročnost snížit ale zachovat jejich výkon a spolehlivost.\par
 			% Existuje mnoho článků na téma energy/power efficiency of fpgas ale v žádném není popsáno, proč je jeho spotřeba nižší, než v CPU
-			Nižší potřebný výkon pro realizaci nepohonářské aplikace podporuje výzkum a článek \cite{rovere-sphery-vs-shapes}, ve kterém autoři představují svoji práci, v níž realizovali HW hru. Ve hře je hlavním úkolem aplikace výpočet stínů a odrazů materiálů. Způsob vykrlesení, který je v aplikaci použit je nazýván \textit{ray tracing}. Ray tracing je označován jako výpočetně náročný způsob, který není vhodný pro on-line aplikace ale pro vykreslování nepohyblivých obrazů, které není nutné zobrazovat v reálném čase. \cite{wikipedia-ray-tracing}\par
+			Nižší potřebný výkon pro realizaci nepohonářské aplikace podporuje výzkum a článek \cite{rovere-sphery-vs-shapes}, ve kterém autoři představují svoji práci, v níž realizovali hru. Ve hře je hlavním úkolem aplikace výpočet stínů a odrazů materiálů. Způsob vykreslení, který je v aplikaci použit je nazýván \textit{ray tracing}. Ray tracing je označován jako výpočetně náročný způsob, který není vhodný pro on-line aplikace ale pro vykreslování nepohyblivých obrazů, které není nutné zobrazovat v reálném čase. \cite{wikipedia-ray-tracing}\par
 			% píšou jednoho jádra, ale to je divný, spíše prostě spotřeba %
 			Autoři v textu popisují, že v případě využití FPGA pro výpočty v reálném čase byla jeho spotřeba 660 mW. Hru autoři vyzkoušeli spustit také na CPU platformě skládající se z Ryzen™️ 4900H 8-core/16 threads 64-bit CPU @ up to 4,4 GHz clock. V případš testování na CPU byla indikována spotřeba 33 W. Tudíž při použití FPGA spotřeba klesla přibližně 50x. \cite{rovere-sphery-vs-shapes}.\par
 			I přes nízkou spotřebu energie v FPGA jsou prováděny výzkumy, jak minimalizovat disipaci elektrické energie v podobě tepla a přiblížit se tak energetické náročnosti ASICs.\par
 			Disipace energie v FPGA je rozdělena na statickou a dynamickou.\par
-			Statická disipace je způsobena zbytkovým proudem tranzistorů ve vypnutém stavu mezi drain a source elektrodou, mezi gate a drain a jevem nazvaným gate direct-tunneling. \cite{grover-reduction-of-power-consumption}\par
+			Statická disipace je způsobena zbytkovým proudem tranzistorů ve vypnutém stavu mezi drain a source elektrodou, mezi gate a drain elektrodou a jevem, nazvaným gate direct-tunneling. \cite{grover-reduction-of-power-consumption}\par
 			Dynamická disipace je způsobena spínacími a vypínacími ztráty použitých tranzistorů (obvykle CMOS) a je závislá na použitém napětí, frekvenci a kapacitě přechodů, kterou je třeba nabít a vybít při spínání a vypínání tranzistorů. \cite{grover-reduction-of-power-consumption}
-			\subsection{Výpočetní výkon a propustnost}
+
+
+			%\subsection{Výpočetní výkon a propustnost}
+			
 			\subsection{Využití}
 			Programovatelná logická hradlová pole se pro svoji nízkou spotřebu, vysoký výpočetní výkon a klesající cenu elektroniky začínají využívat mnohem častěji v mnoha odvětví, ve kterých bylo doposavaď využíváno CPU a GPU. Aplikace FPGA je možné v rámci této práce rozdělit na nepohonářské a pohonářské.
 
 			\subsubsection{Aplikace v nepohonářských odvětví}
 				Díky univerzalitě FPGAs je možné je využít v mnoha aplikacích různých odvětví. Stále se zvyšující požadavky na výpočetní výkon urychlují nasazování FPGAs do provozů, kde jsou v současné době instalovány CPU nebo GPU.\par
-				Poptávka po dostupnosti FPGA způsobila vznik Cloud služeb, které nabízí FPGA výkon on-demand. Jedním z velkých poskytovatelů je Amazon Web Services (AWS), který nabízí FPGA akceleraci v Cloudu. Tuto službu ocení především aplikace, které nejsou vázány na reálný hardware ale potřebují pouze dostupný výpočetní výkon, který mohou v průběhu tvorby, debuggingu či realizace aplikace měnit bez nutnosti pořizování výkonných a někdy drahých FPGA desek. Více o \textit{Amazon EC2 F1 Instances} služby virtuálních FPGA je dostupné na \cite{amazon-ec2-f1}.\par
-				Existuje mnoho výpočetně náročných aplikací jako jsou např. výpočty finančních modelů pro ekonomiku, výpočty pro bioinformatiku, seismické modelování při hledání vzácných surovin apod. Více informací o těchto výpočetně náročných aplikacích je možné získat v \cite{wim-high-performance-computing-using-fpgas}.\par
-				Na akceleraci zpracování audiovizuálních děl je převážně určeno GPU. Ovšem pro aplikace, v nichž je vyžadováno zpracování obrazu v reálném čase s minimální spotřebou energie a nízkou hmotností aplikace, je často využíváno FPGA. Aplikace využití FPGA pro vozidla, která analyzují okolní prostor jsou popsány v \cite{andina-advanced-features-and-industrial-applications-of-fpga}. Tyto aplikace nesou souhrnný název „inteligennt spaces applications“. Obvykle je pro analýzu okolního prostoru využíváno více kamer, z nichž každá obsahuje vlastní výpočetní jádro (FPGA). Díky tomu výpočetně náročné aplikace, jako např. analýza hloubky obrazu pro rozpoznání objektů, probíhá v FPGA a ostatní nenáročné výpočty a řízení v SW. \cite{andina-advanced-features-and-industrial-applications-of-fpga}\par
-				Protože momentálním trendem je snižování energetické náročnosti a zvyšování výpočetního výkonu dochází neustále k vývoji nových aplikací, které využívají FPGA pro akceleraci výpočetně náročných kroků, proto není možné všechny v tomto textu obsáhnout.
+				Poptávka po dostupnosti FPGA způsobila vznik Cloud služeb, které nabízí FPGA výkon on-demand. Jedním z velkých poskytovatelů je Amazon Web Services (AWS), který nabízí FPGA akceleraci v Cloudu. Tuto službu ocení především aplikace, které nejsou vázány na reálný hardware ale pouze potřebují dostupný výpočetní výkon, který mohou v průběhu tvorby, debuggingu či realizace aplikace měnit bez nutnosti pořizování výkonných a někdy drahých FPGA zařízení. Více o \textit{Amazon EC2 F1 Instances} služby virtuálních FPGA je dostupné na \cite{amazon-ec2-f1}.\par
+				Existuje mnoho výpočetně náročných aplikací jako jsou např. výpočty finančních modelů pro ekonomiku, výpočty pro bioinformatiku, seismické modelování při hledání vzácných surovin apod. které je vhodné realizovat pomocí hardwaerového akcelerátoru. Více informací o těchto výpočetně náročných aplikacích je možné získat v \cite{wim-high-performance-computing-using-fpgas}.\par
+				Na akceleraci zpracování audiovizuálních děl je převážně určeno GPU. Ovšem pro aplikace, v nichž je vyžadováno zpracování obrazu v reálném čase s minimální spotřebou energie a nízkou hmotností aplikace, je často využíváno FPGA. Aplikace využití FPGA pro vozidla, která analyzují okolní prostor jsou popsány v \cite{andina-advanced-features-and-industrial-applications-of-fpga}. Tyto aplikace nesou souhrnný název „inteligent spaces applications“. Obvykle je pro analýzu okolního prostoru využíváno více kamer, z nichž každá obsahuje vlastní výpočetní jádro (FPGA). Díky tomu výpočetně náročné aplikace, jako např. analýza hloubky obrazu pro rozpoznání objektů, probíhá v FPGA a ostatní nenáročné výpočty a řízení v SW v CPU. \cite{andina-advanced-features-and-industrial-applications-of-fpga}\par
+				Protože momentálním trendem je snižování energetické náročnosti a zvyšování výpočetního výkonu dochází neustále k vývoji nových aplikací, které využívají FPGA pro akceleraci výpočetně náročných kroků, není možné všechny aplikace v tomto textu obsáhnout.
 
 
 			\subsubsection{Aplikace v elektrických pohonech}
 			% HIL
 			% Control
 			% Control and Extended Kaufmann Filter
-			V některých případech je elektrický pohon rozměrná a finančně náročná sestava, proto zkoumání určitých kritických stavů těchto soustav by mohlo být ekonomicky i technicky nevýhodné. V tomto případě je vhodné vytvořit přesný matematický model jednotlivých analyzovaných součástí a nezbytné náročné výpočty akcelerovat pomocí FPGA. Na základě odezvy modelu je poté možné analyzovat stavy, které by v případě analýze na reálném stroji mohly způsobit jeho destrukci či částečnou ztrátu funkčnosti. Proto se v průmyslu využívá Hardware-in-the-loop simulation (HILS), kdy je vytvořen požadovaný matematický model, který poskytuje elektrické signály do testovaného systému a na základě jeho reakce je možné vyhodnotit díky matematickému modelu jakým způsobem by se choval reálný modelovaný systém. \cite{andina-advanced-features-and-industrial-applications-of-fpga}, \cite{mathworks-discovery-hil-simulation}\par
+			V některých případech je elektrický pohon rozměrná a finančně náročná sestava, proto zkoumání určitých kritických stavů těchto soustav by mohlo být ekonomicky i technicky nevýhodné. V tomto případě je vhodné vytvořit přesný matematický model jednotlivých analyzovaných součástí a nezbytné náročné výpočty akcelerovat pomocí FPGA. Na základě odezvy modelu je poté možné analyzovat stavy, které by v případě analýzy na reálném stroji mohly způsobit jeho destrukci či částečnou ztrátu funkčnosti. Proto se v průmyslu využívá Hardware-in-the-loop simulation (HILS), kdy je vytvořen požadovaný matematický model, který poskytuje elektrické signály do testovaného systému a na základě jeho reakce je možné vyhodnotit, díky matematickému modelu, jakým způsobem by se choval reálný modelovaný systém. \cite{andina-advanced-features-and-industrial-applications-of-fpga}, \cite{mathworks-discovery-hil-simulation}\par
 			Kromě HIL simulace je možné FPGA využít také pro řízení elektrických pohonů. Možnosti realizace řízení AC elektrických strojů pomocí FPGA a analogově digitálních převodníků (ADC) jsou prezentovány v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}. V dokumentu jsou popisovány tři realizace řízení, resp. regulace pohonu. Nejprve byla regulace realizována pomocí hystérézních on-off regulátorů, následně byly použity PI regulátory. Pomocí nich byl pohon regulován na základně měření a změny vektoru statorového proudu, resp. jeho složek $\alpha \beta$ po aplikování Clarkové transformace. Jako poslení prezentovaný způsob autoři realizovali model ovládání synchronního motoru na základě prediktivních regulátorů. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}\par Všechny prezentované způsoby regulace v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives} byly před syntézou realizovány v prostředí MATLAB™️ a Simulink. Tento způsob tvorby modelů a algoritmů je v praxi upřednostňován, protože umožňuje i expertům na řízení a regulaci pracovat na dané problematice bez znalostí mikroelektroniky, programování v HDL a způsobu fungování FPGA. Oproti tomu je třeba zvážit, jaké jsou požadavky na rychlost, výkonnost a optimalizované řízení aplikace a zdali použití předpřipravených knihoven a zjednodušených nástrojů nebude mít příliš značný vliv na rychlost výpočtu a tudíž zpracování dat a řízení v reálném čase. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}
 			
 
 	\section{Porovnání dostupných SoC/SoM platforem pro řízení elektrických pohonů}
-			V této kapitole budou představeny smysluplné, komerčně dostupné SoC platformy, které je možné využít pro aplikace řízení elektrických pohonů či HIL. Výběr je zaměřen na SoC umístěný na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi, vlastnostmi by měla architektura disponovat a poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu na Printed Circuit Board (PCB). Z důvodu finanční náročnosti některých řešení bylo přistoupeno k prezentování SoC od firmy Xilinx, které jsou nižší ceny.
+			V této kapitole budou představeny dvě smysluplné, komerčně dostupné platformy, které je možné využít pro aplikace řízení elektrických pohonů či HIL. Výběr je zaměřen na SoC a Som umístěných na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi a vlastnostmi by měla architektura disponovat a poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu na Printed Circuit Board (PCB). Z důvodu finanční náročnosti některých řešení bylo přistoupeno k prezentování SoC a SoM od firmy Xilinx, které jsou nižší ceny.
 
-			
-
-			\subsection{Platforma využívající Artix}
 
 			\subsection{Platforma využívající ZynQ SoC}
 
 			\subsection{Platforma využívající SOM Kria KR260}
-
-			% popsat že je ZynQ, Spartan, atd. atd. využít možného open Source řešení z poznámek
 
 	\section{Vývojová deska Digilent Zybo}
 			Vývoj akcelerovaných aplikacích je možné realizovat na realativně velikém množství dostupného HW. V některých případech je design vývojových desek dokonce výrobcem uveřejňován a tudíž v případě dostatečných znalostí je dokonce možné si sestavit vlastní HW s dostupných komponent takovým způsobem, aby vyhovoval požadované embedded aplikaci. Výhodné ovšem je využít již připravená řešení vývojových desek, které zjednodušují prvotní tvorbu aplikace.\par
@@ -1091,7 +1088,7 @@ V této části jsou představeny jednotlivé nástroje, využívané při tvorb
 	\fbar
 	\subsection{Tvorba PetaLinux}
 	\subsection{Tvorba SW pro CPU a FPGA}
-	\subsubsection{Upravený postup debuggingu PL}
+	\subsubsection{Upravený postup debuggingu PL pro Digilent Zybo}
 
 	Debugging pro program pro PL. Pro host program je možné debuggovat přímo ve Vitis, ale bez PL kernelu.
 	\begin{figure}[htbp!]

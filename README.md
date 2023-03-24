@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [24.03.2023](/notes/20230324.md) <--celý den snaha o zprovoznění modelu ASM v CPU a řízení v FPGA + řešení SPI
+
+---
+
 💻 [23.03.2023](/notes/20230323.md) <-- řešení SPI ADC, nového designu vivado, přidávání výpočtů do kernelu pro řízení pohonu, testování buildů
 
 ---
