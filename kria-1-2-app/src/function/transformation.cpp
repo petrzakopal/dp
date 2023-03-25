@@ -1,5 +1,5 @@
 #include "../header/transformation.h"
-#include <hls_math.h>
+#include <cmath>
 
 /*------------------------------------------------------------------------------------------*/
 

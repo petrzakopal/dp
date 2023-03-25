@@ -1,9 +1,13 @@
-#include <hls_math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <iostream>
 #include "../header/svmCore.h"
 
-
+// deprecated
+// void svmCoreClass::phaseWantedVoltageAllocateMemory()
+// {
+//     posix_memalign((void **)&phaseWantedVoltage , 4096 , sizeof(PhaseWantedVoltageType) );
+// }
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ ALLOCATING MEMORY FOR SWITCHES AS AN OUPUT FROM FOC SVM CODE MODEL --------------------------------*/

@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <hls_math.h>
+#include <cmath>
 
 
 
@@ -34,9 +34,14 @@ typedef struct modelCVVariablesStruct
     float i1beta;
     float psi2alpha;
     float psi2beta;
-    // float psi2Amplitude;
+    float transformAngle;
+    float psi2Amplitude;
     float motorElectricalAngularVelocity;
-    // float transformAngle;
+    float *inputI1;
+    float *inputI2;
+    float *inputI3;
+    float *inputMotorMechanicalAngularVelocity;
+    float *inputTime;
 }modelCVVariablesType;
 /*------------------------------------------------------------------------------------------------------------------*/
 
@@ -52,11 +57,7 @@ typedef struct odeCVCalculationSettingsStruct
     int numberOfIterations;
 }odeCVCalculationSettingsType;
 /*---------------------------------------------------------------------------------------------------*/
-typedef struct resultsStruct
-{
-    float psi2alpha;
-    float psi2beta;
-}resultsType;
+
 
 class CurVelModelClass
 {
@@ -66,9 +67,6 @@ class CurVelModelClass
     modelCVCoeffType *modelCVCoeff = NULL;
     modelCVVariablesType *modelCVVariables = NULL;
     odeCVCalculationSettingsType *odeCVCalculationSettings = NULL;
-
-    resultsType * curVelModelResults = NULL;
-
     void odeCVCalculationSettingsAllocateMemory();
 
 

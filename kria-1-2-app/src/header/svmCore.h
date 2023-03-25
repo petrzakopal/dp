@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <hls_math.h>
+#include <cmath>
 
 
 
@@ -75,3 +75,5 @@ class svmCoreClass
 
     bool comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue);
 };
+
+

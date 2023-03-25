@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
-
-#include "../header/invertor.h"
-
-
+#include <cmath>
+#include "./../header/invertor.h"
 
 
 /*-----------------------------------------------------------------------------------------------------------------------------------*/

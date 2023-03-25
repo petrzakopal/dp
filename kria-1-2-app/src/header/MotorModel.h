@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <hls_math.h>
+#include <cmath>
 // #include "transformation.h"
 /* MotorModel.h
    basic model of asynchronous motor not for regulation but for motor model simulation
@@ -199,4 +199,3 @@ class MotorModelClass
     int numberOfIterations();
 };
 /*-----------------------------------------------------------*/
-

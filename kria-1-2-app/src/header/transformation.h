@@ -1,6 +1,4 @@
-#include <hls_math.h>
-
-
+#include <cmath>
 
 typedef struct clarkeTransformStruct
 {

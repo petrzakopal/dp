@@ -1,8 +1,6 @@
 #include <stdlib.h>
-#include <hls_math.h>
-
-#include "../header/svmCore.h"
-
+#include <cmath>
+#include "./../header/svmCore.h"
 
 /*---------------------------------------------------------------------------------------*/
 /*-------------------- TYPE/STRUCT FOR INVERTOR PHASE VOLTAGE OUTPUT --------------------*/
@@ -31,4 +29,6 @@ class InvertorClass
         void invertorReconstructVoltages(InvertorSwitchType *invertorSwitch, ReconstructedInvertorOutputVoltageType *ReconstructedInvertorOutputVoltage, float uDC);
         /*-------------------------------------------------------------------------------------------------------------*/
 };
+
+
 
