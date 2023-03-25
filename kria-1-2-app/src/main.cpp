@@ -266,7 +266,7 @@ float globalFinalCalculationTime = 1;
 float minMaxCommonModeVoltageConstant = 287;
 float uS = 400;
 float uDC = ((3 * sqrt(2))/PI) * uS;
-// float globalSimulationTime = globalInitialCalculationTime;
+float globalSimulationTime = globalInitialCalculationTime;
 /*-------------------------------------------------------------*/
 
 
@@ -295,9 +295,9 @@ float *odeCVCalculationSettingsArray;
 // int *numberOfIterations;
 posix_memalign((void **)&odeCVCalculationSettingsArray , 4096 , 5*sizeof(float) );
 // posix_memalign((void **)&numberOfIterations , 4096 , 4*sizeof(int) );
-odeCVCalculationSettingsArray[0] = 0; // initialCalculationTime
+odeCVCalculationSettingsArray[0] = globalInitialCalculationTime; // initialCalculationTime
 odeCVCalculationSettingsArray[1] = 1; // finalCalculationTime
-odeCVCalculationSettingsArray[2] = 0.0001; // calculationStep
+odeCVCalculationSettingsArray[2] = globalCalculationStep; // calculationStep
 odeCVCalculationSettingsArray[3] = 0; // calculationTime
 odeCVCalculationSettingsArray[4] = (int)ceil(((odeCVCalculationSettingsArray[1] - odeCVCalculationSettingsArray[0])/odeCVCalculationSettingsArray[2])); // number of iterations - should not be used in a realtime model
 
@@ -336,9 +336,9 @@ Invertor.reconstructedInvertorOutputVoltageAllocateMemory();
 /*------------------------------------------------------------------*/
 /*-------------------- TRIANGLE WAVE SETTINGS ---------------------*/
 svmCore.triangleWaveSettings->waveAmplitude = 1;
-svmCore.triangleWaveSettings->calculationStep = 0.000001;
+svmCore.triangleWaveSettings->calculationStep = globalCalculationStep;
 svmCore.triangleWaveSettings->wavePeriod = 0.0001;
-svmCore.triangleWaveSettings->calculationTime = 0;
+svmCore.triangleWaveSettings->calculationTime = globalInitialCalculationTime;
 /*------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------*/
@@ -406,7 +406,7 @@ Regulator.iqRegulator->measuredValue = 0;
 /*-------------------- WANTED VALUES INPUT ---------------------*/
 // now hardcoded, change later
 Regulator.fluxRegulator->wantedValue = 1;
-Regulator.velocityRegulator->wantedValue = 0;
+Regulator.velocityRegulator->wantedValue = 50;
 Regulator.idRegulator->wantedValue = 0;
 Regulator.iqRegulator->wantedValue = 0;
 /*--------------------------------------------------------------*/
@@ -585,10 +585,10 @@ else if(modeSelection == 1)
 float *masterInput;
 posix_memalign((void **)&masterInput , 4096 , (62)*sizeof(float) );
 float *masterOutput;
-posix_memalign((void **)&masterOutput , 4096 , (31)*sizeof(float) );
+posix_memalign((void **)&masterOutput , 4096 , (35)*sizeof(float) );
 
 OCL_CHECK(err, cl::Buffer buffer_masterInput(context, CL_MEM_USE_HOST_PTR, 62*sizeof(float),masterInput,&err));
-OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_USE_HOST_PTR, 31*sizeof(float),masterOutput,&err));
+OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_USE_HOST_PTR, 35*sizeof(float),masterOutput,&err));
 
 
 int narg = 0;
@@ -717,7 +717,7 @@ if(modeSelection == 2)
 
 
     masterInput[1] = odeCVCalculationSettingsArray[1]; // finalCalculationTime
-    masterInput[2] = odeCVCalculationSettingsArray[2]; // calculationStep
+    masterInput[2] = globalCalculationStep; // calculationStep
     masterInput[3] = odeCVCalculationSettingsArray[3]; // calculationTime
     masterInput[4] = odeCVCalculationSettingsArray[4]; // number of iterations - should not be used in a realtime model
     masterInput[5] = modelCVCoeffArray[0]; // R2DL2
@@ -780,7 +780,7 @@ if(modeSelection == 2)
 
 
     float timeCV = 0;
-    for(int i = 10;i<1;i++)
+    for(int i = 0;i<500;i++)
     {
         OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput, buffer_masterOutput}, 0 /* 0 means from host*/));
         OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
@@ -808,8 +808,8 @@ if(modeSelection == 2)
 
         MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
 
-        timeCV = timeCV + odeCVCalculationSettingsArray[2];
-        masterInput[3] = timeCV;
+        globalSimulationTime = globalSimulationTime + globalCalculationStep;
+        masterInput[3] = globalSimulationTime;
 
 
         masterInput[8] = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
@@ -849,10 +849,14 @@ if(modeSelection == 2)
         std::cout << "iqRegulator.iSum : " << masterOutput[13] << "\n";
         std::cout << "psi2amplitude : " << masterOutput[14] << "\n";
         std::cout << "transformAngle : " << masterOutput[15] << "\n";
+        std::cout << "fluxRegulator.saturationOutput : " << masterOutput[31] << "\n";
+        std::cout << "velocityRegulator.saturationOutput : " << masterOutput[32] << "\n";
+        std::cout << "idRegulator.saturationOutput : " << masterOutput[33] << "\n";
+        std::cout << "iqRegulator.saturationOutput : " << masterOutput[34] << "\n";
         std::cout << "----------------------------------------\n\r";
 
 
-        globalSimulationData << timeCV << "," << masterOutput[14] << ","<< MotorModel.modelVariables->motorMechanicalAngularVelocity<< ","  << masterOutput[15]<< ","<< masterOutput[19] << "," << masterOutput[30] <<"," << masterOutput[21] << "\n";
+        globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","<< MotorModel.modelVariables->motorMechanicalAngularVelocity<< ","  << masterOutput[15]<< ","<< masterOutput[19] << "," << masterOutput[30] <<"," << masterOutput[21] << "\n";
     }
     globalSimulationData.close();
     std::cout << "Fuck yeah!\n";

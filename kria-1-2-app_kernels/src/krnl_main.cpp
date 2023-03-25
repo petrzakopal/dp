@@ -39,7 +39,7 @@ float psi2betaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, floa
 * @brief Function to calculate slice variables at 4 parts
 */
 
-static void sliceInternalVariables4Parts(float variableIn, float *variableOut)
+void sliceInternalVariables4Parts(float variableIn, float *variableOut)
 {
     for(int i = 0;i<4;i++)
     {
@@ -52,7 +52,7 @@ static void sliceInternalVariables4Parts(float variableIn, float *variableOut)
 * @brief Function to calculate slice variables at 4 parts
 */
 
-static void sliceInternalVariables8Parts(float variableIn, float *variableOut)
+void sliceInternalVariables8Parts(float variableIn, float *variableOut)
 {
     for(int i = 0;i<8;i++)
     {
@@ -66,7 +66,7 @@ static void sliceInternalVariables8Parts(float variableIn, float *variableOut)
 * @brief Function to compute new psi2alpha and psi2beta values based on RK4 method
 */
 
-static void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, float inputI2, float inputI3, float numberOfPolePairs, float *R2MLmDL2Temp, float *R2DL2Temp, float inputMotorMechanicalAngularVelocity, float timeCV, float calculationStep, float halfCalculationStep, float *i1AlphaBeta)
+void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, float inputI2, float inputI3, float numberOfPolePairs, float *R2MLmDL2Temp, float *R2DL2Temp, float inputMotorMechanicalAngularVelocity, float timeCV, float calculationStep, float halfCalculationStep, float *i1AlphaBeta)
 {
     
 
@@ -187,7 +187,7 @@ static void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, floa
 }
 
 
-static float regSaturationBlock(float saturationInput, float saturationOutputMin, float saturationOutputMax)
+float regSaturationBlock(float saturationInput, float saturationOutputMin, float saturationOutputMax)
 {
     float localSaturationInput = saturationInput;
 
@@ -204,7 +204,7 @@ static float regSaturationBlock(float saturationInput, float saturationOutputMin
 }
 
 
-static void checkSaturationStatus(RegulatorType *regulatorData)
+void checkSaturationStatus(RegulatorType *regulatorData)
 {
     if(regulatorData->saturationInput == regulatorData->saturationOutput)
     {
@@ -217,7 +217,7 @@ static void checkSaturationStatus(RegulatorType *regulatorData)
 }
 
 
-static void checkSignStatus(RegulatorType *regulatorData)
+void checkSignStatus(RegulatorType *regulatorData)
 {
     if(((regulatorData->eDif > 0) and (regulatorData->saturationInput > 0)) or ((regulatorData->eDif < 0) and (regulatorData->saturationInput < 0)))
     {
@@ -230,7 +230,7 @@ static void checkSignStatus(RegulatorType *regulatorData)
 }
 
 
-static void enableClamping(RegulatorType *regulatorData)
+void enableClamping(RegulatorType *regulatorData)
 {
     if((regulatorData->saturationCheckStatus == true) and (regulatorData->signCheckStatus == true))
     {
@@ -243,7 +243,7 @@ static void enableClamping(RegulatorType *regulatorData)
 
 }
 
-static void regCalculate(RegulatorType *regulatorData)
+void regCalculate(RegulatorType *regulatorData)
 {
     regulatorData->eDif = regulatorData->wantedValue - regulatorData->measuredValue;
     regulatorData->saturationInput = (regulatorData->eDif * regulatorData->kp) + regulatorData->iSum;
@@ -268,7 +268,7 @@ static void regCalculate(RegulatorType *regulatorData)
 * @brief Calculating output products from CurVel model needed in svmCore
 */
 
-static void outputCurVelProductsCalc(float *transformAngle, float *psi2amplitude, float *psi2alphaOut, float *psi2betaOut)
+void outputCurVelProductsCalc(float *transformAngle, float *psi2amplitude, float *psi2alphaOut, float *psi2betaOut)
 {
     
            float psi2alphaOutTemp = *psi2alphaOut;
@@ -282,7 +282,7 @@ static void outputCurVelProductsCalc(float *transformAngle, float *psi2amplitude
 
 
 
-static float generateActualValueTriangleWave(TriangleWaveSettingsType *triangleWaveSettings)
+float generateActualValueTriangleWave(TriangleWaveSettingsType *triangleWaveSettings)
 {
      float triangleActualValue; // maybe put in triangleWaveSettings, and make this function void, do not know, this should be used only as a local variable
 
@@ -299,13 +299,13 @@ static float generateActualValueTriangleWave(TriangleWaveSettingsType *triangleW
 }
 
 
-static float minMaxCommonModeVoltage(CoreInternalVariablesType *coreInternalVariables)
+float minMaxCommonModeVoltage(CoreInternalVariablesType *coreInternalVariables)
 {
     return(((fmax(fmax(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ) + (fmin(fmin(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ))/2);
 }
 
 
-static bool comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue)
+bool comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue)
 {
     if(compareLevel>=triangleWaveValue)
     {
@@ -317,7 +317,7 @@ static bool comparationLevelTriangleWaveComparation(float compareLevel, float tr
     }
 }
 
-static float createCompareLevel(float levelConstant, float commonModeVoltage, float phaseWantedVoltage)
+float createCompareLevel(float levelConstant, float commonModeVoltage, float phaseWantedVoltage)
 {
     return((phaseWantedVoltage - commonModeVoltage)/levelConstant);
 }
@@ -532,7 +532,10 @@ masterOutput[27] = idRegulator.measuredValue;
 masterOutput[28] = iqRegulator.wantedValue;
 masterOutput[29] = trianglePoint;
 masterOutput[30] = idRegulator.clampingStatus;
-
+masterOutput[31] = fluxRegulator.saturationOutput;
+masterOutput[32] = velocityRegulator.saturationOutput;
+masterOutput[33] = idRegulator.saturationOutput;
+masterOutput[34] = iqRegulator.saturationOutput;
 
 }
 
