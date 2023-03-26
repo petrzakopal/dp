@@ -425,7 +425,7 @@ int main(int argc, char* argv[]) {
     Regulator.idRegulator->ki = 2915.6; // 2915.6
     Regulator.idRegulator->kp = 22.3961;// 22.3961
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
-    Regulator.idRegulator->saturationOutput = - Udcmax;
+    Regulator.idRegulator->saturationOutputMin = - Udcmax;
     Regulator.idRegulator->clampingStatus = false;
     Regulator.idRegulator->saturationCheckStatus = false;
     Regulator.idRegulator->signCheckStatus = false;
@@ -537,6 +537,8 @@ int main(int argc, char* argv[]) {
         masterInput[36] = Regulator.iqRegulator->wantedValue;
         masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
         masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+        masterInput[39] = Regulator.idRegulator->saturationOutputMax;
+        masterInput[40] = Regulator.idRegulator->saturationOutputMin;
         /***************************************************************/
         /*-------------------- MAIN PROGRAM LOOP ---------------------*/
 
@@ -591,6 +593,8 @@ int main(int argc, char* argv[]) {
             masterInput[36] = Regulator.iqRegulator->wantedValue;
             masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
             masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+            masterInput[39] = Regulator.idRegulator->saturationOutputMax;
+            masterInput[40] = Regulator.idRegulator->saturationOutputMin;
 
 
 
@@ -723,6 +727,7 @@ int main(int argc, char* argv[]) {
             std::cout << "idRegulator.measuredValue: " << masterOutput[15] << "\n";
             std::cout << "idRegulator.wantedValue: " << masterOutput[16] << "\n";
             std::cout << "transformationAngle: " << masterOutput[17] << "\n";
+            
                 
             }
             /*--------------------------------------------------------------------------------------------------------*/
@@ -734,7 +739,7 @@ int main(int argc, char* argv[]) {
 
             /*-------------------------------------------------------------------------------*/
             /*-------------------- OUTPUT CSV DATA INSERTING TO A FILE ---------------------*/
-            globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","  << MotorModel.modelVariables->motorMechanicalAngularVelocity <<"\n";
+            globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","  << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," <<masterOutput[15] << "," << masterOutput[16]<<"\n";
             /*-------------------------------------------------------------------------------*/
 
             /*----------------------------------------------------------------------------------------------------------------------*/

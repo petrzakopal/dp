@@ -358,6 +358,8 @@ extern "C" {
         iqRegulator.wantedValue = masterInput[36];
         psi2alpha = masterInput[37];
         psi2beta = masterInput[38];
+        idRegulator.saturationOutputMax = masterInput[39];
+        idRegulator.saturationOutputMin = masterInput[40];
 
         sliceInternalVariables8Parts(R2MLmDL2, R2MLmDL2Temp);
         sliceInternalVariables8Parts(R2DL2, R2DL2Temp);
