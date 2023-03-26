@@ -598,11 +598,11 @@ int main(int argc, char* argv[]) {
 
             OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput}, 0 /* 0 means from host*/));
 
-            OCL_CHECK(err, q.finish());
+           
 
             OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
 
-            OCL_CHECK(err, q.finish());
+    
 
             OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_masterOutput}, CL_MIGRATE_MEM_OBJECT_HOST));
 
@@ -839,11 +839,11 @@ int main(int argc, char* argv[]) {
             std::cout << "\n\n" << i <<" round\n/************************************/\n";
             OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput}, 0 /* 0 means from host*/));
 
-            OCL_CHECK(err, q.finish());
+
 
             OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
             
-            OCL_CHECK(err, q.finish());
+
 
             OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_masterOutput}, CL_MIGRATE_MEM_OBJECT_HOST));
 
