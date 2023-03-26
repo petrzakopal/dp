@@ -525,7 +525,7 @@ int main(int argc, char* argv[]) {
 
         startTime = std::chrono::system_clock::now();
 
-        for(int i = 0; i<10;i++) // replace with while in production, but in this model, it is suitable to use for cycle
+        for(int i = 0; i<10000;i++) // replace with while in production, but in this model, it is suitable to use for cycle
         {
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if(verboseOutput)
@@ -656,7 +656,9 @@ int main(int argc, char* argv[]) {
             if(verboseOutput)
             {
                 std::cout << "psi2alpha: " << CurVelModel.modelCVVariables->psi2alpha << "\n";
-                std::cout << "i1beta: " << CurVelModel.modelCVVariables->i1beta << "\n";
+                std::cout << "psi2amplitude: " << masterOutput[14] << "\n";
+                std::cout << "transformationAngle: " << masterOutput[17] << "\n";
+                
             }
             /*--------------------------------------------------------------------------------------------------------*/
 
@@ -667,7 +669,7 @@ int main(int argc, char* argv[]) {
 
             /*-------------------------------------------------------------------------------*/
             /*-------------------- OUTPUT CSV DATA INSERTING TO A FILE ---------------------*/
-            globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","  << "," << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," << MotorModel.modelVariables->motorTorque << "," << masterOutput[15] << "," << masterOutput[16] << "\n";
+            globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","  << MotorModel.modelVariables->motorMechanicalAngularVelocity <<"\n";
             /*-------------------------------------------------------------------------------*/
 
             /*----------------------------------------------------------------------------------------------------------------------*/
