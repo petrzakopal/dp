@@ -167,6 +167,12 @@ int main()
     /*--------------------------------------------------------------------*/
     /*-------------------- IVNVERTOR MODEL SETTINGS ---------------------*/
     float Udcmax = 311.87;
+    svmCore.invertorSwitch->sw1 = 0;
+    svmCore.invertorSwitch->sw2 = 0;
+    svmCore.invertorSwitch->sw3 = 0;
+    svmCore.invertorSwitch->sw4 = 0;
+    svmCore.invertorSwitch->sw5 = 0;
+    svmCore.invertorSwitch->sw6 = 0;
     /*--------------------------------------------------------------------*/
 
 
@@ -262,6 +268,12 @@ int main()
     for(int i = 0; i<1000000;i++)
     {
 
+        /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
+        if(verboseOutput)
+        {
+            std::cout << "iteration number: " << i << "\n";
+        }
+        /*-------------------------------------------------------------------------------------------------------*/
 
         // change wanted value of velocity somewhere in time
         // if(i == 600000)
@@ -398,9 +410,9 @@ int main()
 
         // not needed in simualation
         // just inverted values from switches in the same branches in invertor
-        svmCore.invertorSwitch->sw4 = ~svmCore.invertorSwitch->sw1;
-        svmCore.invertorSwitch->sw6 = ~svmCore.invertorSwitch->sw3;
-        svmCore.invertorSwitch->sw2 = ~svmCore.invertorSwitch->sw5;
+        svmCore.invertorSwitch->sw4 = !(svmCore.invertorSwitch->sw1);
+        svmCore.invertorSwitch->sw6 = !(svmCore.invertorSwitch->sw3);
+        svmCore.invertorSwitch->sw2 = !(svmCore.invertorSwitch->sw5);
         /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 

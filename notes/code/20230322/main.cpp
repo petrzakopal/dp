@@ -34,5 +34,10 @@ int main()
 
     std::cout << "test input " << testInput[0] << "\n"; 
 
+    bool sw1 = false;
+
+    bool sw2 = !sw1;
+
+    std::cout << sw2 << "\n";
     return(0);
 }
