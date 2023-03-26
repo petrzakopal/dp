@@ -58,8 +58,6 @@ void signal_callback_handler(int signum) {
    // Terminate program
    exit(signum);
 }
-
-
 /*------------------------------------------------------------------------------------*/
 /*-------------------------------- MAIN HOST PROGRAM ---------------------------------*/
 int main(int argc, char* argv[]) {
@@ -231,7 +229,7 @@ int main(int argc, char* argv[]) {
 
 
     int masterInputLength = 39;
-    int masterOutputLength = 17;
+    int masterOutputLength = 18;
 
     float *masterInput;
     float *masterOutput;
@@ -250,14 +248,6 @@ int main(int argc, char* argv[]) {
 
 
 
-    /*------------------------------------------------------------*/
-    /*-------------------- PROGRAM SETTINGS ---------------------*/
-    int verboseOutput = false;
-    std::cout << "\n\r------------------------------------------\n";
-    std::cout << "Select verbose output:\n0 - disabled\n1 - enabled\n";
-    std::cout << "------------------------------------------\n";
-    scanf("%i", &verboseOutput);
-    /*------------------------------------------------------------*/
 
 
 
@@ -464,6 +454,16 @@ int main(int argc, char* argv[]) {
     
     if(modeSelection == 2)
     {
+
+        
+    /*------------------------------------------------------------*/
+    /*-------------------- PROGRAM SETTINGS ---------------------*/
+    int verboseOutput = false;
+    std::cout << "\n\r------------------------------------------\n";
+    std::cout << "Select verbose output:\n0 - disabled\n1 - enabled\n";
+    std::cout << "------------------------------------------\n";
+    scanf("%i", &verboseOutput);
+    /*------------------------------------------------------------*/
         /*------------------------------------------------------------------------*/
         /*-------------------- OUTPUT CSV DATA FILE CREATION ---------------------*/
         std::ofstream globalSimulationData;
@@ -551,7 +551,7 @@ int main(int argc, char* argv[]) {
 
             //kernel
 
-            OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput, buffer_masterOutput}, 0 /* 0 means from host*/));
+            OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput}, 0 /* 0 means from host*/));
 
             OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
 
@@ -692,6 +692,172 @@ int main(int argc, char* argv[]) {
         std::cout << "Time for the execution is: " << diffTime.count() << "\n";
 
     }
+
+
+    if(modeSelection == 1)
+    {
+
+         printf("Keyboard input data mode\n\r");
+        printf("------------------------------------\n\r");
+        printf("Insert data divided by {space symbol}\n\r");
+        printf("I1 I2 I3 MechanicalAngularVelocity psi2alpha[0] psi2beta[0] \n\r");
+
+    
+
+    scanf("%f %f %f %f %f %f", &inputI1, &inputI2, &inputI3, &MotorModel.modelVariables->motorMechanicalAngularVelocity, &CurVelModel.modelCVVariables->psi2alpha, &CurVelModel.modelCVVariables->psi2beta);
+    printf("------------------------------------\n\r");
+    printf("You have entered:\n\r");
+    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\rpsi2alpha[0] = %f\n\rpsi2beta = %f\n\r", inputI1, inputI2, inputI3, MotorModel.modelVariables->motorMechanicalAngularVelocity, CurVelModel.modelCVVariables->psi2alpha, CurVelModel.modelCVVariables->psi2beta);
+    printf("------------------------------------\n\r");
+
+        masterInput[0] = globalSimulationTime;
+        masterInput[1] = globalCalculationStep;
+        masterInput[2] = minMaxCommonModeVoltageConstant;
+        masterInput[3] = globalCalculationStep/2;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
+        masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
+        masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
+        masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
+        masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
+        masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[15] = Udcmax;
+        masterInput[16] = Regulator.fluxRegulator->ki;
+        masterInput[17] = Regulator.fluxRegulator->kp;
+        masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
+        masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[21] = Regulator.velocityRegulator->ki;
+        masterInput[22] = Regulator.velocityRegulator->kp;
+        masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
+        masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[26] = Regulator.idRegulator->ki;
+        masterInput[27] = Regulator.idRegulator->kp;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[30] = Regulator.iqRegulator->ki;
+        masterInput[31] = Regulator.iqRegulator->kp;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[33] = Regulator.fluxRegulator->wantedValue;
+        masterInput[34] = Regulator.velocityRegulator->wantedValue;
+        masterInput[35] = Regulator.idRegulator->wantedValue;
+        masterInput[36] = Regulator.iqRegulator->wantedValue;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+
+
+        masterInput[0] = globalSimulationTime;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+
+        
+        for(int i = 0;i<10;i++)
+        {
+            
+            std::cout << "\n\n" << i <<" round\n/************************************/\n";
+            OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput}, 0 /* 0 means from host*/));
+
+            OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
+
+            OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_masterOutput}, CL_MIGRATE_MEM_OBJECT_HOST));
+
+            OCL_CHECK(err, q.finish());
+
+            
+            std::cout << "psi2amplitude: " << masterOutput[14] << "\n";
+            std::cout << "psi2alpha: " << masterOutput[12] << "\n";
+            std::cout << "psi2beta: " << masterOutput[13] << "\n";
+            std::cout << "triangleWaveSettings.calculationTime: " << masterOutput[6] << "\n";
+            std::cout << "transformationAngle: " << masterOutput[17] << "\n";
+            std::cout << "sw1: " << masterOutput[0] << "\n";
+            std::cout << "sw2: " << masterOutput[1] << "\n";
+            std::cout << "sw3: " << masterOutput[2] << "\n";
+            std::cout << "sw4: " << masterOutput[3] << "\n";
+            std::cout << "sw5: " << masterOutput[4] << "\n";
+            std::cout << "sw6: " << masterOutput[5] << "\n";
+            std::cout << "fluxRegulator.iSum: " << masterOutput[7] << "\n";
+            std::cout << "velocityRegulator.iSum: " << masterOutput[8] << "\n";
+            std::cout << "idRegulator.saturationOutput: " << masterOutput[9] << "\n";
+            std::cout << "idRegulator.iSum: " << masterOutput[10] << "\n";
+            std::cout << "iqRegulator.iSum: " << masterOutput[11] << "\n";
+            std::cout << "idRegulator.measuredValue: " << masterOutput[15] << "\n";
+            std::cout << "idRegulator.wantedValue: " << masterOutput[15] << "\n";
+
+
+            masterInput[0] = globalSimulationTime;
+        masterInput[1] = globalCalculationStep;
+        masterInput[2] = minMaxCommonModeVoltageConstant;
+        masterInput[3] = globalCalculationStep/2;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
+        masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
+        masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
+        masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
+        masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
+        masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[15] = Udcmax;
+        masterInput[16] = Regulator.fluxRegulator->ki;
+        masterInput[17] = Regulator.fluxRegulator->kp;
+        masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
+        masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[21] = Regulator.velocityRegulator->ki;
+        masterInput[22] = Regulator.velocityRegulator->kp;
+        masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
+        masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[26] = Regulator.idRegulator->ki;
+        masterInput[27] = Regulator.idRegulator->kp;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[30] = Regulator.iqRegulator->ki;
+        masterInput[31] = Regulator.iqRegulator->kp;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[33] = Regulator.fluxRegulator->wantedValue;
+        masterInput[34] = Regulator.velocityRegulator->wantedValue;
+        masterInput[35] = Regulator.idRegulator->wantedValue;
+        masterInput[36] = Regulator.iqRegulator->wantedValue;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+
+
+        masterInput[0] = globalSimulationTime;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+        }
+        
+
+            
+    }
     
     std::cout << "the end of the most useful program is here\n";
 
@@ -700,13 +866,11 @@ int main(int argc, char* argv[]) {
     free(MotorModel.odeCalculationSettings);
     free(MotorModel.stateSpaceCoeff);
     free(MotorModel.motorParameters);
-    // free(MotorModel.voltageGeneratorData);
     free(MotorModel.modelVariables);
     free(CurVelModel.motorParameters);
     free(CurVelModel.modelCVCoeff);
     free(CurVelModel.modelCVVariables);
     free(CurVelModel.odeCVCalculationSettings);
-    // free(svmCore.phaseWantedVoltage); // deprecated
     free(svmCore.invertorSwitch);
     free(svmCore.triangleWaveSettings);
     free(Regulator.fluxRegulator);
@@ -715,6 +879,8 @@ int main(int argc, char* argv[]) {
     free(Regulator.idRegulator);
     free(Invertor.reconstructedInvertorOutputVoltage);
     free(svmCore.coreInternalVariables);
+    free(masterInput);
+    free(masterOutput);
     /*-----------------------------------------------------------*/
     
 

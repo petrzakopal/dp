@@ -39,6 +39,14 @@ extern "C" {
         }
     }
 
+     void sliceInternalVariables3Parts(float variableIn, float *variableOut)
+    {
+        for(int i = 0;i<3;i++)
+        {
+            variableOut[i] = variableIn;
+        }
+    }
+
 
     /*
     * @name psi2alphaFce
@@ -83,6 +91,7 @@ extern "C" {
         float calculationStep = globalCalculationStep;
         float k4psi2alphaTemp1;
         float k4psi2betaTemp1;
+
 
 
         #pragma HLS performance target_ti=1
@@ -300,7 +309,7 @@ extern "C" {
         * */
         float R2MLmDL2Temp[8];
         float R2DL2Temp[8];
-        float transformAngle;
+        float transformationAngle;
         float psi2amplitude;
         float trianglePoint;
         float commonModeVoltage;
@@ -312,6 +321,7 @@ extern "C" {
         float globalSimulationTime = masterInput[0];
         float globalCalculationStep =masterInput[1];
         float minMaxCommonModeVoltageConstant = masterInput[2];
+        float minMaxCommonModeVoltageConstantTemp[3];
         float halfCalculationStep = globalCalculationStep/2;
         float inputI1 = masterInput[4];
         float inputI2 = masterInput[5];
@@ -352,16 +362,26 @@ extern "C" {
         sliceInternalVariables8Parts(R2MLmDL2, R2MLmDL2Temp);
         sliceInternalVariables8Parts(R2DL2, R2DL2Temp);
 
+        float *psi2alpha_ptr = &psi2alpha;
+        float *psi2beta_ptr = &psi2beta;
+        float *i1alpha_ptr = &i1alpha;
+        float *i1beta_ptr = &i1beta;
+        float *transformationAngle_ptr = &transformationAngle; 
+        float *psi2amplitude_ptr = &psi2amplitude;
+        float transformationAngleTemp[8];
+        float commonModeVoltageTemp[3];
+        float trianglePointTemp[3];
 
-        computeCurVel(&psi2alpha, &psi2beta, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, globalSimulationTime, globalCalculationStep, halfCalculationStep, &i1alpha, &i1beta);
+        computeCurVel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, globalSimulationTime, globalCalculationStep, halfCalculationStep, i1alpha_ptr, i1beta_ptr);
 
 
-        outputCurVelProductsCalc(&transformAngle, &psi2amplitude, psi2alpha, psi2beta);
+        outputCurVelProductsCalc(transformationAngle_ptr, psi2amplitude_ptr, psi2alpha, psi2beta);
 
+        sliceInternalVariables8Parts(transformationAngle, transformationAngleTemp);
 
         // regulator new values + constrains
-        idRegulator.measuredValue = ((i1alpha * cosf(transformAngle)) + (i1beta * sinf(transformAngle)));
-        iqRegulator.measuredValue = ((-i1alpha * sinf(transformAngle)) + (i1beta * cosf(transformAngle)));
+        idRegulator.measuredValue = ((i1alpha * cosf(transformationAngleTemp[0])) + (i1beta * sinf(transformationAngleTemp[1])));
+        iqRegulator.measuredValue = ((-i1alpha * sinf(transformationAngleTemp[2])) + (i1beta * cosf(transformationAngleTemp[3])));
 
 
         fluxRegulator.measuredValue = psi2amplitude;
@@ -370,7 +390,7 @@ extern "C" {
         iqRegulator.saturationOutputMin = - iqRegulator.saturationOutputMax;
 
 
-
+        
 
         // calculating first set of regulators
         regCalculate(&fluxRegulator);
@@ -387,19 +407,25 @@ extern "C" {
         coreInternalVariables.u1d = idRegulator.saturationOutput;
         coreInternalVariables.u1q = iqRegulator.saturationOutput;
 
-        coreInternalVariables.u1alpha = ((coreInternalVariables.u1d * cosf(transformAngle)) - (coreInternalVariables.u1q * sinf(transformAngle)));
-        coreInternalVariables.u1beta = ((coreInternalVariables.u1d * sinf(transformAngle)) + (coreInternalVariables.u1q * cosf(transformAngle)));
+        coreInternalVariables.u1alpha = ((coreInternalVariables.u1d * cosf(transformationAngleTemp[4])) - (coreInternalVariables.u1q * sinf(transformationAngleTemp[5])));
+        coreInternalVariables.u1beta = ((coreInternalVariables.u1d * sinf(transformationAngleTemp[6])) + (coreInternalVariables.u1q * cosf(transformationAngleTemp[7])));
 
+        coreInternalVariables.u1a = coreInternalVariables.u1alpha;
+        coreInternalVariables.u1b = ((-0.5 * coreInternalVariables.u1alpha) + 0.866 * coreInternalVariables.u1beta);
+        coreInternalVariables.u1c = ((-0.5 * coreInternalVariables.u1alpha) - 0.866 * coreInternalVariables.u1beta);
 
         trianglePoint = generateActualValueTriangleWave(&triangleWaveSettings);
         commonModeVoltage = minMaxCommonModeVoltage(&coreInternalVariables);
 
+        sliceInternalVariables3Parts(commonModeVoltage, commonModeVoltageTemp);
+        sliceInternalVariables3Parts(trianglePoint, trianglePointTemp);
+        sliceInternalVariables3Parts(minMaxCommonModeVoltageConstant, minMaxCommonModeVoltageConstantTemp);
 
-        invertorSwitch.sw1 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage,coreInternalVariables.u1a), trianglePoint);
+        invertorSwitch.sw1 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstantTemp[0], commonModeVoltageTemp[0],coreInternalVariables.u1a), trianglePointTemp[0]);
 
-        invertorSwitch.sw3 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage,coreInternalVariables.u1b), trianglePoint);
+        invertorSwitch.sw3 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstantTemp[1], commonModeVoltageTemp[1],coreInternalVariables.u1b), trianglePointTemp[1]);
 
-        invertorSwitch.sw5 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage,coreInternalVariables.u1c), trianglePoint);
+        invertorSwitch.sw5 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstantTemp[2], commonModeVoltageTemp[2],coreInternalVariables.u1c), trianglePointTemp[2]);
 
         invertorSwitch.sw4 = !invertorSwitch.sw1;
         invertorSwitch.sw6 = !invertorSwitch.sw3;
@@ -424,6 +450,7 @@ extern "C" {
         masterOutput[14] = psi2amplitude;
         masterOutput[15] = idRegulator.measuredValue;
         masterOutput[16] = idRegulator.wantedValue;
+        masterOutput[17] = transformationAngle;
     }
 
 
