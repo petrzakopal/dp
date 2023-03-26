@@ -390,7 +390,7 @@ extern "C" {
         iqRegulator.saturationOutputMin = - iqRegulator.saturationOutputMax;
 
 
-        
+      
 
         // calculating first set of regulators
         regCalculate(&fluxRegulator);
@@ -455,4 +455,3 @@ extern "C" {
 
 
 }
-
