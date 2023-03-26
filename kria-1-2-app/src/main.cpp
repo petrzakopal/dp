@@ -961,3 +961,5 @@ int main(int argc, char* argv[]) {
 
 
 }
+
+// musí být chyba v algoritmu velocity regulatoru
