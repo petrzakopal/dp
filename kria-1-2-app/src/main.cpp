@@ -231,24 +231,34 @@ int main(int argc, char* argv[]) {
     int masterInputLength = 39;
     int masterOutputLength = 18;
 
-    float *masterInput;
-    float *masterOutput;
+    // float *masterInput;
+    // float *masterOutput;
     
-    posix_memalign((void **)&masterInput , 4096 , (masterInputLength)*sizeof(float) );
-    posix_memalign((void **)&masterOutput , 4096 , (masterOutputLength)*sizeof(float) );
+    // posix_memalign((void **)&masterInput , 4096 , (masterInputLength)*sizeof(float) );
+    // posix_memalign((void **)&masterOutput , 4096 , (masterOutputLength)*sizeof(float) );
 
-    OCL_CHECK(err, cl::Buffer buffer_masterInput(context, CL_MEM_USE_HOST_PTR, (masterInputLength)*sizeof(float),masterInput,&err));
-    OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_USE_HOST_PTR, (masterOutputLength)*sizeof(float),masterOutput,&err));
+    // OCL_CHECK(err, cl::Buffer buffer_masterInput(context, CL_MEM_USE_HOST_PTR, (masterInputLength)*sizeof(float),masterInput,&err));
+    // OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_USE_HOST_PTR, (masterOutputLength)*sizeof(float),masterOutput,&err));
 
 
+    // int narg = 0;
+    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterInput));
+    // OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterOutput));
+
+    OCL_CHECK(err, cl::Buffer buffer_masterInput(context, CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_ONLY, masterInputLength*sizeof(float), NULL, &err));
+    OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_ALLOC_HOST_PTR | CL_MEM_WRITE_ONLY, masterOutputLength*sizeof(float), NULL, &err));
     int narg = 0;
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterInput));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterOutput));
 
+    float *masterInput;
+    float *masterOutput;
 
-
-
-
+    OCL_CHECK(err,
+              masterInput = (float*)q.enqueueMapBuffer(buffer_masterInput, CL_TRUE, CL_MAP_WRITE, 0, masterInputLength*sizeof(float), NULL, NULL, &err));
+    
+    OCL_CHECK(err, masterOutput = (float*)q.enqueueMapBuffer(buffer_masterOutput, CL_TRUE, CL_MAP_READ, 0, masterOutputLength*sizeof(float), NULL,
+                                                         NULL, &err));
 
 
     /*-------------------------------------------------------------*/
@@ -459,10 +469,15 @@ int main(int argc, char* argv[]) {
     /*------------------------------------------------------------*/
     /*-------------------- PROGRAM SETTINGS ---------------------*/
     int verboseOutput = false;
+    int numberOfIterations = 0;
     std::cout << "\n\r------------------------------------------\n";
     std::cout << "Select verbose output:\n0 - disabled\n1 - enabled\n";
     std::cout << "------------------------------------------\n";
     scanf("%i", &verboseOutput);
+    // std::cout << "\n\r------------------------------------------\n";
+    // std::cout << "Select numberOfIterations\n";
+    // std::cout << "------------------------------------------\n";
+    // scanf("%i", &numberOfIterations);
     /*------------------------------------------------------------*/
         /*------------------------------------------------------------------------*/
         /*-------------------- OUTPUT CSV DATA FILE CREATION ---------------------*/
@@ -881,9 +896,12 @@ int main(int argc, char* argv[]) {
     free(Regulator.idRegulator);
     free(Invertor.reconstructedInvertorOutputVoltage);
     free(svmCore.coreInternalVariables);
-    free(masterInput);
-    free(masterOutput);
+    // free(masterInput);
+    // free(masterOutput);
+    OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_masterInput, masterInput));
+    OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_masterOutput, masterOutput));
+    OCL_CHECK(err, q.finish());
     /*-----------------------------------------------------------*/
-    
+
 
 }
