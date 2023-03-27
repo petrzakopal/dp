@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="krnl_calculateCurVelModel" dir="">
+  <FileSets>
+    <FileSet Name="kernel_krnl_calculateCurVelModel" Type="DesignSrcs">
+      <File Path="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/src/krnl_main.cpp"/>
+      <Config/>
+    </FileSet>
+  </FileSets>
+  <Runs/>
+</project>

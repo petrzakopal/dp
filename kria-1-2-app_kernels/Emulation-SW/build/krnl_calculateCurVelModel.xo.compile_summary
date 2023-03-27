@@ -1,0 +1,168 @@
+<ENTRY>
+{
+ "thisFile": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/krnl_calculateCurVelModel.xo.compile_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Mon Mar 27 01:47:16 2023",
+ "timestampMillis": "1679874436193",
+ "buildStep": {
+  "cmdId": "f9d645ce-0346-45ab-8e33-6c3cd1b64c4d",
+  "name": "v++",
+  "logFile": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/krnl_calculateCurVelModel/krnl_calculateCurVelModel.steps.log",
+  "commandLine": "/tools/Xilinx/Vitis/2022.2/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" --target sw_emu --compile -I../src --config krnl_calculateCurVelModel-compile.cfg -obuild/krnl_calculateCurVelModel.xo ../src/krnl_main.cpp ",
+  "args": [
+   "--target",
+   "sw_emu",
+   "--compile",
+   "-I../src",
+   "--config",
+   "krnl_calculateCurVelModel-compile.cfg",
+   "-obuild/krnl_calculateCurVelModel.xo",
+   "../src/krnl_main.cpp"
+  ],
+  "iniFiles": [
+   {
+    "path": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/krnl_calculateCurVelModel-compile.cfg",
+    "content": "platform=/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-platform/export/kria-1-2-platform/kria-1-2-platform.xpfm\nsave-temps=1\nkernel=krnl_calculateCurVelModel\ndebug=1\nmessageDb=build/krnl_calculateCurVelModel.mdb\ntemp_dir=build\nreport_dir=build/reports\nlog_dir=build/logs\n\n[advanced]\nmisc=solution_name=krnl_calculateCurVelModel\n\n[hls]\nmax_memory_ports=krnl_calculateCurVelModel"
+   }
+  ],
+  "cwd": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon Mar 27 01:47:16 2023",
+ "timestampMillis": "1679874436194",
+ "status": {
+  "cmdId": "f9d645ce-0346-45ab-8e33-6c3cd1b64c4d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Mon Mar 27 01:47:18 2023",
+ "timestampMillis": "1679874438049",
+ "buildSummary": {
+  "hardwarePlatform": "kria-1-2-platform.xpfm",
+  "hardwareDsa": "kria_bd_wrapper.xsa",
+  "platformDirectory": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-platform/export/kria-1-2-platform",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_COMPILE",
+  "target": "TT_SW_EMU",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "krnl_calculateCurVelModel",
+     "file": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/krnl_calculateCurVelModel.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/src/krnl_main.cpp"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2022.2. SW Build 3671529 on 2022-10-13-17:52:11"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Mon Mar 27 01:47:18 2023",
+ "timestampMillis": "1679874438090",
+ "buildStep": {
+  "cmdId": "aaf89a2f-e15f-4848-8396-22f06a46830a",
+  "name": "vitis_hls",
+  "logFile": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/krnl_calculateCurVelModel/krnl_calculateCurVelModel/vitis_hls.log",
+  "commandLine": "vitis_hls -f /home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/krnl_calculateCurVelModel/krnl_calculateCurVelModel/krnl_calculateCurVelModel.tcl -messageDb vitis_hls.pb",
+  "args": [
+   "vitis_hls",
+   "-f",
+   "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/krnl_calculateCurVelModel/krnl_calculateCurVelModel/krnl_calculateCurVelModel.tcl",
+   "-messageDb",
+   "vitis_hls.pb"
+  ],
+  "iniFiles": [],
+  "cwd": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon Mar 27 01:47:18 2023",
+ "timestampMillis": "1679874438092",
+ "status": {
+  "cmdId": "aaf89a2f-e15f-4848-8396-22f06a46830a",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon Mar 27 01:48:49 2023",
+ "timestampMillis": "1679874529593",
+ "status": {
+  "cmdId": "aaf89a2f-e15f-4848-8396-22f06a46830a",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Mon Mar 27 01:48:49 2023",
+ "timestampMillis": "1679874529627",
+ "status": {
+  "cmdId": "f9d645ce-0346-45ab-8e33-6c3cd1b64c4d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon Mar 27 01:48:49 2023",
+ "timestampMillis": "1679874529773",
+ "report": {
+  "path": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/reports/krnl_calculateCurVelModel/krnl_calculateCurVelModel_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Mon Mar 27 01:48:49 2023",
+ "timestampMillis": "1679874529775",
+ "report": {
+  "path": "/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-app_kernels/Emulation-SW/build/krnl_calculateCurVelModel_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

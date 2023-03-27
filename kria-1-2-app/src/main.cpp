@@ -545,7 +545,7 @@ int main(int argc, char* argv[]) {
 
         startTime = std::chrono::system_clock::now();
 
-        for(int i = 0; i<100000;i++) // replace with while in production, but in this model, it is suitable to use for cycle
+        for(int i = 0; i<1000000;i++) // replace with while in production, but in this model, it is suitable to use for cycle
         {
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if(verboseOutput)
