@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+🐛 [27.03.2023](/notes/20230327.md) <-- debugging a řešení problémů + vytváření frameworku na testování v pc
+
+---
+
 💻 [26.03.2023](/notes/20230326.md) <--celý den snaha o zprovoznění modelu ASM v CPU a řízení v FPGA, problémy se segmentation fault asi kvůli xrt.ini ale když tam zas není ale includuju knihovny a mám v build settings v hw_link --config profile.cfg, tak to zas nejde a ani basic věc to nevydá správně a musím tam xrt.ini zase vložit, vrátil jsem se do nočníhoh kódu kter'ý totiž měl fungovat a najednou nefungoval... pak se zas zkusím vrátit dopředu, pomocí stažení kódu z commitu, nevím proč kód na regulátory, který funguje v pc nefunguje v fpga (array refactoring)
 
 ---
