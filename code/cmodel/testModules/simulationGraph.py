@@ -24,8 +24,8 @@ plt.rcParams["figure.figsize"] = [15, 6]
 plt.rcParams["figure.autolayout"] = True
 
 # defining which columns are in inported CSV
-columns = ["globalSimulationTime", "psi2amplitude", "i1alpha", "i1beta", "motorMechanicalAngularVelocity", "motorTorque", "idRegulatorClampingStatus", "fluxRegulatorClampingStatus", "idRegulatorMeasuredValue", "idRegulatorWantedValue"]
-df = pd.read_csv("./outputData/globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=1000000)
+columns = ["globalSimulationTime", "psi2amplitude", "i1alpha", "i1beta", "motorMechanicalAngularVelocity", "motorTorque", "idRegulatorClampingStatus", "fluxRegulatorClampingStatus", "idRegulatorMeasuredValue", "idRegulatorWantedValue", "velocityRegulatorwantedValue", "velocityRegulatormeasuredValue"]
+df = pd.read_csv("./outputData/globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=10000000)
 
 # print out part of the csv files as a text to terminal
 print("Contents in csv file:", df)
@@ -45,10 +45,12 @@ plt.xticks(fontsize=15, weight=700)
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 
 plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue, label="psi2amplitude")
-# plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed, label="angularVelocity")
+plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed, label="angularVelocity")
 plt.xlabel("time (s)",fontsize=20, fontweight=400, loc = "right")
 plt.ylabel("psi2amplitude (Wb)\nangularVelocity (s^(-1))",fontsize=10 ,fontweight=400, loc = "top", rotation=0)
 plt.legend(  bbox_to_anchor=(0.5, -0.05), ncol=2 )
+plt.plot(df.globalSimulationTime, df.velocityRegulatorwantedValue, color=ctuGreen)
+plt.plot(df.globalSimulationTime, df.velocityRegulatormeasuredValue, color=ctuOrange)
 # plt.plot(df.globalSimulationTime, df.idRegulatorClampingStatus, color=ctuRed)
 # plt.plot(df.globalSimulationTime, df.fluxRegulatorClampingStatus, color=ctuGreen)
 # plt.plot(df.globalSimulationTime, df.idRegulatorMeasuredValue, color=ctuOrange)

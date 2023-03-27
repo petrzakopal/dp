@@ -304,7 +304,7 @@ int main()
     Regulator.idRegulator->ki = 2915.6; // 2915.6
     Regulator.idRegulator->kp = 22.3961;// 22.3961
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
-    Regulator.idRegulator->saturationOutput = - Udcmax;
+    Regulator.idRegulator->saturationOutputMin = 0; // - Udcmax
     Regulator.idRegulator->clampingStatus = false;
     Regulator.idRegulator->saturationCheckStatus = false;
     Regulator.idRegulator->signCheckStatus = false;

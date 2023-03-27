@@ -209,7 +209,8 @@ int main()
     Regulator.idRegulator->ki = 2915.6; // 2915.6
     Regulator.idRegulator->kp = 22.3961;// 22.3961
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
-    Regulator.idRegulator->saturationOutput = - Udcmax;
+    // Regulator.idRegulator->saturationOutputMin = - Udcmax;
+    Regulator.idRegulator->saturationOutputMin = 0;
     Regulator.idRegulator->clampingStatus = false;
     Regulator.idRegulator->saturationCheckStatus = false;
     Regulator.idRegulator->signCheckStatus = false;
@@ -236,14 +237,16 @@ int main()
     /*-------------------- WANTED VALUES INPUT ---------------------*/
     // now hardcoded, change later
     Regulator.fluxRegulator->wantedValue = 1;
-    Regulator.velocityRegulator->wantedValue = 50;
+    Regulator.velocityRegulator->wantedValue = 0;
     Regulator.idRegulator->wantedValue = 0;
     Regulator.iqRegulator->wantedValue = 0;
     /*--------------------------------------------------------------*/
 
    
     
-    
+    float inputI1;
+    float inputI2;
+    float inputI3;
     
 
     /*------------------------------------------------------------------------*/
@@ -267,7 +270,10 @@ int main()
     startTime = std::chrono::system_clock::now();
     for(int i = 0; i<1000000;i++)
     {
-
+        if(i>=600000)
+        {
+            Regulator.velocityRegulator->wantedValue = 10;
+        }
         /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
         if(verboseOutput)
         {
@@ -287,7 +293,6 @@ int main()
         Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
          /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-      
         /*----------------------------------------------------------------------------------*/
         /*-------------------- FLUX AND VELOCITY REGULATOR CALCULATION ---------------------*/
         // TODO: test threads
@@ -321,7 +326,9 @@ int main()
             std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
             std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
             std::cout << "id regulator wanted value: " << Regulator.idRegulator->wantedValue << "\n";
+            std::cout << "id regulator saturation output: " << Regulator.idRegulator->saturationOutput << "\n";
             std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
+            
         }
         /*-------------------------------------------------------------------------------------------------------*/
 
@@ -471,6 +478,9 @@ int main()
 
        /******************************************************************************/
 
+        inputI1 = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
+        inputI2 = Transformation.inverseClarkeTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
+        inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
 
         /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
         if(verboseOutput)
@@ -542,7 +552,7 @@ int main()
 
         /*-------------------------------------------------------------------------------*/
         /*-------------------- OUTPUT CSV DATA INSERTING TO A FILE ---------------------*/
-        globalSimulationData << globalSimulationTime << "," << CurVelModel.modelCVVariables->psi2Amplitude << "," << CurVelModel.modelCVVariables->i1alpha << "," << CurVelModel.modelCVVariables->i1beta << "," << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," << MotorModel.modelVariables->motorTorque << "," << Regulator.idRegulator->clampingStatus << "," << Regulator.fluxRegulator->clampingStatus <<  "," << Regulator.idRegulator->measuredValue << "," << Regulator.idRegulator->wantedValue << "\n";
+        globalSimulationData << globalSimulationTime << "," << CurVelModel.modelCVVariables->psi2Amplitude << "," << CurVelModel.modelCVVariables->i1alpha << "," << CurVelModel.modelCVVariables->i1beta << "," << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," << MotorModel.modelVariables->motorTorque << "," << Regulator.idRegulator->clampingStatus << "," << Regulator.fluxRegulator->clampingStatus <<  "," << Regulator.idRegulator->measuredValue << "," << Regulator.idRegulator->wantedValue << "," <<Regulator.velocityRegulator->wantedValue <<","  << Regulator.velocityRegulator->measuredValue << "\n";
         /*-------------------------------------------------------------------------------*/
 
         /*----------------------------------------------------------------------------------------------------------------------*/
