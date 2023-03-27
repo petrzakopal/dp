@@ -176,8 +176,9 @@ int main(int argc, char* argv[]) {
     CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
     CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
     CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
-    CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+    // CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
     CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
+    CurVelModel.modelCVCoeff->nOfPolePairs = 2;
     /*------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------*/

@@ -18,79 +18,6 @@ Purpose: Kernel
 #define PI 3.141592 
 
 
-
-
-/*-------------------------------------------------------------------------------*/
-/*----------------------- MODEL ODE EQUATIONS OF DY/DT -------------------------*/
-float psi2alphaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float motorElectricalAngularVelocity )
-{
-    return((R2MLmDL2 * i1alpha) - (motorElectricalAngularVelocity * psi2beta) - (R2DL2 * psi2alpha));
-}
-
-float psi2betaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float motorElectricalAngularVelocity)
-{
-    return((R2MLmDL2 * i1beta) + (motorElectricalAngularVelocity * psi2alpha) - (R2DL2 * psi2beta));
-}
-/*-------------------------------------------------------------------------------*/
-
-void computeCurVelKernel(float *psi2alpha_ptr, float *psi2beta_ptr, float i1alpha, float i1beta, float R2MLmDL2, float R2DL2, float halfCalculationStep, float calculationStep,float inputMotorMechanicalAngularVelocity)
-{
-    // coefficients for RK4
-    float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
-    float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
-
-    // helper variable to reduce calculation fo the same value
-
-   
-    float psi2alpha = *psi2alpha_ptr;
-    float psi2beta = *psi2beta_ptr;
-
-    float motorElectricalAngularVelocity = inputMotorMechanicalAngularVelocity * 2;
-
-    
-
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k1psi2alpha = psi2alphaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, psi2alpha, psi2beta, motorElectricalAngularVelocity);
-
-    k1psi2beta = psi2betaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, psi2alpha, psi2beta, motorElectricalAngularVelocity);
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k2psi2alpha = psi2alphaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k1psi2alpha)), (psi2beta + (halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
-
-    k2psi2beta = psi2betaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k1psi2alpha)), (psi2beta + (halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k3psi2alpha = psi2alphaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k2psi2alpha)), (psi2beta + (halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
-
-    k3psi2beta = psi2betaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k2psi2alpha)), (psi2beta + (halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-    k4psi2alpha = psi2alphaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (calculationStep * k3psi2alpha)), (psi2beta + (calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
-
-    k4psi2beta = psi2betaFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (calculationStep * k3psi2alpha)), (psi2beta + (calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-
-    // updating the values based on calculated coefficients
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-    *psi2alpha_ptr = psi2alpha + ((calculationStep / 6) * (k1psi2alpha + 2 * k2psi2alpha + 2 * k3psi2alpha + k4psi2alpha));
-
-   *psi2beta_ptr = psi2beta + ((calculationStep / 6) * (k1psi2beta + 2 * k2psi2beta + 2 * k3psi2beta + k4psi2beta));
-    /*------------------------------------------------------------------------------------------------------------------------------------*/
-}
-
-
-
-/*******************************************************************************
-
-*******************************************************************************/
-
-
-
     /*
     * @name sliceInternalVariables4Parts
     * @brief Function to calculate slice variables at 4 parts
@@ -126,7 +53,119 @@ void computeCurVelKernel(float *psi2alpha_ptr, float *psi2beta_ptr, float i1alph
     }
 
 
+    /*
+    * @name psi2alphaFce
+    * @brief Function to calculate new psi2alpha in RK4 CurVel Model
+    */
 
+    float psi2alphaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float motorElectricalAngularVelocity )
+    {
+        return((R2MLmDL2 * i1alpha) - (motorElectricalAngularVelocity * psi2beta) - (R2DL2 * psi2alpha));
+    }
+
+    /*
+    * @name psi2betaFce
+    * @brief Function to calculate new psi2beta in RK4 CurVel Model
+    */
+
+    float psi2betaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float motorElectricalAngularVelocity)
+    {
+        return((R2MLmDL2 * i1beta) + (motorElectricalAngularVelocity * psi2alpha) - (R2DL2 * psi2beta));
+    }
+
+    void computeCurVelKernel(float *psi2alpha, float *psi2beta, float inputI1, float inputI2, float inputI3, float numberOfPolePairs, float *R2MLmDL2Temp, float *R2DL2Temp, float inputMotorMechanicalAngularVelocity, float globalSimulationTime, float globalCalculationStep, float halfCalculationStep, float *i1alpha, float *i1beta)
+    {
+
+        // coefficients for RK4
+        float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
+        float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
+        // helper variable to reduce calculation fo the same value
+
+        float psi2alphaTemp[8];
+        float psi2betaTemp[8];
+        float i1alphaTemp[8];
+        float i1betaTemp[8];
+        float k1psi2alphaTemp[4];
+        float k1psi2betaTemp[4];
+        float k2psi2alphaTemp[4];
+        float k2psi2betaTemp[4];
+        float k3psi2alphaTemp[4];
+        float k3psi2betaTemp[4];
+        float motorElectricalAngularVelocityTemp[8];
+        float motorElectricalAngularVelocity;
+        float calculationStep = globalCalculationStep;
+        float k4psi2alphaTemp1;
+        float k4psi2betaTemp1;
+
+
+
+
+        sliceInternalVariables8Parts(*psi2alpha, psi2alphaTemp);
+        sliceInternalVariables8Parts(*psi2beta, psi2betaTemp);
+
+        *i1alpha = (0.667 * (inputI1 - (0.5 * inputI2) - (0.5 * inputI3)));
+        *i1beta = (0.6667 * (0.866 * inputI2 - 0.866 *  inputI3));
+
+        sliceInternalVariables8Parts(*i1alpha, i1alphaTemp);
+        sliceInternalVariables8Parts(*i1beta, i1betaTemp);
+
+        motorElectricalAngularVelocity = inputMotorMechanicalAngularVelocity * numberOfPolePairs;
+
+        sliceInternalVariables8Parts(motorElectricalAngularVelocity, motorElectricalAngularVelocityTemp);
+
+
+        /*------------------------------------------------------------------------------------------------------------------------------------*/
+        k1psi2alpha = psi2alphaFce(R2MLmDL2Temp[0], R2DL2Temp[0] , i1alphaTemp[0], i1betaTemp[0], psi2alphaTemp[0], psi2betaTemp[0], motorElectricalAngularVelocityTemp[0]);
+
+        k1psi2beta = psi2betaFce(R2MLmDL2Temp[1], R2DL2Temp[1], i1alphaTemp[1], i1betaTemp[1], psi2alphaTemp[1], psi2betaTemp[1], motorElectricalAngularVelocityTemp[1]);
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+        sliceInternalVariables4Parts(k1psi2alpha, k1psi2alphaTemp);
+
+        sliceInternalVariables4Parts(k1psi2beta, k1psi2betaTemp);
+
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
+        k2psi2alpha = psi2alphaFce(R2MLmDL2Temp[2], R2DL2Temp[2] , i1alphaTemp[2], i1betaTemp[2], (psi2alphaTemp[2] + (halfCalculationStep * k1psi2alphaTemp[0])), (psi2betaTemp[2] + (halfCalculationStep * k1psi2betaTemp[0])), motorElectricalAngularVelocityTemp[2]);
+
+        k2psi2beta = psi2betaFce(R2MLmDL2Temp[3], R2DL2Temp[3], i1alphaTemp[3], i1betaTemp[3], (psi2alphaTemp[3] + (halfCalculationStep * k1psi2alphaTemp[1])), (psi2betaTemp[3] + (halfCalculationStep * k1psi2betaTemp[1])), motorElectricalAngularVelocityTemp[3]);
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+        sliceInternalVariables4Parts(k2psi2alpha, k2psi2alphaTemp);
+
+        sliceInternalVariables4Parts(k2psi2beta, k2psi2betaTemp);
+
+
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
+        k3psi2alpha = psi2alphaFce(R2MLmDL2Temp[4], R2DL2Temp[4] , i1alphaTemp[4], i1betaTemp[4], (psi2alphaTemp[4] + (halfCalculationStep * k2psi2alphaTemp[0])), (psi2betaTemp[4] + (halfCalculationStep * k2psi2betaTemp[0])), motorElectricalAngularVelocityTemp[4]);
+
+        k3psi2beta = psi2betaFce(R2MLmDL2Temp[5], R2DL2Temp[5] , i1alphaTemp[5], i1betaTemp[5], (psi2alphaTemp[5] + (halfCalculationStep * k2psi2alphaTemp[1])), (psi2betaTemp[5] + (halfCalculationStep * k2psi2betaTemp[1])), motorElectricalAngularVelocityTemp[5]);
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
+
+        sliceInternalVariables4Parts(k3psi2alpha, k3psi2alphaTemp);
+
+    
+        sliceInternalVariables4Parts(k3psi2beta, k3psi2betaTemp);
+
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
+        k4psi2alpha = psi2alphaFce(R2MLmDL2Temp[6], R2DL2Temp[6] , i1alphaTemp[6], i1betaTemp[6], (psi2alphaTemp[6] + (calculationStep * k3psi2alphaTemp[0])), (psi2betaTemp[6] + (calculationStep * k3psi2betaTemp[0])), motorElectricalAngularVelocityTemp[6]);
+
+        k4psi2beta = psi2betaFce(R2MLmDL2Temp[7], R2DL2Temp[7] , i1alphaTemp[7], i1betaTemp[7], (psi2alphaTemp[7] + (calculationStep * k3psi2alphaTemp[1])), (psi2betaTemp[7] + (calculationStep * k3psi2betaTemp[1])), motorElectricalAngularVelocityTemp[7]);
+    /*------------------------------------------------------------------------------------------------------------------------------------*/
+
+        k4psi2alphaTemp1 = k4psi2alpha;
+        k4psi2betaTemp1 = k4psi2beta;
+
+
+
+        *psi2alpha = *psi2alpha + ((calculationStep / 6) * (k1psi2alphaTemp[3] + 2 * k2psi2alphaTemp[3] + 2 * k3psi2alphaTemp[3] + k4psi2alphaTemp1));
+
+
+        *psi2beta = *psi2beta + ((calculationStep / 6) * (k1psi2betaTemp[3] + 2 * k2psi2betaTemp[3] + 2 * k3psi2betaTemp[3] + k4psi2betaTemp1));
+
+    }
 
 
     void outputCurVelProductsCalc(float *transformAngle, float *psi2amplitude, float psi2alpha, float psi2beta)
@@ -336,12 +375,8 @@ void computeCurVelKernel(float *psi2alpha_ptr, float *psi2beta_ptr, float i1alph
         float commonModeVoltageTemp[3];
         float trianglePointTemp[3];
 
-        // computeCurVelKernel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, globalSimulationTime, globalCalculationStep, halfCalculationStep, i1alpha_ptr, i1beta_ptr);
+        computeCurVelKernel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, globalSimulationTime, globalCalculationStep, halfCalculationStep, i1alpha_ptr, i1beta_ptr);
 
-        i1alpha = (0.667 * (inputI1 - (0.5 * inputI2) - (0.5 * inputI3)));
-        i1beta = (0.6667 * (0.866 * inputI2 - 0.866 *  inputI3));
-
-        computeCurVelKernel(psi2alpha_ptr, psi2beta_ptr, i1alpha, i1beta, R2MLmDL2, R2DL2, halfCalculationStep, globalCalculationStep, inputMotorMechanicalAngularVelocity);
 
         outputCurVelProductsCalc(transformationAngle_ptr, psi2amplitude_ptr, psi2alpha, psi2beta);
 

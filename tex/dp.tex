@@ -373,7 +373,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 \newpage
 %konec úvodu
 
-\section{System on a chip}
+\section{System on a chip}\label{sec:system-on-a-chip}
 	% co to je, proč to je
 	% typy postavené kolem  mikrokontroléru, mikroprocesoru a ASIC
 	% Aplikace Embedded system (existují i pro mobilní aplikace, osobní počítače)
@@ -397,10 +397,10 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 	\subsection{Aplikace SoC}
 	Systémy na čipu se pro jejich výpočetní výkon, prostorovou a energetickou efektivnost využívají v mnoha aplikacích. Nejvýznamnější využití v problematice elektrických pohonů je v embedded systémech a hardwaerově akcelerovaných aplikacích.
 
-\section{System on Modules}
+\section{System on Modules}\label{sec:system-on-modules}
 
 	System on modules (SOMs) je architektura jejíž jednou z hlavních součástí je dříve zmiňovaný SoC. SOMs se oproti SoC již dodávají na PCB a kromě SoC mají na desce umístěné další komponenty, které jsou pro danou aplikaci vyžadovány. \cite{xilinx-what-is-a-som}\par
-	SOMs se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom SOM taktéž podpůrnou desku s dalšími obecnými komponenty, jež jsou vhodné pro vývoj standardních aplikací. Pokud zákazník již pomocí vývojové desky odladil vytvářenou aplikaci, může zakoupit samostatný SOM a podpůrnou desku (tzv. carrier card) pro danou aplikaci navrhnou tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tudíž se snižuje cena konečného výrobku o komponenty, které byly z carrier card při návrhu odstraněny pro jejich nevyužití.\par
+	SOMs se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom SOM taktéž podpůrnou desku s dalšími obecnými komponenty, jež jsou vhodné pro vývoj standardních aplikací. Pokud zákazník již pomocí vývojové desky odladil vytvářenou aplikaci, může zakoupit samostatný SOM a podpůrnou desku (tzv. carrier card, CC) pro danou aplikaci navrhnou tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tudíž se snižuje cena konečného výrobku o komponenty, které byly z carrier card při návrhu odstraněny pro jejich nevyužití.\par
 	Výrobce platformy \textit{Kria KR260 Robotics Starter Kit}, použité v této práci, dodává k produktu rozsáhlou dokumentaci \cite{kria-som-carrier-card-design-guide-2022} \cite{kria-k26-som-ds}, podle které je možné individuální carrier card sestavit. \par
 	Příkladem individuálně vytvořené carrier card je open source projekt od firmy \textit{Antmicro Ltd}. Tato firma vydala open source design carrier cardu pro zařízení \textit{Kria K26}, které je předchůdcem \textit{KR260}, a bylo určeno pro akcelerování audiovizuálních aplikací. Využívá však totožný SOM ale rozdílný carrier card. Dokumentace a vytvořený návrh je dostupný z \cite{antmicro-open-source-kria-k26-carrier-card}.
 
@@ -590,17 +590,11 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			Kromě HIL simulace je možné FPGA využít také pro řízení elektrických pohonů. Možnosti realizace řízení AC elektrických strojů pomocí FPGA a analogově digitálních převodníků (ADC) jsou prezentovány v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}. V dokumentu jsou popisovány tři realizace řízení, resp. regulace pohonu. Nejprve byla regulace realizována pomocí hystérézních on-off regulátorů, následně byly použity PI regulátory. Pomocí nich byl pohon regulován na základně měření a změny vektoru statorového proudu, resp. jeho složek $\alpha \beta$ po aplikování Clarkové transformace. Jako poslení prezentovaný způsob autoři realizovali model ovládání synchronního motoru na základě prediktivních regulátorů. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}\par Všechny prezentované způsoby regulace v \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives} byly před syntézou realizovány v prostředí MATLAB™️ a Simulink. Tento způsob tvorby modelů a algoritmů je v praxi upřednostňován, protože umožňuje i expertům na řízení a regulaci pracovat na dané problematice bez znalostí mikroelektroniky, programování v HDL a způsobu fungování FPGA. Oproti tomu je třeba zvážit, jaké jsou požadavky na rychlost, výkonnost a optimalizované řízení aplikace a zdali použití předpřipravených knihoven a zjednodušených nástrojů nebude mít příliš značný vliv na rychlost výpočtu a tudíž zpracování dat a řízení v reálném čase. \cite{naouar-fpga-based-current-controllers-for-ac-machine-drives}
 			
 
-	\section{Porovnání dostupných SoC/SoM platforem pro řízení elektrických pohonů}
-			V této kapitole budou představeny dvě smysluplné, komerčně dostupné platformy, které je možné využít pro aplikace řízení elektrických pohonů či HIL. Výběr je zaměřen na SoC a Som umístěných na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi a vlastnostmi by měla architektura disponovat a poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu na Printed Circuit Board (PCB). Z důvodu finanční náročnosti některých řešení bylo přistoupeno k prezentování SoC a SoM od firmy Xilinx, které jsou nižší ceny.
+	
 
-
-			\subsection{Platforma využívající ZynQ SoC}
-
-			\subsection{Platforma využívající SOM Kria KR260}
-
-	\section{Vývojová deska Digilent Zybo}
+	\section{Vývojová deska Digilent Zybo}\label{sec:vyvojova-deska-digilent-zybo}
 			Vývoj akcelerovaných aplikacích je možné realizovat na realativně velikém množství dostupného HW. V některých případech je design vývojových desek dokonce výrobcem uveřejňován a tudíž v případě dostatečných znalostí je dokonce možné si sestavit vlastní HW s dostupných komponent takovým způsobem, aby vyhovoval požadované embedded aplikaci. Výhodné ovšem je využít již připravená řešení vývojových desek, které zjednodušují prvotní tvorbu aplikace.\par
-			V této práci je realizován vývoj aplikace na vývojové desce \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board} od firmy Digilent. \cite{digilent-zybo-7000-docs} Jedná se o model vývojové desky, který byl nahrazen novějšími variantami s označením \textit{ZYBO Z7-10} a \textit{ZYBO Z7-20}, které jsou stále v aktivním prodeji. Hlavním rozdílem představených desek je verze Zynq čipu, který v moderních deskách disponuje ARM procesorem s vyšší taktovací frekvencí a s modernějším FPGA s vyšším počtem LUT, klopných obvodů a s rozsáhlejší pamětí RAM apod. Bližší porovnání specifikací těchto desek je dostupné na \cite{digilent-zybo-compare}.\par
+			V této práci byl realizován prvotní vývoj a seznámení s prostředím akcelerovaných aplikací na vývojové desce \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board} od firmy Digilent. \cite{digilent-zybo-7000-docs} Jedná se o model vývojové desky, který byl na trhu nahrazen novějšími variantami s označením \textit{ZYBO Z7-10} a \textit{ZYBO Z7-20}, které jsou stále v aktivním prodeji. Hlavním rozdílem desek je verze Zynq čipu, který v moderních deskách disponuje ARM procesorem s vyšší taktovací frekvencí a s modernějším FPGA s vyšším počtem LUT, klopných obvodů a s rozsáhlejší pamětí RAM. Bližší porovnání specifikací těchto desek je dostupné na \cite{digilent-zybo-compare}.\par
 			V další části textu jsou představeny významné komponenty vývojové desky \textit{Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}.
 
 			\begin{figure}[htbp!]
@@ -613,7 +607,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 		\subsection{Základní přehled}
 		\subsubsection{CPU a FPGA čip}
 			Hlavní částí vývojové desky je čip, obsahující FPGA a CPU jednotky zakomponované v jedné polovodičové struktuře. Jak již bylo zmíněno v části \hyperref[subsec:hardware-accelerated-applications]{\textit{Hardware Accelerated Applications}}, tato struktura se nazývá heterogenní.\par
-			Deska obsahuje čip Xilinx Zynq-7000 (typ XC72010), který umožňuje pro vývoj aplikací použít SDK od firmy Xilinx. V tomto čipu je integrován dvou jádrový procesor ARM Cortex-9, který slouží jako host akcelerovaných aplikací na Xilinx FPGA sedmé série. Detailní schéma blokové architektury SoC s označním sběrnic a komunikace jednotlivých částí čipu je zobrazené na obr. \ref{fig:zynq-block-diagram-detailed}.\par
+			Deska obsahuje čip Xilinx Zynq-7000 (typ XC72010), který umožňuje pro vývoj aplikací použít SDK od firmy Xilinx. V tomto čipu je integrován dvou jádrový procesor ARM Cortex-9, který slouží jako pro řízení akcelerovaných aplikací na Xilinx FPGA sedmé série. Detailní schéma blokové architektury SoC s označním sběrnic a komunikace jednotlivých částí čipu je zobrazené na obr. \ref{fig:zynq-block-diagram-detailed}.\par
 			Z naznačené architektury je možné vyvodit, že se SoC skládá ze dvou hlavních částí, které je možné dále rozdělit na jednotlivé bloky:
 			\begin{itemize}
 				\item Processing System (PS),
@@ -631,14 +625,14 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			\noindent\textbf{Blok APU}\\
 			Blok APU obsahuje CPU Cortex-A9 a další podpůrné bloky jako např. přímý přístup do paměti (DMA controller), Genral interrupt controller (GIC) pro maskování a ovládání přerušení, watchdog a další podpůrné bloky.\par\vspace*{0.25cm}
 			\noindent\textbf{Blok Memory interfaces}\\
-			Memory interfaces slouží k přístupu APU a PL k pamětím typu DDR3, DDR3L, DDR2 a LPDDR-2. Je možné také vybrat, zda šířka sběrnice bude 16 nebo 32 bitů. K dispozici jsou zakoponované kotroléry přenosu dat pro optimalizaci rychlosti, Static Memory Controller nebo Quad-SPI Controller.\par\vspace*{0.25cm}
+			Memory interfaces slouží k přístupu APU a PL k pamětím typu DDR3, DDR3L, DDR2 a LPDDR-2. Je možné také vybrat, zda šířka sběrnice bude 16, nebo 32 bitů. K dispozici jsou zakoponované kotroléry přenosu dat pro optimalizaci rychlosti, Static Memory Controller nebo Quad-SPI Controller.\par\vspace*{0.25cm}
 			\noindent\textbf{Blok IOP}\\
 			IOP se skládá ze standardizovaných rozhraní vhodných pro průmyslovou komunikaci. Obsahuje nař. GPIO, Gigabit Ethernet, dva bloky USB Controller, dva bloky SD/SDIO Controller pro bootování SD karty, dva bloky SPI Controller, dva bloky CAN Controller, dva bloky UART Controller a dva bloky I2C Controller.\par\vspace*{0.25cm}
 			\noindent\textbf{Blok Interconnect}\\
 			Blok Interconnect, resp. na obr. \ref{fig:zynq-block-diagram-detailed} označený Central Interconnect slouží k propojení jednotlivých bloků SoC dle požadované technologie a rychlosti.\par\vspace*{0.25cm}
 			\noindent\textbf{Blok PL}\\
 			Blok PL reprezentuje logické programovtelné pole (FPGA), v němž jsou zakomponovány další podpůrné bloky jako např. blok zpracování digitálních signálů, řízení taktovacích hodin, analogově digitální převodník (ADC) apod.\par\vspace*{0.35cm}
-			\noindent Veškeré technické specifikace, složení a parametry jmenovaných bloků a jsou uvedeny v \cite{xilinx-zynq-7000-technical-reference-manual}.
+			\noindent Detailní technické specifikace, složení a parametry jmenovaných bloků a jsou uvedeny v \cite{xilinx-zynq-7000-technical-reference-manual}.
 			% \begin{figure}[htbp!]
 			% 	\centering
 			% 		\includegraphics[width=0.75\textwidth]{src/png/zynq-mp-core-dual.png} 
@@ -654,7 +648,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			\end{figure}
 			\fbar
 			\subsubsection{Uspořádání vývojové desky Zybo Zynq-7000}
-				Na obr. \ref{fig:digilent-zybo-foto-1-oznacene} je zobrazen horní pohled na vývojovou desku, na které jsou vyznačeny významné části, kterým je vhodné věnovat při práci s deskou pozornost. Číselné označení koresponduje s označením a vysvětlivkou v tabulce \ref{tab:digilent-zybo-zynq-7000-description}. Na spodní části desky se nachází menší počet součástek, které by byly významné pro ovládání a práci s deskou. Nicméně pro doplnění je spodní strana desky zobrazena na obr. \ref{fig:digilent-zybo-foto-3}.
+				Na obr. \ref{fig:digilent-zybo-foto-1-oznacene} je zobrazen horní pohled na vývojovou desku, na které jsou vyznačeny významné části, kterým je vhodné věnovat pozornost. Číselné označení koresponduje s označením a vysvětlivkou v tabulce \ref{tab:digilent-zybo-zynq-7000-description}. Pro úplnost je spodní strana desky zobrazena na obr. \ref{fig:digilent-zybo-foto-3}.
 
 				\begin{figure}[H]
 					\centering
@@ -673,7 +667,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 				\fbar
 			\begin{table}[htbp!]
 				\centering
-				\caption{Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000. (informace a značení z \cite{digilent-zybo-reference-manual})}
+				\caption{Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000. (informace a značení převzaty z \cite{digilent-zybo-reference-manual})}
 			  \vspace*{0.15cm}
 			   \resizebox{\textwidth}{!}
 				{
@@ -720,11 +714,20 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			
 
 		\fbar
-		\subsection{Vývojová deska Kria KR260}
-			% Novější verze Zybo
-			% Něco jiného
-			% Custom řešení - ZynQ Berry
-			%  [ZynQBerry](https://shop.trenz-electronic.de/en/TE0726-03-11C64-A-ZynqBerry-Module-with-Xilinx-Z-7007S-Single-Core-Raspberry-Pi-2-compatible) (velice zajímavější i díky ceně, ale možná by hodně cool bylo celé si udělat sám sestavu)
+		\section{Vývojová deska Kria KR260}
+				Deska od firmy Digilent, představená v \hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, je vhodná pouze pro prvotní seznámení s vytvářením akcelerovaných aplikací. Pro náročnější aplikace, které při potřebují při využití většího množství LUTs nebylo v této práci možné Zybo použít. Vývojová deska Kria KR260 disponuje dostatečným množstvím LUTs a díky svým moderním komponentám a prvkům, může efektivně sloužit k vytváření náročnějších aplikací.\par
+				Hlavní částí vývojové desky KR260 je „modul“ \textit{Kria K26 System-on-Module}. Tudíž oproti Digilent Zybo, které využívá SoC, deska KR260 využívá SoM. Přednosti jednotlivých architektur byly již představeny v části \hyperref[sec:system-on-a-chip]{\textit{System on a chip}} a \hyperref[sec:system-on-modules]{\textit{System on modules}}. Po ukončení vývoje aplikace na vývojové desce (a také po ukončení vytvářeného návrhu CC) je možné zakoupit pro aplikaci v průmyslu samotný modul ve vhodné variantě. V této práci je ovšem využíván standardní vývojový „Starter kit“ s deskou KR260, jejíž komponenty je vhodné představit.
+				
+				
+
+			\section{Porovnání dostupných SoC/SoM platforem pro řízení elektrických pohonů}
+			V této kapitole budou představeny dvě smysluplné, komerčně dostupné platformy, které je možné využít pro aplikace řízení elektrických pohonů či HIL. Výběr je zaměřen na SoC a Som umístěných na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi a vlastnostmi by měla architektura disponovat a poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu na Printed Circuit Board (PCB). Z důvodu finanční náročnosti některých řešení bylo přistoupeno k prezentování SoC a SoM od firmy Xilinx, které jsou nižší ceny.
+
+
+			\subsection{Platforma Digilent Zybo s ZynQ SoC}
+
+			\subsection{Platforma KR260 se SOM Kria}
+
 
 \section{Model stroje}
 	Jak již bylo představeno v předchozích částech textu, akcelerované aplikace v FPGA je možné použít na různé účely. Součástí této práce je v PL realizovat akcelerovaný výpočet matematického modelu stroje. V této práci bude využito matematického modelu asynchronního motoru.\par

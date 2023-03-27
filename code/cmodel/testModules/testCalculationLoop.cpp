@@ -152,7 +152,8 @@ int main()
     CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
     CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
     CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
-    CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+    // CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs 
+    CurVelModel.modelCVCoeff->nOfPolePairs = 2;
     CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
     /*------------------------------------------------------------------------------------------*/
 
@@ -244,9 +245,7 @@ int main()
 
    
     
-    float inputI1;
-    float inputI2;
-    float inputI3;
+    
     
 
     /*------------------------------------------------------------------------*/
@@ -293,6 +292,7 @@ int main()
         Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
          /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+      
         /*----------------------------------------------------------------------------------*/
         /*-------------------- FLUX AND VELOCITY REGULATOR CALCULATION ---------------------*/
         // TODO: test threads
@@ -478,9 +478,6 @@ int main()
 
        /******************************************************************************/
 
-        inputI1 = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-        inputI2 = Transformation.inverseClarkeTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-        inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
 
         /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
         if(verboseOutput)
@@ -510,7 +507,7 @@ int main()
         // as stated before, reality would be transform ASM model values to A, B, C and then again to alpha beta, would only introduce error and calculation of the same values again
         CurVelModel.modelCVVariables->i1alpha = MotorModel.modelVariables->i1alpha;
         CurVelModel.modelCVVariables->i1beta = MotorModel.modelVariables->i1beta;
-        CurVelModel.modelCVVariables->motorElectricalAngularVelocity = MotorModel.modelVariables->motorMechanicalAngularVelocity * CurVelModel.motorParameters->nOfPolePairs;
+        CurVelModel.modelCVVariables->motorElectricalAngularVelocity = MotorModel.modelVariables->motorMechanicalAngularVelocity * CurVelModel.modelCVCoeff->nOfPolePairs;
 
         /*------------------------------------------------------------------------------------------------*/
         /*-------------------- MAIN CURRENT VELOCITY MODEL CODE WITH RK4 ODE SOLVING ---------------------*/
