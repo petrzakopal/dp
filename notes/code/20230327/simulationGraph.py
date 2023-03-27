@@ -24,7 +24,7 @@ plt.rcParams["figure.figsize"] = [15, 6]
 plt.rcParams["figure.autolayout"] = True
 
 # defining which columns are in inported CSV
-columns = ["globalSimulationTime", "psi2amplitude", "motorMechanicalAngularVelocity", "clampingStatus"]
+columns = ["globalSimulationTime", "psi2amplitude", "motorMechanicalAngularVelocity", "idRegulatormeasuredValue", "idRegulatorwantedValue", "velocityRegulatorwantedValue", "velocityRegulatorsaturationOutput", "velocityRegulatorclampingStatus", "velocityRegulatoriSum"]
 df = pd.read_csv("./outputData/globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=1000000)
 
 # print out part of the csv files as a text to terminal
@@ -45,20 +45,13 @@ plt.xticks(fontsize=15, weight=700)
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 
 plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue, label="psi2amplitude")
-
-plt.plot(df.globalSimulationTime, df.clampingStatus, color=ctuGreenyBlue, label="clampingStatus")
-
+plt.plot(df.globalSimulationTime, df.velocityRegulatorwantedValue, color=ctuOrange, label="velocityRegulatorwantedValue")
 # plt.plot(df.globalSimulationTime, df.velocityRegulatorclampingStatus, color=ctuYellow, label="velocityRegulatorclampingStatus")
-
-# plt.plot(df.globalSimulationTime, df.iDmeasured, color=ctuYellow, label="iDmeasured")
-# plt.plot(df.globalSimulationTime, df.iDwanted, color=ctuGreenyBlue, label="iDwanted")
-
-# plt.plot(df.globalSimulationTime, df.iQmeasured, color="#FF33DD", label="iQmeasured")
-
-# plt.plot(df.globalSimulationTime, df.iQwanted, color="#000000", label="iQwanted")
-
+# plt.plot(df.globalSimulationTime, df.velocityRegulatorsaturationOutput, color=ctuGreenyBlue, label="velocityRegulatorsaturationOutput")
+# plt.plot(df.globalSimulationTime, df.velocityRegulatoriSum, color=ctuGreenyBlue, label="velocityRegulatoriSum")
+# plt.plot(df.globalSimulationTime, df.idRegulatormeasuredValue, color=ctuGreen, label="idRegulatormeasuredValue")
+# plt.plot(df.globalSimulationTime, df.idRegulatorwantedValue, color=ctuOrange, label="idRegulatorwantedValue")
 plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed, label="angularVelocity")
-
 plt.xlabel("time (s)",fontsize=20, fontweight=400, loc = "right")
 plt.ylabel("psi2amplitude (Wb)\nangularVelocity (s^(-1))",fontsize=10 ,fontweight=400, loc = "top", rotation=0)
 plt.legend(  bbox_to_anchor=(0.5, -0.05), ncol=2 )

@@ -31,7 +31,6 @@ Comment: Refactoring for HLS
 #define PI 3.141592
 
 void krnl_calculateCurVelModel(float *masterInput, float *masterOutput );
-void krnl_test(float *masterInput, float *masterOutput);
 
 // Define the function to be called when ctrl-c (SIGINT) is sent to process
 void signal_callback_handler(int signum) {
@@ -318,21 +317,45 @@ int main(int argc, char* argv[]) {
         masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
         masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
         masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
-        
+        masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
+        masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
+        masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[15] = Udcmax;
+        masterInput[16] = Regulator.fluxRegulator->ki;
+        masterInput[17] = Regulator.fluxRegulator->kp;
+        masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
+        masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[21] = Regulator.velocityRegulator->ki;
+        masterInput[22] = Regulator.velocityRegulator->kp;
+        masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
+        masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[26] = Regulator.idRegulator->ki;
+        masterInput[27] = Regulator.idRegulator->kp;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[30] = Regulator.iqRegulator->ki;
+        masterInput[31] = Regulator.iqRegulator->kp;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[33] = Regulator.fluxRegulator->wantedValue;
+        masterInput[34] = Regulator.velocityRegulator->wantedValue;
+        masterInput[35] = Regulator.idRegulator->wantedValue;
+        masterInput[36] = Regulator.iqRegulator->wantedValue;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+        masterInput[39] = Regulator.idRegulator->saturationOutputMax;
+        masterInput[40] = Regulator.idRegulator->saturationOutputMin;
         /***************************************************************/
         /*-------------------- MAIN PROGRAM LOOP ---------------------*/
-    float trianglePoint;
-    float commonModeVoltage;
+
 
         startTime = std::chrono::system_clock::now();
 
         for(int i = 0; i<1000000;i++) // replace with while in production, but in this model, it is suitable to use for cycle
         {
 
-
-            inputI1 = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-            inputI2 = Transformation.inverseClarkeTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-            inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
             
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if(verboseOutput and (i<4))
@@ -344,9 +367,9 @@ int main(int argc, char* argv[]) {
             {
                 Regulator.velocityRegulator->wantedValue = 10;
             }
-            // masterInput[0] = globalSimulationTime;
+            masterInput[0] = globalSimulationTime;
             masterInput[1] = globalCalculationStep;
-            // masterInput[2] = minMaxCommonModeVoltageConstant;
+            masterInput[2] = minMaxCommonModeVoltageConstant;
             masterInput[3] = globalCalculationStep/2;
             masterInput[4] = inputI1;
             masterInput[5] = inputI2;
@@ -355,177 +378,61 @@ int main(int argc, char* argv[]) {
             masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
             masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
             masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
-           
+            masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
+            masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
+            masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
+            masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+            masterInput[15] = Udcmax;
+            masterInput[16] = Regulator.fluxRegulator->ki;
+            masterInput[17] = Regulator.fluxRegulator->kp;
+            masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
+            masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
+            masterInput[20] = Regulator.fluxRegulator->iSum;
+            masterInput[21] = Regulator.velocityRegulator->ki;
+            masterInput[22] = Regulator.velocityRegulator->kp;
+            masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
+            masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
+            masterInput[25] = Regulator.velocityRegulator->iSum;
+            masterInput[26] = Regulator.idRegulator->ki;
+            masterInput[27] = Regulator.idRegulator->kp;
+            masterInput[28] = Regulator.idRegulator->saturationOutput;
+            masterInput[29] = Regulator.idRegulator->iSum;
+            masterInput[30] = Regulator.iqRegulator->ki;
+            masterInput[31] = Regulator.iqRegulator->kp;
+            masterInput[32] = Regulator.iqRegulator->iSum;
+            masterInput[33] = Regulator.fluxRegulator->wantedValue;
+            masterInput[34] = Regulator.velocityRegulator->wantedValue;
+            masterInput[35] = Regulator.idRegulator->wantedValue;
+            masterInput[36] = Regulator.iqRegulator->wantedValue;
             masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
             masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+            masterInput[39] = Regulator.idRegulator->saturationOutputMax;
+            masterInput[40] = Regulator.idRegulator->saturationOutputMin;
 
 
-            CurVelModel.modelCVVariables->i1alpha = (0.667 * (inputI1 - (0.5 * inputI2) - (0.5 * inputI3)));
-            CurVelModel.modelCVVariables->i1beta = (0.6667 * (0.866 * inputI2 - 0.866 *  inputI3));
 
-            CurVelModel.modelCVVariables->motorElectricalAngularVelocity = MotorModel.modelVariables->motorMechanicalAngularVelocity * CurVelModel.motorParameters->nOfPolePairs;
 
-            // //kernel
+            //kernel
             krnl_calculateCurVelModel(masterInput, masterOutput);
-            // krnl_test(masterInput, masterOutput);
-
             
+
+
+            svmCore.invertorSwitch->sw1 = masterOutput[0];
+            svmCore.invertorSwitch->sw2 = masterOutput[1];
+            svmCore.invertorSwitch->sw3 = masterOutput[2];
+            svmCore.invertorSwitch->sw4 = masterOutput[3];
+            svmCore.invertorSwitch->sw5 = masterOutput[4];
+            svmCore.invertorSwitch->sw6 = masterOutput[5];
+
+            svmCore.triangleWaveSettings->calculationTime = masterOutput[6];
+            Regulator.fluxRegulator->iSum = masterOutput[7];
+            Regulator.velocityRegulator->iSum = masterOutput[8];
+            Regulator.idRegulator->saturationOutput = masterOutput[9];
+            Regulator.idRegulator->iSum = masterOutput[10];
+            Regulator.iqRegulator->iSum = masterOutput[11];
             CurVelModel.modelCVVariables->psi2alpha = masterOutput[12];
             CurVelModel.modelCVVariables->psi2beta = masterOutput[13];
 
-
-
-            // CurVelModel.CurVelModelCalculate(CurVelModel.modelCVCoeff, CurVelModel.modelCVVariables, CurVelModel.odeCVCalculationSettings);
-
-            CurVelModel.modelCVVariables->psi2Amplitude = sqrt((CurVelModel.modelCVVariables->psi2alpha * CurVelModel.modelCVVariables->psi2alpha) + (CurVelModel.modelCVVariables->psi2beta * CurVelModel.modelCVVariables->psi2beta));
-            CurVelModel.modelCVVariables->transformAngle = atan2f(CurVelModel.modelCVVariables->psi2beta, CurVelModel.modelCVVariables->psi2alpha);
-            
-
-        /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
-        /*-------------------- CAULTULATING OUTPUTS OF CURRENT VELOCITY MODEL USED FOR REGULATORS => UPDATING REGULATOR MEASURED VALUE ---------------------*/
-        Regulator.idRegulator->measuredValue = Transformation.parkTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta, CurVelModel.modelCVVariables->transformAngle);
-
-        Regulator.iqRegulator->measuredValue = Transformation.parkTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta, CurVelModel.modelCVVariables->transformAngle);
-
-        Regulator.fluxRegulator->measuredValue = CurVelModel.modelCVVariables->psi2Amplitude;
-
-        Regulator.velocityRegulator->measuredValue = MotorModel.modelVariables->motorMechanicalAngularVelocity;
-        /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-         /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
-        /*-------------------- DYNAMICALLY SETTING MAX AND MIN SATURATION VALUES OF IQ REGULATOR BASED ON UDCMAX AND ID REGULATOR OUTPUT ---------------------*/
-        Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
-        Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
-         /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-      
-        /*----------------------------------------------------------------------------------*/
-        /*-------------------- FLUX AND VELOCITY REGULATOR CALCULATION ---------------------*/
-        // TODO: test threads
-        Regulator.regCalculate(Regulator.fluxRegulator);
-        // std::thread regulatorThread(&threadRegulator,Regulator.fluxRegulator, Regulator.idRegulator);
-        Regulator.regCalculate(Regulator.velocityRegulator);
-        /*----------------------------------------------------------------------------------*/
-
-        
-        /*--------------------------------------------------------------------------------------------------------*/
-        /*-------------------- OUTPUT FROM FLUX AND VELOCITY REGULATOR TO CURRENT REGULATORS ---------------------*/
-        Regulator.idRegulator->wantedValue = Regulator.fluxRegulator->saturationOutput;
-        Regulator.iqRegulator->wantedValue = Regulator.velocityRegulator->saturationOutput;
-        /*--------------------------------------------------------------------------------------------------------*/
-
-        
-
-        /*---------------------------------------------------------------------------*/
-        /*-------------------- ID AND IQ REGULATOR CALCULATION ---------------------*/
-        Regulator.regCalculate(Regulator.idRegulator);
-        Regulator.regCalculate(Regulator.iqRegulator);
-        /*---------------------------------------------------------------------------*/
-        
-        // regulatorThread.join();
-        
-       
-        /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-        if(verboseOutput)
-        {
-            std::cout << "flux regulator output value: " << Regulator.fluxRegulator->saturationOutput << "\n";
-            std::cout << "velocity regulator output value: " << Regulator.velocityRegulator->saturationOutput << "\n";
-            std::cout << "id regulator output value: " << Regulator.idRegulator->saturationOutput << "\n";
-            std::cout << "id regulator wanted value: " << Regulator.idRegulator->wantedValue << "\n";
-            std::cout << "id regulator saturation output: " << Regulator.idRegulator->saturationOutput << "\n";
-            std::cout << "iq regulator output value: " << Regulator.iqRegulator->saturationOutput << "\n";
-            
-        }
-        /*-------------------------------------------------------------------------------------------------------*/
-
-        
-        /*-------------------------------------------------------------------------------------------------------*/
-        /*-------------------- OUTPUT FROM ID AND IQ REGULATORS TO SPACE VECTOR CORE MODEL ---------------------*/
-        // this is not strictly necessary, output from regulators could be used directly, but for cleaner code it is good, change it in the future maybe because of SoC memory and speed constrains
-        svmCore.coreInternalVariables->u1d = Regulator.idRegulator->saturationOutput;
-        svmCore.coreInternalVariables->u1q = Regulator.iqRegulator->saturationOutput;
-        /*-------------------------------------------------------------------------------------------------------*/
-
-
-        /*----------------------------------------------------------------------------------------*/
-        /*-------------------- DECOUPLING AND SATURATION BLOCK FOR FOC SVM ---------------------*/
-        
-        // decoupling is missing now
-
-        /*----------------------------------------------------------------------------------------*/
-
-        
-        /*---------------------------------------------------------------------------------------------------------*/
-        /*-------------------- INVERSE FROM CALCULATED/DECOUPLED VALUES FROM DQ TO ALPHA BETA ---------------------*/
-        // inverse Park
-        svmCore.coreInternalVariables->u1alpha = Transformation.inverseParkTransform1(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
-
-        // async testing
-        // std::future<float> asyncInversePark1 = std::async(std::launch::async, &TransformationClass::inverseParkTransform1, &Transformation, svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
-        // std::future<float> asyncInversePark2 = std::async(std::launch::async, &TransformationClass::inverseParkTransform2, &Transformation,svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
-        svmCore.coreInternalVariables->u1beta = Transformation.inverseParkTransform2(svmCore.coreInternalVariables->u1d, svmCore.coreInternalVariables->u1q,CurVelModel.modelCVVariables->transformAngle);
-        /*---------------------------------------------------------------------------------------------------------*/
-        
-        // async testing
-        // svmCore.coreInternalVariables->u1alpha = asyncInversePark1.get();
-        // svmCore.coreInternalVariables->u1beta = asyncInversePark2.get();
-
-
-        /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-        if(verboseOutput)
-        {
-            std::cout << "u1alpha from regulator: " << svmCore.coreInternalVariables->u1alpha << "\n";
-            std::cout << "u1beta from regulator: " << svmCore.coreInternalVariables->u1beta << "\n";
-        }
-        /*-------------------------------------------------------------------------------------------------------*/
-    
-        
-
-        /*-----------------------------------------------------------------------------------------------------------------------------*/
-        /*-------------------- INVERSE FROM CALCULATED/DECOUPLED VALUES FROM TO ALPHA BETA TO THREE PHASE SIGNAL ---------------------*/
-        svmCore.coreInternalVariables->u1a = Transformation.inverseClarkeTransform1(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
-        svmCore.coreInternalVariables->u1b = Transformation.inverseClarkeTransform2(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
-        svmCore.coreInternalVariables->u1c = Transformation.inverseClarkeTransform3(svmCore.coreInternalVariables->u1alpha, svmCore.coreInternalVariables->u1beta);
-        /*-----------------------------------------------------------------------------------------------------------------------------*/
-
-        /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-        if(verboseOutput)
-        {
-            std::cout << "u1a: " << svmCore.coreInternalVariables->u1a << "\n";
-            std::cout << "u1b: " << svmCore.coreInternalVariables->u1b << "\n";
-            std::cout << "u1c: " << svmCore.coreInternalVariables->u1c << "\n";
-        }
-        /*-------------------------------------------------------------------------------------------------------*/
-        
-
-        /*********************************************************************************/
-        /*-------------------- SPACE VECTOR MODULATION CORE CODE ---------------------*/
-        // calculating actual triangle point on a triangle wave signal to me compared with signal (common mode subtracted from outputs from regulators in 3 phase)
-        trianglePoint = svmCore.generateActualValueTriangleWave(svmCore.triangleWaveSettings);
-
-        // common mode voltage ((Umin + Umax) /2)
-        commonModeVoltage = svmCore.minMaxCommonModeVoltage(svmCore.coreInternalVariables);
-        
-
-        /*-------------------- COMPARING SIGNAL (UABC - COMMON_MODE_VOLTAGE) WITH TRIANGLE WAVE AND CREATING SWITCH SIGNALS BASED ON SVM ---------------------*/
-        // phase 1 sw1
-        svmCore.invertorSwitch->sw1 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1a), trianglePoint);
-
-        // phase 2 sw3
-        svmCore.invertorSwitch->sw3 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1b), trianglePoint);
-
-       
-        // phase 3 sw5
-        svmCore.invertorSwitch->sw5 = svmCore.comparationLevelTriangleWaveComparation(svmCore.createCompareLevel(minMaxCommonModeVoltageConstant, commonModeVoltage, svmCore.coreInternalVariables->u1c), trianglePoint);
-
-        
-        
-
-        // not needed in simualation
-        // just inverted values from switches in the same branches in invertor
-        svmCore.invertorSwitch->sw4 = !(svmCore.invertorSwitch->sw1);
-        svmCore.invertorSwitch->sw6 = !(svmCore.invertorSwitch->sw3);
-        svmCore.invertorSwitch->sw2 = !(svmCore.invertorSwitch->sw5);
 
 
         // we got switches from kernel
@@ -596,7 +503,9 @@ int main(int argc, char* argv[]) {
             }
             /*-----------------------------------------------------------------------------------------------------*/
 
-            
+            inputI1 = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
+            inputI2 = Transformation.inverseClarkeTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
+            inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if(verboseOutput and (i<4))
@@ -632,7 +541,7 @@ int main(int argc, char* argv[]) {
 
             /*-------------------------------------------------------------------------------*/
             /*-------------------- OUTPUT CSV DATA INSERTING TO A FILE ---------------------*/
-            globalSimulationData << globalSimulationTime << "," <<  CurVelModel.modelCVVariables->psi2Amplitude << ","  << MotorModel.modelVariables->motorMechanicalAngularVelocity << ","<< masterOutput[18] << "\n";
+            globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","  << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," <<masterOutput[15] << "," << masterOutput[16]<<"," <<Regulator.velocityRegulator->wantedValue << ","<< masterOutput[18] <<"," << masterOutput[19]<< "," << Regulator.velocityRegulator->iSum << "\n";
             /*-------------------------------------------------------------------------------*/
 
             /*----------------------------------------------------------------------------------------------------------------------*/
@@ -659,6 +568,166 @@ int main(int argc, char* argv[]) {
     }
 
 
+    if(modeSelection == 1)
+    {
+
+         printf("Keyboard input data mode\n\r");
+        printf("------------------------------------\n\r");
+        printf("Insert data divided by {space symbol}\n\r");
+        printf("I1 I2 I3 MechanicalAngularVelocity psi2alpha[0] psi2beta[0] \n\r");
+
+    
+
+    scanf("%f %f %f %f %f %f", &inputI1, &inputI2, &inputI3, &MotorModel.modelVariables->motorMechanicalAngularVelocity, &CurVelModel.modelCVVariables->psi2alpha, &CurVelModel.modelCVVariables->psi2beta);
+    printf("------------------------------------\n\r");
+    printf("You have entered:\n\r");
+    printf("I1 = %f\n\rI2 = %f\n\rI3 = %f\n\rMechanicalAngularVelocity = %f\n\rpsi2alpha[0] = %f\n\rpsi2beta = %f\n\r", inputI1, inputI2, inputI3, MotorModel.modelVariables->motorMechanicalAngularVelocity, CurVelModel.modelCVVariables->psi2alpha, CurVelModel.modelCVVariables->psi2beta);
+    printf("------------------------------------\n\r");
+
+        masterInput[0] = globalSimulationTime;
+        masterInput[1] = globalCalculationStep;
+        masterInput[2] = minMaxCommonModeVoltageConstant;
+        masterInput[3] = globalCalculationStep/2;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
+        masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
+        masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
+        masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
+        masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
+        masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[15] = Udcmax;
+        masterInput[16] = Regulator.fluxRegulator->ki;
+        masterInput[17] = Regulator.fluxRegulator->kp;
+        masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
+        masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[21] = Regulator.velocityRegulator->ki;
+        masterInput[22] = Regulator.velocityRegulator->kp;
+        masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
+        masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[26] = Regulator.idRegulator->ki;
+        masterInput[27] = Regulator.idRegulator->kp;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[30] = Regulator.iqRegulator->ki;
+        masterInput[31] = Regulator.iqRegulator->kp;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[33] = Regulator.fluxRegulator->wantedValue;
+        masterInput[34] = Regulator.velocityRegulator->wantedValue;
+        masterInput[35] = Regulator.idRegulator->wantedValue;
+        masterInput[36] = Regulator.iqRegulator->wantedValue;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+
+
+        masterInput[0] = globalSimulationTime;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+
+        
+        for(int i = 0;i<10;i++)
+        {
+            
+            std::cout << "\n\n" << i <<" round\n/************************************/\n";
+           krnl_calculateCurVelModel(masterInput, masterOutput);
+
+            
+            
+            
+            std::cout << "sw1: " << masterOutput[0] << "\n";
+            std::cout << "sw2: " << masterOutput[1] << "\n";
+            std::cout << "sw3: " << masterOutput[2] << "\n";
+            std::cout << "sw4: " << masterOutput[3] << "\n";
+            std::cout << "sw5: " << masterOutput[4] << "\n";
+            std::cout << "sw6: " << masterOutput[5] << "\n";
+            std::cout << "triangleWaveSettings.calculationTime: " << masterOutput[6] << "\n";
+            std::cout << "fluxRegulator.iSum: " << masterOutput[7] << "\n";
+            std::cout << "velocityRegulator.iSum: " << masterOutput[8] << "\n";
+            std::cout << "idRegulator.saturationOutput: " << masterOutput[9] << "\n";
+            std::cout << "idRegulator.iSum: " << masterOutput[10] << "\n";
+            std::cout << "iqRegulator.iSum: " << masterOutput[11] << "\n";
+            std::cout << "psi2alpha: " << masterOutput[12] << "\n";
+            std::cout << "psi2beta: " << masterOutput[13] << "\n";
+            std::cout << "psi2amplitude: " << masterOutput[14] << "\n";
+            std::cout << "idRegulator.measuredValue: " << masterOutput[15] << "\n";
+            std::cout << "idRegulator.wantedValue: " << masterOutput[16] << "\n";
+            std::cout << "transformationAngle: " << masterOutput[17] << "\n";
+
+
+            masterInput[0] = globalSimulationTime;
+        masterInput[1] = globalCalculationStep;
+        masterInput[2] = minMaxCommonModeVoltageConstant;
+        masterInput[3] = globalCalculationStep/2;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
+        masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
+        masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
+        masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
+        masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
+        masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[15] = Udcmax;
+        masterInput[16] = Regulator.fluxRegulator->ki;
+        masterInput[17] = Regulator.fluxRegulator->kp;
+        masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
+        masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[21] = Regulator.velocityRegulator->ki;
+        masterInput[22] = Regulator.velocityRegulator->kp;
+        masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
+        masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[26] = Regulator.idRegulator->ki;
+        masterInput[27] = Regulator.idRegulator->kp;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[30] = Regulator.iqRegulator->ki;
+        masterInput[31] = Regulator.iqRegulator->kp;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[33] = Regulator.fluxRegulator->wantedValue;
+        masterInput[34] = Regulator.velocityRegulator->wantedValue;
+        masterInput[35] = Regulator.idRegulator->wantedValue;
+        masterInput[36] = Regulator.iqRegulator->wantedValue;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+
+
+        masterInput[0] = globalSimulationTime;
+        masterInput[4] = inputI1;
+        masterInput[5] = inputI2;
+        masterInput[6] = inputI3;
+        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+        masterInput[20] = Regulator.fluxRegulator->iSum;
+        masterInput[25] = Regulator.velocityRegulator->iSum;
+        masterInput[28] = Regulator.idRegulator->saturationOutput;
+        masterInput[29] = Regulator.idRegulator->iSum;
+        masterInput[32] = Regulator.iqRegulator->iSum;
+        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+        }
+        
+
+            
+    }
     
     std::cout << "the end of the most useful program is here\n";
 
@@ -688,76 +757,4 @@ int main(int argc, char* argv[]) {
 
 }
 
-
-// /*-------------------------------------------------------------------------------*/
-// /*----------------------- MODEL ODE EQUATIONS OF DY/DT -------------------------*/
-// float psi2alphaTestFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float motorElectricalAngularVelocity )
-// {
-//     return((R2MLmDL2 * i1alpha) - (motorElectricalAngularVelocity * psi2beta) - (R2DL2 * psi2alpha));
-// }
-
-// float psi2betaTestFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, float psi2alpha, float psi2beta, float motorElectricalAngularVelocity)
-// {
-//     return((R2MLmDL2 * i1beta) + (motorElectricalAngularVelocity * psi2alpha) - (R2DL2 * psi2beta));
-// }
-// /*-------------------------------------------------------------------------------*/
-// // musí být chyba v algoritmu velocity regulatoru
-
-// void krnl_test(float *masterInput, float *masterOutput)
-// {
-//     // coefficients for RK4
-//     float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
-//     float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
-
-//     // helper variable to reduce calculation fo the same value
-//     float halfCalculationStep = masterInput[3];
-//     float inputMotorMechanicalAngularVelocity = masterInput[7];
-//      float R2MLmDL2 = masterInput[8];
-//     float R2DL2 = masterInput[9];
-//     float i1alpha;
-//     float i1beta;
-   
-//     float psi2alpha = masterInput[37];
-//     float psi2beta = masterInput[38];
-//     float inputI1 =masterInput[4];
-//     float inputI2 =masterInput[5];
-//     float inputI3 =masterInput[6];
-//     float motorElectricalAngularVelocity = inputMotorMechanicalAngularVelocity * 2;
-//     float calculationStep = masterInput[1];
-
-//     i1alpha = (0.667 * (inputI1 - (0.5 * inputI2) - (0.5 * inputI3)));
-//     i1beta = (0.6667 * (0.866 * inputI2 - 0.866 *  inputI3));
-
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-//     k1psi2alpha = psi2alphaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, psi2alpha, psi2beta, motorElectricalAngularVelocity);
-
-//     k1psi2beta = psi2betaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, psi2alpha, psi2beta, motorElectricalAngularVelocity);
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-//     k2psi2alpha = psi2alphaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k1psi2alpha)), (psi2beta + (halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
-
-//     k2psi2beta = psi2betaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k1psi2alpha)), (psi2beta + (halfCalculationStep * k1psi2beta)), motorElectricalAngularVelocity);
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-//     k3psi2alpha = psi2alphaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k2psi2alpha)), (psi2beta + (halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
-
-//     k3psi2beta = psi2betaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (halfCalculationStep * k2psi2alpha)), (psi2beta + (halfCalculationStep * k2psi2beta)), motorElectricalAngularVelocity);
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-//     k4psi2alpha = psi2alphaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (calculationStep * k3psi2alpha)), (psi2beta + (calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
-
-//     k4psi2beta = psi2betaTestFce(R2MLmDL2, R2DL2, i1alpha, i1beta, (psi2alpha + (calculationStep * k3psi2alpha)), (psi2beta + (calculationStep * k3psi2beta)), motorElectricalAngularVelocity);
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-
-//     // updating the values based on calculated coefficients
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-//     masterOutput[12] = psi2alpha + ((calculationStep / 6) * (k1psi2alpha + 2 * k2psi2alpha + 2 * k3psi2alpha + k4psi2alpha));
-
-//     masterOutput[13] = psi2beta + ((calculationStep / 6) * (k1psi2beta + 2 * k2psi2beta + 2 * k3psi2beta + k4psi2beta));
-//     /*------------------------------------------------------------------------------------------------------------------------------------*/
-// }
+// musí být chyba v algoritmu velocity regulatoru
