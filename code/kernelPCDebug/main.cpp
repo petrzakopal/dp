@@ -36,12 +36,30 @@ Comment: Framework for testing algorithms for kernel and host program.
 void krnl_calculateCurVelModel(float *masterInput, float *masterOutput );
 void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutput);
 
+
+
+InvertorSwitchType invertorSwitchGlobal;
+
+void stopInvertor()
+{
+    invertorSwitchGlobal.sw1 = 0;
+    invertorSwitchGlobal.sw2 = 0;
+    invertorSwitchGlobal.sw3 = 0;
+    invertorSwitchGlobal.sw4 = 0;
+    invertorSwitchGlobal.sw5 = 0;
+    invertorSwitchGlobal.sw6 = 0;
+
+    std::cout << "Set all invertor switches at 0!\n";
+}
+
 // Define the function to be called when ctrl-c (SIGINT) is sent to process
-void signal_callback_handler(int signum) {
-   std::cout << "\nCaught signal " << signum << "\n";
+void signal_callback_handler(int signum)
+{
+    std::cout << "\nCaught signal " << signum << "\n";
 
     // create function for setting default values to switches and regulators
-
+    stopInvertor();
+    std::cout << "Terminating program!\n";
    // Terminate program
    exit(signum);
 }
@@ -137,7 +155,7 @@ int main(int argc, char* argv[]) {
 
     /*-------------------- SPACE VECTOR MODULATION CORE ---------------------*/
     // svmCore.phaseWantedVoltageAllocateMemory(); // depracated
-    svmCore.invertorSwitchAllocateMemory();
+    // svmCore.invertorSwitchAllocateMemory();
     svmCore.triangleWaveSettingsAllocateMemory();
     svmCore.coreInternalVariablesAllocateMemory();
     /*----------------------------------------------------------------------*/
@@ -204,12 +222,12 @@ int main(int argc, char* argv[]) {
     /*--------------------------------------------------------------------*/
     /*-------------------- IVNVERTOR MODEL SETTINGS ---------------------*/
     float Udcmax = 311.87;
-    svmCore.invertorSwitch->sw1 = 0;
-    svmCore.invertorSwitch->sw2 = 0;
-    svmCore.invertorSwitch->sw3 = 0;
-    svmCore.invertorSwitch->sw4 = 0;
-    svmCore.invertorSwitch->sw5 = 0;
-    svmCore.invertorSwitch->sw6 = 0;
+    invertorSwitchGlobal.sw1 = 0;
+    invertorSwitchGlobal.sw2 = 0;
+    invertorSwitchGlobal.sw3 = 0;
+    invertorSwitchGlobal.sw4 = 0;
+    invertorSwitchGlobal.sw5 = 0;
+    invertorSwitchGlobal.sw6 = 0;
     /*--------------------------------------------------------------------*/
 
 
@@ -430,12 +448,12 @@ int main(int argc, char* argv[]) {
             
 
 
-            svmCore.invertorSwitch->sw1 = masterOutput[0];
-            svmCore.invertorSwitch->sw2 = masterOutput[1];
-            svmCore.invertorSwitch->sw3 = masterOutput[2];
-            svmCore.invertorSwitch->sw4 = masterOutput[3];
-            svmCore.invertorSwitch->sw5 = masterOutput[4];
-            svmCore.invertorSwitch->sw6 = masterOutput[5];
+            invertorSwitchGlobal.sw1 = masterOutput[0];
+            invertorSwitchGlobal.sw2 = masterOutput[1];
+            invertorSwitchGlobal.sw3 = masterOutput[2];
+            invertorSwitchGlobal.sw4 = masterOutput[3];
+            invertorSwitchGlobal.sw5 = masterOutput[4];
+            invertorSwitchGlobal.sw6 = masterOutput[5];
 
             svmCore.triangleWaveSettings->calculationTime = masterOutput[6];
             Regulator.fluxRegulator->iSum = masterOutput[7];
@@ -453,23 +471,23 @@ int main(int argc, char* argv[]) {
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if(verboseOutput and (i<4))
             {
-                std::cout << "sw1: " << svmCore.invertorSwitch->sw1 << "\n";
-                std::cout << "sw2: " << svmCore.invertorSwitch->sw2 << "\n";
-                std::cout << "sw3: " << svmCore.invertorSwitch->sw3 << "\n";
-                std::cout << "sw4: " << svmCore.invertorSwitch->sw4 << "\n";
-                std::cout << "sw5: " << svmCore.invertorSwitch->sw5 << "\n";
-                std::cout << "sw6: " << svmCore.invertorSwitch->sw6 << "\n";
+                std::cout << "sw1: " << invertorSwitchGlobal.sw1 << "\n";
+                std::cout << "sw2: " << invertorSwitchGlobal.sw2 << "\n";
+                std::cout << "sw3: " << invertorSwitchGlobal.sw3 << "\n";
+                std::cout << "sw4: " << invertorSwitchGlobal.sw4 << "\n";
+                std::cout << "sw5: " << invertorSwitchGlobal.sw5 << "\n";
+                std::cout << "sw6: " << invertorSwitchGlobal.sw6 << "\n";
         
             }
             /*------------------------------------------------------------------------------------------------------*/
 
 
-            masterInputMotor[0] = svmCore.invertorSwitch->sw1;
-            masterInputMotor[1] = svmCore.invertorSwitch->sw2;
-            masterInputMotor[2] = svmCore.invertorSwitch->sw3;
-            masterInputMotor[3] = svmCore.invertorSwitch->sw4;
-            masterInputMotor[4] = svmCore.invertorSwitch->sw5;
-            masterInputMotor[5] = svmCore.invertorSwitch->sw6;
+            masterInputMotor[0] = invertorSwitchGlobal.sw1;
+            masterInputMotor[1] = invertorSwitchGlobal.sw2;
+            masterInputMotor[2] = invertorSwitchGlobal.sw3;
+            masterInputMotor[3] = invertorSwitchGlobal.sw4;
+            masterInputMotor[4] = invertorSwitchGlobal.sw5;
+            masterInputMotor[5] = invertorSwitchGlobal.sw6;
             masterInputMotor[6] = uDC;
             masterInputMotor[7] = MotorModel.modelVariables->psi2alpha;
             masterInputMotor[8] = MotorModel.modelVariables->psi2beta;
