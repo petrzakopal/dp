@@ -617,8 +617,7 @@ void MotorModelClass::precalculateVoltageClarke(voltageGeneratorType *voltageGen
         setVariable(getMotorVariable(0)->i1alpha, getMotorVariable(1)->i1alpha);
         setVariable(getMotorVariable(0)->i1beta, getMotorVariable(1)->i1beta);
         setVariable(getMotorVariable(0)->motorTorque, getMotorVariable(1)->motorTorque);
-        setVariable(getMotorVariable(0)->motorMechanicalAngularVelocity, getMotorVariable(1)
-        ->motorMechanicalAngularVelocity);
+        setVariable(getMotorVariable(0)->motorMechanicalAngularVelocity, getMotorVariable(1)->motorMechanicalAngularVelocity);
         setVariable(getMotorVariable(0)->psi2alpha, getMotorVariable(1)->psi2alpha);
         setVariable(getMotorVariable(0)->psi2beta, getMotorVariable(1)->psi2beta);
 

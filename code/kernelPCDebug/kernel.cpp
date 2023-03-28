@@ -528,14 +528,13 @@ void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutpu
     bool sw3;
     bool sw4;
     bool sw5;
-    bool sw5;
     bool sw6;
     float psi2alpha;
     float psi2beta;
     float i1alpha;
     float i1beta;
     float halfCalculationStep;
-    float motorParameters[4];
+    float motorParameters[7];
     float stateSpaceCoeff[18];
     float motorMechanicalAngularVelocity;
     float calculationStep;
@@ -566,12 +565,12 @@ void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutpu
     float motorElectricalAngularVelocity;
 
     // inserting values from host
-    sw1 = (bool)masterInput[0];
-    sw2 = (bool)masterInput[1];
-    sw3 = (bool)masterInput[2];
-    sw4 = (bool)masterInput[3];
-    sw5 = (bool)masterInput[4];
-    sw6 = (bool)masterInput[5];
+    sw1 = masterInput[0];
+    sw2 = masterInput[1];
+    sw3 = masterInput[2];
+    sw4 = masterInput[3];
+    sw5 = masterInput[4];
+    sw6 = masterInput[5];
     uDC = masterInput[6];
     psi2alpha = masterInput[7];
     psi2beta = masterInput[8];
@@ -579,32 +578,32 @@ void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutpu
     i1beta = masterInput[10];
     loadTorque = masterInput[11];
     motorMechanicalAngularVelocity = masterInput[12];
-    halfCalculationStep = masterInput[12];
-    calculationStep = masterInput[13];
-    motorParameters[0] = masterInput[14]; // Lm
-    motorParameters[1] = masterInput[15]; // sigma
-    motorParameters[2] = masterInput[16]; // L1
-    motorParameters[3] = masterInput[17]; // L2
-    motorParameters[5] = masterInput[18]; // numberOfPolePairs
-    motorParameters[6] = masterInput[19]; // momentOfInertia
-    stateSpaceCoeff[0] = masterInput[20]; // a11
-    stateSpaceCoeff[1] = masterInput[21]; // a12
-    stateSpaceCoeff[2] = masterInput[22]; // a13
-    stateSpaceCoeff[3] = masterInput[23]; // a14
-    stateSpaceCoeff[4] = masterInput[24]; // a21
-    stateSpaceCoeff[5] = masterInput[25]; // a22
-    stateSpaceCoeff[6] = masterInput[26]; // a23
-    stateSpaceCoeff[7] = masterInput[27]; // a24
-    stateSpaceCoeff[8] = masterInput[28]; // a31
-    stateSpaceCoeff[9] = masterInput[29]; // a32
-    stateSpaceCoeff[10] = masterInput[30]; // a33
-    stateSpaceCoeff[11] = masterInput[31]; // a34
-    stateSpaceCoeff[12] = masterInput[32]; // a41
-    stateSpaceCoeff[13] = masterInput[33]; // a42
-    stateSpaceCoeff[14] = masterInput[34]; // a43
-    stateSpaceCoeff[15] = masterInput[35]; // a44
-    stateSpaceCoeff[16] = masterInput[36]; // b11
-    stateSpaceCoeff[17] = masterInput[37]; // b22
+    halfCalculationStep = masterInput[13];
+    calculationStep = masterInput[14];
+    motorParameters[0] = masterInput[15]; // Lm
+    motorParameters[1] = masterInput[16]; // sigma
+    motorParameters[2] = masterInput[17]; // L1
+    motorParameters[3] = masterInput[18]; // L2
+    motorParameters[5] = masterInput[19]; // numberOfPolePairs
+    motorParameters[6] = masterInput[20]; // momentOfInertia
+    stateSpaceCoeff[0] = masterInput[21]; // a11
+    stateSpaceCoeff[1] = masterInput[22]; // a12
+    stateSpaceCoeff[2] = masterInput[23]; // a13
+    stateSpaceCoeff[3] = masterInput[24]; // a14
+    stateSpaceCoeff[4] = masterInput[25]; // a21
+    stateSpaceCoeff[5] = masterInput[26]; // a22
+    stateSpaceCoeff[6] = masterInput[27]; // a23
+    stateSpaceCoeff[7] = masterInput[28]; // a24
+    stateSpaceCoeff[8] = masterInput[29]; // a31
+    stateSpaceCoeff[9] = masterInput[30]; // a32
+    stateSpaceCoeff[10] = masterInput[31]; // a33
+    stateSpaceCoeff[11] = masterInput[32]; // a34
+    stateSpaceCoeff[12] = masterInput[33]; // a41
+    stateSpaceCoeff[13] = masterInput[34]; // a42
+    stateSpaceCoeff[14] = masterInput[35]; // a43
+    stateSpaceCoeff[15] = masterInput[36]; // a44
+    stateSpaceCoeff[16] = masterInput[37]; // b11
+    stateSpaceCoeff[17] = masterInput[38]; // b22
 
 
     // calculating input electrical angular velocity
@@ -620,7 +619,7 @@ void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutpu
     u1beta = ((0.6667 * (0.866 * u1b - 0.866 * u1c)));
 
 
-    /* RK4 solution of asynchronous motor ODE equations */
+    // /* RK4 solution of asynchronous motor ODE equations */
 
     /*
     * @name RK4 state space variables
@@ -684,7 +683,7 @@ void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutpu
 
     motorTorqueLocal = motorTorqueFce(motorParameters, i1alphaLocal, i1betaLocal, psi2alphaLocal, psi2betaLocal);
 
-    motorMechanicalAngularVelocityLocal = motorMechanicalAngularVelocityFce(motorParameters[6], motorTorqueLocal,  loadTorque, calculationStep, motorMechanicalAngularVelocity);
+    motorMechanicalAngularVelocityLocal = ((1/motorParameters[6])*(motorTorqueLocal - loadTorque)*(calculationStep))+motorMechanicalAngularVelocity;
 
 
     // motor currents inverseClarkeTransform
@@ -702,5 +701,7 @@ void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutpu
     masterOutput[6] = i1;
     masterOutput[7] = i2;
     masterOutput[8] = i3;
+    masterOutput[9] = u1alpha;
+    masterOutput[10] = u1beta;
 
 }

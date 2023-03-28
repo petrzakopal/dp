@@ -476,22 +476,51 @@ int main(int argc, char* argv[]) {
             masterInputMotor[9] = MotorModel.modelVariables->i1alpha;
             masterInputMotor[10] = MotorModel.modelVariables->i1beta;
             masterInputMotor[11] = MotorModel.modelVariables->loadTorque;
-            masterInputMotor[12] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
-            masterInputMotor[13] = globalCalculationStep;
-            masterInputMotor[14] = MotorModel.motorParameters->Lm;
-            masterInputMotor[15] = MotorModel.motorParameters->sigma;
-            masterInputMotor[16] = MotorModel.motorParameters->L1;
-            masterInputMotor[17] = MotorModel.motorParameters->L2;
-            masterInputMotor[18] = MotorModel.motorParameters->nOfPolePairs;
-            
-
+            masterInputMotor[12] =  MotorModel.modelVariables->motorMechanicalAngularVelocity;
+            masterInputMotor[13] = globalCalculationStep/2;
+            masterInputMotor[14] = globalCalculationStep;
+            masterInputMotor[15] = MotorModel.motorParameters->Lm;
+            masterInputMotor[16] = MotorModel.motorParameters->sigma;
+            masterInputMotor[17] = MotorModel.motorParameters->L1;
+            masterInputMotor[18] = MotorModel.motorParameters->L2;
+            masterInputMotor[19] = MotorModel.motorParameters->nOfPolePairs;
+            masterInputMotor[20] = MotorModel.motorParameters->momentOfIntertia;
+            masterInputMotor[21] = MotorModel.stateSpaceCoeff->a11;
+            masterInputMotor[22] = MotorModel.stateSpaceCoeff->a12;
+            masterInputMotor[23] = MotorModel.stateSpaceCoeff->a13;
+            masterInputMotor[24] = MotorModel.stateSpaceCoeff->a14;
+            masterInputMotor[25] = MotorModel.stateSpaceCoeff->a21;
+            masterInputMotor[26] = MotorModel.stateSpaceCoeff->a22;
+            masterInputMotor[27] = MotorModel.stateSpaceCoeff->a23;
+            masterInputMotor[28] = MotorModel.stateSpaceCoeff->a24;
+            masterInputMotor[29] = MotorModel.stateSpaceCoeff->a31;
+            masterInputMotor[30] = MotorModel.stateSpaceCoeff->a32;
+            masterInputMotor[31] = MotorModel.stateSpaceCoeff->a33;
+            masterInputMotor[32] = MotorModel.stateSpaceCoeff->a34;
+            masterInputMotor[33] = MotorModel.stateSpaceCoeff->a41;
+            masterInputMotor[34] = MotorModel.stateSpaceCoeff->a42;
+            masterInputMotor[35] = MotorModel.stateSpaceCoeff->a43;
+            masterInputMotor[36] = MotorModel.stateSpaceCoeff->a44;
+            masterInputMotor[37] = MotorModel.stateSpaceCoeff->b11;
+            masterInputMotor[38] = MotorModel.stateSpaceCoeff->b22;
 
 
             krnl_calculateOnlineInvertorAndMotor(masterInputMotor,  masterOutputMotor);
 
+            MotorModel.modelVariables->i1alpha = masterOutputMotor[0];
+            MotorModel.modelVariables->i1beta = masterOutputMotor[1];
+            MotorModel.modelVariables->psi2alpha = masterOutputMotor[2];
+            MotorModel.modelVariables->psi2beta = masterOutputMotor[3];
+            MotorModel.modelVariables->motorTorque = masterOutputMotor[4];
+            MotorModel.modelVariables->motorMechanicalAngularVelocity = masterOutputMotor[5];
+            inputI1 = masterOutputMotor[6];
+            inputI2 = masterOutputMotor[7];
+            inputI3 = masterOutputMotor[8];
+
+
             /*-------------------- SIMULATED INVERTOR FOR SIMULATION WITH 3 PHASE CONTROLLED THYRISTOR 400 V ---------------------*/
             // invertor voltage reconstruction for phase A, B, C
-            Invertor.invertorReconstructVoltages(svmCore.invertorSwitch, Invertor.reconstructedInvertorOutputVoltage, uDC);
+            // Invertor.invertorReconstructVoltages(svmCore.invertorSwitch, Invertor.reconstructedInvertorOutputVoltage, uDC);
             /*-------------------------------------------------------------------------------------------------------------------*/
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
@@ -514,8 +543,8 @@ int main(int argc, char* argv[]) {
 
             /*---------------------------------------------------------------------------*/
             /*-------------------- CLARKE TRANSFORM FOR ASM MODEL ---------------------*/
-            MotorModel.modelVariables->u1alpha = Transformation.clarkeTransform1(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
-            MotorModel.modelVariables->u1beta = Transformation.clarkeTransform2(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
+            // MotorModel.modelVariables->u1alpha = Transformation.clarkeTransform1(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
+            // MotorModel.modelVariables->u1beta = Transformation.clarkeTransform2(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
             /*---------------------------------------------------------------------------*/
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
@@ -528,7 +557,7 @@ int main(int argc, char* argv[]) {
         
             /*-----------------------------------------------------------------------------------*/
             /*-------------------- MAIN ASM MODEL CODE WITH RK4 ODE SOLVING ---------------------*/
-            MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
+            // MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
             /*-----------------------------------------------------------------------------------*/
             /******************************************************************************/
 
@@ -544,9 +573,9 @@ int main(int argc, char* argv[]) {
             }
             /*-----------------------------------------------------------------------------------------------------*/
 
-            inputI1 = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-            inputI2 = Transformation.inverseClarkeTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-            inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
+            // inputI1 = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
+            // inputI2 = Transformation.inverseClarkeTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
+            // inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if(verboseOutput and (i<4))
