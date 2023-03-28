@@ -263,8 +263,7 @@ int main(int argc, char* argv[]) {
     OCL_CHECK(err, masterOutput = (float*)q.enqueueMapBuffer(buffer_masterOutput, CL_TRUE, CL_MAP_READ, 0, masterOutputLength*sizeof(float), NULL,
                                                          NULL, &err));
 
-
-    /*-------------------------------------------------------------*/
+/*-------------------------------------------------------------*/
     /*-------------------- CLASS DEFINITIONS ---------------------*/
     MotorModelClass MotorModel;
     svmCoreClass svmCore;
@@ -368,8 +367,9 @@ int main(int argc, char* argv[]) {
     CurVelModel.motorParameters->R2 = 0.225f; // Ohm, rotor rezistance
     CurVelModel.motorParameters->Lm = 0.0825f; // H, main flux inductance
     CurVelModel.motorParameters->L2 = 0.08477f; // H, inductance
-    CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+    // CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
     CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
+    CurVelModel.modelCVCoeff->nOfPolePairs = 2;
     /*------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------*/
@@ -425,7 +425,7 @@ int main(int argc, char* argv[]) {
     Regulator.idRegulator->ki = 2915.6; // 2915.6
     Regulator.idRegulator->kp = 22.3961;// 22.3961
     Regulator.idRegulator->saturationOutputMax = Udcmax; // (3*sqrt(2))/(pi*sqrt(3))*Us = 400(3*sqrt(2))/(3.141592*sqrt(3)) = 311.87
-    Regulator.idRegulator->saturationOutputMin = - Udcmax;
+    Regulator.idRegulator->saturationOutputMin = 0; // - Udcmax
     Regulator.idRegulator->clampingStatus = false;
     Regulator.idRegulator->saturationCheckStatus = false;
     Regulator.idRegulator->signCheckStatus = false;
@@ -435,7 +435,7 @@ int main(int argc, char* argv[]) {
     /*-------------------- IQ REGULATOR ---------------------*/
     Regulator.iqRegulator->ki = 2915.6; // 2915.6
     Regulator.iqRegulator->kp = 22.3961; // 22.3961
-    Regulator.iqRegulator->saturationOutputMax = sqrt((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
+    Regulator.iqRegulator->saturationOutputMax = sqrtf((Udcmax * Udcmax) - (Regulator.idRegulator->saturationOutput * Regulator.idRegulator->saturationOutput)); // sqrt(Udcmax^2 - u1d^2) dynamically
     Regulator.iqRegulator->saturationOutputMin = - Regulator.iqRegulator->saturationOutputMax;
     Regulator.iqRegulator->clampingStatus = false;
     Regulator.iqRegulator->saturationCheckStatus = false;
@@ -452,7 +452,7 @@ int main(int argc, char* argv[]) {
     /*-------------------- WANTED VALUES INPUT ---------------------*/
     // now hardcoded, change later
     Regulator.fluxRegulator->wantedValue = 1;
-    Regulator.velocityRegulator->wantedValue = 50;
+    Regulator.velocityRegulator->wantedValue = 0;
     Regulator.idRegulator->wantedValue = 0;
     Regulator.iqRegulator->wantedValue = 0;
     /*--------------------------------------------------------------*/
@@ -547,13 +547,18 @@ int main(int argc, char* argv[]) {
 
         for(int i = 0; i<1000000;i++) // replace with while in production, but in this model, it is suitable to use for cycle
         {
+
+            
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if(verboseOutput)
+            if(verboseOutput and (i<4))
             {
                 std::cout << "iteration number: " << i << "\n";
             }
             /*-------------------------------------------------------------------------------------------------------*/
-
+            if(i>=600000)
+            {
+                Regulator.velocityRegulator->wantedValue = 10;
+            }
             masterInput[0] = globalSimulationTime;
             masterInput[1] = globalCalculationStep;
             masterInput[2] = minMaxCommonModeVoltageConstant;
@@ -598,8 +603,6 @@ int main(int argc, char* argv[]) {
 
 
 
-            //kernel
-
             OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput}, 0 /* 0 means from host*/));
 
            
@@ -613,8 +616,6 @@ int main(int argc, char* argv[]) {
             OCL_CHECK(err, q.finish());
 
             
-
-
             svmCore.invertorSwitch->sw1 = masterOutput[0];
             svmCore.invertorSwitch->sw2 = masterOutput[1];
             svmCore.invertorSwitch->sw3 = masterOutput[2];
@@ -636,7 +637,7 @@ int main(int argc, char* argv[]) {
         // we got switches from kernel
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if(verboseOutput)
+            if(verboseOutput and (i<4))
             {
                 std::cout << "sw1: " << svmCore.invertorSwitch->sw1 << "\n";
                 std::cout << "sw2: " << svmCore.invertorSwitch->sw2 << "\n";
@@ -656,7 +657,7 @@ int main(int argc, char* argv[]) {
             /*-------------------------------------------------------------------------------------------------------------------*/
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if(verboseOutput)
+            if(verboseOutput and (i<4))
             {
                 std::cout << "reconstructed u1a: " << Invertor.reconstructedInvertorOutputVoltage->u1a << "\n";
                 std::cout << "reconstructed u1b: " << Invertor.reconstructedInvertorOutputVoltage->u1b << "\n";
@@ -676,7 +677,7 @@ int main(int argc, char* argv[]) {
             /*---------------------------------------------------------------------------*/
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if(verboseOutput)
+            if(verboseOutput and (i<4))
                 {
                     std::cout << "u1alpha to motor: " << MotorModel.modelVariables->u1alpha << "\n";
                     std::cout << "u1beta to motor: " << MotorModel.modelVariables->u1beta << "\n";
@@ -690,7 +691,7 @@ int main(int argc, char* argv[]) {
             /******************************************************************************/
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if(verboseOutput)
+            if(verboseOutput and (i<4))
             {
                 // std::cout << "ASM i1alpha: " << MotorModel.modelVariables->i1alpha << "\n";
                 // std::cout << "ASM i1beta: " << MotorModel.modelVariables->i1beta << "\n";
@@ -706,7 +707,7 @@ int main(int argc, char* argv[]) {
             inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if(verboseOutput)
+            if(verboseOutput and (i<4))
             {
 
             std::cout << "sw1: " << masterOutput[0] << "\n";
@@ -739,7 +740,7 @@ int main(int argc, char* argv[]) {
 
             /*-------------------------------------------------------------------------------*/
             /*-------------------- OUTPUT CSV DATA INSERTING TO A FILE ---------------------*/
-            globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","  << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," <<masterOutput[15] << "," << masterOutput[16]<<"\n";
+            globalSimulationData << globalSimulationTime << "," << masterOutput[14] << ","  << MotorModel.modelVariables->motorMechanicalAngularVelocity << "," <<masterOutput[15] << "," << masterOutput[16]<<"," <<Regulator.velocityRegulator->wantedValue << ","<< masterOutput[18] <<"," << masterOutput[19]<< "," << Regulator.velocityRegulator->iSum << "\n";
             /*-------------------------------------------------------------------------------*/
 
             /*----------------------------------------------------------------------------------------------------------------------*/
@@ -748,7 +749,7 @@ int main(int argc, char* argv[]) {
             /*----------------------------------------------------------------------------------------------------------------------*/
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if(verboseOutput)
+            if(verboseOutput and (i<4))
             {
                 std::cout << "------------------------------------------------------"<< "\n";
             }
@@ -854,9 +855,7 @@ int main(int argc, char* argv[]) {
 
             OCL_CHECK(err, q.finish());
 
-            
-            
-            
+          
             std::cout << "sw1: " << masterOutput[0] << "\n";
             std::cout << "sw2: " << masterOutput[1] << "\n";
             std::cout << "sw3: " << masterOutput[2] << "\n";
@@ -878,59 +877,59 @@ int main(int argc, char* argv[]) {
 
 
             masterInput[0] = globalSimulationTime;
-        masterInput[1] = globalCalculationStep;
-        masterInput[2] = minMaxCommonModeVoltageConstant;
-        masterInput[3] = globalCalculationStep/2;
-        masterInput[4] = inputI1;
-        masterInput[5] = inputI2;
-        masterInput[6] = inputI3;
-        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
-        masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
-        masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
-        masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
-        masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
-        masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
-        masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
-        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
-        masterInput[15] = Udcmax;
-        masterInput[16] = Regulator.fluxRegulator->ki;
-        masterInput[17] = Regulator.fluxRegulator->kp;
-        masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
-        masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
-        masterInput[20] = Regulator.fluxRegulator->iSum;
-        masterInput[21] = Regulator.velocityRegulator->ki;
-        masterInput[22] = Regulator.velocityRegulator->kp;
-        masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
-        masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
-        masterInput[25] = Regulator.velocityRegulator->iSum;
-        masterInput[26] = Regulator.idRegulator->ki;
-        masterInput[27] = Regulator.idRegulator->kp;
-        masterInput[28] = Regulator.idRegulator->saturationOutput;
-        masterInput[29] = Regulator.idRegulator->iSum;
-        masterInput[30] = Regulator.iqRegulator->ki;
-        masterInput[31] = Regulator.iqRegulator->kp;
-        masterInput[32] = Regulator.iqRegulator->iSum;
-        masterInput[33] = Regulator.fluxRegulator->wantedValue;
-        masterInput[34] = Regulator.velocityRegulator->wantedValue;
-        masterInput[35] = Regulator.idRegulator->wantedValue;
-        masterInput[36] = Regulator.iqRegulator->wantedValue;
-        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
-        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+            masterInput[1] = globalCalculationStep;
+            masterInput[2] = minMaxCommonModeVoltageConstant;
+            masterInput[3] = globalCalculationStep/2;
+            masterInput[4] = inputI1;
+            masterInput[5] = inputI2;
+            masterInput[6] = inputI3;
+            masterInput[7] = MotorModel.    modelVariables->motorMechanicalAngularVelocity;
+            masterInput[8] = CurVelModel.modelCVCoeff->R2MLmDL2;
+            masterInput[9] = CurVelModel.modelCVCoeff->R2DL2;
+            masterInput[10] = CurVelModel.modelCVCoeff->nOfPolePairs;
+            masterInput[11] = svmCore.triangleWaveSettings->waveAmplitude;
+            masterInput[12] = svmCore.triangleWaveSettings->calculationStep;
+            masterInput[13] = svmCore.triangleWaveSettings->wavePeriod;
+            masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+            masterInput[15] = Udcmax;
+            masterInput[16] = Regulator.fluxRegulator->ki;
+            masterInput[17] = Regulator.fluxRegulator->kp;
+            masterInput[18] = Regulator.fluxRegulator->saturationOutputMax;
+            masterInput[19] = Regulator.fluxRegulator->saturationOutputMin;
+            masterInput[20] = Regulator.fluxRegulator->iSum;
+            masterInput[21] = Regulator.velocityRegulator->ki;
+            masterInput[22] = Regulator.velocityRegulator->kp;
+            masterInput[23] = Regulator.velocityRegulator->saturationOutputMax;
+            masterInput[24] = Regulator.velocityRegulator->saturationOutputMin;
+            masterInput[25] = Regulator.velocityRegulator->iSum;
+            masterInput[26] = Regulator.idRegulator->ki;
+            masterInput[27] = Regulator.idRegulator->kp;
+            masterInput[28] = Regulator.idRegulator->saturationOutput;
+            masterInput[29] = Regulator.idRegulator->iSum;
+            masterInput[30] = Regulator.iqRegulator->ki;
+            masterInput[31] = Regulator.iqRegulator->kp;
+            masterInput[32] = Regulator.iqRegulator->iSum;
+            masterInput[33] = Regulator.fluxRegulator->wantedValue;
+            masterInput[34] = Regulator.velocityRegulator->wantedValue;
+            masterInput[35] = Regulator.idRegulator->wantedValue;
+            masterInput[36] = Regulator.iqRegulator->wantedValue;
+            masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+            masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
 
 
-        masterInput[0] = globalSimulationTime;
-        masterInput[4] = inputI1;
-        masterInput[5] = inputI2;
-        masterInput[6] = inputI3;
-        masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
-        masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
-        masterInput[20] = Regulator.fluxRegulator->iSum;
-        masterInput[25] = Regulator.velocityRegulator->iSum;
-        masterInput[28] = Regulator.idRegulator->saturationOutput;
-        masterInput[29] = Regulator.idRegulator->iSum;
-        masterInput[32] = Regulator.iqRegulator->iSum;
-        masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
-        masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
+            masterInput[0] = globalSimulationTime;
+            masterInput[4] = inputI1;
+            masterInput[5] = inputI2;
+            masterInput[6] = inputI3;
+            masterInput[7] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+            masterInput[14] = svmCore.triangleWaveSettings->calculationTime;
+            masterInput[20] = Regulator.fluxRegulator->iSum;
+            masterInput[25] = Regulator.velocityRegulator->iSum;
+            masterInput[28] = Regulator.idRegulator->saturationOutput;
+            masterInput[29] = Regulator.idRegulator->iSum;
+            masterInput[32] = Regulator.iqRegulator->iSum;
+            masterInput[37] = CurVelModel.modelCVVariables->psi2alpha;
+            masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
         }
         
 

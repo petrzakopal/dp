@@ -10,7 +10,7 @@ typedef struct motorCVParametersStruct
     float R2;
     float Lm;
     float L2;
-    int nOfPolePairs;
+    // int nOfPolePairs; //depracated
 }motorCVParametersType;
 /*---------------------------------------------------------------------------------------------------*/
 

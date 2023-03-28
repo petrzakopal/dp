@@ -13,7 +13,7 @@ Purpose: Kernel
 #define PI 3.141592 
 extern "C" {
 
-    /*
+ /*
     * @name sliceInternalVariables4Parts
     * @brief Function to calculate slice variables at 4 parts
     */
@@ -68,7 +68,7 @@ extern "C" {
         return((R2MLmDL2 * i1beta) + (motorElectricalAngularVelocity * psi2alpha) - (R2DL2 * psi2beta));
     }
 
-    void computeCurVel(float *psi2alpha, float *psi2beta, float inputI1, float inputI2, float inputI3, float numberOfPolePairs, float *R2MLmDL2Temp, float *R2DL2Temp, float inputMotorMechanicalAngularVelocity, float globalSimulationTime, float globalCalculationStep, float halfCalculationStep, float *i1alpha, float *i1beta)
+    void computeCurVelKernel(float *psi2alpha, float *psi2beta, float inputI1, float inputI2, float inputI3, float numberOfPolePairs, float *R2MLmDL2Temp, float *R2DL2Temp, float inputMotorMechanicalAngularVelocity, float globalSimulationTime, float globalCalculationStep, float halfCalculationStep, float *i1alpha, float *i1beta)
     {
 
         // coefficients for RK4
@@ -94,8 +94,6 @@ extern "C" {
 
 
 
-        #pragma HLS performance target_ti=1
-        #pragma HLS loop_tripcount max=1
 
         sliceInternalVariables8Parts(*psi2alpha, psi2alphaTemp);
         sliceInternalVariables8Parts(*psi2beta, psi2betaTemp);
@@ -174,7 +172,7 @@ extern "C" {
         *transformAngle = atan2f(psi2betaTemp, psi2alphaTemp);
     }
 
-    float regSaturationBlock(float saturationInput, float saturationOutputMin, float saturationOutputMax)
+    float regSaturationBlockKernel(float saturationInput, float saturationOutputMin, float saturationOutputMax)
     {
         float localSaturationInput = saturationInput;
 
@@ -191,7 +189,7 @@ extern "C" {
 
     }
 
-    void checkSaturationStatus(RegulatorType *regulatorData)
+    void checkSaturationStatusKernel(RegulatorType *regulatorData)
     {
         if(regulatorData->saturationInput == regulatorData->saturationOutput)
         {
@@ -203,7 +201,7 @@ extern "C" {
         }
     }
 
-    void checkSignStatus(RegulatorType *regulatorData)
+    void checkSignStatusKernel(RegulatorType *regulatorData)
     {
         if(((regulatorData->eDif > 0) and (regulatorData->saturationInput > 0)) or ((regulatorData->eDif < 0) and (regulatorData->saturationInput < 0)))
         {
@@ -215,7 +213,7 @@ extern "C" {
         }
     }
 
-    void enableClamping(RegulatorType *regulatorData)
+    void enableClampingKernel(RegulatorType *regulatorData)
     {
         if((regulatorData->saturationCheckStatus == true) and (regulatorData->signCheckStatus == true))
         {
@@ -228,15 +226,15 @@ extern "C" {
 
     }
 
-    void regCalculate(RegulatorType *regulatorData)
+    void regCalculateKernel(RegulatorType *regulatorData)
     {
         regulatorData->eDif = regulatorData->wantedValue - regulatorData->measuredValue;
         regulatorData->saturationInput = (regulatorData->eDif * regulatorData->kp) + regulatorData->iSum;
-        regulatorData->saturationOutput = regSaturationBlock(regulatorData->saturationInput, regulatorData->saturationOutputMin, regulatorData->saturationOutputMax);
+        regulatorData->saturationOutput = regSaturationBlockKernel(regulatorData->saturationInput, regulatorData->saturationOutputMin, regulatorData->saturationOutputMax);
 
-        checkSaturationStatus(regulatorData);
-        checkSignStatus(regulatorData);
-        enableClamping(regulatorData);
+        checkSaturationStatusKernel(regulatorData);
+        checkSignStatusKernel(regulatorData);
+        enableClampingKernel(regulatorData);
 
         if(regulatorData->clampingStatus == true)
         {
@@ -250,7 +248,7 @@ extern "C" {
 
     
 
-    float generateActualValueTriangleWave(TriangleWaveSettingsType *triangleWaveSettings)
+    float generateActualValueTriangleWaveKernel(TriangleWaveSettingsType *triangleWaveSettings)
     {
         float triangleActualValue; // maybe put in triangleWaveSettings, and make this function void, do not know, this should be used only as a local variable
 
@@ -267,12 +265,12 @@ extern "C" {
     }
 
 
-    float minMaxCommonModeVoltage(CoreInternalVariablesType *coreInternalVariables)
+    float minMaxCommonModeVoltageKernel(CoreInternalVariablesType *coreInternalVariables)
     {
         return(((fmax(fmax(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ) + (fmin(fmin(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ))/2);
     }
 
-    bool comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue)
+    bool comparationLevelTriangleWaveComparationKernel(float compareLevel, float triangleWaveValue)
     {
         if(compareLevel>=triangleWaveValue)
         {
@@ -284,16 +282,14 @@ extern "C" {
         }
     }
 
-    float createCompareLevel(float levelConstant, float commonModeVoltage, float phaseWantedVoltage)
+    float createCompareLevelKernel(float levelConstant, float commonModeVoltage, float phaseWantedVoltage)
     {
         return((phaseWantedVoltage - commonModeVoltage)/levelConstant);
     }
 
     void krnl_calculateCurVelModel(float *masterInput, float *masterOutput )
     {
-        #pragma HLS INTERFACE mode = m_axi port = masterInput bundle = gmem0
-        #pragma HLS INTERFACE mode = m_axi port = masterOutput bundle = gmem1
-        #pragma HLS performance target_ti=1
+      
 
         RegulatorType idRegulator;
         RegulatorType iqRegulator;
@@ -322,7 +318,7 @@ extern "C" {
         float globalCalculationStep =masterInput[1];
         float minMaxCommonModeVoltageConstant = masterInput[2];
         float minMaxCommonModeVoltageConstantTemp[3];
-        float halfCalculationStep = globalCalculationStep/2;
+        float halfCalculationStep =  masterInput[3];
         float inputI1 = masterInput[4];
         float inputI2 = masterInput[5];
         float inputI3 = masterInput[6];
@@ -374,7 +370,7 @@ extern "C" {
         float commonModeVoltageTemp[3];
         float trianglePointTemp[3];
 
-        computeCurVel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, globalSimulationTime, globalCalculationStep, halfCalculationStep, i1alpha_ptr, i1beta_ptr);
+        computeCurVelKernel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, globalSimulationTime, globalCalculationStep, halfCalculationStep, i1alpha_ptr, i1beta_ptr);
 
 
         outputCurVelProductsCalc(transformationAngle_ptr, psi2amplitude_ptr, psi2alpha, psi2beta);
@@ -395,39 +391,42 @@ extern "C" {
       
 
         // calculating first set of regulators
-        regCalculate(&fluxRegulator);
-        regCalculate(&velocityRegulator);
+        regCalculateKernel(&fluxRegulator);
+        regCalculateKernel(&velocityRegulator);
 
         // new values
         idRegulator.wantedValue = fluxRegulator.saturationOutput;
         iqRegulator.wantedValue = velocityRegulator.saturationOutput;  
 
          // calculating second set of regulators
-        regCalculate(&idRegulator);
-        regCalculate(&iqRegulator);
+        regCalculateKernel(&idRegulator);
+        regCalculateKernel(&iqRegulator);
 
         coreInternalVariables.u1d = idRegulator.saturationOutput;
         coreInternalVariables.u1q = iqRegulator.saturationOutput;
 
         coreInternalVariables.u1alpha = ((coreInternalVariables.u1d * cosf(transformationAngleTemp[4])) - (coreInternalVariables.u1q * sinf(transformationAngleTemp[5])));
+
         coreInternalVariables.u1beta = ((coreInternalVariables.u1d * sinf(transformationAngleTemp[6])) + (coreInternalVariables.u1q * cosf(transformationAngleTemp[7])));
 
         coreInternalVariables.u1a = coreInternalVariables.u1alpha;
+
         coreInternalVariables.u1b = ((-0.5 * coreInternalVariables.u1alpha) + 0.866 * coreInternalVariables.u1beta);
+
         coreInternalVariables.u1c = ((-0.5 * coreInternalVariables.u1alpha) - 0.866 * coreInternalVariables.u1beta);
 
-        trianglePoint = generateActualValueTriangleWave(&triangleWaveSettings);
-        commonModeVoltage = minMaxCommonModeVoltage(&coreInternalVariables);
+        trianglePoint = generateActualValueTriangleWaveKernel(&triangleWaveSettings);
+        commonModeVoltage = minMaxCommonModeVoltageKernel(&coreInternalVariables);
 
         sliceInternalVariables3Parts(commonModeVoltage, commonModeVoltageTemp);
         sliceInternalVariables3Parts(trianglePoint, trianglePointTemp);
         sliceInternalVariables3Parts(minMaxCommonModeVoltageConstant, minMaxCommonModeVoltageConstantTemp);
 
-        invertorSwitch.sw1 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstantTemp[0], commonModeVoltageTemp[0],coreInternalVariables.u1a), trianglePointTemp[0]);
+        invertorSwitch.sw1 = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[0], commonModeVoltageTemp[0],coreInternalVariables.u1a), trianglePointTemp[0]);
 
-        invertorSwitch.sw3 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstantTemp[1], commonModeVoltageTemp[1],coreInternalVariables.u1b), trianglePointTemp[1]);
+        invertorSwitch.sw3 = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[1], commonModeVoltageTemp[1],coreInternalVariables.u1b), trianglePointTemp[1]);
 
-        invertorSwitch.sw5 = comparationLevelTriangleWaveComparation(createCompareLevel(minMaxCommonModeVoltageConstantTemp[2], commonModeVoltageTemp[2],coreInternalVariables.u1c), trianglePointTemp[2]);
+        invertorSwitch.sw5 = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[2], commonModeVoltageTemp[2],coreInternalVariables.u1c), trianglePointTemp[2]);
 
         invertorSwitch.sw4 = !invertorSwitch.sw1;
         invertorSwitch.sw6 = !invertorSwitch.sw3;
@@ -453,6 +452,8 @@ extern "C" {
         masterOutput[15] = idRegulator.measuredValue;
         masterOutput[16] = idRegulator.wantedValue;
         masterOutput[17] = transformationAngle;
+        masterOutput[18] = velocityRegulator.saturationOutput;
+        masterOutput[19] = velocityRegulator.clampingStatus;
     }
 
 

@@ -16,7 +16,7 @@
       </kernels>
     </configBuildOptions>
   </configuration>
-  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.971014052">
+  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.971014052" dirty="true">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp" maxMemoryPorts="true">
         <args name="masterInput" master="true"/>
