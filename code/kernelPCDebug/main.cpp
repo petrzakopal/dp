@@ -1,7 +1,7 @@
 /*******************************************************************************
 Author: FEE CTU
 Purpose: Host program
-Comment: Refactoring for HLS
+Comment: Framework for testing algorithms for kernel and host program.
 *******************************************************************************/
 /*----------------------------------------------------------------------------*/
 /*-------------------------------- INCLUDES ---------------------------------*/
@@ -27,14 +27,21 @@ Comment: Refactoring for HLS
 #include <cmath>
 
 
-
+// constant definition
 #define PI 3.141592
 
+
+
+// function declaration, maybe move to another file
 void krnl_calculateCurVelModel(float *masterInput, float *masterOutput );
+void krnl_calculateOnlineInvertorAndMotor(float *masterInput, float *masterOutput);
 
 // Define the function to be called when ctrl-c (SIGINT) is sent to process
 void signal_callback_handler(int signum) {
    std::cout << "\nCaught signal " << signum << "\n";
+
+    // create function for setting default values to switches and regulators
+
    // Terminate program
    exit(signum);
 }
@@ -71,6 +78,11 @@ int main(int argc, char* argv[]) {
     posix_memalign((void **)&masterInput , 4096 , (masterInputLength)*sizeof(float) );
     posix_memalign((void **)&masterOutput , 4096 , (masterOutputLength)*sizeof(float) );
 
+    float *masterInputMotor;
+    float *masterOutputMotor;
+
+    posix_memalign((void **)&masterInputMotor , 4096 , (masterInputLength)*sizeof(float) );
+    posix_memalign((void **)&masterOutputMotor , 4096 , (masterOutputLength)*sizeof(float) );
 
     /*-------------------------------------------------------------*/
     /*-------------------- CLASS DEFINITIONS ---------------------*/
@@ -452,6 +464,30 @@ int main(int argc, char* argv[]) {
             /*------------------------------------------------------------------------------------------------------*/
 
 
+            masterInputMotor[0] = svmCore.invertorSwitch->sw1;
+            masterInputMotor[1] = svmCore.invertorSwitch->sw2;
+            masterInputMotor[2] = svmCore.invertorSwitch->sw3;
+            masterInputMotor[3] = svmCore.invertorSwitch->sw4;
+            masterInputMotor[4] = svmCore.invertorSwitch->sw5;
+            masterInputMotor[5] = svmCore.invertorSwitch->sw6;
+            masterInputMotor[6] = uDC;
+            masterInputMotor[7] = MotorModel.modelVariables->psi2alpha;
+            masterInputMotor[8] = MotorModel.modelVariables->psi2beta;
+            masterInputMotor[9] = MotorModel.modelVariables->i1alpha;
+            masterInputMotor[10] = MotorModel.modelVariables->i1beta;
+            masterInputMotor[11] = MotorModel.modelVariables->loadTorque;
+            masterInputMotor[12] = MotorModel.modelVariables->motorMechanicalAngularVelocity;
+            masterInputMotor[13] = globalCalculationStep;
+            masterInputMotor[14] = MotorModel.motorParameters->Lm;
+            masterInputMotor[15] = MotorModel.motorParameters->sigma;
+            masterInputMotor[16] = MotorModel.motorParameters->L1;
+            masterInputMotor[17] = MotorModel.motorParameters->L2;
+            masterInputMotor[18] = MotorModel.motorParameters->nOfPolePairs;
+            
+
+
+
+            krnl_calculateOnlineInvertorAndMotor(masterInputMotor,  masterOutputMotor);
 
             /*-------------------- SIMULATED INVERTOR FOR SIMULATION WITH 3 PHASE CONTROLLED THYRISTOR 400 V ---------------------*/
             // invertor voltage reconstruction for phase A, B, C
@@ -468,9 +504,13 @@ int main(int argc, char* argv[]) {
             /*------------------------------------------------------------------------------------------------------*/
 
 
+
+
             /******************************************************************************/
             /*-------------------- VIRTUAL ASYNCHRONOUS MOTOR MODEL ---------------------*/
         
+            
+
 
             /*---------------------------------------------------------------------------*/
             /*-------------------- CLARKE TRANSFORM FOR ASM MODEL ---------------------*/
@@ -485,7 +525,7 @@ int main(int argc, char* argv[]) {
                     std::cout << "u1beta to motor: " << MotorModel.modelVariables->u1beta << "\n";
                 }
             /*-----------------------------------------------------------------------------------------------------*/
-
+        
             /*-----------------------------------------------------------------------------------*/
             /*-------------------- MAIN ASM MODEL CODE WITH RK4 ODE SOLVING ---------------------*/
             MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
