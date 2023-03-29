@@ -6,6 +6,10 @@
         <args name="masterInput" master="true"/>
         <args name="masterOutput" master="true"/>
       </kernels>
+      <kernels name="krnl_calculateInvMot" sourceFile="src/krnl_inv_asm.cpp" maxMemoryPorts="true">
+        <args name="masterInput" master="true"/>
+        <args name="masterOutput" master="true"/>
+      </kernels>
     </configBuildOptions>
   </configuration>
   <configuration name="Emulation-HW" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.2030768535" dirty="true">
@@ -14,11 +18,19 @@
         <args name="masterInput" master="true"/>
         <args name="masterOutput" master="true"/>
       </kernels>
+      <kernels name="krnl_calculateInvMot" sourceFile="src/krnl_inv_asm.cpp" maxMemoryPorts="true">
+        <args name="masterInput" master="true"/>
+        <args name="masterOutput" master="true"/>
+      </kernels>
     </configBuildOptions>
   </configuration>
   <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.971014052" dirty="true">
-    <configBuildOptions xsi:type="hwkernel:KernelOptions" target="hw">
+    <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp" maxMemoryPorts="true">
+        <args name="masterInput" master="true"/>
+        <args name="masterOutput" master="true"/>
+      </kernels>
+      <kernels name="krnl_calculateInvMot" sourceFile="src/krnl_inv_asm.cpp" maxMemoryPorts="true">
         <args name="masterInput" master="true"/>
         <args name="masterOutput" master="true"/>
       </kernels>
