@@ -13,6 +13,14 @@
 
 ## Mé denní poznámky ✏️
 
+🧪 [29.03.2023](/notes/20230329.md) <--
+
+---
+
+🧪 & ⚙️ [28.03.2023](/notes/20230328.md) <-- snaha o patch linuxu a vytvoření modelu ASM a Invertoru do kernelu v test benchi a přesun do Kernelu
+
+---
+
 🐛 [27.03.2023](/notes/20230327.md) <-- debugging a řešení problémů + vytváření frameworku na testování v pc
 
 ---

@@ -96,11 +96,11 @@ int main(int argc, char* argv[]) {
     posix_memalign((void **)&masterInput , 4096 , (masterInputLength)*sizeof(float) );
     posix_memalign((void **)&masterOutput , 4096 , (masterOutputLength)*sizeof(float) );
 
-    float *masterInputMotor;
-    float *masterOutputMotor;
+    float *masterMotorInput;
+    float *masterMotorOutput;
 
-    posix_memalign((void **)&masterInputMotor , 4096 , (masterInputLength)*sizeof(float) );
-    posix_memalign((void **)&masterOutputMotor , 4096 , (masterOutputLength)*sizeof(float) );
+    posix_memalign((void **)&masterMotorInput , 4096 , (masterInputLength)*sizeof(float) );
+    posix_memalign((void **)&masterMotorOutput , 4096 , (masterOutputLength)*sizeof(float) );
 
     /*-------------------------------------------------------------*/
     /*-------------------- CLASS DEFINITIONS ---------------------*/
@@ -482,58 +482,58 @@ int main(int argc, char* argv[]) {
             /*------------------------------------------------------------------------------------------------------*/
 
 
-            masterInputMotor[0] = invertorSwitchGlobal.sw1;
-            masterInputMotor[1] = invertorSwitchGlobal.sw2;
-            masterInputMotor[2] = invertorSwitchGlobal.sw3;
-            masterInputMotor[3] = invertorSwitchGlobal.sw4;
-            masterInputMotor[4] = invertorSwitchGlobal.sw5;
-            masterInputMotor[5] = invertorSwitchGlobal.sw6;
-            masterInputMotor[6] = uDC;
-            masterInputMotor[7] = MotorModel.modelVariables->psi2alpha;
-            masterInputMotor[8] = MotorModel.modelVariables->psi2beta;
-            masterInputMotor[9] = MotorModel.modelVariables->i1alpha;
-            masterInputMotor[10] = MotorModel.modelVariables->i1beta;
-            masterInputMotor[11] = MotorModel.modelVariables->loadTorque;
-            masterInputMotor[12] =  MotorModel.modelVariables->motorMechanicalAngularVelocity;
-            masterInputMotor[13] = globalCalculationStep/2;
-            masterInputMotor[14] = globalCalculationStep;
-            masterInputMotor[15] = MotorModel.motorParameters->Lm;
-            masterInputMotor[16] = MotorModel.motorParameters->sigma;
-            masterInputMotor[17] = MotorModel.motorParameters->L1;
-            masterInputMotor[18] = MotorModel.motorParameters->L2;
-            masterInputMotor[19] = MotorModel.motorParameters->nOfPolePairs;
-            masterInputMotor[20] = MotorModel.motorParameters->momentOfIntertia;
-            masterInputMotor[21] = MotorModel.stateSpaceCoeff->a11;
-            masterInputMotor[22] = MotorModel.stateSpaceCoeff->a12;
-            masterInputMotor[23] = MotorModel.stateSpaceCoeff->a13;
-            masterInputMotor[24] = MotorModel.stateSpaceCoeff->a14;
-            masterInputMotor[25] = MotorModel.stateSpaceCoeff->a21;
-            masterInputMotor[26] = MotorModel.stateSpaceCoeff->a22;
-            masterInputMotor[27] = MotorModel.stateSpaceCoeff->a23;
-            masterInputMotor[28] = MotorModel.stateSpaceCoeff->a24;
-            masterInputMotor[29] = MotorModel.stateSpaceCoeff->a31;
-            masterInputMotor[30] = MotorModel.stateSpaceCoeff->a32;
-            masterInputMotor[31] = MotorModel.stateSpaceCoeff->a33;
-            masterInputMotor[32] = MotorModel.stateSpaceCoeff->a34;
-            masterInputMotor[33] = MotorModel.stateSpaceCoeff->a41;
-            masterInputMotor[34] = MotorModel.stateSpaceCoeff->a42;
-            masterInputMotor[35] = MotorModel.stateSpaceCoeff->a43;
-            masterInputMotor[36] = MotorModel.stateSpaceCoeff->a44;
-            masterInputMotor[37] = MotorModel.stateSpaceCoeff->b11;
-            masterInputMotor[38] = MotorModel.stateSpaceCoeff->b22;
+            masterMotorInput[0] = invertorSwitchGlobal.sw1;
+            masterMotorInput[1] = invertorSwitchGlobal.sw2;
+            masterMotorInput[2] = invertorSwitchGlobal.sw3;
+            masterMotorInput[3] = invertorSwitchGlobal.sw4;
+            masterMotorInput[4] = invertorSwitchGlobal.sw5;
+            masterMotorInput[5] = invertorSwitchGlobal.sw6;
+            masterMotorInput[6] = uDC;
+            masterMotorInput[7] = MotorModel.modelVariables->psi2alpha;
+            masterMotorInput[8] = MotorModel.modelVariables->psi2beta;
+            masterMotorInput[9] = MotorModel.modelVariables->i1alpha;
+            masterMotorInput[10] = MotorModel.modelVariables->i1beta;
+            masterMotorInput[11] = MotorModel.modelVariables->loadTorque;
+            masterMotorInput[12] =  MotorModel.modelVariables->motorMechanicalAngularVelocity;
+            masterMotorInput[13] = globalCalculationStep/2;
+            masterMotorInput[14] = globalCalculationStep;
+            masterMotorInput[15] = MotorModel.motorParameters->Lm;
+            masterMotorInput[16] = MotorModel.motorParameters->sigma;
+            masterMotorInput[17] = MotorModel.motorParameters->L1;
+            masterMotorInput[18] = MotorModel.motorParameters->L2;
+            masterMotorInput[19] = MotorModel.motorParameters->nOfPolePairs;
+            masterMotorInput[20] = MotorModel.motorParameters->momentOfIntertia;
+            masterMotorInput[21] = MotorModel.stateSpaceCoeff->a11;
+            masterMotorInput[22] = MotorModel.stateSpaceCoeff->a12;
+            masterMotorInput[23] = MotorModel.stateSpaceCoeff->a13;
+            masterMotorInput[24] = MotorModel.stateSpaceCoeff->a14;
+            masterMotorInput[25] = MotorModel.stateSpaceCoeff->a21;
+            masterMotorInput[26] = MotorModel.stateSpaceCoeff->a22;
+            masterMotorInput[27] = MotorModel.stateSpaceCoeff->a23;
+            masterMotorInput[28] = MotorModel.stateSpaceCoeff->a24;
+            masterMotorInput[29] = MotorModel.stateSpaceCoeff->a31;
+            masterMotorInput[30] = MotorModel.stateSpaceCoeff->a32;
+            masterMotorInput[31] = MotorModel.stateSpaceCoeff->a33;
+            masterMotorInput[32] = MotorModel.stateSpaceCoeff->a34;
+            masterMotorInput[33] = MotorModel.stateSpaceCoeff->a41;
+            masterMotorInput[34] = MotorModel.stateSpaceCoeff->a42;
+            masterMotorInput[35] = MotorModel.stateSpaceCoeff->a43;
+            masterMotorInput[36] = MotorModel.stateSpaceCoeff->a44;
+            masterMotorInput[37] = MotorModel.stateSpaceCoeff->b11;
+            masterMotorInput[38] = MotorModel.stateSpaceCoeff->b22;
 
 
-            krnl_calculateOnlineInvertorAndMotor(masterInputMotor,  masterOutputMotor);
+            krnl_calculateOnlineInvertorAndMotor(masterMotorInput,  masterMotorOutput);
 
-            MotorModel.modelVariables->i1alpha = masterOutputMotor[0];
-            MotorModel.modelVariables->i1beta = masterOutputMotor[1];
-            MotorModel.modelVariables->psi2alpha = masterOutputMotor[2];
-            MotorModel.modelVariables->psi2beta = masterOutputMotor[3];
-            MotorModel.modelVariables->motorTorque = masterOutputMotor[4];
-            MotorModel.modelVariables->motorMechanicalAngularVelocity = masterOutputMotor[5];
-            inputI1 = masterOutputMotor[6];
-            inputI2 = masterOutputMotor[7];
-            inputI3 = masterOutputMotor[8];
+            MotorModel.modelVariables->i1alpha = masterMotorOutput[0];
+            MotorModel.modelVariables->i1beta = masterMotorOutput[1];
+            MotorModel.modelVariables->psi2alpha = masterMotorOutput[2];
+            MotorModel.modelVariables->psi2beta = masterMotorOutput[3];
+            MotorModel.modelVariables->motorTorque = masterMotorOutput[4];
+            MotorModel.modelVariables->motorMechanicalAngularVelocity = masterMotorOutput[5];
+            inputI1 = masterMotorOutput[6];
+            inputI2 = masterMotorOutput[7];
+            inputI3 = masterMotorOutput[8];
 
 
             /*-------------------- SIMULATED INVERTOR FOR SIMULATION WITH 3 PHASE CONTROLLED THYRISTOR 400 V ---------------------*/
