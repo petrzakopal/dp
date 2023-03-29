@@ -480,7 +480,7 @@ int main(int argc, char* argv[]) {
 
    
     
-    std::cout << "Flux regulator iSum before loop: " << Regulator.fluxRegulator->iSum << "\n";    
+    
 
     float inputI1 = 0;
     float inputI2 = 0;
@@ -568,7 +568,7 @@ int main(int argc, char* argv[]) {
 
         for(int i = 0; i<1000000;i++) // replace with while in production, but in this model, it is suitable to use for cycle
         {
-            std::cout << "Flux regulator iSum in loop: " << Regulator.fluxRegulator->iSum << "\n";
+            
             
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if(verboseOutput and (i<4))
@@ -578,7 +578,7 @@ int main(int argc, char* argv[]) {
             /*-------------------------------------------------------------------------------------------------------*/
             if(i>=600000)
             {
-                Regulator.velocityRegulator->wantedValue = 0;
+                Regulator.velocityRegulator->wantedValue = 10;
             }
             masterInput[0] = globalSimulationTime;
             masterInput[1] = globalCalculationStep;
