@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+🐧 [30.03.2023](/notes/20230330.md) <-- řešení device tree a pl.dtsi a úprava a optimalizace kódu
+
+---
+
 🧪 [29.03.2023](/notes/20230329.md) <-- řešení pl overlay a preemptive real time + opravy kódu na modely + zprovoznění dvou kernelů (zatím nestreamovaná data)
 
 ---

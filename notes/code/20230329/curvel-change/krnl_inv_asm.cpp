@@ -16,7 +16,7 @@ Purpose: Kernel
 #include "header/invertor.h"
 // #include "function/transformation.cpp"
 
-    /*
+/*
 *
 * @brief Calculating online stateStaceCoeff (coefficients dependant on velocity)
 */

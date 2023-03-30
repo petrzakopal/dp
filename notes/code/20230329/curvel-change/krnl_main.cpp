@@ -255,18 +255,21 @@ Purpose: Kernel
 
     
 
-    float generateActualValueTriangleWaveKernel(TriangleWaveSettingsType *triangleWaveSettings)
+    float generateActualValueTriangleWaveKernel(float *triangleWaveSettings)
     {
         // float triangleActualValue; // maybe put in triangleWaveSettings, and make this function void, do not know, this should be used only as a local variable
 
         // numerical method with abs value and modulo
-        float const triangleActualValue = (((4 * triangleWaveSettings->waveAmplitude)/triangleWaveSettings->wavePeriod) * abs(fmod((fmod((triangleWaveSettings->calculationTime-(triangleWaveSettings->wavePeriod/4)), triangleWaveSettings->wavePeriod) +  triangleWaveSettings->wavePeriod),  triangleWaveSettings->wavePeriod) - ( triangleWaveSettings->wavePeriod/2)) - triangleWaveSettings->waveAmplitude);
+        float const triangleActualValue = (((4 * triangleWaveSettings[0])/triangleWaveSettings[2]) * abs(fmod((fmod((triangleWaveSettings[3]-(triangleWaveSettings[2]/4)), triangleWaveSettings[2]) +  triangleWaveSettings[2]),  triangleWaveSettings[2]) - ( triangleWaveSettings[2]/2)) - triangleWaveSettings[0]);
 
         // trigoniometric method
         // triangleActualValue = ((2 * triangleWaveSettings->waveAmplitude)/3.145192)*asin(sin(((2 * 3.145192)/triangleWaveSettings->wavePeriod) * triangleWaveSettings->calculationTime));
 
         // updating inner wave calculation time based on set initial value of calculationTime...
-        triangleWaveSettings->calculationTime = triangleWaveSettings->calculationTime + triangleWaveSettings->calculationStep;
+
+        const float triangeWaveSettingsCalculationTimeLocal = triangleWaveSettings[3] + triangleWaveSettings[1];
+
+        triangleWaveSettings[3] = triangeWaveSettingsCalculationTimeLocal;
 
         return(triangleActualValue);
     }
@@ -329,7 +332,7 @@ Purpose: Kernel
 
 
         CoreInternalVariablesType coreInternalVariables;
-        TriangleWaveSettingsType triangleWaveSettings;
+        // TriangleWaveSettingsType triangleWaveSettings;
         // InvertorSwitchType invertorSwitch;
 
          /*
@@ -348,8 +351,10 @@ Purpose: Kernel
         float i1beta;
 
 
+        float triangleWaveSettings[4];
+
+
         // check if const makes kernel faster/better
-        // in ordinary gcc it makes code run slower by one sec
         const float globalSimulationTime = masterInput[0];
         const float globalCalculationStep =masterInput[1];
         const float minMaxCommonModeVoltageConstant = masterInput[2];
@@ -362,10 +367,10 @@ Purpose: Kernel
         const float R2MLmDL2 = masterInput[8];
         const float R2DL2 = masterInput[9];
         const float numberOfPolePairs = masterInput[10];
-        triangleWaveSettings.waveAmplitude = masterInput[11];
-        triangleWaveSettings.calculationStep = masterInput[12];
-        triangleWaveSettings.wavePeriod = masterInput[13];
-        triangleWaveSettings.calculationTime = masterInput[14];
+        triangleWaveSettings[0] = masterInput[11]; // waveAmplitude
+        triangleWaveSettings[1] = masterInput[12]; // calculationStep
+        triangleWaveSettings[2] = masterInput[13]; // wavePeriod
+        triangleWaveSettings[3] = masterInput[14]; // calculationTime
         const float Udcmax = masterInput[15];
         regulatorFluxData[8] = masterInput[16]; // ki
         regulatorFluxData[7] = masterInput[17]; // kp
@@ -452,7 +457,7 @@ Purpose: Kernel
 
         coreInternalVariables.u1c = ((-0.5 * coreInternalVariables.u1alpha) - 0.866 * coreInternalVariables.u1beta);
 
-        const float trianglePoint = generateActualValueTriangleWaveKernel(&triangleWaveSettings);
+        const float trianglePoint = generateActualValueTriangleWaveKernel(triangleWaveSettings);
         const float commonModeVoltage = minMaxCommonModeVoltageKernel(&coreInternalVariables);
 
         sliceInternalVariables3Parts(commonModeVoltage, commonModeVoltageTemp);
@@ -477,7 +482,7 @@ Purpose: Kernel
         masterOutput[4] = invertorSwitch[4];
         masterOutput[5] = invertorSwitch[5];
 
-        masterOutput[6] = triangleWaveSettings.calculationTime;
+        masterOutput[6] = triangleWaveSettings[3];
         masterOutput[7] = regulatorFluxData[6];
         masterOutput[8] = regulatorVelocityData[6];
         masterOutput[9] = regulatorIdData[3];
