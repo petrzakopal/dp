@@ -13,7 +13,7 @@
 
 ## Mé denní poznámky ✏️
 
-🧪 [29.03.2023](/notes/20230329.md) <--
+🧪 [29.03.2023](/notes/20230329.md) <-- řešení pl overlay a preemptive real time + opravy kódu na modely + zprovoznění dvou kernelů (zatím nestreamovaná data)
 
 ---
 
