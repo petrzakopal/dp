@@ -172,11 +172,11 @@ Purpose: Kernel
 
     void outputCurVelProductsCalc(float *transformAngle, float *psi2amplitude, float psi2alpha, float psi2beta)
     {
-        float psi2alphaTemp = psi2alpha;
-        float psi2betaTemp = psi2beta;
+        const float psi2alphaTemp = psi2alpha;
+        const float psi2betaTemp = psi2beta;
 
-        *psi2amplitude = sqrt((psi2alphaTemp * psi2alphaTemp) + (psi2betaTemp * psi2betaTemp));
-        *transformAngle = atan2(psi2betaTemp, psi2alphaTemp);
+        *psi2amplitude = sqrtf((psi2alphaTemp * psi2alphaTemp) + (psi2betaTemp * psi2betaTemp));
+        *transformAngle = atan2f(psi2betaTemp, psi2alphaTemp);
     }
 
     float regSaturationBlockKernel(float saturationInput, float saturationOutputMin, float saturationOutputMax)
@@ -257,10 +257,10 @@ Purpose: Kernel
 
     float generateActualValueTriangleWaveKernel(TriangleWaveSettingsType *triangleWaveSettings)
     {
-        float triangleActualValue; // maybe put in triangleWaveSettings, and make this function void, do not know, this should be used only as a local variable
+        // float triangleActualValue; // maybe put in triangleWaveSettings, and make this function void, do not know, this should be used only as a local variable
 
         // numerical method with abs value and modulo
-        triangleActualValue = (((4 * triangleWaveSettings->waveAmplitude)/triangleWaveSettings->wavePeriod) * abs(fmod((fmod((triangleWaveSettings->calculationTime-(triangleWaveSettings->wavePeriod/4)), triangleWaveSettings->wavePeriod) +  triangleWaveSettings->wavePeriod),  triangleWaveSettings->wavePeriod) - ( triangleWaveSettings->wavePeriod/2)) - triangleWaveSettings->waveAmplitude);
+        float const triangleActualValue = (((4 * triangleWaveSettings->waveAmplitude)/triangleWaveSettings->wavePeriod) * abs(fmod((fmod((triangleWaveSettings->calculationTime-(triangleWaveSettings->wavePeriod/4)), triangleWaveSettings->wavePeriod) +  triangleWaveSettings->wavePeriod),  triangleWaveSettings->wavePeriod) - ( triangleWaveSettings->wavePeriod/2)) - triangleWaveSettings->waveAmplitude);
 
         // trigoniometric method
         // triangleActualValue = ((2 * triangleWaveSettings->waveAmplitude)/3.145192)*asin(sin(((2 * 3.145192)/triangleWaveSettings->wavePeriod) * triangleWaveSettings->calculationTime));
@@ -274,7 +274,11 @@ Purpose: Kernel
 
     float minMaxCommonModeVoltageKernel(CoreInternalVariablesType *coreInternalVariables)
     {
-        return(((fmax(fmax(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ) + (fmin(fmin(coreInternalVariables->u1a, coreInternalVariables->u1b), coreInternalVariables->u1c ) ))/2);
+        float const u1a = coreInternalVariables->u1a;
+        float const u1b = coreInternalVariables->u1b;
+        float const u1c = coreInternalVariables->u1c;
+
+        return(((fmax(fmax(u1a, u1b), u1c ) ) + (fmin(fmin(u1a, u1b), u1c ) ))/2);
     }
 
     bool comparationLevelTriangleWaveComparationKernel(float compareLevel, float triangleWaveValue)
@@ -297,12 +301,6 @@ Purpose: Kernel
     void krnl_calculateCurVelModel(float *masterInput, float *masterOutput )
     {
       
-        // // using big structures in kernel
-        // // trying to rewrite for arrays, which could be faster in data model / or should be faster
-        // RegulatorType idRegulator;
-        // RegulatorType iqRegulator;
-        // RegulatorType fluxRegulator;
-        // RegulatorType velocityRegulator;
 
         // dataflow regulator model
         float regulatorFluxData[14];
@@ -332,7 +330,7 @@ Purpose: Kernel
 
         CoreInternalVariablesType coreInternalVariables;
         TriangleWaveSettingsType triangleWaveSettings;
-        InvertorSwitchType invertorSwitch;
+        // InvertorSwitchType invertorSwitch;
 
          /*
         * @brief Initial values settings
@@ -342,30 +340,33 @@ Purpose: Kernel
         float R2DL2Temp[8];
         float transformationAngle;
         float psi2amplitude;
-        float trianglePoint;
-        float commonModeVoltage;
+        // float trianglePoint;
+        // float commonModeVoltage;
         float psi2alpha;
         float psi2beta;
         float i1alpha;
         float i1beta;
 
-        float globalSimulationTime = masterInput[0];
-        float globalCalculationStep =masterInput[1];
-        float minMaxCommonModeVoltageConstant = masterInput[2];
+
+        // check if const makes kernel faster/better
+        // in ordinary gcc it makes code run slower by one sec
+        const float globalSimulationTime = masterInput[0];
+        const float globalCalculationStep =masterInput[1];
+        const float minMaxCommonModeVoltageConstant = masterInput[2];
         float minMaxCommonModeVoltageConstantTemp[3];
-        float halfCalculationStep =  masterInput[3];
-        float inputI1 = masterInput[4];
-        float inputI2 = masterInput[5];
-        float inputI3 = masterInput[6];
-        float inputMotorMechanicalAngularVelocity = masterInput[7];
-        float R2MLmDL2 = masterInput[8];
-        float R2DL2 = masterInput[9];
-        float numberOfPolePairs = masterInput[10];
+        const float halfCalculationStep =  masterInput[3];
+        const float inputI1 = masterInput[4];
+        const float inputI2 = masterInput[5];
+        const float inputI3 = masterInput[6];
+        const float inputMotorMechanicalAngularVelocity = masterInput[7];
+        const float R2MLmDL2 = masterInput[8];
+        const float R2DL2 = masterInput[9];
+        const float numberOfPolePairs = masterInput[10];
         triangleWaveSettings.waveAmplitude = masterInput[11];
         triangleWaveSettings.calculationStep = masterInput[12];
         triangleWaveSettings.wavePeriod = masterInput[13];
         triangleWaveSettings.calculationTime = masterInput[14];
-        float Udcmax = masterInput[15];
+        const float Udcmax = masterInput[15];
         regulatorFluxData[8] = masterInput[16]; // ki
         regulatorFluxData[7] = masterInput[17]; // kp
         regulatorFluxData[9] = masterInput[18]; // saturationOutputMax
@@ -404,6 +405,7 @@ Purpose: Kernel
         float transformationAngleTemp[8];
         float commonModeVoltageTemp[3];
         float trianglePointTemp[3];
+        bool invertorSwitch[6];
 
         computeCurVelKernel(psi2alpha_ptr, psi2beta_ptr, inputI1, inputI2, inputI3, numberOfPolePairs, R2MLmDL2Temp, R2DL2Temp, inputMotorMechanicalAngularVelocity, globalSimulationTime, globalCalculationStep, halfCalculationStep, i1alpha_ptr, i1beta_ptr);
 
@@ -450,30 +452,30 @@ Purpose: Kernel
 
         coreInternalVariables.u1c = ((-0.5 * coreInternalVariables.u1alpha) - 0.866 * coreInternalVariables.u1beta);
 
-        trianglePoint = generateActualValueTriangleWaveKernel(&triangleWaveSettings);
-        commonModeVoltage = minMaxCommonModeVoltageKernel(&coreInternalVariables);
+        const float trianglePoint = generateActualValueTriangleWaveKernel(&triangleWaveSettings);
+        const float commonModeVoltage = minMaxCommonModeVoltageKernel(&coreInternalVariables);
 
         sliceInternalVariables3Parts(commonModeVoltage, commonModeVoltageTemp);
         sliceInternalVariables3Parts(trianglePoint, trianglePointTemp);
         sliceInternalVariables3Parts(minMaxCommonModeVoltageConstant, minMaxCommonModeVoltageConstantTemp);
 
-        invertorSwitch.sw1 = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[0], commonModeVoltageTemp[0],coreInternalVariables.u1a), trianglePointTemp[0]);
+        invertorSwitch[0] = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[0], commonModeVoltageTemp[0],coreInternalVariables.u1a), trianglePointTemp[0]); // switch 1
 
-        invertorSwitch.sw3 = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[1], commonModeVoltageTemp[1],coreInternalVariables.u1b), trianglePointTemp[1]);
+        invertorSwitch[2] = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[1], commonModeVoltageTemp[1],coreInternalVariables.u1b), trianglePointTemp[1]); // switch 3
 
-        invertorSwitch.sw5 = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[2], commonModeVoltageTemp[2],coreInternalVariables.u1c), trianglePointTemp[2]);
+        invertorSwitch[4] = comparationLevelTriangleWaveComparationKernel(createCompareLevelKernel(minMaxCommonModeVoltageConstantTemp[2], commonModeVoltageTemp[2],coreInternalVariables.u1c), trianglePointTemp[2]); // switch 5
 
-        invertorSwitch.sw4 = !invertorSwitch.sw1;
-        invertorSwitch.sw6 = !invertorSwitch.sw3;
-        invertorSwitch.sw2 = !invertorSwitch.sw5;
+        invertorSwitch[3] = !invertorSwitch[0];
+        invertorSwitch[5] = !invertorSwitch[2];
+        invertorSwitch[1] = !invertorSwitch[4];
 
 
-        masterOutput[0] = invertorSwitch.sw1;
-        masterOutput[1] = invertorSwitch.sw2;
-        masterOutput[2] = invertorSwitch.sw3;
-        masterOutput[3] = invertorSwitch.sw4;
-        masterOutput[4] = invertorSwitch.sw5;
-        masterOutput[5] = invertorSwitch.sw6;
+        masterOutput[0] = invertorSwitch[0];
+        masterOutput[1] = invertorSwitch[1];
+        masterOutput[2] = invertorSwitch[2];
+        masterOutput[3] = invertorSwitch[3];
+        masterOutput[4] = invertorSwitch[4];
+        masterOutput[5] = invertorSwitch[5];
 
         masterOutput[6] = triangleWaveSettings.calculationTime;
         masterOutput[7] = regulatorFluxData[6];

@@ -85,15 +85,15 @@ void krnl_calculateInvMot(float *masterInput, float *masterOutput)
     float psi2beta;
     float i1alpha;
     float i1beta;
-    float halfCalculationStep;
+    // float halfCalculationStep;
     float motorParameters[7];
     float stateSpaceCoeff[18];
     float motorMechanicalAngularVelocity;
-    float calculationStep;
-    float u1alpha;
-    float u1beta;
-    float loadTorque;
-    float uDC;
+    // float calculationStep;
+    // float u1alpha;
+    // float u1beta;
+    // float loadTorque;
+    // float uDC;
     
 
     // local variables
@@ -103,12 +103,12 @@ void krnl_calculateInvMot(float *masterInput, float *masterOutput)
         float psi2alphaLocal;
         float psi2betaLocal;
         float motorTorqueLocal;
-        float u1a;
-        float u1b;
-        float u1c;
-        float i1;
-        float i2;
-        float i3;
+        // float u1a;
+        // float u1b;
+        // float u1c;
+        // float i1;
+        // float i2;
+        // float i3;
 
         // local variable to export
     
@@ -123,15 +123,15 @@ void krnl_calculateInvMot(float *masterInput, float *masterOutput)
         sw4 = masterInput[3];
         sw5 = masterInput[4];
         sw6 = masterInput[5];
-        uDC = masterInput[6];
+        const float uDC = masterInput[6];
         psi2alpha = masterInput[7];
         psi2beta = masterInput[8];
         i1alpha = masterInput[9];
         i1beta = masterInput[10];
-        loadTorque = masterInput[11];
+        const float loadTorque = masterInput[11];
         motorMechanicalAngularVelocity = masterInput[12];
-        halfCalculationStep = masterInput[13];
-        calculationStep = masterInput[14];
+        const float halfCalculationStep = masterInput[13];
+        const float calculationStep = masterInput[14];
         motorParameters[0] = masterInput[15]; // Lm
         motorParameters[1] = masterInput[16]; // sigma
         motorParameters[2] = masterInput[17]; // L1
@@ -161,14 +161,14 @@ void krnl_calculateInvMot(float *masterInput, float *masterOutput)
         // calculating input electrical angular velocity
         motorElectricalAngularVelocity = motorMechanicalAngularVelocity *   motorParameters[5];
 
-        float uDCd3 = (uDC)/3;
-        u1a = uDCd3 * ((2 * sw1) - (sw3) - (sw5));
-        u1b = uDCd3 * (- (sw1) + (2 * sw3) - (sw5));
-        u1c = uDCd3 * (- (sw1) - ( sw3) + (2 * sw5));
+        const float uDCd3 = (uDC)/3;
+        const float u1a = uDCd3 * ((2 * sw1) - (sw3) - (sw5));
+        const float u1b = uDCd3 * (- (sw1) + (2 * sw3) - (sw5));
+        const float u1c = uDCd3 * (- (sw1) - ( sw3) + (2 * sw5));
 
         // input voltages for asynchronous motor model
-        u1alpha = (0.6667 * (u1a - (0.5 * u1b) - (0.5 * u1c)));
-        u1beta = ((0.6667 * (0.866 * u1b - 0.866 * u1c)));
+        const float u1alpha = (0.6667 * (u1a - (0.5 * u1b) - (0.5 * u1c)));
+        const float u1beta = ((0.6667 * (0.866 * u1b - 0.866 * u1c)));
 
 
         /* RK4 solution of asynchronous motor ODE equations */
@@ -239,9 +239,9 @@ void krnl_calculateInvMot(float *masterInput, float *masterOutput)
 
 
         // motor currents inverseClarkeTransform
-        i1 = i1alphaLocal;
-        i2 = ((-0.5 * i1alphaLocal) + 0.866 * i1betaLocal);
-        i3 = ((-0.5 * i1alphaLocal) - 0.866 * i1betaLocal);
+        const float i1 = i1alphaLocal;
+        const float i2 = ((-0.5 * i1alphaLocal) + 0.866 * i1betaLocal);
+        const float i3 = ((-0.5 * i1alphaLocal) - 0.866 * i1betaLocal);
 
 
         masterOutput[0] = i1alphaLocal;
