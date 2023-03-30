@@ -196,60 +196,60 @@ Purpose: Kernel
 
     }
 
-    void checkSaturationStatusKernel(RegulatorType *regulatorData)
+    void checkSaturationStatusKernel(float *regulatorData)
     {
-        if(regulatorData->saturationInput == regulatorData->saturationOutput)
+        if(regulatorData[0] == regulatorData[3])
         {
-            regulatorData->saturationCheckStatus = false; // saturation did not happen
+            regulatorData[12] = false; // saturation did not happen
         }
         else
         {
-            regulatorData->saturationCheckStatus = true; // saturation did happen
+            regulatorData[12] = true; // saturation did happen
         }
     }
 
-    void checkSignStatusKernel(RegulatorType *regulatorData)
+    void checkSignStatusKernel(float *regulatorData)
     {
-        if(((regulatorData->eDif > 0) and (regulatorData->saturationInput > 0)) or ((regulatorData->eDif < 0) and (regulatorData->saturationInput < 0)))
+        if(((regulatorData[5] > 0) and (regulatorData[0] > 0)) or ((regulatorData[5] < 0) and (regulatorData[0] < 0)))
         {
-            regulatorData->signCheckStatus = true;
+            regulatorData[13] = true;
         }
         else
         {
-            regulatorData->signCheckStatus = false;
+            regulatorData[13] = false;
         }
     }
 
-    void enableClampingKernel(RegulatorType *regulatorData)
+    void enableClampingKernel(float *regulatorData)
     {
-        if((regulatorData->saturationCheckStatus == true) and (regulatorData->signCheckStatus == true))
+        if((regulatorData[12] == true) and (regulatorData[13] == true))
         {
-            regulatorData->clampingStatus = true;
+            regulatorData[11] = true;
         }
         else
         {
-            regulatorData->clampingStatus = false;
+            regulatorData[11] = false;
         }
 
     }
 
-    void regCalculateKernel(RegulatorType *regulatorData)
+    void regCalculateKernel(float *regulatorData)
     {
-        regulatorData->eDif = regulatorData->wantedValue - regulatorData->measuredValue;
-        regulatorData->saturationInput = (regulatorData->eDif * regulatorData->kp) + regulatorData->iSum;
-        regulatorData->saturationOutput = regSaturationBlockKernel(regulatorData->saturationInput, regulatorData->saturationOutputMin, regulatorData->saturationOutputMax);
+        regulatorData[5] = regulatorData[1] - regulatorData[2];
+        regulatorData[0] = (regulatorData[5] * regulatorData[7]) + regulatorData[6];
+        regulatorData[3] = regSaturationBlockKernel(regulatorData[0], regulatorData[10], regulatorData[9]);
 
         checkSaturationStatusKernel(regulatorData);
         checkSignStatusKernel(regulatorData);
         enableClampingKernel(regulatorData);
 
-        if(regulatorData->clampingStatus == true)
+        if(regulatorData[11] == true)
         {
-            regulatorData->iSum = regulatorData->iSum;
+            regulatorData[6] = regulatorData[6];
         }
         else
         {
-            regulatorData->iSum = regulatorData->iSum + (regulatorData->eDif * regulatorData->ki);
+            regulatorData[6] = regulatorData[6] + (regulatorData[5] * regulatorData[8]);
         }
     }
 
@@ -297,11 +297,39 @@ Purpose: Kernel
     void krnl_calculateCurVelModel(float *masterInput, float *masterOutput )
     {
       
+        // // using big structures in kernel
+        // // trying to rewrite for arrays, which could be faster in data model / or should be faster
+        // RegulatorType idRegulator;
+        // RegulatorType iqRegulator;
+        // RegulatorType fluxRegulator;
+        // RegulatorType velocityRegulator;
 
-        RegulatorType idRegulator;
-        RegulatorType iqRegulator;
-        RegulatorType fluxRegulator;
-        RegulatorType velocityRegulator;
+        // dataflow regulator model
+        float regulatorFluxData[14];
+        float regulatorVelocityData[14];
+        float regulatorIdData[14];
+        float regulatorIqData[14];
+
+        /* 
+        * @note regulatorData array assigment
+        * regulatorFluxData[0]; // saturationInput
+        * regulatorFluxData[1]; // wantedValue
+        * regulatorFluxData[2]; // measuredValue
+        * regulatorFluxData[3]; // saturationOutput
+        * regulatorFluxData[4]; // antiWindUpDif
+        * regulatorFluxData[5]; // eDifregulatorFluxData[5]; // eDif
+        * regulatorFluxData[6]; // iSum
+        * regulatorFluxData[7]; // kp
+        * regulatorFluxData[8]; // ki
+        * regulatorFluxData[9]; // saturationOutputMax
+        * regulatorFluxData[10]; // saturationOutputMin
+        * regulatorFluxData[11]; // clampingStatus
+        * regulatorFluxData[12]; // saturationCheckStatus
+        * regulatorFluxData[13]; // signCheckStatus
+        * */
+
+
+
         CoreInternalVariablesType coreInternalVariables;
         TriangleWaveSettingsType triangleWaveSettings;
         InvertorSwitchType invertorSwitch;
@@ -338,31 +366,31 @@ Purpose: Kernel
         triangleWaveSettings.wavePeriod = masterInput[13];
         triangleWaveSettings.calculationTime = masterInput[14];
         float Udcmax = masterInput[15];
-        fluxRegulator.ki = masterInput[16];
-        fluxRegulator.kp = masterInput[17];
-        fluxRegulator.saturationOutputMax = masterInput[18];
-        fluxRegulator.saturationOutputMin = masterInput[19];
-        fluxRegulator.iSum = masterInput[20];
-        velocityRegulator.ki = masterInput[21];
-        velocityRegulator.kp = masterInput[22];
-        velocityRegulator.saturationOutputMax = masterInput[23];
-        velocityRegulator.saturationOutputMin = masterInput[24];
-        velocityRegulator.iSum = masterInput[25];
-        idRegulator.ki = masterInput[26];
-        idRegulator.kp = masterInput[27];
-        idRegulator.saturationOutput = masterInput[28];
-        idRegulator.iSum = masterInput[29];
-        iqRegulator.ki = masterInput[30];
-        iqRegulator.kp = masterInput[31];
-        iqRegulator.iSum = masterInput[32];
-        fluxRegulator.wantedValue = masterInput[33];
-        velocityRegulator.wantedValue = masterInput[34];
-        idRegulator.wantedValue = masterInput[35];
-        iqRegulator.wantedValue = masterInput[36];
+        regulatorFluxData[8] = masterInput[16]; // ki
+        regulatorFluxData[7] = masterInput[17]; // kp
+        regulatorFluxData[9] = masterInput[18]; // saturationOutputMax
+        regulatorFluxData[10] = masterInput[19]; // saturationOutputMin
+        regulatorFluxData[6] = masterInput[20]; // iSum
+        regulatorVelocityData[8] = masterInput[21]; // ki
+        regulatorVelocityData[7] = masterInput[22]; // kp
+        regulatorVelocityData[9] = masterInput[23]; // saturationOutputMax
+        regulatorVelocityData[10] = masterInput[24]; // saturationOutputMin
+        regulatorVelocityData[6] = masterInput[25]; // iSum
+        regulatorIdData[8] = masterInput[26]; // ki
+        regulatorIdData[7] = masterInput[27]; // kp
+        regulatorIdData[3] = masterInput[28]; // saturationOutput
+        regulatorIdData[6] = masterInput[29]; // iSum
+        regulatorIqData[8] = masterInput[30]; // ki
+        regulatorIqData[7] = masterInput[31]; // kp
+        regulatorIqData[6] = masterInput[32]; // iSum
+        regulatorFluxData[1] = masterInput[33]; // wantedValue
+        regulatorVelocityData[1] = masterInput[34]; // wantedValue
+        regulatorIdData[1] = masterInput[35]; // wantedValue
+        regulatorIqData[1] = masterInput[36]; // wantedValue
         psi2alpha = masterInput[37];
         psi2beta = masterInput[38];
-        idRegulator.saturationOutputMax = masterInput[39];
-        idRegulator.saturationOutputMin = masterInput[40];
+        regulatorIdData[9] = masterInput[39]; // saturationOutputMax
+        regulatorIdData[10] = masterInput[40]; // saturationOutputMin
 
         sliceInternalVariables8Parts(R2MLmDL2, R2MLmDL2Temp);
         sliceInternalVariables8Parts(R2DL2, R2DL2Temp);
@@ -385,32 +413,32 @@ Purpose: Kernel
         sliceInternalVariables8Parts(transformationAngle, transformationAngleTemp);
 
         // regulator new values + constrains
-        idRegulator.measuredValue = ((i1alpha * cosf(transformationAngleTemp[0])) + (i1beta * sinf(transformationAngleTemp[1])));
-        iqRegulator.measuredValue = ((-i1alpha * sinf(transformationAngleTemp[2])) + (i1beta * cosf(transformationAngleTemp[3])));
+        regulatorIdData[2] = ((i1alpha * cosf(transformationAngleTemp[0])) + (i1beta * sinf(transformationAngleTemp[1])));
+        regulatorIqData[2] = ((-i1alpha * sinf(transformationAngleTemp[2])) + (i1beta * cosf(transformationAngleTemp[3])));
 
 
-        fluxRegulator.measuredValue = psi2amplitude;
-        velocityRegulator.measuredValue = inputMotorMechanicalAngularVelocity;
-        iqRegulator.saturationOutputMax = sqrtf((Udcmax * Udcmax) - (idRegulator.saturationOutput * idRegulator.saturationOutput));
-        iqRegulator.saturationOutputMin = - iqRegulator.saturationOutputMax;
+        regulatorFluxData[2] = psi2amplitude;
+        regulatorVelocityData[2] = inputMotorMechanicalAngularVelocity;
+        regulatorIqData[9] = sqrtf((Udcmax * Udcmax) - (regulatorIdData[3] * regulatorIdData[3]));
+        regulatorIqData[10] = - regulatorIqData[9];
 
 
       
 
         // calculating first set of regulators
-        regCalculateKernel(&fluxRegulator);
-        regCalculateKernel(&velocityRegulator);
+        regCalculateKernel(regulatorFluxData);
+        regCalculateKernel(regulatorVelocityData);
 
         // new values
-        idRegulator.wantedValue = fluxRegulator.saturationOutput;
-        iqRegulator.wantedValue = velocityRegulator.saturationOutput;  
+        regulatorIdData[1] = regulatorFluxData[3];
+        regulatorIqData[1] = regulatorVelocityData[3];  
 
          // calculating second set of regulators
-        regCalculateKernel(&idRegulator);
-        regCalculateKernel(&iqRegulator);
+        regCalculateKernel(regulatorIdData);
+        regCalculateKernel(regulatorIqData);
 
-        coreInternalVariables.u1d = idRegulator.saturationOutput;
-        coreInternalVariables.u1q = iqRegulator.saturationOutput;
+        coreInternalVariables.u1d = regulatorIdData[3];
+        coreInternalVariables.u1q = regulatorIqData[3];
 
         coreInternalVariables.u1alpha = ((coreInternalVariables.u1d * cosf(transformationAngleTemp[4])) - (coreInternalVariables.u1q * sinf(transformationAngleTemp[5])));
 
@@ -448,17 +476,17 @@ Purpose: Kernel
         masterOutput[5] = invertorSwitch.sw6;
 
         masterOutput[6] = triangleWaveSettings.calculationTime;
-        masterOutput[7] = fluxRegulator.iSum;
-        masterOutput[8] = velocityRegulator.iSum;
-        masterOutput[9] = idRegulator.saturationOutput;
-        masterOutput[10] = idRegulator.iSum;
-        masterOutput[11] = iqRegulator.iSum;
+        masterOutput[7] = regulatorFluxData[6];
+        masterOutput[8] = regulatorVelocityData[6];
+        masterOutput[9] = regulatorIdData[3];
+        masterOutput[10] = regulatorIdData[6];
+        masterOutput[11] = regulatorIqData[6];
         masterOutput[12] = psi2alpha;
         masterOutput[13] = psi2beta;
         masterOutput[14] = psi2amplitude;
-        masterOutput[15] = idRegulator.measuredValue;
-        masterOutput[16] = idRegulator.wantedValue;
+        masterOutput[15] = regulatorIdData[2];
+        masterOutput[16] = regulatorIdData[1];
         masterOutput[17] = transformationAngle;
-        masterOutput[18] = velocityRegulator.saturationOutput;
-        masterOutput[19] = velocityRegulator.clampingStatus;
+        masterOutput[18] = regulatorVelocityData[3];
+        masterOutput[19] = regulatorVelocityData[11];
     }
