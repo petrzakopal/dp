@@ -400,7 +400,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 \section{System on Modules}\label{sec:system-on-modules}
 
 	System on modules (SOMs) je architektura jejíž jednou z hlavních součástí je dříve zmiňovaný SoC. SOMs se oproti SoC již dodávají na PCB a kromě SoC mají na desce umístěné další komponenty, které jsou pro danou aplikaci vyžadovány. \cite{xilinx-what-is-a-som}\par
-	SOMs se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom SOM taktéž podpůrnou desku s dalšími obecnými komponenty, jež jsou vhodné pro vývoj standardních aplikací. Pokud zákazník již pomocí vývojové desky odladil vytvářenou aplikaci, může zakoupit samostatný SOM a podpůrnou desku (tzv. carrier card, CC) pro danou aplikaci navrhnou tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tudíž se snižuje cena konečného výrobku o komponenty, které byly z carrier card při návrhu odstraněny pro jejich nevyužití.\par
+	SOMs se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom SOM taktéž podpůrnou desku s dalšími obecnými komponenty, jež jsou vhodné pro vývoj standardních aplikací. Pokud zákazník již pomocí vývojové desky odladil vytvářenou aplikaci, může zakoupit samostatný SOM na base board (BB) a podpůrnou desku (tzv. carrier card, CC) pro danou aplikaci navrhnou tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tudíž se snižuje cena konečného výrobku o komponenty, které byly z carrier card při návrhu odstraněny pro jejich nevyužití.\par
 	Výrobce platformy \textit{Kria KR260 Robotics Starter Kit}, použité v této práci, dodává k produktu rozsáhlou dokumentaci \cite{kria-som-carrier-card-design-guide-2022} \cite{kria-k26-som-ds}, podle které je možné individuální carrier card sestavit. \par
 	Příkladem individuálně vytvořené carrier card je open source projekt od firmy \textit{Antmicro Ltd}. Tato firma vydala open source design carrier cardu pro zařízení \textit{Kria K26}, které je předchůdcem \textit{KR260}, a bylo určeno pro akcelerování audiovizuálních aplikací. Využívá však totožný SOM ale rozdílný carrier card. Dokumentace a vytvořený návrh je dostupný z \cite{antmicro-open-source-kria-k26-carrier-card}.
 
@@ -664,7 +664,7 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 						\label{fig:digilent-zybo-foto-3}
 				\end{figure}
 
-				\fbar
+			\fbar
 			\begin{table}[htbp!]
 				\centering
 				\caption{Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000. (informace a značení převzaty z \cite{digilent-zybo-reference-manual})}
@@ -714,18 +714,9 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 			
 
 		\fbar
-		\section{Vývojová deska Kria KR260}
+		\section{Vývojová deska Xilinx Kria KR260}
 				Deska od firmy Digilent, představená v \hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, je vhodná pouze pro prvotní seznámení s vytvářením akcelerovaných aplikací. Pro náročnější aplikace, které při potřebují při využití většího množství LUTs nebylo v této práci možné Zybo použít. Vývojová deska Kria KR260 disponuje dostatečným množstvím LUTs a díky svým moderním komponentám a prvkům, může efektivně sloužit k vytváření náročnějších aplikací.\par
 				Hlavní částí vývojové desky KR260 je „modul“ \textit{Kria K26 System-on-Module}. Tudíž oproti Digilent Zybo, které využívá SoC, deska KR260 využívá SoM. Přednosti jednotlivých architektur byly již představeny v části \hyperref[sec:system-on-a-chip]{\textit{System on a chip}} a \hyperref[sec:system-on-modules]{\textit{System on modules}}. Po ukončení vývoje aplikace na vývojové desce (a také po ukončení vytvářeného návrhu CC) je možné zakoupit pro aplikaci v průmyslu samotný modul ve vhodné variantě. V této práci je ovšem využíván standardní vývojový „Starter kit“ s deskou KR260, jejíž komponenty je vhodné představit.
-
-
-				\begin{figure}[H]
-					\centering
-						\includegraphics[width=1\textwidth]{src/jpg/xilinx-kria-foto-2.jpg} 
-						\caption{Vývojová deska Xilinx Kria KR260 vrchní pohled s vyznačením komponent.}
-						\label{fig:xilinx-kria-foto-2}
-				\end{figure}
-
 
 				\begin{figure}[H]
 					\centering
@@ -734,7 +725,65 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 						\label{fig:xilinx-kria-foto-1}
 				\end{figure}
 
-				
+				\subsection{Základní přehled}
+					\subsubsection{CPU a FPGA čip}
+						Strukturu SOM je možné popsat jako modernější a rozmanitější vylepšení SoC. Opět se vve struktuře nachází hlavní základní bloky pro PS a PL. Ukázkový blokový diagram struktury udávané výrobcem je na obr. \ref{fig:xilinx-kria-k26-block-diagram}.
+
+						\begin{figure}[htbp!]
+							\centering
+								\includegraphics[width=1\textwidth]{src/jpg/xilinx-kria-k26-block-diagram.jpg} 
+								\caption{Blokový diagram K26 SOM Kria. \cite{kria-k26-som-ds}}
+								\label{fig:xilinx-kria-k26-block-diagram}
+						\end{figure}
+						\fbar
+
+						Největšími rozdíly mezi použitými deskami Zybo a Kria je např. velikost operační paměti, počet jader a taktovací frekvence procesorů v PS, počet LUTs nebo logických buněk v FPGA (PL). Úplné specifikace pro K26 SOM je možné nalétz v \cite{kria-k26-som-ds}.
+
+				\subsection{Uspořádání vývojové desky}
+				Na obr. \ref{fig:xilinx-kria-foto-2-oznacene} je zobrazen horní pohled na vývojovou desku, na které jsou vyznačeny významné části, kterým je vhodné věnovat pozornost. Číselné označení koresponduje s označením a vysvětlivkou v tabulce \ref{tab:xilinx-kria-description}. Na spodní straně desky je umístěn slot pro SD kartu, na kterou je umisťován operační systém pro PS. Pro úplnost je spodní strana desky zobrazena na obr. \ref{fig:xilinx-kria-foto-3}.
+				\fbar
+				\begin{table}[htbp!]
+					\centering
+					\caption{Popis označených komponent na vývojové desce  Xilinx Kria KR260. (informace a značení převzaty z \cite{kria-kr260-robotics-starter-kit-user-guide})}
+			  		\vspace*{0.15cm}
+			   		\resizebox{\textwidth}{!}
+						{
+							\begin{tabular}{!{\vrule width 2pt} c | l | l !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+							označení & popis &	poznámka \\
+							\noalign{\hrule height 2pt}
+							1 & SOM modul na BB a Fansink & -  \\ \hline
+							2 & J13 Fan Power & napájení větráku chladiče  \\ \hline
+							3 & J1 watchdog & -  \\ \hline
+							4 & SW1 Firmware Update & -  \\ \hline
+							5 & SW2 Reset & -  \\ \hline
+							6 & DS1–DS6 Power Status LEDs & pokud vše ok, jsou zbarveny zeleně  \\ \hline
+							7 & DS7–DS8 (UF1 a UF2) Uživatelsky ovládané LED & -  \\ \hline
+							8 & J2, J18, J19, J20 Pmod konektory & -  \\ \hline
+							9 & J23 a J24 SFP+ & optický konektor  \\ \hline
+							10 & J4 Micro USB & UART/JTAG  \\ \hline
+							11 & J3 PC4 JTAG & -  \\ \hline
+							12 & J22 SLVS-EC & konektor pro připojení kamery  \\ \hline
+							13 & DS36 Raspberry Pi HAT & -  \\ \hline
+							14 & J10A, J10B RJ-45 PL Ethernet & konektor připojen přes PL  \\ \hline
+							15 & J10C, J10D RJ-45 PS Ethernet & konektor připojen do PS  \\ \hline
+							16 & U46 USB3.0 & -  \\ \hline
+							17 & U44 USB3.0 & -  \\ \hline
+							18 & DS36 PS Status LED & -  \\ \hline
+							19 & DS35 HeartBeat LED & -  \\ \hline
+							20 & DS34 PS Done LED & -  \\ \hline
+							21 & J6 DisplayPort & -  \\ \hline
+							22 & J12 DC Jack & \\\noalign{\hrule height 2pt}
+							\end{tabular}
+						}
+					\label{tab:xilinx-kria-description}
+				\end{table}
+
+				\begin{figure}[H]
+					\centering
+						\includegraphics[width=1\textwidth]{src/jpg/xilinx-kria-foto-2-oznacene.jpg} 
+						\caption{Vývojová deska Xilinx Kria KR260 vrchní pohled s vyznačením komponent.}
+						\label{fig:xilinx-kria-foto-2-oznacene}
+				\end{figure}
 
 
 				\begin{figure}[H]
@@ -743,11 +792,49 @@ Tato práce se zajímá o aplikace a možné využití FPGA při řízení elekt
 						\caption{Vývojová deska Xilinx Kria KR260 – spodní pohled.}
 						\label{fig:xilinx-kria-foto-3}
 				\end{figure}
-				
+			
+			
+				\subsubsection{Dostupné K26 SOM}
+					Moduly Kria K26 SOM jsou dostupné v několika variantách. V roce 2022 jsou dostupné varianty \textit{Commercial} a \textit{Industrial}. Nadřazeným parametrem dvou hlavních variant jsou varianty SOM s povoleným nebo zakázaným šifrováním. Varianty se odlišují označením Encryption Disabled (ED) a Encryption Enabled (-). Pokud je šifrování povoleno, je možné šiftovat konfigurační soubory a nebo ve vytvářených aplikacích využívat zabudované \textit{crypto-accelerator} bloky. Encryption Enabled varianty jsou v některých zemích zakázané a proto je důležité při výběru zboží dbát pokynům prodejce.
+					\par Hlavní rozdíly \textit{Commercial} a \textit{Industrial} variant jsou uvedeny v tab. \ref{tab:xilinx-kria-som-variants}.
+
+					\begin{table}[htbp!]
+						\centering
+						\caption{Porovnání hlavních parametrů Kria K26 SOM Commercial a Industrial. (informace a značení převzaty z \cite{kria-k26-som-product-brief})}
+						  \vspace*{0.15cm}
+						   \resizebox{\textwidth}{!}
+							{
+								\begin{tabular}{!{\vrule width 2pt} l | c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+								parametr & K26 Commercial SOM & K26 Industrial SOM \\
+								\noalign{\hrule height 2pt}
+								pracovní teplota & 0–85 °C & -40–100 °C\\ \hline
+								záruka & 2 roky & 3 roky\\ \hline
+								předpokládaná doba životnosti produktu & 5 let & 10 let\\ \hline 
+								dostupnost produktu & 10 let & 10 let \\\noalign{\hrule height 2pt}
+								\end{tabular}
+							}
+						\label{tab:xilinx-kria-som-variants}
+					\end{table}
+
+					Vývojová deska Xilinx Kria KR260 disponuje dle informací výrobce SOM, který není určen pro nasazení do aplikací (non-production) v teplotní třídě \textit{Commercial}. \cite{kria-k26-som-ds}
 				
 
-			\section{Porovnání dostupných SoC/SoM platforem pro řízení elektrických pohonů}
-			V této kapitole budou představeny dvě smysluplné, komerčně dostupné platformy, které je možné využít pro aplikace řízení elektrických pohonů či HIL. Výběr je zaměřen na SoC a Som umístěných na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi a vlastnostmi by měla architektura disponovat a poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu na Printed Circuit Board (PCB). Z důvodu finanční náročnosti některých řešení bylo přistoupeno k prezentování SoC a SoM od firmy Xilinx, které jsou nižší ceny.
+			\section{Porovnání představených SoC/SoM platforem pro řízení elektrických pohonů}
+			V předchozích kapitolách byly představeny dvě smysluplné, komerčně dostupné platformy, které je možné využít pro růzznorodé aplikace. Výběr byl zaměřen na SoC a SoM umístěných na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi a vlastnostmi by měla architektura řídící soustavy disponovat. Poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu/modulu na Printed Circuit Board (PCB).\par
+
+			\subsection{Konektivita}
+					Aby bylo možné komunikovat s řízeným zařízením, tudíž vysílat řídící signály a získávat informace o jeho stavu, je při hodnocení důležitým faktorem možnost připojení.\par
+					Obě představené platformy disponují minimálně čtyřmi PMOD konektory s 12 piny (2x U+, 2x GND, 8x I/O), pomocí kterých je možné připojit senzory, převodníky nebo naopak ovládat např. drivery spínacích polovodičových prvků či výkonových polovodičových můstků. PMOD konektorů využívá mnoho komerčně dostupných prvků jako jsou senzory, H můstky nebo také ADC/DAC převodníky.\par
+					Dalším důležitým faktorem je připojení Ethernet. Obě desky disponují alespoň jedním konektorem. Xilinx Kria KR260 obsahuje 4 konektory, přičemž dva jsou připojeny přímo do PS a dva do PL. Digilent Zybo disponuje pouze jedním konektorem.\par
+					Pro připojení periferií nebo exeterních datových úložišť je možné využít konektor USB. Protože Digilent Zybo Z7 je staršího data vydání, disponuje pouze USB 2.0, zatímco Xilinx Kria KR260 disponuje připojením pomocí USB 3.0.\par
+					Pro připojení externího displaye je možné u Zybo využít D-SUB (VGA) konektor. U Kria KR260 novější Display Port.\par
+					Digilent zybo poté disponuje konektory pro výstup reproduktorů či vstup mikrofonu. Deska KR260 těmito konektory nedisponuje.\par
+					Značným přínosem pro konektivitu Kria KR260 je Rraspberry Pi hardware attached on top (HATs) konektor, jež umožňuje připojení rozšiřovacích desek, určených pro Raspberry Pi.\par
+					Protože je K26 SOM zaměřen také na AI je možnost připojit k desce kameru pomocí konektoru SLVS-EC.\par
+					Posledním významným konektorem na CC Xilinx Kria je SPF konektor pro připojení optických vláken.
+
+			\subsection{PS a PL}
+					Protože 
 
 
 			\subsection{Platforma Digilent Zybo s ZynQ SoC}
