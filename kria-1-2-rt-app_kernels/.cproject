@@ -3,9 +3,9 @@
     	
     <storageModule moduleId="org.eclipse.cdt.core.settings">
         		
-        <cconfiguration id="com.xilinx.ide.accel.config.hwkernel.sw_emu.775643669">
+        <cconfiguration id="com.xilinx.ide.accel.config.hwkernel.sw_emu.1576319577">
             			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hwkernel.sw_emu.775643669" moduleId="org.eclipse.cdt.core.settings" name="Emulation-SW">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hwkernel.sw_emu.1576319577" moduleId="org.eclipse.cdt.core.settings" name="Emulation-SW">
                 				
                 <externalSettings/>
                 				
@@ -23,19 +23,19 @@
             			
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
                 				
-                <configuration buildProperties="" description="" id="com.xilinx.ide.accel.config.hwkernel.sw_emu.775643669" name="Emulation-SW" parent="com.xilinx.ide.accel.config.hwkernel.sw_emu">
+                <configuration buildProperties="" description="" id="com.xilinx.ide.accel.config.hwkernel.sw_emu.1576319577" name="Emulation-SW" parent="com.xilinx.ide.accel.config.hwkernel.sw_emu">
                     					
-                    <folderInfo id="com.xilinx.ide.accel.config.hwkernel.sw_emu.775643669." name="/" resourcePath="">
+                    <folderInfo id="com.xilinx.ide.accel.config.hwkernel.sw_emu.1576319577." name="/" resourcePath="">
                         						
-                        <toolChain id="com.xilinx.ide.accel.toolchain.hwKernelCompiler.sw_emu.1125143564" name="Hardware Kernel Compiler" superClass="com.xilinx.ide.accel.toolchain.hwKernelCompiler.sw_emu">
+                        <toolChain id="com.xilinx.ide.accel.toolchain.hwKernelCompiler.sw_emu.2062267074" name="Hardware Kernel Compiler" superClass="com.xilinx.ide.accel.toolchain.hwKernelCompiler.sw_emu">
                             							
-                            <targetPlatform id="com.xilinx.ide.accel.config.hwkernel.sw_emu.775643669..1607225142" name=""/>
+                            <targetPlatform id="com.xilinx.ide.accel.config.hwkernel.sw_emu.1576319577..2000652314" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app_kernels}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.kernel.1447595311" managedBuildOn="true" name="Kernel Project Builder.Emulation-SW" superClass="com.xilinx.ide.accel.builder.kernel"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app_kernels}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.kernel.976336191" managedBuildOn="true" name="Kernel Project Builder.Emulation-SW" superClass="com.xilinx.ide.accel.builder.kernel"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.hwKernelCompiler.840261588" name="V++ Kernel Compiler" superClass="com.xilinx.ide.accel.tool.hwKernelCompiler">
+                            <tool id="com.xilinx.ide.accel.tool.hwKernelCompiler.1871864121" name="V++ Kernel Compiler" superClass="com.xilinx.ide.accel.tool.hwKernelCompiler">
                                 								
-                                <inputType id="com.xilinx.accelerated.toolchain.hw_compiler.input.cl.1420324155" name="OpenCL files" superClass="com.xilinx.accelerated.toolchain.hw_compiler.input.cl"/>
+                                <inputType id="com.xilinx.accelerated.toolchain.hw_compiler.input.cl.988026387" name="OpenCL files" superClass="com.xilinx.accelerated.toolchain.hw_compiler.input.cl"/>
                                 							
                             </tool>
                             						
@@ -51,9 +51,9 @@
             		
         </cconfiguration>
         		
-        <cconfiguration id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1691763788">
+        <cconfiguration id="com.xilinx.ide.accel.config.hwkernel.hw_emu.158253521">
             			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1691763788" moduleId="org.eclipse.cdt.core.settings" name="Emulation-HW">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.158253521" moduleId="org.eclipse.cdt.core.settings" name="Emulation-HW">
                 				
                 <externalSettings/>
                 				
@@ -71,19 +71,19 @@
             			
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
                 				
-                <configuration buildProperties="" description="" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1691763788" name="Emulation-HW" parent="com.xilinx.ide.accel.config.hwkernel.hw_emu">
+                <configuration buildProperties="" description="" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.158253521" name="Emulation-HW" parent="com.xilinx.ide.accel.config.hwkernel.hw_emu">
                     					
-                    <folderInfo id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1691763788." name="/" resourcePath="">
+                    <folderInfo id="com.xilinx.ide.accel.config.hwkernel.hw_emu.158253521." name="/" resourcePath="">
                         						
-                        <toolChain id="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw_emu.1919722667" name="Hardware Kernel Compiler" superClass="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw_emu">
+                        <toolChain id="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw_emu.2135303464" name="Hardware Kernel Compiler" superClass="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw_emu">
                             							
-                            <targetPlatform id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1691763788..1924063626" name=""/>
+                            <targetPlatform id="com.xilinx.ide.accel.config.hwkernel.hw_emu.158253521..1073022568" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app_kernels}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.kernel.1499106721" managedBuildOn="true" name="Kernel Project Builder.Emulation-HW" superClass="com.xilinx.ide.accel.builder.kernel"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app_kernels}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.kernel.1589788314" managedBuildOn="true" name="Kernel Project Builder.Emulation-HW" superClass="com.xilinx.ide.accel.builder.kernel"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.hwKernelCompiler.236417047" name="V++ Kernel Compiler" superClass="com.xilinx.ide.accel.tool.hwKernelCompiler">
+                            <tool id="com.xilinx.ide.accel.tool.hwKernelCompiler.1571032793" name="V++ Kernel Compiler" superClass="com.xilinx.ide.accel.tool.hwKernelCompiler">
                                 								
-                                <inputType id="com.xilinx.accelerated.toolchain.hw_compiler.input.cl.1997879528" name="OpenCL files" superClass="com.xilinx.accelerated.toolchain.hw_compiler.input.cl"/>
+                                <inputType id="com.xilinx.accelerated.toolchain.hw_compiler.input.cl.1257205386" name="OpenCL files" superClass="com.xilinx.accelerated.toolchain.hw_compiler.input.cl"/>
                                 							
                             </tool>
                             						
@@ -99,9 +99,9 @@
             		
         </cconfiguration>
         		
-        <cconfiguration id="com.xilinx.ide.accel.config.hwkernel.hw.2063400132">
+        <cconfiguration id="com.xilinx.ide.accel.config.hwkernel.hw.873611294">
             			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hwkernel.hw.2063400132" moduleId="org.eclipse.cdt.core.settings" name="Hardware">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hwkernel.hw.873611294" moduleId="org.eclipse.cdt.core.settings" name="Hardware">
                 				
                 <externalSettings/>
                 				
@@ -119,19 +119,19 @@
             			
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
                 				
-                <configuration buildProperties="" description="" id="com.xilinx.ide.accel.config.hwkernel.hw.2063400132" name="Hardware" parent="com.xilinx.ide.accel.config.hwkernel.hw">
+                <configuration buildProperties="" description="" id="com.xilinx.ide.accel.config.hwkernel.hw.873611294" name="Hardware" parent="com.xilinx.ide.accel.config.hwkernel.hw">
                     					
-                    <folderInfo id="com.xilinx.ide.accel.config.hwkernel.hw.2063400132." name="/" resourcePath="">
+                    <folderInfo id="com.xilinx.ide.accel.config.hwkernel.hw.873611294." name="/" resourcePath="">
                         						
-                        <toolChain id="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw.2056021959" name="Hardware Kernel Compiler" superClass="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw">
+                        <toolChain id="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw.557286452" name="Hardware Kernel Compiler" superClass="com.xilinx.ide.accel.toolchain.hwKernelCompiler.hw">
                             							
-                            <targetPlatform id="com.xilinx.ide.accel.config.hwkernel.hw.2063400132..1657567026" name=""/>
+                            <targetPlatform id="com.xilinx.ide.accel.config.hwkernel.hw.873611294..859891961" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app_kernels}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.kernel.1148366308" managedBuildOn="true" name="Kernel Project Builder.Hardware" superClass="com.xilinx.ide.accel.builder.kernel"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app_kernels}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.kernel.1883504853" managedBuildOn="true" name="Kernel Project Builder.Hardware" superClass="com.xilinx.ide.accel.builder.kernel"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.hwKernelCompiler.1901004249" name="V++ Kernel Compiler" superClass="com.xilinx.ide.accel.tool.hwKernelCompiler">
+                            <tool id="com.xilinx.ide.accel.tool.hwKernelCompiler.2076241780" name="V++ Kernel Compiler" superClass="com.xilinx.ide.accel.tool.hwKernelCompiler">
                                 								
-                                <inputType id="com.xilinx.accelerated.toolchain.hw_compiler.input.cl.1794317958" name="OpenCL files" superClass="com.xilinx.accelerated.toolchain.hw_compiler.input.cl"/>
+                                <inputType id="com.xilinx.accelerated.toolchain.hw_compiler.input.cl.55525086" name="OpenCL files" superClass="com.xilinx.accelerated.toolchain.hw_compiler.input.cl"/>
                                 							
                             </tool>
                             						
@@ -153,7 +153,7 @@
     	
     <storageModule moduleId="cdtBuildSystem" version="4.0.0">
         		
-        <project id="kria-1-2-rt-app_kernels.com.xilinx.ide.accel.hwKernelProjectType.2019910001" name="Hw Kernel Project" projectType="com.xilinx.ide.accel.hwKernelProjectType"/>
+        <project id="kria-1-2-rt-app_kernels.com.xilinx.ide.accel.hwKernelProjectType.23294269" name="Hw Kernel Project" projectType="com.xilinx.ide.accel.hwKernelProjectType"/>
         	
     </storageModule>
     	
