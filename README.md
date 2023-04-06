@@ -13,7 +13,11 @@
 
 ## Mé denní poznámky ✏️
 
-❌ [05.04.2023](/notes/20230405.md)
+💻 [06.04.2023](/notes/20230406.md)
+
+---
+
+💻 [05.04.2023](/notes/20230405.md) <-- začalo mi fungovat generiq, zkouším jak to vylepšit abych mohl přejít na SPI
 
 ---
 
