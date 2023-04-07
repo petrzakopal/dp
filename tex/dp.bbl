@@ -1257,6 +1257,83 @@
       \endverb
       \keyw{commercial-off-the-shelf,Linux}
     \endentry
+    \entry{hackster-real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e56254dce3561eb08b4ea9e24e5df943}{%
+           family={Company]},
+           familyi={C\bibinitperiod},
+           given={LogicTronix\bibnamedelimb [FPGA\bibnamedelimb Design\bibnamedelimb +\bibnamedelimb Machine\bibnamedelima Learning},
+           giveni={L\bibinitperiod\bibinitdelim [\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim +\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{fullhash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{bibnamehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{authorbibnamehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{authornamehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{authorfullhash}{e56254dce3561eb08b4ea9e24e5df943}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{10}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{title}{Real Time Optimization in Petalinux with RT Patch on MPSoC}
+      \field{urlday}{7}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/LogicTronix/real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc-5f4832
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/LogicTronix/real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc-5f4832
+      \endverb
+    \endentry
+    \entry{trenz-electronic-wiki-how-to-install-the-linux-rt}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=e4052aff0dd541356ff24bb5000d9b77}{%
+           family={Errapart},
+           familyi={E\bibinitperiod},
+           given={Andrei},
+           giveni={A\bibinitperiod}}}%
+        {{hash=45b72a02be1eb193466c22949467961f}{%
+           family={Igelbrink},
+           familyi={I\bibinitperiod},
+           given={Felix},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{fullhash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{bibnamehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{authorbibnamehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{authornamehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{authorfullhash}{a3914097df7ecd46682aa2a5d3686847}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Trenz Electronic Wiki}
+      \field{day}{5}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{title}{How to install the linux-rt (Real-Time) patch}
+      \field{urlday}{7}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://wiki.trenz-electronic.de/display/PD/How+to+install+the+linux-rt+%28Real-Time%29+patch
+      \endverb
+      \verb{url}
+      \verb https://wiki.trenz-electronic.de/display/PD/How+to+install+the+linux-rt+%28Real-Time%29+patch
+      \endverb
+    \endentry
     \entry{xilinx-vivado-design-suite-user-guide-2022}{incollection}{}
       \name{author}{1}{}{%
         {{hash=751f6909b12cc240122891470ea09b53}{%
