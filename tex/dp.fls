@@ -230,6 +230,10 @@ INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fon
 INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/times-new-roman-bold.luc
 INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/times-new-roman-bold-italic.luc
 INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/times-new-roman-italic.luc
+INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/courier-1.luc
+INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/courier-4.luc
+INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/courier-2.luc
+INPUT /Users/petrzakopal/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/courier-3.luc
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/csquotes/csquotes.sty
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/csquotes/csquotes.sty
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/csquotes/csquotes.sty
@@ -674,6 +678,14 @@ INPUT ./src/png/vitis-development-flow.png
 INPUT ./src/png/rt-simulation-graph.png
 INPUT ./src/png/rt-simulation-graph.png
 INPUT ./src/png/rt-simulation-graph.png
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang2.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang2.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstmisc.sty
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png

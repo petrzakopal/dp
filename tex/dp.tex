@@ -37,7 +37,7 @@
                                 
 \setsansfont[Ligatures=TeX,BoldFont={* Bold}]{Times New Roman}
                                       
-\setmonofont{Times New Roman}
+\setmonofont{Courier}
  
 %\usepackage[italic]{mathastext} %for text in math environment, better looking times then
 
@@ -121,6 +121,7 @@
 \definecolor{ctulightblue}{HTML}{6AADE4}
 \definecolor{ctuorange}{HTML}{E05206}
 \definecolor{lightgray}{HTML}{D1D5DB}
+\definecolor{codeblue}{HTML}{D9E2F3}
 
 
 \titlespacing*{\section}{0em}{1em}{-\parskip}%spacing text after sections from titlesec package
@@ -146,12 +147,12 @@
 
 
 \lstdefinestyle{zakopal}{
-    backgroundcolor=\color{lightgray},   
-    commentstyle=\color{white},
-    keywordstyle=\color{magenta},
+    backgroundcolor=\color{codeblue},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{ctugreen},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
+    basicstyle=\ttfamily\small,
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -1052,6 +1053,40 @@ V~této části jsou představeny jednotlivé nástroje, využívané při tvorb
 					\caption{Graf prováděné simulace při testování PREEMPT\_RT Linux Patch.}
 					\label{fig:rt-simulation-graph}
 			\end{figure}
+			
+			\fbar
+			\subsubsection{Postup aplikace PREEMPT\_RT patch}
+				Patch je možné aplikovat několika způsoby. V této práci byl aplikován při fázi tvoření PetaLinux systému pomocí úpravy konfiguračních souborů build procesu.\par
+				Pro bezproblémové aplikování patche je vhodné nejdříve vytvořit \textit{build} PetaLinux systému bez aplikovanání patch souboru s minimální konfigurací a po úspěšném vytvoření systému patch aplikovat a build proces opakovat. Pro funkční aplikaci patch souboru je nutné znát verzi jádra PetaLinux, na který bude aplikován. Označení verze je možné získat z \texttt{Makefile} souboru umístěného v cestě naznačené v kódu \ref{lst:petalinux-kernel-makefile-path}, kde \texttt{<petalinux-project>} je označení pro kořenový (root) adresář PetaLinux projektu, který je tvořen.
+
+				\begin{lstlisting}[language={sh}, caption={Cesta Makefile souboru, ze kterého je možné získat označení verze jádra systému PetaLinux.}, label= {lst:petalinux-kernel-makefile-path}]
+<petalinux-project>/build/tmp/work-shared/xilinx-k26-kr/kernel-source/Makefile\end{lstlisting}
+				Protože je zmiňovaný \texttt{Makefile} soubor rozměrný a pro určení verze kernelu je signifikantní pouze jeho úvodní část, je v kódu č. \ref{lst:petalinux-makefile-kernel-version} vynechána podstatná část souboru, která není pro aplikování patche podstatná.
+
+				\begin{lstlisting}[language={make}, caption={Významná část Makefile souboru pro určení verze jádra PetaLinux.}, label= {lst:petalinux-makefile-kernel-version}]
+# SPDX-License-Identifier: GPL-2.0
+VERSION = 5
+PATCHLEVEL = 15
+SUBLEVEL = 36
+EXTRAVERSION =
+NAME = Trick or Treat
+...\end{lstlisting}
+				
+				Z kódu \ref{lst:petalinux-makefile-kernel-version} je možné vyčíst, že je třeba využít patch pro verzi \textit{5.15.36}. Pokud není možné informaci ohledně verze jádra linuxu dohledat, je možné vytvořit PetaLinux obvyklým způsobem, vytvořit obraz systému, ten nahrát na SD kartu, provést spuštění systému na vývojové desce a po úspěšném přihlášení do systému vyvolat příkaz \texttt{uname -a} a dle uvedených informací odvodit verzi jádra.\par
+				Poté je z adresy \href{https://cdn.kernel.org/pub/linux/kernel/projects/rt/}{\textcolor{ctublue}{https://cdn.kernel.org/pub/linux/kernel/projects/rt/}} možné stáhnout patch pro zjištěnou verzi jádra. V této práci byl využit patch pro Petalinux 2022.2 umístěný v cestě \texttt{5.15/older/patch-5.15.36-rt41.patch.gz}.\par
+				Dalším krokem je extrahovaný soubor \texttt{patch-5.15.36-rt41.patch} přenést do složky \texttt{<petalinux-project>/project-spec/meta-user/recipes-kernel/linux/linux-xlnx/}. Build proces musí následně mít informaci o umístění daného souboru, proto je vyžadováno aby do souboru \texttt{<petalinux-project>/project-spec/meta-user/recipes-kernel/linux/linux-xlnx\_\%.bbappend} zapsat na poslední řádek příkaz \texttt{SRC\_URI:append = " file://patch-5.15.36-rt41.patch"}, kde \texttt{patch-5.15.36-rt41.patch} je název patch souboru. Ukázka \texttt{linux-xlnx\_\%.bbappend} souboru, využitého v této práci je v kódu \ref{lst:petalinux-patch-bbbappend}. Jak je vidět, soubor obsahuje informace o různých konfiguračních souborech pro tvorbu jádra Linux systému. Šestý řádek označuje uživatelskou konfiguraci, pomocí data, kdy byla vytvořena.
+
+				\begin{lstlisting}[language={sh}, caption={Ukázka konfiguračního souboru pro aplikování Linux patch.}, label= {lst:petalinux-patch-bbbappend}]
+					FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+					SRC_URI:append = " file://bsp.cfg"
+					KERNEL_FEATURES:append = " bsp.cfg"
+					SRC_URI:append = " file://patch-5.15.36-rt41.patch"
+					SRC_URI += "file://user_2023-04-07-11-32-00.cfg"
+				\end{lstlisting}
+
+
+			
 
 		\subsection{Programovací prostředí – operační systém Linux}
 			Pro práci s~představenými vývojovými prostředími jako je \hyperref[subsec:xilinx-vivado]{Xilinx Vivado}, \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} a \hyperref[subsec:petalinux]{PetaLinux} je nutné využívat podporovaných operačních systémů, které umožňují správnou funkci využitých nástrojů.\par
