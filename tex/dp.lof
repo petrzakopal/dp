@@ -233,6 +233,8 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~2}{\ignorespaces Graf prováděné simulace při testování PREEMPT\_RT Linux Patch.\relax }}{33}{figure.caption.22}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -241,36 +243,42 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~2}{\ignorespaces Xilinx Vivado – volba typu projektu.\relax }}{34}{figure.caption.22}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~3}{\ignorespaces Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.\relax }}{35}{figure.caption.23}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~4}{\ignorespaces Xilinx Vivado – vytváření Block Design.\relax }}{35}{figure.caption.24}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~5}{\ignorespaces Xilinx Vivado – vložení bloku ZYNQ7 Processing System.\relax }}{36}{figure.caption.25}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~6}{\ignorespaces Xilinx Vivado – nastavení výstupních taktovacích signálů.\relax }}{37}{figure.caption.26}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~7}{\ignorespaces Xilinx Vivado – propojení bloků taktování.\relax }}{37}{figure.caption.27}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~8}{\ignorespaces Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.\relax }}{38}{figure.caption.28}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~9}{\ignorespaces Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit {Board/Zybo/GPIO}.\relax }}{39}{figure.caption.30}%
+\contentsline {figure}{\numberline {10~-~1}{\ignorespaces Xilinx Vivado – volba typu projektu.\relax }}{36}{figure.caption.23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~10}{\ignorespaces Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL.\relax }}{40}{figure.caption.31}%
+\contentsline {figure}{\numberline {10~-~2}{\ignorespaces Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.\relax }}{36}{figure.caption.24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~11}{\ignorespaces Uspořádání připojení tlačítek, přepínačů a LED k~PS a PL pro vývojovou desku Digilent Zybo. \cite {digilent-zybo-reference-manual}\relax }}{40}{figure.caption.32}%
+\contentsline {figure}{\numberline {10~-~3}{\ignorespaces Xilinx Vivado – vytváření Block Design.\relax }}{37}{figure.caption.25}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~4}{\ignorespaces Xilinx Vivado – vložení bloku ZYNQ7 Processing System.\relax }}{37}{figure.caption.26}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~5}{\ignorespaces Xilinx Vivado – nastavení výstupních taktovacích signálů.\relax }}{38}{figure.caption.27}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~6}{\ignorespaces Xilinx Vivado – propojení bloků taktování.\relax }}{39}{figure.caption.28}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~7}{\ignorespaces Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.\relax }}{39}{figure.caption.29}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~12}{\ignorespaces Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.\relax }}{41}{figure.caption.33}%
+\contentsline {figure}{\numberline {10~-~8}{\ignorespaces Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit {Board/Zybo/GPIO}.\relax }}{41}{figure.caption.31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~13}{\ignorespaces Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.\relax }}{41}{figure.caption.34}%
+\contentsline {figure}{\numberline {10~-~9}{\ignorespaces Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL.\relax }}{41}{figure.caption.32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~14}{\ignorespaces Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do PL\relax }}{42}{figure.caption.35}%
+\contentsline {figure}{\numberline {10~-~10}{\ignorespaces Uspořádání připojení tlačítek, přepínačů a LED k~PS a PL pro vývojovou desku Digilent Zybo. \cite {digilent-zybo-reference-manual}\relax }}{42}{figure.caption.33}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~11}{\ignorespaces Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.\relax }}{42}{figure.caption.34}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~12}{\ignorespaces Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.\relax }}{43}{figure.caption.35}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~13}{\ignorespaces Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do PL\relax }}{44}{figure.caption.36}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 

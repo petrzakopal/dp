@@ -671,6 +671,9 @@ INPUT ./src/jpg/xilinx-kria-foto-3.jpg
 INPUT ./src/png/vitis-development-flow.png
 INPUT ./src/png/vitis-development-flow.png
 INPUT ./src/png/vitis-development-flow.png
+INPUT ./src/png/rt-simulation-graph.png
+INPUT ./src/png/rt-simulation-graph.png
+INPUT ./src/png/rt-simulation-graph.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png
 INPUT ./src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png

@@ -569,7 +569,6 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 			Dynamická disipace je způsobena spínacími a vypínacími ztráty použitých tranzistorů (obvykle CMOS) a je závislá na použitém napětí, frekvenci a kapacitě přechodů, kterou je třeba nabít a vybít při spínání a vypínání tranzistorů. \cite{grover-reduction-of-power-consumption}
 
 
-			%\subsection{Výpočetní výkon a propustnost}
 			
 			\subsection{Využití}
 			Programovatelná logická hradlová pole se pro svoji nízkou spotřebu, vysoký výpočetní výkon a klesající cenu elektroniky začínají využívat mnohem častěji v~mnoha odvětví, ve kterých bylo doposavaď využíváno CPU a GPU. Aplikace FPGA je možné v~rámci této práce rozdělit na nepohonářské a pohonářské.
@@ -838,18 +837,18 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 					Jak již bylo zmíněno v~sekci \hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, obsahuje PS použité vývojové deska Digilent Zybo Zynq-7000 dvoujádrový procesor Cortex-A9 s~taktovací frekvencí 650 MHz. Oproti tomu novější PS desky s~Kria K26 SOM obsahuje čtyřjádrový procesor Cortex®-A53 MPCore™ s~taktovací frekvencí až 1,5 GHz. SOM je také doplněn dvoujádrovým real-time dvoujádrovým procesorem Arm Cortex-R5F MPCore s~taktovací frekvencí až 600 MHz. \cite{digilent-zybo-reference-manual}, \cite{kria-k26-som-ds}\par
 					Dalším důležitým faktorem jsou zdroje pro PL. Digilent Zybo disponuje pouze 17 600 LUTs. Oproti tomu K26 SOM obsahuje 117 120 LUTs. Novější verze Digilent Zybo desek obsahují novější verze Zynq čipu, který nabízí také 17 600 LUTs (Zybo Z7-10) nebo 53 200 LUTs (Zybo Z7-20). \cite{digilent-zybo-reference-manual}, \cite{kria-k26-som-ds}\par
 					Počet LUTs v~této práci má značný vliv na možný rozsah vytvářené aplikace, která je počtem zdrojů (LUTs, Flip-Flops, Block RAM atd.) velmi ovlivněna.\par
-					Vlivem omezených zdrojů při realizaci této práce bylo možné i přes optimalizaci C++ kódu (pro dodržení load-compute-store modelu programování \cite{vitis-unified-software-platform-documentation-2022}) akcelerované aplikace (kernel) pro FPGA možné umístit do PL v~Digilent Zybo Z7 pouze matematický I-n model asynchronního motoru, jehož výsledkem byl transformační úhel, složky magnetického toku rotoru $\psi_2^{\alpha\beta}$ a velikost magnetického toku rotoru $\abs{\psi_2}$. Oproti tomu při využití Kria K26 SOM je možné využít PL pro výpočet I-n modelu stroje, zjednodušeného modelu asynchronního motoru i regulačního zásahu.
+					Vlivem omezených zdrojů při realizaci této práce bylo možné i přes optimalizaci C++ kódu (pro dodržení load-compute-store modelu programování \cite{vitis-unified-software-platform-documentation-2022}) akcelerované aplikace (kernel) pro FPGA možné umístit do PL v~Digilent Zybo Z7 pouze matematický I-n model asynchronního motoru, jehož výsledkem byl transformační úhel, složky magnetického toku rotoru $\psi_2^{\alpha \beta}$ a velikost magnetického toku rotoru $| \psi_2 |$. Oproti tomu při využití Kria K26 SOM je možné využít PL pro výpočet I-n modelu stroje, zjednodušeného modelu asynchronního motoru i regulačního zásahu.
 
 			\subsection{Developer Experience}
 					V~moderní době, kdy je kladen značný důraz na rychlost vývoje aplikace, je důležitým hodnotícím faktorem developer experience. Tudíž jak je systém konfigurace a vytváření aplikací přívětivý pro vývojáře. V~době vydání Digilent Zybo Z7 byl používán postup vytvoření operačního systému Petalinux již s~pevně daným Device Tree (DT), který byl možné měnit pomocí celkové rekonfigurace a následného opakování celého procesu tvorby systému a aplikace. To přinášelo značné časové prodlevy při ladění aplikace a vytvářeného PL hardware.\par
 					Při použití Xilinx Kria K26 SOM je možné při tvorbě systému definovat kostru DT pro PL část, kterou je poté možné do značného rozsahu upravovat pomocí Device Tree Overlay (DTO). Pomocí DTO je možné rekonfigurovat IP vytvářené v~PL. Změnou v~DTO je možné ovlivňovat funkčnost některých IP v~PL při chodu operačního systému Petalinux. Ovšem tyto úpravy mají určitá omezení a je vhodné Device Tree vhodně nakonfigurovat již při vytváření operačního systému Petalinux.\par
-					Více informací o~chování a tvorbě DT/DTO, zjištěných při realizaci této práce, je uvedeno v~části \hyperref[subsubsec:petalinux]{\textit{Petalinux}}.\par
+					Více informací o~chování a tvorbě DT/DTO, zjištěných při realizaci této práce, je uvedeno v~části \hyperref[subsec:petalinux]{\textit{Petalinux}}.\par
 					Digilent pro své výrobky vytvořil „board files“ a „constrains files“, které umožňují snazší konfiguraci PS a PL v~prostředí Vivado. Značným přínosem jsou „constrains files“, které umožňují snazší a rychlejší mapování fyzických pinů vývojové desky k~portům, pinům a rozhraní, vytvářených ve Vivado. Pro vývojovou desku Xilinx Kria KR260 jsou v~repozitáři Vivado již „board files“ zakomponovány. Ovšem oficiální „constrains files“ nejsou od výrobce k~dispozici. Pro mapování pinů je nutné si vyžádat dokumentaci, pomocí které je možné odvodit požadované mapování a „constrains files“ vytvořit. Potřebná dokumentace pro odvození mapování je v~souborech \cite{kria-kr260-starter-kit-cc-schematics} a \cite{kria-k26-som-xdc}.
 
 			\subsection{Aplikace a operační systém}
 				Aplikace pro Digilent Zybo je možné převážně vytvářet jako \textit{Bare Metal / Standalone} nebo pro operační systém \textit{Petalinux}. Pro Xilinx Kria je možné využít \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. Protože obě využívané vývojové desky využívají čipu od firmy Xilinx, Inc., je podpora dostupná pro oba čipy relativně srovnatelná. Výrobce na stránkách Wiki podpory zmiňuje, že poskytuje podporu převážně ve formě veřejného fóra na adrese \href{https://support.xilinx.com}{\textit{support.xilinx.com}}. Podpora bude dostupná pro dvě poslední major verze softwaerových nástrojů, které jsou součástí \textit{PetaLinux} a \textit{Xilinx SDK}. \cite{xilinx-wiki-atlassian-embedded-sw-support}\par
 				Protože je rodina Kria SOMs modernější než Digilent Zybo, výrobce vytvořil ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. \cite{xilinx-appstore-for-kria-soms}
-				Oba čipy podporují PREEMPT\_RT Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~postupu realizace patche \textit{PetaLinux} je v~sekci \hyperref[subsubsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
+				Oba čipy podporují PREEMPT\_RT Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~postupu realizace patche \textit{PetaLinux} je v~sekci \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
 
 
 
@@ -1005,17 +1004,16 @@ kde $\sigma = 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, $i_{1\alpha}$ (
 		\end{equation}
 
 
-\section{Aplikace pro FPGA a CPU}
+\section{Použité nástroje pro vývoj aplikace pro PS a PL}
 V~této části jsou představeny jednotlivé nástroje, využívané při tvorbě programu pro CPU a akcelerované aplikace na FPGA. Je důležité zmínit, že na tzv. „host“ (ARM procesor) je skutečně možné spustit řídící program akcelerované aplikace. Na PL (FPGA) je ovšem vytvořen HW, který reprezentuje myšlené algoritmy aplikace. Proto není korektně správné mluvit o~tom, že se vytváří program pro FPGA. Proto v~této práci bude používáno označení pro vytváření HW na PL vytváření „kernel“.\par
-	Dále jsou v~této části představeny postupy, které vedou k~úspěšnému používání vývojových nástrojů. Následně je popsána tvorba samostatné akcelerované aplikace, která je hlavní náplní této práce.
-	\subsection{Použité nástroje}
-		Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Tento způsob závisí na použitém vývojovém nástroji HW. V~této práci je využíváno SoC od firmy Xilinx, proto je výhodné využívat již připravené nástroje, které umožní snazší vývoj SW, tvorbu HW a přípravu systému na SoC.\par
-		Veškerý používaný SW v~této práci od firmy Xilinx je po registraci volně dostupný ke stažení na \cite{xilinx-downloads}.\par
-		Tato část představuje jednotlivé použité nástroje firmy Xilinx a nastiňuje postupy, které je třeba dodržet k~úspěšnému zprovoznění a používání nástrojů.
-		\subsubsection{Xilinx Vivado}\label{subsubsec:xilinx-vivado}
+	Dále jsou v~této části představeny postupy, které vedou k~úspěšnému používání vývojových nástrojů. Následně je popsána tvorba samostatné akcelerované aplikace, která je hlavní náplní této práce.\par
+	Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Tento způsob závisí na použitém vývojovém nástroji HW. V~této práci je využíváno SoC od firmy Xilinx, proto je výhodné využívat již připravené nástroje, které umožní snazší vývoj SW, tvorbu HW a přípravu systému na SoC.\par
+	Veškerý používaný SW v~této práci od firmy Xilinx je po registraci volně dostupný ke stažení na \cite{xilinx-downloads}.\par
+	Tato část představuje jednotlivé použité nástroje firmy Xilinx a nastiňuje postupy, které je třeba dodržet k~úspěšnému zprovoznění a používání nástrojů.
+		\subsection{Xilinx Vivado}\label{subsec:xilinx-vivado}
 			Xilinx Vivado je nástroj, používaný pro tvorbu HW architektury, resp. platformy, pro kterou bude následně možné vytvořit akcelerovanou aplikaci. Ve Vivado je možné tvořit HW návrh, převedtitelný do HDL, který bude spustitelný v~PL bez použití Vitis HLS. Kromě pouhé tvorby HW návrhu je ve Vivado dostupý simulátor a analýza vytvořeného návrhu.\par
-			Xilinx Vivado je součástí instalačního balíčku \textit{Xilinx Unified Installer}, dostupného z~\cite{xilinx-downloads}. Pro práci tvorbu HLS aplikace, kterou jsou schopni vytvořit i software vývojáři je vhodné stáhnout kompletní balíček s~velikosti cca 89,4 GB (verze 2022.2 SFD), která obsahuje také nástroj \hyperref[subsubsec:xilinx-vitis]{Xilinx Vitis}.
-		\subsubsection{Xilinx Vitis}\label{subsubsec:xilinx-vitis}
+			Xilinx Vivado je součástí instalačního balíčku \textit{Xilinx Unified Installer}, dostupného z~\cite{xilinx-downloads}. Pro práci tvorbu HLS aplikace, kterou jsou schopni vytvořit i software vývojáři je vhodné stáhnout kompletní balíček s~velikosti cca 89,4 GB (verze 2022.2 SFD), která obsahuje také nástroj \hyperref[subsec:xilinx-vitis]{Xilinx Vitis}.
+		\subsection{Xilinx Vitis}\label{subsec:xilinx-vitis}
 		Xilinx Vitis je nástroj, který slouží k~vytváření akcelerovaných aplikací na zařízeních firmy Xilinx. Tento nástroj obsahuje základní vrstvu s~názvem Xilinx Vitis HLS, která slouží jako jádro převodu vytvářených aplikací v~C, C++, OpenCL do RTL. V~programu Xilinx Vitis bude vytvářena největší část aplikace, proto je vhodné nastínit postup, jakým Vitis pracuje.
 		\par
 		Nejprve je vytvořen tzv „host program“, který je vyvíjen v~C/C++, používající Xilinx Runtime (XRT) Application Programming Interface (API). Tento program je následně kompilován pomocí g++ kompilátoru, který vytvoří spustitelný soubor pro procesor. Tento host program komunikuje s~akcelerovanou částí aplikace (kernel), umístěným v~PL v~FPGA. \cite{vitis-unified-software-platform-documentation-2022}\par
@@ -1031,16 +1029,33 @@ V~této části jsou představeny jednotlivé nástroje, využívané při tvorb
 			\label{fig:vitis-development-flow}
 		\end{figure}
 		
-		\subsubsection{PetaLinux}\label{subsubsec:petalinux}
+		\subsection{PetaLinux}\label{subsec:petalinux}
 			I~přes to, že se tento nástroj nazývá PetaLinux, nejedná se o~samostatný systém. PetaLinux je nástroj, který slouží k~vytvoření systému, který bude spuštěn na ARM procesoru na vývojové desce. Z~tohoto systému je poté možné spouštět navazující programy pro host a kernel.\par
-			PetaLinux poskytuje distribuci systému Linux, který uživatel před tvorbou aplikace pomocí \hyperref[subsubsec:xilinx-vitis]{Xilinx Vitis} využívá k~tomu, aby vytvořil „operační systém“, na kterém bude schopen spuštět vytvářené aplikace. Tento systém je schopen si nakonfigurovat dle požadavků aplikace. Při tvoření tohoto systému je možné vybrat balíčky, které budou do systému nainstalovány, vytvořit uživatele systému nebo vybrat kde v~paměti bude systém umístěn (RAM, SD karta apod.). \cite{xilinx-petalinux}\par
+			PetaLinux poskytuje distribuci systému Linux, který uživatel před tvorbou aplikace pomocí \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} využívá k~tomu, aby vytvořil „operační systém“, na kterém bude schopen spuštět vytvářené aplikace. Tento systém je schopen si nakonfigurovat dle požadavků aplikace. Při tvoření tohoto systému je možné vybrat balíčky, které budou do systému nainstalovány, vytvořit uživatele systému nebo vybrat kde v~paměti bude systém umístěn (RAM, SD karta apod.). \cite{xilinx-petalinux}\par
 			PetaLinux Tools mohou sloužit také k~debuggingu a virtualizaci systému pomocí QEMU. V~případě tvorby systému, který je konfigurovaný uživatelem, je třeba postupovat obezřetně a z~rozumem, protože se jedná o~časově náročný postup.
 
-		\subsubsection{RealTime Linux Patch}\label{subsubsec:real-time-linux-patch}
-			Linux původně nebyl vyvíjen pro embedded systémy, ale pro obecné systémy, jako jsou osobní počítače a převážně servery. 
-		\subsubsection{Programovací prostředí – operační systém Linux}
-			Pro práci s~představenými vývojovými prostředími jako je \hyperref[subsubsec:xilinx-vivado]{Xilinx Vivado}, \hyperref[subsubsec:xilinx-vitis]{Xilinx Vitis} a \hyperref[subsubsec:petalinux]{PetaLinux} je nutné využívat podporovaných operačních systémů, které umožňují správnou funkci využitých nástrojů.\par
-			Jednotlivé požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. Pro nejnovější verze v~době zpracování této práce jsou požadavky pro \hyperref[subsubsec:xilinx-vivado]{Xilinx Vivado} dostupné v~\cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsubsec:xilinx-vitis]{Xilinx Vitis} v~\cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsubsec:petalinux]{PetaLinux} je třeba dodržet systémové požadavky uvedené v~\cite{petalinux-tools-documentation-2022}.
+		\subsection{RealTime Linux Patch}\label{subsec:real-time-linux-patch}
+			Protože operační systém Linux nebyl původně vytvářen pro využití v embedded systémech, ale v obecných zařízeních jako jsou servery a stolní počítače, nebyl tento systém vhodný pro řešení úloh v reálném čase. Proto se objevila snaha upravit tento systém takovým způsobem, aby jej bylo možné využívat v real time systémech.\par
+			Real time systémy je obvykle možné rozdělit do jednotlivých úrovní podle časových požadavků systému v reálném čase na:
+			\begin{itemize}
+				\item \textbf{Soft Real Time} – aplikace, ve které je hlavním parametrem kvalita výsledků, pokud v některých případech nedojde k dodržení časových omezení jednotlivých úkonů, nemá tato chyba vliv na zdraví člověka nebo stav majetku,
+				\item \textbf{Firm Real Time} – pokud v aplikaci nedojde k dodržení časových omezení výpočtů, je výsledek daného výpočtu považován za neplatný a nelze jej použít,
+				\item \textbf{Hard Real Time} – v aplikaci je zakázáno nedodržení časových omezení, kdyby došlo k překročení pevně daných časových rámců, může vzniklá situace vést k ohrožení lidských životů nebo stavu majetku.
+			\end{itemize}
+			V \cite{the-real-time-linux-kernel-survey-on-preempt-rt} jsou představeny původní přístupy, kdy pro dodržení časových omezení a tzv. „preemptibility“ (přerušitelnosti vykonávaného vlákna) byl využit \textit{cokernel}.\par
+			Moderní způsob spočívá v aplikování Linux patch pro danou verzi kernelu (pojmem kernel v tomto případě není myšlena akcelerovaná aplikace, ale jádro operačního systému Linux), kdy není přidávaná do systému další vrstva jádra, ale původní jádro je upravováno. Úpravy spočívají ve změně některých přístupů funkčnosti jádra a přerušení. Tento patch se obecně nazývá \textit{PREEMPT\_RT} a o začlenění jeho principů do mainline kernelu je dlouhodobě usilováno. \cite{the-real-time-linux-kernel-survey-on-preempt-rt}\par
+			Popis state-of-art \textit{PREEMPT\_RT} je popsán v \cite{the-real-time-linux-kernel-survey-on-preempt-rt}. V této práci je patch využit pro získání co největší přerušitelnosti jádra, tudíž aby byl kernel \textit{FULLY PREEMPTIBLE}. Pokud by tomu tak nebylo, nebyly by výsledky simulací matematických modelů při použití PL a PS konzistentní. Pokud je využívána architektura simulace, naznačená na obr. \ref{fig:rt-simulation-graph}, dojde při opakovaném spuštění aplikace s vysokou pravděpodobností k získání znehodnocených výsledků, které není možné použít. Při spuštění aplikace se tento problém projeví nevalidními výsledky, které neodpovídají žádnému ze zadaných parametrů. Po opakovaném spuštění aplikace je možné získat validní výsledky, ovšem četnost, kdy dochází k získání nevalidních výsledků, je značně vysoká.
+
+			\begin{figure}[H]
+				\centering
+					\includegraphics[width=1\textwidth]{src/png/rt-simulation-graph.png} 
+					\caption{Graf prováděné simulace při testování PREEMPT\_RT Linux Patch.}
+					\label{fig:rt-simulation-graph}
+			\end{figure}
+
+		\subsection{Programovací prostředí – operační systém Linux}
+			Pro práci s~představenými vývojovými prostředími jako je \hyperref[subsec:xilinx-vivado]{Xilinx Vivado}, \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} a \hyperref[subsec:petalinux]{PetaLinux} je nutné využívat podporovaných operačních systémů, které umožňují správnou funkci využitých nástrojů.\par
+			Jednotlivé požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. Pro nejnovější verze v~době zpracování této práce jsou požadavky pro \hyperref[subsec:xilinx-vivado]{Xilinx Vivado} dostupné v~\cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} v~\cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsec:petalinux]{PetaLinux} je třeba dodržet systémové požadavky uvedené v~\cite{petalinux-tools-documentation-2022}.
 			Pokud uživatel využívá starších verzí vývojových nástrojů, je doporučováno využít operační systém Linux. Pro tuto práci bylo využíván systém Ubuntu 18.04 LTS (Bionic Beaver), dostupný ke stažení na adrese \href{http://old-releases.ubuntu.com}{\textcolor{ctublue}{http://old-releases.ubuntu.com}}. V~průběhu práce došlo k~aktualizování verzí SW, které byly z~počátku roku 2022 a veškerá práce byla přenesena na novější verzi systému Ubuntu 20.04 LTS (Focal Fossa).\par
 			Je důležité poznamenat, že neplatí skutečnost, že když např. Vivado podporuje některou z~novějších verzí Ubuntu, bude jí podporovat také PetaLinux. Vždy je doporučeno využívat starší verze a kontrolovat vzájemnou kompatibilitu, aby se předešlo zbytečné ztrátě času. Stahování SW, instalace a nastavování nástrojů je značně časově náročné.\par
 			V~případě využívání představených nástrojů a systému Linux je třeba dbát na správné postupy instalací a v~případě problémů využívat dostupné dokumentace.
@@ -1048,19 +1063,19 @@ V~této části jsou představeny jednotlivé nástroje, využívané při tvorb
 		% Co je třeba nainstalovat za balíčky před započetím instalace
 		% Jaký je flow aby byla možná příprava systému
 		% Proč zrovna linux Open Source
-	\subsection{Tvorba HW architektury Xilinx Vivado}
+	\section{Tvorba HW architektury Xilinx Vivado}
 		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí HLS C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K~tvorbě platformy je využit SW Xilinx Vivado. V~tomto programu je možné konfigurovat jednotlivé použité prvky jako je ZynQ jednotka, GPIO jednotky a další. Výsledkem tvorby platformy v~této práci je vytvoření XSA souboru, který bude použit pro konfiguraci tvorby PetaLinux systému. Ve Vivado je možné také vytvářet aplikace přímo v~VHDL, ale této funkcionality nebude v~této práci využito.\par
 		Tvorba HW pro různé platformy (Digilent Zybo vs Xilinx Kria KR260) má různé specifikace a různý postup.
 		V~této sekci bude popsána tvorba platformy pro vývojovou desku Zybo Zynq-7000 a taktéž Xilinx Kria KR260 Starter Kit. Tvorba platformy pro jiné vývojové desky nebo zařízení je specifická pro daného výrobce a může se v~nějakých případech lišit. Ovšem základní úkony jako je vložení potřebných bloků a celkový postup tvorby je zachován.\par
 		Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}.
 
-		\subsubsection{Vivado Board Files}\label{subsubsec:vivado-board-files}
+		\subsection{Vivado Board Files}\label{subsec:vivado-board-files}
 			Aby bylo možné snadněji vytvořit potřebnou HW architekturu, firmy většinou dodávají tzv. \textit{Board Files}, jež jsou soubory, obsahující různá přednastavení, konfigurace, informace a podmínky připojení IP bloků k~reálným součástím. \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
 			Samozřejmě by bylo možné HW architekturu vytvořit i bez těchto předkonfigurovaných souborů, ovšem proces by byl značně náročnější. Pro používanou vývojovou desku Digilent Zybo Zynq-7000 je možné stáhnout tyto soubory z~\cite{github-vivado-board-files-for-digilent-fpga-boards}. Způsob instalace board files je popsaný v~oficiální dokumentaci firmy Digilent, Inc. v~\cite{digilent-installing-vivado-vitis-and-digilent-board-files}.\par
 			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou HW architekturu pro akcelerovanou aplikaci.\par
 			Pro vývojovou desku Xilinx Kria KR260 Starter Kit výrobce dodává Board files již s~instalací Vivado.
 		
-		\subsubsection{Tvorba HW architektury pro Digilent Zybo Zynq-7000 vývojovou desku}
+		\subsection{Tvorba HW architektury pro Digilent Zybo Zynq-7000 vývojovou desku} % zahodit, budu psát ohledně kria
 		V~této části bude představen postup tvorby HW architektury pro vývojovou desku Digilent Zybo Zynq-7000. V~případě, že je požadováno aktivování dalších speciálních bloků v~čipu, např. pro specifickou akcelerovanou aplikaci, je třeba do blokového designu vložit odpovídající prvky, které zajistí potřebnou funkcionalitu.\par
 		Nejprve je nutné vytvořit nový Vivado projekt a pojmenovat ho dle požadavků. Při výběru typu projektu je nutné zvolit možnost \textit{RTL Project} a aktivovat možnost \textit{Project is an extensible Vitis platform}. Tento úkon je naznačen na obr. \ref{fig:xilinx-vivado-flow-01}.
 
@@ -1071,7 +1086,7 @@ V~této části jsou představeny jednotlivé nástroje, využívané při tvorb
 				\label{fig:xilinx-vivado-flow-01}
 			\end{figure}
 
-		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. V~této práci bude využíváno desky \textit{Zybo}. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsubsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku verze 2.0 a pokračovat v~tvorbě HW. Výběr základního HW je zobrazen na obr. \ref{fig:xilinx-vivado-flow-02}.
+		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. V~této práci bude využíváno desky \textit{Zybo}. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku verze 2.0 a pokračovat v~tvorbě HW. Výběr základního HW je zobrazen na obr. \ref{fig:xilinx-vivado-flow-02}.
 
 		\begin{figure}[htbp!]
 			\centering

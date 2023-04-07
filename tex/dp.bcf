@@ -2239,16 +2239,19 @@
     <bcf:citekey order="104">vitis-unified-software-platform-documentation-2022</bcf:citekey>
     <bcf:citekey order="105">vitis-unified-software-platform-documentation-2022</bcf:citekey>
     <bcf:citekey order="106">xilinx-petalinux</bcf:citekey>
-    <bcf:citekey order="107">xilinx-vivado-design-suite-user-guide-2022</bcf:citekey>
-    <bcf:citekey order="108">vitis-unified-software-platform-documentation-2022</bcf:citekey>
-    <bcf:citekey order="109">petalinux-tools-documentation-2022</bcf:citekey>
-    <bcf:citekey order="110">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="111">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
-    <bcf:citekey order="112">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
-    <bcf:citekey order="113">digilent-installing-vivado-vitis-and-digilent-board-files</bcf:citekey>
-    <bcf:citekey order="114">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="115">digilent-zybo-reference-manual</bcf:citekey>
-    <bcf:citekey order="116">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="107">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
+    <bcf:citekey order="108">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
+    <bcf:citekey order="109">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
+    <bcf:citekey order="110">xilinx-vivado-design-suite-user-guide-2022</bcf:citekey>
+    <bcf:citekey order="111">vitis-unified-software-platform-documentation-2022</bcf:citekey>
+    <bcf:citekey order="112">petalinux-tools-documentation-2022</bcf:citekey>
+    <bcf:citekey order="113">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="114">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
+    <bcf:citekey order="115">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
+    <bcf:citekey order="116">digilent-installing-vivado-vitis-and-digilent-board-files</bcf:citekey>
+    <bcf:citekey order="117">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="118">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="119">digilent-zybo-reference-manual</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
