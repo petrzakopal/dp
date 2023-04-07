@@ -40,7 +40,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3~-~1}{\ignorespaces Blokové schéma Embedded systému a řízeného fyzikálního systému. (převzato a upraveno z \cite {juan-fpgas})\relax }}{4}{figure.caption.2}%
+\contentsline {figure}{\numberline {3~-~1}{\ignorespaces Blokové schéma Embedded systému a řízeného fyzikálního systému. (převzato a upraveno z~\cite {juan-fpgas})\relax }}{4}{figure.caption.2}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -118,7 +118,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4~-~4}{\ignorespaces Blokové schéma převodu aplikace, naprogramované v procedurálním jazyce, na bitstream, kterým je konfigurováno FPGA.\relax }}{11}{figure.caption.7}%
+\contentsline {figure}{\numberline {4~-~4}{\ignorespaces Blokové schéma převodu aplikace, naprogramované v~procedurálním jazyce, na bitstream, kterým je konfigurováno FPGA.\relax }}{11}{figure.caption.7}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -158,11 +158,11 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5~-~2}{\ignorespaces Detailní schéma čipu Zynq-7000, umístěného na vývojové desce \textit {Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}. (převzato z \cite {xilinx-zynq-7000-technical-reference-manual})\relax }}{16}{figure.caption.9}%
+\contentsline {figure}{\numberline {5~-~2}{\ignorespaces Detailní schéma čipu Zynq-7000, umístěného na vývojové desce \textit {Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}. (převzato z~\cite {xilinx-zynq-7000-technical-reference-manual})\relax }}{16}{figure.caption.9}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5~-~3}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board vrchní pohled s vyznačením komponent.\relax }}{17}{figure.caption.10}%
+\contentsline {figure}{\numberline {5~-~3}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board vrchní pohled s~vyznačením komponent.\relax }}{17}{figure.caption.10}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {5~-~4}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board – spodní pohled.\relax }}{18}{figure.caption.11}%
 \babel@toc {czech}{}\relax 
@@ -178,7 +178,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~3}{\ignorespaces Vývojová deska Xilinx Kria KR260 vrchní pohled s vyznačením komponent.\relax }}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {6~-~3}{\ignorespaces Vývojová deska Xilinx Kria KR260 vrchní pohled s~vyznačením komponent.\relax }}{23}{figure.caption.16}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {6~-~4}{\ignorespaces Vývojová deska Xilinx Kria KR260 – spodní pohled.\relax }}{23}{figure.caption.17}%
 \babel@toc {czech}{}\relax 
@@ -201,8 +201,6 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~1}{\ignorespaces Blokový diagram tvorby spustitelné aplikace v prostředí Vitis. (převzato z \cite {vitis-unified-software-platform-documentation-2022}, upraveno)\relax }}{30}{figure.caption.21}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -221,36 +219,112 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~2}{\ignorespaces Xilinx Vivado – volba typu projektu.\relax }}{32}{figure.caption.22}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~3}{\ignorespaces Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.\relax }}{33}{figure.caption.23}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~4}{\ignorespaces Xilinx Vivado – vytváření Block Design.\relax }}{33}{figure.caption.24}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~5}{\ignorespaces Xilinx Vivado – vložení bloku ZYNQ7 Processing System.\relax }}{34}{figure.caption.25}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~6}{\ignorespaces Xilinx Vivado – nastavení výstupních taktovacích signálů.\relax }}{35}{figure.caption.26}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~7}{\ignorespaces Xilinx Vivado – propojení bloků taktování.\relax }}{35}{figure.caption.27}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~8}{\ignorespaces Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.\relax }}{36}{figure.caption.28}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~9}{\ignorespaces Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit {Board/Zybo/GPIO}.\relax }}{37}{figure.caption.30}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~10}{\ignorespaces Xilinx Vivado – block design s využitím GPIO pro LED, BTN, SW propojených s PL.\relax }}{38}{figure.caption.31}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~11}{\ignorespaces Uspořádání připojení tlačítek, přepínačů a LED k PS a PL pro vývojovou desku Digilent Zybo. \cite {digilent-zybo-reference-manual}\relax }}{38}{figure.caption.32}%
+\contentsline {figure}{\numberline {9~-~1}{\ignorespaces Blokový diagram tvorby spustitelné aplikace v~prostředí Vitis. (převzato z~\cite {vitis-unified-software-platform-documentation-2022}, upraveno)\relax }}{32}{figure.caption.21}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~12}{\ignorespaces Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.\relax }}{39}{figure.caption.33}%
+\contentsline {figure}{\numberline {9~-~2}{\ignorespaces Xilinx Vivado – volba typu projektu.\relax }}{34}{figure.caption.22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~13}{\ignorespaces Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.\relax }}{39}{figure.caption.34}%
+\contentsline {figure}{\numberline {9~-~3}{\ignorespaces Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.\relax }}{35}{figure.caption.23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9~-~14}{\ignorespaces Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do PL\relax }}{40}{figure.caption.35}%
+\contentsline {figure}{\numberline {9~-~4}{\ignorespaces Xilinx Vivado – vytváření Block Design.\relax }}{35}{figure.caption.24}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~5}{\ignorespaces Xilinx Vivado – vložení bloku ZYNQ7 Processing System.\relax }}{36}{figure.caption.25}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~6}{\ignorespaces Xilinx Vivado – nastavení výstupních taktovacích signálů.\relax }}{37}{figure.caption.26}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~7}{\ignorespaces Xilinx Vivado – propojení bloků taktování.\relax }}{37}{figure.caption.27}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~8}{\ignorespaces Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.\relax }}{38}{figure.caption.28}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~9}{\ignorespaces Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit {Board/Zybo/GPIO}.\relax }}{39}{figure.caption.30}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~10}{\ignorespaces Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL.\relax }}{40}{figure.caption.31}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~11}{\ignorespaces Uspořádání připojení tlačítek, přepínačů a LED k~PS a PL pro vývojovou desku Digilent Zybo. \cite {digilent-zybo-reference-manual}\relax }}{40}{figure.caption.32}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~12}{\ignorespaces Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.\relax }}{41}{figure.caption.33}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~13}{\ignorespaces Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.\relax }}{41}{figure.caption.34}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9~-~14}{\ignorespaces Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do PL\relax }}{42}{figure.caption.35}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 

@@ -13,7 +13,11 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [06.04.2023](/notes/20230406.md)
+💻 [07.04.2023](/notes/20230407.md) <--
+
+---
+
+💻 [06.04.2023](/notes/20230406.md) <-- vyřešení timer generic-uio, ale problém s spi, psaní dp.tex
 
 ---
 
