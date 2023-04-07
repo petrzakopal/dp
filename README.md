@@ -13,7 +13,7 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [07.04.2023](/notes/20230407.md) <--
+💻 [07.04.2023](/notes/20230407.md) <-- snaha o rebuild s timerem, protože axi quad spi s spidev způsobil nenačtení kernelu, psaní v dp.tex ohledně RT patche atd
 
 ---
 
