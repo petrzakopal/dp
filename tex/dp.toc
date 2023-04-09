@@ -283,12 +283,6 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {9.3}PetaLinux}{32}{subsection.9.3}%
 \babel@toc {czech}{}\relax 
