@@ -2236,22 +2236,25 @@
     <bcf:citekey order="101">vitis-unified-software-platform-documentation-2022</bcf:citekey>
     <bcf:citekey order="102">vitis-unified-software-platform-documentation-2022</bcf:citekey>
     <bcf:citekey order="103">xilinx-petalinux</bcf:citekey>
-    <bcf:citekey order="104">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
+    <bcf:citekey order="104">petalinux-tools-documentation-2022</bcf:citekey>
     <bcf:citekey order="105">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
     <bcf:citekey order="106">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
-    <bcf:citekey order="107">hackster-real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc</bcf:citekey>
-    <bcf:citekey order="108">trenz-electronic-wiki-how-to-install-the-linux-rt</bcf:citekey>
-    <bcf:citekey order="109">xilinx-vivado-design-suite-user-guide-2022</bcf:citekey>
-    <bcf:citekey order="110">vitis-unified-software-platform-documentation-2022</bcf:citekey>
-    <bcf:citekey order="111">petalinux-tools-documentation-2022</bcf:citekey>
-    <bcf:citekey order="112">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="107">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
+    <bcf:citekey order="108">hackster-real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc</bcf:citekey>
+    <bcf:citekey order="109">trenz-electronic-wiki-how-to-install-the-linux-rt</bcf:citekey>
+    <bcf:citekey order="110">xilinx-vivado-design-suite-user-guide-2022</bcf:citekey>
+    <bcf:citekey order="111">vitis-unified-software-platform-documentation-2022</bcf:citekey>
+    <bcf:citekey order="112">petalinux-tools-documentation-2022</bcf:citekey>
     <bcf:citekey order="113">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
     <bcf:citekey order="114">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
     <bcf:citekey order="115">digilent-installing-vivado-vitis-and-digilent-board-files</bcf:citekey>
-    <bcf:citekey order="116">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="117">digilent-zybo-reference-manual</bcf:citekey>
-    <bcf:citekey order="118">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="116">hackster-getting-started-with-the-kria-kr260-in-petalinux</bcf:citekey>
+    <bcf:citekey order="117">hackster-add-peripherial-support-to-kria-kr260-vivado</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
+    <bcf:citekey order="118">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="119">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="120">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="121">digilent-zybo-reference-manual</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

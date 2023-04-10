@@ -1204,6 +1204,39 @@
       \verb https://www.xilinx.com/products/design-tools/embedded-software/petalinux-sdk.html
       \endverb
     \endentry
+    \entry{petalinux-tools-documentation-2022}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{15}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{langid}{english}
+      \field{title}{PetaLinux Tools Documentation: Reference Guide (UG1144)}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
+      \endverb
+    \endentry
     \entry{the-real-time-linux-kernel-survey-on-preempt-rt}{article}{}
       \name{author}{3}{}{%
         {{hash=c1363097a364153efdd592634b99df00}{%
@@ -1348,7 +1381,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{15}
+      \field{extraname}{16}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -1365,75 +1398,6 @@
       \endverb
       \verb{url}
       \verb https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/
-      \endverb
-    \endentry
-    \entry{petalinux-tools-documentation-2022}{incollection}{}
-      \name{author}{1}{}{%
-        {{hash=751f6909b12cc240122891470ea09b53}{%
-           family={Xilinx},
-           familyi={X\bibinitperiod},
-           given={Inc.},
-           giveni={I\bibinitperiod}}}%
-      }
-      \strng{namehash}{751f6909b12cc240122891470ea09b53}
-      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
-      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
-      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
-      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
-      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{16}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{AMD Xilinx Documentation Portal}
-      \field{langid}{english}
-      \field{title}{PetaLinux Tools Documentation: Reference Guide (UG1144)}
-      \field{urlday}{18}
-      \field{urlmonth}{11}
-      \field{urlyear}{2022}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
-      \endverb
-      \verb{url}
-      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
-      \endverb
-    \endentry
-    \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
-      \name{author}{1}{}{%
-        {{hash=19947edb20f496d8ecef44bc1609a614}{%
-           family={Hosseinabady},
-           familyi={H\bibinitperiod},
-           given={Mohammad},
-           giveni={M\bibinitperiod}}}%
-      }
-      \strng{namehash}{19947edb20f496d8ecef44bc1609a614}
-      \strng{fullhash}{19947edb20f496d8ecef44bc1609a614}
-      \strng{bibnamehash}{19947edb20f496d8ecef44bc1609a614}
-      \strng{authorbibnamehash}{19947edb20f496d8ecef44bc1609a614}
-      \strng{authornamehash}{19947edb20f496d8ecef44bc1609a614}
-      \strng{authorfullhash}{19947edb20f496d8ecef44bc1609a614}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Hackster.io, an Avnet Community}
-      \field{day}{16}
-      \field{langid}{english}
-      \field{month}{8}
-      \field{title}{Vitis 2021.1 Embedded Platform for Zybo-Z7-20, 2018}
-      \field{urlday}{26}
-      \field{urlmonth}{11}
-      \field{urlyear}{2022}
-      \field{year}{2021}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a
-      \endverb
-      \verb{url}
-      \verb https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a
       \endverb
     \endentry
     \entry{github-vivado-board-files-for-digilent-fpga-boards}{incollection}{}
@@ -1504,6 +1468,116 @@
       \endverb
       \verb{url}
       \verb https://digilent.com/reference/programmable-logic/guides/installing-vivado-and-vitis
+      \endverb
+    \endentry
+    \entry{hackster-getting-started-with-the-kria-kr260-in-petalinux}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=5b64c231e39b35a5c773db018a9abb44}{%
+           family={Knitter},
+           familyi={K\bibinitperiod},
+           given={Whitney},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{fullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{bibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorbibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authornamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorfullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{12}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{Getting Started with the Kria KR260 in PetaLinux 2022.1}
+      \field{urlday}{10}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-petalinux-2022-1-daec16
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-petalinux-2022-1-daec16
+      \endverb
+    \endentry
+    \entry{hackster-add-peripherial-support-to-kria-kr260-vivado}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=5b64c231e39b35a5c773db018a9abb44}{%
+           family={Knitter},
+           familyi={K\bibinitperiod},
+           given={Whitney},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{fullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{bibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorbibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authornamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorfullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{11}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{Add Peripheral Support to Kria KR260 Vivado 2022.1 Project}
+      \field{urlday}{10}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/whitney-knitter/add-peripheral-support-to-kria-kr260-vivado-2022-1-project-874960
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/whitney-knitter/add-peripheral-support-to-kria-kr260-vivado-2022-1-project-874960
+      \endverb
+    \endentry
+    \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=19947edb20f496d8ecef44bc1609a614}{%
+           family={Hosseinabady},
+           familyi={H\bibinitperiod},
+           given={Mohammad},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{fullhash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{bibnamehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{authorbibnamehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{authornamehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{authorfullhash}{19947edb20f496d8ecef44bc1609a614}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{16}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{Vitis 2021.1 Embedded Platform for Zybo-Z7-20, 2018}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a
       \endverb
     \endentry
     \entry{xilinx-zynq-7000-socs-with-hardware-and-software-programmability}{incollection}{}

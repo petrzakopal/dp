@@ -1007,8 +1007,8 @@ kde $\sigma = 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, $i_{1\alpha}$ (
 
 \section{Použité nástroje pro vývoj aplikace pro PS a PL}
 V~této části jsou představeny jednotlivé nástroje, využívané při tvorbě programu pro PS a akcelerované aplikace (kernelu) realizované na PL. Je důležité zmínit, že na v PS je skutečně spouštěn zkompilovaný program vytvářený pomocí jazyka C, C++ nebo Python. Na PL je ovšem vytvořen HW, který reprezentuje myšlené algoritmy aplikace. Tento HW je popisován pomocí nízkoúrovňových jazyků, do kterých je algoritmus převeden v HLS z jazyka C. Není tudíž korektně správné mluvit o~tom, že se vytváří program pro FPGA. Z toho důvodu bude v~této práci používáno označení pro vytváření HW na PL \textit{vytváření kernelu} (creation of the kernel). Označení \textit{kernel} je myšleno v odlišném významu než je využíváno v části \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.\par
-	Také jsou v~této části představeny postupy využívání vývojových nástrojů, které vedou k~úspěšné tvorbě aplikace.\par
-	Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Tento způsob závisí na použitém vývojovém nástroji pro daný HW. V~této práci je využíváno SOM od firmy Xilinx, proto je výhodné využívat již připravené nástroje, které umožní snazší vývoj SW, tvorbu HW a přípravu systému na SOM.\par
+	% Také jsou v~této části představeny postupy využívání vývojových nástrojů, které vedou k~úspěšné tvorbě aplikace.\par
+Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Tento způsob závisí na použitém vývojovém nástroji pro daný HW. V~této práci je využíváno SOM od firmy Xilinx, proto je výhodné využívat již připravené nástroje, které umožní snazší vývoj SW, tvorbu HW a přípravu systému na SOM.\par
 	Veškerý používaný SW v~této práci od firmy Xilinx je po registraci volně dostupný ke stažení na \cite{xilinx-downloads}.
 		\subsection{Xilinx Vivado}\label{subsec:xilinx-vivado}
 			Xilinx Vivado je nástroj, používaný pro tvorbu HW architektury, resp. platformy, pro kterou bude v další části postupu možné vytvořit akcelerovanou aplikaci. Ve Vivado je možné tvořit HW návrh, převeditelný do HDL, který bude spustitelný v~PL bez použití Vitis HLS. Pro vývojáře HW pro FPGA může sloužit i jako jediný vývojářský nástroj.\par
@@ -1020,7 +1020,7 @@ V~této části jsou představeny jednotlivé nástroje, využívané při tvorb
 		Nejprve je vytvořen tzv. „host program“ bežící na PS, který je vyvíjen v~C/C++ jazyku (popř. Python), používající Xilinx Runtime (XRT) Application Programming Interface (API). Tento program je následně kompilován pomocí g++ kompilátoru, který vytvoří spustitelný soubor pro procesor. Tento host program komunikuje s~akcelerovanou částí aplikace (kernel), umístěným v~PL v~FPGA. Blok \textit{ARM x86 host Application Compilation} naznačuje, jakým způsobem je vytvářena aplikace pro host procesor. \cite{vitis-unified-software-platform-documentation-2022}\par
 		Poté Vitis HLS compiler přeloží C/C++ zdrojový kód pro kernel do register transfer level (RTL) (úrovně registrů). Produkty této kompilace mají příponu „.xo“ (Xilinx Object) a mohou být spojovány do binárního souboru s~příponou „.xclbin“ pomocí Vitis linkeru. Souborem \textit{kernel.xclbin} je poté možné nakonfigurovat PL.\cite{vitis-unified-software-platform-documentation-2022}\par
 		Na obr. \ref{fig:vitis-development-flow} je blokově znázorněn postup tvorby spustitelné aplikace v~programu Vitis. Tento diagram předpokládá, že již byla vytvořena HW platforma ve Vivado a PetaLinux systém.\par
-		Produkty větve programu pro PS a konfigurace pro PL je po jejich dokončení možné použít na dané vývojové desce. Host program zařídí nakonfigurování PL pomocí souboru \textit{kernel.xclbin} a následné zpracování výsledků. Blok s~názvem \textit{Running the Application} je kompletně vykonáván v~prostředí PetaLinux v~simulátoru (QEMU) nebo na fyzickém zařízení (vývojová deska).
+		Produkty větve programu pro PS a konfigurace pro PL je po jejich dokončení možné použít v daném heterogenním systému. Host program zařídí nakonfigurování PL pomocí souboru \textit{kernel.xclbin} a následné zpracování výsledků. Blok s~názvem \textit{Running the Application} je kompletně vykonáván v~prostředí PetaLinux v~simulátoru (QEMU) nebo na fyzickém zařízení (vývojová deska).
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=1\textwidth]{src/png/vitis-development-flow.png}
@@ -1028,10 +1028,11 @@ V~této části jsou představeny jednotlivé nástroje, využívané při tvorb
 			\label{fig:vitis-development-flow}
 		\end{figure}
 		
-		\subsection{PetaLinux}\label{subsec:petalinux}
-			I~přes to, že se tento nástroj nazývá PetaLinux, nejedná se o~samostatný systém. PetaLinux je nástroj, který slouží k~vytvoření systému, který bude spuštěn na ARM procesoru na vývojové desce. Z~tohoto systému je poté možné spouštět navazující programy pro host a kernel.\par
-			PetaLinux poskytuje distribuci systému Linux, který uživatel před tvorbou aplikace pomocí \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} využívá k~tomu, aby vytvořil „operační systém“, na kterém bude schopen spuštět vytvářené aplikace. Tento systém je schopen si nakonfigurovat dle požadavků aplikace. Při tvoření tohoto systému je možné vybrat balíčky, které budou do systému nainstalovány, vytvořit uživatele systému nebo vybrat kde v~paměti bude systém umístěn (RAM, SD karta apod.). \cite{xilinx-petalinux}\par
-			PetaLinux Tools mohou sloužit také k~debuggingu a virtualizaci systému pomocí QEMU. V~případě tvorby systému, který je konfigurovaný uživatelem, je třeba postupovat obezřetně a z~rozumem, protože se jedná o~časově náročný postup.
+		\subsection{PetaLinux Tools}\label{subsec:petalinux-tools}
+			PetaLinux Tools je nástroj, který slouží k~vytvoření systému PetaLinux, který bude spuštěn na PS v daném SOM nebo SoC. Z~tohoto systému je poté možné spouštět navazující programy host a kernel.\par
+			PetaLinux poskytuje distribuci systému Linux, který uživatel před tvorbou aplikace pomocí \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} využívá k~tomu, aby vytvořil operační systém, na kterém bude možné spuštět dané akcelerované aplikace. Tento systém je možné nakonfigurovat dle požadavků aplikace. Při tvoření tohoto systému je možné konfigurovat jádro systému (kernel), balíčky, které budou do systému nainstalovány, vytvořit uživatele systému nebo vybrat, kde v~paměti bude systém umístěn (RAM, SD karta apod.). \cite{xilinx-petalinux}\par
+			PetaLinux Tools mohou sloužit k~debuggingu a virtualizaci systému pomocí QEMU. V~případě tvorby systému, který je konfigurovaný uživatelem, je třeba postupovat obezřetně a dodržovat nastavené postupy konfigurace, protože v případě chyby je nutné překonfigurovat chybnou část nebo někdy kompletní build. Tvorba PetaLinux systému je časově náročný postup, u něhož je problematický debugging.\par
+			Pro funkční instalaci PetaLinux Tools je nutné disponovat nainstalovanými správnými verzemi systémových a aplikačních balíků, které jsou nutnou prerekvizitou tvorby PetaLinux pro PS. Požadavky na balíky je možné nalézt při nahlédnutí do dokumentace \cite{petalinux-tools-documentation-2022} (UG1144) dané instalované verze PetaLinux Tools. V sekci \textit{Installation Reguirements} se nachází odkaz označený \textit{PetaLinux <version> Release Notes}, který ve spodní čásit obsahuje stáhnutelný soubor \textit{<version>\_PetaLinux\_Package\_List.xlsx}, který obsahuje požadované balíky a jejich verze. Bez použití podporovaných balíků by neprracoval nástroj PetaLinux Tools správně.
 
 		\subsection{RealTime Linux Patch}\label{subsec:real-time-linux-patch}
 			Protože operační systém Linux nebyl původně vytvářen pro využití v embedded systémech, ale v obecných zařízeních jako jsou servery a stolní počítače, nebyl tento systém vhodný pro řešení úloh v reálném čase. Proto se objevila snaha upravit tento systém takovým způsobem, aby jej bylo možné využívat v real time systémech.\par
@@ -1103,20 +1104,19 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 			
 
 		\subsection{Programovací prostředí – operační systém Linux}
-			Pro práci s~představenými vývojovými prostředími jako je \hyperref[subsec:xilinx-vivado]{Xilinx Vivado}, \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} a \hyperref[subsec:petalinux]{PetaLinux} je nutné využívat podporovaných operačních systémů, které umožňují správnou funkci využitých nástrojů.\par
-			Jednotlivé požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. Pro nejnovější verze v~době zpracování této práce jsou požadavky pro \hyperref[subsec:xilinx-vivado]{Xilinx Vivado} dostupné v~\cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} v~\cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsec:petalinux]{PetaLinux} je třeba dodržet systémové požadavky uvedené v~\cite{petalinux-tools-documentation-2022}.
-			Pokud uživatel využívá starších verzí vývojových nástrojů, je doporučováno využít operační systém Linux. Pro tuto práci bylo využíván systém Ubuntu 18.04 LTS (Bionic Beaver), dostupný ke stažení na adrese \href{http://old-releases.ubuntu.com}{\textcolor{ctublue}{http://old-releases.ubuntu.com}}. V~průběhu práce došlo k~aktualizování verzí SW, které byly z~počátku roku 2022 a veškerá práce byla přenesena na novější verzi systému Ubuntu 20.04 LTS (Focal Fossa).\par
-			Je důležité poznamenat, že neplatí skutečnost, že když např. Vivado podporuje některou z~novějších verzí Ubuntu, bude jí podporovat také PetaLinux. Vždy je doporučeno využívat starší verze a kontrolovat vzájemnou kompatibilitu, aby se předešlo zbytečné ztrátě času. Stahování SW, instalace a nastavování nástrojů je značně časově náročné.\par
+			Pro práci s~představenými nástroji \hyperref[subsec:xilinx-vivado]{Xilinx Vivado}, \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} a \hyperref[subsec:petalinux-tools]{PetaLinux Tools} je nutné využívat podporovaných operačních systémů, které umožňují správnou funkci využitých nástrojů.\par
+			Jednotlivé požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. Pro nejnovější verze v~době zpracování této práce jsou požadavky pro \hyperref[subsec:xilinx-vivado]{Xilinx Vivado} dostupné v~\cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} v~\cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsec:petalinux-tools]{PetaLinux Tools} je třeba dodržet systémové požadavky uvedené v~\cite{petalinux-tools-documentation-2022}.
+			Pokud uživatel využívá starších verzí vývojových nástrojů, je doporučeno využít operační systém Linux. Pro tuto práci byl nejdříve využíván systém Ubuntu 18.04 LTS (Bionic Beaver), dostupný ke stažení na adrese \href{http://old-releases.ubuntu.com}{\textcolor{ctublue}{http://old-releases.ubuntu.com}}. V~průběhu práce došlo k~aktualizování verzí vývojových nástrojů, které byly původně kompatibilní pouze s verzí Ubuntu 18.04 a nižší. Veškerá práce a postupy byly po aktualizaci přeneseny na novější verzi systému Ubuntu 20.04 LTS (Focal Fossa).\par
+			Je důležité poznamenat, že neplatí skutečnost, že když např. Vivado podporuje některou z~novějších verzí Ubuntu, bude jí podporovat také PetaLinux Tools. Vždy je doporučeno využívat starší verze a kontrolovat vzájemnou kompatibilitu, aby se předešlo zbytečné ztrátě času.\par
 			V~případě využívání představených nástrojů a systému Linux je třeba dbát na správné postupy instalací a v~případě problémů využívat dostupné dokumentace.
 		% Jaké verze jsou momentálně podporované
 		% Co je třeba nainstalovat za balíčky před započetím instalace
 		% Jaký je flow aby byla možná příprava systému
 		% Proč zrovna linux Open Source
 	\section{Tvorba HW architektury Xilinx Vivado}
-		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí HLS C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K~tvorbě platformy je využit SW Xilinx Vivado. V~tomto programu je možné konfigurovat jednotlivé použité prvky jako je ZynQ jednotka, GPIO jednotky a další. Výsledkem tvorby platformy v~této práci je vytvoření XSA souboru, který bude použit pro konfiguraci tvorby PetaLinux systému. Ve Vivado je možné také vytvářet aplikace přímo v~VHDL, ale této funkcionality nebude v~této práci využito.\par
-		Tvorba HW pro různé platformy (Digilent Zybo vs Xilinx Kria KR260) má různé specifikace a různý postup.
-		V~této sekci bude popsána tvorba platformy pro vývojovou desku Zybo Zynq-7000 a taktéž Xilinx Kria KR260 Starter Kit. Tvorba platformy pro jiné vývojové desky nebo zařízení je specifická pro daného výrobce a může se v~nějakých případech lišit. Ovšem základní úkony jako je vložení potřebných bloků a celkový postup tvorby je zachován.\par
-		Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}.
+		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí HLS C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K~tvorbě platformy je využit SW Xilinx Vivado. V~tomto programu je možné konfigurovat jednotlivé IP (intellectual property) prvky jako je ZynQ jednotka, GPIO, Timer, SPI komunikace a další. Výsledkem tvorby platformy v~této práci je vytvoření XSA souboru, který bude použit pro konfiguraci PetaLinux systému a jako vstupní informace pro tvorbu Platformy ve Vitis. Ve Vivado je možné vytvářet aplikace přímo v~VHDL.\par
+		Tvorba HW pro různé platformy (Digilent Zybo, Xilinx Kria KR260, SoC, SOM) má částečně odlišné specifikace a odlišný postup. Rámcový postup je však totožný pro většinu platforem využívající zařízení od firmy Xilinx, Inc.\par
+		V~této sekci bude popsána tvorba platformy pro vývojovou desku Xilinx Kria KR260 Starter Kit, na níž byla realizována finální aplikace. V příloze práce je naznačen postup tvorby základní platformy pro vývojovou desku Digilent Zybo.\par
 
 		\subsection{Vivado Board Files}\label{subsec:vivado-board-files}
 			Aby bylo možné snadněji vytvořit potřebnou HW architekturu, firmy většinou dodávají tzv. \textit{Board Files}, jež jsou soubory, obsahující různá přednastavení, konfigurace, informace a podmínky připojení IP bloků k~reálným součástím. \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
@@ -1124,154 +1124,11 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou HW architekturu pro akcelerovanou aplikaci.\par
 			Pro vývojovou desku Xilinx Kria KR260 Starter Kit výrobce dodává Board files již s~instalací Vivado.
 		
-		\subsection{Tvorba HW architektury pro Digilent Zybo Zynq-7000 vývojovou desku} % zahodit, budu psát ohledně kria
-		V~této části bude představen postup tvorby HW architektury pro vývojovou desku Digilent Zybo Zynq-7000. V~případě, že je požadováno aktivování dalších speciálních bloků v~čipu, např. pro specifickou akcelerovanou aplikaci, je třeba do blokového designu vložit odpovídající prvky, které zajistí potřebnou funkcionalitu.\par
-		Nejprve je nutné vytvořit nový Vivado projekt a pojmenovat ho dle požadavků. Při výběru typu projektu je nutné zvolit možnost \textit{RTL Project} a aktivovat možnost \textit{Project is an extensible Vitis platform}. Tento úkon je naznačen na obr. \ref{fig:xilinx-vivado-flow-01}.
-
-			\begin{figure}[htbp!]
-				\centering
-				\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png}
-				\caption{Xilinx Vivado – volba typu projektu.}
-				\label{fig:xilinx-vivado-flow-01}
-			\end{figure}
-
-		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. V~této práci bude využíváno desky \textit{Zybo}. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku verze 2.0 a pokračovat v~tvorbě HW. Výběr základního HW je zobrazen na obr. \ref{fig:xilinx-vivado-flow-02}.
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-02.png}
-			\caption{Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.}
-			\label{fig:xilinx-vivado-flow-02}
-		\end{figure}
+		\subsection{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}
+				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány základní informace o postupu z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux} a \cite{hackster-add-peripherial-support-to-kria-kr260-vivado}.\par
+				Protože prvotní vývoj a zkoumání využitelnosti SoC bylo prováděno na desce Digilent Zybo Zynq-7000, je v příloze \hyperref[sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku]{\textit{Tvorba HW designu pro Digilent Zybo Zynq-7000
+				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku.
 		
-		Po úspěšné inicializaci projektu je pro další pokračování nutné v~menu \textit{Flow Navigator/IP Integrator} zvolit možnost \textit{Create Block Design} a vytvořit nový blokový design HW. Tvorba blokového designu je naznačena na obr. \ref{fig:xilinx-vivado-flow-05}.
-		
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-05.png}
-			\caption{Xilinx Vivado – vytváření Block Design.}
-			\label{fig:xilinx-vivado-flow-05}
-		\end{figure}
-
-		Nyní je možné již konečně přistoupit ke tvoření vlastní architektury. Jako prvotní krok je nutné vložit blok \textit{ZYNQ7 Processing System} a zvolit nově zobrazenou možnost \textit{Run Block Automation}. V~těchto pomocných automatizacích je většinou výhodné ponechávat nastavené výchozí hodnoty, které jsou pro většinu tvořený HW architektur a akcelerovaných aplikací dostačující. Menu s~výběrem IP bloku pro ZynQ je zobrazeno na obr. \ref{fig:xilinx-vivado-flow-07}.
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-07.png}
-			\caption{Xilinx Vivado – vložení bloku ZYNQ7 Processing System.}
-			\label{fig:xilinx-vivado-flow-07}
-		\end{figure}
-
-
-		Poté je pro funkční akcelerované aplikace nutné vložit do designu blok \textit{Clocking Wizard}, ve kterém nastavit v~záložce \textit{Output Clocks}, aby byl signál aktivní v~0 a aktivovat pět výstupních signálů \textit{Clock}, ve kterých nastavit požadovanou taktovací frekvenci na 50, 100, 150, 200 a 300 Hz. Poté je nutné na výstup bloku \textit{ZYNQ7 Processing System} se jménem \textit{FCLK\_CLK0} připojit vstup \textit{clk\_in1} a k~výstupu \textit{FCLK\_RESET0\_N} vstup \textit{resetn}.\par
-		Po nastavení bloku \textit{Clocking Wizard} je zapotřebí do designu vložit pět bloků \textit{Processor System Reset}. Následně propojit odpovídající výstupy bloku \textit{Clocking Wizard} s~názvem \textit{clk\_outX}, kde \textit{X} značí pořadí výstupního signálu, s~odpovídajícímí bloky \textit{Processor System Reset} a jejich vstupy \textit{slowest\_sync\_clk}. Ke všem vstupům \textit{dcm\_locked} bloků \textit{Processor System Reset} připojit výstup \textit{locked} \textit{Clocking Wizard}. A~konečně ke všem vstupům \textit{ext\_reset\_in} připojit výstup \textit{FCLK\_RESET0\_N} ZynQ bloku. Představené propojení jednotlivých bloků je možné pozorovat na obr. \ref{fig:xilinx-vivado-flow-12}.
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-36.png}
-			\caption{Xilinx Vivado – nastavení výstupních taktovacích signálů.}
-			\label{fig:xilinx-vivado-flow-36}
-		\end{figure}
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png}
-			\caption{Xilinx Vivado – propojení bloků taktování.}
-			\label{fig:xilinx-vivado-flow-12}
-		\end{figure}
-
-		\fbar
-
-		Po úspěšném propojení bloků je vhodné otevřít nastavení \textit{ZYNQ7 Processing System} a v~záložce \textit{Interrupts} povolit nastavení \textit{Fabric Interrupts/PL-PS Interrupt Ports/IRQ\_F2P} přerušení. Následně do designu je nutné vložit další blok, řídící přerušení, se jménem \textit{AXI Interrupt Controller}, otevřít jeho nastavení a v~sekci \textit{Processor Interrupt Type and Connection} změnit nastavení \textit{Interrupt Output Connection} z~\textit{Bus} na \textit{Single}. Následně je opět možné spustit automatické propojení jednotlivých bloků s~výchozím nastavením.\par
-		Aby byly přerušení funkční, je třeba propojit výstup bloku \textit{AXI Interrupt Controller} se jménem \textit{irq} se vstupem bloku \textit{ZYNQ7 Processing System} \textit{IRQ\_F2P}. Minimální funkční blokový design je zobrazen na obr. \ref{fig:xilinx-vivado-flow-17}.
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png}
-			\caption{Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.}
-			\label{fig:xilinx-vivado-flow-17}
-		\end{figure}
-
-		Nyní je možné přejít ze záložky \textit{Diagram} do záložky \textit{Platform Setup} kde je nutné nastavit určité potřebné konektory a výstupy. V~záložce \textit{AXI Port} je nutné pro blok \textit{ZYNQ7 Processing System} nastavit parametry dle tabulky č. \ref{tab:vivado-platform-setup-axi}.
-
-
-		\begin{table}[H]
-			\centering
-			\caption{Ukázka nastavených AXI portů v~Xilinx Vivado bloku \textit{ZYNQ7 Processing System}.}
-		  \vspace*{0.15cm}
-		
-			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
-			\noalign{\hrule height 2pt}
-			Name & Enabled & Memport & SP Tag\\
-			\noalign{\hrule height 2pt}
-			M\_AXI\_GP1 & X & M\_AXI\_GP & -\\ \hline
-			S\_AXI\_ACP & O~& - & - \\ \hline
-			S\_AXI\_HP0 & X & S\_AXI\_HP & HP0 \\ \hline
-			S\_AXI\_HP1 & X & S\_AXI\_HP & HP1 \\ \hline
-			S\_AXI\_HP2 & X & S\_AXI\_HP & HP2 \\ \hline
-			S\_AXI\_HP3 & X & S\_AXI\_HP & HP3 \\\noalign{\hrule height 2pt}
-			\end{tabular}
-			\label{tab:vivado-platform-setup-axi}
-		\end{table}
-
-		Aby bylo možné zapisovat do globální paměti přes MAXI Adapter je nutné povolit funkci vybraných portů v~bloku \textit{AXI Interconnect}. V~této práci byly povoleny porty \textit{M01\_AXI} až \textit{M32\_AXI}.\par
-		Následně v~záložce \textit{Clock} je nutné povolit \textit{clk\_outx}, kde $x \in <1,5>$, nastavit jejich odpovídající ID a jako výchozí použít taktovací signál 100 MHz.\par
-		Dále je v~záložce \textit{Interrupt} nutné aktivovat výstup \textit{intr} bloku \textit{AXI Interrupt Controller}.\par
-		Aby bylo možné případně provádět HW-emulaci, je nutné v~kartě \textit{Diagram} zvolit blok \textit{ZYNQ7 Processing System} a v~záložce \textit{Block Properties} v~nabídce \textit{SELECTED\_SIM\_MODEL} zvolit možnost tlm. \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}\par
-		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
-		Ovšem v~této práci nebylo dosaženo funkční SW ani HW simulace z~neznámých důvodů nemožnosti spuštění Emulátoru v~prostředí Vitis. Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{scp} přesunuty potřebné soubory, jednalo se pouze o~SW simulaci bez připojeného PL a tudíž nebylo možné algoritmy ověřit.\par
-		% vsunutý blok, zkontrolovat poté kontinuitu s předchozím textem
-		Pro zajištění funkčních GPIO (General Purpose Input/Output) pro ovládání LED signalizace, tlačítek a přepínačů, připojených na PL je nutné do blokového designu ještě z~karty \textit{Board/Zybo/GPIO} vložit potřebné IP do designu. Po kliknutí pomocí pravého tlačítka myši na vybraný blok je nutné zvolit z~nabídky \textit{Connect board component} a požadovaný GPIO interface. Blok \textit{AXI GPIO} je automaticky vložen do blokového designu a jeho přítomnost je signalizována na kartě \textit{Board/Zybo/GPIO} zvýraznění vložených bloků (ukázka na obr. \ref{fig:xilinx-vivado-flow-38}). Dle požadavku uživatele je možné vybrat zda bude využíváno \textit{GPIO} nebo \textit{GPIO2} rozhraní. Dle vybraného rozhraní budou poté adresovány jednotlivé výstupy a vstupy v~\textit{Petalinux} příkazové řádce. Ukázka takto vytvořeného designu je na obr. \ref{fig:xilinx-vivado-flow-37}.
-
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.65\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-38.png}
-			\caption{Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit{Board/Zybo/GPIO}.}
-			\label{fig:xilinx-vivado-flow-38}
-		\end{figure}
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.95\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-37.png}
-			\caption{Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL.}
-			\label{fig:xilinx-vivado-flow-37}
-		\end{figure}
-
-		Rozdělení vstupů a výstupů do jednotlivých částí SoC – PS a PL je vyzobrazeno na obr.
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.55\textwidth]{src/png/digilent-zybo-ps-pl-gpio.png}
-			\caption{Uspořádání připojení tlačítek, přepínačů a LED k~PS a PL pro vývojovou desku Digilent Zybo. \cite{digilent-zybo-reference-manual}}
-			\label{fig:digilent-zybo-ps-pl-gpio}
-		\end{figure}
-
-
-		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
-		Před dalším pokračováním je možné design validovat ponocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již HW design vytvořen a nakonfigurován, je možné v~kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create HDL Wrapper}. Zároveň dochází také k~validaci designu. Pokud se vyskytují v~designu různá kritická upozornění, která jsou zobrazena například na obr. \ref{fig:xilinx-vivado-flow-24} je stále možné pokračovat v~tvorbě konečného produktu.\par
-		Po vytvoření \textit{HDL Wrapper} je možné v~menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést a v~případě pokračování v~požadavku generování bitstreamu budou provedeny. Poté je v~nabídce možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru nebo clusteru. Také je možné zvolit, kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V~případě využívání osobního počítače autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z~experimentálního zjištění, že v~případě využívání vyššího počtu jader může dojít k~neočekávané chybě a proces provádění úkolů bude bez vypsání jakékoliv informace ukončen a proces syntézy, implementace a generace bitstreamu bude nutné spustit a provést znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:xilinx-vivado-flow-29}.\par
-
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-24.png}
-			\caption{Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.}
-			\label{fig:xilinx-vivado-flow-24}
-		\end{figure}
-
-
-		\begin{figure}[htbp!]
-			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-29.png}
-			\caption{Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.}
-			\label{fig:xilinx-vivado-flow-29}
-		\end{figure}
-
-		Indikátor provádění jednotlivých procesů je umístěn v~pravém horním rohu. Záznam prováděných procesů je poté umístěn v~kartě \textit{Log}.\par
-		Po úspěšném provedení jednotlivých kroků je zobrazena nabídka, která umožňuje nahlédnout na vytvořený design. Tuto nabídku je možné zavřít aniž by byla vykonávána jakákoliv z~nabízených možností.\par
-		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v~Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný HW i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí V++. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
-		Po nastavení dodatečných informací platformy je možné jej vyexportovat do požadované lokace, kde bude dále využívána.
 
 
 	% Basic popsání, možná si zjistit do hloubky co vše znamená
@@ -1323,5 +1180,153 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\begin{description}
 			\item DCM \hspace*{\parindent} DC Master
 		\end{description}
+
+		\section{Tvorba HW designu pro Digilent Zybo Zynq-7000 vývojovou desku}\label{sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku}
+		V~této části bude představen postup tvorby HW architektury pro vývojovou desku Digilent Zybo Zynq-7000. Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}. V~případě, že je požadováno vytvoření dalších speciálních bloků v~čipu PL je třeba do blokového designu vložit odpovídající IP bloky, které zajistí potřebnou funkcionalitu.\par
+		Nejprve je nutné vytvořit nový Vivado projekt a pojmenovat ho dle požadavků. Při výběru typu projektu je nutné zvolit možnost \textit{RTL Project} a aktivovat možnost \textit{Project is an extensible Vitis platform}. Tento úkon je naznačen na obr. \ref{fig:xilinx-vivado-flow-01}.
+
+			\begin{figure}[htbp!]
+				\centering
+				\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-01.png}
+				\caption{Xilinx Vivado – volba typu projektu.}
+				\label{fig:xilinx-vivado-flow-01}
+			\end{figure}
+
+		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. V~této práci bude využíváno desky \textit{Zybo}. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku verze 2.0 a pokračovat v~tvorbě designu. Výběr základního HW je zobrazen na obr. \ref{fig:xilinx-vivado-flow-02}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-02.png}
+			\caption{Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.}
+			\label{fig:xilinx-vivado-flow-02}
+		\end{figure}
+		
+		Po úspěšné inicializaci projektu je pro další pokračování nutné v~menu \textit{Flow Navigator/IP Integrator} zvolit možnost \textit{Create Block Design} a vytvořit nový blokový design. Tvorba blokového designu je naznačena na obr. \ref{fig:xilinx-vivado-flow-05}.
+		
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-05.png}
+			\caption{Xilinx Vivado – vytváření Block Design.}
+			\label{fig:xilinx-vivado-flow-05}
+		\end{figure}
+
+		Nyní je možné již přistoupit k tvorbě vlastní architektury. Prvotním krokem tvorby fesignu je vložit blok \textit{ZYNQ7 Processing System} a zvolit nově zobrazenou možnost \textit{Run Block Automation}. V~těchto pomocných automatizacích je většinou výhodné ponechávat nastavené výchozí hodnoty, které jsou pro většinu tvořeného HW designu dostačující. Menu s~výběrem IP bloku ZynQ PS je zobrazeno na obr. \ref{fig:xilinx-vivado-flow-07}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-07.png}
+			\caption{Xilinx Vivado – vložení bloku ZYNQ7 Processing System.}
+			\label{fig:xilinx-vivado-flow-07}
+		\end{figure}
+
+
+		Následně je pro funkční akcelerované aplikace nutné vložit do designu blok \textit{Clocking Wizard}, ve kterém nastavit v~záložce \textit{Output Clocks}, aby byl signál aktivní v~0 a aktivovat pět výstupních signálů \textit{Clock}. Těmto signálům je po aktivaci možné nastavit taktovací frekvenci na 50, 100, 150, 200 a 300 Hz. Poté je nutné na výstup \textit{FCLK\_CLK0} bloku \textit{ZYNQ7 Processing System} připojit vstup \textit{clk\_in1} a k~výstupu \textit{FCLK\_RESET0\_N} vstup \textit{resetn}.\par
+		Po nastavení bloku \textit{Clocking Wizard} je zapotřebí do designu vložit pět bloků \textit{Processor System Reset}. Následuje propojení odpovídajících výstupů bloků \textit{Clocking Wizard} s~názvem \textit{clk\_outX}, kde \textit{X} značí pořadí výstupního signálu, s~odpovídajícímí bloky \textit{Processor System Reset} a jejich vstupy \textit{slowest\_sync\_clk}. Ke všem vstupům \textit{dcm\_locked} bloků \textit{Processor System Reset} je nutné připojit výstup \textit{locked} \textit{Clocking Wizard}. A~konečně ke všem vstupům \textit{ext\_reset\_in} připojit výstup \textit{FCLK\_RESET0\_N} ZynQ bloku. Představené propojení jednotlivých bloků je možné pozorovat na obr. \ref{fig:xilinx-vivado-flow-12}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-36.png}
+			\caption{Xilinx Vivado – nastavení výstupních taktovacích signálů.}
+			\label{fig:xilinx-vivado-flow-36}
+		\end{figure}
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-12.png}
+			\caption{Xilinx Vivado – propojení bloků taktování.}
+			\label{fig:xilinx-vivado-flow-12}
+		\end{figure}
+
+		\fbar
+
+		Nyní je možné otevřít nastavení \textit{ZYNQ7 Processing System} a v~záložce \textit{Interrupts} povolit nastavení \textit{Fabric Interrupts/PL-PS Interrupt Ports/IRQ\_F2P} přerušení. Následně do designu je nutné vložit blok řídící přerušení se jménem \textit{AXI Interrupt Controller}, otevřít jeho nastavení a v~sekci \textit{Processor Interrupt Type and Connection} změnit nastavení \textit{Interrupt Output Connection} z~\textit{Bus} na \textit{Single}. Následně je opět možné spustit automatické propojení jednotlivých bloků s~výchozím nastavením.\par
+		Aby byly přerušení funkční, je třeba propojit výstup bloku \textit{AXI Interrupt Controller} se jménem \textit{irq} se vstupem bloku \textit{ZYNQ7 Processing System} \textit{IRQ\_F2P}. Minimální funkční blokový design je zobrazen na obr. \ref{fig:xilinx-vivado-flow-17}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-17.png}
+			\caption{Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.}
+			\label{fig:xilinx-vivado-flow-17}
+		\end{figure}
+
+		Nyní je možné přejít ze záložky \textit{Diagram} do záložky \textit{Platform Setup} ve které je pro zajištění funkčnosti nutné nastavit určité potřebné konektory a výstupy. Následuje nastavení parametrů bloku \textit{ZYNQ7 Processing System} v~záložce \textit{AXI Port} dle tabulky č. \ref{tab:vivado-platform-setup-axi}.
+
+
+		\begin{table}[H]
+			\centering
+			\caption{Ukázka nastavených AXI portů v~Xilinx Vivado bloku \textit{ZYNQ7 Processing System}.}
+		  \vspace*{0.15cm}
+		
+			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
+			\noalign{\hrule height 2pt}
+			Name & Enabled & Memport & SP Tag\\
+			\noalign{\hrule height 2pt}
+			M\_AXI\_GP1 & X & M\_AXI\_GP & -\\ \hline
+			S\_AXI\_ACP & O~& - & - \\ \hline
+			S\_AXI\_HP0 & X & S\_AXI\_HP & HP0 \\ \hline
+			S\_AXI\_HP1 & X & S\_AXI\_HP & HP1 \\ \hline
+			S\_AXI\_HP2 & X & S\_AXI\_HP & HP2 \\ \hline
+			S\_AXI\_HP3 & X & S\_AXI\_HP & HP3 \\\noalign{\hrule height 2pt}
+			\end{tabular}
+			\label{tab:vivado-platform-setup-axi}
+		\end{table}
+
+		Aby bylo možné zapisovat do globální paměti přes MAXI Adapter je nutné povolit funkci vybraných portů v~bloku \textit{AXI Interconnect}. V~této práci byly povoleny porty \textit{M01\_AXI} až \textit{M32\_AXI}.\par
+		Následně v~záložce \textit{Clock} je nutné povolit \textit{clk\_outx}, kde $x \in <1,5>$, nastavit jejich odpovídající ID a jako výchozí použít taktovací signál 100 MHz.\par
+		Dále je v~záložce \textit{Interrupt} nutné aktivovat výstup \textit{intr} bloku \textit{AXI Interrupt Controller}.\par
+		Aby bylo možné případně provádět HW-emulaci, je nutné v~kartě \textit{Diagram} zvolit blok \textit{ZYNQ7 Processing System} a v~záložce \textit{Block Properties} v~nabídce \textit{SELECTED\_SIM\_MODEL} zvolit možnost tlm. \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}\par
+		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
+		V~této práci nebylo dosaženo funkční SW ani HW simulace pro desku Digilent Zybo z~neznámých důvodů. Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{scp} přesunuty potřebné soubory, jednalo se pouze o~SW simulaci bez připojeného PL a tudíž nebylo možné algoritmy ověřit.\par
+		% vsunutý blok, zkontrolovat poté kontinuitu s předchozím textem
+		Pro zajištění funkčních GPIO (General Purpose Input/Output) pro ovládání LED signalizace, tlačítek a přepínačů, připojených na PL, je nutné do blokového designu z~karty \textit{Board/Zybo/GPIO} vložit potřebné IP. Po kliknutí pomocí pravého tlačítka myši na vybraný blok je nutné zvolit z~nabídky \textit{Connect board component} a požadovaný GPIO interface. Blok \textit{AXI GPIO} je automaticky vložen do blokového designu a jeho přítomnost je signalizována na kartě \textit{Board/Zybo/GPIO} zvýraznění vložených bloků (ukázka na obr. \ref{fig:xilinx-vivado-flow-38}). Dle požadavku uživatele je možné vybrat zda bude využíváno \textit{GPIO} nebo \textit{GPIO2} rozhraní. Dle vybraného rozhraní budou poté adresovány jednotlivé výstupy a vstupy v~\textit{Petalinux}. Ukázka vytvořeného designu s IP pro GPIO je na obr. \ref{fig:xilinx-vivado-flow-37}.
+
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.65\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-38.png}
+			\caption{Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit{Board/Zybo/GPIO}.}
+			\label{fig:xilinx-vivado-flow-38}
+		\end{figure}
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.95\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-37.png}
+			\caption{Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL.}
+			\label{fig:xilinx-vivado-flow-37}
+		\end{figure}
+
+		Rozdělení vstupů a výstupů do jednotlivých částí SoC – PS a PL je vyzobrazeno na obr. \ref{fig:digilent-zybo-ps-pl-gpio}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.55\textwidth]{src/png/digilent-zybo-ps-pl-gpio.png}
+			\caption{Uspořádání připojení tlačítek, přepínačů a LED k~PS a PL pro vývojovou desku Digilent Zybo. \cite{digilent-zybo-reference-manual}}
+			\label{fig:digilent-zybo-ps-pl-gpio}
+		\end{figure}
+
+
+		Před dalším pokračováním je možné design validovat ponocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již HW design vytvořen a nakonfigurován, je možné v~kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create HDL Wrapper}. V tomto kroku je opět prováděna validace designu. Pokud se v~designu vyskytují kritická upozornění, která jsou zobrazena například na obr. \ref{fig:xilinx-vivado-flow-24}, je stále možné pokračovat v~tvorbě konečného produktu.\par
+		Po vytvoření \textit{HDL Wrapper} je možné v~menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést, v~případě pokračování v~požadavku generování bitstreamu budou automaticky provedeny. V navazující nabídce možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru, nebo clusteru. Také je možné zvolit kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V~případě využití osobního počítače pro generaci bitstreamu (i předcházející syntézy a implementace) autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z~experimentálního zjištění, že v~případě využití vyššího počtu jader může dojít k~neočekávané chybě a proces provádění úkolů bude bez udání jakékoli informace ukončen a proces syntézy, implementace a generace bitstreamu bude nutné spustit znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:xilinx-vivado-flow-29}.\par
+
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-24.png}
+			\caption{Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.}
+			\label{fig:xilinx-vivado-flow-24}
+		\end{figure}
+
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/png/xilinx-vivado-flow/xilinx-vivado-flow-29.png}
+			\caption{Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.}
+			\label{fig:xilinx-vivado-flow-29}
+		\end{figure}
+
+		Indikátor provádění jednotlivých procesů je umístěn v~pravém horním rohu. Záznam prováděných procesů je umístěn v~kartě \textit{Log}.\par
+		Po úspěšném provedení jednotlivých kroků je zobrazena nabídka, která umožňuje nahlédnout na vytvořený design. Tuto nabídku je možné zavřít aniž by byla vykonávána jakákoliv z~nabízených možností.\par
+		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v~Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný HW i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí V++. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
+		Po nastavení dodatečných informací platformy je možné jej vyexportovat do požadované lokace, kde bude dále využívána.
 	\end{appendices}
 \end{document}
