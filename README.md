@@ -13,7 +13,7 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [10.04.2023](/notes/20230410.md)
+💻 [10.04.2023](/notes/20230410.md) <-- multi threading AXI timeru, ukázka na kria, dokončení prvních oprav [dp.tex](./tex/dp.tex), popsání struktury složek v projektu, snížení velikostí obrázků a snížení velikosti [dp.pdf](./tex/dp.pdf), zkouška SPI (zatím bez osciloskopů, ale fungovalo vysunutí dat z FIFO), dumání nad spi v [YouTube](https://youtu.be/wEhr3DgErmM)
 
 ---
 
