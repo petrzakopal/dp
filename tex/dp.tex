@@ -1113,21 +1113,46 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 		% Co je třeba nainstalovat za balíčky před započetím instalace
 		% Jaký je flow aby byla možná příprava systému
 		% Proč zrovna linux Open Source
+
+	\section{Struktura složek}\label{sec:struktura-slozek}
+		Aby byl vývoj, debugging, deployment a verzování aplikace co nejméně problematickým a zdlouhavým procesem pro vývojáře (jak HW tak SW), je vhodné zavést pro daný projekt/vývoj pevný systém složek (file system), který bude dodržován napříč projekty. V případě existence takového systému je možné vytvořit postupy a skripty, které značně urychlí práci na vyvíjeném projektu.\par
+		Tyto skripty mohou sloužit k snadnějšímu přenosu souborů mezi jednotlivými složkami pro potřeby daných vývojových nástrojů, přenos souborů na vývvojovou desku a nebo k výrazně rychlejší práci s vývojovými nástroji PetaLinux Tools a Vitis HLS. Díky tomuto systému složek bude pro každý projekt přesně stanovaná cesta k vytvořenému SDK (software development kit), který je potřeba pro vývoj akcelerované aplikace.\par
+		V této práci bude dodržována struktura naznačená v kódu \ref{lst:struktura-slozek}.
+
+		\begin{lstlisting}[language={sh}, caption={Struktura složek, využívaná při tvorbě projektů k dosažení lepšího DX.}, label= {lst:struktura-slozek}]
+- top folder (projects)
+	- transfer				// user generated
+	- hw							// vivado project
+	- petalinux				// petalinux project
+	- linux-files			// user generated folders
+		- pfm
+			- boot
+			- sd_dir
+		- dtg_out				// created when converting device tree from XSA file
+		- sysroots			// created by ./sdk.sh -d ./../linux-files
+	- vitis\end{lstlisting}
+
+		Tato struktura přináší možnosti rychlejšího pohyb v projektu pomocí vzdáleného přístupu SSH a emulátoru terminálu, který umožňuje provádět build aplikace i bez použití GUI Vitis HLS. Využíváním headless módu dochází k odstranění některých nedostatků SW, jako je např. zastavení build procesu z neznámých důvodů. Ovšem GUI je vhodné na provádění úkonů, jejichž způsob provedení v headless módu nebyl při realizaci této práce objeven (tvorba platformy, tvorba aplikace, automatické vytváření \texttt{makefile} souborů apod.).\par
+		V případě verzování projektu je ovšem důležité si uvědomit, že některé soubory mají značnou velikost a některé složky obsahují velmi mnoho souborů (více než 8 000 souborů). Proto je nutné tuto skutečnost vnímat a dle vlastních požadavků vyjmout vybrané prvky z verzování.
+		
+
 	\section{Tvorba HW architektury Xilinx Vivado}
 		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí HLS C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K~tvorbě platformy je využit SW Xilinx Vivado. V~tomto programu je možné konfigurovat jednotlivé IP (intellectual property) prvky jako je ZynQ jednotka, GPIO, Timer, SPI komunikace a další. Výsledkem tvorby platformy v~této práci je vytvoření XSA souboru, který bude použit pro konfiguraci PetaLinux systému a jako vstupní informace pro tvorbu Platformy ve Vitis. Ve Vivado je možné vytvářet aplikace přímo v~VHDL.\par
 		Tvorba HW pro různé platformy (Digilent Zybo, Xilinx Kria KR260, SoC, SOM) má částečně odlišné specifikace a odlišný postup. Rámcový postup je však totožný pro většinu platforem využívající zařízení od firmy Xilinx, Inc.\par
 		V~této sekci bude popsána tvorba platformy pro vývojovou desku Xilinx Kria KR260 Starter Kit, na níž byla realizována finální aplikace. V příloze práce je naznačen postup tvorby základní platformy pro vývojovou desku Digilent Zybo.\par
 
 		\subsection{Vivado Board Files}\label{subsec:vivado-board-files}
-			Aby bylo možné snadněji vytvořit potřebnou HW architekturu, firmy většinou dodávají tzv. \textit{Board Files}, jež jsou soubory, obsahující různá přednastavení, konfigurace, informace a podmínky připojení IP bloků k~reálným součástím. \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
-			Samozřejmě by bylo možné HW architekturu vytvořit i bez těchto předkonfigurovaných souborů, ovšem proces by byl značně náročnější. Pro používanou vývojovou desku Digilent Zybo Zynq-7000 je možné stáhnout tyto soubory z~\cite{github-vivado-board-files-for-digilent-fpga-boards}. Způsob instalace board files je popsaný v~oficiální dokumentaci firmy Digilent, Inc. v~\cite{digilent-installing-vivado-vitis-and-digilent-board-files}.\par
+			Aby bylo možné snadněji vytvořit potřebnou HW architekturu, firmy velmi časo dodávají ke svému produktu \textit{Board Files} soubory, obsahující různá přednastavení, konfigurace, informace a způsob připojení IP bloků k~reálným součástím (constrains). \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
+			Samozřejmě by bylo možné HW architekturu vytvořit i bez těchto konfiguračních souborů, ovšem postup tvorby by byl značně náročnější. Pro vývojovou desku Xilinx Kria KR260 Starter Kit výrobce dodává Board files již s~instalací Vivado. Pro používanou vývojovou desku Digilent Zybo Zynq-7000 je možné stáhnout tyto soubory z~\cite{github-vivado-board-files-for-digilent-fpga-boards}. Způsob instalace board files je popsaný v~oficiální dokumentaci firmy Digilent, Inc. v~\cite{digilent-installing-vivado-vitis-and-digilent-board-files}.\par
 			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou HW architekturu pro akcelerovanou aplikaci.\par
-			Pro vývojovou desku Xilinx Kria KR260 Starter Kit výrobce dodává Board files již s~instalací Vivado.
+			
 		
 		\subsection{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}
-				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány základní informace o postupu z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux} a \cite{hackster-add-peripherial-support-to-kria-kr260-vivado}.\par
+				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány rámcové základní informace o postupu z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} a \cite{hackster-getting-started-with-the-kria-kr260-in-vivado}. Konkrétní postup se liší dle vytvářené aplikace a zkoumaných vlastností.\par
 				Protože prvotní vývoj a zkoumání využitelnosti SoC bylo prováděno na desce Digilent Zybo Zynq-7000, je v příloze \hyperref[sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku]{\textit{Tvorba HW designu pro Digilent Zybo Zynq-7000
-				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku.
+				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku. Protože Digilent Zybo obsahuje odlišné periferie a prvky, je tvorba jeho HW designu odlišná od designu Xilinx Kria KR260. Tyto odlišnosti jsou také způsobeny použitím novějšího PS MPSoC Zynq UltraScale+ v Xilinx Kria oproti staršímu Zynq-7000 v Digilent Zybo.\par
+				Prvním krokem je vytvoření Vivado projektu a jeho umístění do složky \texttt{hw} (popis struktury složek v projektu je představen v části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}).
+
 		
 
 

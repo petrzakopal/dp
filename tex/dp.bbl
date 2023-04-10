@@ -1544,6 +1544,43 @@
       \verb https://www.hackster.io/whitney-knitter/add-peripheral-support-to-kria-kr260-vivado-2022-1-project-874960
       \endverb
     \endentry
+    \entry{hackster-getting-started-with-the-kria-kr260-in-vivado}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=5b64c231e39b35a5c773db018a9abb44}{%
+           family={Knitter},
+           familyi={K\bibinitperiod},
+           given={Whitney},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{fullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{bibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorbibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authornamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorfullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{31}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Getting Started with the Kria KR260 in Vivado 2022.1}
+      \field{urlday}{10}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-vivado-2022-1-33746d
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-vivado-2022-1-33746d
+      \endverb
+    \endentry
     \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
       \name{author}{1}{}{%
         {{hash=19947edb20f496d8ecef44bc1609a614}{%
