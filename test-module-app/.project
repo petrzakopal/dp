@@ -3,7 +3,6 @@
 	<name>test-module-app</name>
 	<comment></comment>
 	<projects>
-		<project>kria-1-2-spi-rt-platform</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

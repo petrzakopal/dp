@@ -346,7 +346,7 @@ int main(int argc, char* argv[]) {
        
        
     *((unsigned *)(ptr)) = 0X1C0;
-     write(fd, &irq_on, sizeof(irq_on));
+    write(fd, &irq_on, sizeof(irq_on));
     *((unsigned *)(ptr + 0x4)) = 0XAFFFFFFF;
     *((unsigned *)(ptr)) = 0XE0;
   

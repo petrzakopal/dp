@@ -82,33 +82,102 @@ int threadLoopOutput = 0;
 bool isDataFromBackgroundThreadReady = false; // zde je použito proto aby se zajistilo, že nejsou použity v main while smyšce programu na pozadí dvě stejné hodnoty - když nedošlo vlastně ještě k zápisu, jinak kdyby se mohli použít, tak se nebude vůbec tato proměnná v if statements používat
 std::mutex gLock;
 
-void threadLoop()
-{   int i = 0; // timer counter
-    while(true) // free running timer
-    {
-        if(i == 500) // timer overflow value
-        {   
-            // if timer has finished (interrupt has risen)
-            // copy data / insert data to shared variable
-            if(isDataFromBackgroundThreadReady == false)
-            {
-                
-                i = 0;
-                gLock.lock(); // mutex locking - any other thread can't access this variable (think it cannot write or read)
-                threadLoopOutput = threadLoopOutput + 1; // edit the shared variable
-                gLock.unlock(); // mutex unlock
-                isDataFromBackgroundThreadReady = true; // flag to main while loop that new data is present
 
-            }
-            
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));   // just emulate some time delay
-            
-            
+
+/*
+* @name     threadLoop
+* @brief    Threaded function for timer and data acquisition.
+* @todo     Make multiple functions and multiple data acquisitions paralel but use data only when data from all sources all valid.
+*/
+
+void threadLoop()
+{
+    void *timer1ptr; // pointer to a virtual memory filled by mmap
+    int timer1fd; // file descriptor of uio to reset interrupt in /proc/interrupts
+    char *uiod; // name of the uio to reset interrupts
+    uiod = "/dev/uio4"; // check when making changes in a platform
+    int irq_on = 1; // for writing 0x1 to /dev/uioX
+    uint32_t info = 1; // in read function of a interrupt checking
+
+    timer1fd = open(uiod, O_RDWR | O_NONBLOCK); // opening uioX device
+
+    // if error
+    if (timer1fd < 1)
+    {
+        perror("open\n");
+        printf("Invalid UIO device file:%s.\n", uiod);
+    }
+
+    // for polling the interrupt struct
+    struct pollfd fds = {
+            .fd = timer1fd,
+            .events = POLLIN | POLLOUT,
+        };
+
+    // mmap the timer in virtual memory
+    timer1ptr = mmap(NULL, TIMER_MAP_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, timer1fd, 0);
+
+    // initial values for timer
+    *((unsigned *)(timer1ptr)) = 0X1C0;
+    write(timer1fd, &irq_on, sizeof(irq_on));
+    *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+    *((unsigned *)(timer1ptr)) = 0XE0;
+
+    // one tick is 0.8 ns, have to wait till data is moved to counter register
+    // otherwise it wont start, solve maybe later or ask about it
+    std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+
+    *((unsigned *)(timer1ptr + 0x8)) = 0X0;
+    *((unsigned *)(timer1ptr)) = 0XC0;
+
+    while(true)
+    {
+        // std::cout << "Outer loop\n";
+        while(true) // polling while
+        {
+            // std::cout << "Inner loop\n";
+            int ret = poll(&fds, 1, -1); // poll on a return value
+
+            // there was change in ret
+            if (ret >= 1)
+                {
+                    ssize_t nb = read(timer1fd, &info, sizeof(info));
+                    if (nb == (ssize_t)sizeof(info))
+                        {
+                            /* Do something in response to the interrupt. */
+                            printf("Interrupt #%u!\n", info);
+                            // if timer has finished (interrupt has risen)
+                            // copy data / insert data to shared variable
+                            if(isDataFromBackgroundThreadReady == false)
+                                {
+                                    gLock.lock(); // mutex locking - any other thread can't access this variable (think it cannot write or read)
+                                    threadLoopOutput = threadLoopOutput + 1; // edit the shared variable
+                                    gLock.unlock(); // mutex unlock
+                                    isDataFromBackgroundThreadReady = true; // flag to main while loop that new data is present
+                                }
+                            break;
+                        }
+                }  
         }
 
-        i++;
+        // resolving and starting timer again
+        *((unsigned *)(timer1ptr)) = 0X1C0;
+        write(timer1fd, &irq_on, sizeof(irq_on));
+        *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+        *((unsigned *)(timer1ptr)) = 0XE0;
+        
+        // one tick is 0.8 ns, have to wait till data is moved to counter register
+        // otherwise it wont start, solve maybe later or ask about it
+        std::this_thread::sleep_for(std::chrono::nanoseconds(1)); 
 
+        *((unsigned *)(timer1ptr + 0x8)) = 0X0;
+        *((unsigned *)(timer1ptr)) = 0XC0; // start
+        
     }
+
+
+    munmap(timer1ptr, TIMER_MAP_SIZE);
+    close(timer1fd);
 }
 
 /*------------------------------------------------------------------------------------*/
