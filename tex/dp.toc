@@ -832,15 +832,15 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{45}{section.13}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{44}{section.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{46}{appendix.1.A}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{45}{appendix.1.A}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{46}{subsection.1.A.1}%
+\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{45}{subsection.1.A.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{46}{subsection.1.A.2}%
+\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{45}{subsection.1.A.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000 vývojovou desku}{47}{appendix.1.B}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000 vývojovou desku}{46}{appendix.1.B}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 

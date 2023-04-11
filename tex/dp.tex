@@ -1120,17 +1120,18 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 		V této práci bude dodržována struktura naznačená v kódu \ref{lst:struktura-slozek}.
 
 		\begin{lstlisting}[language={sh}, caption={Struktura složek, využívaná při tvorbě projektů k dosažení lepšího DX.}, label= {lst:struktura-slozek}]
-- top folder (projects)
-	- transfer				// user generated
-	- hw							// vivado project
-	- petalinux				// petalinux project
-	- linux-files			// user generated folders
-		- pfm
-			- boot
-			- sd_dir
-		- dtg_out				// created when converting device tree from XSA file
-		- sysroots			// created by ./sdk.sh -d ./../linux-files
-	- vitis\end{lstlisting}
+- projects folder
+	- top folder (project name)
+		- transfer				// user generated
+		- hw							// vivado project
+		- petalinux				// petalinux project
+		- linux-files			// user generated folders
+			- pfm
+				- boot
+				- sd_dir
+			- dtg_out				// created when converting device tree from XSA file
+			- sysroots			// created by ./sdk.sh -d ./../linux-files
+		- vitis\end{lstlisting}
 
 		Tato struktura přináší možnosti rychlejšího pohyb v projektu pomocí vzdáleného přístupu SSH a emulátoru terminálu, který umožňuje provádět build aplikace i bez použití GUI Vitis HLS. Využíváním headless módu dochází k odstranění některých nedostatků SW, jako je např. zastavení build procesu z neznámých důvodů. Ovšem GUI je vhodné na provádění úkonů, jejichž způsob provedení v headless módu nebyl při realizaci této práce objeven (tvorba platformy, tvorba aplikace, automatické vytváření \texttt{makefile} souborů apod.).\par
 		V případě verzování projektu je ovšem důležité si uvědomit, že některé soubory mají značnou velikost a některé složky obsahují velmi mnoho souborů (více než 8 000 souborů). Proto je nutné tuto skutečnost vnímat a dle vlastních požadavků vyjmout vybrané prvky z verzování.
@@ -1190,8 +1191,10 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 %konec závěru
 
 \newpage
+\setmonofont{Times New Roman}
 \printbibliography[title={{Literatura}}]	
 \nocite{*}
+\setmonofont{Courier}
 \addcontentsline{toc}{section}{\numberline{}Literatura} %Added citations to TOC%
 	\appendix
 	\titleformat{\section}{\color{ctublue}\fontspec{Times New Roman}\fontsize{15}{15}\bfseries}{Příloha \thesection:}{2.1em}{}
