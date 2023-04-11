@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [11.04.2023](/notes/20230411.md) <-- snaha rozchození spi, foto vivado, řešení arduino pro SPI testování, změna vivado designu pro 10 MHz CLK pro SPI, nevím, zda to půjde protože v dokumentaci je napsáno, že ext clk nemá být menší než axi clk, ale v jejich tabulce o min a max hodnotách je ext clk nižší než axi clk, což už i kdyby to vše bylo na max, je ext clk menší než axi clk, je třeba to vyzkoušet
+
+---
+
 💻 [10.04.2023](/notes/20230410.md) <-- multi threading AXI timeru, ukázka na kria, dokončení prvních oprav [dp.tex](./tex/dp.tex), popsání struktury složek v projektu, snížení velikostí obrázků a snížení velikosti [dp.pdf](./tex/dp.pdf), zkouška SPI (zatím bez osciloskopů, ale fungovalo vysunutí dat z FIFO), dumání nad spi v [YouTube](https://youtu.be/wEhr3DgErmM)
 
 ---
