@@ -1149,9 +1149,9 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 			
 		
 		\subsection{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}
-				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány rámcové základní informace o postupu z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} a \cite{hackster-getting-started-with-the-kria-kr260-in-vivado}. Konkrétní postup se liší dle vytvářené aplikace a zkoumaných vlastností.\par
+				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány základní rámcové informace o postupu z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} a \cite{hackster-getting-started-with-the-kria-kr260-in-vivado}. Konkrétní postup se liší dle vytvářené aplikace a zkoumaných vlastností.\par
 				Protože prvotní vývoj a zkoumání využitelnosti SoC bylo prováděno na desce Digilent Zybo Zynq-7000, je v příloze \hyperref[sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku]{\textit{Tvorba HW designu pro Digilent Zybo Zynq-7000
-				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku. Protože Digilent Zybo obsahuje odlišné periferie a prvky, je tvorba jeho HW designu odlišná od designu Xilinx Kria KR260. Tyto odlišnosti jsou také způsobeny použitím novějšího PS MPSoC Zynq UltraScale+ v Xilinx Kria oproti staršímu Zynq-7000 v Digilent Zybo.\par
+				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku. Konfigurace PS a tvorba HW pro Digilent Zybo se odlišuje převážně proto, že Zybo používá starší PS Zynq-7000, oproti novějšímu PS MPSoC Zynq UltraScale+ v Xilinx Kria.\par
 				Prvním krokem je vytvoření Vivado projektu a jeho umístění do složky \texttt{hw} (popis struktury složek v projektu je představen v části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}).
 
 		
