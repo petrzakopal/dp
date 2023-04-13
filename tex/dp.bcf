@@ -2254,11 +2254,16 @@
     <bcf:citekey order="119">hackster-getting-started-with-the-kria-kr260-in-vivado</bcf:citekey>
     <bcf:citekey order="120">xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa</bcf:citekey>
     <bcf:citekey order="121">xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa</bcf:citekey>
+    <bcf:citekey order="122">hackster-getting-started-with-the-kria-kr260-in-vivado</bcf:citekey>
+    <bcf:citekey order="123">xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide</bcf:citekey>
+    <bcf:citekey order="124">xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution</bcf:citekey>
+    <bcf:citekey order="125">hackster-add-peripherial-support-to-kria-kr260-vivado</bcf:citekey>
+    <bcf:citekey order="126">xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="122">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="123">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="124">digilent-zybo-reference-manual</bcf:citekey>
-    <bcf:citekey order="125">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="127">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="128">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="129">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="130">digilent-zybo-reference-manual</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

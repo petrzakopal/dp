@@ -6,6 +6,7 @@
 \newcommand{\fbar}{\FloatBarrier}
 
 \usepackage{amsmath} %matematic package%
+\usepackage{amssymb} %for miscellaneous mathematical symbols, first usage was for tick symbol in math mode \checkmark%
 \usepackage{textcomp} %for miscellaneous symbols%
 %\usepackage{times} %times font%
 \usepackage{graphicx} %enhanced support for craphics%
@@ -149,7 +150,7 @@
 \lstdefinestyle{zakopal}{
     backgroundcolor=\color{codeblue},   
     commentstyle=\color{codegray},
-    keywordstyle=\color{ctugreen},
+    keywordstyle=\color{ctured},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{ctuorange},
     basicstyle=\ttfamily\small,
@@ -174,12 +175,17 @@ THEN,END_IF,END_FUNCTION,BOOL,FALSE,TRUE},
 sensitive=false,
 morecomment=[l]{//},
 morestring=[b]",
-literate={;}{{\textcolor{orange}{;}}}{1}
-{:}{{\textcolor{orange}{:}}}{1}
-{)}{{\textcolor{orange}{)}}}{1}
-{(}{{\textcolor{orange}{(}}}{1}
-{=}{{\textcolor{orange}{=}}}{1}
-{,}{{\textcolor{orange}{,}}}{1},} %basic SCL language for siemens defined%
+literate={;}{{\textcolor{ctuorange}{;}}}{1}
+{:}{{\textcolor{ctuorange}{:}}}{1}
+{)}{{\textcolor{ctuorange}{)}}}{1}
+{(}{{\textcolor{ctuorange}{(}}}{1}
+{=}{{\textcolor{ctuorange}{=}}}{1}
+{,}{{\textcolor{ctuorange}{,}}}{1},} %basic SCL language for siemens defined%
+
+\lstdefinelanguage{xdc}
+{morekeywords={set_property, current_design, get_ports},
+sensitive=false,
+morecomment=[l]{\#}} %basic xdc file in Vivado syntax highlighting%
 
 
 %%change in previous commands 2.1 em , 1.53em and 1em to 1em to be easy indented not the same
@@ -1253,6 +1259,24 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\end{figure}
 
 				Pokud by vyvíjená aplikace nevyužívala další PL IP bloky, je možné přistoupit ke konfiguraci platformy, PS a periferií připojených k PS. Pro vyvíjenou ukázkovou aplikaci je vytvořený HW blokový design naznačen v sekci \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW Block design vyvíjené aplikace}}.\par
+				Ovšem při využití vývojové desky Xilinx Kria KR260 je vhodné aktivovat řízení chladícího ventilátoru pomocí PWM. Pro tuto možnost musí být aktivovaný výstup \textit{Waveout} u TTC 0, jak je tomu naznačeno na obr. \ref{fig:kr26-xilix-vivado-flow-30}. Po aktivaci \textit{Waveout} na I/O \textit{EMI0} se objeví na bloku \texttt{Zynq UltraScale+ MPSoC} výstup s názvem \texttt{emio\_ttc0\_wave\_o[2:0]}. Označení \texttt{[2:0]} znamená, že signál je tříbitový, pro řízení ventilátoru pomocí PWM je ovšem využitelný pouze jeden bit. Pro odstranění dvou horních bitů je využito IP bloku \texttt{Slice}.\par
+				Konfigurace bloku \texttt{Slice} je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-29}. \textit{Din Width} určuje šířku vstupujícího signálu. V řešeném případě se jedná o trojbitový signál. \textit{Din From} určuje označení bitu, od kterého bude odstraněno \textit{Din Down To} bitů pro výstup z bloku \texttt{Slice}. Položka \textit{Dout Width} je automaticky doplněna dle nastavení předchozích položek.\par Následně je nutné nastavit výstupní pin, na který bude signál PWM pro řízení ventilátoru odesílán. Pro vytvoření pinu existuje mnoho způsobů, v tomto případě je ovšem nejjednodušší pravým tlačítkem myší kliknout na výstup bloku \texttt{Slice} \texttt{Dout[0:0]} a zvolit \textit{Make External}. Tento pin je poté vhodné pojmenovat \texttt{fan\_en\_b}. Minimální funkční design s výstupním pinem pro ventilátor je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-31}.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-29.jpg}
+					\caption{Xilinx Vivado – nastavení bloku Slice pro odstranění dvou horních bitů signálu.}
+					\label{fig:kr26-xilix-vivado-flow-29}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-31.jpg}
+					\caption{Xilinx Vivado – minimální funkční design s výstupním pinem pro řízení ventilátoru.}
+					\label{fig:kr26-xilix-vivado-flow-31}
+				\end{figure}
+
+
 				Na kartě \textit{Platform Setup} je pro funkční design vhodné aktivovat a pojmenovat základní AXI porty dle tabulky \ref{tab:vivado-platform-setup-axi-xilinx-kria}.
 
 
@@ -1277,7 +1301,137 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{tab:vivado-platform-setup-axi-xilinx-kria}
 				\end{table}
 
+				Dalším krokem je povolení a nastavení výchozích clock signálů v záložce \textit{Clock}. V této práci byl zvolen výchozí clock signál 200 MHz. Snímek záložky zachycující nastavení pro dva clock signály je na obr. \ref{fig:kr26-xilix-vivado-flow-14}.\par
+				Posledním důležitým krokem je povolení signálu \texttt{intr} z použitého bloku \texttt{Axi Interrupt Controller} v kartě \textit{Platform Setup -> Interrupt}.\par
+				Volitelným, ovšem vhodným krokem je pojmenovat platformu a udat jejího autora a verzi v kartě \textit{Platform Setup -> Interrupt}.
 
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-14.jpg}
+					\caption{Xilinx Vivado – záložka nastavení clock signálů na platformě.}
+					\label{fig:kr26-xilix-vivado-flow-14}
+				\end{figure}
+
+
+				Autorka článku \cite{hackster-getting-started-with-the-kria-kr260-in-vivado} zmiňuje, že pokud je zapnuta možnost \textit{Incremental Synthesis}, můžou vznikat při postupu tvorby akcelerované aplikace problémy. Proto doporučuje pomocí nabídky \textit{Settings -> Synthesis -> Incremental Synthesis} zvolit možnost \textit{Disable incremental synthesis}.\par
+
+				\subsubsection{Konfigurace PS pro využití implementovaných periferií}
+				Aby bylo možné využívat periferie, jako je DisplayPort, Ethernet nebo USB konektory, je nutné nakonfigurovat PS. Konfigurační nabídka je otevřena po otevření IP bloku \texttt{Zynq UltraScale+ MPSoC} a vybrání \textit{I/O Configuration}.\par
+				Pro názornost je využito snímků obrazovky jednotlivých významných konfigurací. Některé z konfigurací jsou již nastaveny jako výchozí, některé je třeba konfigurovat.\par
+				Na obr. \ref{fig:kr26-xilix-vivado-flow-17} je zobrazeno kompletní konfigurační okno ve kterém jsou jednotlivá připojení pro PS nastavovány. Další snímky jsou však z důvodu úspory plochy zaměřeny pouze na konkrétní nastavení.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-17.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration QSPI zařízení.}
+					\label{fig:kr26-xilix-vivado-flow-17}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-18.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration I2C zařízení.}
+					\label{fig:kr26-xilix-vivado-flow-18}
+				\end{figure}
+
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-19.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration PMU (GPIO 4 a GPIO 5 není vybráno).}
+					\label{fig:kr26-xilix-vivado-flow-19}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-20.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration SPI zařízení.}
+					\label{fig:kr26-xilix-vivado-flow-20}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-21.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration UART zařízení.}
+					\label{fig:kr26-xilix-vivado-flow-21}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-22.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration GPIO zařízení.}
+					\label{fig:kr26-xilix-vivado-flow-22}
+				\end{figure}
+
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-23.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration System Watchdog Timers (SWDT).}
+					\label{fig:kr26-xilix-vivado-flow-23}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-30.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration Triple Timer Counter (TTC), TTC 0 výstup Waveout je využit pro PIN řídící chladící ventilátor na SoM.}
+					\label{fig:kr26-xilix-vivado-flow-30}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-25.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration USB.}
+					\label{fig:kr26-xilix-vivado-flow-25}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-26.jpg}
+					\caption{Xilinx Vivado – PS I/O Configuration DisplayPort.}
+					\label{fig:kr26-xilix-vivado-flow-26}
+				\end{figure}
+
+				\fbar
+				Po úspěšné konfiguraci I/O je možné přistoupit ke kartě \textit{PS-PL Configuration} a v záložce \textit{General -> Fabric Reset Enable} povolit \textit{Fabric Reset Enable} a zvolit v nabídce \textit{Number of Fabric Resets} číslo 4.\par
+				Toto nastavení \textit{Number of Fabric Resets} udává, kolik signálů je možné použít pro reset PL IP bloků. \cite{xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide}, \cite{xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution}\par
+
+				V předchozích krocích a obrázcích byla představena základní konfigurace PS pro funkčnost periferií, přítomných na vývojové desce Xilinx Kria KR260 s \texttt{Zynq UltraScale+ MPSoC}. Po této základní konfiguraci je možné pozorovat v konfigurační nabídce PS IP v kartě \textit{PS UltraScale+ Block Design} označení pomocí „$\checkmark$“ symbolu u konfigurovaných prvků. Ukázka systému je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-28}.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.85\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-28.jpg}
+					\caption{Xilinx Vivado – PS UltraScale+ Block Design v PS IP.}
+					\label{fig:kr26-xilix-vivado-flow-28}
+				\end{figure}
+
+			\subsubsection{Design Constraints}
+				Aby bylo možné vytvořené \textit{virtuální} piny ve Vivado propojit se skutečnými fyzickými piny MPSoC, resp. vývojové desky, je třeba vytvořit soubor v prostředí Vivado, který toto fyzické propojení definuje. Tyto soubory se nazývají \textit{Constraints Files}.\par
+				Jejich tvorba může probíhat i mimo prostředí Vivado, jsou to textové soubory, jež lze upravit v libovolném textovém editoru. Tato skutečnost lze využít při časté tvorbě designů v nových projektech pro zrychlení konfigurace. Soubory je poté možné jednoduše importovat.\par
+				Soubory se vkládají pomocí výběru v levém menu \textit{Project Manager -> Add Sources -> Add or create constraints -> Add Files/Create File}. Nabídka tvorby souboru je vyzobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-32}.\par
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.85\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-32.jpg}
+					\caption{Xilinx Vivado – okno tvorby/vložení Constraints File.}
+					\label{fig:kr26-xilix-vivado-flow-32}
+				\end{figure}
+
+				Pro spojení vytvořeného virtuálního pinu \texttt{fan\_en\_b} a fyzického pinu, ke kterému je na CC připojen ventilátor je do \texttt{XDC} souboru zapsána konfigurace z kódu \ref{lst:fan-pinout-constraints-file}.\par
+				Kód \ref{lst:fan-pinout-constraints-file} byl získán z \cite{hackster-add-peripherial-support-to-kria-kr260-vivado}. Autorem však bylo ověřeno, že se skutečně jedná o fyzický pin \texttt{A12}.\par
+				Vyhledání propojení fyzického pinu a označení pro soubory \texttt{XDC} probíhá totožně také pro konektory \textit{PMOD} a \textit{Raspberry Pi HAT}. Oficiální dokumentace pro postup vyhledání pinů nebyla autorem nalezena, proto se pokusil nalézt vlastní postup, který ověřil na oficiálním fóru Xilinx \cite{xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation}.\par
+				Postup nalezení reálného pinu je následující:
+				
+
+
+				\begin{lstlisting}[language={xdc}, caption={Constraints XDC soubor pro přiřazení PL Vivado pinu fan\_en\_b k fyzickému pinu MPSoC na CC.}, label= {lst:fan-pinout-constraints-file}]
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
+					
+# Fan Speed Enable
+set_property PACKAGE_PIN A12 [get_ports {fan_en_b}]
+set_property IOSTANDARD LVCMOS33 [get_ports {fan_en_b}]
+set_property SLEW SLOW [get_ports {fan_en_b}]
+set_property DRIVE 4 [get_ports {fan_en_b}]\end{lstlisting}
 				
 			\fbar
 			\subsubsection{HW block design vyvíjené aplikace}\label{subsubsec:hw-block-design-vyvijene-aplikace}
@@ -1380,7 +1534,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\end{figure}
 
 
-		Následně je pro funkční akcelerované aplikace nutné vložit do designu blok \textit{Clocking Wizard}, ve kterém nastavit v~záložce \textit{Output Clocks}, aby byl signál aktivní v~0 a aktivovat pět výstupních signálů \textit{Clock}. Těmto signálům je po aktivaci možné nastavit taktovací frekvenci na 50, 100, 150, 200 a 300 Hz. Poté je nutné na výstup \textit{FCLK\_CLK0} bloku \textit{ZYNQ7 Processing System} připojit vstup \textit{clk\_in1} a k~výstupu \textit{FCLK\_RESET0\_N} vstup \textit{resetn}.\par
+		Poté je pro funkční akcelerované aplikace nutné vložit do designu blok \textit{Clocking Wizard}, ve kterém nastavit v~záložce \textit{Output Clocks}, aby byl signál aktivní v~0 a aktivovat pět výstupních signálů \textit{Clock}. Těmto signálům je po aktivaci možné nastavit taktovací frekvenci na 50, 100, 150, 200 a 300 Hz. Poté je nutné na výstup \textit{FCLK\_CLK0} bloku \textit{ZYNQ7 Processing System} připojit vstup \textit{clk\_in1} a k~výstupu \textit{FCLK\_RESET0\_N} vstup \textit{resetn}.\par
 		Po nastavení bloku \textit{Clocking Wizard} je zapotřebí do designu vložit pět bloků \textit{Processor System Reset}. Následuje propojení odpovídajících výstupů bloků \textit{Clocking Wizard} s~názvem \textit{clk\_outX}, kde \textit{X} značí pořadí výstupního signálu, s~odpovídajícímí bloky \textit{Processor System Reset} a jejich vstupy \textit{slowest\_sync\_clk}. Ke všem vstupům \textit{dcm\_locked} bloků \textit{Processor System Reset} je nutné připojit výstup \textit{locked} \textit{Clocking Wizard}. A~konečně ke všem vstupům \textit{ext\_reset\_in} připojit výstup \textit{FCLK\_RESET0\_N} ZynQ bloku. Představené propojení jednotlivých bloků je možné pozorovat na obr. \ref{fig:zybo-xilinx-vivado-flow-12}.
 
 		\begin{figure}[htbp!]
