@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [12.04.2023](/notes/20230412.md) <-- zprovoznění SPI, data z osciloskopu [20230412](./notes/code/20230412/oscilloscope-data/)
+
+---
+
 💻 [11.04.2023](/notes/20230411.md) <-- snaha rozchození spi, foto vivado, řešení arduino pro SPI testování, změna vivado designu pro 10 MHz CLK pro SPI, nevím, zda to půjde protože v dokumentaci je napsáno, že ext clk nemá být menší než axi clk, ale v jejich tabulce o min a max hodnotách je ext clk nižší než axi clk, což už i kdyby to vše bylo na max, je ext clk menší než axi clk, je třeba to vyzkoušet
 
 ---
