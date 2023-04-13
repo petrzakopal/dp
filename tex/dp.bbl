@@ -1581,6 +1581,43 @@
       \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-vivado-2022-1-33746d
       \endverb
     \endentry
+    \entry{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{17}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Vitis Tutorials Github Repository}
+      \field{day}{22}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{title}{Vitis Custom Embedded Platform Creation Example on KV260 – Step 1: Create the Vivado Hardware Design and Generate XSA}
+      \field{urlday}{13}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step1.html
+      \endverb
+      \verb{url}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step1.html
+      \endverb
+    \endentry
     \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
       \name{author}{1}{}{%
         {{hash=19947edb20f496d8ecef44bc1609a614}{%
@@ -1631,7 +1668,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{17}
+      \field{extraname}{18}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}

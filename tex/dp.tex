@@ -1152,10 +1152,142 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány základní rámcové informace o postupu z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} a \cite{hackster-getting-started-with-the-kria-kr260-in-vivado}. Konkrétní postup se liší dle vytvářené aplikace a zkoumaných vlastností.\par
 				Protože prvotní vývoj a zkoumání využitelnosti SoC bylo prováděno na desce Digilent Zybo Zynq-7000, je v příloze \hyperref[sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku]{\textit{Tvorba HW designu pro Digilent Zybo Zynq-7000
 				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku. Konfigurace PS a tvorba HW pro Digilent Zybo se odlišuje převážně proto, že Zybo používá starší PS Zynq-7000, oproti novějšímu PS MPSoC Zynq UltraScale+ v Xilinx Kria.\par
-				Prvním krokem je vytvoření Vivado projektu a jeho umístění do složky \texttt{hw} (popis struktury složek v projektu je představen v části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}).
+				Prvním krokem je vytvoření Vivado projektu a jeho umístění do složky \texttt{hw} (popis struktury složek v projektu je představen v části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}).\par
+				Postup tvorba projektu začíná pro většinu akcelerovaných aplikací stejným způsobem. Po otveření programu Vivado stačí vytvořit nový project typu \textit{RTL Project} a aktivovat nastavení \textit{Project is an extensible Vitis platform}. Ukázka nabídky tvorby projektu je na obr. \ref{fig:kr26-xilix-vivado-flow-01}.
 
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.65\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-01.jpg}
+					\caption{Xilinx Vivado – volba typu projektu, použitelného dále jako platforma ve Vitis, pro Xilinx KR26.}
+					\label{fig:kr26-xilix-vivado-flow-01}
+				\end{figure}
+
+				Dalším krokem při zakládání projektu je zvolení prvku, na který bude vyvíjený HW design určen. Je možné zvolit přímo komponentu, pro kterou je design určen nebo již přednastavené vývojové desky. Pokud není vývojová deska v repozitáři od Xilinx, je možné jí vložit dle způsobu popsaného v části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}. Xilinx Kria KR260 je však již součástí daného repozitáře a je možné ji v repozitáři vyhledat a zvolit. Výběr desky z repozitáře je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-02}.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-02.jpg}
+					\caption{Xilinx Vivado – výběr základní komponenty, pro který bude HW design vytvářen.}
+					\label{fig:kr26-xilix-vivado-flow-02}
+				\end{figure}
+
+				Po vytvoření projektu je uživateli zobrazena hlavní Vivado obrazovka. V základním nastavení jsou v pravé části obrazovky zobrazeny informace o vybrané základní komponentě/desce a v levé části pracovní menu. Pro pokračování ve vytváření designu je třeba zvolit v menu odkaz \textit{Create block design} a pojmenovat jej dle požadavků autora designu. Zvýrazněné menu a nabídka vytváření blokového je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-03}.
 		
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-03.jpg}
+					\caption{Xilinx Vivado – nabídka vytváření block design.}
+					\label{fig:kr26-xilix-vivado-flow-03}
+				\end{figure}
 
+				Až po krok vytváření block designu byl postup velmi podobný pro obě představené vývojové desky. Nyní je již možné přistoupit k vlastní tvorbě blokového designu v kartě \textit{Diagram}.\par
+				Bloky lze přidávat znakem \texttt{+} v aktivním okně nebo po kliknutím pravého tlačítka myši do volného prostoru v téže okně a zvolení \textit{Add IP} (IP – Intellectual Property). Prvním krokem je přidání PS, v případě Xilinx KR26 se jedná o IP y názvem \texttt{Zynq UltraScale+ MPSoC}. Výhoda používání Vivado je taková, že po vložení některých bloků je k dispozici aktivace automatického propojení/nastavení vybraných bloků IP. Po vložení PS bloku je vhodné tuto automatizaci spustit pomocí aktivního odkazu, zobrazeného na kartě \textit{Diagram} v obr. \ref{fig:kr26-xilix-vivado-flow-05}.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-04.jpg}
+					\caption{Xilinx Vivado – vložení PS IP bloku.}
+					\label{fig:kr26-xilix-vivado-flow-04}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-05.jpg}
+					\caption{Xilinx Vivado – automatické propojení pro PS.}
+					\label{fig:kr26-xilix-vivado-flow-05}
+				\end{figure}
+
+				Další krok je důležitý pro tvorbu akcelerované aplikace pomocí Vitis. Je třeba předkonfigurovat PS AXI Interface (rozhraní) takovým způsobem, aby AXI Interface s vysokým výkonem bylo využito až pro akcelerovanou aplikaci a nikoliv v některém z automatických propojení, jejichž pozitivní přínos byl představen v předchozím odstavci. Tato informace je popsána jak v \cite{hackster-getting-started-with-the-kria-kr260-in-vivado} ale také v oficiálních příkladových \cite{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa} (\textit{v sekci Add Interrupt Support, krok 1}) pro tvorbu platformy pro vývojovou desku Xilinx Kria KV260, jež používá totožný modul Xilinx Kria K26. Obr. \ref{fig:kr26-xilix-vivado-flow-06} obsahuje snímek obrazovky s požadovaným nastavením bloku \texttt{Zynq UltraScale+ MPSoC} a daných rozhraní.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-06.jpg}
+					\caption{Xilinx Vivado – zablokování FPD a odblokování LPD pro block design.}
+					\label{fig:kr26-xilix-vivado-flow-06}
+				\end{figure}
+
+				Protože dle \cite{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa} je počet clock signálů \texttt{pl\_clk} z PS omezený, je vhodné pro vytvoření požadovaných taktovacích signálů využít blok \texttt{Clocking wizard}. V tomto bloku je možné vytvořit taktovací signály s požadovanými parametry. Pokud počet signálů nestačí, je možné přidat další IP.\par
+				Pro design ukázkové platformy v této práci je vhodné přidat tři taktovací signály s frekvencí 100, 200 a 20 MHz. také je důležité nastavit \textit{Reset type} na \textit{Active Low}. Příklad nastavení bloku \texttt{Clocking wizard} je na obr. \ref{fig:kr26-xilix-vivado-flow-07}.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-07.jpg}
+					\caption{Xilinx Vivado – nastavení bloku Clocking wizard.}
+					\label{fig:kr26-xilix-vivado-flow-07}
+				\end{figure}
+				Po nastavení požadovaných taktovacích signálů je možné opět pomocí aktivního odkazu automatizace spustit automatické propojení bloků. Po úspěšném provedení předchozích konfiguračních kroků a automatizace je získáno schéma blokového designu na obr. \ref{fig:kr26-xilix-vivado-flow-08}.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-08.jpg}
+					\caption{Xilinx Vivado – blokový design s PS a blokem Clocking wizard po provedení automatizace.}
+					\label{fig:kr26-xilix-vivado-flow-08}
+				\end{figure}
+
+				K bloku \texttt{Clocking Wizard} je nyní vhodné připojit bloky \texttt{Processor System Reset} dle obr. \ref{fig:kr26-xilix-vivado-flow-09}.
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-09.jpg}
+					\caption{Xilinx Vivado – propojení bloků Clocking wizard a Processor System Reset.}
+					\label{fig:kr26-xilix-vivado-flow-09}
+				\end{figure}
+				
+				Vstup pro přerušení \texttt{pl\_ps irq} může obsahovat maximálně 16 interrupt signálů. Pro design v této aplikaci to je dostačující případ, ovšem pokud je vyžadováno, aby aplikace využívala více signálů přerušení, je třeba využít blok \texttt{AXI Interrupt Controller}. Doporučené nastavení tohoto IP je na obr. \ref{fig:kr26-xilix-vivado-flow-10}. Aby bylo možné připojit signál k \texttt{pl\_ps irq} je nutné přepnout nastavení \textit{Processor Interrupt Type and Connection -> Interrupt Output Connection} na \texttt{Single} z výchozího \texttt{Bus}.\par
+				V případě nevyužití bloku \texttt{AXI Interrupt Controller}, nebo při snaze přivést signály přerušení přímo do \texttt{pl\_ps irq} vstupu PS systému je pro připojení více signálů doporučeno použít IP blok \texttt{Concat}. V pokročilejší části této práci je tento blok také využit, aby byla demonstrována možnost jeho využití a projevení tohoto připojení v PetaLinux systému.\par
+				Po dokončení konfigurace \texttt{AXI Interrupt Controller} je opět možné aktivovat automatizaci propojení a v konfiguračním okně vybrat požadovanou frekvenci clock signálů. V této práci je využito 200 MHz. Výsledný design po automatizaci je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-12}.\par
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-10.jpg}
+					\caption{Xilinx Vivado – nastavení bloku AXI Interrupt Controller.}
+					\label{fig:kr26-xilix-vivado-flow-10}
+				\end{figure}
+
+				\begin{figure}[htbp!]
+					\centering
+					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-12.jpg}
+					\caption{Xilinx Vivado – block design po automatizaci a propojení bloku AXI Interrupt Controller.}
+					\label{fig:kr26-xilix-vivado-flow-12}
+				\end{figure}
+
+				Pokud by vyvíjená aplikace nevyužívala další PL IP bloky, je možné přistoupit ke konfiguraci platformy, PS a periferií připojených k PS. Pro vyvíjenou ukázkovou aplikaci je vytvořený HW blokový design naznačen v sekci \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW Block design vyvíjené aplikace}}.\par
+				Na kartě \textit{Platform Setup} je pro funkční design vhodné aktivovat a pojmenovat základní AXI porty dle tabulky \ref{tab:vivado-platform-setup-axi-xilinx-kria}.
+
+
+				\begin{table}[H]
+					\centering
+					\caption{Ukázka nastavených AXI portů v~Xilinx Vivado platformě pro \textit{Xilinx Kria KR260}.}
+				  \vspace*{0.15cm}
+				
+					\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
+					\noalign{\hrule height 2pt}
+					Name & Enabled & Memport & SP Tag\\
+					\noalign{\hrule height 2pt}
+					M\_AXI\_HPM0\_FPD & X & M\_AXI\_GP & -\\ \hline
+					M\_AXI\_HPM1\_FPD & X & M\_AXI\_GP & -\\ \hline
+					S\_AXI\_HPC0\_FPD & X & S\_AXI\_HPC & HPC0\\ \hline
+					S\_AXI\_HPC1\_FPD & X & S\_AXI\_HPC & HPC1\\ \hline
+					S\_AXI\_HP0\_FPD & X & S\_AXI\_HP & HP0\\ \hline
+					S\_AXI\_HP1\_FPD & X & S\_AXI\_HP & HP1\\ \hline
+					S\_AXI\_HP2\_FPD & X & S\_AXI\_HP & HP2\\ \hline
+					S\_AXI\_HP3\_FPD & X & S\_AXI\_HP & HP3\\ \noalign{\hrule height 2pt}
+					\end{tabular}
+					\label{tab:vivado-platform-setup-axi-xilinx-kria}
+				\end{table}
+
+
+				
+			\fbar
+			\subsubsection{HW block design vyvíjené aplikace}\label{subsubsec:hw-block-design-vyvijene-aplikace}
+
+			\begin{figure}[htbp!]
+				\centering
+				\includegraphics[width=0.95\textwidth]{src/png/kr-26-xilinx-vivado-hw-block-design.png}
+				\caption{Xilinx Vivado – HW block design vyvíjené aplikace.}
+				\label{fig:kr-26-xilinx-vivado-hw-block-design}
+			\end{figure}
 
 	% Basic popsání, možná si zjistit do hloubky co vše znamená
     % WorkFlow
@@ -1215,8 +1347,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 			\begin{figure}[htbp!]
 				\centering
-				\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg}
-				\caption{Xilinx Vivado – volba typu projektu.}
+				\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg}
+				\caption{Xilinx Vivado – volba typu projektu pro Digilent Zybo.}
 				\label{fig:zybo-xilinx-vivado-flow-01}
 			\end{figure}
 
@@ -1224,8 +1356,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg}
-			\caption{Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura.}
+			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg}
+			\caption{Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-02}
 		\end{figure}
 		
@@ -1233,8 +1365,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg}
-			\caption{Xilinx Vivado – vytváření Block Design.}
+			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg}
+			\caption{Xilinx Vivado – vytváření Block Design pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-05}
 		\end{figure}
 
@@ -1242,8 +1374,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg}
-			\caption{Xilinx Vivado – vložení bloku ZYNQ7 Processing System.}
+			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg}
+			\caption{Xilinx Vivado – vložení bloku ZYNQ7 Processing System pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-07}
 		\end{figure}
 
@@ -1253,15 +1385,15 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg}
-			\caption{Xilinx Vivado – nastavení výstupních taktovacích signálů.}
+			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg}
+			\caption{Xilinx Vivado – nastavení výstupních taktovacích signálů pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-36}
 		\end{figure}
 
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg}
-			\caption{Xilinx Vivado – propojení bloků taktování.}
+			\caption{Xilinx Vivado – propojení bloků taktování pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-12}
 		\end{figure}
 
@@ -1273,16 +1405,16 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg}
-			\caption{Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci.}
+			\caption{Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-17}
 		\end{figure}
 
-		Nyní je možné přejít ze záložky \textit{Diagram} do záložky \textit{Platform Setup} ve které je pro zajištění funkčnosti nutné nastavit určité potřebné konektory a výstupy. Následuje nastavení parametrů bloku \textit{ZYNQ7 Processing System} v~záložce \textit{AXI Port} dle tabulky č. \ref{tab:vivado-platform-setup-axi}.
+		Nyní je možné přejít ze záložky \textit{Diagram} do záložky \textit{Platform Setup} ve které je pro zajištění funkčnosti nutné nastavit určité potřebné konektory a výstupy. Následuje nastavení parametrů bloku \textit{ZYNQ7 Processing System} v~záložce \textit{AXI Port} dle tabulky č. \ref{tab:vivado-platform-setup-axi-digilent-zybo}.
 
 
 		\begin{table}[H]
 			\centering
-			\caption{Ukázka nastavených AXI portů v~Xilinx Vivado bloku \textit{ZYNQ7 Processing System}.}
+			\caption{Ukázka nastavených AXI portů v~Xilinx Vivado platformě pro \textit{Digilent Zybo}.}
 		  \vspace*{0.15cm}
 		
 			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
@@ -1296,7 +1428,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 			S\_AXI\_HP2 & X & S\_AXI\_HP & HP2 \\ \hline
 			S\_AXI\_HP3 & X & S\_AXI\_HP & HP3 \\\noalign{\hrule height 2pt}
 			\end{tabular}
-			\label{tab:vivado-platform-setup-axi}
+			\label{tab:vivado-platform-setup-axi-digilent-zybo}
 		\end{table}
 
 		Aby bylo možné zapisovat do globální paměti přes MAXI Adapter je nutné povolit funkci vybraných portů v~bloku \textit{AXI Interconnect}. V~této práci byly povoleny porty \textit{M01\_AXI} až \textit{M32\_AXI}.\par
@@ -1312,14 +1444,14 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.65\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg}
-			\caption{Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit{Board/Zybo/GPIO}.}
+			\caption{Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit{Board/Zybo/GPIO} pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-38}
 		\end{figure}
 
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.95\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg}
-			\caption{Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL.}
+			\caption{Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-37}
 		\end{figure}
 
@@ -1348,7 +1480,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg}
-			\caption{Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat.}
+			\caption{Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-29}
 		\end{figure}
 
