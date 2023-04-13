@@ -13,6 +13,11 @@
 
 ## Mé denní poznámky ✏️
 
+
+💻 [13.04.2023](/notes/20230413.md) <-- zkouška zprovoznění interruptu na SPI + psaní do [dp.tex](dp.tex)
+
+---
+
 💻 [12.04.2023](/notes/20230412.md) <-- zprovoznění SPI, data z osciloskopu [20230412](./notes/code/20230412/oscilloscope-data/)
 
 ---
