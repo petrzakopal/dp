@@ -2266,11 +2266,17 @@
     <bcf:citekey order="131">hackster-getting-started-with-the-kria-kr260-in-petalinux</bcf:citekey>
     <bcf:citekey order="132">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
     <bcf:citekey order="133">xilinx-downloads</bcf:citekey>
+    <bcf:citekey order="134">axi-quad-spi-ip-product-guide</bcf:citekey>
+    <bcf:citekey order="135">axi-timer-v-2-0-ip-product-guide</bcf:citekey>
+    <bcf:citekey order="136">devicetree-org-specification</bcf:citekey>
+    <bcf:citekey order="137">youtube-devicetree-for-dummies</bcf:citekey>
+    <bcf:citekey order="138">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
+    <bcf:citekey order="139">hackster-getting-started-with-the-kria-kr260-in-petalinux</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="134">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="135">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="136">digilent-zybo-reference-manual</bcf:citekey>
-    <bcf:citekey order="137">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="140">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="141">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="142">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="143">digilent-zybo-reference-manual</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

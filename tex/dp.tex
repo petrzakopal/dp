@@ -187,6 +187,12 @@ literate={;}{{\textcolor{ctuorange}{;}}}{1}
 sensitive=false,
 morecomment=[l]{\#}} %basic xdc file in Vivado syntax highlighting%
 
+\lstdefinelanguage{xsct}
+{morekeywords={xsct, hsi, open_hw_design, -createdts, -hw, -zocl, -platform-name, -overlay, -compile, -out, exit, -git-branch},
+alsoletter={-},
+sensitive=false,
+morecomment=[l]{\#}} %xsct (Xilinx Software Command-Line Tools)%
+
 
 %%change in previous commands 2.1 em , 1.53em and 1em to 1em to be easy indented not the same
 \begin{document}
@@ -1060,7 +1066,7 @@ Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Te
 			\end{figure}
 			
 			\fbar
-			\subsubsection{Postup aplikace PREEMPT\_RT patch}
+			\subsubsection{Postup aplikace PREEMPT\_RT patch}\label{subsubsec:postup-aplikace-preempt-rt-patch}
 				Patch je možné aplikovat několika způsoby. V této práci byl aplikován při fázi tvoření PetaLinux systému pomocí úpravy konfiguračních souborů build procesu.\par
 				Pro bezproblémové aplikování patche je vhodné nejdříve vytvořit \textit{build} PetaLinux systému bez aplikovanání patch souboru s minimální konfigurací a po úspěšném vytvoření systému patch aplikovat a build proces opakovat. Pro funkční aplikaci patch souboru je nutné znát verzi jádra PetaLinux, na který bude aplikován. Označení verze je možné získat z \texttt{Makefile} souboru umístěného v cestě naznačené v kódu \ref{lst:petalinux-kernel-makefile-path}, kde \texttt{<petalinux-project>} je označení pro kořenový (root) adresář PetaLinux projektu, který je tvořen.
 
@@ -1485,11 +1491,91 @@ petalinux-create --type project -s <path-to-bsp-file> --name <project-name>
 petalinux-create --type project -s ./../xilinx-kr260-starterkit-v2022.2-10141622.bsp --name petalinux\end{lstlisting}
 
 	Nyní je možné přejít do adresáře projektu pomocí \texttt{cd <project-name>} a začít konfigurovat \textit{PetaLinux}.\par
-	První konfigurace spočívá v implementaci HW platformy do projektu pomocí příkazu \ref{lst:petalinux-config-hw}. Kdy je předpokládáno, že ve složce \texttt{hw} je umístěn soubor exportované platformy z Vivado, získaný v části \hyperref[subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku]{\textit{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}}.
+	První konfigurace spočívá v implementaci HW platformy do projektu pomocí příkazu \ref{lst:petalinux-config-hw}. Kdy je předpokládáno, že ve složce \texttt{hw} je umístěn soubor exportované platformy z Vivado, získaný v části \hyperref[subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku]{\textit{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}}.\par
 
 
 	\begin{lstlisting}[language={sh}, caption={Konfigurace PetaLinux pomocí XPR souboru z Vivado.}, label= {lst:petalinux-config-hw}]
 petalinux-config --get-hw-description=./../hw/\end{lstlisting}
+
+	Po načtení \textit{XSA} souboru je v terminálu zobrazena konfigurační nabídka. Nastavení prvků v této nabídce je pro K26 SOM uvedeno v kódu \ref{lst:petalinux-config-hw-settings}.
+
+
+
+\begin{lstlisting}[language={sh}, caption={Nastavení v petalinux-config pro Xilix K26 SOM.}, label= {lst:petalinux-config-hw-settings}]
+FPGA Manager -> Fpga Manager <*>
+
+Image Packaging Configuration -> Root Filesystem Type --> INITRD <*>
+Image Packaging Configuration -> INITRAMFS/INITRD Image name -> petalinux-initramfs-image <*>
+Image Packaging Configuration -> Copy final images to tftpboot < >\end{lstlisting}
+
+	Pátý řádek popisuje vypnutí možnosti kopírování souborů pomocí \texttt{tftpboot}. Tato možnost nebyla v této práci využita a prozkoumána.\par
+	Ukázka konfigurační nabídky, která je zobrazena uživateli je na obr. \ref{fig:terminal-petalinux-config}.\par
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.75\textwidth]{src/jpg/terminal-petalinux-config.jpg}
+	\caption{Xilinx Vivado – snímek obrazovky konfigurace PetaLinux pomocí „petalinux-config“ příkazu.}
+	\label{fig:terminal-petalinux-config}
+\end{figure}
+
+
+	Po prvotní konfiguraci bylo zjištěno, že při požadavku na aplikaci RT patch pro PetaLinux je vhodné provést prvotní build systému a poté pokračovat v následných konfiguracích. Build proces je spuštěn příkazem \ref{lst:petalinux-build}.\par
+	Proces aplikace RT Patch je představen v části \hyperref[subsubsec:postup-aplikace-preempt-rt-patch]{\textit{Postup aplikace PREEMPT\_RT patch}}.\par
+
+\begin{lstlisting}[language={sh}, caption={PetaLinux build příkaz pro vytvoření systému.}, label= {lst:petalinux-build}]
+petalinux-build\end{lstlisting}
+	Po aplikaci patche je vhodné pokračovat v nastavování kernelu PetaLinux systému pomocí příkazu \ref{lst:petalinux-config-c-kernel}  dle požadavků aplikace. Ve vytvářené aplikaci je využíván \texttt{Userspace IO Driver} a proto je nutné aktivovat konfiguraci kernelu, která zajistí automatické načtení driveru (ovladače) do systému při jeho startu. Pokud by se tak nestalo, bylo by nutné vkládat moduly, resp. drivery manuálně pomocí příkazů \texttt{modprobe} či \texttt{insmod}. Při konfiguraci kernelu je možné aktivovat i další prvky, které nejsou v této práci využívány. Aktivovaná konfigurace pro \texttt{Userspace IO Driver} je zobrazena v kódu \ref{lst:petalinux-config-c-kernel-userspace-io-driver}.\par
+
+\begin{lstlisting}[language={sh}, caption={PetaLinux příkaz pro konfiguraci kernelu systému.}, label= {lst:petalinux-config-c-kernel}]
+petalinux-config -c kernel\end{lstlisting}
+
+\begin{lstlisting}[language={sh}, caption={PetaLinux konfigurace pro User Space IO Drivers.}, label= {lst:petalinux-config-c-kernel-userspace-io-driver}]
+Device drivers -> user space IO drivers <\*>
+Device drivers -> user space IO drivers -> Userspace platform driver with generic irq and dynamic memory <*>
+Device drivers -> user space IO drivers -> Userspace platform driver with generic IRQ handling <*>\end{lstlisting}
+
+	Aby bylo možné využívat zmiňovaný \texttt{Userspace IO Driver} v podobě \texttt{generic-uio} driver pro řešení přerušení (interrupts) od prvků AXI Quad SPI \cite{axi-quad-spi-ip-product-guide}, AXI Timer \cite{axi-timer-v-2-0-ip-product-guide} a dalších, je nezbytné provést konfiguraci \texttt{devicetree}. Konfiguraci \texttt{devicetree} je možné provádět i u tvorby Linux systému pro jiné vývojové desky s SoC, které neobsahují FPGA, ale využívají systému Linux.\par
+	Problematika \texttt{devicetree} je značně obsáhlá, tento standard je obhospodařován komunitou systému Linux a jsou vydávány specifikace, které tuto datovou strukturu popisují. Tyto specifikace je možné nalézt na oficiálních stránkách této iniciativy. \cite{devicetree-org-specification}\par
+	Existuje i záznam velmi přínosné prezentace z \textit{Embedded Linux Conference Europe} ohledně problematiky Device Tree od \textit{Thomas Petazzoni} s názvem \textit{Device Tree for Dummies!} \cite{youtube-devicetree-for-dummies}.\par
+	Při tvorbě akcelerované aplikace v této práci byl využit \texttt{devicetree} soubor automaticky vytvořený při konfiguraci kernelu a prvotním buil procesu \textit{PetaLinux} systému. Ovšem aby bylo možné použít zmiňované bloky, je třeba do souboru \texttt{system-user.dtsi}, který slouží k překonfigurování automaticky vytvořeného souboru \texttt{system-conf.dtsi}, protože je při \texttt{parse} procesu čten jako poslední.\par
+	Obsah \texttt{system-user.dtsi} souboru je zobrazen v \ref{lst:system-user-dtsi-device-tree}. Soubor je možné nalézt v cestě \texttt{<petalinux-project>/project-spec/meta-user/recipes-bsp/device-tree/files/system.user.dtsi}.\par
+
+	\begin{lstlisting}[language={TeX}, caption={Obsah souboru system-user.dtsi, překonfigurovávající soubor system-conf.dtsi.}, label= {lst:system-user-dtsi-device-tree}]
+/include/ "system-conf.dtsi"
+/ {
+        chosen {
+        bootargs = "earlycon clk_ignore_unused   uio_pdrv_genirq.of_id=generic-uio";
+        stdout-path = "serial0:115200n8";
+        };
+
+    timer@0080020000 {
+        compatible = "axi_timer_0, generic-uio, ui_pdrv";
+        status = "okay";
+        };
+
+    axi_quad_spi@80040000 {
+    compatible = "axi_quad_spi_0, generic-uio, ui_pdrv";
+    status = "okay";
+    };
+};\end{lstlisting}
+
+		Tento rekonfugirační \texttt{devicetree} byl získán reengineeringem souboru \texttt{pl.dtsi}. Soubor \texttt{pl.dtsi} je získán za pomoci exportovaného \textit{XPR} souboru pomocí \texttt{XSCT} (Xilinx Software Command-Line Tool). Postup byl získán ze zdrojů \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}.\par
+		V definované struktuře z části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} je vhodné příkazy vyvolávat ze složky \texttt{linux-files}. Postup spočívá v spuštění nástroje, otevření HW designu souboru \textit{XSA} a použití příkazu \texttt{createdts} s příslušnými parametry. Postup je naznačen v kódu \ref{lst:xsct-flow}.\par
+
+		\begin{lstlisting}[language={xsct}, caption={Postup tvorby pl.dtsi souboru pomoci XSCT, popisující devicetree v runtime.}, label= {lst:xsct-flow}]
+xsct # start the Xilinx Software Command-Line Tool
+
+hsi::open_hw_design ../hw/kria_bd_wrapper.xsa # open HW design
+
+createdts -hw ../hw/kria_bd_wrapper.xsa -zocl -platform-name kria_kr260 -git-branch xlnx_rel_v2022.2 -overlay -compile -out ./dtg_output # create devicetree overlay from defined hardware with the help of Xilinx official GitHub repository
+
+exit # exit the tool\end{lstlisting}
+
+		Uvedeným způsobem je získán textový soubor \texttt{pl.dtsi}, který je možné opět konfigurovat pomocí textového editoru. Soubor má podobnou strukturu jako běžný \texttt{devicetree}, ovšem definuje tzv. fragmenty pro \texttt{device tree overlay}. Protože byla aktivována v kroku HW konfigurace \textit{PetaLinux} možnost \texttt{FPGA Manager -> Fpga Manager <*>}, je v jádru systému \textit{PetaLinux} zabudovaná jen základní část \texttt{devicetree}. Zbytková část je poté načtena do systému při běhu systému (at runtime) při vyvolání příkazu \texttt{xmutil loadapp <name-of-the-app>}. Příkaz \texttt{xmutil} je specifický pro \textit{PetaLinux} a Xilinx nástroje. Pro ostatní \textit{Linux} distribuce a zařízení je nutné využívat obecný způsob načítání \texttt{device tree overlay}.\par
+		Pro vyvíjenou aplikaci v této práci je nutné u použitého bloku AXI Timer
+		změnit \textit{property value} \texttt{compatible = "generic-uio";} a pro AXI Quad SPI na téže hodnotu.
+
+
 	\subsection{Tvorba SW pro CPU a FPGA}
 	\subsubsection{Upravený postup debuggingu PL pro Digilent Zybo}
 

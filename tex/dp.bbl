@@ -1771,6 +1771,136 @@
       \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step2.html
       \endverb
     \endentry
+    \entry{axi-quad-spi-ip-product-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{20}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{26}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{title}{AXI Quad SPI v3.2 LogiCORE IP Product Guide}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/pg153-axi-quad-spi
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/pg153-axi-quad-spi
+      \endverb
+    \endentry
+    \entry{axi-timer-v-2-0-ip-product-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{21}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{5}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{title}{AXI Timer v2.0 LogiCORE IP Product Guide}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/v/u/en-US/pg079-axi-timer
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/v/u/en-US/pg079-axi-timer
+      \endverb
+    \endentry
+    \entry{devicetree-org-specification}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=7e4c57e298e5eb3d7a121e7767a3dc6b}{%
+           family={Limited},
+           familyi={L\bibinitperiod},
+           given={Linaro},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{fullhash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{bibnamehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{authorbibnamehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{authornamehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{authorfullhash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Specification page}
+      \field{langid}{english}
+      \field{title}{The DeviceTree Specification}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.devicetree.org/
+      \endverb
+      \verb{url}
+      \verb https://www.devicetree.org/
+      \endverb
+    \endentry
+    \entry{youtube-devicetree-for-dummies}{incollection}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{YouTube}
+      \field{day}{15}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{note}{Kanál uživatele The Linux Foundation}
+      \field{title}{Device Tree for Dummies! - Thomas Petazzoni, Free Electrons}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://youtu.be/m_NyYEBxfn8
+      \endverb
+      \verb{url}
+      \verb https://youtu.be/m_NyYEBxfn8
+      \endverb
+      \warn{\item Overwriting field 'month' with month value from field 'date' for entry 'youtube-devicetree-for-dummies'}
+    \endentry
     \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
       \name{author}{1}{}{%
         {{hash=19947edb20f496d8ecef44bc1609a614}{%
@@ -1821,7 +1951,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{20}
+      \field{extraname}{22}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
