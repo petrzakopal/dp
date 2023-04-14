@@ -852,8 +852,8 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 					Více informací o~chování a tvorbě DT/DTO, zjištěných při realizaci této práce, je uvedeno v~části \hyperref[subsec:petalinux]{\textit{Petalinux}}.\par
 					Digilent pro své výrobky vytvořil „board files“ a „constrains files“, které umožňují snazší konfiguraci PS a PL v~prostředí Vivado. Značným přínosem jsou „constrains files“, které umožňují snazší a rychlejší mapování fyzických pinů vývojové desky k~portům, pinům a rozhraní, vytvářených ve Vivado. Pro vývojovou desku Xilinx Kria KR260 jsou v~repozitáři Vivado již „board files“ zakomponovány. Ovšem oficiální „constrains files“ nejsou od výrobce k~dispozici. Pro mapování pinů je nutné si vyžádat dokumentaci, pomocí které je možné odvodit požadované mapování a „constrains files“ vytvořit. Potřebná dokumentace pro odvození mapování je v~souborech \cite{kria-kr260-starter-kit-cc-schematics} a \cite{kria-k26-som-xdc}.
 
-			\subsection{Aplikace a operační systém}
-				Aplikace pro Digilent Zybo je možné převážně vytvářet jako \textit{Bare Metal / Standalone} nebo pro operační systém \textit{Petalinux}. Pro Xilinx Kria je možné využít \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. Protože obě využívané vývojové desky využívají čipu od firmy Xilinx, Inc., je podpora dostupná pro oba čipy relativně srovnatelná. Výrobce na stránkách Wiki podpory zmiňuje, že poskytuje podporu převážně ve formě veřejného fóra na adrese \href{https://support.xilinx.com}{\textit{support.xilinx.com}}. Podpora bude dostupná pro dvě poslední major verze softwaerových nástrojů, které jsou součástí \textit{PetaLinux} a \textit{Xilinx SDK}. \cite{xilinx-wiki-atlassian-embedded-sw-support}\par
+			\subsection{Aplikace a operační systém}\label{subsec:aplikace-a-operacni-system}
+				Aplikace pro Digilent Zybo je možné vytvářet jako \textit{Bare Metal / Standalone} nebo aplikace pro operační systém \textit{Petalinux}. Pro Xilinx Kria je možné využít \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. Protože obě využívané vývojové desky využívají čipu od firmy Xilinx, Inc., je podpora dostupná pro oba čipy relativně srovnatelná. Výrobce na stránkách Wiki podpory zmiňuje, že poskytuje podporu převážně ve formě veřejného fóra na adrese \href{https://support.xilinx.com}{\textit{support.xilinx.com}}. Podpora bude dostupná pro dvě poslední major verze softwaerových nástrojů, které jsou součástí \textit{PetaLinux} a \textit{Xilinx SDK}. \cite{xilinx-wiki-atlassian-embedded-sw-support}\par
 				Protože je rodina Kria SOMs modernější než Digilent Zybo, výrobce vytvořil ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. \cite{xilinx-appstore-for-kria-soms}
 				Oba čipy podporují PREEMPT\_RT Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~postupu realizace patche \textit{PetaLinux} je v~sekci \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
 
@@ -1154,7 +1154,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou HW architekturu pro akcelerovanou aplikaci.\par
 			
 		
-		\subsection{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}
+		\subsection{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}\label{subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku}
 				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány základní rámcové informace o postupu z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} a \cite{hackster-getting-started-with-the-kria-kr260-in-vivado}. Konkrétní postup se liší dle vytvářené aplikace a zkoumaných vlastností.\par
 				Protože prvotní vývoj a zkoumání využitelnosti SoC bylo prováděno na desce Digilent Zybo Zynq-7000, je v příloze \hyperref[sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku]{\textit{Tvorba HW designu pro Digilent Zybo Zynq-7000
 				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku. Konfigurace PS a tvorba HW pro Digilent Zybo se odlišuje převážně proto, že Zybo používá starší PS Zynq-7000, oproti novějšímu PS MPSoC Zynq UltraScale+ v Xilinx Kria.\par
@@ -1419,8 +1419,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 
 				Pro spojení vytvořeného virtuálního pinu \texttt{fan\_en\_b} a fyzického pinu, ke kterému je na CC připojen ventilátor je do \texttt{XDC} souboru zapsána konfigurace z kódu \ref{lst:fan-pinout-constraints-file}.\par
 				Kód \ref{lst:fan-pinout-constraints-file} byl získán z \cite{hackster-add-peripherial-support-to-kria-kr260-vivado}. Autorem však bylo ověřeno, že se skutečně jedná o fyzický pin \texttt{A12}.\par
-				Vyhledání propojení fyzického pinu a označení pro soubory \texttt{XDC} probíhá totožně také pro konektory \textit{PMOD} a \textit{Raspberry Pi HAT}. Oficiální dokumentace pro postup vyhledání pinů nebyla autorem nalezena, proto se pokusil nalézt vlastní postup, který ověřil na oficiálním fóru Xilinx \cite{xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation}.\par
-				Postup nalezení reálného pinu je následující:
+				
 				
 
 
@@ -1432,6 +1431,24 @@ set_property PACKAGE_PIN A12 [get_ports {fan_en_b}]
 set_property IOSTANDARD LVCMOS33 [get_ports {fan_en_b}]
 set_property SLEW SLOW [get_ports {fan_en_b}]
 set_property DRIVE 4 [get_ports {fan_en_b}]\end{lstlisting}
+
+				Vyhledání propojení fyzického pinu a označení pro soubory \texttt{XDC} probíhá totožně také pro konektory \textit{PMOD} a \textit{Raspberry Pi HAT}. Oficiální dokumentace pro postup vyhledání pinů nebyla autorem nalezena, proto se pokusil nalézt vlastní postup, který ověřil na oficiálním fóru Xilinx \cite{xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation}.\par
+				\vspace*{0.55cm}
+				Postup nalezení reálného pinu je následující:
+				\begin{enumerate}
+					\item Nalézt ve schématu \cite{kria-kr260-starter-kit-cc-schematics} Kria KR260 CC požadované označení fyzického pinu (např. pro ventilátor \texttt{HDA20}).
+					\item Nalézt ve schématu \cite{kria-kr260-starter-kit-cc-schematics}, ke kterému pinu na PL connector (\texttt{SOM240\_1 CONNECTOR}) je nalezený PIN připojen. (v případě ventilátoru \texttt{C24}).
+					\item V XDC \cite{kria-k26-som-xdc} souboru pro Xilinx Kria K26 vyhledat daný pin z connector připojení, zkontrolovat, zda je připojen ke správnémiu connectoru ze schématu a získat požadovanou hodnotu \texttt{PACKAGE\_PIN}.
+				\end{enumerate}
+				\vspace*{0.75cm}
+				\fbar
+				Po provedení všech pořebných nastavení a konfigurací je možné přejít k finální části postupu ve Vivado.\par
+				Nejprve je vhodné vytvořený design validovat pomocí symbolu „$\checkmark$“ v ovládací liště v okně \textit{Platform}. Pokud jsou získány upozornění s označením \textit{Warning}, je možné pokračovat v tvorbě platformy. V bloku \textit{Sources} zvolit pravým tlačítkem vytvořený block design a aktivovat nabídku \textit{Generate Output Products}. Objeví se konfigurační okno, ve kterém je vhodné nastavit v části \textit{Synthesis Options} volbu \textit{Out of context per IP}. V části \textit{Run Settings} je možné zvolit, kolik jader procesoru se bude podílet na zvolené činnosti. Pro osobní počítače autor doporučuje zvolit méně než polovinu dostupných jader CPU. Bylo vypozorováno, že pokud jader je zvoleno více, může zatížení systému způsobit samovolné ukončení programmu Vivado.\par
+				Po provedení akce je možné zvolit opět v nabídce pro block design akci \textit{Create HDL Wrapper}. V nabídce akce je výhodné využít možnosti \textit{Let Vivado manage wrapper and auto update}, kdy Vivado bude aktualizovar HDL wrapper podle změn provedených v designu.\par
+				Autorovi se ovšem při změně block designu vyplatilo HDL Wrapper kompletně smazat a opětovaně provést kroky \textit{Generate Output Products} a \textit{Create HDL Wrapper}.\par
+				Nyní je již možné přistoupit k syntéze, implementaci a generování bit stream. Jednotlivé kroky je možné pomocí levé nabídky ve Vivado aktivovat samostatně, nebo zvolit pouze generování bit streamu a Vivado automaticky zajistí, že pokud došlo ke změně designu, budou provedeny kroky syntézy a implementace.\par
+				Po úspěšném provedení genrování bitstreamu je možné platformu exportovat pro její další využití v PetaLinux Tools a Vitis. Export je možné provést pomocí volby \textit{File -> Export -> Export Platform}. Ve zobrazené nabídce je obecně u vývojových desek vhodné zvolit \textit{Hardware and hardware emulation}, pokud je požadovaná také HW emulace. Dle \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} podpora HW emulace pro K26 prozatím není dostupná. Posledním krokem je vybrání v nastavení \textit{Platform State} volby \textit{Pre-synthesis} a \textit{Include bitstream}. Po nastavení označení platformy je možné provést export.\par
+				V této části byl představen postup tvorby základní HW platfromy pro Xilinx KR260 Starter Kit vývojovou desku v prostředí Vivado. Výstupem projektu ve Vivado je soubor \textit{XPR}, který je dále využit při tvorbě akcelerované aplikace v PetaLinux Tools a Vitis. Pro některé případy, kdy není potřeba specifický HW v PL je možné využít předpřipravené \textit{XPR} soubory. Tyto předpřipravené soubory slouží pouze k seznámení s vývojovými deskami a nejsou dostačující pro vývoj specifické akcelerované aplikace.
 				
 			\fbar
 			\subsubsection{HW block design vyvíjené aplikace}\label{subsubsec:hw-block-design-vyvijene-aplikace}
@@ -1449,6 +1466,30 @@ set_property DRIVE 4 [get_ports {fan_en_b}]\end{lstlisting}
 
 	\fbar
 	\subsection{Tvorba PetaLinux}\label{subsec:tvorba-petalinux}
+	Jak již bylo zmíněno v části \hyperref[subsec:aplikace-a-operacni-system]{\textit{Aplikace a operační systém}}, aplikace pro Xilinx Kria je možné vytvářen pro \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. V této práci je využito systému \textit{PetaLinux}, který díky své tvorbě pomocí \textit{PetaLinux Tools} je možné konfigurovat tak, aby využíval HW v PL a splňoval požadavky vytvářené aplikace.\par
+	Konfigurace pro jednotlivé požadavky vytvářených aplikací se mohou odlišovat, ovšem rámec (flow) tvorby systému zůstává pro danou platformu zachován. V této práci bude představen postup tvorby \textit{PetaLinux} systému pro HW platformu osabující prvky představené v části \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW block design vyvíjené aplikace}}.\par
+	Postup tvorby \textit{PetaLinux} systému čerpá informace z \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a z experimentálních zjištění autora práce.\par
+	Prvním krokem je aktivace \textit{PetaLinux} prostředí (environment). Příkaz k aktivaci je závislý na umístění instalovaných \textit{PetaLinux Tools} a je zobrazen v kódu \ref{lst:petalinux-environment}. Představený postup předpokládá práci s definovanou strukturou vyvíjené aplikace/projektu definované v části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} v kódu \ref{lst:struktura-slozek}.
+
+
+	\begin{lstlisting}[language={sh}, caption={Aktivace prostředí PetaLinux verze 2022.2.}, label= {lst:petalinux-environment}]
+source /tools/Xilinx/PetaLinux/2022.2/settings.sh\end{lstlisting}
+
+	Po aktivaci prostředí je možné vytvořit projekt pomocí příkazu \ref{lst:petalinux-create}. Soubor \texttt{xilinx-kr260-starterkit-v2022.2-10141622.bsp} je možné stáhnout z oficiálních stránek Xilinx \cite{xilinx-downloads} pro aktuální využívanou verzi vývojových nástrojů.
+
+	\begin{lstlisting}[language={sh}, caption={Tvorba PetaLinux projektu ze základního BSP souboru.}, label= {lst:petalinux-create}]
+# general command
+petalinux-create --type project -s <path-to-bsp-file> --name <project-name>
+
+# example command for defined file structure
+petalinux-create --type project -s ./../xilinx-kr260-starterkit-v2022.2-10141622.bsp --name petalinux\end{lstlisting}
+
+	Nyní je možné přejít do adresáře projektu pomocí \texttt{cd <project-name>} a začít konfigurovat \textit{PetaLinux}.\par
+	První konfigurace spočívá v implementaci HW platformy do projektu pomocí příkazu \ref{lst:petalinux-config-hw}. Kdy je předpokládáno, že ve složce \texttt{hw} je umístěn soubor exportované platformy z Vivado, získaný v části \hyperref[subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku]{\textit{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}}.
+
+
+	\begin{lstlisting}[language={sh}, caption={Konfigurace PetaLinux pomocí XPR souboru z Vivado.}, label= {lst:petalinux-config-hw}]
+petalinux-config --get-hw-description=./../hw/\end{lstlisting}
 	\subsection{Tvorba SW pro CPU a FPGA}
 	\subsubsection{Upravený postup debuggingu PL pro Digilent Zybo}
 

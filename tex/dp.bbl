@@ -1734,6 +1734,43 @@
       \verb https://support.xilinx.com/s/question/0D54U00006alUwcSAE/kria-som-kr260-starter-kit-schematic-pdf-vs-constrains-xdc-pin-confusion-possible-explanation-on-fan-pinout?language=en_US
       \endverb
     \endentry
+    \entry{xilinx-github-vitis-tutorials-step-2-create-the-software-components}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{19}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Vitis Tutorials Github Repository}
+      \field{day}{16}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{title}{Vitis Custom Embedded Platform Creation Example on KV260 – Step 2: Step 2: Create the Software Components}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step2.html
+      \endverb
+      \verb{url}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step2.html
+      \endverb
+    \endentry
     \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
       \name{author}{1}{}{%
         {{hash=19947edb20f496d8ecef44bc1609a614}{%
@@ -1784,7 +1821,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{19}
+      \field{extraname}{20}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}

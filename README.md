@@ -13,6 +13,9 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [14.04.2023](/notes/20230414.md) <-- funkční zprovoznění interruptu na SPI + psaní do [dp.tex](dp.tex)
+
+---
 
 💻 [13.04.2023](/notes/20230413.md) <-- zkouška zprovoznění interruptu na SPI + psaní do [dp.tex](dp.tex)
 
