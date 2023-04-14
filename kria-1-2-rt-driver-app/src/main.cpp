@@ -342,7 +342,7 @@ int main(int argc, char* argv[]) {
     */
 
     int modeSelection = 0;
-    printf("Select mode:\n0 - preloaded data (disabled)\n1 - keyboard input data (partialy enabled)\n2 - CPU/FPGA model\n3 - timer test\n");
+    printf("Select mode:\n0 - preloaded data (disabled)\n1 - keyboard input data (partialy enabled)\n2 - CPU/FPGA model\n3 - timer thread test\n");
     scanf("%i", &modeSelection);
     printf("You have selected: %i\n\r", modeSelection);
 
@@ -1133,6 +1133,7 @@ int main(int argc, char* argv[]) {
     
     std::cout << "the end of the most useful program is here\n";
 
+    // timer thread testing
     if(modeSelection == 3)
     {
 
@@ -1160,60 +1161,6 @@ int main(int argc, char* argv[]) {
     
     backgroundThread.join();
 
-        // void *ptr;
-        // char *uiod;
-        // int value = 0;
-        // uiod = "/dev/uioX";
-        // int fd;
-        // int irq_on = 1;
-
-        // fd = open(uiod, O_RDWR | O_NONBLOCK); // when using poll()
-
-        // struct pollfd fds = {
-        //     .fd = fd,
-        //     .events = POLLIN | POLLOUT,
-        // };
-
-        // if (fd < 1)
-        // {
-        // perror("open\n");
-        // printf("Invalid UIO device file:%s.\n", uiod);
-        // return -1;
-        // }
-
-        // ptr = mmap(NULL, TIMER_MAP_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
-        // value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
-        // printf("timer counter register: %08x\n", value);
-        // std::cout << "sizeof(ptr)= " << sizeof(ptr) << "\n";
-        // std::cout << "sizeof(fd)= " << sizeof(fd) << "\n";
-
-
-        // int ret = poll(&fds, 1, -1);
-
-        // value = *((unsigned *) (ptr + TIMER_0_CTR_REG));
-
-        // printf("timer counter register: %08x\n", value);
-
-        // if (ret >= 1)
-        // {
-        //     ssize_t nb = read(fd, &info, sizeof(info));
-            
-
-        //     if (nb == (ssize_t)sizeof(info))
-        //     {
-        //         /* Do something in response to the interrupt. */
-        //        printf("Interrupt #%u!\n", info);
-        //     }
-        // }
-
-        // *((unsigned *)(ptr)) = 0X1C0;
-        // write(fd, &irq_on, sizeof(irq_on));
-        // *((unsigned *)(ptr + 0x4)) = 0XAFFFFFFF;
-        // *((unsigned *)(ptr)) = 0XE0;
-  
-        // *((unsigned *)(ptr + 0x8)) = 0X0;
-        // munmap(ptr, TIMER_MAP_SIZE);
-        // close(fd);
 
     }
 

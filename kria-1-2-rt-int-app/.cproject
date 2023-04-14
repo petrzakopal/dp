@@ -3,9 +3,9 @@
     	
     <storageModule moduleId="org.eclipse.cdt.core.settings">
         		
-        <cconfiguration id="com.xilinx.ide.accel.config.sw_emu.aarch64.2082859006">
+        <cconfiguration id="com.xilinx.ide.accel.config.sw_emu.aarch64.995361001">
             			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.sw_emu.aarch64.2082859006" moduleId="org.eclipse.cdt.core.settings" name="Emulation-SW">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.sw_emu.aarch64.995361001" moduleId="org.eclipse.cdt.core.settings" name="Emulation-SW">
                 				
                 <externalSettings/>
                 				
@@ -25,29 +25,29 @@
             			
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
                 				
-                <configuration buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" description="" id="com.xilinx.ide.accel.config.sw_emu.aarch64.2082859006" name="Emulation-SW" parent="com.xilinx.ide.accel.config.sw_emu.aarch64">
+                <configuration buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" description="" id="com.xilinx.ide.accel.config.sw_emu.aarch64.995361001" name="Emulation-SW" parent="com.xilinx.ide.accel.config.sw_emu.aarch64">
                     					
-                    <folderInfo id="com.xilinx.ide.accel.config.sw_emu.aarch64.2082859006." name="/" resourcePath="">
+                    <folderInfo id="com.xilinx.ide.accel.config.sw_emu.aarch64.995361001." name="/" resourcePath="">
                         						
-                        <toolChain id="com.xilinx.ide.accel.aarch64.toolchain.sw_emu.debug.433930193" name="Accelerated Host Application Toolchain (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.aarch64.toolchain.sw_emu.debug">
+                        <toolChain id="com.xilinx.ide.accel.aarch64.toolchain.sw_emu.debug.561527903" name="Accelerated Host Application Toolchain (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.aarch64.toolchain.sw_emu.debug">
                             							
-                            <targetPlatform id="com.xilinx.ide.accel.config.sw_emu.aarch64.2082859006..1780027205" name=""/>
+                            <targetPlatform id="com.xilinx.ide.accel.config.sw_emu.aarch64.995361001..1350314059" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.310176831" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-SW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-int-app}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.116513387" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-SW" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.932997637" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
+                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.844466537" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.sw_emu.debug.aarch64.1737540013" name="GCC Host Compiler (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.sw_emu.debug.aarch64">
+                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.sw_emu.debug.aarch64.1586059106" name="GCC Host Compiler (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.sw_emu.debug.aarch64">
                                 								
-                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64.1763689164" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64"/>
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64.884772897" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64"/>
                                 								
-                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.aarch64.619577283" superClass="com.xilinx.ide.accel.managedbuild.input.c.aarch64"/>
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.aarch64.1318535713" superClass="com.xilinx.ide.accel.managedbuild.input.c.aarch64"/>
                                 							
                             </tool>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.1941524621" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
+                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.968884039" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
                                 								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.651834315" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1255533065" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
                                     									
                                     <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
                                     									
@@ -75,9 +75,9 @@
             		
         </cconfiguration>
         		
-        <cconfiguration id="com.xilinx.ide.accel.config.hw_emu.aarch64.1922823247">
+        <cconfiguration id="com.xilinx.ide.accel.config.hw_emu.aarch64.38062354">
             			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hw_emu.aarch64.1922823247" moduleId="org.eclipse.cdt.core.settings" name="Emulation-HW">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hw_emu.aarch64.38062354" moduleId="org.eclipse.cdt.core.settings" name="Emulation-HW">
                 				
                 <externalSettings/>
                 				
@@ -97,29 +97,29 @@
             			
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
                 				
-                <configuration buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" description="" id="com.xilinx.ide.accel.config.hw_emu.aarch64.1922823247" name="Emulation-HW" parent="com.xilinx.ide.accel.config.hw_emu.aarch64">
+                <configuration buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" description="" id="com.xilinx.ide.accel.config.hw_emu.aarch64.38062354" name="Emulation-HW" parent="com.xilinx.ide.accel.config.hw_emu.aarch64">
                     					
-                    <folderInfo id="com.xilinx.ide.accel.config.hw_emu.aarch64.1922823247." name="/" resourcePath="">
+                    <folderInfo id="com.xilinx.ide.accel.config.hw_emu.aarch64.38062354." name="/" resourcePath="">
                         						
-                        <toolChain id="com.xilinx.ide.accel.toolchain.hw_emu.debug.aarch64.1997614611" name="Accelerated Host Application Toolchain (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.toolchain.hw_emu.debug.aarch64">
+                        <toolChain id="com.xilinx.ide.accel.toolchain.hw_emu.debug.aarch64.995304801" name="Accelerated Host Application Toolchain (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.toolchain.hw_emu.debug.aarch64">
                             							
-                            <targetPlatform id="com.xilinx.ide.accel.config.hw_emu.aarch64.1922823247..1138747589" name=""/>
+                            <targetPlatform id="com.xilinx.ide.accel.config.hw_emu.aarch64.38062354..2057360659" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1414258967" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-HW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-int-app}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1273308928" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-HW" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.1997379678" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
+                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.24815157" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.hw_emu.debug.aarch64.1600364546" name="GCC Host Compiler (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.hw_emu.debug.aarch64">
+                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.hw_emu.debug.aarch64.1384074979" name="GCC Host Compiler (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.hw_emu.debug.aarch64">
                                 								
-                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64.536673670" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64"/>
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64.1787486425" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64"/>
                                 								
-                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.aarch64.33043012" superClass="com.xilinx.ide.accel.managedbuild.input.c.aarch64"/>
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.aarch64.1171254157" superClass="com.xilinx.ide.accel.managedbuild.input.c.aarch64"/>
                                 							
                             </tool>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.1862122349" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
+                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.2093062240" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
                                 								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.282628915" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1132541627" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
                                     									
                                     <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
                                     									
@@ -147,9 +147,9 @@
             		
         </cconfiguration>
         		
-        <cconfiguration id="com.xilinx.ide.accel.config.hw.aarch64.414229622">
+        <cconfiguration id="com.xilinx.ide.accel.config.hw.aarch64.1132313218">
             			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hw.aarch64.414229622" moduleId="org.eclipse.cdt.core.settings" name="Hardware">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.xilinx.ide.accel.config.hw.aarch64.1132313218" moduleId="org.eclipse.cdt.core.settings" name="Hardware">
                 				
                 <externalSettings/>
                 				
@@ -169,29 +169,29 @@
             			
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
                 				
-                <configuration artifactExtension="" artifactName="${ProjName}" buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" cleanCommand="rm -rf" description="" id="com.xilinx.ide.accel.config.hw.aarch64.414229622" name="Hardware" parent="com.xilinx.ide.accel.config.hw.aarch64">
+                <configuration artifactExtension="" artifactName="${ProjName}" buildArtefactType="com.xilinx.accelerated.buildArtefactType.hostExe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.xilinx.accelerated.buildArtefactType.hostExe" cleanCommand="rm -rf" description="" id="com.xilinx.ide.accel.config.hw.aarch64.1132313218" name="Hardware" parent="com.xilinx.ide.accel.config.hw.aarch64">
                     					
-                    <folderInfo id="com.xilinx.ide.accel.config.hw.aarch64.414229622." name="/" resourcePath="">
+                    <folderInfo id="com.xilinx.ide.accel.config.hw.aarch64.1132313218." name="/" resourcePath="">
                         						
-                        <toolChain id="com.xilinx.ide.accel.toolchain.hw.aarch64.218310389" name="Accelerated Host Application Toolchain (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.toolchain.hw.aarch64">
+                        <toolChain id="com.xilinx.ide.accel.toolchain.hw.aarch64.1853501476" name="Accelerated Host Application Toolchain (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.toolchain.hw.aarch64">
                             							
-                            <targetPlatform id="com.xilinx.ide.accel.config.hw.aarch64.414229622..1942968603" name=""/>
+                            <targetPlatform id="com.xilinx.ide.accel.config.hw.aarch64.1132313218..248695841" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-app}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1844444228" managedBuildOn="true" name="Accelerated Host Application Builder.Hardware" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-int-app}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.291716881" managedBuildOn="true" name="Accelerated Host Application Builder.Hardware" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.977846531" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
+                            <tool id="com.xilinx.ide.accel.tool.emconfigutil.349444254" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.hw.aarch64.580827893" name="GCC Host Compiler (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.hw.aarch64">
+                            <tool id="com.xilinx.ide.accel.tool.gcc_compiler.hw.aarch64.63471209" name="GCC Host Compiler (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_compiler.hw.aarch64">
                                 								
-                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64.5293227" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64"/>
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64.675684623" superClass="com.xilinx.ide.accel.managedbuild.input.cpp.aarch64"/>
                                 								
-                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.aarch64.2105580231" superClass="com.xilinx.ide.accel.managedbuild.input.c.aarch64"/>
+                                <inputType id="com.xilinx.ide.accel.managedbuild.input.c.aarch64.1400791272" superClass="com.xilinx.ide.accel.managedbuild.input.c.aarch64"/>
                                 							
                             </tool>
                             							
-                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.1915633230" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
+                            <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.513993086" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
                                 								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.809958515" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.554352186" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
                                     									
                                     <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
                                     									
@@ -225,7 +225,7 @@
     	
     <storageModule moduleId="cdtBuildSystem" version="4.0.0">
         		
-        <project id="kria-1-2-rt-app.com.xilinx.ide.accel.hostProject.aarch64.988280234" name="Accelerated Host Application Project (ARMv8-A for A53/A72 - 64 bit)" projectType="com.xilinx.ide.accel.hostProject.aarch64"/>
+        <project id="kria-1-2-rt-int-app.com.xilinx.ide.accel.hostProject.aarch64.1977206195" name="Accelerated Host Application Project (ARMv8-A for A53/A72 - 64 bit)" projectType="com.xilinx.ide.accel.hostProject.aarch64"/>
         	
     </storageModule>
     	
@@ -235,6 +235,6 @@
         	
     </storageModule>
     	
-    <storageModule moduleId="refreshScope"/>
+    <storageModule moduleId="org.eclipse.cdt.core.pathentry"/>
     
 </cproject>
