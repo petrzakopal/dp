@@ -119,7 +119,7 @@ void threadLoop()
         
         // one tick is 0.8 ns, have to wait till data is moved to counter register
         // otherwise it wont start, solve maybe later or ask about it
-        std::this_thread::sleep_for(std::chrono::nanoseconds(1)); 
+        std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 
         *((unsigned *)(timer1ptr + 0x8)) = 0X0;
         *((unsigned *)(timer1ptr)) = 0XC0; // start
@@ -131,6 +131,46 @@ void threadLoop()
     close(timer1fd);
 }
 
+/*
+* @name     acknowledgeInterrupt
+* @brief    Basic function to acknowledge an interrupt.
+* @todo     Make API from SPI and Interrupt solving. Solve how it works in Linux.
+*/
+
+void acknowledgeInterrupt(int fd, void *ptr)
+{
+    struct pollfd fds = {
+            .fd = fd,
+            .events = POLLIN | POLLOUT,
+        };
+    int irq_on = 1; // for writing 0x1 to /dev/uioX
+    uint32_t info = 1; // in read function of a interrupt checking
+    off_t interruptStatus;
+
+   
+        while(true)
+        {
+
+        
+            int ret = poll(&fds, 1, -1); // poll on a return value
+
+            // there was change in ret
+            if (ret >= 1)
+            {
+            /* Do something in response to the interrupt. */
+            printf("AXI Quad SPI Interrupt!\n");
+            interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
+            // printf("1st From acknowledge IPISR: 0x%lx\n", interruptStatus);
+            std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
+            *((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;
+           
+            write(fd, &irq_on, sizeof(irq_on));
+            break;
+            }
+        }
+    
+    
+}
 
 /*
 * @name     SPI communication functions.
@@ -144,14 +184,15 @@ void threadLoop()
 * @brief    Send SPI data to desired slave via mapped device.
 * @todo     Implement interrupt and delete sleep_for...
 */
-void sendSPIdata(void *ptr, off_t slaveSelect, off_t data)
+void sendSPIdata(void *ptr, int fd, off_t slaveSelect, off_t data)
 {
     *((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
     *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect; // 0x01 - slave select 1 to high, when slave no. 2 - it would be 0x02
     *((unsigned *)(ptr + SPI_DTR)) = data;
     *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
     *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-    std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+    // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+    acknowledgeInterrupt(fd, ptr);
     *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
 }
 
@@ -173,7 +214,13 @@ void initializeSPI(void *ptr, off_t slaveSelect)
     
     *((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
 
+
+    // Interrupt settings
+
+    // Global Interrupt Enable
     *((unsigned *)(ptr + SPI_DGIER)) = 0x80000000;
+
+    // Interrupt enables
     *((unsigned *)(ptr + SPI_IPIER)) = 0x3FFF;
 }
 
@@ -182,7 +229,7 @@ void initializeSPI(void *ptr, off_t slaveSelect)
 * @brief    Initialize LED matrix with MAX7219.
 * @todo     Implement interrupt and delete sleep_for...
 */
-void initializeLEDmatrix(void *ptr, off_t slaveSelect)
+void initializeLEDmatrix(void *ptr, int fd, off_t slaveSelect)
 {
     off_t initilSeq[5] = {0x0900, 0x0a01, 0x0b07, 0x0c01, 0x0f00};
 
@@ -193,7 +240,8 @@ void initializeLEDmatrix(void *ptr, off_t slaveSelect)
         *((unsigned *)(ptr + SPI_DTR)) = initilSeq[i];
         *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
         *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-        std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+        // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+        acknowledgeInterrupt(fd, ptr);
         *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
     }
    
@@ -204,7 +252,7 @@ void initializeLEDmatrix(void *ptr, off_t slaveSelect)
 * @brief    Clear LED matrix (set all LEDs to 0).
 * @todo     Implement interrupt and delete sleep_for...
 */
-void clearLEDmatrix(void *ptr, off_t slaveSelect)
+void clearLEDmatrix(void *ptr, int fd, off_t slaveSelect)
 {
 
     off_t clearSeq[8] = {0x100, 0x200, 0x300, 0x400, 0x500, 0x600, 0x700, 0x800};
@@ -215,7 +263,8 @@ void clearLEDmatrix(void *ptr, off_t slaveSelect)
         *((unsigned *)(ptr + SPI_DTR)) = clearSeq[i];
         *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
         *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-        std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+        // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+        acknowledgeInterrupt(fd, ptr);
         *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
     }
 }
@@ -225,19 +274,25 @@ void clearLEDmatrix(void *ptr, off_t slaveSelect)
 * @brief    Print desired letter on a LED matrix.
 * @todo     Implement interrupt and delete sleep_for...
 */
-void printLetterOnLEDMatrix(void *ptr, off_t slaveSelect, off_t *pismeno)
+void printLetterOnLEDMatrix(void *ptr, int fd, off_t slaveSelect, off_t *pismeno)
 {
-        for(int i = 0;i<8;i++)
+
+       
+
+    for(int i = 0;i<8;i++)
     {
         *((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
         *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect; // 0x01 - slave select 1 to high, when slave no. 2 - it would be 0x02
         *((unsigned *)(ptr + SPI_DTR)) = pismeno[i];
         *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
         *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-        std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+        // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
+        acknowledgeInterrupt(fd, ptr);
+
         *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
     }
 }
+
 
 /*
 * @name     Thread for SPI communication.
@@ -306,14 +361,14 @@ void threadLoopSPI()
     // LED matrix initialization
     std::cout<<"Initialize matrix? [1 = yes / 0 = no]\n";
     scanf("%i", &initializeMatrix);
-    (initializeMatrix == 1) ? initializeLEDmatrix(ptr, slaveSelect) : (void)0;
+    (initializeMatrix == 1) ? initializeLEDmatrix(ptr, fd, slaveSelect) : (void)0;
     printf("initializeMatrix is set to: %i\n", initializeMatrix);
 
 
     // Clearing matrix
     std::cout<<"Clear matrix? [1 = yes / 0 = no]\n";
     scanf("%i", &clearMatrix);
-    (clearMatrix == 1) ? clearLEDmatrix(ptr, slaveSelect) : (void)0 ;
+    (clearMatrix == 1) ? clearLEDmatrix(ptr, fd, slaveSelect) : (void)0 ;
     printf("clearMatrix is set to: %i\n", clearMatrix);
 
     
@@ -325,20 +380,19 @@ void threadLoopSPI()
             std::cout<<"Input data to transfer:\n";
             scanf("%lx", &dataToSend);
             printf("Value to send via SPI: 0x%lx\n", dataToSend);
-            sendSPIdata(ptr, slaveSelect, dataToSend);
+            sendSPIdata(ptr, fd, slaveSelect, dataToSend);
             break;
         }
 
         case 1:
         {
-            printLetterOnLEDMatrix(ptr, slaveSelect, pismeno);
+            printLetterOnLEDMatrix(ptr, fd, slaveSelect, pismeno);
             break;
         }
     }
 
     
     printf("IPISR: 0x%lx\n", *((unsigned *)(ptr + SPI_IPISR)));
-
     // Unmaping memory
     munmap(ptr, MAP_SIZE);
 
