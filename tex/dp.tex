@@ -1519,7 +1519,7 @@ set_property DRIVE 4 [get_ports {fan_en_b}]\end{lstlisting}
     % Zjistit jak dát vstupem tlačítka a jak výstupy jako výstupy
 
 	\fbar
-	\subsection{Tvorba PetaLinux}\label{subsec:tvorba-petalinux}
+	\section{Tvorba PetaLinux}\label{subsec:tvorba-petalinux}
 	Jak již bylo zmíněno v~části \hyperref[subsec:aplikace-a-operacni-system]{\textit{Aplikace a operační systém}}, aplikace pro Xilinx Kria je možné vytvářen pro \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. V~této práci je využito systému \textit{PetaLinux}, který díky své tvorbě pomocí \textit{PetaLinux Tools} je možné konfigurovat tak, aby využíval HW v~PL a splňoval požadavky vytvářené aplikace.\par
 	Konfigurace pro jednotlivé požadavky vytvářených aplikací se mohou odlišovat, ovšem rámec (flow) tvorby systému zůstává pro danou platformu zachován. V~této práci bude představen postup tvorby \textit{PetaLinux} systému pro HW platformu osabující prvky představené v~části \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW block design vyvíjené aplikace}}.\par
 	Postup tvorby \textit{PetaLinux} systému čerpá informace z~\cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a z~experimentálních zjištění autora práce.\par
@@ -1538,6 +1538,8 @@ petalinux-create --type project -s <path-to-bsp-file> --name <project-name>
 # example command for defined file structure
 petalinux-create --type project -s ./../xilinx-kr260-starterkit-v2022.2-10141622.bsp --name petalinux\end{lstlisting}
 
+	\fbar
+	\subsection{Hardware konfigurace PetaLinux}
 	Nyní je možné přejít do adresáře projektu pomocí \texttt{cd <project-name>} a začít konfigurovat \textit{PetaLinux}.\par
 	První konfigurace spočívá v~implementaci HW platformy do projektu pomocí příkazu \ref{lst:petalinux-config-hw}. Kdy je předpokládáno, že ve složce \texttt{hw} je umístěn soubor exportované platformy z~Vivado, získaný v~části \hyperref[subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku]{\textit{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}}.\par
 
@@ -1572,6 +1574,8 @@ Image Packaging Configuration -> Copy final images to tftpboot < >\end{lstlistin
 
 \begin{lstlisting}[language={sh}, caption={PetaLinux build příkaz pro vytvoření systému.}, label= {lst:petalinux-build}]
 petalinux-build\end{lstlisting}
+
+	\subsection{Konfigurace kernelu PetaLinux}
 	Po aplikaci patche je vhodné pokračovat v~nastavování kernelu PetaLinux systému pomocí příkazu \ref{lst:petalinux-config-c-kernel}  dle požadavků aplikace. Ve vytvářené aplikaci je využíván \texttt{Userspace IO Driver} a proto je nutné aktivovat konfiguraci kernelu, která zajistí automatické načtení driveru (ovladače) do systému při jeho startu. Pokud by se tak nestalo, bylo by nutné vkládat moduly, resp. drivery manuálně pomocí příkazů \texttt{modprobe} či \texttt{insmod}. Při konfiguraci kernelu je možné aktivovat i další prvky, které nejsou v~této práci využívány. Aktivovaná konfigurace pro \texttt{Userspace IO Driver} je zobrazena v~kódu \ref{lst:petalinux-config-c-kernel-userspace-io-driver}.\par
 
 \begin{lstlisting}[language={sh}, caption={PetaLinux příkaz pro konfiguraci kernelu systému.}, label= {lst:petalinux-config-c-kernel}]
@@ -1582,13 +1586,15 @@ Device drivers -> user space IO drivers <\*>
 Device drivers -> user space IO drivers -> Userspace platform driver with generic irq and dynamic memory <*>
 Device drivers -> user space IO drivers -> Userspace platform driver with generic IRQ handling <*>\end{lstlisting}
 
-	Aby bylo možné využívat zmiňovaný \texttt{Userspace IO Driver} v~podobě \texttt{generic-uio} driver pro řešení přerušení (interrupts) od prvků AXI Quad SPI \cite{axi-quad-spi-ip-product-guide}, AXI Timer \cite{axi-timer-v-2-0-ip-product-guide} a dalších, je nezbytné provést konfiguraci \texttt{devicetree}. Konfiguraci \texttt{devicetree} je možné provádět i u~tvorby Linux systému pro jiné vývojové desky s~SoC, které neobsahují FPGA, ale využívají systému Linux.\par
-	Problematika \texttt{devicetree} je značně obsáhlá, tento standard je obhospodařován komunitou systému Linux a jsou vydávány specifikace, které tuto datovou strukturu popisují. Tyto specifikace je možné nalézt na oficiálních stránkách této iniciativy. \cite{devicetree-org-specification}\par
-	Existuje i záznam velmi přínosné prezentace z~\textit{Embedded Linux Conference Europe} ohledně problematiky Device Tree od \textit{Thomas Petazzoni} s~názvem \textit{Device Tree for Dummies!} \cite{youtube-devicetree-for-dummies}.\par
-	Při tvorbě akcelerované aplikace v~této práci byl využit \texttt{devicetree} soubor automaticky vytvořený při konfiguraci kernelu a prvotním build procesu \textit{PetaLinux} systému. Ovšem aby bylo možné použít zmiňované bloky, je třeba do souboru \texttt{system-user.dtsi}, který slouží k~překonfigurování automaticky vytvořeného souboru \texttt{system-conf.dtsi}, protože je při \texttt{parse} procesu čten jako poslední.\par
-	Obsah \texttt{system-user.dtsi} souboru je zobrazen v~\ref{lst:system-user-dtsi-device-tree}. Soubor je možné nalézt v~cestě \texttt{<petalinux-project>/project-spec/meta-user/recipes-bsp/device-tree/files/system.user.dtsi}.\par
+		\fbar
+		\subsubsection{Konfigurace Device Tree}\label{subsubsec:konfigurace-device-tree}
+		Aby bylo možné využívat zmiňovaný \texttt{Userspace IO Driver} v~podobě \texttt{generic-uio} driver pro řešení přerušení (interrupts) od prvků AXI Quad SPI \cite{axi-quad-spi-ip-product-guide}, AXI Timer \cite{axi-timer-v-2-0-ip-product-guide} a dalších, je nezbytné provést konfiguraci \texttt{devicetree}. Konfiguraci \texttt{devicetree} je možné provádět i u~tvorby Linux systému pro jiné vývojové desky s~SoC, které neobsahují FPGA, ale využívají systému Linux.\par
+		Problematika \texttt{devicetree} je značně obsáhlá, tento standard je obhospodařován komunitou systému Linux a jsou vydávány specifikace, které tuto datovou strukturu popisují. Tyto specifikace je možné nalézt na oficiálních stránkách této iniciativy. \cite{devicetree-org-specification}\par
+		Existuje i záznam velmi přínosné prezentace z~\textit{Embedded Linux Conference Europe} ohledně problematiky Device Tree od \textit{Thomas Petazzoni} s~názvem \textit{Device Tree for Dummies!} \cite{youtube-devicetree-for-dummies}.\par
+		Při tvorbě akcelerované aplikace v~této práci byl využit \texttt{devicetree} soubor automaticky vytvořený při konfiguraci kernelu a prvotním build procesu \textit{PetaLinux} systému. Ovšem aby bylo možné použít zmiňované bloky, je třeba do souboru \texttt{system-user.dtsi}, který slouží k~překonfigurování automaticky vytvořeného souboru \texttt{system-conf.dtsi}, protože je při \texttt{parse} procesu čten jako poslední.\par
+		Obsah \texttt{system-user.dtsi} souboru je zobrazen v~\ref{lst:system-user-dtsi-device-tree}. Soubor je možné nalézt v~cestě \texttt{<petalinux-project>/project-spec/meta-user/recipes-bsp/device-tree/files/system.user.dtsi}.\par
 
-	\begin{lstlisting}[language={devicetree}, caption={Obsah souboru system-user.dtsi, překonfigurovávající soubor system-conf.dtsi.}, label= {lst:system-user-dtsi-device-tree}]
+		\begin{lstlisting}[language={devicetree}, caption={Obsah souboru system-user.dtsi, překonfigurovávající soubor system-conf.dtsi.}, label= {lst:system-user-dtsi-device-tree}]
 /include/ "system-conf.dtsi"
 / {
         chosen {
@@ -1607,8 +1613,8 @@ Device drivers -> user space IO drivers -> Userspace platform driver with generi
     };
 };\end{lstlisting}
 
-		Tento rekonfigurační \texttt{devicetree} byl získán reengineeringem souboru \texttt{pl.dtsi}. Soubor \texttt{pl.dtsi} je získán za pomoci exportovaného \textit{XPR} souboru pomocí \texttt{XSCT} (Xilinx Software Command-Line Tool). Postup byl získán ze zdrojů \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}.\par
-		V~definované struktuře z~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} je vhodné příkazy vyvolávat ze složky \texttt{linux-files}. Postup spočívá v~spuštění nástroje, otevření HW designu souboru \textit{XSA} a použití příkazu \texttt{createdts} s~příslušnými parametry. Postup je naznačen v~kódu \ref{lst:xsct-flow}.\par
+			Tento rekonfigurační \texttt{devicetree} byl získán reengineeringem souboru \texttt{pl.dtsi}. Soubor \texttt{pl.dtsi} je získán za pomoci exportovaného \textit{XPR} souboru pomocí \texttt{XSCT} (Xilinx Software Command-Line Tool). Postup byl získán ze zdrojů \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}.\par
+			V~definované struktuře z~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} je vhodné příkazy vyvolávat ze složky \texttt{linux-files}. Postup spočívá v~spuštění nástroje, otevření HW designu souboru \textit{XSA} a použití příkazu \texttt{createdts} s~příslušnými parametry. Postup je naznačen v~kódu \ref{lst:xsct-flow}.\par
 
 		\begin{lstlisting}[language={xsct}, caption={Postup tvorby pl.dtsi souboru pomoci XSCT, popisující devicetree v~runtime.}, label= {lst:xsct-flow}]
 xsct # start the Xilinx Software Command-Line Tool
@@ -1629,7 +1635,10 @@ dtc -@ -O dtb -o <path-to-output-file> <path-to-input-file> # general command
 
 dtc -@ -O dtb -o ./dtg_output/dtg_output/kria_kr260/psu_cortexa53_0/device_tree_domain/bsp/pl.dtbo ./dtg_output/dtg_output/kria_kr260/psu_cortexa53_0/device_tree_domain/bsp/pl.dtsi # command for project file structure
 \end{lstlisting}
+	Pokud byla kompilace úspěšná (v některých případech dochází k vypsání hlášky ohledně IP bloku interrupt controller, tu je možné ignorovat) je vhodné přesunout soubor \texttt{pl.dtbo} do složky \texttt{transfer}.
 
+	\fbar
+	\subsection{Konfigurace Root File System}
 		Po úspěšné konfiguraci kernelu \textit{PetaLinux} s~aktualizovaným souborem \texttt{system-user.dtsi} je možné přistoupit ke kroku konfigurace \textit{root filesystem} (\texttt{rootfs}). Konfigurační nabídka je vyvolána pomocí příkazu \ref{lst:petalinux-config-c-rootfs}.
 
 \begin{lstlisting}[language={sh}, caption={Příkaz pro vyvolání konfigurace root filesystem}, label= {lst:petalinux-config-c-rootfs}]
@@ -1645,7 +1654,6 @@ petalinux-config -c rootfs\end{lstlisting}
 		\vspace*{0.25cm}
 		\begin{description}
 			\item \texttt{dnf} – Package Manager,
-			\item \texttt{libdrm} – nízkoúrovňová knihovna, využívána grafickými ovladači,
 			\item \texttt{xrt} – Xilinx Runtime Library – knihovna mj. zajišťující komunikaci mezi PS aplikací a akcelerovanými kernely v~PL,
 			\item \texttt{zocl} – ovladač pro ZynQ OpenCL akcelerátory,
 			\item \texttt{opencl-headers} a \texttt{opencl-clhpp} – knihovny pro OpenCL (Open Computing Language),
@@ -1689,6 +1697,8 @@ Petaliunx Package Groups -> packagegroup-petalinux-v4lutils -> packagegroup-peta
 
 Petaliunx Package Groups -> packagegroup-petalinux-x11 -> packagegroup-petalinux-x11 <*>\end{lstlisting}
 	
+	\fbar
+	\subsection{Závěrečný build PetaLinux, generování SDK a tvoření WIC obrazu systému}
 	Po provedení požadované \texttt{rootfs} konfigurace je možné přistoupit opět k~build procesu pomocí příkazu \ref{lst:petalinux-build}. Po první části build procesu je možné aktivovat proces generování \textit{SDK} (Software Development Kit), který je nutný k~tomu, aby bylo možné akcelerovanou aplikaci ve Vitis vyvíjet a aktivovat její build proces. Generování \textit{SDK} je provedeno pomocí příkazu \ref{lst:petalinux-build-sdk}.\par
 	Tento \textit{SDK} je pro jeho využití ve Vitis IDE nutné instalovat. Instalace je doporučena do složky \texttt{linux-files}, udaná strukturou v~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} pomocí příkazu \ref{lst:petalinux-install-sdk-to-linux-files}.
 	Po vygenerování \textit{SDK} je možné přistoupit ke kroku vytvoření a „zabalení“ (package) určitých komponent, pro vytvoření obrazu systému \textit{PetaLinux}. K~tomuto jsou využity příkazy \ref{lst:petalinux-package-boot} a \ref{lst:petalinux-package-wic}.\par
@@ -1713,13 +1723,17 @@ cp bl31.elf pmufw.elf system.dtb u-boot.elf zynqmp_fsbl.elf ./../../../linux-fil
 
 		Vygenerovaný obraz systému typu \texttt{wic} je možné použít na flash SD karty, která je následně vložena do vývojové desky. K flashnutí je možné na opetačním systému macOS nebo Linux využít příkazu \texttt{dd}. Pokud uživatel není zkušený, je doporučováno využít program \textit{balenaEtcher}.\par
 		V této části byl představen postup generování systému \textit{PetaLinux}, byly doporučeny jednotlivá nastavení a konfigurace, vhodné pro vyvíjenou aplikaci. Na závěr části byl nastíněn postup flash SD karty, kterou je poté možné vložit do vývojové desky a započít boot proces systému.
-	\subsection{Tvorba akcelerované aplikace}
+	\fbar
+	\section{Tvorba akcelerované aplikace ve Vitis IDE}
 	V předchozích kapitolách byl představeno, jakým způsobem připravit HW platformu a \textit{PetaLinux} systém pro vývoj akcelerované aplikace. V této části je uveden postup, jakým vytvořit akcelerovanou aplikaci pomocí Vitis, s využitím HLS.\par
 	HLS může být použito také v prostředí Vitis HLS, ve kterém je možné krom \texttt{xo} souborů pro \texttt{v++} linker vytvářet RTL IP PL bloky do prostředí Vivado. Této možnosti nebylo v práci využito a bude předmětem dalších navazujících prací.\par
 	Pro vytvoření \texttt{c++} aplikace pro PS a kernelu pro PL, jež je pomocí HLS z \texttt{c++} zkompilován do objektu \texttt{xo} je využit je v této práci využito prostředí Vitis IDE. Autorem práce je doporučováno využít IDE v maximální míře, ovšem při tvorbě aplikace a prozkoumávání možností využití platformy narazil na problémy s odezvou od GUI Vitis IDE, proto přešel částečně na headless řešení pomocí příkazové řádky. Headless řešení umožňuje rychlejší flow při vytváření aplikace, které je možné automatizovat pomocí \texttt{bash} skriptů. Příkazová řádka v této práci byla převážně využívána ke kompilaci souborů pro PS, kernel k a procesu linkování jednotlivých artefaktů pomocí \texttt{v++ linker}.\par
 	Aby bylo možné Vitis IDE spustit v operačním systému Linux, je nutné opět aktivovat prostředí pomocí příkazu \ref{lst:vitis-environment}. Poté je možné spustit Vitis IDE pomocí příkazu \texttt{vitis}. Po spuštění je třeba zvolit \textit{Workspace}, které je doporučeno volit do složky \texttt{vitis} definované ve \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}.\par
-	Při tvorbě akcelerované aplikace je nejprve nutné vytvořit tzv. \textit{Platform project}, jež využije vytvořený soubor \textit{XSA} z Vivado a soubor \textit{Image} z cesty \texttt{<petalinux-project>/linux/image/Image}. V nabídce výběru systému při tvorbě platformy je nutné vybrat \textit{linux} a zrušit možnost \textit{Generate boot components}. Konfigurace je zobrazená na obr. \ref{fig:vitis-new-platform-linux}.\par
-	Po vytvoření platformy je nutné vložit cesty potřebných souborů platformy. Přidání cest probíhá v souboru \texttt{<platform-name>/platform.spr} v záložce \texttt{linux on cortexa53}. Vysvětlení, jaké cesty souborů je třeba vložit v konfiguraci je uvedeno v tabulce \ref{tab:vitis-platform-spr-settings}.\par
+
+		\fbar
+		\subsection{Tvorba platformy pro akcelerovanou aplikaci}
+		Před tvorbou samotné akcelerované aplikace je nejprve nutné vytvořit tzv. \textit{Platform project}, jež využije vytvořený soubor \textit{XSA} z Vivado a soubor \textit{Image} z cesty \texttt{<petalinux-project>/linux/image/Image}. V nabídce výběru systému při tvorbě platformy je nutné vybrat \textit{linux} a zrušit možnost \textit{Generate boot components}. Konfigurace je zobrazená na obr. \ref{fig:vitis-new-platform-linux}.\par
+		Po vytvoření platformy je nutné vložit cesty potřebných souborů platformy. Přidání cest probíhá v souboru \texttt{<platform-name>/platform.spr} v záložce \texttt{linux on cortexa53}. Vysvětlení, jaké cesty souborů je třeba vložit v konfiguraci je uvedeno v tabulce \ref{tab:vitis-platform-spr-settings}.\par
 	
 
 	\begin{lstlisting}[language={sh}, caption={Aktivace prostředí pro Vitis verze 2022.2.}, label= {lst:vitis-environment}]
@@ -1773,6 +1787,8 @@ source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 			\label{fig:vitis-platform-build}
 		\end{figure}
 
+		\fbar
+		\subsection{Tvorba application projektu}
 		Po dokončení build procesu platformy je již možné přejít k tvorbě \textit{Application Project}. \textit{Application Project} je možné vytvářen pouze na předem vytvořenou platformu, která prošla úspěšným build procesem. Ukázka výběru platformy s povolenou HW akcelerací, na kterou může být vytvářen \textit{Application Project} je na obr. \ref{fig:vitis-application-project-platform-selection}.\par
 		Při inicializaci projektu v kroku \textit{Domain} je nutné zvolit v části \textit{Application settings} cestu k položce \textit{Kernel Image}, ta je pro vyvíjenou aplikaci umístěna v cestě \texttt{<project-name>/<petalinux-project>/images/linux/Image}.
 
@@ -1783,29 +1799,52 @@ source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 			\label{fig:vitis-application-project-platform-selection}
 		\end{figure}
 
+		V následujícím kroku je doporučeno vytvořit aplikaci z předpřipravených ukázkových souborů, ze kterých může být aplikace dále rozvinuta dle potřeb. Nejlepším řešením se autorovi jevilo využívat \textit{Simple Vector Addition}. Při využití ukázkových souborů jsou již potřebné soubory projektu předkonfigurovány a je je možné vhodně měnit, aby splňovali potřebné parametry.\par
+		Po načtení ukázkového projektu je možné spustit build proces přímo z Vitis IDE, nebo pomocí příkazové řádky. Při realizace této práce bylo využíváno příkazové řádky, protože disponovala rychlejší odezvou na požadovaný build a snadněji se tak aplikace iterovala a vyvíjela.\par
+		Aby bylo možné build proces vyvolávat z příkazové řádky, je nutné vytvořit \texttt{makefile} soubory, které slouží ke kompilaci dílčích zdrojových souborů a k vyvolání \texttt{v++} linkeru, jež spojí vytvořené artefakty pro PL do jednoho binárního souboru \texttt{xclbin}. Makefile soubory je možné vytvořit manuálně, nebo pomocí Vitis IDE v okně \textit{Assistant} poklikem levým tlačítkem myši na název potřebného typu procesu build a volby \textit{Create Makefiles}. Toto je potřeba provést nejméně 4x. Pro složky:
+		\begin{enumerate}
+			\item \texttt{<application-project-name>\_hw\_link} \textit{[HW Link]},
+			\item \texttt{<application-project-name>\_kernels} \textit{HW Kernel},
+			\item \texttt{<application-project-name>} \textit{Host},
+			\item \texttt{<type-of-build>} (mimo podsložku, umístěno v hlavní složce \texttt{<application-project-name>} \textit{System}).
+		\end{enumerate}
+		V některých případech nejsou \texttt{makefile} soubory vytvořeny, nebo aktualizovány dle posledních změn v projektu. Proto je nutné v téže okně \textit{Assistant} pravým tlačítkem kliknout na jednotlivé složky a zvolit \textit{Refresh Project Models} a v okně \textit{Explorer} zvolit aplikaci a v nabídce po využití pravvého tlačítka myši zvolit \textit{Refresh} a akci generování \texttt{makefile} souborů opakovat.\par
+		Struktura \texttt{makefile} souborů je obecná a firma Xilinx dodává na svých stránkách dokumentaci k jejich tvorbě. V některých případech, kdy nedocházelo k jejich automatické aktualizaci, byl autor nucen tyto soubory manuálně upravit. Zejména přidat nové soubory pro generování a linkování objektů pro kernel.\par
+		% vyřešit mezery mezi původním odstavcem a listem a listem a odstavcem
+		Doporučený postup build pro \textit{Hardware} build je následující:
+		\begin{enumerate}
+			\item build host aplikace pomocí \texttt{makefile} v cestě \texttt{<vitis-workspace>/<application-name>/Hardware/makefile} (nejrychlejší proces),
+			\item build kernelu pomocí \texttt{makefile} v cestě \texttt{<vitis-workspace>/<application-name>\_kernels/Hardware/makefile} (středně pomalý proces),
+			\item link objektů \texttt{xo} z kroku č. 2 do objektu \texttt{xclbin} pro PL pomocí \texttt{makefile} souboru v cestě \texttt{<vitis-workspace>/<application-name>\_system\_hw\_link/Hardware/makefile} (nejpomalejší proces, obsahuje syntézu, implementaci, generování bitstreamu), tento proces u vytvářené aplikace v této práci trval i 1–2 hodiny.
+		\end{enumerate}
+		Dle dostupných informací Xilinx Kria K26 SoM momentálně nepodporuje emulaci. Proto byl představen postup pro \textit{Hardware} build, který je možné aktivovat při otevření konfiguračního souboru v okně \textit{Explorer} v cestě \texttt{<appliacation-name>\_system/<application-name>\_kernels/<application-name>\_kernels.prj} a výběru \texttt{Hardware} v nastavení pro \textit{Active build configuration}.\par
+		Je nutné upozornit, že tento soubor je opět upravitelný v textovém editoru a této skutečnosti bylo při realizace aplikace velmi využíváno. Soubor obsahuje nastavení jednotlivých akcelerovaných funkcí, výběr optimalizace build procesu a nastavení šířky portu pro přenos dat mezi PS a PL akcelerovanou funkcí. V případě, že jsou přidávány do projektu další akcelerované funkce, je nutné mj. pro jejich zkompilování je umístit i do tohoto souboru pomocí GUI nabídky. Ovvšem v některých případech nedochází ke správné indexaci souborů ze strany Vitis IDE a je nutné upravit soubor v textovém editoru.\par
+
+		
+
+	
+	\section{Deployment aplikace na platformu}
+	Po úspěšném dokončení build a linking procesu aplikace ve Vitis, je možné přistoupit k procesu \textit{deployment} (nasazení) aplikace do systému vývojové desky.\par
+	Z předchozího kroku \hyperref[subsubsec:konfigurace-device-tree]{\textit{Konfigurace Device Tree}} byl získán soubor \texttt{pl.dtbo}, který byl přemístěn do složky \texttt{transfer}, definované v \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}. Do téže složky je vhodné překopírovat soubory:
+	\begin{itemize}
+		\item \texttt{<application-name>/Hardware/<application-name>} (host program),
+		\item \texttt{<application-name>\_system\_hw\_link/Hardware/<binary-container>.xclbin}
+	\end{itemize}
+	% vyřešit mezery mezi původním odstavcem a listem a listem a odstavcem
+	z build procesu pomocí Vitis také do složky \texttt{transfer}.\par
 	% Info o shell.json
-	Aby bylo možné využívat příkazy \texttt{xmutil}, které využívají \texttt{DFX-MGR} (daemon) \cite{xilinx-github-dfx-mgr} pro konfiguraci PL, loading a unloading bitstreamů aplikací, spravování data modelu daných bitstreamů apod. je třeba pro akcelerovanou aplikaci vytvořit metadata soubor \texttt{shell.json}. Tento soubor je využíván právě \texttt{DFX-MGR}. Podpora dalších formátů \texttt{shell\_type}, než jen \texttt{XRT\_FLAT} je ve vývoji. \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components}\par
+	Aby bylo možné využívat příkazy \texttt{xmutil}, které využívají \texttt{DFX-MGR} (daemon) \cite{xilinx-github-dfx-mgr} pro konfiguraci PL, loading a unloading bitstreamů aplikací, spravování data modelu daných bitstreamů apod. je třeba pro akcelerovanou aplikaci vytvořit metadata soubor \texttt{shell.json}. Tento soubor je využíván právě \texttt{DFX-MGR}. Podpora dalších formátů \texttt{shell\_type}, než jen \texttt{XRT\_FLAT} je ve vývoji. \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components}\par Tento soubor je opět vhodné vytvořit na vývojářském PC a přemístit do složky \texttt{transfer}.\par
 
 	\begin{lstlisting}[language={json}, caption={Metadata shell.json soubor pro xmutil.}, label={lst:metadata-shell-json}]
-		{
-			"shell_type": "XRT_FLAT",
-			"num_slots": "1"
-		}\end{lstlisting}
-
-	\subsection{Deployment aplikace na platformu}
+{
+	"shell_type": "XRT_FLAT",
+	"num_slots": "1"
+}\end{lstlisting}
 
 	
 
 
-	\subsubsection{Upravený postup debuggingu PL pro Digilent Zybo}
-
-	Debugging pro program pro PL. Pro host program je možné debuggovat přímo ve Vitis, ale bez PL kernelu.
-	\begin{figure}[htbp!]
-		\centering
-		\includegraphics[width=0.85\textwidth]{src/png/vitis-edited-debugging-flow.png}
-		\caption{Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do PL}
-		\label{fig:vitis-edited-debugging-flow}
-	\end{figure}
+	
 
 \section{Představení pracoviště}
 \section{Dosažené výsledky}
@@ -1988,7 +2027,17 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		Indikátor provádění jednotlivých procesů je umístěn v~pravém horním rohu. Záznam prováděných procesů je umístěn v~kartě \textit{Log}.\par
 		Po úspěšném provedení jednotlivých kroků je zobrazena nabídka, která umožňuje nahlédnout na vytvořený design. Tuto nabídku je možné zavřít aniž by byla vykonávána jakákoliv z~nabízených možností.\par
-		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v~Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný HW i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí V++. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
+		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v~Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný HW i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí \textt{v++}. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
 		Po nastavení dodatečných informací platformy je možné jej vyexportovat do požadované lokace, kde bude dále využívána.
+
+
+	\section{Upravený postup debuggingu PL pro Digilent Zybo}
+	Debugging pro program pro PL. Pro host program je možné debuggovat přímo ve Vitis, ale bez PL kernelu.
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=0.85\textwidth]{src/png/vitis-edited-debugging-flow.png}
+		\caption{Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do PL.}
+		\label{fig:vitis-edited-debugging-flow}
+	\end{figure}
 	\end{appendices}
 \end{document}

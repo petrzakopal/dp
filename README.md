@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+📝 [15.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), popsání PetaLinux, snaha o Vitis, přidání zvýraznění nových syntaxí, opravy, přidání obrázků a kódů
+
+---
+
 💻 [14.04.2023](/notes/20230414.md) <-- funkční zprovoznění interruptu na SPI + psaní do [dp.tex](dp.tex)
 
 ---
