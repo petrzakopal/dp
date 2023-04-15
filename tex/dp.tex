@@ -198,7 +198,7 @@ morecomment=[l]{\#}} %xsct (Xilinx Software Command-Line Tools)%
 {morekeywords={},
 alsoletter={-},
 sensitive=false,
-morecomment=[l]{//}, %basic text%
+morecomment=[l]{//},
 morecomment=[l]{\#}} %basic text%
 
 \lstdefinelanguage{devicetree}
@@ -535,6 +535,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 		
 			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt} c !{\vrule width 2pt}}
 			\noalign{\hrule height 2pt}
+			\rowcolor{codeblue}
 			$i$ & $x$ &	$y$ & $z$ & f($x,y,z$)\\
 			\noalign{\hrule height 2pt}
 			0 & 0 & 0 & 0 & 0\\ \hline
@@ -727,6 +728,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 			   \resizebox{\textwidth}{!}
 				{
 				\begin{tabular}{!{\vrule width 2pt} c | l | l !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+				\rowcolor{codeblue}
 				označení & popis &	poznámka \\
 				\noalign{\hrule height 2pt}
 				1 & Power Switch & galvanické sepnutí napájecího obvodu \\ \hline
@@ -804,6 +806,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 			   		\resizebox{\textwidth}{!}
 						{
 							\begin{tabular}{!{\vrule width 2pt} c | l | l !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+							\rowcolor{codeblue}
 							označení & popis &	poznámka \\
 							\noalign{\hrule height 2pt}
 							1 & SOM modul na BB a Fansink & -  \\ \hline
@@ -860,6 +863,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 						   \resizebox{\textwidth}{!}
 							{
 								\begin{tabular}{!{\vrule width 2pt} l | c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
+								\rowcolor{codeblue}
 								parametr & K26 Commercial SOM & K26 Industrial SOM \\
 								\noalign{\hrule height 2pt}
 								pracovní teplota & 0–85 °C & -40–100 °C\\ \hline
@@ -1336,6 +1340,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				
 					\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
 					\noalign{\hrule height 2pt}
+					\rowcolor{codeblue}
 					Name & Enabled & Memport & SP Tag\\
 					\noalign{\hrule height 2pt}
 					M\_AXI\_HPM0\_FPD & X & M\_AXI\_GP & -\\ \hline
@@ -1713,11 +1718,12 @@ cp bl31.elf pmufw.elf system.dtb u-boot.elf zynqmp_fsbl.elf ./../../../linux-fil
 	HLS může být použito také v prostředí Vitis HLS, ve kterém je možné krom \texttt{xo} souborů pro \texttt{v++} linker vytvářet RTL IP PL bloky do prostředí Vivado. Této možnosti nebylo v práci využito a bude předmětem dalších navazujících prací.\par
 	Pro vytvoření \texttt{c++} aplikace pro PS a kernelu pro PL, jež je pomocí HLS z \texttt{c++} zkompilován do objektu \texttt{xo} je využit je v této práci využito prostředí Vitis IDE. Autorem práce je doporučováno využít IDE v maximální míře, ovšem při tvorbě aplikace a prozkoumávání možností využití platformy narazil na problémy s odezvou od GUI Vitis IDE, proto přešel částečně na headless řešení pomocí příkazové řádky. Headless řešení umožňuje rychlejší flow při vytváření aplikace, které je možné automatizovat pomocí \texttt{bash} skriptů. Příkazová řádka v této práci byla převážně využívána ke kompilaci souborů pro PS, kernel k a procesu linkování jednotlivých artefaktů pomocí \texttt{v++ linker}.\par
 	Aby bylo možné Vitis IDE spustit v operačním systému Linux, je nutné opět aktivovat prostředí pomocí příkazu \ref{lst:vitis-environment}. Poté je možné spustit Vitis IDE pomocí příkazu \texttt{vitis}. Po spuštění je třeba zvolit \textit{Workspace}, které je doporučeno volit do složky \texttt{vitis} definované ve \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}.\par
-	Při tvorbě akcelerované aplikace je nejprve nutné vytvořit tzv. \textit{Platform project}, jež využije vvytvořený soubor \textit{XSA} z Vivado a soubor \textit{Image} z cesty \texttt{<petalinux-project>/linux/image/Image}. V nabídce výběru systému při tvorbě platformy je nutné vybrat \textit{linux} a zrušit možnost \textit{Generate boot components}. Konfigurace je zobrazená na obr. \ref{fig:vitis-new-platform-linux}.
+	Při tvorbě akcelerované aplikace je nejprve nutné vytvořit tzv. \textit{Platform project}, jež využije vytvořený soubor \textit{XSA} z Vivado a soubor \textit{Image} z cesty \texttt{<petalinux-project>/linux/image/Image}. V nabídce výběru systému při tvorbě platformy je nutné vybrat \textit{linux} a zrušit možnost \textit{Generate boot components}. Konfigurace je zobrazená na obr. \ref{fig:vitis-new-platform-linux}.\par
+	Po vytvoření platformy je nutné vložit cesty potřebných souborů platformy. Přidání cest probíhá v souboru \texttt{<platform-name>/platform.spr} v záložce \texttt{linux on cortexa53}. Vysvětlení, jaké cesty souborů je třeba vložit v konfiguraci je uvedeno v tabulce \ref{tab:vitis-platform-spr-settings}.\par
 	
 
 	\begin{lstlisting}[language={sh}, caption={Aktivace prostředí pro Vitis verze 2022.2.}, label= {lst:vitis-environment}]
-		source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
+source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 
 
 		\begin{figure}[htbp!]
@@ -1725,6 +1731,56 @@ cp bl31.elf pmufw.elf system.dtb u-boot.elf zynqmp_fsbl.elf ./../../../linux-fil
 			\includegraphics[width=0.75\textwidth]{src/png/vitis-new-platform-linux.png}
 			\caption{Xilinx Vitis IDE – tvorba platformy pro akcelerovanou aplikaci.}
 			\label{fig:vitis-new-platform-linux}
+		\end{figure}
+
+		\begin{table}[H]
+			\centering
+			\caption{Nastavení cest souborů pro platformu ve Vitis IDE souboru platform.spr.}
+		  \vspace*{0.15cm}
+		  \resizebox{\textwidth}{!}
+		  {
+			\begin{tabular}{!{\vrule width 2pt} l | l | l !{\vrule width 2pt}}
+			\noalign{\hrule height 2pt}
+			\rowcolor{codeblue}
+			Jméno & Cesta & Pozmánka\\
+			\noalign{\hrule height 2pt}
+			OS & linux & generované automaticky\\ \hline
+			Processor & psu\_cortexa53 & generované automaticky\\ \hline
+			Supported Runtimes & OpenCL & generované automaticky\\ \hline
+			Display Name & linux on psu\_cortexa53 & generované automaticky \\\hline
+			Description & linux\_domain & generované automaticky\\ \hline
+			BiF File & - & generovat pomocí šipky tlačítka\\ \hline
+			Boot components directory & \texttt{<project-name>/linux-files/pfm/boot} & -\\ \hline
+			Linux Rootfs & \texttt{<project-name>/<petalinux-project>/images/linux/rootfs.ext4} & generované pomocí \textit{SDK}\\ \hline
+			Bootmode & SD & generované automaticky\\ \hline
+			FAT32 Partition Directory & \texttt{<project-name>/linux-files/pfm/sd\_card} & složka zůstane prázdná\\ \hline
+			Sysroot Directory & \texttt{<project-name>/linux-files/sysroots/cortexa72-cortexa53-xilinx-linux/} & generované pomocí \textit{SDK}\\ \hline
+			QEMU Data & - & generované automaticky \\ \hline
+			QEMU Arguments & - & generované automaticky \\ \hline
+			PMU QEMU Arguments & - & generované automaticky \\\noalign{\hrule height 2pt}
+			\end{tabular}
+		  }
+			\label{tab:vitis-platform-spr-settings}
+		\end{table}
+
+		Jak již bylo řešeno, většinu souborů ve Vitis je možné otevřít pomocí textového editoru. Soubor \texttt{platform.spr} není výjimkou. Pokud dochází k tvorbě mnohočetných projektů se stejným nastavením platformy, je možné vytvořit skripty, které automaticky vytvoří konfigurovaný \texttt{platform.spr} soubor s danou strukturou a nastavením.\par
+		Po základní konfiguraci platformy je možné spustit kompilaci platformy pomocí pravého kliknutí na název platformy v okně \textit{Explorer} a zvolení možnosti \textit{Build Project}. Ukázka tohoto kroku je na obr. \ref{fig:vitis-platform-build}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.95\textwidth]{src/jpg/vitis-build-project-platform.jpg}
+			\caption{Xilinx Vitis IDE – build proces platfromy.}
+			\label{fig:vitis-platform-build}
+		\end{figure}
+
+		Po dokončení build procesu platformy je již možné přejít k tvorbě \textit{Application Project}. \textit{Application Project} je možné vytvářen pouze na předem vytvořenou platformu, která prošla úspěšným build procesem. Ukázka výběru platformy s povolenou HW akcelerací, na kterou může být vytvářen \textit{Application Project} je na obr. \ref{fig:vitis-application-project-platform-selection}.\par
+		Při inicializaci projektu v kroku \textit{Domain} je nutné zvolit v části \textit{Application settings} cestu k položce \textit{Kernel Image}, ta je pro vyvíjenou aplikaci umístěna v cestě \texttt{<project-name>/<petalinux-project>/images/linux/Image}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=0.85\textwidth]{src/jpg/vitis-application-project-platform-selection.jpg}
+			\caption{Xilinx Vitis IDE – výběr platformy pro vytvoření Application Project.}
+			\label{fig:vitis-application-project-platform-selection}
 		\end{figure}
 
 	% Info o shell.json
@@ -1864,6 +1920,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		
 			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
 			\noalign{\hrule height 2pt}
+			\rowcolor{codeblue}
 			Name & Enabled & Memport & SP Tag\\
 			\noalign{\hrule height 2pt}
 			M\_AXI\_GP1 & X & M\_AXI\_GP & -\\ \hline

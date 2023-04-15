@@ -798,6 +798,12 @@ INPUT ./src/jpg/terminal-petalinux-config.jpg
 INPUT ./src/png/vitis-new-platform-linux.png
 INPUT ./src/png/vitis-new-platform-linux.png
 INPUT ./src/png/vitis-new-platform-linux.png
+INPUT ./src/jpg/vitis-build-project-platform.jpg
+INPUT ./src/jpg/vitis-build-project-platform.jpg
+INPUT ./src/jpg/vitis-build-project-platform.jpg
+INPUT ./src/jpg/vitis-application-project-platform-selection.jpg
+INPUT ./src/jpg/vitis-application-project-platform-selection.jpg
+INPUT ./src/jpg/vitis-application-project-platform-selection.jpg
 INPUT ./src/png/vitis-edited-debugging-flow.png
 INPUT ./src/png/vitis-edited-debugging-flow.png
 INPUT ./src/png/vitis-edited-debugging-flow.png
