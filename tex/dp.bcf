@@ -2272,11 +2272,13 @@
     <bcf:citekey order="137">youtube-devicetree-for-dummies</bcf:citekey>
     <bcf:citekey order="138">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
     <bcf:citekey order="139">hackster-getting-started-with-the-kria-kr260-in-petalinux</bcf:citekey>
+    <bcf:citekey order="140">xilinx-github-dfx-mgr</bcf:citekey>
+    <bcf:citekey order="141">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="140">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="141">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="142">digilent-zybo-reference-manual</bcf:citekey>
-    <bcf:citekey order="143">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="142">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="143">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="144">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="145">digilent-zybo-reference-manual</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

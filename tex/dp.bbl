@@ -1901,6 +1901,43 @@
       \endverb
       \warn{\item Overwriting field 'month' with month value from field 'date' for entry 'youtube-devicetree-for-dummies'}
     \endentry
+    \entry{xilinx-github-dfx-mgr}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{22}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub}
+      \field{day}{23}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{DFX-MGR Github Repository}
+      \field{urlday}{15}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/Xilinx/dfx-mgr
+      \endverb
+      \verb{url}
+      \verb https://github.com/Xilinx/dfx-mgr
+      \endverb
+    \endentry
     \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
       \name{author}{1}{}{%
         {{hash=19947edb20f496d8ecef44bc1609a614}{%
@@ -1951,7 +1988,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{22}
+      \field{extraname}{23}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
