@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 & 📝 [16.04.2023](./notes/20230416.md) <-- psaní do [dp.tex](./tex/dp.tex), obrázek SPI testovacího připojení, udělání SPI v threadu
+
+---
+
 📝 [15.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), popsání PetaLinux, snaha o Vitis, přidání zvýraznění nových syntaxí, opravy, přidání obrázků a kódů
 
 ---

@@ -1699,7 +1699,7 @@ Petaliunx Package Groups -> packagegroup-petalinux-x11 -> packagegroup-petalinux
 	
 	\fbar
 	\subsection{Závěrečný build PetaLinux, generování SDK a tvoření WIC obrazu systému}
-	Po provedení požadované \texttt{rootfs} konfigurace je možné přistoupit opět k~build procesu pomocí příkazu \ref{lst:petalinux-build}. Po první části build procesu je možné aktivovat proces generování \textit{SDK} (Software Development Kit), který je nutný k~tomu, aby bylo možné akcelerovanou aplikaci ve Vitis vyvíjet a aktivovat její build proces. Generování \textit{SDK} je provedeno pomocí příkazu \ref{lst:petalinux-build-sdk}.\par
+	Po provedení požadované \texttt{rootfs} konfigurace je možné přistoupit opět k~build procesu pomocí příkazu \ref{lst:petalinux-build}. Po první části build procesu je možné aktivovat proces generování \textit{SDK} (Software Development Kit), který je nutný k~tomu, aby bylo možné akcelerovanou aplikaci ve Vitis vyvíjet a aktivovat její build proces. Generování \textit{SDK} je provedeno pomocí příkazu \ref{lst:petalinux-build-sdk}. Autor vypozoroval, že pokud je postup tvorby \textit{PetaLinux} dodržen a jsou nainstalované všechny správné packages v operačním systému, kde dochází k buildu \textit{SDK}, a vznikne v procesu generování chyba ohledně \texttt{do\_populate\_sdk}, zahrnující klíčové slovo \textit{python}, je třeba restart operačního systému a pokusit se o opakování příkazu \ref{lst:petalinux-build-sdk}.\par
 	Tento \textit{SDK} je pro jeho využití ve Vitis IDE nutné instalovat. Instalace je doporučena do složky \texttt{linux-files}, udaná strukturou v~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} pomocí příkazu \ref{lst:petalinux-install-sdk-to-linux-files}.
 	Po vygenerování \textit{SDK} je možné přistoupit ke kroku vytvoření a „zabalení“ (package) určitých komponent, pro vytvoření obrazu systému \textit{PetaLinux}. K~tomuto jsou využity příkazy \ref{lst:petalinux-package-boot} a \ref{lst:petalinux-package-wic}.\par
 
@@ -1913,7 +1913,21 @@ Aplikaci a bitstream které jsou aktuálně načtené je možné spustit i mimo 
 	V této části byl představen doporučený postup deploymentu aplikace na zařízení Kria K26 SOM. Postup byl doplněn o užitečné příkazy a poznámky, které spuštění aplikace urychlují, usnadňují a nebo přinášejí možnost automatizace pomocí \texttt{bash} skriptů.\par
 	S určitou pravděpodobností existují i jiné způsoby deploymentu aplikací, ale autor je v době realizace této práce zatím nenalezl.
 
+
+\section{Vytvořená aplikace}
+ V této části bude představena vytvořená aplikace pro PS a akcelerovaná aplikace pro PL.
+
+
 \section{Popis pracoviště}\label{sec:popis-pracoviste}
+
+	\subsection{SPI komunikace}
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=1\textwidth]{src/png/spi-test-connection.png}
+		\caption{Názorné schéma připojení PMOD 3 Xilinx Kria KR260 k LED Matici s obvodem MAX7219.}
+		\label{fig:spi-test-connection}
+	\end{figure}
+
 \section{Dosažené výsledky}
 
 

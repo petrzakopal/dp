@@ -804,6 +804,9 @@ INPUT ./src/jpg/vitis-build-project-platform.jpg
 INPUT ./src/jpg/vitis-application-project-platform-selection.jpg
 INPUT ./src/jpg/vitis-application-project-platform-selection.jpg
 INPUT ./src/jpg/vitis-application-project-platform-selection.jpg
+INPUT ./src/png/spi-test-connection.png
+INPUT ./src/png/spi-test-connection.png
+INPUT ./src/png/spi-test-connection.png
 INPUT ./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg
 INPUT ./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg
 INPUT ./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg
