@@ -40,6 +40,94 @@ int threadLoopOutput = 0;
 bool isDataFromBackgroundThreadReady = false; // zde je použito proto aby se zajistilo, že nejsou použity v main while smyšce programu na pozadí dvě stejné hodnoty - když nedošlo vlastně ještě k zápisu, jinak kdyby se mohli použít, tak se nebude vůbec tato proměnná v if statements používat
 std::mutex gLock;
 
+void threadLoop()
+{
+    void *timer1ptr;    // pointer to a virtual memory filled by mmap
+    int timer1fd;       // file descriptor of uio to reset interrupt in /proc/interrupts
+    char *uiod;         // name of the uio to reset interrupts
+    uiod = "/dev/uio5"; // check when making changes in a platform
+    int irq_on = 1;     // for writing 0x1 to /dev/uioX
+    uint32_t info = 1;  // in read function of a interrupt checking
+
+    timer1fd = open(uiod, O_RDWR | O_NONBLOCK); // opening uioX device
+
+    // if error
+    if (timer1fd < 1)
+    {
+        perror("open\n");
+        printf("Invalid UIO device file:%s.\n", uiod);
+    }
+
+    // for polling the interrupt struct
+    struct pollfd fds = {
+        .fd = timer1fd,
+        .events = POLLIN | POLLOUT,
+    };
+
+    // mmap the timer in virtual memory
+    timer1ptr = mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, timer1fd, 0);
+
+    // initial values for timer
+    *((unsigned *)(timer1ptr)) = 0X1C0;
+    write(timer1fd, &irq_on, sizeof(irq_on));
+    *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+    *((unsigned *)(timer1ptr)) = 0XE0;
+
+    // one tick is 0.8 ns, have to wait till data is moved to counter register
+    // otherwise it wont start, solve maybe later or ask about it
+    std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+
+    *((unsigned *)(timer1ptr + 0x8)) = 0X0;
+    *((unsigned *)(timer1ptr)) = 0XC0;
+
+    while (true)
+    {
+        // std::cout << "Outer loop\n";
+        while (true) // polling while
+        {
+            // std::cout << "Inner loop\n";
+            int ret = poll(&fds, 1, -1); // poll on a return value
+
+            // there was change in ret
+            if (ret >= 1)
+            {
+                ssize_t nb = read(timer1fd, &info, sizeof(info));
+                if (nb == (ssize_t)sizeof(info))
+                {
+                    /* Do something in response to the interrupt. */
+                    printf("Interrupt #%u!\n", info);
+                    // if timer has finished (interrupt has risen)
+                    // copy data / insert data to shared variable
+                    if (isDataFromBackgroundThreadReady == false)
+                    {
+                        gLock.lock();                            // mutex locking - any other thread can't access this variable (think it cannot write or read)
+                        threadLoopOutput = threadLoopOutput + 1; // edit the shared variable
+                        gLock.unlock();                          // mutex unlock
+                        isDataFromBackgroundThreadReady = true;  // flag to main while loop that new data is present
+                    }
+                    break;
+                }
+            }
+        }
+
+        // resolving and starting timer again
+        *((unsigned *)(timer1ptr)) = 0X1C0;
+        write(timer1fd, &irq_on, sizeof(irq_on));
+        *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+        *((unsigned *)(timer1ptr)) = 0XE0;
+
+        // one tick is 0.8 ns, have to wait till data is moved to counter register
+        // otherwise it wont start, solve maybe later or ask about it
+        std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+
+        *((unsigned *)(timer1ptr + 0x8)) = 0X0;
+        *((unsigned *)(timer1ptr)) = 0XC0; // start
+    }
+
+    munmap(timer1ptr, MAP_SIZE);
+    close(timer1fd);
+}
+
 /*
  * @name     acknowledgeSPIInterrupt
  * @brief    Basic function to acknowledge an interrupt.
@@ -123,12 +211,6 @@ void initializeSPI(void *ptr, off_t slaveSelect)
 
     // Interrupt enables
     *((unsigned *)(ptr + SPI_IPIER)) = 0x3FFF;
-
-    off_t interruptStatus;
-
-    interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
-    std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
-    *((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;       // reseting SPI interrupt status register
 }
 
 /*
@@ -198,11 +280,11 @@ void printLetterOnLEDMatrix(void *ptr, int fd, off_t slaveSelect, off_t *pismeno
 }
 
 /*
- * @name     mainSPIfunction
+ * @name     Thread for SPI communication.
  * @brief    SPI communication demonstration. Without Interrupts of knowing if the transfer has finished. Need to work on that.
  * @todo     Handle and test interrupts that transfer has finished.
  */
-void mainSPIfunction()
+void threadLoopSPI()
 {
     void *ptr;  // pointer to a virtual memory filled by mmap
     int fd;     // file descriptor
@@ -295,162 +377,6 @@ void mainSPIfunction()
 
     // Closing fd
     close(fd);
-}
-
-bool oddNumberOfTimer = true;
-
-void threadSPI()
-{
-    void *ptr;  // pointer to a virtual memory filled by mmap
-    int fd;     // file descriptor
-    char *uiod; // name what device to open
-    // uiod = "/dev/mem";
-    uiod = "/dev/uio4";
-    off_t slaveSelect = 0x1;
-
-    // letter variable
-    off_t pismenoZ[8] = {0b000110000001,
-                         0b001011000001,
-                         0b001110100001,
-                         0b010010010001,
-                         0b010110001001,
-                         0b011010000101,
-                         0b011110000011,
-                         0b100010000001};
-
-    // letter variable
-    off_t pismenoP[8] = {0b000100000000 + 0b00000000,
-                         0b001000000000 + 0b00000000,
-                         0b001100000000 + 0b00000000,
-                         0b010000000000 + 0b00000000,
-                         0b010100000000 + 0b01110000,
-                         0b011000000000 + 0b10001000,
-                         0b011100000000 + 0b10001000,
-                         0b100000000000 + 0b11111111};
-
-    fd = open(uiod, O_RDWR | O_NONBLOCK); // opening device
-
-    // if error
-    if (fd < 1)
-    {
-        perror("open\n");
-        printf("Invalid UIO device file:%s.\n", uiod);
-    }
-    else
-    {
-        std::cout << "Successfully opened device.\n";
-    }
-
-    // map PL memory to virtual memory
-    ptr = mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-    initializeLEDmatrix(ptr, fd, slaveSelect);
-
-    if (oddNumberOfTimer == true)
-    {
-        clearLEDmatrix(ptr, fd, slaveSelect);
-        printLetterOnLEDMatrix(ptr, fd, slaveSelect, pismenoZ);
-        oddNumberOfTimer = false;
-    }
-    else
-    {
-        clearLEDmatrix(ptr, fd, slaveSelect);
-        printLetterOnLEDMatrix(ptr, fd, slaveSelect, pismenoP);
-        oddNumberOfTimer = true;
-    }
-
-    munmap(ptr, MAP_SIZE);
-
-    // Closing fd
-    close(fd);
-}
-
-void threadLoop()
-{
-    void *timer1ptr;    // pointer to a virtual memory filled by mmap
-    int timer1fd;       // file descriptor of uio to reset interrupt in /proc/interrupts
-    char *uiod;         // name of the uio to reset interrupts
-    uiod = "/dev/uio5"; // check when making changes in a platform
-    int irq_on = 1;     // for writing 0x1 to /dev/uioX
-    uint32_t info = 1;  // in read function of a interrupt checking
-
-    timer1fd = open(uiod, O_RDWR | O_NONBLOCK); // opening uioX device
-
-    // if error
-    if (timer1fd < 1)
-    {
-        perror("open\n");
-        printf("Invalid UIO device file:%s.\n", uiod);
-    }
-
-    // for polling the interrupt struct
-    struct pollfd fds = {
-        .fd = timer1fd,
-        .events = POLLIN | POLLOUT,
-    };
-
-    // mmap the timer in virtual memory
-    timer1ptr = mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, timer1fd, 0);
-
-    // initial values for timer
-    *((unsigned *)(timer1ptr)) = 0X1C0;
-    write(timer1fd, &irq_on, sizeof(irq_on));
-    *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
-    *((unsigned *)(timer1ptr)) = 0XE0;
-
-    // one tick is 0.8 ns, have to wait till data is moved to counter register
-    // otherwise it wont start, solve maybe later or ask about it
-    std::this_thread::sleep_for(std::chrono::nanoseconds(1));
-
-    *((unsigned *)(timer1ptr + 0x8)) = 0X0;
-    *((unsigned *)(timer1ptr)) = 0XC0;
-
-    while (true)
-    {
-        // std::cout << "Outer loop\n";
-        while (true) // polling while
-        {
-            // std::cout << "Inner loop\n";
-            int ret = poll(&fds, 1, -1); // poll on a return value
-
-            // there was change in ret
-            if (ret >= 1)
-            {
-                ssize_t nb = read(timer1fd, &info, sizeof(info));
-                if (nb == (ssize_t)sizeof(info))
-                {
-                    /* Do something in response to the interrupt. */
-                    printf("Interrupt #%u!\n", info);
-                    // if timer has finished (interrupt has risen)
-                    // copy data / insert data to shared variable
-                    if (isDataFromBackgroundThreadReady == false)
-                    {
-                        gLock.lock();                            // mutex locking - any other thread can't access this variable (think it cannot write or read)
-                        threadLoopOutput = threadLoopOutput + 1; // edit the shared variable
-                        threadSPI();
-                        gLock.unlock();                         // mutex unlock
-                        isDataFromBackgroundThreadReady = true; // flag to main while loop that new data is present
-                    }
-                    break;
-                }
-            }
-        }
-
-        // resolving and starting timer again
-        *((unsigned *)(timer1ptr)) = 0X1C0;
-        write(timer1fd, &irq_on, sizeof(irq_on));
-        *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
-        *((unsigned *)(timer1ptr)) = 0XE0;
-
-        // one tick is 0.8 ns, have to wait till data is moved to counter register
-        // otherwise it wont start, solve maybe later or ask about it
-        std::this_thread::sleep_for(std::chrono::nanoseconds(1));
-
-        *((unsigned *)(timer1ptr + 0x8)) = 0X0;
-        *((unsigned *)(timer1ptr)) = 0XC0; // start
-    }
-
-    munmap(timer1ptr, MAP_SIZE);
-    close(timer1fd);
 }
 
 static const int DATA_SIZE = 4096;
@@ -621,7 +547,7 @@ int main(int argc, char *argv[])
 
     std::cout << "-------------------\n";
     std::cout << "testing spi\n";
-    mainSPIfunction();
+    threadLoopSPI();
 
     std::thread backgroundThread(&threadLoop); // initiate a new background Thread
 
