@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>kria-1-2-rt-int-app</name>
+	<name>kria-1-2-rt-dp-app_kernels</name>
 	<comment></comment>
 	<projects>
-		<project>kria-1-2-rt-int-platform</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -19,11 +18,10 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>com.xilinx.ide.accel.core.hostApplicationNature</nature>
-		<nature>com.xilinx.ide.accel.core.embdAccelHostNature</nature>
+		<nature>com.xilinx.ide.accel.core.hwKernelNature</nature>
 		<nature>org.eclipse.cdt.core.cnature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
 </projectDescription>
