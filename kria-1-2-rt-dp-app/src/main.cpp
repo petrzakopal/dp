@@ -121,7 +121,7 @@ void acknowledgeSPIInterrupt(int fd, void *ptr)
             printf("AXI Quad SPI Interrupt!\n");
             interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
             // printf("1st From acknowledge IPISR: 0x%lx\n", interruptStatus);
-            std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
+            std::this_thread::sleep_for(std::chrono::nanoseconds(2)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
             *((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;       // reseting SPI interrupt status register
             write(fd, &irq_on, sizeof(irq_on));
             break;
@@ -457,7 +457,9 @@ void threadLoop()
     *((unsigned *)(timer1ptr)) = 0X1C0;
     write(timer1fd, &irq_on, sizeof(irq_on));
     // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
-    *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37;
+    // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37;
+    // *((unsigned *)(timer1ptr + 0x4)) = 0xFFE17B7F; // 10 ms
+    *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
     *((unsigned *)(timer1ptr)) = 0XE0;
 
     // one tick is 0.8 ns, have to wait till data is moved to counter register
@@ -487,8 +489,15 @@ void threadLoop()
     }
 
     ptrSPI = mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fdSPI, 0);
+    // std::cout << "Initializing SPI!\n";
+    std::this_thread::sleep_for(std::chrono::nanoseconds(1));
     initializeSPI(ptrSPI, slaveSelect);
+    // std::cout << "Initializing Matrix!\n";
+    std::this_thread::sleep_for(std::chrono::nanoseconds(1));
     initializeLEDmatrix(ptrSPI, fdSPI, slaveSelect);
+    // std::cout << "Clearing Matrix!\n";
+    std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+    clearLEDmatrix(ptrSPI, fdSPI, slaveSelect);
 
     while (true)
     {
@@ -501,6 +510,7 @@ void threadLoop()
             // there was change in ret
             if (ret >= 1)
             {
+
                 ssize_t nb = read(timer1fd, &info, sizeof(info));
                 if (nb == (ssize_t)sizeof(info))
                 {
@@ -524,7 +534,10 @@ void threadLoop()
         // resolving and starting timer again
         *((unsigned *)(timer1ptr)) = 0X1C0;
         write(timer1fd, &irq_on, sizeof(irq_on));
-        *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+        // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+        // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37; // 1 us
+        // *((unsigned *)(timer1ptr + 0x4)) = 0xFFE17B7F; // 10 ms
+        *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
         *((unsigned *)(timer1ptr)) = 0XE0;
 
         // one tick is 0.8 ns, have to wait till data is moved to counter register
@@ -698,7 +711,7 @@ int main(int argc, char *argv[])
      */
 
     int modeSelection = 0;
-    printf("Select mode:\n0 - preloaded data (disabled)\n1 - keyboard input data (partialy enabled)\n2 - CPU/FPGA model\n3 - timer thread test + SPI\n, 4 - SPI send data");
+    printf("Select mode:\n0 - preloaded data (disabled)\n1 - keyboard input data (partialy enabled)\n2 - CPU/FPGA model\n3 - timer thread test + SPI\n4 - SPI send data\n");
     scanf("%i", &modeSelection);
     printf("You have selected: %i\n\r", modeSelection);
 
