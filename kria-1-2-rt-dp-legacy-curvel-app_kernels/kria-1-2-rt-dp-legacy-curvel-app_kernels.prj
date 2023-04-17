@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hwkernel:HwKernelProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hwkernel="http://www.xilinx.com/acceleration/hwkernel" name="kria-1-2-rt-dp-legacy-curvel-app_kernels" platform="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-rt-dp-platform/export/kria-1-2-rt-dp-platform/kria-1-2-rt-dp-platform.xpfm" platformUID="zakopal_k13114:lib:kria_base:1.2(custom)" systemProject="kria-1-2-rt-dp-legacy-curvel-app_system" cpu="">
+  <configuration name="Emulation-SW" id="com.xilinx.ide.accel.config.hwkernel.sw_emu.1620453889" dirty="true">
+    <configBuildOptions xsi:type="hwkernel:KernelOptions" kernelDebug="true">
+      <kernels name="krnl_vadd" sourceFile="src/krnl_vadd.cpp">
+        <configSettings></configSettings>
+      </kernels>
+    </configBuildOptions>
+  </configuration>
+  <configuration name="Emulation-HW" id="com.xilinx.ide.accel.config.hwkernel.hw_emu.1304308864" dirty="true">
+    <configBuildOptions xsi:type="hwkernel:KernelOptions" kernelDebug="true" target="hw_emu">
+      <kernels name="krnl_vadd" sourceFile="src/krnl_vadd.cpp">
+        <configSettings></configSettings>
+      </kernels>
+    </configBuildOptions>
+  </configuration>
+ <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.971014052" dirty="true">
+    <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" target="hw">
+      <kernels name="krnl_CurVelLoadLegacy" sourceFile="src/krnl_CurVelLoadLegacy.cpp" maxMemoryPorts="true">
+        <args name="odeCVCalculationSettingsArray" master="true"/>
+        <args name="modelCVCoeffArray" master="true"/>
+        <args name="inputI1" master="true"/>
+        <args name="inputI2" master="true"/>
+        <args name="inputI3" master="true"/>
+        <args name="inputMotorMechanicalAngularVelocity" master="true"/>
+        <args name="psi2alphaOut" master="true"/>
+        <args name="psi2betaOut" master="true"/>
+      </kernels>
+    </configBuildOptions>
+  </configuration>
+</hwkernel:HwKernelProject>
