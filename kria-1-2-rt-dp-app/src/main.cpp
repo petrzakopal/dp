@@ -121,7 +121,7 @@ void acknowledgeSPIInterrupt(int fd, void *ptr)
             printf("AXI Quad SPI Interrupt!\n");
             interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
             // printf("1st From acknowledge IPISR: 0x%lx\n", interruptStatus);
-            std::this_thread::sleep_for(std::chrono::nanoseconds(2)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
+            std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
             *((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;       // reseting SPI interrupt status register
             write(fd, &irq_on, sizeof(irq_on));
             break;
@@ -458,8 +458,8 @@ void threadLoop()
     write(timer1fd, &irq_on, sizeof(irq_on));
     // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
     // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37;
-    // *((unsigned *)(timer1ptr + 0x4)) = 0xFFE17B7F; // 10 ms
-    *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
+    *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFF82F; // 10 us
+    // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
     *((unsigned *)(timer1ptr)) = 0XE0;
 
     // one tick is 0.8 ns, have to wait till data is moved to counter register
@@ -516,11 +516,12 @@ void threadLoop()
                 {
                     /* Do something in response to the interrupt. */
                     printf("Interrupt #%u!\n", info);
+                    threadSPI(ptrSPI, fdSPI, slaveSelect);
                     // if timer has finished (interrupt has risen)
                     // copy data / insert data to shared variable
                     if (isDataFromBackgroundThreadReady == false)
                     {
-                        threadSPI(ptrSPI, fdSPI, slaveSelect);
+
                         gLock.lock();                            // mutex locking - any other thread can't access this variable (think it cannot write or read)
                         threadLoopOutput = threadLoopOutput + 1; // edit the shared variable
                         gLock.unlock();                          // mutex unlock
@@ -536,8 +537,8 @@ void threadLoop()
         write(timer1fd, &irq_on, sizeof(irq_on));
         // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
         // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37; // 1 us
-        // *((unsigned *)(timer1ptr + 0x4)) = 0xFFE17B7F; // 10 ms
-        *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
+        *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFF82F; // 10 us
+        // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
         *((unsigned *)(timer1ptr)) = 0XE0;
 
         // one tick is 0.8 ns, have to wait till data is moved to counter register
@@ -1453,8 +1454,8 @@ int main(int argc, char *argv[])
 
         while (true) // main while loop as in low lvl embedded proc
         {
-            std::cout << "Main thread is running!\n";                    // just something to see
-            std::this_thread::sleep_for(std::chrono::milliseconds(500)); // simulating some tasks in the background
+            std::cout << "Main thread is running!\n";                     // just something to see
+            std::this_thread::sleep_for(std::chrono::microseconds(1000)); // simulating some tasks in the background
 
             // there is new data present from background Thread
             if (isDataFromBackgroundThreadReady)
