@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [18.04.2023]() <-- psaní do [dp.tex](dp.tex), oprava velikost kreslení vývojových diagramů, vložení spi do classy (ne moc fancy, jen rychle kvůli dp)...
+
+---
+
 💻 [17.04.2023](/notes/20230417.md) <-- psaní do [dp.tex](dp.tex), kreslení vývojových diagramů, práce na legacy aplikaci
 
 ---
