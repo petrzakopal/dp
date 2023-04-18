@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [17.04.2023](/notes/20230417.md) <-- psaní do [dp.tex](dp.tex), kreslení vývojových diagramů, práce na legacy aplikaci
+
+---
+
 💻 & 📝 [16.04.2023](./notes/20230416.md) <-- psaní do [dp.tex](./tex/dp.tex), obrázek SPI testovacího připojení, udělání SPI v threadu, problém SPI v threadu, najednou se zastaví asi na pollingu a nejde dál a jede jen hlavní thread a po ukončení a zapnutí nejde komunikace SPI i když je inicalizována, možná je problém u DDR overun, proto změnit zápis do IPIER na inicializaci, kdy nebudou povoleny některé přerušení, původně je `0x3FFF` a zkusit zadat `0x2005`
 
 ---
