@@ -1,9 +1,8 @@
 #include "../header/spi.h"
 
-
-
 /*
  * @name     acknowledgeSPIInterrupt
+ * @class    spiClass
  * @brief    Basic function to acknowledge an interrupt.
  * @todo     Make API from SPI and Interrupt solving. Solve how it works in Linux.
  */
@@ -39,12 +38,14 @@ void spiClass::acknowledgeSPIInterrupt(int fd, void *ptr)
 
 /*
  * @name     SPI communication functions.
+ * @class    spiClass
  * @brief
  * @todo     Resolve when using multiple slaves to automate slave changing. Eg. when using one slave on 1. SS, just changing 0x01 to 0x00, when using slave only on 2. SS change 0x2 to 0x0, but when using slaves on 1. and 2. SS and activating slave only on SS 1. it should probably be 0x3 (both at 1) to 0x2 (first at 0) to 0x3 (both at 1).
  */
 
 /*
  * @name     sendSPIdata
+ * @class    spiClass
  * @brief    Send SPI data to desired slave via mapped device.
  * @todo     Implement interrupt and delete sleep_for...
  * @details  For details about registers check PG of AXI SPI Timer
@@ -62,6 +63,7 @@ void spiClass::sendSPIdata(void *ptr, int fd, off_t slaveSelect, off_t data)
 
 /*
  * @name     initializeSPI
+ * @class    spiClass
  * @brief    Initialize SPI communication in PL for desired slave and mapped device.
  * @todo     Implement interrupt and delete sleep_for...
  */
@@ -95,6 +97,7 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
 
 /*
  * @name     initializeLEDmatrix
+ * @class    spiClass
  * @brief    Initialize LED matrix with MAX7219.
  * @todo     Implement interrupt and delete sleep_for...
  */
@@ -116,6 +119,7 @@ void spiClass::initializeLEDmatrix(void *ptr, int fd, off_t slaveSelect)
 
 /*
  * @name     clearLEDmatrix
+ * @class    spiClass
  * @brief    Clear LED matrix (set all LEDs to 0).
  * @todo     Implement interrupt and delete sleep_for...
  */
@@ -137,6 +141,7 @@ void spiClass::clearLEDmatrix(void *ptr, int fd, off_t slaveSelect)
 
 /*
  * @name     printLetterOnLEDMatrix
+ * @class    spiClass
  * @brief    Print desired letter on a LED matrix.
  * @todo     Implement interrupt and delete sleep_for...
  */
