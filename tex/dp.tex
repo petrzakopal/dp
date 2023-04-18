@@ -1915,15 +1915,161 @@ Aplikaci a bitstream které jsou aktuálně načtené je možné spustit i mimo 
 
 
 \section{Vytvořená aplikace}
- V této části bude představena vytvořená aplikace pro PS a akcelerovaná aplikace pro PL.
+ V této části je představena vytvořená aplikace pro PS a akcelerovaná aplikace pro PL. Aby bylo možné představit jednotlivé funkce, které by byly používány při řízení elektrického pohonu, je ukázková aplikace rozdělena do pěti větví, které je možné vybrat po spuštění aplikace. Je nutné podotknout, že větev \texttt{PRELOADED DATA} bylo nutné realizovat do zvláštní aplikace, protože současné vkládání všech vytvořených kernelů do bitstreamu by vyžadovalo příliš mnoho resources (FIFO). Aby bylo možné všechny větve aplikaci realizovat s pomocí pouze jednoho bitstreamu, bylo by nutné podrobit algoritmus kernelu další optimalizaci.\par
+ Základních pět větví ukázkové aplikace a jejich vztahy k celkovému běhu programu jsou zobrazeny na obr. \ref{fig:application-overview}.
+
+ \begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=1\textwidth]{src/pdf/application-overview.pdf}
+	\caption{Základní větvení ukázkové aplikace.}
+	\label{fig:application-overview}
+\end{figure}
+	Po spuštění hlavního procesu je pomocí \texttt{selectionMode} proměnné volit, jaká podaplikace bude spuštěna. Následně je provedena dynamická alokace paměti pro využívané struktury a pole v daných aplikacích. Je nutné zmínit, že \texttt{PRELOADED DATA} aplikace využívá unikátní sadu proměnných, které nejsou využívány v ostatních aplikacích. Z tohoto důvodu obsahuje \texttt{legacyApp} samostatnou skladbu instrukcí pro dealokaci paměti daných proměnných. Jednolivé podaplikace jsou představeny v následujících částech práce pomocí názorných vývojových diagramů.\par
+	Po ukončení podaplikací jsou vyvolány příkazy pro dealokaci paměti, které byly alokovány dynamicky v programu PS.\par
+	\fbar
+
+	\subsection{Bezpečnost při uživatelském ukončení aplikace}
+	Z důvodu bezpečnosti je do algoritmu aplikace zakomponována funkce \texttt{signal\_callback\_handler}, jež reaguje na signál \texttt{SIGINT}. Tento signál je momentálně vysílán v případě přerušení běhu aplikace uživatelem. Handler funkce je registrována na signál na počátku hlavní \texttt{ main(int argc, char *argv[])} funkce celé aplikace.\par
+	V kódu č. \ref{lst:signall-callback-handler} představana deklarace struktury typu \texttt{InvertorSwitchType}, která slouží k uložení hodnot stavu virtuálních spínačů invertoru. Po deklaraci následuje deklarace funkce \texttt{stopInvertor()}, která po vyvolání nastaví stavy všech virtuálních spínačů na \texttt{0} a zajistí vypsání informační hlášky ohledně tohoto děje pro případ debuggingu.\par
+	Ve funkci \texttt{signal\_callback\_handler} v neprodukční aplikaci vypisuje hlášku o zachycení \texttt{SIGINT} signálu, zajišťuje spuštění funkce \texttt{stopInvertor()} a ukončení programu.
+
+	\begin{lstlisting}[language={c++}, caption={signal\_callback\_handler funkce a její registrace na signál SIGINT}, label={lst:signall-callback-handler}]
+// main.cpp
+main(int argc, char *argv[])
+{
+	// Register signal and signal handler
+	signal(SIGINT, signal_callback_handler);
+.
+..
+...
+}
 
 
+// main.cpp
+
+InvertorSwitchType invertorSwitchGlobal;
+
+void stopInvertor()
+{
+    invertorSwitchGlobal.sw1 = 0;
+    invertorSwitchGlobal.sw2 = 0;
+    invertorSwitchGlobal.sw3 = 0;
+    invertorSwitchGlobal.sw4 = 0;
+    invertorSwitchGlobal.sw5 = 0;
+    invertorSwitchGlobal.sw6 = 0;
+
+    std::cout << "Set all invertor switches at 0!\n";
+}
+
+
+// Define the function to be called when ctrl-c (SIGINT) is sent to process
+void signal_callback_handler(int signum)
+{
+    std::cout << "\nCaught signal " << signum << "\n";
+
+    // stoping invertor of global variables
+    stopInvertor();
+    std::cout << "Terminating program!\n";
+    // Terminate program
+    exit(signum);
+}// Define the function to be called when ctrl-c (SIGINT) is sent to process
+void signal_callback_handler(int signum)
+{
+    std::cout << "\nCaught signal " << signum << "\n";
+
+    // stoping invertor of global variables
+    stopInvertor();
+    std::cout << "Terminating program!\n";
+    // Terminate program
+    exit(signum);
+}\end{lstlisting}
+
+	\fbar
+	\subsection{Keyboard Input}
+
+
+ 		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=1\textwidth]{src/pdf/keyboard-input.pdf}
+			\caption{Keyboard Input větev aplikace – manuální nastavování vstupních hodnot do I-n modelu.}
+			\label{fig:keyboard-input}
+		\end{figure}
+
+		\fbar
+		\subsection{CPU/FPGA Model}
+
+		\begin{figure}[htbp!]
+		   \centering
+		   \includegraphics[width=1\textwidth]{src/pdf/cpu-fpga-model.pdf}
+		   \caption{CPU/FPGA Model větev aplikace – matematický I-n model, regulace, ASM model v FPGA.}
+		   \label{fig:cpu-fpga-model}
+	   \end{figure}
+
+	   \fbar
+	   \subsection{Preloaded Data}
+
+		\begin{figure}[htbp!]
+		   \centering
+		   \includegraphics[width=1\textwidth]{src/pdf/preloaded-data.pdf}
+		   \caption{Preloaded Data větev aplikace – manuální nastavování vstupních hodnot do I-n modelu.}
+		   \label{fig:preloaded-data}
+	   \end{figure}
+
+	   \fbar
+	   \subsection{SPI}
+	   Část aplikace, která prezentuje SPI komunikaci není oproti předchozím představeným podaplikacím akcelerovaná. Tudíž nevyužívá akcelerované funkce (kernelu) pro urychlení výpočtů. Využívá však PL, ve kterém byl vytvořen IP blok \textit{AXI Quad SPI}, který umožňuje SPI komunikaci. Tento blok způsobí vytvoření adres pamětí, které je možní z userspace programu nebo běhu \textit{PetaLinux} adresovat. Díky adresaci v userspace je možné využívat libovolně nakonfigurovanou SPI komunikaci z Vivado IP bloku.\par
+	   Další možné využití SPI komunikace by bylo využít SPI driver, který by bylo nutné aktivovat při tvorbě \textit{PetaLinux} systému.\par
+	   Je důležité zmínit, že nakonfigurované parametry bloku \textit{AXI Quad SPI} lze změnit pouze ve Vivado, tudíž je důležité při tvorbě HW platformy již znát požadavky použitých zařízení, se kterými bude aplikace komunikovat. Jedná se například o délku přenášené zprávy nebo o frekvenci signálu \texttt{CLK}.\par
+	   
+	   \begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=1\textwidth]{src/pdf/spi.pdf}
+			\caption{SPI větev aplikace – manuální odesílání dat přes SPI.}
+			\label{fig:preloaded-data}
+	\end{figure}
+
+	Pro zjednodušení adresování jsou definovány jednotlivé posuny od základní adresy pomocí \texttt{define} direktiv. Definice direktiv dle dokumentace \cite{axi-quad-spi-ip-product-guide} je zobrazena v \ref{lst:define-direktivy-spi.}
+
+	\fbar
+	\begin{lstlisting}[language={c++}, caption={Definice posuvu adres pro registry AXI Quad SPI bloku pomocí define direktiv.}, label={lst:define-direktivy-spi}]
+#define MAP_SIZE 0x10000
+#define SPI_SPICR 0x60
+#define SPI_SPISR 0x64
+#define SPI_DTR 0x68
+#define SPI_DRR 0x6C
+#define SPI_SPISSR 0x70
+#define SPI_TRANSMIT_FIFO_OCUPANCY 0x74
+#define SPI_RECEIVE_FIFO_OCUPANCY 0x78
+#define SPI_DGIER 0x1C
+#define SPI_IPISR 0x20
+#define SPI_IPIER 0x28\end{lstlisting}
+
+	\fbar
+	\subsection{Timer Thread}
+	\begin{figure}[htbp!]
+	 	\centering
+	 	\includegraphics[width=1\textwidth]{src/pdf/timer-thread.pdf}
+		\caption{SPI Timer Thread větev aplikace – AXI Timer Thread s automatickým odesíláním dat.}
+	 \label{fig:timer-thread}
+ \end{figure}
+
+ 	\fbar
+ 	\subsubsection{Thread Loop}
+ 		\begin{figure}[htbp!]
+	  	\centering
+	  	\includegraphics[width=1\textwidth]{src/pdf/threadLoop.pdf}
+	 	\caption{SPI Timer Thread detail threadLoop části.}
+  		\label{fig:threadLoop}
+	\end{figure}
+
+
+	\fbar
 \section{Popis pracoviště}\label{sec:popis-pracoviste}
 
 	\subsection{SPI komunikace}
 	\begin{figure}[htbp!]
 		\centering
-		\includegraphics[width=1\textwidth]{src/png/spi-test-connection.png}
+		\includegraphics[width=1\textwidth]{src/pdf/spi-test-connection.pdf}
 		\caption{Názorné schéma připojení PMOD 3 Xilinx Kria KR260 k LED Matici s obvodem MAX7219.}
 		\label{fig:spi-test-connection}
 	\end{figure}
