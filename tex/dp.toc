@@ -426,17 +426,17 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {15.6}Timer Thread}{70}{subsection.15.6}%
+\contentsline {subsection}{\numberline {15.6}Timer Thread}{72}{subsection.15.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {15.6.1}Thread Loop}{71}{subsubsection.15.6.1}%
+\contentsline {subsubsection}{\numberline {15.6.1}Thread Loop}{73}{subsubsection.15.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {16}Popis pracoviště}{73}{section.16}%
+\contentsline {section}{\numberline {16}Popis pracoviště}{78}{section.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.1}SPI komunikace}{73}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.1}SPI komunikace}{78}{subsection.16.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {17}Dosažené výsledky}{74}{section.17}%
+\contentsline {section}{\numberline {17}Dosažené výsledky}{79}{section.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{75}{section.17}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{80}{section.17}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -1019,22 +1019,6 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{80}{section.17}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{81}{appendix.1.A}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{81}{subsection.1.A.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{81}{subsection.1.A.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000 vývojovou desku}{82}{appendix.1.B}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -1042,4 +1026,20 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup debuggingu PL pro Digilent Zybo}{90}{appendix.1.C}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{85}{section.17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{86}{appendix.1.A}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.1}Seznam symbolů}{86}{subsection.1.A.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2}Seznam zkratek}{86}{subsection.1.A.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000 vývojovou desku}{87}{appendix.1.B}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup debuggingu PL pro Digilent Zybo}{95}{appendix.1.C}%

@@ -2017,7 +2017,7 @@ void signal_callback_handler(int signum)
 
 	   \fbar
 	   \subsection{SPI}
-	   Část aplikace, která prezentuje SPI komunikaci není oproti předchozím představeným podaplikacím akcelerovaná. Tudíž nevyužívá akcelerované funkce (kernelu) pro urychlení výpočtů. Využívá však PL, ve kterém byl vytvořen IP blok \textit{AXI Quad SPI}, který umožňuje SPI komunikaci. Tento blok způsobí vytvoření adres pamětí, které je možní z userspace programu nebo běhu \textit{PetaLinux} adresovat. Díky adresaci v userspace je možné využívat libovolně nakonfigurovanou SPI komunikaci z Vivado IP bloku.\par
+	   Část aplikace, která prezentuje SPI komunikaci není oproti předchozím podaplikacím akcelerovaná. Tudíž nevyužívá akcelerované funkce (kernelu) pro urychlení výpočtů. Využívá však PL, ve kterém byl vytvořen IP blok \textit{AXI Quad SPI}, který umožňuje SPI komunikaci. Tento blok způsobí vytvoření adres pamětí, které je možní z userspace programu nebo běhu \textit{PetaLinux} adresovat. Díky adresaci v userspace je možné využívat libovolně nakonfigurovanou SPI komunikaci z Vivado IP bloku.\par
 	   Další možné využití SPI komunikace by bylo využít SPI driver, který by bylo nutné aktivovat při tvorbě \textit{PetaLinux} systému.\par
 	   Je důležité zmínit, že nakonfigurované parametry bloku \textit{AXI Quad SPI} lze změnit pouze ve Vivado, tudíž je důležité při tvorbě HW platformy již znát požadavky použitých zařízení, se kterými bude aplikace komunikovat. Jedná se například o délku přenášené zprávy nebo o frekvenci signálu \texttt{CLK}.\par
 	   
@@ -2025,10 +2025,10 @@ void signal_callback_handler(int signum)
 			\centering
 			\includegraphics[width=1\textwidth]{src/pdf/spi.pdf}
 			\caption{SPI větev aplikace – manuální odesílání dat přes SPI.}
-			\label{fig:preloaded-data}
+			\label{fig:spi}
 	\end{figure}
 
-	Pro zjednodušení adresování jsou definovány jednotlivé posuny od základní adresy pomocí \texttt{define} direktiv. Definice direktiv dle dokumentace \cite{axi-quad-spi-ip-product-guide} je zobrazena v \ref{lst:define-direktivy-spi.}
+	Pro zjednodušení adresování jsou definovány jednotlivé posuny od základní adresy pomocí \texttt{define} direktiv. Definice direktiv dle dokumentace \cite{axi-quad-spi-ip-product-guide} je zobrazena v \ref{lst:define-direktivy-spi}.\par
 
 	\fbar
 	\begin{lstlisting}[language={c++}, caption={Definice posuvu adres pro registry AXI Quad SPI bloku pomocí define direktiv.}, label={lst:define-direktivy-spi}]
@@ -2044,8 +2044,54 @@ void signal_callback_handler(int signum)
 #define SPI_IPISR 0x20
 #define SPI_IPIER 0x28\end{lstlisting}
 
+	Jak je možné na názorném vývojovém diagramu \ref{fig:spi} pozorovat, je pro zvýšení bezpečnosti programu využito mapování pouze potřebné části HW registrů SPI jednotky do uživatelského prostředí pomocí UIO zařízení a \texttt{mmap} funkce. Pro jednotku je využit \textit{generic-uio} driver, díky kterému je možné pozorvat vzniklá přerušení od jednotky a tyto přerušení také znovu povolovat pomocí acknowledge operace. Autor zatím nenašel jiný způsob, jakým by došlo k acknowledge přerušení v \textit{PetaLinux}, pokud by bylo využito výchozích driverů SPI jednotky.\par
+	Po provedení mapování adres registrů do userspace pomocí funkce \texttt{initializeSPI()} (jejíž algoritmus je zobrazen v kódu \ref{initialize-spi}) následuje inicializace jednotky, se kterou aplikace má komunikovat. Pokud by se jednalo o skutečnou aplikaci pro řízení elektrického pohonu, aplikace by komunikovala nejspíše s analogově-digitálními převodníky. Pokud by se jednalo o aplikaci HIL, nejspíše by docházelo ke komunikaci s digiálně-analogovými převodníky. V této práci dochází pouze k ukázkové komunikaci s jednotkou \textit{MAX7219}, která je připojena k LED matici. Z toho důvodu je po inicializaci SPI jednotky třeba inicializovat jednotku \textit{MAX7219} a nejlépe zajistit, aby po její inicializaci došlo ke zhasnutí všech diod na matici. Tyto kroky jsou provedeny pomocí funkcí \texttt{initializzeLEDMatrix()} a \texttt{clearLEDmatrix()}. Kód funkcí je součástí souborů, jež jsou přílohou této práce.\par
+	Po inicializaci je možné pomocí proměnné \texttt{dataTransfer} vybrat ze dvou testovacích módů. Mód kdy \texttt{dataTransfer == 0} je určen pro manuální odesílání jednotlivých zpráv pomocí SPI jednotky, mód kdy \texttt{dataTransfer == 1} odešle předem definované zprávy pomocí SPI jednotky.\par
+	Následně dochází k odmapování dříve mapované HW paměti a uzavření UIO zařízejí pomocí jeho file descriptoru.
+
+
+\begin{lstlisting}[language={c++}, caption={Algoritmus inicializace AXI Quad SPI jednotky v C++.}, label={lst:initialize-spi}]
+/*
+ * @name     initializeSPI
+ * @brief    Initialize SPI communication in PL for desired slave and mapped device.
+ * @todo     Implement interrupt and delete sleep_for...
+ */
+void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
+{
+    *((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
+
+    *((unsigned *)(ptr + SPI_DTR)) = 0x06;
+
+    *((unsigned *)(ptr + SPI_SPISSR)) = 0x00;
+
+    *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
+
+    *((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
+
+    // Interrupt settings
+
+    // Global Interrupt Enable
+    *((unsigned *)(ptr + SPI_DGIER)) = 0x80000000;
+
+    // Interrupt enables
+    // *((unsigned *)(ptr + SPI_IPIER)) = 0x3FFF;               // enabling all interrupts
+    *((unsigned *)(ptr + SPI_IPIER)) = 0x4; // enabling onty DTR is clear INT
+
+    off_t interruptStatus;
+
+    interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
+    std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
+    *((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;       // resetting SPI interrupt status register
+}
+		\end{lstlisting}
+
 	\fbar
 	\subsection{Timer Thread}
+	Timer Thread je opět podaplikace, která nevyužívá PL k akceleraci, ale k implementaci IP, jež reprezentují HW jednotky, využité v programu aplikace. V podaplikaci je využito IP bloku AXI Timer pro časování periodického děje. V ukázkové aplikaci je periodickým dějem funkce, měnící obsah proměnné \texttt{threadLoopOutput}, a funkce odesílání dat pomocí SPI jednotky. Pomocí SPI jednotky jsou odeslány data opět do jednotky \textit{MAX7219}, která způsobují zobrazování dvou písmen na LED matici.\par
+	Tento ukázkový algoritmus má za úkol reprezentovat periodické získávání dat z analogově-digitálních převodníků a jejich následné zpracování v hlavní funkci. Jak je na vývojovém diagramu \ref{fig:timer-thread} možné zjistit, pro obhospodařování AXI Timeru a SPI jednotky je vytvořeno samostatné vlákno, jež krom inicializační části obsahuje část výkonnou, která je uzavřena do nekonečné smyčky.\par
+	V reálné aplikaci řízení elektrického pohonu je plánováno využít tolik vláken, kolik bude třeba paralelně získávat informací z AD převodníků, jež budou napojeny na proudové senzory a na senzor otáček.\par
+	Aby došlo k přenosu z vedlejších vláken do hlavního vlánka pouze validních dat, je využito \texttt{mutex} třídy z knihovny \texttt{std} a logického semaforu, který umožní předání dat pouze v případě, že došlo ke kompletnímu uložení potřebné hodnoty do proměnné, ze které je hodnota čtena v hlavním vlákně. V případě více paralelích vláken a čtených hodnot by bylo nutné zakomponovat podmínku, která by kontrolovala stav všech čtených proměnných z vedlejších vláken.\par
+	Algoritmy, provedené ve vedlejším vlákně, jsou představeny v části \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}}.
 	\begin{figure}[htbp!]
 	 	\centering
 	 	\includegraphics[width=1\textwidth]{src/pdf/timer-thread.pdf}
@@ -2054,13 +2100,149 @@ void signal_callback_handler(int signum)
  \end{figure}
 
  	\fbar
- 	\subsubsection{Thread Loop}
+ 	\subsubsection{Thread Loop}\label{subsubsec:thread-loop}
+ 		Část aplikace Thread Loop, jejíž ukázkový vývojový diagram je zobrazen na \ref{fig:threadLoop}, reprezentuje soubor algoritmů a funkcí, které jsou prováděny ve vedlejším vlákně \texttt{backgroundThread}. Funkce, která je pomocí \texttt{backgroundThread} spuštěna je v kódu nazvána \texttt{threadLoop()}.\par
+		Protože tato aplikace pracuje opět s adresy HW registrů, vytvořených v PL, zobrazitelnými v user space, je s ohledem na bezpečnost programu vhodné přistupovat k paměti pomocí mapování do user space pomocí \texttt{mmap()} funkce a daného file descriptoru UIO zařízení.\par
+		Po inicializační části mapování mapětí jednotky AXI Timer (postup zobrazen v horní části kódu \ref{lst:thread-loop-code}) a AXI Quad SPI do user space dané aplikace, je v případě ukázkové aplikace využito opět komunikování SPI jednotky s obvodem \textit{MAX7219}. V práci je uvedený kompletní ukázka funkce \texttt{threadLoop()} jejíž algoritmus odráží vývojový diagram \ref{fig:threadLoop}. V případě zájmu o nahlédnutí na kódy použitých funkcí \texttt{initializeSPI(ptrSPI, slaveSelect)}, \texttt{initializeLEDmatrix(ptrSPI, fdSPI, slaveSelect)}, \texttt{clearLEDmatrix(ptrSPI, fdSPI, slaveSelect)} a \texttt{threadSPI(ptrSPI, fdSPI, slaveSelect)} je možné prozkoumat soubory přílohy této práce. Funkce jsou z důvodu vývoje vloženy do samostatné třídy. Funkce jsou zatím ve vývoji a v budoucnu je plánováno vytvořit knihovnu, která umožňuje uživateli komunikovat s bloky jako je AXI Quad SPI a AXI Timer bez nutnosti znalostí adres jednotlivých registrů a používat pouze dobře zdokumentované API.
+
+
  		\begin{figure}[htbp!]
-	  	\centering
-	  	\includegraphics[width=1\textwidth]{src/pdf/threadLoop.pdf}
-	 	\caption{SPI Timer Thread detail threadLoop části.}
-  		\label{fig:threadLoop}
-	\end{figure}
+	  		\centering
+	  		\includegraphics[width=1\textwidth]{src/pdf/threadLoop.pdf}
+	 		\caption{SPI Timer Thread detail threadLoop části.}
+  			\label{fig:threadLoop}
+		\end{figure}
+		\fbar
+		\begin{lstlisting}[language={c++}, caption={threadLoop() funkce, běžící ve vedlejším vlákně backgroundThread. Z důvodu úspory místa byla vynechána část kódu SPI jednotky.}, label={lst:thread-loop-code}]
+			/*
+			* @name     threadLoop
+			* @brief    Threaded function for timer and data acquisition.
+			* @todo     Make multiple functions and multiple data acquisitions paralel but use data only when data from all sources all valid.
+			*/
+		   
+		   void threadLoop()
+		   {
+			   void *timer1ptr;         // pointer to a virtual memory filled by mmap
+			   int timer1fd;            // file descriptor of uio to reset interrupt in /proc/interrupts
+			   char *uiod;              // name of the uio to reset interrupts
+			   uiod = "/dev/uio5";      // check when making changes in a platform
+			   int irq_on = 1;          // for writing 0x1 to /dev/uioX
+			   uint32_t info = 1;       // in read function of a interrupt checking
+			   spiClass spi;
+
+			   timer1fd = open(uiod, O_RDWR | O_NONBLOCK); // opening uioX device
+		   
+			   // if error
+			   if (timer1fd < 1)
+			   {
+				   perror("open\n");
+				   printf("Invalid UIO device file:%s.\n", uiod);
+			   }
+		   
+			   // for polling the interrupt struct
+			   struct pollfd fds = {
+				   .fd = timer1fd,
+				   .events = POLLIN | POLLOUT,
+			   };
+		   
+			   // mmap the timer in virtual memory
+			   timer1ptr = mmap(NULL, TIMER_MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, timer1fd, 0);
+		   
+			   // initial values for timer
+			   *((unsigned *)(timer1ptr)) = 0X1C0;
+			   write(timer1fd, &irq_on, sizeof(irq_on));
+			   // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37;
+			   *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFF82F; // 10 us
+			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
+			   *((unsigned *)(timer1ptr)) = 0XE0;
+		   
+			   // one tick is 0.8 ns, have to wait till data is moved to counter register
+			   // otherwise it wont start, solve maybe later or ask about it
+			   std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+		   
+			   *((unsigned *)(timer1ptr + 0x8)) = 0X0;
+			   *((unsigned *)(timer1ptr)) = 0XC0;
+		   
+			   off_t slaveSelect = 0x1; // manually selecting slave to make active
+			   void *ptrSPI;  // pointer to a virtual memory filled by mmap
+			   int fdSPI;     // file descriptor
+			   char *uiodSPI; // name what device to open
+			   uiodSPI = "/dev/uio4";
+		   
+			   fdSPI = open(uiodSPI, O_RDWR | O_NONBLOCK); // opening device
+		   
+			   // if error
+			   if (fdSPI < 1)
+			   {
+				   perror("open\n");
+				   printf("Invalid UIO SPI device file:%s.\n", uiod);
+			   }
+			   else
+			   {
+				   std::cout << "Successfully SPI opened device.\n";
+			   }
+		   
+			   ptrSPI = mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fdSPI, 0);
+			   std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+			   spi.initializeSPI(ptrSPI, slaveSelect);
+			   std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+			   spi.initializeLEDmatrix(ptrSPI, fdSPI, slaveSelect);
+			   std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+			   spi.clearLEDmatrix(ptrSPI, fdSPI, slaveSelect);
+		   
+			   while (true)
+			   {
+				   while (true) // polling while
+				   {
+					   int ret = poll(&fds, 1, -1); // poll on a return value
+					   // there was change in ret
+					   if (ret >= 1)
+					   {
+						   ssize_t nb = read(timer1fd, &info, sizeof(info));
+						   if (nb == (ssize_t)sizeof(info))
+						   {
+							   /* Do something in response to the interrupt. */
+							   printf("Interrupt #%u!\n", info);
+							   spi.threadSPI(ptrSPI, fdSPI, slaveSelect);
+							   // if timer has finished (interrupt has risen)
+							   // copy data / insert data to shared variable
+							   if (isDataFromBackgroundThreadReady == false)
+							   {
+								   gLock.lock();                            // mutex locking - any other thread can't access this variable (think it cannot write or read)
+								   threadLoopOutput = threadLoopOutput + 1; // edit the shared variable
+								   gLock.unlock();                          // mutex unlock
+								   isDataFromBackgroundThreadReady = true;  // flag to main while loop that new data is present
+							   }
+							   break;
+						   }
+					   }
+				   }
+		   
+				   // resolving and starting timer again
+				   *((unsigned *)(timer1ptr)) = 0X1C0;
+				   write(timer1fd, &irq_on, sizeof(irq_on));
+				   // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
+				   // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37; // 1 us
+				   *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFF82F; // 10 us
+				   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
+				   *((unsigned *)(timer1ptr)) = 0XE0;
+		   
+				   // one tick is 0.8 ns, have to wait till data is moved to counter register
+				   // otherwise it wont start, solve maybe later or ask about it
+				   std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+
+				   *((unsigned *)(timer1ptr + 0x8)) = 0X0;
+				   *((unsigned *)(timer1ptr)) = 0XC0; // start
+			   }
+		   
+			   munmap(ptrSPI, MAP_SIZE);
+			   close(fdSPI);
+			   munmap(timer1ptr, TIMER_MAP_SIZE);
+			   close(timer1fd);
+		   }\end{lstlisting}
+
+
 
 
 	\fbar
@@ -2075,6 +2257,7 @@ void signal_callback_handler(int signum)
 	\end{figure}
 
 \section{Dosažené výsledky}
+% je třeba zas využít xrt_coreutil a měření pomocí přidání kódu do aplikace, ale asi nebude možné používat na celých 1M dat, vyřešit a přidat možnost ovládat počet iterací
 
 
 		

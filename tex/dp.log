@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  18 APR 2023 15:34
+This is LuaHBTeX, Version 1.13.2 (TeX Live 2021)  (format=lualatex 2021.10.28)  18 APR 2023 20:34
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/petrzakopal/Documents/dp/tex/dp.tex
@@ -1331,11 +1331,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'czech'.
- (./dp.aux
-
-LaTeX Warning: Label `fig:preloaded-data' multiply defined.
-
-)
+ (./dp.aux)
 \openout1 = dp.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 241.
@@ -2278,38 +2274,58 @@ File: src/pdf/spi.pdf Graphic file (type pdf)
 <use src/pdf/spi.pdf>
 Package luatex.def Info: src/pdf/spi.pdf  used on input line 2026.
 (luatex.def)             Requested size: 455.24411pt x 321.18855pt.
-
-LaTeX Warning: Reference `lst:define-direktivy-spi.' on page 69 undefined on input line 2031.
-
 [69<./src/pdf/preloaded-data.pdf>]
+
+LaTeX Warning: Reference `initialize-spi' on page 70 undefined on input line 2048.
+
+[70<./src/pdf/spi.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [71]
 warning  (file src/pdf/timer-thread.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/timer-thread.pdf, id=3740, 1440.38126pt x 824.07875pt>
+<src/pdf/timer-thread.pdf, id=4187, 1440.38126pt x 824.07875pt>
 File: src/pdf/timer-thread.pdf Graphic file (type pdf)
 <use src/pdf/timer-thread.pdf>
-Package luatex.def Info: src/pdf/timer-thread.pdf  used on input line 2051.
+Package luatex.def Info: src/pdf/timer-thread.pdf  used on input line 2097.
 (luatex.def)             Requested size: 455.24411pt x 260.45381pt.
-[70<./src/pdf/spi.pdf>]
+[72<./src/pdf/timer-thread.pdf>]
+Overfull \hbox (84.31268pt too wide) in paragraph at lines 2106--2107
+\TU/Courier(0)/m/n/10.95 initializeSPI(ptrSPI, slaveSelect)\TU/TimesNewRoman(1)/m/n/10.95 , \TU/Courier(0)/m/n/10.95 initializeLEDmatrix(ptrSPI, fdSPI, slaveSelect)\TU/TimesNewRoman(1)/m/n/10.95 ,
+ []
+
+
+Overfull \hbox (72.37978pt too wide) in paragraph at lines 2106--2107
+\TU/Courier(0)/m/n/10.95 clearLEDmatrix(ptrSPI, fdSPI, slaveSelect) \TU/TimesNewRoman(1)/m/n/10.95 a \TU/Courier(0)/m/n/10.95 threadSPI(ptrSPI, fdSPI, slaveSelect)
+ []
+
+
 warning  (file src/pdf/threadLoop.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/threadLoop.pdf, id=4147, 877.2775pt x 1504.62125pt>
+<src/pdf/threadLoop.pdf, id=4645, 877.2775pt x 1490.56876pt>
 File: src/pdf/threadLoop.pdf Graphic file (type pdf)
 <use src/pdf/threadLoop.pdf>
-Package luatex.def Info: src/pdf/threadLoop.pdf  used on input line 2060.
-(luatex.def)             Requested size: 455.24411pt x 780.80046pt.
+Package luatex.def Info: src/pdf/threadLoop.pdf  used on input line 2111.
+(luatex.def)             Requested size: 455.24411pt x 773.50813pt.
 
-LaTeX Warning: Float too large for page by 100.01738pt on input line 2063.
+LaTeX Warning: Float too large for page by 92.72505pt on input line 2114.
 
-[71<./src/pdf/timer-thread.pdf>] [72<./src/pdf/threadLoop.pdf>]
+[73] [74<./src/pdf/threadLoop.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [75]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76] [77]
 warning  (file src/pdf/spi-test-connection.pdf) (pdf inclusion): PDF inclusion: found PDF version '1.7', but at most version '1.5' allowed
-<src/pdf/spi-test-connection.pdf, id=5047, 1267.73625pt x 546.04pt>
+<src/pdf/spi-test-connection.pdf, id=5240, 1267.73625pt x 546.04pt>
 File: src/pdf/spi-test-connection.pdf Graphic file (type pdf)
 <use src/pdf/spi-test-connection.pdf>
-Package luatex.def Info: src/pdf/spi-test-connection.pdf  used on input line 2072.
+Package luatex.def Info: src/pdf/spi-test-connection.pdf  used on input line 2254.
 (luatex.def)             Requested size: 455.24411pt x 196.08266pt.
-[73
+[78
 
-<./src/pdf/spi-test-connection.pdf>] [74
+<./src/pdf/spi-test-connection.pdf>] [79
 
-] [75
+] [80
 
 ]
 luaotfload | aux : font no 32 (nil) does not define feature smcp for script latn with language dflt
@@ -2366,424 +2382,424 @@ Package biblatex Warning: '\mainlang' is deprecated in favour of
 (biblatex)                Using the old, problematic definition.
 
 
-Overfull \hbox (14.51183pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (14.51183pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. System-on-Modules (SOMs): How and Why to Use Them[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Web-site[] \TU/TimesNewRoman(2)/m/n/10.95 [online][].
  []
 
 
-Overfull \hbox (9.62505pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (9.62505pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Kria KR260 Robotics Starter Kit[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Web-site[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2023-03-10].
  []
 
 
-Overfull \hbox (14.16779pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (14.16779pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Kria SOM Carrier Card Design Guide (UG1091)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Do-cu-men-tation Por-
  []
 
 
-Overfull \hbox (6.51135pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (6.51135pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Kria K26 SOM Data Sheet (DS987)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Do-cu-men-tation Por-tal[] \TU/TimesNewRoman(2)/m/n/10.95 [online][].
  []
 
 
-Overfull \hbox (29.92462pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (29.92462pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Antmicro's open source Kria K26 Devboard[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Gi-tHub[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2023-03-10].
  []
 
 
-Overfull \hbox (8.54918pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (8.54918pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 ANDINA, Juan J. R.; TORRE ARNANZ, Eduardo de la; VALDÉS PEÑA, Marı́a D. \TU/TimesNewRoman(1)/m/it/10.95 FP-GAs: Fun-
  []
 
 
-Overfull \hbox (4.61536pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (4.61536pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(1)/m/it/10.95 da-men-tals, Advan-ced Fe-a-tu-res, and Ap-pli-cati-ons in In-dustrial Electro-nics\TU/TimesNewRoman(2)/m/n/10.95 . 1. vyd. Bosa Roca: CRC
  []
 
 
-Overfull \hbox (45.87303pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (45.87303pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 What Is Accelerated Computing, and Why Is It Important?[] In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx, Inc.[] \TU/TimesNewRoman(2)/m/n/10.95 [Online][]. [B.r.] [[]cit.[] 2022-11-03].
  []
 
 
-Overfull \hbox (5.18526pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (5.18526pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 NALCACI, Gamze; YILDIRIM, Doğan; CADIRCI, Isik; ERMIS, Muammer. Selective Harmonic
  []
 
 
-Overfull \hbox (14.2695pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (14.2695pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 Elimination for Variable Frequency Traction Motor Drives Using Harris Hawks Optimization. \TU/TimesNewRoman(1)/m/it/10.95 IEEE
  []
 
 
-Overfull \hbox (9.29721pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (9.29721pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(1)/m/it/10.95 Transacti-ons on In-dustry Ap-pli-cati-ons\TU/TimesNewRoman(2)/m/n/10.95 . 2022, roč. 58, č. 4, []s.[] 4778–4791[]. Dostupné z[] DOI: [][]$10 . 1109 /
  []
 
 
-Overfull \hbox (5.46368pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (5.46368pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2023-03-18]. []Dostupné z[]: [][]$https : / / developer . apple . com / videos / play / wwdc2020 /
  []
 
 
-Overfull \hbox (16.71207pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (16.71207pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 Sphery vs. shapes, the first raytraced game that is not software[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Gi-tHub[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 14.07.2022 [[]cit.[]
  []
 
 
-Overfull \hbox (0.6079pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (0.6079pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 Ray tracing (graphics)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Wi-ki-pe-dia[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 06.11.2022 [[]cit.[] 2022-11-06]. []Dostupné z[]: [][]$https : / /
  []
 
 
-Overfull \hbox (0.3626pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (0.3626pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 GROVER, Naresh; K.SONI, M. Reduction of Power Consumption in FPGAs - An Overview. \TU/TimesNewRoman(1)/m/it/10.95 In-
  []
 
-[76
+[81
 
 ]
-Overfull \hbox (4.59703pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (4.59703pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 VANDERBAUWHEDE, Wim; BENKRID, Khaled. \TU/TimesNewRoman(1)/m/it/10.95 High-Performance Com-pu-ting Using FP-GAs\TU/TimesNewRoman(2)/m/n/10.95 .
  []
 
 
-Overfull \hbox (19.17743pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (19.17743pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 RODRÍGUEZ-ANDINA, Juan J.; VALDÉS-PEÑA, Marı́a D.; MOURE, Marı́a J. Advanced Features
  []
 
 
-Overfull \hbox (11.43674pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (11.43674pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 Hardware-in-the-Loop (HIL) Simulation[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 The MathWorks, Inc.[] \TU/TimesNewRoman(2)/m/n/10.95 [Online][]. [B.r.] [[]cit.[] 2022-11-06].
  []
 
 
-Overfull \hbox (60.2879pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (60.2879pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 NAOUAR, Mohamed-Wissem; MONMASSON, Eric; NAASSANI, Ahmad Ammar; SLAMA-BELKHODJA,
  []
 
 
-Overfull \hbox (19.15623pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (19.15623pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 Ilhem; PATIN, Nicolas. FPGA-Based Current Controllers for AC Machine Drives---A Review. \TU/TimesNewRoman(1)/m/it/10.95 IEEE
  []
 
 
-Overfull \hbox (10.3024pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (10.3024pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(1)/m/it/10.95 Transacti-ons on In-dustrial Electro-nics\TU/TimesNewRoman(2)/m/n/10.95 . 2007, roč. 54, č. 4, []s.[] 1907–1925[]. Dostupné z[] DOI: [][]$10 . 1109 /
  []
 
 
-Overfull \hbox (0.89926pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (0.89926pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 DIGILENT, Inc. Zybo[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2022-11-11]. []Dostupné z[]:
  []
 
 
-Overfull \hbox (36.48143pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (36.48143pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 DIGILENT, Inc. Zybo Z7 Migration Guide[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2022-11-11].
  []
 
 
-Overfull \hbox (47.7138pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (47.7138pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Zynq-7000 SoC Technical Reference Manual[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Do-cu-men-tation[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 02.04.2021
  []
 
 
-Overfull \hbox (28.84637pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (28.84637pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 DIGILENT, Inc. Zybo Reference Manual[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Di-gi-lent Do-cu-men-tation[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2022-11-11].
  []
 
 
-Overfull \hbox (0.70306pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (0.70306pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Kria KR260 Robotics Starter Kit User Guide (UG1092)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Do-cu-men-
  []
 
 
-Overfull \hbox (46.33354pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (46.33354pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Kria K26 System-on-Module[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Pro-duct Brief[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2023-04-05].
  []
 
 
-Overfull \hbox (25.50824pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (25.50824pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Vitis Unified Software Platform Documentation: Application Acceleration Development
  []
 
 
-Overfull \hbox (14.37454pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (14.37454pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. XTP743 - Kria KR260 Starter Kit Carrier Card Schematics (v1.0)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Bo-
  []
 
 
-Overfull \hbox (45.34862pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (45.34862pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. XTP685 - Kria K26 SOM XDC File (v1.0)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Bo-ard Fi-les[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 14.05.2021
  []
 
-[77]
-Overfull \hbox (16.77878pt too wide) in paragraph at lines 2094--2094
+[82]
+Overfull \hbox (16.77878pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 ADMIN, Confluence Wiki; ROY, Debraj; DYLAN. Embedded SW Support[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Wiki[] \TU/TimesNewRoman(2)/m/n/10.95 [online][].
  []
 
 
-Overfull \hbox (13.28217pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (13.28217pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Pre-Built Applications for Kria System-on-Modules[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Web-site[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.]
  []
 
 
-Overfull \hbox (48.71635pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (48.71635pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 FOUNDATION, Linux. Real-Time Linux[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Li-nux Foun-dation Do-ku-Wiki[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2023-04-06].
  []
 
 
-Overfull \hbox (19.43614pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (19.43614pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 KOBRLE, Pavel; PAVELKA, Jiřı́. \TU/TimesNewRoman(1)/m/it/10.95 Elek-trické po-hony a je-jich řı́-ze-nı́\TU/TimesNewRoman(2)/m/n/10.95 . 3. přepracované vydánı́. V Praze:
  []
 
 
-Overfull \hbox (1.63348pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (1.63348pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Downloads[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Down-lo-ads[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2022-11-19]. []Dostupné
  []
 
 
-Overfull \hbox (21.91524pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (21.91524pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Downloads[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Pe-ta-Li-nux Tools[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2022-11-19]. []Dostupné
  []
 
 
-Overfull \hbox (4.59174pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (4.59174pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 REGHENZANI, Federico; MASSARI, Giuseppe; FORNACIARI, William. The Real-Time Linux
  []
 
 
-Overfull \hbox (5.75044pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (5.75044pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 Kernel: A Survey on PREEMPT_RT. \TU/TimesNewRoman(1)/m/it/10.95 ACM Com-put. Surv. \TU/TimesNewRoman(2)/m/n/10.95 02/2019, roč. 52, č. 1. ISSN 0360-0300[].
  []
 
 
-Overfull \hbox (20.79236pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (20.79236pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 COMPANY], LogicTronix [FPGA Design + Machine Learning. Real Time Optimization in Petalinux
  []
 
 
-Overfull \hbox (28.20468pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (28.20468pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 with RT Patch on MPSoC[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Hacks-ter.io, an Av-net Com-mu-nity[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 10.12.2021 [[]cit.[] 2023-04-07].
  []
 
 
-Overfull \hbox (6.62364pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (6.62364pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 ERRAPART, Andrei; IGELBRINK, Felix. How to install the linux-rt (Real-Time) patch[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Trenz
  []
 
 
-Overfull \hbox (15.79866pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (15.79866pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)[].
  []
 
 
-Overfull \hbox (42.00703pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (42.00703pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 DIGILENT, Inc. Vivado Board Files for Digilent FPGA Boards, 2022[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Gi-tHub.io[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 25.03.2022
  []
 
 
-Overfull \hbox (8.09592pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (8.09592pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 DIGILENT, Inc. Installing Vivado, Vitis, and Digilent Board Files[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Di-gi-lent Re-fe-rence[] \TU/TimesNewRoman(2)/m/n/10.95 [online][].
  []
 
 
-Overfull \hbox (8.23225pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (8.23225pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 KNITTER, Whitney. Getting Started with the Kria KR260 in PetaLinux 2022.1[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Hacks-ter.io, an
  []
 
-[78]
-Overfull \hbox (15.52596pt too wide) in paragraph at lines 2094--2094
+[83]
+Overfull \hbox (15.52596pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 KNITTER, Whitney. Add Peripheral Support to Kria KR260 Vivado 2022.1 Project[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Hacks-ter.io,
  []
 
 
-Overfull \hbox (11.67729pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (11.67729pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 KNITTER, Whitney. Getting Started with the Kria KR260 in Vivado 2022.1[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Hacks-ter.io, an Av-
  []
 
 
-Overfull \hbox (5.17476pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (5.17476pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Vitis Custom Embedded Platform Creation Example on KV260 – Step 1: Create the
  []
 
 
-Overfull \hbox (2.00066pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (2.00066pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 Vivado Hardware Design and Generate XSA[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Vi-tis Tu-to-ri-als Gi-thub Re-po-si-tory[] \TU/TimesNewRoman(2)/m/n/10.95 [online][].
  []
 
 
-Overfull \hbox (9.5554pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (9.5554pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Zynq UltraScale+ MPSoC Processing System Product Guide (PG201)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Do-
  []
 
 
-Overfull \hbox (1.9453pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (1.9453pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 ADMIN, Confluence Wiki; BHATT, Madhav. Zynq UltraScale+ MPSoC Restart solution[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-
  []
 
 
-Overfull \hbox (34.97716pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (34.97716pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 ZAKOPAL, Petr et al. [Kria SOM KR260 Starter Kit] Schematic (pdf) vs constrains (xdc) pin confusion.
  []
 
 
-Overfull \hbox (8.24823pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (8.24823pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 Possible explanation on fan pinout.[] In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Sup-port Com-mu-nity Fo-rum[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 18.03.2023 [[]cit.[]
  []
 
 
-Overfull \hbox (22.5194pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (22.5194pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. Vitis Custom Embedded Platform Creation Example on KV260 – Step 2: Step 2: Create
  []
 
 
-Overfull \hbox (1.72069pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (1.72069pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. AXI Timer v2.0 LogiCORE IP Product Guide[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 AMD Xi-linx Do-cu-men-tation Por-
  []
 
 
-Overfull \hbox (37.94649pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (37.94649pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 LIMITED, Linaro. The DeviceTree Specification[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Spe-ci-fi-cation page[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.] [[]cit.[] 2023-04-14].
  []
 
 
-Overfull \hbox (4.44667pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (4.44667pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 Device Tree for Dummies! - Thomas Petazzoni, Free Electrons[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 You-Tube[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 15.11.2013
  []
 
 
-Overfull \hbox (28.29396pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (28.29396pt too wide) in paragraph at lines 2277--2277
 \TU/TimesNewRoman(2)/m/n/10.95 [[]cit.[] 2023-04-14]. []Dostupné z[]: [][]$https : / / youtu . be / m _ NyYEBxfn8$[][]. Kanál uživatele The Linux Foundation.[] 
  []
 
 
-Overfull \hbox (0.34035pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (0.34035pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. DFX-MGR Github Repository[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Gi-tHub[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 23.08.2022 [[]cit.[] 2023-04-15].
  []
 
 
-Overfull \hbox (18.27939pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (18.27939pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 HOSSEINABADY, Mohammad. Vitis 2021.1 Embedded Platform for Zybo-Z7-20, 2018[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Hacks-
  []
 
-[79]
-Overfull \hbox (14.18036pt too wide) in paragraph at lines 2094--2094
+[84]
+Overfull \hbox (14.18036pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 XILINX, Inc. SoCs with Hardware and Software Programmability[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Web-site[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. [B.r.]
  []
 
 
-Overfull \hbox (41.08746pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (41.08746pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 DIGILENT, Inc. Zybo Petalinux BSP Project, 2018[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Gi-tHub.io[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 29.03.2018 [[]cit.[] 2022-11-26].
  []
 
 
-Overfull \hbox (55.18842pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (55.18842pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 MESSINGER, Roy. GPIO and Petalinux - Part 1[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Lin-ke-dIn Ar-ticle[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 20.06.2020 [[]cit.[] 2023-02-28].
  []
 
 
-Overfull \hbox (55.18842pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (55.18842pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 MESSINGER, Roy. GPIO and Petalinux - Part 2[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Lin-ke-dIn Ar-ticle[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 27.06.2020 [[]cit.[] 2023-02-28].
  []
 
 
-Overfull \hbox (43.02463pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (43.02463pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 MESSINGER, Roy. GPIO and Petalinux - Part 3 (Go, UIO, Go!)[] In[]: \TU/TimesNewRoman(1)/m/it/10.95 Lin-ke-dIn Ar-ticle[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 23.07.2021
  []
 
 
-Overfull \hbox (34.86026pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (34.86026pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 ADMIN, Confluence Wiki; O'NEAL, Terry. GPIO User Space App[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Wiki[] \TU/TimesNewRoman(2)/m/n/10.95 [online][]. 14.01.2020
  []
 
 
-Overfull \hbox (13.75444pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (13.75444pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 INC., Xilinx. Zynq-7000 SoC Technical Reference Manual (UG585)[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 Xi-linx Do-cu-men-tation Por-
  []
 
 
-Overfull \hbox (15.24782pt too wide) in paragraph at lines 2094--2094
+Overfull \hbox (15.24782pt too wide) in paragraph at lines 2277--2277
 []\TU/TimesNewRoman(2)/m/n/10.95 THE MATHWORKS, Inc. Understanding PID Control, Part 2: Anti-windup for PID control[]. In[]: \TU/TimesNewRoman(1)/m/it/10.95 The
  []
 
 luaotfload | aux : font no 38 (nil) defines no feature for script latn
-luaotfload | aux : font no 38 (nil) defines no feature for script dflt [80] [81
+luaotfload | aux : font no 38 (nil) defines no feature for script dflt [85] [86
 
 ]
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg, id=5346, 1810.765pt x 1148.29pt>
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg, id=5539, 1810.765pt x 1148.29pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg  used on input line 2117.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg  used on input line 2300.
 (luatex.def)             Requested size: 341.43307pt x 216.51282pt.
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg, id=5349, 1138.2525pt x 841.1425pt>
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg, id=5542, 1138.2525pt x 841.1425pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg  used on input line 2126.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg  used on input line 2309.
 (luatex.def)             Requested size: 341.43307pt x 252.3062pt.
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg, id=5351, 1710.39pt x 1086.0575pt>
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg, id=5544, 1710.39pt x 1086.0575pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg  used on input line 2135.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg  used on input line 2318.
 (luatex.def)             Requested size: 341.43307pt x 216.79335pt.
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg, id=5353, 1709.38625pt x 1085.05376pt>
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg, id=5546, 1709.38625pt x 1085.05376pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg  used on input line 2144.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg  used on input line 2327.
 (luatex.def)             Requested size: 341.43307pt x 216.72543pt.
- [82
+ [87
 
-<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg>] [83<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg>]
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg, id=5366, 1578.89874pt x 1126.2075pt>
+<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg>] [88<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg>]
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg, id=5559, 1578.89874pt x 1126.2075pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg  used on input line 2155.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg  used on input line 2338.
 (luatex.def)             Requested size: 341.43307pt x 243.53903pt.
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg, id=5367, 1938.24126pt x 1185.42876pt>
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg, id=5560, 1938.24126pt x 1185.42876pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg  used on input line 2162.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg  used on input line 2345.
 (luatex.def)             Requested size: 386.96027pt x 236.66551pt.
- [84<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg>]
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg, id=5374, 1940.24875pt x 1188.44pt>
+ [89<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg>]
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg, id=5567, 1940.24875pt x 1188.44pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg  used on input line 2174.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg  used on input line 2357.
 (luatex.def)             Requested size: 386.96027pt x 237.01283pt.
- [85<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg>]
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg, id=5384, 573.14125pt x 441.65pt>
+ [90<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg>]
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg, id=5577, 573.14125pt x 441.65pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg  used on input line 2214.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg  used on input line 2397.
 (luatex.def)             Requested size: 295.90588pt x 228.02173pt.
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg, id=5385, 1902.10625pt x 1187.43625pt>
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg, id=5578, 1902.10625pt x 1187.43625pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg  used on input line 2221.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg  used on input line 2404.
 (luatex.def)             Requested size: 432.48051pt x 269.97005pt.
-<src/png/digilent-zybo-ps-pl-gpio.png, id=5387, 299.61937pt x 290.58563pt>
+<src/png/digilent-zybo-ps-pl-gpio.png, id=5580, 299.61937pt x 290.58563pt>
 File: src/png/digilent-zybo-ps-pl-gpio.png Graphic file (type png)
 <use src/png/digilent-zybo-ps-pl-gpio.png>
-Package luatex.def Info: src/png/digilent-zybo-ps-pl-gpio.png  used on input line 2230.
+Package luatex.def Info: src/png/digilent-zybo-ps-pl-gpio.png  used on input line 2413.
 (luatex.def)             Requested size: 250.38564pt x 242.83987pt.
- [86] [87<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg>]
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg, id=5402, 1948.27875pt x 1185.42876pt>
+ [91] [92<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg>]
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg, id=5594, 1948.27875pt x 1185.42876pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg  used on input line 2242.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg  used on input line 2425.
 (luatex.def)             Requested size: 386.96027pt x 235.43552pt.
-<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg, id=5403, 1947.275pt x 1188.44pt>
+<src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg, id=5595, 1947.275pt x 1188.44pt>
 File: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg Graphic file (type jpg)
 <use src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg>
-Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg  used on input line 2250.
+Package luatex.def Info: src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg  used on input line 2433.
 (luatex.def)             Requested size: 386.96027pt x 236.16052pt.
- [88<./src/png/digilent-zybo-ps-pl-gpio.png><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg>] [89<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg>]
-<src/png/vitis-edited-debugging-flow.png, id=5413, 1159.33125pt x 994.71625pt>
+ [93<./src/png/digilent-zybo-ps-pl-gpio.png><./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg>] [94<./src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg>]
+<src/png/vitis-edited-debugging-flow.png, id=5605, 1159.33125pt x 994.71625pt>
 File: src/png/vitis-edited-debugging-flow.png Graphic file (type png)
 <use src/png/vitis-edited-debugging-flow.png>
-Package luatex.def Info: src/png/vitis-edited-debugging-flow.png  used on input line 2265.
+Package luatex.def Info: src/png/vitis-edited-debugging-flow.png  used on input line 2448.
 (luatex.def)             Requested size: 386.96027pt x 332.00638pt.
- [90
+ [95
 
 <./src/png/vitis-edited-debugging-flow.png>] (./dp.aux)
 
@@ -2791,9 +2807,6 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `dp.out' has not changed.
 (rerunfilecheck)             Checksum: 87F444FC65A73085EA33678A6511D9E5;17063.
@@ -2803,19 +2816,19 @@ Package logreq Info: Writing requests to 'dp.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 55790 strings out of 478092
- 381833,2848258 words of node,token memory allocated
+ 56099 strings out of 478092
+ 745792,2848258 words of node,token memory allocated
  1722 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 193 attribute, 107 glue_spec, 98 attribute_list, 2 write, 62 pdf_action nodes
-   avail lists: 1:23,2:6114,3:998,4:5572,5:4879,6:246,7:11706,8:192,9:14534,10:37,11:1034,12:10
- 73375 multiletter control sequences out of 65536+600000
- 119 fonts using 31941063 bytes
+   avail lists: 1:23,2:12138,3:998,4:11890,5:10626,6:246,7:19273,8:192,9:31870,10:48,11:1700,12:10
+ 73517 multiletter control sequences out of 65536+600000
+ 119 fonts using 31948743 bytes
  84i,17n,108p,1815b,4537s stack positions out of 5000i,500n,10000p,200000b,80000s
 </System/Library/Fonts/Courier.ttc></System/Library/Fonts/Supplemental/Times New Roman Italic.ttf></System/Library/Fonts/Supplemental/Times New Roman.ttf></System/Library/Fonts/Supplemental/Times New Roman Bold.ttf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on dp.pdf (105 pages, 18347887 bytes).
+Output written on dp.pdf (110 pages, 18389841 bytes).
 
-PDF statistics: 5499 PDF objects out of 6186 (max. 8388607)
- 3532 compressed objects within 36 object streams
- 582 named destinations out of 1000 (max. 131072)
+PDF statistics: 5696 PDF objects out of 6186 (max. 8388607)
+ 3723 compressed objects within 38 object streams
+ 749 named destinations out of 1000 (max. 131072)
  737 words of extra memory for PDF output out of 10000 (max. 100000000)
 
