@@ -2,7 +2,7 @@
 /*******************************************************************************
 Author: FEE CTU
 Purpose: Host program
-Comment: Refactoring for HLS
+Comment: Thesis Export Version of Legacy APP PL Processing of I-n model loading from file
 *******************************************************************************/
 /*----------------------------------------------------------------------------*/
 /*-------------------------------- INCLUDES ---------------------------------*/
@@ -82,7 +82,7 @@ void signal_callback_handler(int signum)
 {
     std::cout << "\nCaught signal " << signum << "\n";
 
-    // create function for setting default values to switches and regulators
+    // stoping invertor of global variables
     stopInvertor();
     std::cout << "Terminating program!\n";
     // Terminate program

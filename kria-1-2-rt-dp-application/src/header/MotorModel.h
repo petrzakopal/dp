@@ -1,3 +1,6 @@
+#ifndef MOTORMODEL_H
+#define	MOTORMODEL_H
+
 #include <stdlib.h>
 #include <cmath>
 // #include "transformation.h"
@@ -199,3 +202,5 @@ class MotorModelClass
     int numberOfIterations();
 };
 /*-----------------------------------------------------------*/
+
+#endif	/* MOTORMODEL_H */

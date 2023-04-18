@@ -1,8 +1,8 @@
+#ifndef SVMCORE_H
+#define SVMCORE_H
+
 #include <stdlib.h>
 #include <cmath>
-
-#ifndef SVMCORE_H
-#define	SVMCORE_H
 
 // deprecated
 // typedef struct
@@ -11,7 +11,6 @@
 //     float u1b;
 //     float u1c;
 // }PhaseWantedVoltageType;
-
 
 /*-----------------------------------------------------------------------------------------------------*/
 /*------------------------------ CORE INTERNAL VALUES OF SVM CORE CODE --------------------------------*/
@@ -24,7 +23,7 @@ typedef struct
     float u1a;
     float u1b;
     float u1c;
-}CoreInternalVariablesType;
+} CoreInternalVariablesType;
 /*-----------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------*/
@@ -37,9 +36,8 @@ typedef struct
     bool sw4;
     bool sw5;
     bool sw6;
-}InvertorSwitchType;
+} InvertorSwitchType;
 /*----------------------------------------------------------------------------------*/
-
 
 /*---------------------------------------------------------------------------------------*/
 /*------------------------------ TRIANGLE WAVE SETTINGS --------------------------------*/
@@ -50,14 +48,12 @@ typedef struct
     float calculationStep;
     float calculationTime;
 
-}TriangleWaveSettingsType;
+} TriangleWaveSettingsType;
 /*---------------------------------------------------------------------------------------*/
-
-
 
 class svmCoreClass
 {
-    public:
+public:
     // PhaseWantedVoltageType *phaseWantedVoltage = NULL; // deprecated
     InvertorSwitchType *invertorSwitch = NULL;
     TriangleWaveSettingsType *triangleWaveSettings = NULL;
@@ -77,8 +73,4 @@ class svmCoreClass
     bool comparationLevelTriangleWaveComparation(float compareLevel, float triangleWaveValue);
 };
 
-
-
-
-
-#endif
+#endif /* SVMCORE_H */

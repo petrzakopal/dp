@@ -2,7 +2,7 @@
 /*******************************************************************************
 Author: FEE CTU
 Purpose: Host program
-Comment: Refactoring for HLS
+Comment: Thesis Export Version of Main APP without Legacy PL Processing of I-n model
 *******************************************************************************/
 /*----------------------------------------------------------------------------*/
 /*-------------------------------- INCLUDES ---------------------------------*/
@@ -20,7 +20,7 @@ Comment: Refactoring for HLS
 #include "header/MotorModel.h"
 #include "header/CurVelModel.h"
 #include "header/regulator.h"
-// #include "header/svmCore.h" // already in invertor
+#include "header/svmCore.h" // already in invertor
 #include "header/transformation.h"
 #include "header/invertor.h"
 
@@ -82,15 +82,15 @@ void signal_callback_handler(int signum)
 {
     std::cout << "\nCaught signal " << signum << "\n";
 
-    // create function for setting default values to switches and regulators
+    // stoping invertor of global variables
     stopInvertor();
     std::cout << "Terminating program!\n";
     // Terminate program
     exit(signum);
 }
 
-int threadLoopOutput = 0;
-bool isDataFromBackgroundThreadReady = false; // zde je použito proto aby se zajistilo, že nejsou použity v main while smyšce programu na pozadí dvě stejné hodnoty - když nedošlo vlastně ještě k zápisu, jinak kdyby se mohli použít, tak se nebude vůbec tato proměnná v if statements používat
+int threadLoopOutput = 0;                     // for counting data from a Timer loop
+bool isDataFromBackgroundThreadReady = false; // for blocking data transfer from timer thread to main thread
 std::mutex gLock;
 
 /*
@@ -106,9 +106,9 @@ void acknowledgeSPIInterrupt(int fd, void *ptr)
         .events = POLLIN | POLLOUT,
     };
 
-    int irq_on = 1;    // for writing 0x1 to /dev/uioX
-    uint32_t info = 1; // in read function of a interrupt checking
-    off_t interruptStatus;
+    int irq_on = 1;        // for writing 0x1 to /dev/uioX
+    uint32_t info = 1;     // in read function of a interrupt checking
+    off_t interruptStatus; // interruptStatus register - for asserting bit
 
     while (true)
     {
@@ -120,10 +120,9 @@ void acknowledgeSPIInterrupt(int fd, void *ptr)
             /* Do something in response to the interrupt. */
             printf("AXI Quad SPI Interrupt!\n");
             interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
-            // printf("1st From acknowledge IPISR: 0x%lx\n", interruptStatus);
             std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
             *((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;       // reseting SPI interrupt status register
-            write(fd, &irq_on, sizeof(irq_on));
+            write(fd, &irq_on, sizeof(irq_on));                       // writing to UIO device to clear interrupt
             break;
         }
     }
@@ -139,6 +138,7 @@ void acknowledgeSPIInterrupt(int fd, void *ptr)
  * @name     sendSPIdata
  * @brief    Send SPI data to desired slave via mapped device.
  * @todo     Implement interrupt and delete sleep_for...
+ * @details  For details about registers check PG of AXI SPI Timer
  */
 void sendSPIdata(void *ptr, int fd, off_t slaveSelect, off_t data)
 {
@@ -147,7 +147,6 @@ void sendSPIdata(void *ptr, int fd, off_t slaveSelect, off_t data)
     *((unsigned *)(ptr + SPI_DTR)) = data;
     *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
     *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-    // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
     acknowledgeSPIInterrupt(fd, ptr); // acknowledging interrupt
     *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
 }
@@ -175,7 +174,8 @@ void initializeSPI(void *ptr, off_t slaveSelect)
     *((unsigned *)(ptr + SPI_DGIER)) = 0x80000000;
 
     // Interrupt enables
-    *((unsigned *)(ptr + SPI_IPIER)) = 0x3FFF;
+    // *((unsigned *)(ptr + SPI_IPIER)) = 0x3FFF;               // enabling all interrupts
+    *((unsigned *)(ptr + SPI_IPIER)) = 0x4; // enabling onty DTR is clear INT
 
     off_t interruptStatus;
 
@@ -200,7 +200,6 @@ void initializeLEDmatrix(void *ptr, int fd, off_t slaveSelect)
         *((unsigned *)(ptr + SPI_DTR)) = initilSeq[i];
         *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
         *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-        // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
         acknowledgeSPIInterrupt(fd, ptr); // acknowledging interrupt
         *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
     }
@@ -222,7 +221,6 @@ void clearLEDmatrix(void *ptr, int fd, off_t slaveSelect)
         *((unsigned *)(ptr + SPI_DTR)) = clearSeq[i];
         *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
         *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-        // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
         acknowledgeSPIInterrupt(fd, ptr); // acknowledging interrupt
         *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
     }
@@ -243,9 +241,7 @@ void printLetterOnLEDMatrix(void *ptr, int fd, off_t slaveSelect, off_t *pismeno
         *((unsigned *)(ptr + SPI_DTR)) = pismeno[i];
         *((unsigned *)(ptr + SPI_SPISSR)) = 0x0;
         *((unsigned *)(ptr + SPI_SPICR)) = 0x86;
-        // std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // here should be waiting for an interrrupt
         acknowledgeSPIInterrupt(fd, ptr); // acknowledging interrupt
-
         *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
     }
 }
@@ -257,17 +253,15 @@ void printLetterOnLEDMatrix(void *ptr, int fd, off_t slaveSelect, off_t *pismeno
  */
 void mainSPIfunction()
 {
-    void *ptr;  // pointer to a virtual memory filled by mmap
-    int fd;     // file descriptor
-    char *uiod; // name what device to open
-    // uiod = "/dev/mem";
-    uiod = "/dev/uio4";
-    off_t memoryBase = 0x0080040000; // base memory (in mmap() it is an offset)
-    off_t dataToSend;                // data to send to SPI manually
-    off_t slaveSelect;               // slave selection (chip select CS)
-    int initializeMatrix;            // variable for if statement to initializeMatrix with initialization sequence
-    int clearMatrix;                 // variable for if statement to clearMatrix (set all LEDs to 0)
-    int modeSelection;               // mode selction to write data manually or to write a letter
+    void *ptr;            // pointer to a virtual memory filled by mmap
+    int fd;               // file descriptor
+    char *uiod;           // name what device to open
+    uiod = "/dev/uio4";   // device name
+    off_t dataToSend;     // data to send to SPI manually
+    off_t slaveSelect;    // slave selection (chip select CS)
+    int initializeMatrix; // variable for if statement to initializeMatrix with initialization sequence
+    int clearMatrix;      // variable for if statement to clearMatrix (set all LEDs to 0)
+    int modeSelection;    // mode selction to write data manually or to write a letter
 
     // letter variable
     off_t pismeno[8] = {0b000110000001,
@@ -323,7 +317,7 @@ void mainSPIfunction()
 
     // Main semaphore
     // 0 - send data via SPI manually
-    // 1 - send desired letter defined in pismeno[] array
+    // 1 - send desired letter defined in pismeno[] array (defined above)
     switch (modeSelection)
     {
     case 0:
@@ -343,24 +337,15 @@ void mainSPIfunction()
     }
 
     printf("IPISR: 0x%lx\n", *((unsigned *)(ptr + SPI_IPISR)));
-    // Unmaping memory
-    munmap(ptr, MAP_SIZE);
 
-    // Closing fd
-    close(fd);
+    munmap(ptr, MAP_SIZE); // unmaping memory
+    close(fd);             // closing fd
 }
 
-bool oddNumberOfTimer = true;
+bool oddNumberOfTimer = true; // when in SPI Timer thread loop, this variable holds infou if it is an odd or even number of interrupt to change written letter on LED matrix
 
 void threadSPI(void *ptr, int fd, off_t slaveSelect)
 {
-    // void *ptr;  // pointer to a virtual memory filled by mmap
-    // int fd;     // file descriptor
-    // char *uiod; // name what device to open
-    //  uiod = "/dev/mem";
-    // uiod = "/dev/uio4";
-    //  off_t slaveSelect = 0x1;
-
     // letter variable
     off_t pismenoZ[8] = {0b000110000001,
                          0b001011000001,
@@ -381,25 +366,6 @@ void threadSPI(void *ptr, int fd, off_t slaveSelect)
                          0b011100000000 + 0b10001000,
                          0b100000000000 + 0b11111111};
 
-    // fd = open(uiod, O_RDWR | O_NONBLOCK); // opening device
-
-    // if error
-    /*
-    if (fd < 1)
-    {
-        perror("open\n");
-        printf("Invalid UIO device file:%s.\n", uiod);
-    }
-    else
-    {
-        std::cout << "Successfully opened device.\n";
-    }*/
-
-    // map PL memory to virtual memory
-    // ptr = mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-    // initializeSPI(ptr, 0x1);
-    // initializeLEDmatrix(ptr, fd, slaveSelect);
-
     if (oddNumberOfTimer == true)
     {
         clearLEDmatrix(ptr, fd, slaveSelect);
@@ -412,11 +378,6 @@ void threadSPI(void *ptr, int fd, off_t slaveSelect)
         printLetterOnLEDMatrix(ptr, fd, slaveSelect, pismenoP);
         oddNumberOfTimer = true;
     }
-
-    // munmap(ptr, MAP_SIZE);
-
-    // // Closing fd
-    // close(fd);
 }
 
 /*
@@ -427,13 +388,13 @@ void threadSPI(void *ptr, int fd, off_t slaveSelect)
 
 void threadLoop()
 {
-    void *timer1ptr;    // pointer to a virtual memory filled by mmap
-    int timer1fd;       // file descriptor of uio to reset interrupt in /proc/interrupts
-    char *uiod;         // name of the uio to reset interrupts
-    uiod = "/dev/uio5"; // check when making changes in a platform
-    int irq_on = 1;     // for writing 0x1 to /dev/uioX
-    uint32_t info = 1;  // in read function of a interrupt checking
-    off_t slaveSelect = 0x1;
+    void *timer1ptr;         // pointer to a virtual memory filled by mmap
+    int timer1fd;            // file descriptor of uio to reset interrupt in /proc/interrupts
+    char *uiod;              // name of the uio to reset interrupts
+    uiod = "/dev/uio5";      // check when making changes in a platform
+    int irq_on = 1;          // for writing 0x1 to /dev/uioX
+    uint32_t info = 1;       // in read function of a interrupt checking
+    off_t slaveSelect = 0x1; // manually selecting slave to make active
 
     timer1fd = open(uiod, O_RDWR | O_NONBLOCK); // opening uioX device
 
@@ -501,10 +462,8 @@ void threadLoop()
 
     while (true)
     {
-        // std::cout << "Outer loop\n";
         while (true) // polling while
         {
-            // std::cout << "Inner loop\n";
             int ret = poll(&fds, 1, -1); // poll on a return value
 
             // there was change in ret
@@ -716,40 +675,46 @@ int main(int argc, char *argv[])
     scanf("%i", &modeSelection);
     printf("You have selected: %i\n\r", modeSelection);
 
-    // int masterInputLength = 39;
-    // int masterOutputLength = 18;
-
+    // resolve length maybe later, but in the app it is probably a minimum difference
     int masterInputLength = 4096;
     int masterOutputLength = 4096;
     int masterMotorInputLength = 4096;
     int masterMotorOutputLength = 4096;
 
+    // allocating buffers in a global memory for first I-n and regulatory model
     OCL_CHECK(err, cl::Buffer buffer_masterInput(context, CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_ONLY, masterInputLength * sizeof(float), NULL, &err));
     OCL_CHECK(err, cl::Buffer buffer_masterOutput(context, CL_MEM_ALLOC_HOST_PTR | CL_MEM_WRITE_ONLY, masterOutputLength * sizeof(float), NULL, &err));
 
     int narg = 0;
 
+    // setting buffers to first kernel
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterInput));
     OCL_CHECK(err, err = krnl_calculateCurVelModel.setArg(narg++, buffer_masterOutput));
 
+    // pointers to which the buffer addresses will be mapped
     float *masterInput;
     float *masterOutput;
 
+    // enqueue buffers to a memory and get the addresses
     OCL_CHECK(err, masterInput = (float *)q.enqueueMapBuffer(buffer_masterInput, CL_TRUE, CL_MAP_WRITE, 0, masterInputLength * sizeof(float), NULL, NULL, &err));
 
     OCL_CHECK(err, masterOutput = (float *)q.enqueueMapBuffer(buffer_masterOutput, CL_TRUE, CL_MAP_READ, 0, masterOutputLength * sizeof(float), NULL, NULL, &err));
 
+    // allocating buffers for ASM and OIV model
     OCL_CHECK(err, cl::Buffer buffer_masterMotorInput(context, CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_ONLY, masterMotorInputLength * sizeof(float), NULL, &err));
     OCL_CHECK(err, cl::Buffer buffer_masterMotorOutput(context, CL_MEM_ALLOC_HOST_PTR | CL_MEM_WRITE_ONLY, masterMotorOutputLength * sizeof(float), NULL, &err));
 
     narg = 0;
 
+    // setting buffers to second kernel
     OCL_CHECK(err, err = krnl_calculateInvMot.setArg(narg++, buffer_masterMotorInput));
     OCL_CHECK(err, err = krnl_calculateInvMot.setArg(narg++, buffer_masterMotorOutput));
 
+    // pointers to which the buffer addresses will be mapped
     float *masterMotorInput;
     float *masterMotorOutput;
 
+    // enqueue buffers to a memory and get the addresses
     OCL_CHECK(err, masterMotorInput = (float *)q.enqueueMapBuffer(buffer_masterMotorInput, CL_TRUE, CL_MAP_WRITE, 0, masterMotorInputLength * sizeof(float), NULL, NULL, &err));
 
     OCL_CHECK(err, masterMotorOutput = (float *)q.enqueueMapBuffer(buffer_masterMotorOutput, CL_TRUE, CL_MAP_READ, 0, masterMotorOutputLength * sizeof(float), NULL, NULL, &err));
@@ -791,7 +756,6 @@ int main(int argc, char *argv[])
     MotorModel.motorParametersAllocateMemory();
     MotorModel.stateSpaceCoeffAllocateMemory();
     MotorModel.modelVariablesForOnlineCalculationAllocateMemory();
-    // MotorModel.voltageGeneratorDataAllocateMemory();
     /*-------------------- END OF ASYNCHRONOUS MOTOR MODEL ---------------------*/
 
     /*-------------------- CURRENT VELOCITY MOTOR MODEL ---------------------*/
@@ -802,8 +766,6 @@ int main(int argc, char *argv[])
     /*---------------- END OF CURRENT VELOCITY MOTOR MODEL -----------------*/
 
     /*-------------------- SPACE VECTOR MODULATION CORE ---------------------*/
-    // svmCore.phaseWantedVoltageAllocateMemory(); // depracated
-    // svmCore.invertorSwitchAllocateMemory();
     svmCore.triangleWaveSettingsAllocateMemory();
     svmCore.coreInternalVariablesAllocateMemory();
     /*----------------------------------------------------------------------*/
@@ -940,10 +902,13 @@ int main(int argc, char *argv[])
     Regulator.iqRegulator->wantedValue = 0;
     /*--------------------------------------------------------------*/
 
+    // defining default values for inputs used in CPU/FPGA model and keyboard input
     float inputI1 = 0;
     float inputI2 = 0;
     float inputI3 = 0;
 
+    /*-------------------------------------------------------------------------*/
+    /*---------------------- CPU/FPGA MODEL SIMULATION -----------------------*/
     if (modeSelection == 2)
     {
 
@@ -1286,7 +1251,11 @@ int main(int argc, char *argv[])
         std::chrono::duration<double> diffTime = endTime - startTime;
         std::cout << "Time for the execution is: " << diffTime.count() << "\n";
     }
+    /*---------------------- END OF CPU/FPGA MODEL SIMULATION -----------------------*/
+    /*------------------------------------------------------------------------------*/
 
+    /*-------------------------------------------------------------------------*/
+    /*---------------------- KEYBOARD INPUT SIMULATION -----------------------*/
     if (modeSelection == 1)
     {
 
@@ -1443,10 +1412,11 @@ int main(int argc, char *argv[])
             masterInput[38] = CurVelModel.modelCVVariables->psi2beta;
         }
     }
+    /*---------------------- END OF KEYBOARD INPUT SIMULATION -----------------------*/
+    /*------------------------------------------------------------------------------*/
 
-    std::cout << "the end of the most useful program is here\n";
-
-    // timer thread testing
+    /*---------------------------------------------------------------------*/
+    /*---------------------- TIMER THREAD WITH SPI -----------------------*/
     if (modeSelection == 3)
     {
 
@@ -1471,11 +1441,17 @@ int main(int argc, char *argv[])
 
         backgroundThread.join();
     }
+    /*---------------------- END OF TIMER THREAD WITH SPI -----------------------*/
+    /*--------------------------------------------------------------------------*/
 
+    /*---------------------- SPI - SEND SINGLE USER DATA -----------------------*/
+    /*-------------------------------------------------------------------------*/
     if (modeSelection == 4)
     {
         mainSPIfunction();
     }
+    /*---------------------- END OF SPI - SEND SINGLE USER DATA -----------------------*/
+    /*--------------------------------------------------------------------------------*/
 
     /*-----------------------------------------------------------*/
     /*-------------------- MEMORY FREEING ---------------------*/
@@ -1496,13 +1472,11 @@ int main(int argc, char *argv[])
     free(Invertor.reconstructedInvertorOutputVoltage);
     free(svmCore.coreInternalVariables);
 
+    // unmapping kernel objects
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_masterInput, masterInput));
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_masterOutput, masterOutput));
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_masterMotorInput, masterMotorInput));
     OCL_CHECK(err, err = q.enqueueUnmapMemObject(buffer_masterMotorOutput, masterMotorInput));
     OCL_CHECK(err, q.finish());
-
     /*-----------------------------------------------------------*/
 }
-
-// musí být chyba v algoritmu velocity regulatoru
