@@ -32,7 +32,7 @@ print("Contents in csv file:", df)
 
 figure_first = plt.figure("psi2amplitude")
 
-plt.title("psi2amplitude", fontsize=30, fontweight=700)
+plt.title("Závislost mechanické otáčivé rychlosti rotoru a velikosti magnetického toku rotoru na čase", fontsize=22, fontweight=700)
 
 # ax = axis, but subplot is here mainly for deleting some axis on top and right
 ax = plt.subplot(111)
@@ -46,9 +46,9 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 
 plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue, label="psi2amplitude")
 plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed, label="angularVelocity")
-plt.xlabel("time (s)",fontsize=20, fontweight=400, loc = "right")
-plt.ylabel("psi2amplitude (Wb)\nangularVelocity (s^(-1))",fontsize=10 ,fontweight=400, loc = "top", rotation=0)
+plt.xlabel("time (s)",fontsize=17, fontweight=400, loc = "right")
+plt.ylabel("psi2amplitude (Wb)\nangularVelocity (s^(-1))",fontsize=14 ,fontweight=400, loc = "top", rotation=0)
 plt.legend(  bbox_to_anchor=(0.5, -0.05), ncol=2 )
-
-
 plt.show()
+
+
