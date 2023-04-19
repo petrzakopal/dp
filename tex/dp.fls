@@ -816,6 +816,9 @@ INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstmisc.sty
 INPUT ./src/pdf/keyboard-input.pdf
 INPUT ./src/pdf/keyboard-input.pdf
 INPUT ./src/pdf/keyboard-input.pdf
+INPUT ./src/png/keyboard-input-terminal.png
+INPUT ./src/png/keyboard-input-terminal.png
+INPUT ./src/png/keyboard-input-terminal.png
 INPUT ./src/pdf/cpu-fpga-model.pdf
 INPUT ./src/pdf/cpu-fpga-model.pdf
 INPUT ./src/pdf/cpu-fpga-model.pdf

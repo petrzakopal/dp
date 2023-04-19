@@ -147,6 +147,11 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 
+% solving problems with ) literal to be coded in lstlisting as it should be
+\makeatletter
+\patchcmd{\lsthk@SelectCharTable}{)}{`}{}{} 
+\makeatother 
+
 \lstdefinestyle{zakopal}{
     backgroundcolor=\color{codeblue},   
     commentstyle=\color{codegray},
@@ -1635,7 +1640,7 @@ dtc -@ -O dtb -o <path-to-output-file> <path-to-input-file> # general command
 
 dtc -@ -O dtb -o ./dtg_output/dtg_output/kria_kr260/psu_cortexa53_0/device_tree_domain/bsp/pl.dtbo ./dtg_output/dtg_output/kria_kr260/psu_cortexa53_0/device_tree_domain/bsp/pl.dtsi # command for project file structure
 \end{lstlisting}
-	Pokud byla kompilace úspěšná (v některých případech dochází k vypsání hlášky ohledně IP bloku interrupt controller, tu je možné ignorovat) je vhodné přesunout soubor \texttt{pl.dtbo} do složky \texttt{transfer}.
+	Pokud byla kompilace úspěšná (v~některých případech dochází k~vypsání hlášky ohledně IP bloku interrupt controller, tu je možné ignorovat) je vhodné přesunout soubor \texttt{pl.dtbo} do složky \texttt{transfer}.
 
 	\fbar
 	\subsection{Konfigurace Root File System}
@@ -1699,7 +1704,7 @@ Petaliunx Package Groups -> packagegroup-petalinux-x11 -> packagegroup-petalinux
 	
 	\fbar
 	\subsection{Závěrečný build PetaLinux, generování SDK a tvoření WIC obrazu systému}
-	Po provedení požadované \texttt{rootfs} konfigurace je možné přistoupit opět k~build procesu pomocí příkazu \ref{lst:petalinux-build}. Po první části build procesu je možné aktivovat proces generování \textit{SDK} (Software Development Kit), který je nutný k~tomu, aby bylo možné akcelerovanou aplikaci ve Vitis vyvíjet a aktivovat její build proces. Generování \textit{SDK} je provedeno pomocí příkazu \ref{lst:petalinux-build-sdk}. Autor vypozoroval, že pokud je postup tvorby \textit{PetaLinux} dodržen a jsou nainstalované všechny správné packages v operačním systému, kde dochází k buildu \textit{SDK}, a vznikne v procesu generování chyba ohledně \texttt{do\_populate\_sdk}, zahrnující klíčové slovo \textit{python}, je třeba restart operačního systému a pokusit se o opakování příkazu \ref{lst:petalinux-build-sdk}.\par
+	Po provedení požadované \texttt{rootfs} konfigurace je možné přistoupit opět k~build procesu pomocí příkazu \ref{lst:petalinux-build}. Po první části build procesu je možné aktivovat proces generování \textit{SDK} (Software Development Kit), který je nutný k~tomu, aby bylo možné akcelerovanou aplikaci ve Vitis vyvíjet a aktivovat její build proces. Generování \textit{SDK} je provedeno pomocí příkazu \ref{lst:petalinux-build-sdk}. Autor vypozoroval, že pokud je postup tvorby \textit{PetaLinux} dodržen a jsou nainstalované všechny správné packages v~operačním systému, kde dochází k~buildu \textit{SDK}, a vznikne v~procesu generování chyba ohledně \texttt{do\_populate\_sdk}, zahrnující klíčové slovo \textit{python}, je třeba restart operačního systému a pokusit se o~opakování příkazu \ref{lst:petalinux-build-sdk}.\par
 	Tento \textit{SDK} je pro jeho využití ve Vitis IDE nutné instalovat. Instalace je doporučena do složky \texttt{linux-files}, udaná strukturou v~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} pomocí příkazu \ref{lst:petalinux-install-sdk-to-linux-files}.
 	Po vygenerování \textit{SDK} je možné přistoupit ke kroku vytvoření a „zabalení“ (package) určitých komponent, pro vytvoření obrazu systému \textit{PetaLinux}. K~tomuto jsou využity příkazy \ref{lst:petalinux-package-boot} a \ref{lst:petalinux-package-wic}.\par
 
@@ -1721,16 +1726,16 @@ petalinux-package --wic --images-dir ./images/linux/ --bootfiles "ramdisk.cpio.g
 	\begin{lstlisting}[language={sh}, caption={Příkaz pro kopírování boot komponent do složky dané strukturou projektu.}, label={lst:petalinux-cp-boot-components}, morekeywords={cp}]
 cp bl31.elf pmufw.elf system.dtb u-boot.elf zynqmp_fsbl.elf ./../../../linux-files/pfm/boot/\end{lstlisting}
 
-		Vygenerovaný obraz systému typu \texttt{wic} je možné použít na flash SD karty, která je následně vložena do vývojové desky. K flashnutí je možné na opetačním systému macOS nebo Linux využít příkazu \texttt{dd}. Pokud uživatel není zkušený, je doporučováno využít program \textit{balenaEtcher}.\par
-		V této části byl představen postup generování systému \textit{PetaLinux}, byly doporučeny jednotlivá nastavení a konfigurace, vhodné pro vyvíjenou aplikaci. Na závěr části byl nastíněn postup flash SD karty, kterou je poté možné vložit do vývojové desky a započít boot proces systému.
+		Vygenerovaný obraz systému typu \texttt{wic} je možné použít na flash SD karty, která je následně vložena do vývojové desky. K~flashnutí je možné na opetačním systému macOS nebo Linux využít příkazu \texttt{dd}. Pokud uživatel není zkušený, je doporučováno využít program \textit{balenaEtcher}.\par
+		V~této části byl představen postup generování systému \textit{PetaLinux}, byly doporučeny jednotlivá nastavení a konfigurace, vhodné pro vyvíjenou aplikaci. Na závěr části byl nastíněn postup flash SD karty, kterou je poté možné vložit do vývojové desky a započít boot proces systému.
 
 	\subsection{Spuštění systému PetaLinux na KR260}
 		Po úspěšném procesu flashnutí obrazu systému \texttt{wic} na SD kartu, je možné kartu vložit do vývojové desky a připojit desku na napájení. CC KR260 neobsahuje přepínač, který by umožňoval přerušení napájení desky. Proto se deska vypíná pomocí manuálního odstranění napájení. Restart (reboot) desky je proveden softwaerový způsobem pomocí příkazu \texttt{reboot now} nebo opět pomocí odstranění a připojení napájení (power cycle).\par
-		Po připojení naoájení dochází k automatickému spuštění \textit{bootloaderu} a postupnému načtení a spuštění systému. Pokud je uživatel připojen k desce pomocí USB, resp. UART komunikace (např. pomocí \textit{minicom} s baud rate 115200), budou v terminálu vypisovány informace jak z bootloaderu opřed spuštěním \textit{PetaLinux}, tak informace z \textit{kernel ring buffer}. Po úspěšném spuštění systému je možné informace z \textit{kernel ring buffer} opět zobrazit pomocí příkazzu \texttt{dmesg}. Výpis je v některých případech důležitý při debuggingu systému a jeho informace je možné využít i při spouštění akcelerované aplikace a načítání \texttt{pl.dtbo} a \texttt{xclbin} souboru.\par
+		Po připojení naoájení dochází k~automatickému spuštění \textit{bootloaderu} a postupnému načtení a spuštění systému. Pokud je uživatel připojen k~desce pomocí USB, resp. UART komunikace (např. pomocí \textit{minicom} s~baud rate 115200), budou v~terminálu vypisovány informace jak z~bootloaderu opřed spuštěním \textit{PetaLinux}, tak informace z~\textit{kernel ring buffer}. Po úspěšném spuštění systému je možné informace z~\textit{kernel ring buffer} opět zobrazit pomocí příkazzu \texttt{dmesg}. Výpis je v~některých případech důležitý při debuggingu systému a jeho informace je možné využít i při spouštění akcelerované aplikace a načítání \texttt{pl.dtbo} a \texttt{xclbin} souboru.\par
 
 	\subsection{Nastavení Ethernet adaptéru po spuštění systému}
 		Bylo vypozorváno, že vlivem tvorby platformy a nastavení \textit{PetaLinux} je \texttt{eth0} interface po restartu systému neaktivní, je třeba jej aktivovat pomocí příkazu \texttt{ifup eth0}.\par
-		Pokud v síti, ke které je připojena vývojová deska není aktivní DHCP server, je nutné upravit soubor v cestě \texttt{/etc/network/interfaces} a vložit požadované nastavení adaptéru. Ukázka nastavení pro vývojové pracoviště autora je v kódu \ref{lst:eth0-interface}. Kompletní popis architektury pracoviště a volby adres jsou popsány v části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}}.\par
+		Pokud v~síti, ke které je připojena vývojová deska není aktivní DHCP server, je nutné upravit soubor v~cestě \texttt{/etc/network/interfaces} a vložit požadované nastavení adaptéru. Ukázka nastavení pro vývojové pracoviště autora je v~kódu \ref{lst:eth0-interface}. Kompletní popis architektury pracoviště a volby adres jsou popsány v~části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}}.\par
 
 \begin{lstlisting}[language={sh}, caption={Nastavení eth0 interface pro KR260 vývojovou desku na vývojovém pracovišti autora.}, label={lst:eth0-interface}, morekeywords={auto, iface, address, netmask, network, gateway, broadcast}]
 auto eth0
@@ -1744,15 +1749,15 @@ iface eth0 inet static
 
 	\fbar
 	\section{Tvorba akcelerované aplikace ve Vitis IDE}
-	V předchozích kapitolách byl představeno, jakým způsobem připravit HW platformu a \textit{PetaLinux} systém pro vývoj akcelerované aplikace. V této části je uveden postup, jakým vytvořit akcelerovanou aplikaci pomocí Vitis, s využitím HLS.\par
-	HLS může být použito také v prostředí Vitis HLS, ve kterém je možné krom \texttt{xo} souborů pro \texttt{v++} linker vytvářet RTL IP PL bloky do prostředí Vivado. Této možnosti nebylo v práci využito a bude předmětem dalších navazujících prací.\par
-	Pro vytvoření \texttt{c++} aplikace pro PS a kernelu pro PL, jež je pomocí HLS z \texttt{c++} zkompilován do objektu \texttt{xo} je využit je v této práci využito prostředí Vitis IDE. Autorem práce je doporučováno využít IDE v maximální míře, ovšem při tvorbě aplikace a prozkoumávání možností využití platformy narazil na problémy s odezvou od GUI Vitis IDE, proto přešel částečně na headless řešení pomocí příkazové řádky. Headless řešení umožňuje rychlejší flow při vytváření aplikace, které je možné automatizovat pomocí \texttt{bash} skriptů. Příkazová řádka v této práci byla převážně využívána ke kompilaci souborů pro PS, kernel k a procesu linkování jednotlivých artefaktů pomocí \texttt{v++ linker}.\par
-	Aby bylo možné Vitis IDE spustit v operačním systému Linux, je nutné opět aktivovat prostředí pomocí příkazu \ref{lst:vitis-environment}. Poté je možné spustit Vitis IDE pomocí příkazu \texttt{vitis}. Po spuštění je třeba zvolit \textit{Workspace}, které je doporučeno volit do složky \texttt{vitis} definované ve \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}.\par
+	V~předchozích kapitolách byl představeno, jakým způsobem připravit HW platformu a \textit{PetaLinux} systém pro vývoj akcelerované aplikace. V~této části je uveden postup, jakým vytvořit akcelerovanou aplikaci pomocí Vitis, s~využitím HLS.\par
+	HLS může být použito také v~prostředí Vitis HLS, ve kterém je možné krom \texttt{xo} souborů pro \texttt{v++} linker vytvářet RTL IP PL bloky do prostředí Vivado. Této možnosti nebylo v~práci využito a bude předmětem dalších navazujících prací.\par
+	Pro vytvoření \texttt{c++} aplikace pro PS a kernelu pro PL, jež je pomocí HLS z~\texttt{c++} zkompilován do objektu \texttt{xo} je využit je v~této práci využito prostředí Vitis IDE. Autorem práce je doporučováno využít IDE v~maximální míře, ovšem při tvorbě aplikace a prozkoumávání možností využití platformy narazil na problémy s~odezvou od GUI Vitis IDE, proto přešel částečně na headless řešení pomocí příkazové řádky. Headless řešení umožňuje rychlejší flow při vytváření aplikace, které je možné automatizovat pomocí \texttt{bash} skriptů. Příkazová řádka v~této práci byla převážně využívána ke kompilaci souborů pro PS, kernel k~a procesu linkování jednotlivých artefaktů pomocí \texttt{v++ linker}.\par
+	Aby bylo možné Vitis IDE spustit v~operačním systému Linux, je nutné opět aktivovat prostředí pomocí příkazu \ref{lst:vitis-environment}. Poté je možné spustit Vitis IDE pomocí příkazu \texttt{vitis}. Po spuštění je třeba zvolit \textit{Workspace}, které je doporučeno volit do složky \texttt{vitis} definované ve \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}.\par
 
 		\fbar
 		\subsection{Tvorba platformy pro akcelerovanou aplikaci}
-		Před tvorbou samotné akcelerované aplikace je nejprve nutné vytvořit tzv. \textit{Platform project}, jež využije vytvořený soubor \textit{XSA} z Vivado a soubor \textit{Image} z cesty \texttt{<petalinux-project>/linux/image/Image}. V nabídce výběru systému při tvorbě platformy je nutné vybrat \textit{linux} a zrušit možnost \textit{Generate boot components}. Konfigurace je zobrazená na obr. \ref{fig:vitis-new-platform-linux}.\par
-		Po vytvoření platformy je nutné vložit cesty potřebných souborů platformy. Přidání cest probíhá v souboru \texttt{<platform-name>/platform.spr} v záložce \texttt{linux on cortexa53}. Vysvětlení, jaké cesty souborů je třeba vložit v konfiguraci je uvedeno v tabulce \ref{tab:vitis-platform-spr-settings}.\par
+		Před tvorbou samotné akcelerované aplikace je nejprve nutné vytvořit tzv. \textit{Platform project}, jež využije vytvořený soubor \textit{XSA} z~Vivado a soubor \textit{Image} z~cesty \texttt{<petalinux-project>/linux/image/Image}. V~nabídce výběru systému při tvorbě platformy je nutné vybrat \textit{linux} a zrušit možnost \textit{Generate boot components}. Konfigurace je zobrazená na obr. \ref{fig:vitis-new-platform-linux}.\par
+		Po vytvoření platformy je nutné vložit cesty potřebných souborů platformy. Přidání cest probíhá v~souboru \texttt{<platform-name>/platform.spr} v~záložce \texttt{linux on cortexa53}. Vysvětlení, jaké cesty souborů je třeba vložit v~konfiguraci je uvedeno v~tabulce \ref{tab:vitis-platform-spr-settings}.\par
 	
 
 	\begin{lstlisting}[language={sh}, caption={Aktivace prostředí pro Vitis verze 2022.2.}, label= {lst:vitis-environment}, morekeywords={source}]
@@ -1796,8 +1801,8 @@ source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 			\label{tab:vitis-platform-spr-settings}
 		\end{table}
 
-		Jak již bylo řešeno, většinu souborů ve Vitis je možné otevřít pomocí textového editoru. Soubor \texttt{platform.spr} není výjimkou. Pokud dochází k tvorbě mnohočetných projektů se stejným nastavením platformy, je možné vytvořit skripty, které automaticky vytvoří konfigurovaný \texttt{platform.spr} soubor s danou strukturou a nastavením.\par
-		Po základní konfiguraci platformy je možné spustit kompilaci platformy pomocí pravého kliknutí na název platformy v okně \textit{Explorer} a zvolení možnosti \textit{Build Project}. Ukázka tohoto kroku je na obr. \ref{fig:vitis-platform-build}.
+		Jak již bylo řešeno, většinu souborů ve Vitis je možné otevřít pomocí textového editoru. Soubor \texttt{platform.spr} není výjimkou. Pokud dochází k~tvorbě mnohočetných projektů se stejným nastavením platformy, je možné vytvořit skripty, které automaticky vytvoří konfigurovaný \texttt{platform.spr} soubor s~danou strukturou a nastavením.\par
+		Po základní konfiguraci platformy je možné spustit kompilaci platformy pomocí pravého kliknutí na název platformy v~okně \textit{Explorer} a zvolení možnosti \textit{Build Project}. Ukázka tohoto kroku je na obr. \ref{fig:vitis-platform-build}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -1808,8 +1813,8 @@ source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 
 		\fbar
 		\subsection{Tvorba application projektu}
-		Po dokončení build procesu platformy je již možné přejít k tvorbě \textit{Application Project}. \textit{Application Project} je možné vytvářen pouze na předem vytvořenou platformu, která prošla úspěšným build procesem. Ukázka výběru platformy s povolenou HW akcelerací, na kterou může být vytvářen \textit{Application Project} je na obr. \ref{fig:vitis-application-project-platform-selection}.\par
-		Při inicializaci projektu v kroku \textit{Domain} je nutné zvolit v části \textit{Application settings} cestu k položce \textit{Kernel Image}, ta je pro vyvíjenou aplikaci umístěna v cestě \texttt{<project-name>/<petalinux-project>/images/linux/Image}.
+		Po dokončení build procesu platformy je již možné přejít k~tvorbě \textit{Application Project}. \textit{Application Project} je možné vytvářen pouze na předem vytvořenou platformu, která prošla úspěšným build procesem. Ukázka výběru platformy s~povolenou HW akcelerací, na kterou může být vytvářen \textit{Application Project} je na obr. \ref{fig:vitis-application-project-platform-selection}.\par
+		Při inicializaci projektu v~kroku \textit{Domain} je nutné zvolit v~části \textit{Application settings} cestu k~položce \textit{Kernel Image}, ta je pro vyvíjenou aplikaci umístěna v~cestě \texttt{<project-name>/<petalinux-project>/images/linux/Image}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -1818,44 +1823,44 @@ source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 			\label{fig:vitis-application-project-platform-selection}
 		\end{figure}
 
-		V následujícím kroku je doporučeno vytvořit aplikaci z předpřipravených ukázkových souborů, ze kterých může být aplikace dále rozvinuta dle potřeb. Nejlepším řešením se autorovi jevilo využívat \textit{Simple Vector Addition}. Při využití ukázkových souborů jsou již potřebné soubory projektu předkonfigurovány a je je možné vhodně měnit, aby splňovali potřebné parametry.\par
-		Po načtení ukázkového projektu je možné spustit build proces přímo z Vitis IDE, nebo pomocí příkazové řádky. Při realizace této práce bylo využíváno příkazové řádky, protože disponovala rychlejší odezvou na požadovaný build a snadněji se tak aplikace iterovala a vyvíjela.\par
-		Aby bylo možné build proces vyvolávat z příkazové řádky, je nutné vytvořit \texttt{makefile} soubory, které slouží ke kompilaci dílčích zdrojových souborů a k vyvolání \texttt{v++} linkeru, jež spojí vytvořené artefakty pro PL do jednoho binárního souboru \texttt{xclbin}. Makefile soubory je možné vytvořit manuálně, nebo pomocí Vitis IDE v okně \textit{Assistant} poklikem levým tlačítkem myši na název potřebného typu procesu build a volby \textit{Create Makefiles}.\par
+		V~následujícím kroku je doporučeno vytvořit aplikaci z~předpřipravených ukázkových souborů, ze kterých může být aplikace dále rozvinuta dle potřeb. Nejlepším řešením se autorovi jevilo využívat \textit{Simple Vector Addition}. Při využití ukázkových souborů jsou již potřebné soubory projektu předkonfigurovány a je je možné vhodně měnit, aby splňovali potřebné parametry.\par
+		Po načtení ukázkového projektu je možné spustit build proces přímo z~Vitis IDE, nebo pomocí příkazové řádky. Při realizace této práce bylo využíváno příkazové řádky, protože disponovala rychlejší odezvou na požadovaný build a snadněji se tak aplikace iterovala a vyvíjela.\par
+		Aby bylo možné build proces vyvolávat z~příkazové řádky, je nutné vytvořit \texttt{makefile} soubory, které slouží ke kompilaci dílčích zdrojových souborů a k~vyvolání \texttt{v++} linkeru, jež spojí vytvořené artefakty pro PL do jednoho binárního souboru \texttt{xclbin}. Makefile soubory je možné vytvořit manuálně, nebo pomocí Vitis IDE v~okně \textit{Assistant} poklikem levým tlačítkem myši na název potřebného typu procesu build a volby \textit{Create Makefiles}.\par
 		\vspace*{0.35cm}
 		Volbu \texttt{makefiles} je potřeba provést pro složky:
 		\begin{enumerate}
 			\item \texttt{<application-project-name>\_hw\_link} \textit{[HW Link]},
 			\item \texttt{<application-project-name>\_kernels} \textit{[HW Kernel]},
 			\item \texttt{<application-project-name>} \textit{[Host]},
-			\item \texttt{<type-of-build>} (mimo podsložku, umístěno v hlavní složce \texttt{<application-project-name>} \textit{[System]}).
+			\item \texttt{<type-of-build>} (mimo podsložku, umístěno v~hlavní složce \texttt{<application-project-name>} \textit{[System]}).
 		\end{enumerate}
 		\vspace*{0.75cm}
-		V některých případech nejsou \texttt{makefile} soubory vytvořeny, nebo aktualizovány dle posledních změn v projektu. Proto je nutné v téže okně \textit{Assistant} pravým tlačítkem kliknout na jednotlivé složky a zvolit \textit{Refresh Project Models} a v okně \textit{Explorer} zvolit aplikaci a v nabídce po využití pravvého tlačítka myši zvolit \textit{Refresh} a akci generování \texttt{makefile} souborů opakovat.\par
-		Struktura \texttt{makefile} souborů je obecná a firma Xilinx dodává na svých stránkách dokumentaci k jejich tvorbě. V některých případech, kdy nedocházelo k jejich automatické aktualizaci, byl autor nucen tyto soubory manuálně upravit. Zejména přidat nové soubory pro generování a linkování objektů pro kernel.\par
+		V~některých případech nejsou \texttt{makefile} soubory vytvořeny, nebo aktualizovány dle posledních změn v~projektu. Proto je nutné v~téže okně \textit{Assistant} pravým tlačítkem kliknout na jednotlivé složky a zvolit \textit{Refresh Project Models} a v~okně \textit{Explorer} zvolit aplikaci a v~nabídce po využití pravvého tlačítka myši zvolit \textit{Refresh} a akci generování \texttt{makefile} souborů opakovat.\par
+		Struktura \texttt{makefile} souborů je obecná a firma Xilinx dodává na svých stránkách dokumentaci k~jejich tvorbě. V~některých případech, kdy nedocházelo k~jejich automatické aktualizaci, byl autor nucen tyto soubory manuálně upravit. Zejména přidat nové soubory pro generování a linkování objektů pro kernel.\par
 		\vspace*{0.35cm}
 		% vyřešit mezery mezi původním odstavcem a listem a listem a odstavcem
 		Doporučený postup build procesu pro \textit{Hardware} build je následující:
 		\begin{enumerate}
-			\item build host aplikace pomocí \texttt{makefile} v cestě \texttt{<vitis-workspace>/<application-name>/Hardware/makefile} (nejrychlejší proces),
-			\item build kernelu pomocí \texttt{makefile} v cestě \texttt{<vitis-workspace>/<application-name>\_kernels/Hardware/makefile} (středně pomalý proces),
-			\item link objektů \texttt{xo} z kroku č. 2 do objektu \texttt{xclbin} pro PL pomocí \texttt{makefile} souboru v cestě \texttt{<vitis-workspace>/<application-name>\_system\_hw\_link/Hardware/makefile} (nejpomalejší proces, obsahuje syntézu, implementaci, generování bitstreamu), tento proces u vytvářené aplikace v této práci trval i 1–2 hodiny.
+			\item build host aplikace pomocí \texttt{makefile} v~cestě \texttt{<vitis-workspace>/<application-name>/Hardware/makefile} (nejrychlejší proces),
+			\item build kernelu pomocí \texttt{makefile} v~cestě \texttt{<vitis-workspace>/<application-name>\_kernels/Hardware/makefile} (středně pomalý proces),
+			\item link objektů \texttt{xo} z~kroku č. 2 do objektu \texttt{xclbin} pro PL pomocí \texttt{makefile} souboru v~cestě \texttt{<vitis-workspace>/<application-name>\_system\_hw\_link/Hardware/makefile} (nejpomalejší proces, obsahuje syntézu, implementaci, generování bitstreamu), tento proces u~vytvářené aplikace v~této práci trval i 1–2 hodiny.
 		\end{enumerate}
 		\vspace*{0.75cm}
-		Dle dostupných informací Xilinx Kria K26 SoM momentálně nepodporuje emulaci. Proto byl představen postup pro \textit{Hardware} build, který je možné aktivovat při otevření konfiguračního souboru v okně \textit{Explorer} v cestě \texttt{<appliacation-name>\_system/<application-name>\_kernels/<application-name>\_kernels.prj} a výběru \texttt{Hardware} v nastavení pro \textit{Active build configuration}.\par
-		Je nutné upozornit, že tento soubor je opět upravitelný v textovém editoru a této skutečnosti bylo při realizace aplikace velmi využíváno. Soubor obsahuje nastavení jednotlivých akcelerovaných funkcí, výběr optimalizace build procesu a nastavení šířky portu pro přenos dat mezi PS a PL akcelerovanou funkcí. V případě, že jsou přidávány do projektu další akcelerované funkce, je nutné mj. pro jejich zkompilování je umístit i do tohoto souboru pomocí GUI nabídky. Ovvšem v některých případech nedochází ke správné indexaci souborů ze strany Vitis IDE a je nutné upravit soubor v textovém editoru.\par
+		Dle dostupných informací Xilinx Kria K26 SoM momentálně nepodporuje emulaci. Proto byl představen postup pro \textit{Hardware} build, který je možné aktivovat při otevření konfiguračního souboru v~okně \textit{Explorer} v~cestě \texttt{<appliacation-name>\_system/<application-name>\_kernels/<application-name>\_kernels.prj} a výběru \texttt{Hardware} v~nastavení pro \textit{Active build configuration}.\par
+		Je nutné upozornit, že tento soubor je opět upravitelný v~textovém editoru a této skutečnosti bylo při realizace aplikace velmi využíváno. Soubor obsahuje nastavení jednotlivých akcelerovaných funkcí, výběr optimalizace build procesu a nastavení šířky portu pro přenos dat mezi PS a PL akcelerovanou funkcí. V~případě, že jsou přidávány do projektu další akcelerované funkce, je nutné mj. pro jejich zkompilování je umístit i do tohoto souboru pomocí GUI nabídky. Ovvšem v~některých případech nedochází ke správné indexaci souborů ze strany Vitis IDE a je nutné upravit soubor v~textovém editoru.\par
 
 		
 
 	
 	\section{Deployment aplikace na platformu}
-	Po úspěšném dokončení build a linking procesu aplikace ve Vitis, je možné přistoupit k procesu \textit{deployment} (nasazení) aplikace do systému vývojové desky.\par
-	Z předchozího kroku \hyperref[subsubsec:konfigurace-device-tree]{\textit{Konfigurace Device Tree}} byl získán soubor \texttt{pl.dtbo}, který byl přemístěn do složky \texttt{transfer}, definované v \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}. Do téže složky je vhodné překopírovat soubory:
+	Po úspěšném dokončení build a linking procesu aplikace ve Vitis, je možné přistoupit k~procesu \textit{deployment} (nasazení) aplikace do systému vývojové desky.\par
+	Z~předchozího kroku \hyperref[subsubsec:konfigurace-device-tree]{\textit{Konfigurace Device Tree}} byl získán soubor \texttt{pl.dtbo}, který byl přemístěn do složky \texttt{transfer}, definované v~\hyperref[sec:struktura-slozek]{\textit{Struktura složek}}. Do téže složky je vhodné překopírovat soubory:
 	\begin{itemize}
 		\item \texttt{<application-name>/Hardware/<application-name>} (host program),
 		\item \texttt{<application-name>\_system\_hw\_link/Hardware/<binary-container>.xclbin} (PL bitstream),
 	\end{itemize}
 	% vyřešit mezery mezi původním odstavcem a listem a listem a odstavcem
-	které byly získány z build procesu pomocí Vitis.\par
+	které byly získány z~build procesu pomocí Vitis.\par
 	% Info o shell.json
 	Aby bylo možné využívat příkazy \texttt{xmutil}, které využívají \texttt{DFX-MGR} (daemon) \cite{xilinx-github-dfx-mgr} pro konfiguraci PL, loading a unloading bitstreamů aplikací, spravování data modelu daných bitstreamů apod. je třeba pro akcelerovanou aplikaci vytvořit metadata soubor \texttt{shell.json}. Tento soubor je využíván právě \texttt{DFX-MGR}. Podpora dalších formátů \texttt{shell\_type}, než jen \texttt{XRT\_FLAT} je ve vývoji. \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components}\par Soubor \texttt{shell.json} je opět vhodné vytvořit na vývojářském PC a přemístit do složky \texttt{transfer}.\par
 
@@ -1875,25 +1880,25 @@ source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 	\end{itemize}
 	\vspace*{0.75cm}
 
-	Bylo zjištěno, že nejrychlejším a nejefektivnějším způsobem přenosu dat a souborů mezi systémem na kterém je aplikace vyvíjena (či je třeba data z aplikace zpracovávat) a systémem vývojové desky (\textit{PetaLinux}) je použití \texttt{scp} (secure copy) přes interface \texttt{eth0}.\par
-	Příkaz přenosu potřebných souborů pro běh akcelerované aplikace ze složky \texttt{transfer} do složky \texttt{/home/petalinux} na K26 je v kódu \ref{lst:scp-application-to-kria}.\par
-	Dle dostupné dokumentace operačních systémů Linux a macOS bylo zjištěno, že pokud systém vývojového PC využívá OpenSSH verze 9.0 a vyšší, je výchozím protokolem pro přenos souborů pomocí \texttt{scp} SFTP protokol. Bez dodatečného nastavení \textit{PetaLinux} by tudíž nebylo možné pouze pomocí \texttt{scp} příkazu přenášet soubory. Proto je nutné využít tzv. \textit{legacy SCP protocol}, aktivovaný pomocí \texttt{-O} v příkazu \texttt{scp} (\ref{lst:scp-application-to-kria}).\par
+	Bylo zjištěno, že nejrychlejším a nejefektivnějším způsobem přenosu dat a souborů mezi systémem na kterém je aplikace vyvíjena (či je třeba data z~aplikace zpracovávat) a systémem vývojové desky (\textit{PetaLinux}) je použití \texttt{scp} (secure copy) přes interface \texttt{eth0}.\par
+	Příkaz přenosu potřebných souborů pro běh akcelerované aplikace ze složky \texttt{transfer} do složky \texttt{/home/petalinux} na K26 je v~kódu \ref{lst:scp-application-to-kria}.\par
+	Dle dostupné dokumentace operačních systémů Linux a macOS bylo zjištěno, že pokud systém vývojového PC využívá OpenSSH verze 9.0 a vyšší, je výchozím protokolem pro přenos souborů pomocí \texttt{scp} SFTP protokol. Bez dodatečného nastavení \textit{PetaLinux} by tudíž nebylo možné pouze pomocí \texttt{scp} příkazu přenášet soubory. Proto je nutné využít tzv. \textit{legacy SCP protocol}, aktivovaný pomocí \texttt{-O} v~příkazu \texttt{scp} (\ref{lst:scp-application-to-kria}).\par
 
 	\begin{lstlisting}[language={sh}, caption={Příkaz pro přesun souborů pomocí scp ze systému, kde byla aplikace vyvíjena do systému PetaLinux na K26 SOM.}, label={lst:scp-application-to-kria}, morekeywords={scp}]
 scp -O pl.dtbo shell.json <application-name> <binary-container.xclbin> root@<ip-address-of-eth-interface>:/home/petalinux
 \end{lstlisting}
 
-	Pro práci na vývojové desce v systému \textit{PetaLinux} autor doporučuje využívat \textit{ssh} a komunikaci přes USB/UART používat pouze jako prostředí pro výpis informací z \textit{kernel ring bufferu}, které nejsou pomocí \textit{ssh} bez použití \texttt{dmesg} uživateli viditelné.\par
-	Aby došlo k funkčnímu přesunutí bitstreamu do PL, je třeba přejmenovat soubor \texttt{<binary-container.xclbin>} na \texttt{<binary-container.bin>} (např. pomocí příkazu \texttt{mv}). Pokud by nedošlo k přejmenování, bude vypsána chybová hláška.\par
-	Aby bylo možné akcelerovanou spustit, vyžaduje \texttt{dfx.mgr} aby bitstream a soubory aplikace byly vloženy do cesty \texttt{/lib/firmware/<company-name>/<application-name>}. Do verze \textit{PetaLinux} 2022.1 je podporována pouze firma \texttt{xilinx} jako \texttt{<company-name>}, od verze 2022.1 jsou podporovány volitelné názvy, ovšem musí být vloženy do souboru \texttt{daemon.config}, umístěného v \texttt{/etc/dfx.mgrd/daemon.conf}. \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} \cite{xilinx-github-dfx-mgr}\par
-	Příkaz pro tvorbu složky \texttt{<application-name>} a pro kopírování požadovaných souborů je zobrazen v \ref{lst:cp-application-to-firmware}.\par
+	Pro práci na vývojové desce v~systému \textit{PetaLinux} autor doporučuje využívat \textit{ssh} a komunikaci přes USB/UART používat pouze jako prostředí pro výpis informací z~\textit{kernel ring bufferu}, které nejsou pomocí \textit{ssh} bez použití \texttt{dmesg} uživateli viditelné.\par
+	Aby došlo k~funkčnímu přesunutí bitstreamu do PL, je třeba přejmenovat soubor \texttt{<binary-container.xclbin>} na \texttt{<binary-container.bin>} (např. pomocí příkazu \texttt{mv}). Pokud by nedošlo k~přejmenování, bude vypsána chybová hláška.\par
+	Aby bylo možné akcelerovanou spustit, vyžaduje \texttt{dfx.mgr} aby bitstream a soubory aplikace byly vloženy do cesty \texttt{/lib/firmware/<company-name>/<application-name>}. Do verze \textit{PetaLinux} 2022.1 je podporována pouze firma \texttt{xilinx} jako \texttt{<company-name>}, od verze 2022.1 jsou podporovány volitelné názvy, ovšem musí být vloženy do souboru \texttt{daemon.config}, umístěného v~\texttt{/etc/dfx.mgrd/daemon.conf}. \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} \cite{xilinx-github-dfx-mgr}\par
+	Příkaz pro tvorbu složky \texttt{<application-name>} a pro kopírování požadovaných souborů je zobrazen v~\ref{lst:cp-application-to-firmware}.\par
 
 	\begin{lstlisting}[language={sh}, caption={Příkaz vytvoření potřebné složky aplikace a kopírování potřebných souborů firmwaru.}, label={lst:cp-application-to-firmware}, morekeywords={mkdir, cp}]
 mkdir -p /lib/firmware/xilinx/<application-name>
 
 cp pl.dtbo <application-name> <binary-container.bin> shell.json /lib/firmware/xilinx/<application-name>\end{lstlisting}
 	
-	Následně je mozné provést unloading stávající nahrané aplikace a loading aplikace \texttt{<application-name>}. Potřebné příkazy s komentáři jsou zobrazeny v \ref{lst:xmutil-unloadapp-listapps-loadapp}.\par
+	Následně je mozné provést unloading stávající nahrané aplikace a loading aplikace \texttt{<application-name>}. Potřebné příkazy s~komentáři jsou zobrazeny v~\ref{lst:xmutil-unloadapp-listapps-loadapp}.\par
 
 	\begin{lstlisting}[language={sh}, caption={Příkaz vytvoření potřebné složky aplikace a kopírování potřebných souborů firmwaru.}, label={lst:xmutil-unloadapp-listapps-loadapp}, morekeywords={xmutil}]
 xmutil unloadapp # unloading currently active application
@@ -1904,19 +1909,21 @@ xmutil loadapp <application-name> # load user defined application
 \end{lstlisting}
 
 Po provedení příkazů načtení aplikace je možné na výpisu \texttt{dmesg} nebo USB/UART pozorovat, zda došlo ke správnému načtení bitstreamu, zařízení, přiřazení přerušení apod.\par
-Aplikaci a bitstream které jsou aktuálně načtené je možné spustit i mimo \texttt{firmware} cestu. Autor doporučuje mít ponechané kopie aplikací v uživatelské složce \texttt{/home/petalinux/<application-name>} a spouštět aplikace např. příkazem uvedeným v \ref{lst:petalinux-run-application}.\par
+Aplikaci a bitstream které jsou aktuálně načtené je možné spustit i mimo \texttt{firmware} cestu. Autor doporučuje mít ponechané kopie aplikací v~uživatelské složce \texttt{/home/petalinux/<application-name>} a spouštět aplikace např. příkazem uvedeným v~\ref{lst:petalinux-run-application}.\par
 
 
 	\begin{lstlisting}[language={sh}, caption={Příkaz pro spuštění akcelerované aplikace.}, label={lst:petalinux-run-application}]
 ./<application-name> <binary-container.bin>\end{lstlisting}
 
-	V této části byl představen doporučený postup deploymentu aplikace na zařízení Kria K26 SOM. Postup byl doplněn o užitečné příkazy a poznámky, které spuštění aplikace urychlují, usnadňují a nebo přinášejí možnost automatizace pomocí \texttt{bash} skriptů.\par
-	S určitou pravděpodobností existují i jiné způsoby deploymentu aplikací, ale autor je v době realizace této práce zatím nenalezl.
+	V~této části byl představen doporučený postup deploymentu aplikace na zařízení Kria K26 SOM. Postup byl doplněn o~užitečné příkazy a poznámky, které spuštění aplikace urychlují, usnadňují a nebo přinášejí možnost automatizace pomocí \texttt{bash} skriptů.\par
+	S~určitou pravděpodobností existují i jiné způsoby deploymentu aplikací, ale autor je v~době realizace této práce zatím nenalezl.
 
 
-\section{Vytvořená aplikace}
- V této části je představena vytvořená aplikace pro PS a akcelerovaná aplikace pro PL. Aby bylo možné představit jednotlivé funkce, které by byly používány při řízení elektrického pohonu, je ukázková aplikace rozdělena do pěti větví, které je možné vybrat po spuštění aplikace. Je nutné podotknout, že větev \texttt{PRELOADED DATA} bylo nutné realizovat do zvláštní aplikace, protože současné vkládání všech vytvořených kernelů do bitstreamu by vyžadovalo příliš mnoho resources (FIFO). Aby bylo možné všechny větve aplikaci realizovat s pomocí pouze jednoho bitstreamu, bylo by nutné podrobit algoritmus kernelu další optimalizaci.\par
- Základních pět větví ukázkové aplikace a jejich vztahy k celkovému běhu programu jsou zobrazeny na obr. \ref{fig:application-overview}.
+\section{Vytvořená aplikace}\label{sec:vytvorena-aplikace}
+ V~této části je představena vytvořená aplikace pro PS a akcelerovaná aplikace pro PL. Experimentální výsledky časové náročnosti jednotlivých procesů v daných aplikacích jsou uvedeny v sekci \ref{}.\par
+ % přidat odkaz na místo, kde budou časové výsledky, ukázky z vitis analyzéru apod.
+ Aby bylo možné představit jednotlivé funkce, které by byly používány při řízení elektrického pohonu, je ukázková aplikace rozdělena do pěti větví, které je možné vybrat po spuštění aplikace. Je nutné podotknout, že větev \texttt{PRELOADED DATA} bylo nutné realizovat do zvláštní aplikace, protože současné vkládání všech vytvořených kernelů do bitstreamu by vyžadovalo příliš mnoho resources (FIFO). Aby bylo možné všechny větve aplikaci realizovat s~pomocí pouze jednoho bitstreamu, bylo by nutné podrobit algoritmus kernelu další optimalizaci.\par
+ Základních pět větví ukázkové aplikace a jejich vztahy k~celkovému běhu programu jsou zobrazeny na obr. \ref{fig:application-overview}.
 
  \begin{figure}[htbp!]
 	\centering
@@ -1924,14 +1931,14 @@ Aplikaci a bitstream které jsou aktuálně načtené je možné spustit i mimo 
 	\caption{Základní větvení ukázkové aplikace.}
 	\label{fig:application-overview}
 \end{figure}
-	Po spuštění hlavního procesu je pomocí \texttt{selectionMode} proměnné volit, jaká podaplikace bude spuštěna. Následně je provedena dynamická alokace paměti pro využívané struktury a pole v daných aplikacích. Je nutné zmínit, že \texttt{PRELOADED DATA} aplikace využívá unikátní sadu proměnných, které nejsou využívány v ostatních aplikacích. Z tohoto důvodu obsahuje \texttt{legacyApp} samostatnou skladbu instrukcí pro dealokaci paměti daných proměnných. Jednolivé podaplikace jsou představeny v následujících částech práce pomocí názorných vývojových diagramů.\par
-	Po ukončení podaplikací jsou vyvolány příkazy pro dealokaci paměti, které byly alokovány dynamicky v programu PS.\par
+	Po spuštění hlavního procesu je pomocí \texttt{selectionMode} proměnné volit, jaká podaplikace bude spuštěna. Následně je provedena dynamická alokace paměti pro využívané struktury a pole v~daných aplikacích. Je nutné zmínit, že \texttt{PRELOADED DATA} aplikace využívá unikátní sadu proměnných, které nejsou využívány v~ostatních aplikacích. Z~tohoto důvodu obsahuje \texttt{legacyApp} samostatnou skladbu instrukcí pro dealokaci paměti daných proměnných. Jednolivé podaplikace jsou představeny v~následujících částech práce pomocí názorných vývojových diagramů.\par
+	Po ukončení podaplikací jsou vyvolány příkazy pro dealokaci paměti, které byly alokovány dynamicky v~programu PS.\par
 	\fbar
 
 	\subsection{Bezpečnost při uživatelském ukončení aplikace}
-	Z důvodu bezpečnosti je do algoritmu aplikace zakomponována funkce \texttt{signal\_callback\_handler}, jež reaguje na signál \texttt{SIGINT}. Tento signál je momentálně vysílán v případě přerušení běhu aplikace uživatelem. Handler funkce je registrována na signál na počátku hlavní \texttt{ main(int argc, char *argv[])} funkce celé aplikace.\par
-	V kódu č. \ref{lst:signall-callback-handler} představana deklarace struktury typu \texttt{InvertorSwitchType}, která slouží k uložení hodnot stavu virtuálních spínačů invertoru. Po deklaraci následuje deklarace funkce \texttt{stopInvertor()}, která po vyvolání nastaví stavy všech virtuálních spínačů na \texttt{0} a zajistí vypsání informační hlášky ohledně tohoto děje pro případ debuggingu.\par
-	Ve funkci \texttt{signal\_callback\_handler} v neprodukční aplikaci vypisuje hlášku o zachycení \texttt{SIGINT} signálu, zajišťuje spuštění funkce \texttt{stopInvertor()} a ukončení programu.
+	Z~důvodu bezpečnosti je do algoritmu aplikace zakomponována funkce \texttt{signal\_callback\_handler}, jež reaguje na signál \texttt{SIGINT}. Tento signál je momentálně vysílán v~případě přerušení běhu aplikace uživatelem. Handler funkce je registrována na signál na počátku hlavní \texttt{ main(int argc, char *argv[])} funkce celé aplikace.\par
+	V~kódu č. \ref{lst:signall-callback-handler} představana deklarace struktury typu \texttt{InvertorSwitchType}, která slouží k~uložení hodnot stavu virtuálních spínačů invertoru. Po deklaraci následuje deklarace funkce \texttt{stopInvertor()}, která po vyvolání nastaví stavy všech virtuálních spínačů na \texttt{0} a zajistí vypsání informační hlášky ohledně tohoto děje pro případ debuggingu.\par
+	Ve funkci \texttt{signal\_callback\_handler} v~neprodukční aplikaci vypisuje hlášku o~zachycení \texttt{SIGINT} signálu, zajišťuje spuštění funkce \texttt{stopInvertor()} a ukončení programu.
 
 	\begin{lstlisting}[language={c++}, caption={signal\_callback\_handler funkce a její registrace na signál SIGINT}, label={lst:signall-callback-handler}]
 // main.cpp
@@ -1985,8 +1992,19 @@ void signal_callback_handler(int signum)
 }\end{lstlisting}
 
 	\fbar
-	\subsection{Keyboard Input}
+	\subsection{Keyboard Input}\label{subsec:keyboard-input}
+		Program, který je v~podaplikaci \textit{Keyboard Input} akcelerován v~PL, se nazývá kernel. (v~tomto kontextu není myšleno jádro systému Linux) Tento kernel je realizován v~PL a jeho úkolem je provést časově náročné výpočty. V~podaplikaci \textit{Keyboard Input}, \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}} a \hyperref[subsec:preloaded-data]{\textit{Preloaded Data}} byl v~PL realizován matematický $I$-$n$ model asynchronního motoru, regulace a Space Vector Modulation (SVM) řízení. Hlavním výstupem kernelu jsou virtuální stav sepnutí spínačů, které by v~reálné aplikaci byly napojeny na výstupní fyzické piny PMOD a ovládaly by drivery řízených výkonových polovodičových prvků měniče.\par
+		Naznačený algoritmus kompletní aplikace je zobrazen na obr. \ref{fig:keyboard-input}. Představené aplikace v~této práci, jež využívají akcelerované kernely, obsahují totižné inicializační a deinicializační funkce pro správnou funkci kernelu.\par
+		\subsubsection{Konfigurace PL}
+		Blok \texttt{PL SETTINGS PREAMBLE} obsahuje kód, jehož předloha byla získána z~ukázkových souborů akcelerovaných aplikací přímo v~aplikaci Vitis. V~tomto bloku dochází k~inicializaci PL zařízení, definování příkazové fronty (Command Queue), programu pro PL, platformy a k~definici kernelů. Funkce a definice typů, jež jsou použity pro jednotlivé proměnné jsou pro akcelerované aplikace definovány v~\texttt{cl2.hpp} knihovně. V~preambuli se nachází smyčka, jež vyhledává platformy zařízení Xilinx, pokud dojde k~jejímu úspěšnému nalezení, pokouší se algoritmus do ní nahrát bitstream ve formátu \textit{xclbin} nebo \textit{bin}. Po úspěšném nahrání bitstreamu, jsou deklarovány potřebné elementy pro spouštění kernelu. (Context, CommandQueue, Program, Kernel). Veškeré funkce, jež využívají \textit{openCL} knihovny jsou  uzavřeny do definovaného makra, které v~případě, že vykonávaný příkaz navrátí jinou návratovou hodnotu než \texttt{CL\_SUCCESS} (0), vypíše informace o~dané chybě. Toto makro není podstatné pro funkční aplikaci, ovšem je velmi vhodné pro možný debugging. Definice makra byla také převzata z~ukázkových akcelerovaných aplikací.
 
+		\subsubsection{PS Aplikace}
+			Pokud byla část aplikace pro inicializaci a konfiguraci elementů pro PL a akcelerovaný kernel úspěšná, aplikace přecházi do části ve které jsou definovány a deklarovány parametry pro simulaci, pro $I$-$n$ model motoru a pro regulaci. V~části \texttt{PARAMETERS SETTINGS} dochází k~dynamické alokaci paměti pomocí funkce \texttt{posix\_memalign()}. U~některých parameterů je při jejich definici znán jejich počet proto by bylo možné použít statické alokace paměti. Ovšem pro demonstraci práce s~\texttt{posix\_memalign()} a nutností zarovnání paměti na 4096 bitů, byl zvolen přístup dynamické alokace.\par
+			Následně je uživatel tázán o~jakou podaplikaci má zájem, po zadání čísla, odpovídající dané podaplikaci \texttt{KEYBOARD INPUT} je uživatel tázán ohledně vstupních hodnot do $I$-$n$, které jsou pomocí funkce \texttt{scanf()} vloženy do odpovídajících proměnných, které budou využity v~kernelu.\par
+			V~algoritmu je dále uveden blok \texttt{MASTER INPUT PREP}, který reprezentuje přípravu datového pole typu \textit{float}, které bude využito k~přesunu dat do globální paměti, ze které budou hodnoty využívány akcelerovaným kernelem. Je možné využít i více vstupních proměnných, které budou ukládány do globální paměti, ovšem poté je v~kernelu nutné vytvořit více interfaces, aby bylo možné data načítat paralelně a urychlit tím dobu vykonávání kernelu. Při zkoumání využitelnosti platformy v~této práci byl ovšem vliv rozdělení jedotlivých interfaces na rychlost vykonávání minimální. Vznikl však rozdíl ve využitých resources. Pokud se v~případě platformy Digilent Zybo využilo více interfaces a bylo požadováno paralelní načítání dat kernelem, v~některých případech to mělo za následek nemožnost umístění designu na PL, protože bylo překročeno maximálního počtu využitých resources.\par
+			\
+			\subsubsection{Interakce s~kernelem}
+			Po přípravě proměnné \texttt{masterInput} je do CommandQueue pro dané zařízení vložen požadavek na přesun proměnných v~podobě vytvořeného bufferu do globální paměti, přístupné pro PL. Po ukončení přenosu bufferů do paměti, je možné do CommandQueue zařadit spuštění požadovaného kernelu \texttt{krnl\_calculateCurVelModel}. Pokud dojde k~úspěšnému vykonání kernelu, je možné přesunout výsledné hodnoty uložené v~bufferu z~globální paměti pomoci příkazu \texttt{enqueueMigrateMemObjects} do paměti PS. Část ohraničená přerušovanou křivkou v~obr. \ref{fig:keyboard-input} reprezentující komunikaci s~kernelem je zobrazena v~kódu \ref{lst:interakce-s-krnl-calculateCurVelModel}. Postup interakce s~tímto kernelem je totožný i v~podaplikacích \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}} a \hyperref[subsec:preloaded-data]{\textit{Preloaded Data}}. Interakce s~kernelem \texttt{krnl\_calculateInvMot} v~podaplikaci \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}}, která využívá akcelerovaný model asynchronního motoru, je odlišná ve struktuře přenášeného bufferu do a z~globální paměti.\par
 
  		\begin{figure}[htbp!]
 			\centering
@@ -1995,31 +2013,111 @@ void signal_callback_handler(int signum)
 			\label{fig:keyboard-input}
 		\end{figure}
 
+		\begin{lstlisting}[language={c++}, caption={Interakce s~kernelem krnl\_calculateCurVelModel.}, label={lst:interakce-s-krnl-calculateCurVelModel}, morekeywords={OCL_CHECK, enqueueMigrateMemObjects, finish, enqueueTask, CL_MIGRATE_MEM_OBJECT_HOST}, literate=
+			 {\{}{{{\color{ctured}{\{}}}}{1}
+			 {\}}{{{\color{ctured}{\}}}}}{1}
+			 {)}{{{\color{ctured}{)}}}}{1}
+			 {(}{{{\color{ctured}{(}}}}{1}]
+OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_masterInput}, 0 /* 0 means from host*/));
+OCL_CHECK(err, q.finish());
+
+OCL_CHECK(err, err = q.enqueueTask(krnl_calculateCurVelModel));
+OCL_CHECK(err, q.finish());
+
+OCL_CHECK(err, q.enqueueMigrateMemObjects({buffer_masterOutput}, CL_MIGRATE_MEM_OBJECT_HOST));
+OCL_CHECK(err, q.finish());
+\end{lstlisting}
+
+	Po získání dat z~globální paměti je vybraná sada hodnot proměnných vypsána uživateli v~konzoli. Nyní by bylo možné program ukončit, ale pro demonstraci funkce aplikovaného RT, je znovu deklarován vstupní vektor proměnných a opět je spuštěn kernel. Pokud jsou výsledky získané z~akcelerovaného kernelu totožné z~předchozí iterací, došlo ke správné aplikaci a RT patch je užitečný.\par
+	Na počátku vývoje a debuggování aplikace, kdy nebyl RT patch využit vznikal problém nekonzistentnosti výsledků mezi iteracemi. Více o~problematice RT patche je uvedeno v~části \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.\par
+	Program je zakončen uvolněním využité paměti, dynamicky alokované v~předchozích krocích. Na závěr dojde k~odmapování bufferů, které byly využity pro interakci s~kernelem, od přidružených ukazatelů.\par
+	V~obr. \ref{fig:keyboard-input-terminal} je možné pozorovat snímek konzole/terminálu, který zachycuje postup přihlášení pomocí \texttt{ssh} k~vývojové desce s~K26, unload stávající aplikace, loading uživatelské aplikace \texttt{rt} a její následné spuštění. Dále je zobrazen výběr podaplikace a výpis vybraných hodnot proměnných po první iteraci kernelu.
+
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=1\textwidth]{src/png/keyboard-input-terminal.png}
+		\caption{Snímek obrazovky konzole, zobrazující postup spuštění podaplikace Keyboard Input a výpis první iterace výsledků z~kernelu.}
+		\label{fig:keyboard-input-terminal}
+	\end{figure}
+
 		\fbar
-		\subsection{CPU/FPGA Model}
+		\subsection{CPU/FPGA Model}\label{subsec:cpu-fpga-model}
+			Nejrozsáhlejší částí hlavního programu je podaplikace s názvem CPU/FPGA Model, která využívá dvou kernelů, které komunikují přes PS. Při prozkoumávání možností využití platformy autor narazil na možnost, že by kernely streamovali data přímo mezi sebou, bez nutnosti použití PS. Tento způsob přenosu dat nebyl v této práci využit, ale je plánováno jeho prozkoumání. Tyto kernely by bylo také vhodné realizovat stylem \textit{free running}, kdy by data byla z PS streamovaná přímo do jednotlivých kernelů v okamžiku, když by byla v PS k dispozici. To by nejspíše umožnilo rychlejší reakci kernelu, která by přinesla zkrácení doby potřebné na přesun dat z PS do PL a naopak. Právě doba, potřebná na přesun hodnot představuje v algoritmu největší časovou položku, kterou je třeba minimalizovat. Experimentálně zjištěné časy a waterfall graf je uveden v sekci \ref{}\par
+			% dodat odkaz na sekci, kde budou umístěné výsledky
+			Algoritmus, využívaný v této práci, je uveden na obr. \ref{fig:cpu-fpga-model}.\par
+			K inicializaci PL je využita totožná preambule jako v \hyperref[subsec:keyboard-input]{\textit{Keyboard Input}} podaplikaci. Stejným způsobem dochází i k nastavení potřebných bufferů a parametrů modelů a simulace.\par
+			Protože dochází k modelování i regulace, je v případě této podaplikace důležité nastavit žádané hodnoty regulovaných veličin. V této ukázkové aplikaci jsou žádané hodnoty mechanické otáčivé rychlosti $\Omega$ a velikosti magnetického toku rotoru $| \psi_2 |$ nastaveny přímo v kódu aplikace. V případě realizace skutečné regulace by bylo vhodné disponovat možností měnit tyto hodnoty v průběhu běhu programu pomocí konzole, nebo např. pomocí externího zařízení, komunikující s platformou pomocí SPI nebo jiného druhu komunikace.\par
+			Před započnutím smyčky, která zajišťuje hlavní iteraci programu, je v programu zařazeno vytvoření souboru \texttt{globalSimulationData.csv}, který slouží k uchování hodnot vybraných sledovaných veličin. Soubor je dále využíván při tvorbě výsledných grafů simulace pomocí Python skriptu. Výsledný graf simulace a popis využití skriptu je uveden v čásit \hyperref[subsubsec:zobrazeni-vysledku-simulace]{Zobrazení výsledků simulace}.\par
+
+
+			\subsubsection{Zobrazení výsledků simulace}\label{subsubsec:zobrazeni-vysledku-simulace}
+			Aby bylo možné vizuálně pozorovat výsledky simulace, bylo nutné data ze souboru \texttt{globalSimulationData.csv} vizualizovat způsobem, jež umožňuje rychlé zpracování velikého množství dat a v nejlepším případě je Open Source.\par
+			První přístup spočíval ke kontrole výsledků v programu Wolfram Mathematica. Ovšem při kroku simulace $1 \mu$s a simulovaném čase 1 s se jednalo o 1 milion dat. Vykreslení takového množství hodnot, které byly přímkově spojeny, bylo příliš náročné pro zařízení autora a trvalo přiliš dlouho dobu. A protože Wolfram Mathematika není Open Source, bylo od tohoto způsobu upuštěno. Další možností bylo využití programu MATLAB, ovšem opět není Open Source a autor dbal na co největší otevřenosti projektu. Proto bylo nakonec využito jazyku Python, jež není zatížen problémem \textit{Vendor lock-in} a vykreslení požadovaného grafu se stejnou kvalitou jako v MATLABu nebo ve Wolfram Mathematika trvalo velmi krátkou dobu.
+
+
+
 
 		\begin{figure}[htbp!]
 		   \centering
 		   \includegraphics[width=1\textwidth]{src/pdf/cpu-fpga-model.pdf}
-		   \caption{CPU/FPGA Model větev aplikace – matematický I-n model, regulace, ASM model v FPGA.}
+		   \caption{CPU/FPGA Model větev aplikace – matematický I-n model, regulace, ASM model v~FPGA.}
 		   \label{fig:cpu-fpga-model}
 	   \end{figure}
 
+
+
+
 	   \fbar
-	   \subsection{Preloaded Data}
+	   \subsection{Preloaded Data}\label{subsec:preloaded-data}
+	   Podaplikace preloaded data je z~důvodů, popsaných v~\hyperref[sec:vytvorena-aplikace]{\textit{Vytvořená aplikace}}, realizována v~odděleném Application projektu v~programu Vitis.\par
+	   Aplikace byla součástí prvních experimentů s~využitím kernelů a proto obsahuje starší (legacy) strukturu algoritmu, všetně legacy kódu v~kernelu, který využívá více vstupních a výstupních vektorů a tudíž i interfaces (z~důvodu testování optimalizace).\par
+	   Zjednodušený vývojový diagram aplikace je na obr. \ref{fig:preloaded-data}. Stejně jako ostatní představené akcelerované aplikace je na počátku hlavního programu blok zajišťující inicializaci prvků pro kernel. Hlavním rozdílem od předchozích aplikací je definice a deklarace pouze jednoho kernelu \texttt{krnl\_CurVelLoadLegacy}. Ukázka deklarace je v~kódu \ref{lst:krnl-curvelloadlegacy-declaration}.\par
+
+	   \begin{lstlisting}[language={c++}, caption={Deklarace kernelu krnl\_CurVelLoadLegacy v~podaplikace Preloaded Data. Aplikace využívá legacy kódu.}, label={lst:krnl-curvelloadlegacy-declaration}, morekeywords={OCL_CHECK, enqueueMigrateMemObjects, finish, enqueueTask, CL_MIGRATE_MEM_OBJECT_HOST}, literate=
+		{\{}{{{\color{ctured}{\{}}}}{1}
+		{\}}{{{\color{ctured}{\}}}}}{1}
+		{)}{{{\color{ctured}{)}}}}{1}
+		{(}{{{\color{ctured}{(}}}}{1}]
+OCL_CHECK(err, krnl_CurVelLoadLegacy = cl::Kernel(
+	program, "krnl_CurVelLoadLegacy", &err));
+\end{lstlisting}
+	Po potřebných deklaracích a definicích pro správnou funkci kernelu je dynamicky naalokována paměť pro určité konstatní parametry simulace, jako je krok simulace, časové rozmezí simulace, počet kroků. Protože je v~podaplikaci simulován zjednodušený $I$-$n$ model, kdy není uvažována změna parametrů stroje během simulace (např. rezistivita rotorového vinutí), jsou v~bloku \texttt{PARAMETERS SETTINGS} definovány také parametry stroje vstupující do myšleného modelu.\par
+	Do této aplikace vstupují předpočítané nebo změřené hodnoty následujících veličin:
+	\begin{itemize}
+		\item proud $I1$, jež reprezentuje velikost proudu statoru $i_1 (t)$ procházející první fází do řízeného motoru,
+		\item proud $I2$, jež reprezentuje velikost proudu statoru $i_2 (t)$ procházející druhou fází do řízeného motoru,
+		\item proud $I3$, jež reprezentuje velikost proudu statoru $i_3 (t)$ procházející třetí fází do řízeného motoru,
+		\item mechanická otáčivá rychlost rotoru mototu $\Omega(t)$.
+	\end{itemize}
+	Uvedené hodnoty jsou načítány ze souboru \texttt{outputData.csv}, který je strukturován dle formátu, uvedeném v \ref{lst:output-data-csv-struktura}. Formát nevyužívá nových řádků pro oddělení sady dat, pouze využívá oddělení pomocí čárky. Tento přístup byl zvolen aby byla zajištěna co nejmenší velikost souboru a aby bylo maximálně zjednodušeno načítání dat pomocí funkce \texttt{std::getline}.\par
+
+	\begin{lstlisting}[language={Text}, caption={Struktura souboru outputData, ze kterého jsou načítány hodnoty pro akcelerovaný kernel.}, label={lst:output-data-csv-struktura}]
+time,i1,i2,i3,MechanicalAngularVelocity.,..,...
+\end{lstlisting}
+	Po načtení hodnot do definovaných proměnných jsou vytvořeny v PS buffery, které jsou mapovány na jednotlivé adresy proměnných a mají rozsah jednotlivých proměnných, ke kterým jsou mapovány. Poté, jako u všech představených aplikací s kernelem, kde není využíván přístup free running kernelu \ref{xilinx-github-host-stream-free-running-kernel}, jsou nastaveny buffery jako jednotlivé vstupní parametry kernelu. Dále ve vyznačené části \texttt{krnl\_CurVelLoadLegacy} na obr. \ref{fig:preloaded-data} je provedena sada příkazů pro přenos hodnot proměnných pomocí bufferů do globální paměti, přístupné z PL, spuštění kernelu a opětovné přenesení výsledných hodnot z globální paměti do PS.\par
+	V této legacy aplikaci je při výpisu hodnot vybraných veličin také provedeno ukládání hodnot do csv souboru \texttt{outputCurVel2.csv}. Struktura tohoto legacy souboru je v kódu \ref{lst:output-cur-vel-2-csv}.\par
+	Po ukončení podaplikace je opět dealokována paměť proměnných, která byla dynamicky alokována.
+
+	\begin{lstlisting}[language={Text}, caption={Struktura souboru outputCurVel2, do něhož jsou umisťovány výstupní hodnoty vybraných veličin, vypočtených pomocí akcelerované aplikace.}, label={lst:output-cur-vel-2-csv}]
+time,psi2Amplitude,transformAngle
+.
+..
+...\end{lstlisting}
+
+
 
 		\begin{figure}[htbp!]
 		   \centering
 		   \includegraphics[width=1\textwidth]{src/pdf/preloaded-data.pdf}
-		   \caption{Preloaded Data větev aplikace – manuální nastavování vstupních hodnot do I-n modelu.}
+		   \caption{Preloaded Data větev aplikace – automatické čtení změřených/simulovaných vstupních hodnot do I-n modelu a jejich následné hromadné zpracování v~kernelu.}
 		   \label{fig:preloaded-data}
 	   \end{figure}
 
 	   \fbar
 	   \subsection{SPI}
-	   Část aplikace, která prezentuje SPI komunikaci není oproti předchozím podaplikacím akcelerovaná. Tudíž nevyužívá akcelerované funkce (kernelu) pro urychlení výpočtů. Využívá však PL, ve kterém byl vytvořen IP blok \textit{AXI Quad SPI}, který umožňuje SPI komunikaci. Tento blok způsobí vytvoření adres pamětí, které je možní z userspace programu nebo běhu \textit{PetaLinux} adresovat. Díky adresaci v userspace je možné využívat libovolně nakonfigurovanou SPI komunikaci z Vivado IP bloku.\par
+	   Část aplikace, která prezentuje SPI komunikaci není oproti předchozím podaplikacím akcelerovaná. Tudíž nevyužívá akcelerované funkce (kernelu) pro urychlení výpočtů. Využívá však PL, ve kterém byl vytvořen IP blok \textit{AXI Quad SPI}, který umožňuje SPI komunikaci. Tento blok způsobí vytvoření adres pamětí, které je možní z~userspace programu nebo běhu \textit{PetaLinux} adresovat. Díky adresaci v~userspace je možné využívat libovolně nakonfigurovanou SPI komunikaci z~Vivado IP bloku.\par
 	   Další možné využití SPI komunikace by bylo využít SPI driver, který by bylo nutné aktivovat při tvorbě \textit{PetaLinux} systému.\par
-	   Je důležité zmínit, že nakonfigurované parametry bloku \textit{AXI Quad SPI} lze změnit pouze ve Vivado, tudíž je důležité při tvorbě HW platformy již znát požadavky použitých zařízení, se kterými bude aplikace komunikovat. Jedná se například o délku přenášené zprávy nebo o frekvenci signálu \texttt{CLK}.\par
+	   Je důležité zmínit, že nakonfigurované parametry bloku \textit{AXI Quad SPI} lze změnit pouze ve Vivado, tudíž je důležité při tvorbě HW platformy již znát požadavky použitých zařízení, se kterými bude aplikace komunikovat. Jedná se například o~délku přenášené zprávy nebo o~frekvenci signálu \texttt{CLK}.\par
 	   
 	   \begin{figure}[htbp!]
 			\centering
@@ -2028,7 +2126,7 @@ void signal_callback_handler(int signum)
 			\label{fig:spi}
 	\end{figure}
 
-	Pro zjednodušení adresování jsou definovány jednotlivé posuny od základní adresy pomocí \texttt{define} direktiv. Definice direktiv dle dokumentace \cite{axi-quad-spi-ip-product-guide} je zobrazena v \ref{lst:define-direktivy-spi}.\par
+	Pro zjednodušení adresování jsou definovány jednotlivé posuny od základní adresy pomocí \texttt{define} direktiv. Definice direktiv dle dokumentace \cite{axi-quad-spi-ip-product-guide} je zobrazena v~\ref{lst:define-direktivy-spi}.\par
 
 	\fbar
 	\begin{lstlisting}[language={c++}, caption={Definice posuvu adres pro registry AXI Quad SPI bloku pomocí define direktiv.}, label={lst:define-direktivy-spi}]
@@ -2044,13 +2142,13 @@ void signal_callback_handler(int signum)
 #define SPI_IPISR 0x20
 #define SPI_IPIER 0x28\end{lstlisting}
 
-	Jak je možné na názorném vývojovém diagramu \ref{fig:spi} pozorovat, je pro zvýšení bezpečnosti programu využito mapování pouze potřebné části HW registrů SPI jednotky do uživatelského prostředí pomocí UIO zařízení a \texttt{mmap} funkce. Pro jednotku je využit \textit{generic-uio} driver, díky kterému je možné pozorvat vzniklá přerušení od jednotky a tyto přerušení také znovu povolovat pomocí acknowledge operace. Autor zatím nenašel jiný způsob, jakým by došlo k acknowledge přerušení v \textit{PetaLinux}, pokud by bylo využito výchozích driverů SPI jednotky.\par
-	Po provedení mapování adres registrů do userspace pomocí funkce \texttt{initializeSPI()} (jejíž algoritmus je zobrazen v kódu \ref{initialize-spi}) následuje inicializace jednotky, se kterou aplikace má komunikovat. Pokud by se jednalo o skutečnou aplikaci pro řízení elektrického pohonu, aplikace by komunikovala nejspíše s analogově-digitálními převodníky. Pokud by se jednalo o aplikaci HIL, nejspíše by docházelo ke komunikaci s digiálně-analogovými převodníky. V této práci dochází pouze k ukázkové komunikaci s jednotkou \textit{MAX7219}, která je připojena k LED matici. Z toho důvodu je po inicializaci SPI jednotky třeba inicializovat jednotku \textit{MAX7219} a nejlépe zajistit, aby po její inicializaci došlo ke zhasnutí všech diod na matici. Tyto kroky jsou provedeny pomocí funkcí \texttt{initializzeLEDMatrix()} a \texttt{clearLEDmatrix()}. Kód funkcí je součástí souborů, jež jsou přílohou této práce.\par
+	Jak je možné na názorném vývojovém diagramu \ref{fig:spi} pozorovat, je pro zvýšení bezpečnosti programu využito mapování pouze potřebné části HW registrů SPI jednotky do uživatelského prostředí pomocí UIO zařízení a \texttt{mmap} funkce. Pro jednotku je využit \textit{generic-uio} driver, díky kterému je možné pozorvat vzniklá přerušení od jednotky a tyto přerušení také znovu povolovat pomocí acknowledge operace. Autor zatím nenašel jiný způsob, jakým by došlo k~acknowledge přerušení v~\textit{PetaLinux}, pokud by bylo využito výchozích driverů SPI jednotky.\par
+	Po provedení mapování adres registrů do userspace pomocí funkce \texttt{initializeSPI()} (jejíž algoritmus je zobrazen v~kódu \ref{initialize-spi}) následuje inicializace jednotky, se kterou aplikace má komunikovat. Pokud by se jednalo o~skutečnou aplikaci pro řízení elektrického pohonu, aplikace by komunikovala nejspíše s~analogově-digitálními převodníky. Pokud by se jednalo o~aplikaci HIL, nejspíše by docházelo ke komunikaci s~digiálně-analogovými převodníky. V~této práci dochází pouze k~ukázkové komunikaci s~jednotkou \textit{MAX7219}, která je připojena k~LED matici. Z~toho důvodu je po inicializaci SPI jednotky třeba inicializovat jednotku \textit{MAX7219} a nejlépe zajistit, aby po její inicializaci došlo ke zhasnutí všech diod na matici. Tyto kroky jsou provedeny pomocí funkcí \texttt{initializzeLEDMatrix()} a \texttt{clearLEDmatrix()}. Kód funkcí je součástí souborů, jež jsou přílohou této práce.\par
 	Po inicializaci je možné pomocí proměnné \texttt{dataTransfer} vybrat ze dvou testovacích módů. Mód kdy \texttt{dataTransfer == 0} je určen pro manuální odesílání jednotlivých zpráv pomocí SPI jednotky, mód kdy \texttt{dataTransfer == 1} odešle předem definované zprávy pomocí SPI jednotky.\par
-	Následně dochází k odmapování dříve mapované HW paměti a uzavření UIO zařízejí pomocí jeho file descriptoru.
+	Následně dochází k~odmapování dříve mapované HW paměti a uzavření UIO zařízejí pomocí jeho file descriptoru.
 
 
-\begin{lstlisting}[language={c++}, caption={Algoritmus inicializace AXI Quad SPI jednotky v C++.}, label={lst:initialize-spi}]
+\begin{lstlisting}[language={c++}, caption={Algoritmus inicializace AXI Quad SPI jednotky v~C++.}, label={lst:initialize-spi}]
 /*
  * @name     initializeSPI
  * @brief    Initialize SPI communication in PL for desired slave and mapped device.
@@ -2087,23 +2185,23 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
 
 	\fbar
 	\subsection{Timer Thread}
-	Timer Thread je opět podaplikace, která nevyužívá PL k akceleraci, ale k implementaci IP, jež reprezentují HW jednotky, využité v programu aplikace. V podaplikaci je využito IP bloku AXI Timer pro časování periodického děje. V ukázkové aplikaci je periodickým dějem funkce, měnící obsah proměnné \texttt{threadLoopOutput}, a funkce odesílání dat pomocí SPI jednotky. Pomocí SPI jednotky jsou odeslány data opět do jednotky \textit{MAX7219}, která způsobují zobrazování dvou písmen na LED matici.\par
-	Tento ukázkový algoritmus má za úkol reprezentovat periodické získávání dat z analogově-digitálních převodníků a jejich následné zpracování v hlavní funkci. Jak je na vývojovém diagramu \ref{fig:timer-thread} možné zjistit, pro obhospodařování AXI Timeru a SPI jednotky je vytvořeno samostatné vlákno, jež krom inicializační části obsahuje část výkonnou, která je uzavřena do nekonečné smyčky.\par
-	V reálné aplikaci řízení elektrického pohonu je plánováno využít tolik vláken, kolik bude třeba paralelně získávat informací z AD převodníků, jež budou napojeny na proudové senzory a na senzor otáček.\par
-	Aby došlo k přenosu z vedlejších vláken do hlavního vlánka pouze validních dat, je využito \texttt{mutex} třídy z knihovny \texttt{std} a logického semaforu, který umožní předání dat pouze v případě, že došlo ke kompletnímu uložení potřebné hodnoty do proměnné, ze které je hodnota čtena v hlavním vlákně. V případě více paralelích vláken a čtených hodnot by bylo nutné zakomponovat podmínku, která by kontrolovala stav všech čtených proměnných z vedlejších vláken.\par
-	Algoritmy, provedené ve vedlejším vlákně, jsou představeny v části \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}}.
+	Timer Thread je opět podaplikace, která nevyužívá PL k~akceleraci, ale k~implementaci IP, jež reprezentují HW jednotky, využité v~programu aplikace. V~podaplikaci je využito IP bloku AXI Timer pro časování periodického děje. V~ukázkové aplikaci je periodickým dějem funkce, měnící obsah proměnné \texttt{threadLoopOutput}, a funkce odesílání dat pomocí SPI jednotky. Pomocí SPI jednotky jsou odeslány data opět do jednotky \textit{MAX7219}, která způsobují zobrazování dvou písmen na LED matici.\par
+	Tento ukázkový algoritmus má za úkol reprezentovat periodické získávání dat z~analogově-digitálních převodníků a jejich následné zpracování v~hlavní funkci. Jak je na vývojovém diagramu \ref{fig:timer-thread} možné zjistit, pro obhospodařování AXI Timeru a SPI jednotky je vytvořeno samostatné vlákno, jež krom inicializační části obsahuje část výkonnou, která je uzavřena do nekonečné smyčky.\par
+	V~reálné aplikaci řízení elektrického pohonu je plánováno využít tolik vláken, kolik bude třeba paralelně získávat informací z~AD převodníků, jež budou napojeny na proudové senzory a na senzor otáček.\par
+	Aby došlo k~přenosu z~vedlejších vláken do hlavního vlánka pouze validních dat, je využito \texttt{mutex} třídy z~knihovny \texttt{std} a logického semaforu, který umožní předání dat pouze v~případě, že došlo ke kompletnímu uložení potřebné hodnoty do proměnné, ze které je hodnota čtena v~hlavním vlákně. V~případě více paralelích vláken a čtených hodnot by bylo nutné zakomponovat podmínku, která by kontrolovala stav všech čtených proměnných z~vedlejších vláken.\par
+	Algoritmy, provedené ve vedlejším vlákně, jsou představeny v~části \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}}.
 	\begin{figure}[htbp!]
 	 	\centering
 	 	\includegraphics[width=1\textwidth]{src/pdf/timer-thread.pdf}
-		\caption{SPI Timer Thread větev aplikace – AXI Timer Thread s automatickým odesíláním dat.}
+		\caption{SPI Timer Thread větev aplikace – AXI Timer Thread s~automatickým odesíláním dat.}
 	 \label{fig:timer-thread}
  \end{figure}
 
  	\fbar
  	\subsubsection{Thread Loop}\label{subsubsec:thread-loop}
- 		Část aplikace Thread Loop, jejíž ukázkový vývojový diagram je zobrazen na \ref{fig:threadLoop}, reprezentuje soubor algoritmů a funkcí, které jsou prováděny ve vedlejším vlákně \texttt{backgroundThread}. Funkce, která je pomocí \texttt{backgroundThread} spuštěna je v kódu nazvána \texttt{threadLoop()}.\par
-		Protože tato aplikace pracuje opět s adresy HW registrů, vytvořených v PL, zobrazitelnými v user space, je s ohledem na bezpečnost programu vhodné přistupovat k paměti pomocí mapování do user space pomocí \texttt{mmap()} funkce a daného file descriptoru UIO zařízení.\par
-		Po inicializační části mapování mapětí jednotky AXI Timer (postup zobrazen v horní části kódu \ref{lst:thread-loop-code}) a AXI Quad SPI do user space dané aplikace, je v případě ukázkové aplikace využito opět komunikování SPI jednotky s obvodem \textit{MAX7219}. V práci je uvedený kompletní ukázka funkce \texttt{threadLoop()} jejíž algoritmus odráží vývojový diagram \ref{fig:threadLoop}. V případě zájmu o nahlédnutí na kódy použitých funkcí \texttt{initializeSPI(ptrSPI, slaveSelect)}, \texttt{initializeLEDmatrix(ptrSPI, fdSPI, slaveSelect)}, \texttt{clearLEDmatrix(ptrSPI, fdSPI, slaveSelect)} a \texttt{threadSPI(ptrSPI, fdSPI, slaveSelect)} je možné prozkoumat soubory přílohy této práce. Funkce jsou z důvodu vývoje vloženy do samostatné třídy. Funkce jsou zatím ve vývoji a v budoucnu je plánováno vytvořit knihovnu, která umožňuje uživateli komunikovat s bloky jako je AXI Quad SPI a AXI Timer bez nutnosti znalostí adres jednotlivých registrů a používat pouze dobře zdokumentované API.
+ 		Část aplikace Thread Loop, jejíž ukázkový vývojový diagram je zobrazen na \ref{fig:threadLoop}, reprezentuje soubor algoritmů a funkcí, které jsou prováděny ve vedlejším vlákně \texttt{backgroundThread}. Funkce, která je pomocí \texttt{backgroundThread} spuštěna je v~kódu nazvána \texttt{threadLoop()}.\par
+		Protože tato aplikace pracuje opět s~adresy HW registrů, vytvořených v~PL, zobrazitelnými v~user space, je s~ohledem na bezpečnost programu vhodné přistupovat k~paměti pomocí mapování do user space pomocí \texttt{mmap()} funkce a daného file descriptoru UIO zařízení.\par
+		Po inicializační části mapování mapětí jednotky AXI Timer (postup zobrazen v~horní části kódu \ref{lst:thread-loop-code}) a AXI Quad SPI do user space dané aplikace, je v~případě ukázkové aplikace využito opět komunikování SPI jednotky s~obvodem \textit{MAX7219}. V~práci je uvedený kompletní ukázka funkce \texttt{threadLoop()} jejíž algoritmus odráží vývojový diagram \ref{fig:threadLoop}. V~případě zájmu o~nahlédnutí na kódy použitých funkcí \texttt{initializeSPI(ptrSPI, slaveSelect)}, \texttt{initializeLEDmatrix(ptrSPI, fdSPI, slaveSelect)}, \texttt{clearLEDmatrix(ptrSPI, fdSPI, slaveSelect)} a \texttt{threadSPI(ptrSPI, fdSPI, slaveSelect)} je možné prozkoumat soubory přílohy této práce. Funkce jsou z~důvodu vývoje vloženy do samostatné třídy. Funkce jsou zatím ve vývoji a v~budoucnu je plánováno vytvořit knihovnu, která umožňuje uživateli komunikovat s~bloky jako je AXI Quad SPI a AXI Timer bez nutnosti znalostí adres jednotlivých registrů a používat pouze dobře zdokumentované API.
 
 
  		\begin{figure}[htbp!]
@@ -2113,7 +2211,7 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
   			\label{fig:threadLoop}
 		\end{figure}
 		\fbar
-		\begin{lstlisting}[language={c++}, caption={threadLoop() funkce, běžící ve vedlejším vlákně backgroundThread. Z důvodu úspory místa byla vynechána část kódu SPI jednotky.}, label={lst:thread-loop-code}]
+		\begin{lstlisting}[language={c++}, caption={threadLoop() funkce, běžící ve vedlejším vlákně backgroundThread. Z~důvodu úspory místa byla vynechána část kódu SPI jednotky.}, label={lst:thread-loop-code}]
 			/*
 			* @name     threadLoop
 			* @brief    Threaded function for timer and data acquisition.
@@ -2154,8 +2252,8 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
 			   // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
 			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37;
 			   *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFF82F; // 10 us
-			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
-			   *((unsigned *)(timer1ptr)) = 0XE0;
+			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5
+s~*((unsigned *)(timer1ptr)) = 0XE0;
 		   
 			   // one tick is 0.8 ns, have to wait till data is moved to counter register
 			   // otherwise it wont start, solve maybe later or ask about it
@@ -2225,8 +2323,8 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
 				   // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
 				   // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37; // 1 us
 				   *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFF82F; // 10 us
-				   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5 s
-				   *((unsigned *)(timer1ptr)) = 0XE0;
+				   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5
+s~*((unsigned *)(timer1ptr)) = 0XE0;
 		   
 				   // one tick is 0.8 ns, have to wait till data is moved to counter register
 				   // otherwise it wont start, solve maybe later or ask about it
@@ -2252,7 +2350,7 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/pdf/spi-test-connection.pdf}
-		\caption{Názorné schéma připojení PMOD 3 Xilinx Kria KR260 k LED Matici s obvodem MAX7219.}
+		\caption{Názorné schéma připojení PMOD 3 Xilinx Kria KR260 k~LED Matici s~obvodem MAX7219.}
 		\label{fig:spi-test-connection}
 	\end{figure}
 
