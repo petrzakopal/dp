@@ -48,7 +48,5 @@ plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue, label="psi2am
 plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed, label="angularVelocity")
 plt.xlabel("time (s)",fontsize=17, fontweight=400, loc = "right")
 plt.ylabel("psi2amplitude (Wb)\nangularVelocity (s^(-1))",fontsize=14 ,fontweight=400, loc = "top", rotation=0)
-plt.legend(  bbox_to_anchor=(0.5, -0.05), ncol=2 )
+plt.legend(  bbox_to_anchor=(0.5, -0.05), ncol=2, fontsize=14 )
 plt.show()
-
-

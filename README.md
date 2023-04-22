@@ -13,6 +13,22 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), snaha implementace odkazů na zkratky atd. autor původního sesbíraného kódu a nápadu [Jakub Kučera](https://www.linkedin.com/in/jakub-ku%C4%8Dera-49682421a/), vytváření a dávání dohromady designu grafů v pythonu, aby to bylo co nejvíce open source 🔓 [sources and files](./tex/src/python-graph/)
+
+---
+
+💻 [21.04.2023]() <-- psaní do [dp.tex](dp.tex)
+
+---
+
+💻 [20.04.2023]() <-- psaní do [dp.tex](dp.tex), opravil jsem chybu v code v testLoop (jen tam a poté v aktivní větvi v na serveru), aby vypisování výsledků do souboru podle time - nebylo podle time ale podle čísla iteraci, po tom, co došlo k přehoupnutí čísla přes 1 - byl problém a nevešlo se celé číslo do double ani float (co jsem experimentálně vyzkoušel), takže až pak ve vykreslovacím programu, který pracuje s vyšší úrovní abstrakce přepočítat vzorek na čas, také jsem přidal do triangle actual value do main souboru loop cmodel a také do aktivního souboru na serveru reset hodnot času triangle, když je větší nebo rovno periodě, aby se nestal stejný problém s přetečením a nebo nepřesností
+
+---
+
+💻 [19.04.2023]() <-- psaní do [dp.tex](dp.tex)
+
+---
+
 💻 [18.04.2023]() <-- psaní do [dp.tex](dp.tex), oprava velikost kreslení vývojových diagramů, vložení spi do classy (ne moc fancy, jen rychle kvůli dp)...
 
 ---
@@ -375,3 +391,167 @@ _prostě jsem hledal jaké věci co znamenají v dokumentacích na internetu a p
 - Oh My ZSH - konfigurace terminálu zsh [ohmyz](https://ohmyz.sh/)
 - powerlevel10k - nejlepší théma na zsh [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - tmux - terminal multiplexer [tmux](https://github.com/tmux/tmux/wiki), [cheatsheet](https://tmuxcheatsheet.com/)
+
+## Nastavení kompilace LaTeX ve VS Code
+
+```json
+// settings.json
+
+{
+	"latex-workshop.latex.tools": [
+		{
+			"name": "makeglossaries",
+			"command": "makeglossaries",
+			"args": ["%DOCFILE%"]
+		},
+		{
+			"name": "lualatex",
+			"command": "lualatex",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-pdf",
+				"%DOC%.tex"
+			]
+		},
+		{
+			"name": "biber",
+			"command": "biber",
+			"args": ["%DOCFILE%.bcf"]
+		}
+	],
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "biber ",
+			"tools": ["biber"]
+		},
+		{
+			"name": "makeglossaries",
+			"tools": ["makeglossaries"]
+		},
+		{
+			"name": "lualatex (lualatex)",
+			"tools": ["lualatex"]
+		},
+		{
+			"name": "lualatex × 2 ➞ biber ➞ makeglossaries ➞ lualatex × 2",
+			"tools": [
+				"lualatex",
+				"lualatex",
+				"biber",
+				"makeglossaries",
+				"lualatex",
+				"lualatex"
+			]
+		}
+	]
+}
+```
+
+- pokud nefunguje `makeglossaries` run `makeglossaries <name-of-the-file-without-extension>` for eg. run `makeglossaries dp` in the folder [tex](./tex/)
+
+## My actual settins.json VS Code File
+
+```json
+{
+	"security.workspace.trust.untrustedFiles": "open",
+	"security.workspace.trust.enabled": false,
+	"latex-workshop.latex.recipes": [
+		// {
+		// 	"name": "latexmk 🔃",
+		// 	"tools": ["lualatexmk"]
+		// },
+		// {
+		// 	"name": "latexmk (latexmkrc)",
+		// 	"tools": ["latexmk_rconly"]
+		// },
+		// {
+		// 	"name": "latexmk (lualatex)",
+		// 	"tools": ["lualatexmk"]
+		// },
+		// {
+		// 	"name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+		// 	"tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+		// },
+		// {
+		// 	"name": "lualatex ➞ bibtex ➞ lualatex × 2",
+		// 	"tools": ["lualatexmk", "bibtex", "lualatexmk", "lualatexmk"]
+		// },
+		{
+			"name": "lualatex × 2 ➞ biber ➞ makeglossaries ➞ lualatex × 2",
+			"tools": [
+				"lualatex",
+				"lualatex",
+				"biber",
+				"makeglossaries",
+				"lualatex",
+				"lualatex"
+			]
+		},
+		{
+			"name": "lualatex (lualatex)",
+			"tools": ["lualatex"]
+		},
+
+		{
+			"name": "biber ",
+			"tools": ["biber"]
+		},
+		{
+			"name": "makeglossaries",
+			"tools": ["makeglossaries"]
+		}
+	],
+	"latex-workshop.latex.tools": [
+		{
+			"name": "makeglossaries",
+			"command": "makeglossaries",
+			"args": ["%DOCFILE%"]
+		},
+		{
+			"name": "lualatex",
+			"command": "lualatex",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-pdf",
+				"%DOC%.tex"
+			]
+		},
+		{
+			"name": "biber",
+			"command": "biber",
+			"args": ["%DOCFILE%.bcf"]
+		}
+	],
+	"editor.wordWrap": "on",
+	"workbench.colorTheme": "Ayu Dark",
+	"editor.fontFamily": "Fira Code",
+	"editor.fontSize": 13,
+	"prettier.useTabs": true,
+
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"editor.quickSuggestions": {
+		"strings": true
+	},
+	"workbench.iconTheme": "vscode-icons",
+	"editor.fontLigatures": false,
+	"[python]": {
+		"editor.formatOnType": true
+	},
+	"editor.minimap.enabled": false,
+	"window.zoomLevel": 1,
+	"[cpp]": {
+		"editor.defaultFormatter": "ms-vscode.cpptools"
+	}
+}
+```

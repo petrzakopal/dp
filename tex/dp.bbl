@@ -33,8 +33,8 @@
       \strng{authorbibnamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
       \strng{authornamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
       \strng{authorfullhash}{92aaceff6df8d347e3f06cb62c80e5a9}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Blog post}
@@ -297,8 +297,8 @@
       \strng{authorbibnamehash}{2305db98fc92d0785ced5e30d8d33030}
       \strng{authornamehash}{2305db98fc92d0785ced5e30d8d33030}
       \strng{authorfullhash}{2305db98fc92d0785ced5e30d8d33030}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Field Programmable Gate Arrays (FPGAs) are currently recognized as the most suitable platform for the implementation of complex digital systems targeting an increasing number of industrial electronics applications. They cover a huge variety of application areas, such as: aerospace, food industry, art, industrial automation, automotive, biomedicine, process control, military, logistics, power electronics, chemistry, sensor networks, robotics, ultrasound, security, and artificial vision. This book first presents the basic architectures of the devices to familiarize the reader with the fundamentals of FPGAs before identifying and discussing new resources that extend the ability of the devices to solve problems in new application domains. Design methodologies are discussed and application examples are included for some of these domains, e.g., mechatronics, robotics, and power systems.;This book explains the how and why of field-programmable gate array (FPGA) usage. It analyzes fundamental architectures of FPGA devices, providing case studies and simple design examples. It also describes advanced features of the latest devices, exploring new resources enabling problem solving in new application domains, such as high-speed sensor interfacing and control of power converters. From basic circuits to state-of-the-art implementations, this text demystifies FPGAs for engineers who are not digital designers but need efficient digital solutions for their systems to be competitive.;}
@@ -355,8 +355,8 @@
       \strng{authorbibnamehash}{5749120ccda657a4ad78c3c5f9512e5d}
       \strng{authornamehash}{5749120ccda657a4ad78c3c5f9512e5d}
       \strng{authorfullhash}{5749120ccda657a4ad78c3c5f9512e5d}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Industry Applications}
@@ -384,8 +384,8 @@
       \strng{authorbibnamehash}{3325b015fbae57ba74629a53f1ead961}
       \strng{authornamehash}{3325b015fbae57ba74629a53f1ead961}
       \strng{authorfullhash}{3325b015fbae57ba74629a53f1ead961}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Apple WWDC Video}
@@ -448,8 +448,8 @@
       \endverb
     \endentry
     \entry{rovere-sphery-vs-shapes}{incollection}{}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labeltitlesource}{title}
       \field{booktitle}{GitHub}
       \field{day}{14}
@@ -470,8 +470,8 @@
       \endverb
     \endentry
     \entry{wikipedia-ray-tracing}{incollection}{}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labeltitlesource}{title}
       \field{booktitle}{Wikipedia}
       \field{day}{6}
@@ -513,8 +513,8 @@
       \strng{authorbibnamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
       \strng{authornamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
       \strng{authorfullhash}{b60097a66d74fcdb4183ba8c76caa3ac}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Field Programmable Gate Arrays FPGAs are highly desirable for implementation of digital systems due to their flexibility, programmability and low end product life cycle. In more than 20 years since the introduction of FPGA, research and development has produced dramatic improvements in FPGA speed and area efficiency, narrowing the gap between FPGAs and ASICs and making FPGAs the platform of choice for implementing digital circuits. FPGAs hold significant promise as a fast to market replacement. Unfortunately, the advantages of FPGAs are offset in many cases by their high power consumption and area. The goal is to reduce the power consumption without sacrificing much performance or incurring a large chip area so that the territories of FPGAs applications can expand more effectively. Reducing the power of FPGAs is the key to lowering packaging and cooling costs, improving device reliability, and opening the door to new markets such as mobile electronics. This paper presents the tips to lower down the static and dynamic power dissipation in FPGAs. It gives an overview of various techniques at system, device, and circuit and architecture level used for reduction of power consumption of FPGAs and their outcomes.}
@@ -616,8 +616,8 @@
       \endverb
     \endentry
     \entry{mathworks-discovery-hil-simulation}{incollection}{}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labeltitlesource}{title}
       \field{booktitle}{The MathWorks, Inc.}
       \field{langid}{english}
@@ -667,8 +667,8 @@
       \strng{authorbibnamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
       \strng{authornamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
       \strng{authorfullhash}{2c4446e1c7c6722464bfcc9b9a6d023e}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Industrial Electronics}
@@ -800,8 +800,8 @@
       \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
       \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
       \field{extraname}{3}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Digilent Documentation}
@@ -1104,6 +1104,43 @@
       \verb https://wiki.linuxfoundation.org/realtime/start
       \endverb
     \endentry
+    \entry{lipcak-bauer-ept-moodle}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=8106e7c795d705e1610eace6512a8ae6}{%
+           family={Lipčák},
+           familyi={L\bibinitperiod},
+           given={Ondřej},
+           giveni={O\bibinitperiod}}}%
+        {{hash=d44b88edbc4a6e2154a4fc92e21f00df}{%
+           family={Bauer},
+           familyi={B\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{fullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{bibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authorbibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authornamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authorfullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Materiál k přednáškám předmětu B1M14EPT}
+      \field{langid}{czech}
+      \field{title}{Doprovodný materiál k přednáškám}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://moodle.cvut.cz
+      \endverb
+      \verb{url}
+      \verb https://moodle.cvut.cz
+      \endverb
+    \endentry
     \entry{kobrle-elektricke-pohony}{book}{}
       \name{author}{2}{}{%
         {{hash=df455503b24471d1c50b4a056d9fe820}{%
@@ -1129,8 +1166,8 @@
       \strng{authorbibnamehash}{6bb5fb8a26d9144f60c8a6a013f5948d}
       \strng{authornamehash}{6bb5fb8a26d9144f60c8a6a013f5948d}
       \strng{authorfullhash}{6bb5fb8a26d9144f60c8a6a013f5948d}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3. přepracované vydánı́}
@@ -1153,8 +1190,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{13}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{AMD Xilinx Downloads}
@@ -1938,6 +1975,75 @@
       \verb https://github.com/Xilinx/dfx-mgr
       \endverb
     \endentry
+    \entry{vitis-high-level-synthesis-user-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{23}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{7}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{title}{Vitis High-Level Synthesis User Guide (UG1399)}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1399-vitis-hls
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1399-vitis-hls
+      \endverb
+    \endentry
+    \entry{microsemi-svm-min-max-algoritmus}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=a6c488e2b49d9d447b340648980c62c1}{%
+           family={Corporation},
+           familyi={C\bibinitperiod},
+           given={Microsemi},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{fullhash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{bibnamehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{authorbibnamehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{authornamehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{authorfullhash}{a6c488e2b49d9d447b340648980c62c1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{User Guide}
+      \field{langid}{english}
+      \field{title}{Space Vector Modulation v4.1, User Guide, UG0468}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.microsemi.com/document-portal/doc_download/133496-ug0468-space-vector-modulation-v4-1-user-guide
+      \endverb
+      \verb{url}
+      \verb https://www.microsemi.com/document-portal/doc_download/133496-ug0468-space-vector-modulation-v4-1-user-guide
+      \endverb
+    \endentry
     \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
       \name{author}{1}{}{%
         {{hash=19947edb20f496d8ecef44bc1609a614}{%
@@ -1988,7 +2094,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{23}
+      \field{extraname}{24}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -2239,44 +2345,6 @@
       \verb https://docs.xilinx.com/v/u/en-US/ug585-Zynq-7000-TRM
       \endverb
     \endentry
-    \entry{lipcak-bauer-ept-moodle}{incollection}{}
-      \name{author}{2}{}{%
-        {{hash=8106e7c795d705e1610eace6512a8ae6}{%
-           family={Lipčák},
-           familyi={L\bibinitperiod},
-           given={Ondřej},
-           giveni={O\bibinitperiod}}}%
-        {{hash=d44b88edbc4a6e2154a4fc92e21f00df}{%
-           family={Bauer},
-           familyi={B\bibinitperiod},
-           given={Jan},
-           giveni={J\bibinitperiod}}}%
-      }
-      \strng{namehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
-      \strng{fullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
-      \strng{bibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
-      \strng{authorbibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
-      \strng{authornamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
-      \strng{authorfullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Materiál k přednáškám předmětu B1M14EPT}
-      \field{langid}{czech}
-      \field{title}{Doprovodný materiál k přednáškám}
-      \field{urlday}{28}
-      \field{urlmonth}{2}
-      \field{urlyear}{2023}
-      \field{urldateera}{ce}
-      \true{nocite}
-      \verb{urlraw}
-      \verb https://moodle.cvut.cz
-      \endverb
-      \verb{url}
-      \verb https://moodle.cvut.cz
-      \endverb
-    \endentry
     \entry{mathworks-antiwindup-clamping}{incollection}{}
       \name{author}{1}{}{%
         {{hash=8687eae34a3830fc0c113d9d65382e90}{%
@@ -2324,7 +2392,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{24}
+      \field{extraname}{25}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}

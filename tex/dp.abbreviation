@@ -1,0 +1,9 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{B}\relax \glsresetentrylist %
+\glossentry{abbreviation:bsrm}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{94}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossentry{abbreviation:srm}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{94}}}%
+\end{theglossary}\glossarypostamble
