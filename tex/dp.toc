@@ -482,7 +482,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {18}Dosažené výsledky}{94}{section.18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{95}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Preloaded Data – Legacy Application}{94}{subsection.18.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\hbox to\@tempdima {\hfil }Závěr}{95}{table.caption.73}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -1102,7 +1104,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{100}{section.18}%
+\contentsline {section}{\hbox to\@tempdima {\hfil }Literatura}{100}{table.caption.73}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{P\v {r}\'{\i }loha \numberline {A}Seznam symbolů a zkratek}{101}{appendix.1.A}%
 \defcounter {refsection}{0}\relax 

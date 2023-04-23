@@ -970,23 +970,23 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 				Oba čipy podporují PREEMPT\_RT Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~postupu realizace patche \textit{PetaLinux} je v~sekci \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
 
 \section{Zpětnovazební vektorová regulace}
-	V této práci bude využití platformy taktéž demonstrováno pomocí realizace simulace zpětnovazebního vektorového řízení asynchronního motoru. Zadání této simulační úlohy bylo převzato z předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
-	Hlavním záměrem této práce není představovat princip vektorové regulace, ale je vhodné pomocí blokového schématu a krátkým komentářem nastínit její princip. Na obr. \ref{fig:foc-block} je zobrazeno obecné schéma zpětnovazební vektorové regulace. Naznačeným obecným způsobem by bylo možné realizovat fyzickou regulaci s použitím vývojové desky.\par
-	Z finančních důvodů je možné při souměrnosti napájecí sítě a napájení motoru měřit pouze dvě hodnoty napájecích proudů motoru a třetí dopočítat. Pro úplnost jsou naznačeny všechny tři snímače. Pro měření otáčivé rychlosti motoru je možné použít inkrementální snímač a jeho výsledné impulzy zpracovávat pomocí PS nebo PL. Pokud by byl k dispozici jiný druh snímače, je preferován prvek s možností komunikace pomocí SPI, které splňuje požadavky na rychlé získávání a odesílání hodnot do PS.\par
-	V této práci byla realizována pouze simulace jednotlivých prvků FOC. Upravené blokové schéma simulace je zobrazeno na obr. \ref{foc-block-colored}. \textcolor{ctuyellow}{Žluté označení} symbolizuje, že se výpočty provádějí v \texttt{krnl\_calculateCurVelModel}, tudíž v prvním ze spouštěných kernlů v podaplikaci \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}}. \textcolor{ctugreen}{Zelené označení} symbolizuje provádění výpočtů výstupního napětí invertoru a modelu asynchronního motoru v kernelu \texttt{krnl\_calculateInvMot}. \textcolor{ctublue}{Modře označený} blok symbolizuje, že je algoritmus prováděn v PS. \textcolor{ctublue}{Modře označená} proměnná je nastavována v PS a \textcolor{ctuyellow}{žlutě označená}, resp. \textcolor{ctugreen}{zeleně označená} je výstupem kernelu s $I$-$n$ modelem, resp. s modelem asynchronního motoru.\par
-	Bloky (omezení a odvazbení) a měření napětí $U_\text{DC}$ nebyly v aplikaci \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}} implementovány. Bloky pro zpracování rychlosti otáčení byly vynechány z důvodu, že mechanická otáčivá rychlost je přímo jeden z výstupů modelu asynchronního motoru.
+	V~této práci bude využití platformy taktéž demonstrováno pomocí realizace simulace zpětnovazebního vektorového řízení asynchronního motoru. Zadání této simulační úlohy bylo převzato z~předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
+	Hlavním záměrem této práce není představovat princip vektorové regulace, ale je vhodné pomocí blokového schématu a krátkým komentářem nastínit její princip. Na obr. \ref{fig:foc-block} je zobrazeno obecné schéma zpětnovazební vektorové regulace. Naznačeným obecným způsobem by bylo možné realizovat fyzickou regulaci s~použitím vývojové desky.\par
+	Z~finančních důvodů je možné při souměrnosti napájecí sítě a napájení motoru měřit pouze dvě hodnoty napájecích proudů motoru a třetí dopočítat. Pro úplnost jsou naznačeny všechny tři snímače. Pro měření otáčivé rychlosti motoru je možné použít inkrementální snímač a jeho výsledné impulzy zpracovávat pomocí PS nebo PL. Pokud by byl k~dispozici jiný druh snímače, je preferován prvek s~možností komunikace pomocí SPI, které splňuje požadavky na rychlé získávání a odesílání hodnot do PS.\par
+	V~této práci byla realizována pouze simulace jednotlivých prvků FOC. Upravené blokové schéma simulace je zobrazeno na obr. \ref{foc-block-colored}. \textcolor{ctuyellow}{Žluté označení} symbolizuje, že se výpočty provádějí v~\texttt{krnl\_calculateCurVelModel}, tudíž v~prvním ze spouštěných kernlů v~podaplikaci \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}}. \textcolor{ctugreen}{Zelené označení} symbolizuje provádění výpočtů výstupního napětí invertoru a modelu asynchronního motoru v~kernelu \texttt{krnl\_calculateInvMot}. \textcolor{ctublue}{Modře označený} blok symbolizuje, že je algoritmus prováděn v~PS. \textcolor{ctublue}{Modře označená} proměnná je nastavována v~PS a \textcolor{ctuyellow}{žlutě označená}, resp. \textcolor{ctugreen}{zeleně označená} je výstupem kernelu s~$I$-$n$ modelem, resp. s~modelem asynchronního motoru.\par
+	Bloky (omezení a odvazbení) a měření napětí $U_\text{DC}$ nebyly v~aplikaci \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}} implementovány. Bloky pro zpracování rychlosti otáčení byly vynechány z~důvodu, že mechanická otáčivá rychlost je přímo jeden z~výstupů modelu asynchronního motoru.
 
 	\begin{figure}[htbp!]
 		\centering
 			\includegraphics[width=1\textwidth]{src/pdf/foc-block.pdf} 
-			\caption{Obecné schéma zpětnovazební vektorové regulace. (převzato z \cite{lipcak-bauer-ept-moodle}, \cite{kobrle-elektricke-pohony}, upraveno)}
+			\caption{Obecné schéma zpětnovazební vektorové regulace. (převzato z~\cite{lipcak-bauer-ept-moodle}, \cite{kobrle-elektricke-pohony}, upraveno)}
 			\label{fig:foc-block}
 	\end{figure}
 
 	\begin{figure}[htbp!]
 		\centering
 			\includegraphics[width=1\textwidth]{src/pdf/foc-block-colored.pdf} 
-			\caption{Simulační schéma zpětnovazební vektorové regulace, realizované v této práci. (převzato z \cite{lipcak-bauer-ept-moodle}, \cite{kobrle-elektricke-pohony}, upraveno)}
+			\caption{Simulační schéma zpětnovazební vektorové regulace, realizované v~této práci. (převzato z~\cite{lipcak-bauer-ept-moodle}, \cite{kobrle-elektricke-pohony}, upraveno)}
 			\label{foc-block-colored}
 	\end{figure}
 
@@ -1001,8 +1001,8 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 	% goniometrické funkce jsou v pure c++ v knihovně cmath, ve vitis jsou v hls_math.h
 	% https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/Vitis-HLS-Math-Library
 	\subsection{Matematický popis „kompletního“ modelu stroje}\label{subsec:matematicky-popis-kompletniho-modelu-stroje}
-	Parametry motoru, který bude využíván v simulaci, byly získány z výukových materiálů předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
-	Motor je umístěn v laboratoři č. H-26 na Fakultě elektrotechnické Českého vysokého učení technického v Praze. Parametry, využívané pro jeho modelování jsou uvedeny v tab. \ref{tab:motor-stitkove-udaje} a v tab. \ref{tab:motor-zmerene-parametry-stroje}.
+	Parametry motoru, který bude využíván v~simulaci, byly získány z~výukových materiálů předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
+	Motor je umístěn v~laboratoři č. H-26 na Fakultě elektrotechnické Českého vysokého učení technického v~Praze. Parametry, využívané pro jeho modelování jsou uvedeny v~tab. \ref{tab:motor-stitkove-udaje} a v~tab. \ref{tab:motor-zmerene-parametry-stroje}.
 	\begin{minipage}[t]{0.47\textwidth}
         \vspace{\baselineskip}
         \begin{table}[H]
@@ -2197,7 +2197,7 @@ plt.show()\end{lstlisting}
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=1\textwidth]{src/png/k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru.png}
+			\includegraphics[width=1\textwidth]{src/pdf/k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru.pdf}
 			\caption{Časová závislost velikosti mechanické otáčivé rychlosti $\Omega$ a velikosti magnetického toku rotoru $\psi_2$. Výsledné hodnoty získané ze simulace akcelerované pomocí kernelu v~PL.}
 			\label{fig:k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru}
 		\end{figure}
@@ -2531,7 +2531,7 @@ float psi2betaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, floa
 		kde $h$ značí krok metody, index $i$ označuje pořadí proměnné, pro kterou je uvedena skladba rovnic.\par
 
 		\subsubsection{Implementace regulátorů}
-			V~kernelu byly implementovány PI regulátory se strukturou naznačenou na obr. \ref{}. Pro omezení wind-up efektu byl použit princip \textit{clamping}.\par
+			V~kernelu byly implementovány PI regulátory se strukturou naznačenou na obr. \ref{fig:regulator-scheme}. Pro omezení wind-up efektu byl použit princip \textit{clamping}.\par
 			Při realizaci v~\texttt{C++} by bylo vhodné realizovat pro regulátory ucelený datový typ struktury, která by obsahovala potřebné proměnné. Tento způsob byl výhodný při implementaci algoritmu v~PC, ovšem jak již bylo zmíňeno v~části \hyperref[subsec:akcelerovane-algoritmy-kernely-v-pl]{\textit{Akcelerované algoritmy (kernely) v~PL}}, pro překlad pomocí HLS bylo nutné využít datová pole typu float. Tento přístup snížil čitelnost kódu, ale zachoval relativně kvalitní překlad HLS.\par
 			Blokové schéma principu PI regulátoru, který byl implementován do algoritmu je zobrazeno v~obr. \ref{fig:regulator-scheme}.\par
 			
@@ -2598,11 +2598,11 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 
 	\fbar
 \section{Popis pracoviště}\label{sec:popis-pracoviste}
-	Na obr. \ref{fig:workspace-scheme} je zobrazeno blokové schéma pracoviště, které bylo vytvořeno v rámci této práce a slouží k vývoji akcelerovaných aplikcí.\par
-	Blok \textit{PC} představuje osobní počítač, který slouží k přístupu k vyvíjenému pracovišti a je propojeno s vývojovou deskou KR260 pomocí \textit{USB/UART} spojení, které je vhdoné v případě, že nedošlo k inicializaci ethernet adaptéru. Vývojová deska je pomocí adaptéru \textit{eth0} připojena do switche na pracovišti, ke kterému je také připojen uživatelský počítač. Pomocí \textcolor{ctublue}{modrého značení} jsou do switche připojeny také bloky \textcolor{ctuorange}{development machine}. Fyzicky se jedná o připojení serveru pomocí adaptéru \textit{eno2}, který je umístěn ve fakultním datacentru. Tímto způsobem je vytvořena virtuální síť, která je využívána pouze pro komunikaci mezi zařízeními vývojového pracoviště.\par
-	Připojení serveru pomocí adaptéru \textit{eno1} do externí sítě \textcolor{ctugreenyblue}{Ethernet (world)} přináší krom možnosti vzdáleného přístupu do virtualizované zařízení v hypervisoru Proxmox VE také možnost vzdáleného přístupu do sítě \textcolor{ctublue}{Ethernet (private)}. Využití serveru pro tvorbu aplikací bylo zvoleno z důvodu výkonové a časové náročnosti tvoření \textit{PetaLinux} systému, HW designu ve Vivado a tvoření bitstreamu ve Vitis IDE. Díky vzdáleným přístupům je možné pracovat na vývoji i mimo laboratoř. Protože v některých případech při restartování vývojové desky nedochází ke správné inicializaci adaptéru \textit{eth0}, je v navazující práci plánováno připojit vývojovou desku k SBC (single board computer) pomocí \textit{USB/UART} rozhraní a SBC do \textcolor{ctublue}{Ethernet (private)}. K vývojové desce bude možné přistupovat cestou \textcolor{ctugreenyblue}{Ethernet (world)} -> \textcolor{ctuorange}{development machine} -> \textcolor{ctublue}{Ethernet (private)} -> PCB -> \textit{USB/UART} -> Kria KR260. Toto fyzické spojení umožní přístup ke K26 pomocí \textit{minicom} a manuální inicializaci adaptéru po restartování vývojové desky.\par
-	Protože obvod MAX7219 s LED maticí vyžaduje napájení v rozmezí 4 V až 5 V a výstupy PMOD dodávají napětí pouze 3,3 V, je třeba pro napájení testovacího rozhraní využít externího zdroje. V této práci bylo pro napájení obvodu využito z důvodu jednoduchosti desky Arduino UNO, která je napájena z USB rozhraní uživatelského počítače. Provedení testovacího zapojení je znázorněno v části \ref{subsec:spi-komunikace}.\par
-	Představená architektura pracoviště byla tvořena takovým způsobem, aby nebylo problematické ji rozšiřovat o další prvky a umožňovala vzdálený přístup s podporou více aktivních uživatelů v jeden okamžik.
+	Na obr. \ref{fig:workspace-scheme} je zobrazeno blokové schéma pracoviště, které bylo vytvořeno v~rámci této práce a slouží k~vývoji akcelerovaných aplikcí.\par
+	Blok \textit{PC} představuje osobní počítač, který slouží k~přístupu k~vyvíjenému pracovišti a je propojeno s~vývojovou deskou KR260 pomocí \textit{USB/UART} spojení, které je vhdoné v~případě, že nedošlo k~inicializaci ethernet adaptéru. Vývojová deska je pomocí adaptéru \textit{eth0} připojena do switche na pracovišti, ke kterému je také připojen uživatelský počítač. Pomocí \textcolor{ctublue}{modrého značení} jsou do switche připojeny také bloky \textcolor{ctuorange}{development machine}. Fyzicky se jedná o~připojení serveru pomocí adaptéru \textit{eno2}, který je umístěn ve fakultním datacentru. Tímto způsobem je vytvořena virtuální síť, která je využívána pouze pro komunikaci mezi zařízeními vývojového pracoviště.\par
+	Připojení serveru pomocí adaptéru \textit{eno1} do externí sítě \textcolor{ctugreenyblue}{Ethernet (world)} přináší krom možnosti vzdáleného přístupu do virtualizované zařízení v~hypervisoru Proxmox VE také možnost vzdáleného přístupu do sítě \textcolor{ctublue}{Ethernet (private)}. Využití serveru pro tvorbu aplikací bylo zvoleno z~důvodu výkonové a časové náročnosti tvoření \textit{PetaLinux} systému, HW designu ve Vivado a tvoření bitstreamu ve Vitis IDE. Díky vzdáleným přístupům je možné pracovat na vývoji i mimo laboratoř. Protože v~některých případech při restartování vývojové desky nedochází ke správné inicializaci adaptéru \textit{eth0}, je v~navazující práci plánováno připojit vývojovou desku k~SBC (single board computer) pomocí \textit{USB/UART} rozhraní a SBC do \textcolor{ctublue}{Ethernet (private)}. K~vývojové desce bude možné přistupovat cestou \textcolor{ctugreenyblue}{Ethernet (world)} -> \textcolor{ctuorange}{development machine} -> \textcolor{ctublue}{Ethernet (private)} -> PCB -> \textit{USB/UART} -> Kria KR260. Toto fyzické spojení umožní přístup ke K26 pomocí \textit{minicom} a manuální inicializaci adaptéru po restartování vývojové desky.\par
+	Protože obvod MAX7219 s~LED maticí vyžaduje napájení v~rozmezí 4 V~až 5 V~a výstupy PMOD dodávají napětí pouze 3,3 V, je třeba pro napájení testovacího rozhraní využít externího zdroje. V~této práci bylo pro napájení obvodu využito z~důvodu jednoduchosti desky Arduino UNO, která je napájena z~USB rozhraní uživatelského počítače. Provedení testovacího zapojení je znázorněno v~části \ref{subsec:spi-komunikace}.\par
+	Představená architektura pracoviště byla tvořena takovým způsobem, aby nebylo problematické ji rozšiřovat o~další prvky a umožňovala vzdálený přístup s~podporou více aktivních uživatelů v~jeden okamžik.
 
 
 \begin{figure}[htbp!]
@@ -2613,7 +2613,7 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 \end{figure}
 
 	\subsection{SPI komunikace}\label{subsec:spi-komunikace}
-	V částech \hyperref[subsec:spi]{\textit{SPI}} a \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}} je představen způsob využití IP bloku AXI Quad SPI. Pomocí tohoto bloku je možné provádět komunikaci s externími zařízeními. Pokud by se jednalo o skutečnou aplikaci pro řízení elektrického pohonu, byly by jako externí zařízení použity ADC a DAC. Pro ukázku funkčnosti SPI komunikace byl využit prvek MAX7219, který vyžaduje napájecí napětí v rozmezí 4 V až 5 V. Ovšem jak již bylo v části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}} uvedeno, výstupní napětí využitých PMOD konektorů je pouze 3,3 V. Aby bylo možné tento obvod využít k demonstraci, je pro připojení PMOD konektorům k obovdu MAX7219 využit převodník úrovní. Finální experimentální zapojení pro testování SPI komunikace je zobrazeno na \ref{fig:spi-test-connection}.
+	V~částech \hyperref[subsec:spi]{\textit{SPI}} a \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}} je představen způsob využití IP bloku AXI Quad SPI. Pomocí tohoto bloku je možné provádět komunikaci s~externími zařízeními. Pokud by se jednalo o~skutečnou aplikaci pro řízení elektrického pohonu, byly by jako externí zařízení použity ADC a DAC. Pro ukázku funkčnosti SPI komunikace byl využit prvek MAX7219, který vyžaduje napájecí napětí v~rozmezí 4 V~až 5 V. Ovšem jak již bylo v~části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}} uvedeno, výstupní napětí využitých PMOD konektorů je pouze 3,3 V. Aby bylo možné tento obvod využít k~demonstraci, je pro připojení PMOD konektorům k~obovdu MAX7219 využit převodník úrovní. Finální experimentální zapojení pro testování SPI komunikace je zobrazeno na \ref{fig:spi-test-connection}.
 
 
 
@@ -2641,16 +2641,52 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 
 
 
-	V rámci prozkoumávání funkčnosti SPI komunikace byly pomocí osciloskopu změřeny oscilogramy pro signály \textcolor{ctublue}{CLK} a \textcolor{ctured}{MOSI}.\par
-	Na grafu \ref{fig:clk-data-full-graph} je možné pozorovat průběhy obou signálů a jejich vzájemnou závislost. Je vidět, že náběžná hrana signálu MOSI začíná před náběžnou hranou CLK. Tato souslednost je vytvořena z důvodu, aby již v okamžiku, kdy vzniká náběžná hrana \textcolor{ctublue}{CLK} signálu, byla úroveň signálu \textcolor{ctured}{MOSI} ustálená na hodnotě 3,3 V.\par
-	Na obou signálech je vidět, že nedochází při náběžné hraně k dosáhnutí přesně úrovně 3,3 V, ale k překmitnutí hodnoty až na úroveň téměr 4,38431 V. Při sestupné hraně dochází k podkmitnutí hodnoty 0 V na hodnotu -0,854902 V. Při komunikaci s některými prvky nejsou tyto překmity žádoucí a bylo by třeba provést kroky k jejich odstranění. Důvod nedodržení úrovní by bylo vhodné více prozkoumat, ovšem tento úkol by byl nad rámec této práce a je možné mu věnovat úsilí v nadcházejících pracích.\par
-	V případě, že nedochází k odesílání signálu \textcolor{ctured}{MOSI} bylo pomocí oscilogramu \ref{fig:clk-data-full-graph} zjištěno, že se v signálu objevuje šum v napěťovém rozmezí přibližně - 0.200 V až 0.170 V. Po ukončení přenosu signálu \textcolor{ctublue}{CLK} je šum již relativně malý. Je tudíž možné předpokládat, že rušení je způsobeno přenosem \textcolor{ctublue}{CLK} signálu pomocí vodiče, který nezaručuje dostatečné odstínění možného EMC rušení a způsobuje tvorbu šumu v \textcolor{ctured}{MOSI} signálu.
+	V~rámci prozkoumávání funkčnosti SPI komunikace byly pomocí osciloskopu změřeny oscilogramy pro signály \textcolor{ctublue}{CLK} a \textcolor{ctured}{MOSI}.\par
+	Na grafu \ref{fig:clk-data-full-graph} je možné pozorovat průběhy obou signálů a jejich vzájemnou závislost. Je vidět, že náběžná hrana signálu MOSI začíná před náběžnou hranou CLK. Tato souslednost je vytvořena z~důvodu, aby již v~okamžiku, kdy vzniká náběžná hrana \textcolor{ctublue}{CLK} signálu, byla úroveň signálu \textcolor{ctured}{MOSI} ustálená na hodnotě 3,3 V.\par
+	Na obou signálech je vidět, že nedochází při náběžné hraně k~dosáhnutí přesně úrovně 3,3 V, ale k~překmitnutí hodnoty až na úroveň téměr 4,38431 V. Při sestupné hraně dochází k~podkmitnutí hodnoty 0 V~na hodnotu -0,854902 V. Při komunikaci s~některými prvky nejsou tyto překmity žádoucí a bylo by třeba provést kroky k~jejich odstranění. Důvod nedodržení úrovní by bylo vhodné více prozkoumat, ovšem tento úkol by byl nad rámec této práce a je možné mu věnovat úsilí v~nadcházejících pracích.\par
+	V~případě, že nedochází k~odesílání signálu \textcolor{ctured}{MOSI} bylo pomocí oscilogramu \ref{fig:clk-data-full-graph} zjištěno, že se v~signálu objevuje šum v~napěťovém rozmezí přibližně - 0.200 V~až 0.170 V. Po ukončení přenosu signálu \textcolor{ctublue}{CLK} je šum již relativně malý. Je tudíž možné předpokládat, že rušení je způsobeno přenosem \textcolor{ctublue}{CLK} signálu pomocí vodiče, který nezaručuje dostatečné odstínění možného EMC rušení a způsobuje tvorbu šumu v~\textcolor{ctured}{MOSI} signálu.
 
 	\fbar
 \section{Dosažené výsledky}
 % je třeba zas využít xrt_coreutil a měření pomocí přidání kódu do aplikace, ale asi nebude možné používat na celých 1M dat, vyřešit a přidat možnost ovládat počet iterací
+V této sekci budou představeny výsledky a poznatky ohledně spouštěných aplikací, které byly získány analýzou výstupů profilování aplikace pomocí knihovny \texttt{xrt\_coreutil} a programu \textit{Vitis Analyzer}.\par
 
-Ahoj, toto je Spínaný reluktanční motor (\gls{abbreviation:srm}), ale dělá se i \gls{abbreviation:bsrm}. A \gls{symbol:R} je odpor vinutí jedné fáze, to je ale napsané ve zkratkách přece! Jinak fungují i odkazy :-).
+	\subsection{Preloaded Data – Legacy Application}
+		V části \hyperref[subsec:preloaded-data]{\textit{Preloaded Data}} byla představena aplikace, ktrá používá starší verzi kódu v kernelu a PS.\par
+		Struktura systému aplikace, která je vizualizována pomocí Vitis Analyzer je zobrazena na \ref{fig:legacy-rt-step-0.000001-system-diagram}.\par
+		Na téže snímku je uvedena také informace o skutečném využití zdrojů kernelem. Pro porovnání je využití jednotlivých zdrojů pro aplikace, interagující s kernelem, uvedeno v tab. \ref{tab:vyuziti-zdroju-pl-pro-akcelerovane-aplikace}.
+
+		\begin{figure}[htbp!]
+			\centering
+			\includegraphics[width=1\textwidth]{src/png/vitis-analyzer/legacy-rt/1M-data/writing-data-output/legacy-rt-step-0.000001-system-diagram.png}
+			\caption{System diagram – Vitis Analyzer pro Preloaded Data Application.}
+			\label{fig:legacy-rt-step-0.000001-system-diagram}
+		\end{figure}
+
+
+
+		Tuto aplikace je převážně vhodné analyzovat z pohledu rychlosti zpracování dat v kernelu v závislosti na velikosti přenášených dat.
+
+
+
+	\begin{table}[H]
+		\centering
+		\caption{Využití zdrojů PL pro akcelerované aplikace.}
+		\vspace*{0.15cm}
+		
+		\begin{tabular}{!{\vrule width 2pt} l | c | c | c | c | c !{\vrule width 2pt}}
+		\noalign{\hrule height 2pt}
+		\rowcolor{codeblue}
+		Kernel & LUT & Registry & BRAM & URAM & DSP\\
+		\noalign{\hrule height 2pt}
+		krnl\_CurVelLoadLegacy & 6 520 & 8 003 & 2 & 0 & 19\\ \hline
+		krnl\_calculateCurVelModel & 23 713 & 23 490 & 3 & 0 & 103\\ \hline
+		krnl\_calculateInvMot & 14 207 & 16 319 & 9 & 0 & 75\\\noalign{\hrule height 2pt}
+			\end{tabular}
+			\label{tab:vyuziti-zdroju-pl-pro-akcelerovane-aplikace}
+	\end{table}
+
+Ahoj, toto je Spínaný reluktanční motor (\gls{abbreviation:srm}), ale dělá se i \gls{abbreviation:bsrm}. A~\gls{symbol:R} je odpor vinutí jedné fáze, to je ale napsané ve zkratkách přece! Jinak fungují i odkazy :-).
 
 
 		
