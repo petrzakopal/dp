@@ -767,10 +767,10 @@ int main(int argc, char *argv[])
 
         posix_memalign((void **)&odeCVCalculationSettingsArray, 4096, 5 * sizeof(float));
 
-        odeCVCalculationSettingsArray[0] = 0;      // initialCalculationTime
-        odeCVCalculationSettingsArray[1] = 1;      // finalCalculationTime
-        odeCVCalculationSettingsArray[2] = 0.0001; // calculationStep
-        odeCVCalculationSettingsArray[3] = 0;      // calculationTime
+        odeCVCalculationSettingsArray[0] = 0;        // initialCalculationTime
+        odeCVCalculationSettingsArray[1] = 1;        // finalCalculationTime
+        odeCVCalculationSettingsArray[2] = 0.000001; // calculationStep
+        odeCVCalculationSettingsArray[3] = 0;        // calculationTime
         odeCVCalculationSettingsArray[4] = (int)ceil(((odeCVCalculationSettingsArray[1] - odeCVCalculationSettingsArray[0]) / odeCVCalculationSettingsArray[2]));
 
         float *motorParametersArray;

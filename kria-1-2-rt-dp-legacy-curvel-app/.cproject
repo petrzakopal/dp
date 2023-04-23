@@ -33,7 +33,7 @@
                             							
                             <targetPlatform id="com.xilinx.ide.accel.config.sw_emu.aarch64.2141076252..64476912" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-legacy-curvel-app}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1306688910" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-SW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-legacy-curvel-app}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1306688910" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Accelerated Host Application Builder" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
                             <tool id="com.xilinx.ide.accel.tool.emconfigutil.485977808" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
@@ -105,7 +105,7 @@
                             							
                             <targetPlatform id="com.xilinx.ide.accel.config.hw_emu.aarch64.532369730..1189483555" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-legacy-curvel-app}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.795268201" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-HW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-legacy-curvel-app}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.795268201" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Accelerated Host Application Builder" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
                             <tool id="com.xilinx.ide.accel.tool.emconfigutil.1380842182" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
@@ -177,7 +177,7 @@
                             							
                             <targetPlatform id="com.xilinx.ide.accel.config.hw.aarch64.1639745284..1942178397" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-legacy-curvel-app}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.298548774" managedBuildOn="true" name="Accelerated Host Application Builder.Hardware" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-legacy-curvel-app}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.298548774" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Accelerated Host Application Builder" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
                             <tool id="com.xilinx.ide.accel.tool.emconfigutil.489381341" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
@@ -190,6 +190,24 @@
                             </tool>
                             							
                             <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.802490025" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
+                                								
+                                <option id="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64.1328239109" superClass="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64" useByScannerDiscovery="false" valueType="libFiles">
+                                    									
+                                    <listOptionValue builtIn="false" value="xilinxopencl"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="xrt_coreutil"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="pthread"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="rt"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="dl"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="crypt"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="stdc++"/>
+                                    								
+                                </option>
                                 								
                                 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1996850403" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
                                     									

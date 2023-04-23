@@ -883,11 +883,6 @@ int main(int argc, char *argv[])
                 Regulator.velocityRegulator->wantedValue = 10;
             }
 
-            if (svmCore.triangleWaveSettings->calculationTime >= svmCore.triangleWaveSettings->wavePeriod)
-            {
-                svmCore.triangleWaveSettings->calculationTime = 0;
-            }
-
             masterInput[0] = globalSimulationTime;
             masterInput[1] = globalCalculationStep;
             masterInput[2] = minMaxCommonModeVoltageConstant;
@@ -954,6 +949,11 @@ int main(int argc, char *argv[])
             Regulator.iqRegulator->iSum = masterOutput[11];
             CurVelModel.modelCVVariables->psi2alpha = masterOutput[12];
             CurVelModel.modelCVVariables->psi2beta = masterOutput[13];
+
+            if (svmCore.triangleWaveSettings->calculationTime >= svmCore.triangleWaveSettings->wavePeriod)
+            {
+                svmCore.triangleWaveSettings->calculationTime = 0;
+            }
 
             // we got switches from kernel
 

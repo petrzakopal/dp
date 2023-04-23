@@ -24,7 +24,7 @@
       </kernels>
     </configBuildOptions>
   </configuration>
-  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.117970075" dirty="true">
+  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwkernel.hw.117970075">
     <configBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" target="hw">
       <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp" maxMemoryPorts="true">
         <args name="masterInput" master="true"/>
@@ -35,5 +35,15 @@
         <args name="masterOutput" master="true"/>
       </kernels>
     </configBuildOptions>
+    <lastBuildOptions xsi:type="hwkernel:KernelOptions" hardwareOptimizationLevel="O_quick" target="hw">
+      <kernels name="krnl_calculateCurVelModel" sourceFile="src/krnl_main.cpp" maxMemoryPorts="true">
+        <args name="masterInput" master="true"/>
+        <args name="masterOutput" master="true"/>
+      </kernels>
+      <kernels name="krnl_calculateInvMot" sourceFile="src/krnl_inv_asm.cpp" maxMemoryPorts="true">
+        <args name="masterInput" master="true"/>
+        <args name="masterOutput" master="true"/>
+      </kernels>
+    </lastBuildOptions>
   </configuration>
 </hwkernel:HwKernelProject>

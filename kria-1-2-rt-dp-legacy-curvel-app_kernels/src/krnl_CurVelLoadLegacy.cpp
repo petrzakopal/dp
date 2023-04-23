@@ -6,8 +6,6 @@ Purpose: Kernel
 #include <stdint.h>
 #include <hls_stream.h>
 #include <hls_math.h>
-
-// #include "function/transformation.cpp"
 #define PI 3.141592
 extern "C"
 {

@@ -33,7 +33,7 @@
                             							
                             <targetPlatform id="com.xilinx.ide.accel.config.sw_emu.aarch64.1354272063..1955575633" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-application}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1757164940" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-SW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-application}/Emulation-SW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1757164940" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Accelerated Host Application Builder" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
                             <tool id="com.xilinx.ide.accel.tool.emconfigutil.1658028989" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
@@ -105,7 +105,7 @@
                             							
                             <targetPlatform id="com.xilinx.ide.accel.config.hw_emu.aarch64.792737531..1243820917" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-application}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1695918734" managedBuildOn="true" name="Accelerated Host Application Builder.Emulation-HW" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-application}/Emulation-HW" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1695918734" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Accelerated Host Application Builder" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
                             <tool id="com.xilinx.ide.accel.tool.emconfigutil.54243823" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
@@ -177,7 +177,7 @@
                             							
                             <targetPlatform id="com.xilinx.ide.accel.config.hw.aarch64.630500980..1058327087" name=""/>
                             							
-                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-application}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1311817834" managedBuildOn="true" name="Accelerated Host Application Builder.Hardware" superClass="com.xilinx.ide.accel.builder.host"/>
+                            <builder buildPath="${workspace_loc:/kria-1-2-rt-dp-application}/Hardware" enableAutoBuild="true" id="com.xilinx.ide.accel.builder.host.1311817834" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Accelerated Host Application Builder" superClass="com.xilinx.ide.accel.builder.host"/>
                             							
                             <tool id="com.xilinx.ide.accel.tool.emconfigutil.1827995730" name="emconfigutil" superClass="com.xilinx.ide.accel.tool.emconfigutil"/>
                             							
@@ -190,6 +190,24 @@
                             </tool>
                             							
                             <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.571002252" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
+                                								
+                                <option id="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64.1437834216" superClass="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64" useByScannerDiscovery="false" valueType="libFiles">
+                                    									
+                                    <listOptionValue builtIn="false" value="xilinxopencl"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="xrt_coreutil"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="pthread"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="rt"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="dl"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="crypt"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="stdc++"/>
+                                    								
+                                </option>
                                 								
                                 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1520967686" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
                                     									
@@ -234,5 +252,7 @@
         <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
         	
     </storageModule>
+    	
+    <storageModule moduleId="refreshScope"/>
     
 </cproject>
