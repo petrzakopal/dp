@@ -2290,11 +2290,12 @@
     <bcf:citekey order="159">vitis-high-level-synthesis-user-guide</bcf:citekey>
     <bcf:citekey order="160">microsemi-svm-min-max-algoritmus</bcf:citekey>
     <bcf:citekey order="161">lipcak-bauer-ept-moodle</bcf:citekey>
+    <bcf:citekey order="162">kria-k26-som-ds</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="162">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
     <bcf:citekey order="163">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="164">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="164">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
     <bcf:citekey order="165">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="166">digilent-zybo-reference-manual</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
