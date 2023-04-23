@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+💻 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), měření ve vitis analyzer, tabulky, práce na dosažených výsledkách
+
+---
+
 💻 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), snaha implementace odkazů na zkratky atd. autor původního sesbíraného kódu a nápadu [Jakub Kučera](https://www.linkedin.com/in/jakub-ku%C4%8Dera-49682421a/), vytváření a dávání dohromady designu grafů v pythonu, aby to bylo co nejvíce open source 🔓 [sources and files](./tex/src/python-graph/)
 
 ---
