@@ -13,19 +13,19 @@
 
 ## Mé denní poznámky ✏️
 
-💻 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), měření ve vitis analyzer, tabulky, práce na dosažených výsledkách
+📝 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), měření ve vitis analyzer, tabulky, práce na dosažených výsledkách
 
 ---
 
-💻 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), snaha implementace odkazů na zkratky atd. autor původního sesbíraného kódu a nápadu [Jakub Kučera](https://www.linkedin.com/in/jakub-ku%C4%8Dera-49682421a/), vytváření a dávání dohromady designu grafů v pythonu, aby to bylo co nejvíce open source 🔓 [sources and files](./tex/src/python-graph/)
+📝 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), snaha implementace odkazů na zkratky atd. autor původního sesbíraného kódu a nápadu [Jakub Kučera](https://www.linkedin.com/in/jakub-ku%C4%8Dera-49682421a/), vytváření a dávání dohromady designu grafů v pythonu, aby to bylo co nejvíce open source 🔓 [sources and files](./tex/src/python-graph/)
 
 ---
 
-💻 [21.04.2023]() <-- psaní do [dp.tex](dp.tex)
+📝 [21.04.2023]() <-- psaní do [dp.tex](dp.tex)
 
 ---
 
-💻 [20.04.2023]() <-- psaní do [dp.tex](dp.tex), opravil jsem chybu v code v testLoop (jen tam a poté v aktivní větvi v na serveru), aby vypisování výsledků do souboru podle time - nebylo podle time ale podle čísla iteraci, po tom, co došlo k přehoupnutí čísla přes 1 - byl problém a nevešlo se celé číslo do double ani float (co jsem experimentálně vyzkoušel), takže až pak ve vykreslovacím programu, který pracuje s vyšší úrovní abstrakce přepočítat vzorek na čas, také jsem přidal do triangle actual value do main souboru loop cmodel a také do aktivního souboru na serveru reset hodnot času triangle, když je větší nebo rovno periodě, aby se nestal stejný problém s přetečením a nebo nepřesností
+📝 [20.04.2023]() <-- psaní do [dp.tex](dp.tex), opravil jsem chybu v code v testLoop (jen tam a poté v aktivní větvi v na serveru), aby vypisování výsledků do souboru podle time - nebylo podle time ale podle čísla iteraci, po tom, co došlo k přehoupnutí čísla přes 1 - byl problém a nevešlo se celé číslo do double ani float (co jsem experimentálně vyzkoušel), takže až pak ve vykreslovacím programu, který pracuje s vyšší úrovní abstrakce přepočítat vzorek na čas, také jsem přidal do triangle actual value do main souboru loop cmodel a také do aktivního souboru na serveru reset hodnot času triangle, když je větší nebo rovno periodě, aby se nestal stejný problém s přetečením a nebo nepřesností
 
 ---
 
