@@ -1,15 +1,343 @@
-%\newglossaryentry{symboly:R}{
-%type=shortcutslist, % glossary
-%name=$R~(\Omega)$, % jméno v seznamu
-%text= $R$, % jméno v textu
-%description={činný odpor jedné fáze SRM}, %popis
-%sort=R % seředit podle
-%} 
+\newglossaryentry{symbol:Pn}{
+    type=symbolslist, % glossary
+    name=$P_\text{n}$, % jméno v seznamu
+    description={jmenovitý výkon stroje}, %popis
+    symbol = (W),
+    sort=P % seředit podle
+}
 
-\newglossaryentry{symbol:R}{
-type=symbolslist, % glossary
-name=$R$, % jméno v seznamu
-description={činný odpor jedné fáze SRM}, %popis
-symbol = $(\Omega)$,
-sort=R % seředit podle
-} 
+\newglossaryentry{symbol:In}{
+    type=symbolslist, % glossary
+    name=$I_\text{n}$, % jméno v seznamu
+    description={jmenovitý fázový proud stroje (efektivní hodnota)}, %popis
+    symbol = (A),
+    sort=I % seředit podle
+}
+
+\newglossaryentry{symbol:Un}{
+    type=symbolslist, % glossary
+    name=$U_\text{n}$, % jméno v seznamu
+    description={jmenovité sdružené napájací napětí stroje}, %popis
+    symbol = (V),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:fn}{
+    type=symbolslist, % glossary
+    name=$f_\text{n}$, % jméno v seznamu
+    description={jmenovitá napájecí frekvence stroje}, %popis
+    symbol = (Hz),
+    sort=C % seředit podle
+}
+
+\newglossaryentry{symbol:cosphin}{
+    type=symbolslist, % glossary
+    name=$\cos(\varphi_\text{n})$, % jméno v seznamu
+    description={jmenovitý účinník stroje}, %popis
+    symbol = (-),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:nn}{
+    type=symbolslist, % glossary
+    name=$n_\text{n}$, % jméno v seznamu
+    description={jmenovité otáčky stroje}, %popis
+    symbol = (min$^{-1}$),
+    sort=N % seředit podle
+}
+
+\newglossaryentry{symbol:pocet-polparu}{
+    type=symbolslist, % glossary
+    name=$p_\text{p}$, % jméno v seznamu
+    description={počet polpárů stroje}, %popis
+    symbol = (-),
+    sort=P % seředit podle
+}
+
+\newglossaryentry{symbol:r1}{
+    type=symbolslist, % glossary
+    name=$R_1$, % jméno v seznamu
+    description={rezistivita statorového vinutí}, %popis
+    symbol = ($\Omega$),
+    sort=R % seředit podle
+}
+
+\newglossaryentry{symbol:r2}{
+    type=symbolslist, % glossary
+    name=$R_2$, % jméno v seznamu
+    description={rezistivita rotorového vinutí}, %popis
+    symbol = ($\Omega$),
+    sort=R % seředit podle
+}
+
+\newglossaryentry{symbol:l1sigma}{
+    type=symbolslist, % glossary
+    name=$L_{1\sigma}$, % jméno v seznamu
+    description={statorová rozptylová indukčnost}, %popis
+    symbol = (H),
+    sort=R % seředit podle
+}
+
+\newglossaryentry{symbol:l2sigma}{
+    type=symbolslist, % glossary
+    name=$L_{2\sigma}$, % jméno v seznamu
+    description={rotorová rozptylová indukčnost}, %popis
+    symbol = (H),
+    sort=L % seředit podle
+}
+
+\newglossaryentry{symbol:lm}{
+    type=symbolslist, % glossary
+    name=$L_\text{m}$, % jméno v seznamu
+    description={magnetizační indukčnost}, %popis
+    symbol = (H),
+    sort=L % seředit podle
+}
+
+\newglossaryentry{symbol:l1}{
+    type=symbolslist, % glossary
+    name=$L_1$, % jméno v seznamu
+    description={statorová indukčnost}, %popis
+    symbol = (H),
+    sort=L % seředit podle
+}
+
+\newglossaryentry{symbol:l2}{
+    type=symbolslist, % glossary
+    name=$L_1$, % jméno v seznamu
+    description={rotorová indukčnost}, %popis
+    symbol = (H),
+    sort=L % seředit podle
+}
+
+\newglossaryentry{symbol:moment-setrvacnosti}{
+    type=symbolslist, % glossary
+    name=$J$, % jméno v seznamu
+    description={moment setrvačnosti}, %popis
+    symbol = (kg$\cdot$m$^{2}$),
+    sort=L % seředit podle
+}
+
+\newglossaryentry{symbol:prostorovy-vektor-statoroveho-proudu}{
+    type=symbolslist, % glossary
+    name=$\underline{i_1^{k}}$, % jméno v seznamu
+    description={prostorový vektor statorového proudu v obecném souřadnicovém systému $k$}, %popis
+    symbol = (A),
+    sort=I % seředit podle
+}
+
+\newglossaryentry{symbol:i1alpha-beta}{
+    type=symbolslist, % glossary
+    name=$\underline{i_1^{\alpha \beta}}$, % jméno v seznamu
+    description={prostorový vektor statorového proudu v souřadnicovém systému $\alpha \beta$}, %popis
+    symbol = (A),
+    sort=I % seředit podle
+}
+
+\newglossaryentry{symbol:prostorovy-vektor-rotoroveho-toku}{
+    type=symbolslist, % glossary
+    name=$\underline{\psi_2^{k}}$, % jméno v seznamu
+    description={prostorový vektor rotorového toku v obecném souřadnicovém systému $k$}, %popis
+    symbol = (Wb),
+    sort=P % seředit podle
+}
+
+\newglossaryentry{symbol:psi2alpha-beta}{
+    type=symbolslist, % glossary
+    name=$\underline{\psi_2^{\alpha \beta}}$, % jméno v seznamu
+    description={prostorový vektor rotorového toku v souřadnicovém systému $\alpha \beta$}, %popis
+    symbol = (Wb),
+    sort=P % seředit podle
+}
+
+\newglossaryentry{symbol:psi2}{
+    type=symbolslist, % glossary
+    name=$\psi_2$, % jméno v seznamu
+    description={velikost vektoru magnetického toku rotirzz}, %popis
+    symbol = (Wb),
+    sort=P % seředit podle
+}
+
+\newglossaryentry{symbol:prostorovy-vektor-statoroveho-toku}{
+    type=symbolslist, % glossary
+    name=$\underline{\psi_1^{k}}$, % jméno v seznamu
+    description={prostorový vektor statoroveho toku v obecném souřadnicovém systému $k$}, %popis
+    symbol = (Wb),
+    sort=P % seředit podle
+}
+
+\newglossaryentry{symbol:otaciva-rychlost-souradnicoveho-systemu}{
+    type=symbolslist, % glossary
+    name=$\omega_\text{k}$, % jméno v seznamu
+    description={elektrická otáčivá rychlost souřadnicového systému $k$}, %popis
+    symbol = (s$^{-1}$),
+    sort=O % seředit podle
+}
+
+\newglossaryentry{symbol:konstanta-clarkovi-transformace-pri-wk-0}{
+    type=symbolslist, % glossary
+    name=$K$, % jméno v seznamu
+    description={konstanta Clarkovi transformace při volbě $\omega_{k} = 0$}, %popis
+    symbol = (-),
+    sort=K % seředit podle
+}
+
+\newglossaryentry{symbol:sigma-rozptyl}{
+    type=symbolslist, % glossary
+    name=$\sigma$, % jméno v seznamu
+    description={rozptyl}, %popis
+    symbol = (-),
+    sort=K % seředit podle
+}
+
+\newglossaryentry{symbol:i1alpha}{
+    type=symbolslist, % glossary
+    name=$i_{1\alpha}$, % jméno v seznamu
+    description={složka vektoru statorového proudu v souřadnicovém systému spojeném se statorem stroje}, %popis
+    symbol = (A),
+    sort=I % seředit podle
+}
+
+\newglossaryentry{symbol:i1beta}{
+    type=symbolslist, % glossary
+    name=$i_{1\beta}$, % jméno v seznamu
+    description={složka vektoru statorového proudu v souřadnicovém systému spojeném se statorem stroje}, %popis
+    symbol = (A),
+    sort=I % seředit podle
+}
+
+\newglossaryentry{symbol:i2alpha-beta}{
+    type=symbolslist, % glossary
+    name=$\underline{i_{2}^{\alpha \beta}}$, % jméno v seznamu
+    description={prostorový vektor rotorového proudu v souřadnicovém systému $\alpha \beta$}, %popis
+    symbol = (A),
+    sort=I % seředit podle
+}
+
+\newglossaryentry{symbol:psi2alpha}{
+    type=symbolslist, % glossary
+    name=$\psi_{2\alpha}$, % jméno v seznamu
+    description={složka vektoru rotorového magnetického toku v souřadnicovém systému spojeném se statorem stroje}, %popis
+    symbol = (Wb),
+    sort=P % seředit podle
+}
+
+\newglossaryentry{symbol:psi2beta}{
+    type=symbolslist, % glossary
+    name=$\psi_{2\beta}$, % jméno v seznamu
+    description={složka vektoru rotorového magnetického toku v souřadnicovém systému spojeném se statorem stroje}, %popis
+    symbol = (Wb),
+    sort=P % seředit podle
+}
+
+\newglossaryentry{symbol:u1alpha}{
+    type=symbolslist, % glossary
+    name=$u_{1\alpha}$, % jméno v seznamu
+    description={složka vektoru napětí statoru v souřadnicovém systému spojeném se statorem stroje}, %popis
+    symbol = (V),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:u1beta}{
+    type=symbolslist, % glossary
+    name=$u_{1\beta}$, % jméno v seznamu
+    description={složka vektoru napětí statoru v souřadnicovém systému spojeném se statorem stroje}, %popis
+    symbol = (V),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:u1-vektor}{
+    type=symbolslist, % glossary
+    name=$\underline{u_{1}^{k}}$, % jméno v seznamu
+    description={prostorový vektor napětí statoru v obecném souřadnicovém systému $k$}, %popis
+    symbol = (V),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:u1alpha-beta}{
+    type=symbolslist, % glossary
+    name=$\underline{u_{1}^{\alpha \beta}}$, % jméno v seznamu
+    description={prostorový vektor napětí statoru v obecném souřadnicovém systému $\alpha \beta$}, %popis
+    symbol = (V),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:u2-vektor}{
+    type=symbolslist, % glossary
+    name=$\underline{u_{2}^{k}}$, % jméno v seznamu
+    description={prostorový vektor napětí rotoru v obecném souřadnicovém systému $k$}, %popis
+    symbol = (V),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:u2alpha-beta}{
+    type=symbolslist, % glossary
+    name=$\underline{u_{2}^{\alpha \beta}}$, % jméno v seznamu
+    description={prostorový vektor napětí rotoru v souřadnicovém systému $\alpha \beta$}, %popis
+    symbol = (V),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:i1-vektor}{
+    type=symbolslist, % glossary
+    name=$\underline{i_{1}^{k}}$, % jméno v seznamu
+    description={prostorový vektor proudu statoru v obecném souřadnicovém systému $k$}, %popis
+    symbol = (A),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:i2-vektor}{
+    type=symbolslist, % glossary
+    name=$\underline{i_{2}^{k}}$, % jméno v seznamu
+    description={prostorový vektor proudu rotoru v obecném osuřadnicovém systému $k$}, %popis
+    symbol = (A),
+    sort=U % seředit podle
+}
+
+\newglossaryentry{symbol:elektricka-uhlova-rychlost}{
+    type=symbolslist, % glossary
+    name=$\omega$, % jméno v seznamu
+    description={elektrická úhlová rychlost rotoru}, %popis
+    symbol = (s$^{-1}$),
+    sort=O % seředit podle
+}
+
+\newglossaryentry{symbol:mechanicka-uhlova-rychlost}{
+    type=symbolslist, % glossary
+    name=$\Omega$, % jméno v seznamu
+    description={mechanická úhlová rychlost}, %popis
+    symbol = (s$^{-1}$),
+    sort=O % seředit podle
+}
+
+\newglossaryentry{symbol:vnitrni-elektromechanicky-moment}{
+    type=symbolslist, % glossary
+    name=$M$, % jméno v seznamu
+    description={vnitřní elektromechanický moment}, %popis
+    symbol = (Nm),
+    sort=M % seředit podle
+}
+
+\newglossaryentry{symbol:zatezny-moment}{
+    type=symbolslist, % glossary
+    name=$M_\text{z}$, % jméno v seznamu
+    description={zátěžný moment}, %popis
+    symbol = (Nm),
+    sort=M % seředit podle
+}
+
+\newglossaryentry{symbol:t-cas}{
+    type=symbolslist, % glossary
+    name=$t$, % jméno v seznamu
+    description={čas}, %popis
+    symbol = (s),
+    sort=T % seředit podle
+}
+
+\newglossaryentry{symbol:h}{
+    type=symbolslist, % glossary
+    name=$h$, % jméno v seznamu
+    description={krok metody}, %popis
+    symbol = (-),
+    sort=T % seředit podle
+}
