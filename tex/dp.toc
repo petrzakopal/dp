@@ -291,6 +291,8 @@
 \contentsline {subsection}{\numberline {9.2}I-n model asynchronního motoru}{31}{subsection.9.2}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {10}Použité nástroje pro vývoj aplikace pro PS a PL}{33}{section.10}%
 \babel@toc {czech}{}\relax 
@@ -315,6 +317,8 @@
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {10.4}RealTime Linux Patch}{35}{subsection.10.4}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 

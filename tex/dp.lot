@@ -174,7 +174,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6~-~2}{\ignorespaces Porovnání hlavních parametrů Kria K26 SOM Commercial a Industrial. (informace a značení převzaty z~\cite {kria-k26-som-product-brief})\relax }}{24}{table.caption.18}%
+\contentsline {table}{\numberline {6~-~2}{\ignorespaces Porovnání hlavních parametrů Kria K26 \gls {abbreviation:som} Commercial a Industrial. (informace a značení převzaty z~\cite {kria-k26-som-product-brief})\relax }}{24}{table.caption.18}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -215,6 +215,10 @@
 \contentsline {table}{\numberline {9~-~1}{\ignorespaces Štítkové údaje stroje.\relax }}{30}{table.caption.21}%
 \defcounter {refsection}{0}\relax 
 \contentsline {table}{\numberline {9~-~2}{\ignorespaces Změřené parametry stroje.\relax }}{30}{table.caption.22}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -964,7 +968,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {B~-~1}{\ignorespaces Ukázka nastavených \gls {abbreviation:axi} portů v~Xilinx Vivado platformě pro \textit {Digilent Zybo}.\relax }}{115}{table.caption.90}%
+\contentsline {table}{\numberline {B~-~1}{\ignorespaces Ukázka nastavených \gls {abbreviation:axi} portů v~Xilinx Vivado platformě pro \textit {Digilent Zybo}.\relax }}{114}{table.caption.90}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 

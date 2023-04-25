@@ -2311,8 +2311,8 @@
       \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
       \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
       \field{extraname}{3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{LinkedIn Article}
@@ -2353,8 +2353,8 @@
       \strng{authorbibnamehash}{ae2699e980d0489b4416695a69016ba3}
       \strng{authornamehash}{ae2699e980d0489b4416695a69016ba3}
       \strng{authorfullhash}{ae2699e980d0489b4416695a69016ba3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Wiki}

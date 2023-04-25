@@ -492,7 +492,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 	% co to je, proč to je
 	% typy postavené kolem  mikrokontroléru, mikroprocesoru a ASIC
 	% Aplikace Embedded system (existují i pro mobilní aplikace, osobní počítače)
-	System on a chip (\gls{abbreviation:soc}) je struktura, využívající výhod integrování různých prvků systému na jeden čip. Integrace prvků na jeden čip značně snižuje nároky na rozměry nosičů, na kterých jsou tyto \gls{abbreviation:soc} umístěny. Místo diskrétních čipů obstarávající jednotlivé funkce je využito jednoho čipu s integrovanými prvky které vykonávají požadované funkce.\par
+	System on a chip (\gls{abbreviation:soc}) je struktura, využívající výhod integrování různých prvků systému na jeden čip. Integrace prvků na jeden čip značně snižuje nároky na rozměry nosičů, na kterých jsou tyto \gls{abbreviation:soc} umístěny. Místo diskrétních čipů obstarávající jednotlivé funkce je využito jednoho čipu s~integrovanými prvky které vykonávají požadované funkce.\par
 	Při integrování prvků do jedné polovodičové struktury dochází ke značnému snížení potřebných počtů kovových vodivých spojů, snížení časové náročnosti výroby a zvýšení rychlosti přenosu dat. Proto je \gls{abbreviation:soc} upřednostňováno před metalicky spojenými diskrétními prvky vykonávající dané operace.\par
 	Označení \gls{abbreviation:soc} může představovat mnoho struktur. Obecné rozdělení, nalezitelné v~literatuře a veřejných zdrojích, těchto architektur je následující:
 	\begin{itemize}
@@ -509,17 +509,17 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 
 
 	\subsection{Aplikace SoC}
-	Systémy na čipu se pro jejich výpočetní výkon, prostorovou a energetickou efektivnost využívají v~mnoha aplikacích. Jedno z nejvýznamnějších využití v~oboru elektrických pohonů je v~embedded systémech a hardwarově akcelerovaných aplikacích.
+	Systémy na čipu se pro jejich výpočetní výkon, prostorovou a energetickou efektivnost využívají v~mnoha aplikacích. Jedno z~nejvýznamnějších využití v~oboru elektrických pohonů je v~embedded systémech a hardwarově akcelerovaných aplikacích.
 
 \section{System on Modules}\label{sec:system-on-modules}
 
 	System on modules (\gls{abbreviation:soms}) je struktura, jejíž hlavní součástí je \gls{abbreviation:soc}. \gls{abbreviation:soms} se oproti \gls{abbreviation:soc} již dodávají na \gls{abbreviation:pcb} a kromě \gls{abbreviation:soc} mají na \gls{abbreviation:pcb} umístěny další komponenty, které mohou být pro danou aplikaci vyžadovány. \cite{xilinx-what-is-a-som}\par
-	\gls{abbreviation:soms} se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom \gls{abbreviation:soms} nosnou desku (tzv. Carrier Card, \gls{abbreviation:cc}) s~dalšími komponenty, jež jsou vhodné pro vývoj standardních aplikací. Pokud zákazník pomocí vývojové desky odladil vyvíjenou aplikaci, může zakoupit samostatný \gls{abbreviation:soms} na základní desce (base board, \gls{abbreviation:bb}) a \gls{abbreviation:cc} pro danou aplikaci navrhnout tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tímto způsobem je možné snížit cenu konečného výrobku o~komponenty, které byly z \gls{abbreviation:cc} při návrhu odstraněny pro jejich nevyužití. Ovšem dochází ke zvýšení finanční a časové náročnosti vývoje.\par
+	\gls{abbreviation:soms} se mohou dodávat jako vývojové desky \cite{xilinx-kria-kr260-robotics-starter-kit}, které obsahují krom \gls{abbreviation:soms} nosnou desku (tzv. Carrier Card, \gls{abbreviation:cc}) s~dalšími komponenty, jež jsou vhodné pro vývoj standardních aplikací. Pokud zákazník pomocí vývojové desky odladil vyvíjenou aplikaci, může zakoupit samostatný \gls{abbreviation:soms} na základní desce (base board, \gls{abbreviation:bb}) a \gls{abbreviation:cc} pro danou aplikaci navrhnout tak, aby obsahovala pouze komponenty, které daná aplikace využívá. Tímto způsobem je možné snížit cenu konečného výrobku o~komponenty, které byly z~\gls{abbreviation:cc} při návrhu odstraněny pro jejich nevyužití. Ovšem dochází ke zvýšení finanční a časové náročnosti vývoje.\par
 	Výrobce platformy \textit{Kria KR260 Robotics Starter Kit}, použité v~této práci, dodává k~produktu rozsáhlou dokumentaci \cite{kria-som-carrier-card-design-guide-2022}, \cite{kria-k26-som-ds}, podle které je možné individuální \gls{abbreviation:cc} sestavit. \par
-	Příkladem individuálně vytvořené \gls{abbreviation:cc} je open source projekt od firmy \textit{Antmicro Ltd}. Tato firma vydala open source design \gls{abbreviation:cc} pro \textit{K26 SOM}, původně využívané na \textit{Kria KV260}, jež je určen pro akcelerování audiovizuálních aplikací. Individuální design využívá totožný \gls{abbreviation:soms}, jako je použit v této práci, ale rozdílný \gls{abbreviation:cc}. Dokumentace a vytvořený návrh je dostupný v~\cite{antmicro-open-source-kria-k26-carrier-card}.
+	Příkladem individuálně vytvořené \gls{abbreviation:cc} je open source projekt od firmy \textit{Antmicro Ltd}. Tato firma vydala open source design \gls{abbreviation:cc} pro \textit{K26 SOM}, původně využívané na \textit{Kria KV260}, jež je určen pro akcelerování audiovizuálních aplikací. Individuální design využívá totožný \gls{abbreviation:soms}, jako je použit v~této práci, ale rozdílný \gls{abbreviation:cc}. Dokumentace a vytvořený návrh je dostupný v~\cite{antmicro-open-source-kria-k26-carrier-card}.
 
 	\subsubsection{Embedded Systems}
-	Embedded systems je název pro skupinu prvků, obecně systémů, které je možné charakterizovat jako specifické výpočetní zařízení, resp. počítače, které jsou určeny pro podporu funkce nebo řízení nějakého většího celku, produktu nebo fyzikálního systému. Naopak osobní počítač je výpočetní zařízení, které je určeno pro vykonávání mnoha univerzálních aplikací a funkcí, které nejsou v okamžiku vývoje počítače určeny, proto nelze mluvit o~embedded systému. \cite{Sass2010}\par
+	Embedded systems je název pro skupinu prvků, obecně systémů, které je možné charakterizovat jako specifické výpočetní zařízení, resp. počítače, které jsou určeny pro podporu funkce nebo řízení nějakého většího celku, produktu nebo fyzikálního systému. Naopak osobní počítač je výpočetní zařízení, které je určeno pro vykonávání mnoha univerzálních aplikací a funkcí, které nejsou v~okamžiku vývoje počítače určeny, proto nelze mluvit o~embedded systému. \cite{Sass2010}\par
 	Dalším důležitým rozdílem mezi \textit{Embedded System} a obecným výpočetním zařízením je ten, že v~případě embedded systému je interakce mezi systémem a uživatelem uměle omezena na základní ovládání či kontrolu funkce. Není předpokládáno, že by uživatel, jež aplikaci embedded systému využvá, výrazným způsobem zasahoval do jeho funkce. Naopak obecný výpočetní systém je uzpůsoben na podstatné zásahy uživatele. \cite{Sass2010} \cite{juan-fpgas}\par
 	Do embedded systému vstupují signály, které jsou dále zpracovány a poté vybrané výsledky výpočtů jsou v~podobě výstupní signálů výstupním produktem systému. Tyto produkty mohou pomocí akčních členů zasahovat do řízeného systému. Vstupní signály jsou většinou získávány ze speciálních snímačů, kompatibilních s~embedded systémem (senzor teploty, senzor tlaku, senzor zrychlení, gyroskop, senzory proudu, inkrementální čidla apod.). Jeho výstupní signály jsou například specifická ovládací hodnota napětí, proudu nebo jiné veličiny. Na výstupních pinech mohou být také připojené \gls{abbreviation:led} signalizace, komunikační sběrnice některých komunikačních systémů nebo \gls{abbreviation:lcd} displeje. Způsob, kterým jsou kódovány vstupní a výstupní signály, je většinou specificky určen řízeným systémem. \cite{Sass2010}\par
 	K~obecnému výpočetnímu systému je možné připojit vstupní periferie klasických osbních počítačů – myš, klávesnice, mikrofon. Komunikace embedded systému s~periferiemi je většinou standardizována tak, aby bylo možné periferie libovolně zaměňovat beze změny funkčnosti. \cite{Sass2010}.\par
@@ -535,16 +535,16 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 		\fbar
 
 		\subsubsection{Hardware Accelerated Applications}\label{subsec:hardware-accelerated-applications}
-		V~mnoha aplikacích je vyžadováno, aby výpočty nebo zpracování dat probíhalo vysokou rychlostí. Tento problém je v některých případech problematické řešit použitím běžného procesoru (\gls{abbreviation:cpu}), který je optimalizován na provádění obecných komplexních funkcí, řízení běhu uživatelského programu, komunikaci či přesun dat. V~moderním světě je třeba zpracovávat množství dat, které v některých případech exponenciálně narůstá. Aby tyto data bylo možné v~požadovaném čase s~co nejnižším zpožděním zpracovat, je vhodné využít specifický \gls{abbreviation:hw} a přístup, který bude schopen požadavky rychlosti a výkonu uspokojit. Tento přístup se nazývá \textit{Hardware Acceleration} (hardwarová akcelerace). \cite{xilinx-accelerated-computing}\par
+		V~mnoha aplikacích je vyžadováno, aby výpočty nebo zpracování dat probíhalo vysokou rychlostí. Tento problém je v~některých případech problematické řešit použitím běžného procesoru (\gls{abbreviation:cpu}), který je optimalizován na provádění obecných komplexních funkcí, řízení běhu uživatelského programu, komunikaci či přesun dat. V~moderním světě je třeba zpracovávat množství dat, které v~některých případech exponenciálně narůstá. Aby tyto data bylo možné v~požadovaném čase s~co nejnižším zpožděním zpracovat, je vhodné využít specifický \gls{abbreviation:hw} a přístup, který bude schopen požadavky rychlosti a výkonu uspokojit. Tento přístup se nazývá \textit{Hardware Acceleration} (hardwarová akcelerace). \cite{xilinx-accelerated-computing}\par
 		Princip hardwarové akcelerace spočívá v~přesunu výpočetně náročných aktivit na specifický a oddělený hardware. Celkové řízení běhu aplikace a komunikace je ovšem stále vykonáváno řídícím \gls{abbreviation:cpu}. Oddělený hardware, na kterém dochází k~akceleraci výpočtů, je optimalizován na vykonávanou úlohu a jeho využití přináší zefektivnění běhu celkové aplikace. \cite{xilinx-accelerated-computing}\par
 		Struktura, ve které je využíváno více fyzicky oddělených procesorových a hardwarových akceleračních jednotek, se často nazývá heterogenní. \cite{xilinx-accelerated-computing}\par
-		Hardwarová akcelerace je schopna poskytovat rychlejší výpočty než \gls{abbreviation:cpu}, protože využívá maximální paralelizace výpočtů. Klasické \gls{abbreviation:cpu} však vykonává jednotlivé instrukce sériově. V případě, že \gls{abbreviation:cpu} využívá pro výpočty více jader a vláken, je velmi náročné se úrovní paralelizace, při dodržení stejné energetické náročnosti, vyrovnat výpočtům pomocí \gls{abbreviation:hw}.
+		Hardwarová akcelerace je schopna poskytovat rychlejší výpočty než \gls{abbreviation:cpu}, protože využívá maximální paralelizace výpočtů. Klasické \gls{abbreviation:cpu} však vykonává jednotlivé instrukce sériově. V~případě, že \gls{abbreviation:cpu} využívá pro výpočty více jader a vláken, je velmi náročné se úrovní paralelizace, při dodržení stejné energetické náročnosti, vyrovnat výpočtům pomocí \gls{abbreviation:hw}.
 		Pro \gls{abbreviation:hw} akceleraci je v~mnoha oblastech využíváno několik druhů jednotek, které jsou optimalizované pro dané charaktery aplikací.\par
 		\textbf{Graphics Processing Units} (\gls{abbreviation:gpus}) jsou jednotky, které slouží převážně k~akceleraci zpracování vizuálních úloh. V~době rapidního rozvoje elektroniky a \gls{abbreviation:sw} je možné využít \gls{abbreviation:gpus} v~mnoha odvětví umělé inteligence (\gls{abbreviation:ai}) či kreativních odvětích. \gls{abbreviation:gpus} jsou využívány v~aplikacích, kde není kladen veliký důraz na nízkou odezvu (latenci). \cite{xilinx-accelerated-computing}\par
 		\textbf{Tensor Processing Units} (\gls{abbreviation:tpus}) jsou jednotky, které slouží k~provádění algoritmů strojového učení (machine-learning, \gls{abbreviation:ml}). Jejich přímé datové propojení umožňuje velmi rychlý a přímý přenost dat. Díky přímému připojení nevyžadují využití pamětí, které by přenos dat zpomalovaly. \cite{xilinx-accelerated-computing}\par
 		\textbf{Field Programmable Gate Arrays} (\gls{abbreviation:fpgas}) jsou jednotky, ve kterých není při výrobě pevně daná \gls{abbreviation:hw} struktura. To umožňuje vytvoření, resp. naprogramování \gls{abbreviation:hw} dle požadavků akcelerované aplikace. \gls{abbreviation:fpgas} mohou být využívány i při výpočtech v~reálném čase matematických modelů elektrických strojů. Při realizaci této práce je pro akceleraci využíváno právě těchto programovatelných polí.\\ \\
 		\noindent Vhodným příkladem je porovnání časové náročnosti matematických výpočtů pro selektivní eliminaci harmonických složek v~trakci pomocí \gls{abbreviation:cpu} a \gls{abbreviation:gpu} je provedeno v~\cite{ieee-selective-harmonic-elimination-nvidia}.\par
-		Z~článku vyplývá že využitím \gls{abbreviation:gpu} skutečně dochází ke~snížení potřebného času na provedení výpočtu. V~některých případech se jedná o~snížení výpočetního času z~183 ms (při použití \gls{abbreviation:cpu}) na 0,81 ms (při použití NVIDIA Titan V~GPU). Díky využití \gls{abbreviation:gpu} je tedy možné algoritmus provádět v lokomotivě v~reálném čase.
+		Z~článku vyplývá že využitím \gls{abbreviation:gpu} skutečně dochází ke~snížení potřebného času na provedení výpočtu. V~některých případech se jedná o~snížení výpočetního času z~183 ms (při použití \gls{abbreviation:cpu}) na 0,81 ms (při použití NVIDIA Titan V~GPU). Díky využití \gls{abbreviation:gpu} je tedy možné algoritmus provádět v~lokomotivě v~reálném čase.
 
 	\subsubsection{Výpočetní technika, mobilní zařízení a elektronika}
 	Kromě průmyslových odvětví jsou \gls{abbreviation:cpu} využívány i pro běžné aplikace spotřební elektroniky.\par
@@ -643,7 +643,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 			Aby došlo ke zvýšeení rychlosti přenosu dat z~\gls{abbreviation:fpga} do externího \gls{abbreviation:cpu} a naopak, jsou některé speciální funkce implementovány jako funkční bloky přímo do struktury \gls{abbreviation:fpga}. To umožňuje efektivní využití \gls{abbreviation:fpga} pro různorodé aplikace. \cite{Sass2010}\par
 			\textbf{Block RAM} (\gls{abbreviation:bram}) je blok, který slouží k~uchování dat. Sice by bylo možné vytvořit paměťový blok z~\hyperref[subsubsec:logicke-bloky]{\textit{Logických bloků}}, ale docházelo by k~omezení využití \gls{abbreviation:fpga} pro jeho původní aplikaci a pro realizaci by bylo potřeba využít mnoho bloků. \gls{abbreviation:bram} mají oddělený vstup a výstup, současně s~odděleným \gls{abbreviation:clk}. Proto je možné do \gls{abbreviation:bram} zároveň data zapisovat a zároveň z~něj číst. \cite{Sass2010}\par
 			\textbf{\gls{abbreviation:dsp}}, resp. digital signal processing bloky slouží ke zpracování digitálního signálu. V~těchto blocích jsou implementované funkce AND, OR, NAND, NOT, násobičky a sčítačky. Mají nízkou spotřebu. \gls{abbreviation:dsp} bloky jsou často umístěny geograficky blízko bloků \gls{abbreviation:bram}, které slouží jako „mezipaměti“ (buffer). \cite{Sass2010}\par
-			\textbf{Procesor} je-li implementovaný do struktury \gls{abbreviation:fpga} dochází ke snížení časového zpoždění při komunikaci mezi \gls{abbreviation:cpu} A \gls{abbreviation:fpga}. \cite{Sass2010}\par
+			\textbf{Procesor} je-li implementovaný do struktury \gls{abbreviation:fpga} dochází ke snížení časového zpoždění při komunikaci mezi \gls{abbreviation:cpu} A~\gls{abbreviation:fpga}. \cite{Sass2010}\par
 			\textbf{Digital Clock Manager} slouží k~vytvoření jiného, resp. nižšího taktovacího signálu \gls{abbreviation:clk}, který je odvozen z~původního vstupního/zdrojového \gls{abbreviation:clk}, pro různé bloky v~\gls{abbreviation:fpga}. \cite{Sass2010}\par
 			\textbf{Multi-Gigabit Transcievers} slouží k~přenosu dat takovým způsobem, aby došlo k~minimalizaci vlivu rušení na přenášená data. Obecně obstarávají optimální serializaci a paralelizaci dat. \cite{Sass2010}\par
 			Struktura \gls{abbreviation:fpga}, která je obsauje všechny zdroje a funkcionalitu potřebné pro kompletní realizaci aplikace, se nazývá \textit{platform FPGA}.
@@ -652,7 +652,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 		\subsubsection{Forma tvorby algoritmu pro FPGA}\label{subsubsec:forma-tvorby-algoritmu-pro-fpga}
 		K~programování, resp. konfiguraci \gls{abbreviation:fpga} je možné přistupovat z~několika úrovní. Jednou z~využívaných metod popisu požadovaného \gls{abbreviation:hw} na \gls{abbreviation:fpga} je popis struktury/toku signálu obvody (structural/data flow circuits). K~tomuto popisu je využíváno jazyků \gls{abbreviation:hdl}, \gls{abbreviation:vhdl} a Verilog (Hardware Description Language, Very High-Speed Integrated Circuit Hardware Description Language, -). V~těchto jazycích je využíváno logických členů AND, OR, NOT nebo bloků sčítaček a násobiček. Forma popisu, jež naopak využívá vyššího programovacího jazyka než \gls{abbreviation:hdl} je nazývána metoda popisu chování obvodů (behavioral circuits). Zatímco \gls{abbreviation:hdl} slouží k~popisu hardware s~využitím nízké míry abstrakce, popis ve vyšších programovacích jazycích, které popis pomocí behavioral circuits umožňuje, je pro programátory (zejména ty softwarové) značně příjemnější, protože využívá běžných procedurálních programovacích jazyků jako je C, C++ nebo Python. Tyto jazyky jsou následně přeloženy/kompilovány do \gls{abbreviation:hdl}. Po překladu do \gls{abbreviation:hdl} pomocí \textit{high level synthesis} (\gls{abbreviation:hls}) jsou provedeny kroky \textit{synthesis} (syntéza), \textit{place-and-route} (umístění-a-pospojování) a \textit{bitgen} (generace bitstreamu). \cite{Sass2010}\par
 		Při použití \gls{abbreviation:hls} může vzniknout situace, že bude vytvořen algoritmus, který bude velmi komplexní takovým způsobem, že ho nebude možné syntetizovat na \gls{abbreviation:fpga}. Oproti tomu při použití popisu pomocí structural/data flow circuits, je prakticky vždy algoritmus syntetizovatelný. \cite{Sass2010}\par
-		Dalším negativním jevem přístupu \gls{abbreviation:hls} je situace, kdy dojde k vytvoření neoptimalizovaného komplexního algoritmu, který se ve vyšším programovacím jazyce jeví jako jednoduchý, ale při překladu do \gls{abbreviation:hdl} a následných krocích \textit{synthesis -> place-and-route -> bitgen} nebude možné vytvářený \gls{abbreviation:hw} design do \gls{abbreviation:fpga} umístit, protože bude vyžadovat více \textit{resources} (zdrojů \gls{abbreviation:luts}, \gls{abbreviation:bram}, atd.), než je v~zařízení dostupných.\par
+		Dalším negativním jevem přístupu \gls{abbreviation:hls} je situace, kdy dojde k~vytvoření neoptimalizovaného komplexního algoritmu, který se ve vyšším programovacím jazyce jeví jako jednoduchý, ale při překladu do \gls{abbreviation:hdl} a následných krocích \textit{synthesis -> place-and-route -> bitgen} nebude možné vytvářený \gls{abbreviation:hw} design do \gls{abbreviation:fpga} umístit, protože bude vyžadovat více \textit{resources} (zdrojů \gls{abbreviation:luts}, \gls{abbreviation:bram}, atd.), než je v~zařízení dostupných.\par
 		V~praxi je k~tvorbě algoritmů stále více často využíváno vyšších programovacích jazyků a \gls{abbreviation:hls}, protože je tento přístup pro značný počet vývojářů \gls{abbreviation:sw} srozumitelnější. Dalším častým přístupem v~praxi je použití specializovaných \gls{abbreviation:sw} jako je MATLAB™️ a Simulink, které jsou schopny při použití odpovídajících balíčků přeložit vytvořený algoritmus do \gls{abbreviation:hdl}, který je poté možné dále zpracovat a použít pro konfiguraci \gls{abbreviation:fpga}. Ovšem při využití přístupu se \gls{abbreviation:sw} MATLAB™️ je třeba disponovat podporovaným \gls{abbreviation:hw}, který disponuje dostatečným počtem zdrojů v~\gls{abbreviation:fpga} struktuře. Tento přístup je značně finančně náročný v~ohledu licence \gls{abbreviation:sw} a taktéž vlivem vyšší ceny \gls{abbreviation:hw} s~větším počtem zdrojů.
 
 		\subsubsection{Konverze HDL na konfigurační Bitstream}
@@ -689,7 +689,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 			Programovatelná logická hradlová pole se pro svoji nízkou spotřebu, vysoký výpočetní výkon a klesající cenu elektroniky začínají využívat mnohem častěji v~mnoha odvětví, ve kterých bylo doposavaď využíváno \gls{abbreviation:cpu} a \gls{abbreviation:gpu}. Aplikace \gls{abbreviation:fpga} je možné v~rámci této práce rozdělit na nepohonářské a pohonářské.
 
 			\subsubsection{Aplikace v~nepohonářských odvětví}
-				Díky univerzalitě \gls{abbreviation:fpgas} je možné jej využít v~mnoha aplikacích v různých odvětví. Stále se zvyšující požadavky na výpočetní výkon urychlují nasazování \gls{abbreviation:fpgas} do provozů, kde jsou v~současné době instalovány \gls{abbreviation:cpu} nebo \gls{abbreviation:gpu}.\par
+				Díky univerzalitě \gls{abbreviation:fpgas} je možné jej využít v~mnoha aplikacích v~různých odvětví. Stále se zvyšující požadavky na výpočetní výkon urychlují nasazování \gls{abbreviation:fpgas} do provozů, kde jsou v~současné době instalovány \gls{abbreviation:cpu} nebo \gls{abbreviation:gpu}.\par
 				Poptávka po dostupnosti \gls{abbreviation:fpga} způsobila vznik Cloud služeb, které nabízí \gls{abbreviation:fpga} výkon on-demand. Jedním z~velkých poskytovatelů je Amazon Web Services (\gls{abbreviation:aws}), který nabízí \gls{abbreviation:fpga} akceleraci v~Cloudu. Tuto službu ocení především aplikace, které nejsou vázány na reálný hardware ale pouze potřebují výpočetní výkon, který mohou v~průběhu tvorby, debuggingu či realizace aplikace měnit bez nutnosti pořizování výkonných a finančně náročných \gls{abbreviation:fpga} zařízení. Více o~\textit{Amazon EC2 F1 Instances} služby virtuálních \gls{abbreviation:fpga} je dostupné na \cite{amazon-ec2-f1}.\par
 				Existuje mnoho výpočetně náročných aplikací jako jsou výpočty finančních modelů pro ekonomiku, výpočty pro bioinformatiku, seismické modelování při hledání vzácných surovin apod. které je vhodné realizovat pomocí hardwarového akcelerátoru. Více informací o~těchto výpočetně náročných aplikacích je možné získat v~\cite{wim-high-performance-computing-using-fpgas}.\par
 				Na akceleraci zpracování audiovizuálních děl je převážně určeno \gls{abbreviation:gpu}. Ovšem pro aplikace, v~nichž je vyžadováno zpracování obrazu v~reálném čase s~minimální spotřebou energie a nízkou hmotností aplikace, je často využíváno \gls{abbreviation:fpga}. Aplikace využití \gls{abbreviation:fpga} pro vozidla, která při své jízdě analyzují okolní prostor jsou popsány v~\cite{andina-advanced-features-and-industrial-applications-of-fpga}. Tyto aplikace nesou souhrnný název „inteligent spaces applications“. Obvykle je pro analýzu okolního prostoru využíváno více kamer, z~nichž každá obsahuje vlastní výpočetní jádro (\gls{abbreviation:fpga}). Díky tomu výpočetně náročné aplikace, jako např. analýza hloubky obrazu pro rozpoznání objektů, probíhá v~\gls{abbreviation:fpga} a ostatní nenáročné výpočty a řízení v~\gls{abbreviation:sw} v~\gls{abbreviation:cpu}. \cite{andina-advanced-features-and-industrial-applications-of-fpga}\par
@@ -714,7 +714,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 			\begin{figure}[htbp!]
 				\centering
 					\includegraphics[width=0.85\textwidth]{src/jpg/digilent-zybo-foto-2.jpeg} 
-					\caption{Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board – boční pohled.}
+					\caption{Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA \gls{abbreviation:soc} Trainer Board – boční pohled.}
 					\label{fig:digilent-zybo-foto-2}
 			\end{figure}
 
@@ -791,7 +791,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 				\noalign{\hrule height 2pt}
 				1 & Power Switch & galvanické sepnutí napájecího obvodu \\ \hline
 				2 & Power Select Jumper and Battery Header & výběr napájecího vstupu konektor, \gls{abbreviation:usb}, baterie\\ \hline
-				3 & Shared \gls{abbreviation:uart}/JTAG \gls{abbreviation:usb} port & komunikace \gls{abbreviation:uart} a JTAG debugging\\ \hline
+				3 & Shared \gls{abbreviation:uart}/\gls{abbreviation:jtag} \gls{abbreviation:usb} port & komunikace \gls{abbreviation:uart} a \gls{abbreviation:jtag} debugging\\ \hline
 				4 & MIO \gls{abbreviation:led} & multiplexed \gls{abbreviation:led} – možnost výběru signálu\\ \hline
 				5 & MIO Pushbuttons (2) & multiplexed input\\ \hline
 				6 & MIO Pmod & možnost připojení periférií\\ \hline
@@ -799,19 +799,19 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 				8 & Logic \gls{abbreviation:led}s (4) & zobrazování 1/0\\ \hline
 				9 & Logic Slide Switches (4) & logický vstup 1/0\\ \hline
 				10 & \gls{abbreviation:usb} OTG Host/Device Select Jumpers & výběr módu zařízení\\ \hline
-				11 & Standard Pmod & chráněné Pmod, limitace max. přenosu informace\\ \hline
-				12 & High-speed Pmods (3) & jako standard ale bez ochrany, vyšší rychlost\\ \hline
+				11 & Standard \gls{abbreviation:pmod} & chráněné \gls{abbreviation:pmod}, limitace max. přenosu informace\\ \hline
+				12 & High-speed \gls{abbreviation:pmod}s (3) & jako standard ale bez ochrany, vyšší rychlost\\ \hline
 				13 & Logic Pushbuttons (4) & logický vstup 1/0\\ \hline
-				14 & XADC Pmod & možnost  analog/digi input/output, spojeno s~ADC v~Zynq\\ \hline
+				14 & XADC \gls{abbreviation:pmod} & možnost  analog/digi input/output, spojeno s~\gls{abbreviation:adc} v~Zynq\\ \hline
 				15 & Processor Reset Pushbutton & reset \gls{abbreviation:pl}, paměti v~\gls{abbreviation:ps}\\ \hline
 				16 & Logic Configuration reset Pushbutton & reset \gls{abbreviation:pl}, zrušení DONE informace\\ \hline
 				17 & Audio Codec Connectors & stereo line in, mono mikrofon, stereo output\\ \hline
 				18 & Logic Configuration Done \gls{abbreviation:led} & signál o~úspěšném dokončení konfigurace PL\\ \hline
 				19 & Board Power Good \gls{abbreviation:led} & 1/0, 1 – nominální napětí na všech sběrnicích\\ \hline
-				20 & JTAG Port for optional external cable & externí JTAG\\ \hline
-				21 & Programming Mode Jumper & výběr „programovacího vstupu“, \gls{abbreviation:sd} karta, QSPI, JTAG\\ \hline
-				22 & Independent JTAG Mode Enable Jumper & JTAG mimo \gls{abbreviation:ps}, viditelné pouze \gls{abbreviation:pl}\\ \hline
-				23 & PLL Bypass Jumper & přemostění PLL (CLK), pro možnost konfigurace PLL\\ \hline
+				20 & \gls{abbreviation:jtag} Port for optional external cable & externí \gls{abbreviation:jtag}\\ \hline
+				21 & Programming Mode Jumper & výběr „programovacího vstupu“, \gls{abbreviation:sd} karta, \gls{abbreviation:qspi}, \gls{abbreviation:jtag}\\ \hline
+				22 & Independent \gls{abbreviation:jtag} Mode Enable Jumper & \gls{abbreviation:jtag} mimo \gls{abbreviation:ps}, viditelné pouze \gls{abbreviation:pl}\\ \hline
+				23 & PLL Bypass Jumper & přemostění PLL (\gls{abbreviation:clk}), pro možnost konfigurace PLL\\ \hline
 				24 & VGA connector & připojení displeje\\ \hline
 				25 & microSD connector & na spodní straně\\ \hline
 				26 & HDMI Sink/Source Connector & input/ouput, nutné implementovat encoding a decoding v~logice\\ \hline
@@ -830,8 +830,8 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 
 		\fbar
 		\section{Vývojová deska Xilinx Kria KR260}
-				Deska od firmy Digilent, představená v~\hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, je vhodná pouze pro prvotní seznámení s~vytvářením akcelerovaných aplikací. Pro náročnější aplikace, které při potřebují při využití většího množství \gls{abbreviation:luts} nebylo v~této práci možné Zybo použít. Vývojová deska Kria KR260 disponuje dostatečným množstvím \gls{abbreviation:luts} a díky svým moderním komponentám a prvkům, může efektivně sloužit k~vytváření náročnějších aplikací.\par
-				Hlavní částí vývojové desky KR260 je „modul“ \textit{Kria K26 System-on-Module}. Tudíž oproti Digilent Zybo, které využívá \gls{abbreviation:soc}, deska KR260 využívá \gls{abbreviation:som}. Přednosti jednotlivých architektur byly již představeny v~části \hyperref[sec:system-on-a-chip]{\textit{System on a chip}} a \hyperref[sec:system-on-modules]{\textit{System on modules}}. Po ukončení vývoje aplikace na vývojové desce (a také po ukončení vytvářeného návrhu CC) je možné zakoupit pro aplikaci v~průmyslu samotný modul ve vhodné variantě. V~této práci je ovšem využíván standardní vývojový „Starter kit“ s~deskou KR260, jejíž komponenty je vhodné představit.
+				Deska od firmy Digilent, představená v~\hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, je vhodná pouze pro prvotní seznámení s~procesem~vytváření akcelerovaných aplikací. Pro náročnější aplikace, které vyžadují využití většího množství \gls{abbreviation:luts}, nebylo v~této práci možné Zybo použít. Naopak \gls{abbreviation:pl} vývojové desky Kria KR260 obsahuje dostatečné množství \gls{abbreviation:luts} a díky svým moderním komponentám, může být efektivně využita k~tvorbě náročnějších aplikací.\par
+				Hlavní částí vývojové desky KR260 je „modul“ \textit{Kria K26 System-on-Module}. Tudíž oproti Digilent Zybo, které využívá \gls{abbreviation:soc}, deska KR260 využívá \gls{abbreviation:som}. Přednosti jednotlivých architektur byly již představeny v~části \hyperref[sec:system-on-a-chip]{\textit{System on a chip}} a \hyperref[sec:system-on-modules]{\textit{System on modules}}. Po ukončení vývoje aplikace na vývojové desce (a popřípadě po ukončení vytváření návrhu \gls{abbreviation:cc}) je možné pro aplikaci v~průmyslu zakoupit samostatný modul na \gls{abbreviation:bb} ve vhodné variantě. V~této práci je využíván standardní vývojový „Starter kit“ s~deskou KR260, jejíž komponenty je vhodné představit.
 
 				\begin{figure}[H]
 					\centering
@@ -842,20 +842,20 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 
 				\subsection{Základní přehled}
 					\subsubsection{CPU a FPGA čip}
-						Strukturu \gls{abbreviation:som} je možné popsat jako modernější a rozmanitější vylepšení \gls{abbreviation:soc}. Opět se ve struktuře nachází hlavní základní bloky pro \gls{abbreviation:ps} a \gls{abbreviation:pl}. Ukázkový blokový diagram struktury udávané výrobcem je na obr. \ref{fig:xilinx-kria-k26-block-diagram}.
+						Strukturu \gls{abbreviation:som} je možné popsat jako modernější a komplexnější. Opět se ve struktuře nachází hlavní základní bloky \gls{abbreviation:ps} a \gls{abbreviation:pl}. Ukázkový blokový diagram struktury udávané výrobcem je na obr. \ref{fig:xilinx-kria-k26-block-diagram}.
 
 						\begin{figure}[htbp!]
 							\centering
 								\includegraphics[width=1\textwidth]{src/jpg/xilinx-kria-k26-block-diagram.jpg} 
-								\caption{Blokový diagram K26 SOM Kria. \cite{kria-k26-som-ds}}
+								\caption{Blokový diagram K26 \gls{abbreviation:som} Kria. \cite{kria-k26-som-ds}}
 								\label{fig:xilinx-kria-k26-block-diagram}
 						\end{figure}
 						\fbar
 
-						Největšími rozdíly mezi použitými deskami Zybo a Kria je např. velikost operační paměti, počet jader a taktovací frekvence procesorů v~\gls{abbreviation:ps}, počet \gls{abbreviation:luts} nebo logických buněk v~\gls{abbreviation:fpga} (\gls{abbreviation:pl}). Úplné specifikace pro K26 \gls{abbreviation:som} je možné nalézt v~\cite{kria-k26-som-ds}.
+						Největšími rozdíly mezi použitými \gls{abbreviation:soc} Zybo a \gls{abbreviation:som} Kria je např. velikost operační paměti, počet jader, taktovací frekvence procesorů v~\gls{abbreviation:ps}, počet \gls{abbreviation:luts} nebo logických buněk v~\gls{abbreviation:fpga} (\gls{abbreviation:pl}). Úplné specifikace pro K26 \gls{abbreviation:som} je možné nalézt v~\cite{kria-k26-som-ds}.
 
 				\subsection{Uspořádání vývojové desky}
-				Na obr. \ref{fig:xilinx-kria-foto-2-oznacene} je zobrazen horní pohled na vývojovou desku, na které jsou vyznačeny významné části, kterým je vhodné věnovat pozornost. Číselné označení koresponduje s~označením a vysvětlivkou v~tabulce \ref{tab:xilinx-kria-description}. Na spodní straně desky je umístěn slot pro SD kartu, na kterou je umisťován operační systém pro PS. Pro úplnost je spodní strana desky zobrazena na obr. \ref{fig:xilinx-kria-foto-3}.
+				Na obr. \ref{fig:xilinx-kria-foto-2-oznacene} je zobrazen horní pohled na vývojovou desku, na které jsou vyznačeny významné části, kterým je vhodné věnovat pozornost. Číselné označení koresponduje s~označením a vysvětlivkou v~tabulce \ref{tab:xilinx-kria-description}. Na spodní straně desky je umístěn slot pro \gls{abbreviation:sd} kartu, na kterou je umisťován (flashován) operační systém pro \gls{abbreviation:ps}. Pro úplnost je spodní strana desky zobrazena na obr. \ref{fig:xilinx-kria-foto-3}.
 				\fbar
 				\begin{table}[htbp!]
 					\centering
@@ -867,28 +867,28 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 							\rowcolor{codeblue}
 							označení & popis &	poznámka \\
 							\noalign{\hrule height 2pt}
-							1 & SOM modul na BB a Fansink & -  \\ \hline
+							1 & \gls{abbreviation:som} modul na \gls{abbreviation:bb} a Fansink & -  \\ \hline
 							2 & J13 Fan Power & napájení větráku chladiče  \\ \hline
 							3 & J1 watchdog & -  \\ \hline
-							4 & SW1 Firmware Update & -  \\ \hline
-							5 & SW2 Reset & -  \\ \hline
-							6 & DS1–DS6 Power Status LEDs & pokud vše ok, jsou zbarveny zeleně  \\ \hline
-							7 & DS7–DS8 (UF1 a UF2) Uživatelsky ovládané LED & -  \\ \hline
-							8 & J2, J18, J19, J20 Pmod konektory & -  \\ \hline
+							4 & \gls{abbreviation:switch}1 Firmware Update & -  \\ \hline
+							5 & \gls{abbreviation:switch}2 Reset & -  \\ \hline
+							6 & DS1–DS6 Power Status \gls{abbreviation:led}s & pokud vše ok, jsou zbarveny zeleně  \\ \hline
+							7 & DS7–DS8 (UF1 a UF2) Uživatelsky ovládané \gls{abbreviation:led} & -  \\ \hline
+							8 & J2, J18, J19, J20 \gls{abbreviation:pmod} konektory & -  \\ \hline
 							9 & J23 a J24 SFP+ & optický konektor  \\ \hline
-							10 & J4 Micro USB & UART/JTAG  \\ \hline
+							10 & J4 Micro \gls{abbreviation:usb} & UART/JTAG  \\ \hline
 							11 & J3 PC4 JTAG & -  \\ \hline
 							12 & J22 SLVS-EC & konektor pro připojení kamery  \\ \hline
 							13 & DS36 Raspberry Pi HAT & -  \\ \hline
-							14 & J10A, J10B RJ-45 PL Ethernet & konektor připojen přes PL  \\ \hline
-							15 & J10C, J10D RJ-45 PS Ethernet & konektor připojen do PS  \\ \hline
-							16 & U46 USB3.0 & -  \\ \hline
-							17 & U44 USB3.0 & -  \\ \hline
-							18 & DS36 PS Status LED & -  \\ \hline
-							19 & DS35 HeartBeat LED & -  \\ \hline
-							20 & DS34 PS Done LED & -  \\ \hline
+							14 & J10A, J10B RJ-45 \gls{abbreviation:pl} Ethernet & konektor připojen přes \gls{abbreviation:ps}  \\ \hline
+							15 & J10C, J10D RJ-45 PS Ethernet & konektor připojen do \gls{abbreviation:ps}  \\ \hline
+							16 & U46 \gls{abbreviation:usb}3.0 & -  \\ \hline
+							17 & U44 \gls{abbreviation:usb}3.0 & -  \\ \hline
+							18 & DS36 \gls{abbreviation:ps} Status \gls{abbreviation:led} & -  \\ \hline
+							19 & DS35 HeartBeat \gls{abbreviation:led} & -  \\ \hline
+							20 & DS34 \gls{abbreviation:ps} Done LED & -  \\ \hline
 							21 & J6 DisplayPort & -  \\ \hline
-							22 & J12 DC Jack & \\\noalign{\hrule height 2pt}
+							22 & J12 \gls{abbreviation:dc} Jack & \\\noalign{\hrule height 2pt}
 							\end{tabular}
 						}
 					\label{tab:xilinx-kria-description}
@@ -911,18 +911,18 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 			
 			
 				\subsubsection{Dostupné K26 SOM}
-					Moduly Kria K26 \gls{abbreviation:som} jsou dostupné v~několika variantách. V~roce 2022 jsou dostupné varianty \textit{Commercial} a \textit{Industrial}. Nadřazeným parametrem dvou hlavních variant jsou varianty \gls{abbreviation:som} s~povoleným nebo zakázaným šifrováním. Varianty se odlišují označením Encryption Disabled (ED) a Encryption Enabled (-). Pokud je šifrování povoleno, je možné šiftovat konfigurační soubory a nebo ve vytvářených aplikacích využívat zabudované \textit{crypto-accelerator} bloky. Encryption Enabled varianty jsou v~některých zemích zakázané a proto je důležité při výběru zboží dbát pokynům prodejce.
+					Moduly Kria K26 \gls{abbreviation:som} jsou dostupné v~několika variantách. V~roce 2022 jsou dostupné varianty \textit{Commercial} a \textit{Industrial}. Nadřazeným parametrem dvou hlavních variant jsou varianty \gls{abbreviation:som} s~povoleným nebo zakázaným šifrováním. Varianty se odlišují označením Encryption Disabled (ED) a Encryption Enabled (-). Pokud je šifrování povoleno, je možné šifrovat konfigurační soubory a nebo ve vytvářených aplikacích využívat implementované \textit{crypto-accelerator} bloky. Encryption Enabled varianty jsou v~některých zemích zakázané a proto je důležité při výběru zboží dbát pokynů prodejce.
 					\par Hlavní rozdíly \textit{Commercial} a \textit{Industrial} variant jsou uvedeny v~tab. \ref{tab:xilinx-kria-som-variants}.
 
 					\begin{table}[htbp!]
 						\centering
-						\caption{Porovnání hlavních parametrů Kria K26 SOM Commercial a Industrial. (informace a značení převzaty z~\cite{kria-k26-som-product-brief})}
+						\caption{Porovnání hlavních parametrů Kria K26 \gls{abbreviation:som} Commercial a Industrial. (informace a značení převzaty z~\cite{kria-k26-som-product-brief})}
 						  \vspace*{0.15cm}
 						   \resizebox{\textwidth}{!}
 							{
 								\begin{tabular}{!{\vrule width 2pt} l | c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
 								\rowcolor{codeblue}
-								parametr & K26 Commercial \gls{abbreviation:som} & K26 Industrial SOM \\
+								parametr & K26 Commercial \gls{abbreviation:som} & K26 Industrial \gls{abbreviation:som} \\
 								\noalign{\hrule height 2pt}
 								pracovní teplota & 0–85 °C & -40–100 °C\\ \hline
 								záruka & 2 roky & 3 roky\\ \hline
@@ -933,47 +933,48 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 						\label{tab:xilinx-kria-som-variants}
 					\end{table}
 
-					Vývojová deska Xilinx Kria KR260 disponuje dle informací výrobce \gls{abbreviation:som}, který není určen pro nasazení do aplikací (non-production) v~teplotní třídě \textit{Commercial}. \cite{kria-k26-som-ds}
+					Vývojová deska Xilinx Kria KR260 obsahuje dle informací výrobce \gls{abbreviation:som}, který není určen pro nasazení do produkčních aplikací (non-production) a je v~teplotní třídě \textit{Commercial}. \cite{kria-k26-som-ds}
 				
 
 			\section{Porovnání představených SoC/SoM platforem pro řízení elektrických pohonů}
-			V~předchozích kapitolách byly představeny dvě smysluplné, komerčně dostupné platformy, které je možné využít pro růzznorodé aplikace. Výběr byl zaměřen na \gls{abbreviation:soc} a \gls{abbreviation:som} umístěných na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po vývoji aplikace následuje uvědomění, jakými periferiemi a vlastnostmi by měla architektura řídící soustavy disponovat. Poté je možné pro velko produkci dané aplikace začít vyvíjet vlastní integraci čipu/modulu na Printed Circuit Board (\gls{abbreviation:pcb}).\par
+			V~předchozích kapitolách byly představeny dvě smysluplné (z~finančního i aplikačního hlediska), komerčně dostupné platformy, které je možné využít pro vývoj aplikací. Výběr byl zaměřen na \gls{abbreviation:soc} a \gls{abbreviation:som}, umístěných na vývojových deskách, které je možné využít pro vývoj požadované aplikace. Často po prvotním vývoji aplikace následuje uvědomění, jaké periferie by měla \gls{abbreviation:cc} obsahovat. Poté je možné pro velkoprodukci dané aplikace začít vyvíjet vlastní \gls{abbreviation:cc} a řešit integraci čipu/modulu na Printed Circuit Board (\gls{abbreviation:pcb}).\par
 
 			\subsection{Konektivita}
 					Aby bylo možné komunikovat s~řízeným zařízením, tudíž vysílat řídící signály a získávat informace o~jeho stavu, je při hodnocení důležitým faktorem možnost připojení.\par
-					Obě představené platformy disponují minimálně čtyřmi PMOD konektory s~12 piny (2x \gls{abbreviation:u-plus}, 2x \gls{abbreviation:gnd}, 8x \gls{abbreviation:io}), pomocí kterých je možné připojit senzory, převodníky nebo naopak ovládat např. drivery spínacích polovodičových prvků či výkonových polovodičových můstků. \gls{abbreviation:pmod} konektorů využívá mnoho komerčně dostupných prvků jako jsou senzory, H můstky nebo také \gls{abbreviation:adc}/\gls{abbreviation:dac} převodníky.\par
-					Dalším důležitým faktorem je připojení Ethernet. Obě desky disponují alespoň jedním konektorem. Xilinx Kria KR260 obsahuje 4 konektory, přičemž dva jsou připojeny přímo do \gls{abbreviation:ps} a dva do \gls{abbreviation:pl}. Digilent Zybo disponuje pouze jedním konektorem.\par
-					Pro připojení periferií nebo exeterních datových úložišť je možné využít konektor USB. Protože Digilent Zybo Z7 je staršího data vydání, disponuje pouze USB 2.0, zatímco Xilinx Kria KR260 disponuje připojením pomocí USB 3.0.\par
-					Pro připojení externího displaye je možné u~Zybo využít D-SUB (VGA) konektor. U~Kria KR260 novější Display Port.\par
-					Digilent zybo poté disponuje konektory pro výstup reproduktorů či vstup mikrofonu. Deska KR260 těmito konektory nedisponuje.\par
+					Obě představené platformy disponují minimálně čtyřmi \gls{abbreviation:pmod} konektory s~12 piny (2x \gls{abbreviation:u-plus}, 2x \gls{abbreviation:gnd}, 8x \gls{abbreviation:io}), pomocí kterých je možné připojit senzory, převodníky nebo naopak ovládat např. drivery spínacích polovodičových soušástek či výkonových polovodičových můstků. \gls{abbreviation:pmod} konektory využívá mnoho komerčně dostupných prvků jako jsou senzory, H můstky nebo \gls{abbreviation:adc}/\gls{abbreviation:dac} převodníky.\par
+					Dalším důležitým faktorem konektivity je připojení pomocí Ethernetu. Xilinx Kria KR260 obsahuje 4 konektory, přičemž dva jsou připojeny přímo do \gls{abbreviation:ps} a dva do \gls{abbreviation:pl}. Digilent Zybo obsahuje pouze jeden Ethernet konektor.\par
+					Pro připojení periferií nebo externích datových úložišť je možné využít konektor \gls{abbreviation:usb}. Protože Digilent Zybo Z7 je staršího data vydání, využívá pouze \gls{abbreviation:usb} 2.0, zatímco Xilinx Kria KR260 využívá připojení pomocí \gls{abbreviation:usb} 3.0.\par
+					Pro připojení externího displeje je možné u~Zybo využít D-SUB (VGA) konektor. U~Kria KR260 novější Display Port.\par
+					Digilent Zybo má na svém \gls{abbreviation:pcb} umístěny konektory pro výstup reproduktorů či vstup mikrofonu. Deska KR260 tyto konektory neobsahuje.\par
 					Značným přínosem pro konektivitu Kria KR260 je Rraspberry Pi hardware attached on top (\gls{abbreviation:hats}) konektor, jež umožňuje připojení rozšiřovacích desek, určených pro Raspberry Pi.\par
-					Protože je K26 \gls{abbreviation:som} zaměřen také na \gls{abbreviation:ai} je možnost připojit k~desce kameru pomocí konektoru SLVS-EC.\par
-					Posledním významným konektorem na \gls{abbreviation:cc} Xilinx Kria je SPF konektor pro připojení optických vláken.
+					Pro \gls{abbreviation:ai} aplikace na KR260, které využívají externího obrazu, je možné připojit externí webkameru pomocí konektoru SLVS-EC.\par
+					Posledním významným konektorem na \gls{abbreviation:cc} Xilinx Kria je \gls{abbreviation:sfp} konektor pro připojení optických vláken.
 
 			\subsection{PS a PL}\label{subsec:ps-a-pl}
 					Protože je porovnávaná deska Digilent Zybo a Xilinx Kria KR260 různého data vydání a také na jejich pořízení je třeba rozdílných finančních prostředků, odpovídají zdroje pro \gls{abbreviation:ps} a \gls{abbreviation:pl} daným cenám.\par
-					Jak již bylo zmíněno v~sekci \hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, obsahuje PS použité vývojové deska Digilent Zybo Zynq-7000 dvoujádrový procesor Cortex-A9 s~taktovací frekvencí 650 MHz. Oproti tomu novější PS desky s~Kria K26 SOM obsahuje čtyřjádrový procesor Cortex®-A53 MPCore™ s~taktovací frekvencí až 1,5 GHz. SOM je také doplněn dvoujádrovým real-time dvoujádrovým procesorem Arm Cortex-R5F MPCore s~taktovací frekvencí až 600 MHz. \cite{digilent-zybo-reference-manual}, \cite{kria-k26-som-ds}\par
-					Dalším důležitým faktorem jsou zdroje pro \gls{abbreviation:pl}. Digilent Zybo disponuje pouze 17 600 \gls{abbreviation:luts}. Oproti tomu K26 \gls{abbreviation:som} obsahuje 117 120 \gls{abbreviation:luts}. Novější verze Digilent Zybo desek obsahují novější verze Zynq čipu, který nabízí také 17 600 \gls{abbreviation:luts} (Zybo Z7-10) nebo 53 200 LUTs (Zybo Z7-20). \cite{digilent-zybo-reference-manual}, \cite{kria-k26-som-ds}\par
-					Počet \gls{abbreviation:luts} v~této práci má značný vliv na možný rozsah vytvářené aplikace, která je počtem zdrojů (\gls{abbreviation:luts}, Flip-Flops, Block \gls{abbreviation:ram} atd.) velmi ovlivněna.\par
-					Vlivem omezených zdrojů při realizaci této práce bylo možné i přes optimalizaci C++ kódu (pro dodržení load-compute-store modelu programování \cite{vitis-unified-software-platform-documentation-2022}) akcelerované aplikace (kernel) pro \gls{abbreviation:fpga} možné umístit do \gls{abbreviation:pl} v~Digilent Zybo Z7 pouze matematický $I$-$n$ model asynchronního motoru, jehož výsledkem byl transformační úhel, složky magnetického toku rotoru $\psi_2^{\alpha \beta}$ a velikost magnetického toku rotoru $| \psi_2 |$. Oproti tomu při využití Kria K26 \gls{abbreviation:som} je možné využít \gls{abbreviation:pl} pro výpočet $I$-$n$ modelu stroje, zjednodušeného modelu asynchronního motoru i regulačního zásahu.
+					Jak již bylo zmíněno v~sekci \hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, \gls{abbreviation:ps} vývojové desky Digilent Zybo Zynq-7000 obsahuje dvoujádrový procesor Cortex-A9 s~taktovací frekvencí 650 MHz. Oproti tomu novější \gls{abbreviation:ps} desky s~Kria K26 \gls{abbreviation:som} obsahuje čtyřjádrový procesor Cortex®-A53 MPCore™ s~taktovací frekvencí až 1,5 GHz. \gls{abbreviation:som} je doplněn dvoujádrovým real-time procesorem Arm Cortex-R5F MPCore s~taktovací frekvencí až 600 MHz. \cite{digilent-zybo-reference-manual} \cite{kria-k26-som-ds}\par
+					Dalším důležitým faktorem jsou zdroje pro \gls{abbreviation:pl}. Digilent Zybo disponuje pouze 17 600 \gls{abbreviation:luts}. Oproti tomu K26 \gls{abbreviation:som} obsahuje 117 120 \gls{abbreviation:luts}. Novější verze Digilent Zybo desek obsahuje novější verze Zynq čipu, který nabízí také 17 600 \gls{abbreviation:luts} (Zybo Z7-10) nebo 53 200 \gls{abbreviation:luts} (Zybo Z7-20). \cite{digilent-zybo-reference-manual} \cite{kria-k26-som-ds}\par
+					Počet \gls{abbreviation:luts} v~této práci má značný vliv na možný rozsah vytvářené aplikace, která je počtem zdrojů (\gls{abbreviation:luts}, Flip-Flops, \gls{abbreviation:bram} atd.) velmi ovlivněna.\par
+					Vlivem omezených zdrojů bylo možné i přes optimalizaci C++ kódu (pro dodržení load-compute-store modelu programování \cite{vitis-unified-software-platform-documentation-2022}) akcelerované aplikace (kernelu) možné umístit do \gls{abbreviation:pl} v~Digilent Zybo Z7 pouze $I$-$n$ model asynchronního motoru, jehož výsledkem byl transformační úhel, složky magnetického toku rotoru $\psi_2^{\alpha \beta}$ a velikost magnetického toku rotoru $| \psi_2 |$. Oproti tomu při využití Kria K26 \gls{abbreviation:som} je možné využít \gls{abbreviation:pl} pro výpočet $I$-$n$ modelu stroje, zjednodušeného modelu asynchronního motoru, regulátorů a invertoru.
 
 			\subsection{Developer Experience}
-					V~moderní době, kdy je kladen značný důraz na rychlost vývoje aplikace, je důležitým hodnotícím faktorem developer experience. Tudíž jak je systém konfigurace a vytváření aplikací přívětivý pro vývojáře. V~době vydání Digilent Zybo Z7 byl používán postup vytvoření operačního systému Petalinux již s~pevně daným Device Tree (\gls{abbreviation:dt}), který byl možné měnit pomocí celkové rekonfigurace a následného opakování celého procesu tvorby systému a aplikace. To přinášelo značné časové prodlevy při ladění aplikace a vytvářeného \gls{abbreviation:pl} hardware.\par
-					Při použití Xilinx Kria K26 \gls{abbreviation:som} je možné při tvorbě systému definovat kostru \gls{abbreviation:dt} pro \gls{abbreviation:pl} část, kterou je poté možné do značného rozsahu upravovat pomocí Device Tree Overlay (\gls{abbreviation:dto}). Pomocí \gls{abbreviation:dto} je možné rekonfigurovat \gls{abbreviation:ip} vytvářené v~\gls{abbreviation:pl}. Změnou v~\gls{abbreviation:dto} je možné ovlivňovat funkčnost některých IP v~PL při chodu operačního systému Petalinux. Ovšem tyto úpravy mají určitá omezení a je vhodné Device Tree vhodně nakonfigurovat již při vytváření operačního systému Petalinux.\par
-					Více informací o~chování a tvorbě \gls{abbreviation:dt}/\gls{abbreviation:dto}, zjištěných při realizaci této práce, je uvedeno v~části \hyperref[subsec:petalinux]{\textit{Petalinux}}.\par
-					Digilent pro své výrobky vytvořil „board files“ a „constrains files“, které umožňují snazší konfiguraci \gls{abbreviation:ps} a \gls{abbreviation:pl} v~prostředí Vivado. Značným přínosem jsou „constrains files“, které umožňují snazší a rychlejší mapování fyzických pinů vývojové desky k~portům, pinům a rozhraní, vytvářených ve Vivado. Pro vývojovou desku Xilinx Kria KR260 jsou v~repozitáři Vivado již „board files“ zakomponovány. Ovšem oficiální „constrains files“ nejsou od výrobce k~dispozici. Pro mapování pinů je nutné si vyžádat dokumentaci, pomocí které je možné odvodit požadované mapování a „constrains files“ vytvořit. Potřebná dokumentace pro odvození mapování je v~souborech \cite{kria-kr260-starter-kit-cc-schematics} a \cite{kria-k26-som-xdc}.
+					V~moderní době, kdy je kladen značný důraz na rychlost vývoje aplikace, je také hodnotícím faktorem developer experience. Tudíž jak je systém konfigurace a vytváření aplikací přívětivý pro vývojáře. V~době vydání Digilent Zybo Z7 byl používán postup vytvoření operačního systému \textit{PetaLinux} již s~pevně daným Device Tree (\gls{abbreviation:dt}), které bylo možné měnit pomocí rekonfigurace a následného opakování celého procesu tvorby systému a aplikace. To přinášelo značné časové prodlevy při ladění aplikace a vytvářeného \gls{abbreviation:pl} hardware.\par
+					Při použití Xilinx Kria K26 \gls{abbreviation:som} je možné při tvorbě systému definovat kostru \gls{abbreviation:dt} pro \gls{abbreviation:ps}, kterou je poté možné do značného rozsahu upravovat pomocí Device Tree Overlay (\gls{abbreviation:dto}). Pomocí \gls{abbreviation:dto} je možné rekonfigurovat \gls{abbreviation:ip} vytvářené v~\gls{abbreviation:pl}. Změnou v~\gls{abbreviation:dto} je možné ovlivňovat funkčnost některých \gls{abbreviation:ip} v~\gls{abbreviation:pl} při chodu operačního systému \textit{PetaLinux}. Ovšem tyto úpravy mají určitá omezení a je vhodné Device Tree vhodně nakonfigurovat již při vytváření operačního systému \textit{PetaLinux}.\par
+					Více informací o~chování a tvorbě \gls{abbreviation:dt}/\gls{abbreviation:dto}, zjištěných při realizaci této práce, je uvedeno v~části \hyperref[subsubsec:konfigurace-device-treesubsubsec:konfigurace-device-tree]{\textit{Petalinux}}.\par
+					Digilent pro své výrobky vytvořil „board files“ a „constraints files“, které umožňují snazší konfiguraci \gls{abbreviation:ps} a \gls{abbreviation:pl} v~prostředí Vivado. Značným přínosem jsou „constraints files“, které umožňují snazší a rychlejší mapování fyzických pinů vývojové desky k~portům, pinům a rozhraní, vytvářených ve Vivado. Pro vývojovou desku Xilinx Kria KR260 jsou v~repozitáři ve Vivado již „board files“ obsaženy. Ovšem oficiální „constraints files“ nejsou od výrobce k~dispozici. Pro mapování pinů je nutné si vyžádat dokumentaci, pomocí které je možné odvodit požadované mapování a „constrains files“ vytvořit. Potřebná dokumentace pro odvození mapování je v~souborech \cite{kria-kr260-starter-kit-cc-schematics} a \cite{kria-k26-som-xdc}.
 
 			\subsection{Aplikace a operační systém}\label{subsec:aplikace-a-operacni-system}
-				Aplikace pro Digilent Zybo je možné vytvářet jako \textit{Bare Metal / Standalone} nebo aplikace pro operační systém \textit{Petalinux}. Pro Xilinx Kria je možné využít \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. Protože obě využívané vývojové desky využívají čipu od firmy Xilinx, Inc., je podpora dostupná pro oba čipy relativně srovnatelná. Výrobce na stránkách Wiki podpory zmiňuje, že poskytuje podporu převážně ve formě veřejného fóra na adrese \href{https://support.xilinx.com}{\textit{support.xilinx.com}}. Podpora bude dostupná pro dvě poslední major verze softwaerových nástrojů, které jsou součástí \textit{PetaLinux} a \textit{Xilinx SDK}. \cite{xilinx-wiki-atlassian-embedded-sw-support}\par
-				Protože je rodina Kria \gls{abbreviation:soms} modernější než Digilent Zybo, výrobce vytvořil ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. \cite{xilinx-appstore-for-kria-soms}
-				Oba čipy podporují PREEMPT\_\gls{abbreviation:rt} Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~postupu realizace patche \textit{PetaLinux} je v~sekci \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
+				Aplikace pro Digilent Zybo je možné vytvářet jako \textit{Bare Metal / Standalone} nebo jako aplikace pro operační systém \textit{PetaLinux}.\par
+				Pro Xilinx Kria je možné využít \textit{Bare Metal / Standalone} přístup, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. Výrobce na stránkách Wiki podpory produktů Xilinx zmiňuje, že poskytuje podporu převážně ve formě veřejného fóra na adrese \href{https://support.xilinx.com}{\textit{support.xilinx.com}}. Oficiální podpora je vždy dostupná pro dvě poslední major verze softwarových nástrojů, které jsou součástí \textit{PetaLinux Tools} a \textit{Xilinx \gls{abbreviation:sdk}}. \cite{xilinx-wiki-atlassian-embedded-sw-support}\par
+				Výrobce vytvořil pro Xilinx Kria ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. V~budoucím plánu výrobce je vytvořit větší množství aplikací, které by mohly sloužit jako výchozí bod pro vývojáře a byly by umístěny v~Kria App Store.\cite{xilinx-appstore-for-kria-soms}\par
+				Oba čipy podporují PREEMPT\_\gls{abbreviation:rt} Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~PREEMPT\_\gls{abbreviation:rt} Linux Patch \textit{PetaLinux} je v~sekci \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
 
 \section{Zpětnovazební vektorová regulace}
-	V~této práci bude využití platformy taktéž demonstrováno pomocí realizace simulace zpětnovazebního vektorového řízení asynchronního motoru. Zadání této simulační úlohy bylo převzato z~předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
-	Hlavním záměrem této práce není představovat princip vektorové regulace, ale je vhodné pomocí blokového schématu a krátkým komentářem nastínit její princip. Na obr. \ref{fig:foc-block} je zobrazeno obecné schéma zpětnovazební vektorové regulace. Naznačeným obecným způsobem by bylo možné realizovat fyzickou regulaci s~použitím vývojové desky.\par
-	Z~finančních důvodů je možné při souměrnosti napájecí sítě a napájení motoru měřit pouze dvě hodnoty napájecích proudů motoru a třetí dopočítat. Pro úplnost jsou naznačeny všechny tři snímače. Pro měření otáčivé rychlosti motoru je možné použít inkrementální snímač a jeho výsledné impulzy zpracovávat pomocí \gls{abbreviation:ps} nebo \gls{abbreviation:pl}. Pokud by byl k~dispozici jiný druh snímače, je preferován prvek s~možností komunikace pomocí \gls{abbreviation:spi}, které splňuje požadavky na rychlé získávání a odesílání hodnot do \gls{abbreviation:ps}.\par
-	V~této práci byla realizována pouze simulace jednotlivých prvků \gls{abbreviation:foc}. Upravené blokové schéma simulace je zobrazeno na obr. \ref{foc-block-colored}. \textcolor{ctuyellow}{Žluté označení} symbolizuje, že se výpočty provádějí v~\texttt{krnl\_calculateCurVelModel}, tudíž v~prvním ze spouštěných kernlů v~podaplikaci \hyperref[subsec:cpu-fpga-model]{\textit{CPU/FPGA Model}}. \textcolor{ctugreen}{Zelené označení} symbolizuje provádění výpočtů výstupního napětí invertoru a modelu asynchronního motoru v~kernelu \texttt{krnl\_calculateInvMot}. \textcolor{ctublue}{Modře označený} blok symbolizuje, že je algoritmus prováděn v~\gls{abbreviation:ps}. \textcolor{ctublue}{Modře označená} proměnná je nastavována v~\gls{abbreviation:ps} a \textcolor{ctuyellow}{žlutě označená}, resp. \textcolor{ctugreen}{zeleně označená} je výstupem kernelu s~$I$-$n$ modelem, resp. s~modelem asynchronního motoru.\par
-	Bloky (omezení a odvazbení) a měření napětí $U_\text{DC}$ nebyly v~aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA Model}} implementovány. Bloky pro zpracování rychlosti otáčení byly vynechány z~důvodu, že mechanická otáčivá rychlost je přímo jeden z~výstupů modelu asynchronního motoru.
+	V~této práci bude využití platformy demonstrováno pomocí realizace simulace zpětnovazebního vektorového řízení asynchronního motoru. Zadání této simulační úlohy bylo převzato z~předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
+	Hlavním záměrem této práce není představovat princip vektorové regulace, ale je vhodné pomocí blokového schématu nastínit její princip. Na obr. \ref{fig:foc-block} je zobrazeno obecné schéma zpětnovazební vektorové regulace. Naznačeným obecným způsobem by bylo možné realizovat fyzickou regulaci s~použitím vývojové desky a potřebných prvků (\gls{abbreviation:adc}, senzorů, \dots).\par
+	Z~finančních důvodů je možné při souměrnosti napájecí sítě a napájení motoru měřit pouze dvě hodnoty napájecích proudů motoru a třetí dopočítat. Pro úplnost jsou naznačeny v~obr. \ref{fig:foc-block} všechny tři snímače. Pro měření otáčivé rychlosti motoru je možné použít inkrementální snímač a jeho výsledné impulzy zpracovávat pomocí \gls{abbreviation:ps} nebo \gls{abbreviation:pl}. Pokud by byl k~dispozici jiný druh snímače, je preferován prvek s~možností komunikace pomocí \gls{abbreviation:spi}, které splňuje požadavky na rychlé příjmání a odesílání hodnot.\par
+	V~této práci byla realizována pouze simulace jednotlivých prvků \gls{abbreviation:foc}. Upravené blokové schéma simulace je zobrazeno na obr. \ref{foc-block-colored}. \textcolor{ctuyellow}{Žluté označení} symbolizuje, že se výpočty provádějí v~\texttt{krnl\_calculateCurVelModel}, tudíž v~prvním ze spouštěných kernelů v~podaplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA Model}}. \textcolor{ctugreen}{Zelené označení} symbolizuje provádění výpočtů výstupního napětí invertoru a modelu asynchronního motoru v~kernelu \texttt{krnl\_calculateInvMot}. \textcolor{ctublue}{Modře označený} blok symbolizuje, že je algoritmus prováděn v~\gls{abbreviation:ps}. \textcolor{ctublue}{Modře označená} proměnná je nastavována v~\gls{abbreviation:ps} a \textcolor{ctuyellow}{žlutě označená}, resp. \textcolor{ctugreen}{zeleně označená} je výstupem kernelu s~$I$-$n$ modelem, resp. s~modelem asynchronního motoru.\par
+	Bloky (omezení a odvazbení) a měření napětí \gls{symbol:udc} nebyly v~aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA Model}} implementovány. Bloky pro zpracování rychlosti otáčení byly vynechány z~důvodu, že mechanická otáčivá rychlost je přímo jeden z~výstupů modelu asynchronního motoru.
 
 	\begin{figure}[htbp!]
 		\centering
@@ -990,8 +991,8 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 	\end{figure}
 
 \section{Model stroje}\label{sec:model-stroje}
-	Jak již bylo představeno v~předchozích částech textu, akcelerované aplikace v~\gls{abbreviation:fpga} je možné použít na různé účely. Součástí této práce je realizace akcelerovaného výpočtu matematického modelu stroje. V~této práci bude k~demonstraci funkčnosti využito matematického modelu asynchronního motoru. Asynchronní motor bude modelován pro řízení pomocí $I$-$n$ modelu a pro simulační účely pomocí zjednodušeného modelu, zanedbávající některé jevy.\par
-	V~části \hyperref[subsec:ps-a-pl]{\textit{PL a PS}} je uvedeno, že vlivem omezených zdrojů je možné realizovat v~Digilent Zybo Z7 pouze $I$-$n$ model stroje. Ostatní výpočty je nutné realizovat v~\gls{abbreviation:ps}. V~Xilinx Kria K26 je díky většímu množství zdrojů možné realizovat větší část modelu v~PL a pomocí \gls{abbreviation:ps} řešit pouze konfiguraci, řízení procesu akvizice dat apod.\par
+	Jak již bylo představeno v~předchozích částech textu, akcelerované aplikace v~\gls{abbreviation:fpga} je možné použít na různé účely. Součástí této práce je realizace akcelerovaného výpočtu matematického modelu stroje. V~této práci bude k~demonstraci funkčnosti využit matematický model asynchronního motoru. Asynchronní motor bude modelován pomocí zjednodušeného modelu, zanedbávající některé jevy a pro \gls{abbreviation:foc} pomocí $I$-$n$ modelu.\par
+	V~části \hyperref[subsec:ps-a-pl]{\textit{PS a PL}} je uvedeno, že vlivem omezených zdrojů je možné realizovat v~Digilent Zybo Z7 pouze $I$-$n$ model stroje. Ostatní výpočty je nutné realizovat v~\gls{abbreviation:ps}. V~Xilinx Kria K26 je díky většímu množství zdrojů možné realizovat větší část modelu v~\gls{abbreviation:pl} a pomocí \gls{abbreviation:ps} řešit pouze konfiguraci, řízení procesu akvizice dat nebo komunikaci.\par
 	%% mám se v této celé kapitole více rozepsat o odvození modelu ASM
 	%% schéma, princip činnosti, napěťové a tokové rovnice
 	%% v optimalizace/úpravě modelu pro jazyk C++ mám se rozepsat o numerických metodách? RK4 bych použil
@@ -1008,13 +1009,13 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
             \caption{Štítkové údaje stroje.}
             \centering
                 \begin{tabular}{!{\vrule width 2pt} c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
-                    $P_\text{n}$ & 12 kW \\ \hline
-                    $U_\text{n}$ & 380 V~\\ \hline
-                    $I_\text{n}$ & 22 A\\ \hline
-                    $n_\text{n}$ & 1460 min$^{-1}$ \\ \hline
-                    $f_\text{n}$ & 50 Hz \\ \hline
-                    $\cos(\varphi_\text{n})$ &  0.8 \\ \hline
-                    $p_\text{p}$ & 2 \\ \noalign{\hrule height 2pt}
+                    \gls{symbol:Pn} & 12 kW \\ \hline
+                    \gls{symbol:Un} & 380 V~\\ \hline
+                    \gls{symbol:Un} & 22 A\\ \hline
+                    \gls{symbol:nn} & 1460 min$^{-1}$ \\ \hline
+                    \gls{symbol:fn} & 50 Hz \\ \hline
+                    \gls{symbol:cosphin} &  0.8 \\ \hline
+                    \gls{symbol:pocet-polparu} & 2 \\ \noalign{\hrule height 2pt}
                 \end{tabular}     
             \label{tab:motor-stitkove-udaje}
         \end{table}
@@ -1026,13 +1027,14 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
                 \caption{Změřené parametry stroje.}
                 \centering
                     \begin{tabular}{!{\vrule width 2pt} c | c !{\vrule width 2pt}}\noalign{\hrule height 2pt}
-                        $R_\text{1}$ & 370 m$\Omega$ \\ \hline
-                        $R_\text{2}$ & 225 m$\Omega$ \\ \hline
-                        $L_{1\sigma}$ & 2,27 mH \\ \hline
-                        $L_{2\sigma}$ & 2,27 mH \\ \hline
-                        $L_\text{m}$ & 82,5 mH \\ \hline
-                        $L_{1}$ & 84,77 mH \\ \hline
-                        $L_{2}$ & 84,77 mH \\ \hline $J$ & 0,4 kg$\cdot$m$^{2}$ \\ \noalign{\hrule height 2pt}
+                        \gls{symbol:r1} & 370 m$\Omega$ \\ \hline
+                        \gls{symbol:r2} & 225 m$\Omega$ \\ \hline
+                        \gls{symbol:l1sigma} & 2,27 mH \\ \hline
+                        \gls{symbol:l2sigma} & 2,27 mH \\ \hline
+                        \gls{symbol:lm} & 82,5 mH \\ \hline
+                        \gls{symbol:l1} & 84,77 mH \\ \hline
+                        \gls{symbol:l2} & 84,77 mH \\ \hline
+						\gls{symbol:moment-setrvacnosti} & 0,4 kg$\cdot$m$^{2}$ \\ \noalign{\hrule height 2pt}
                     \end{tabular}     
                 \label{tab:motor-zmerene-parametry-stroje}
             \end{table}
@@ -1090,8 +1092,8 @@ Stavový popis je vhodné doplnit o~další rovnice, jež budou v~simulaci využ
 kde \gls{symbol:sigma-rozptyl}~$= 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozptyl, \gls{symbol:i1alpha} (A) a \gls{symbol:i1beta} (A) jsou složky vektoru statorového proudu \gls{symbol:i1alpha-beta} (A), \gls{symbol:psi2alpha} (Wb) a \gls{symbol:psi2beta} (Wb) jsou složky vektoru rotorového magnetického toku \gls{symbol:psi2alpha-beta} (Wb), \gls{symbol:u1alpha} (V) a \gls{symbol:u1beta} (V) jsou složky vektoru statorového napětí \gls{symbol:u1alpha-beta} (V), \gls{symbol:pocet-polparu} (-) je počet polpárů stroje, \gls{symbol:elektricka-uhlova-rychlost} (s$^{-1}$) je elektrická úhlová rychlost hřídele, \gls{symbol:mechanicka-uhlova-rychlost} (s$^{-1}$) je mechanická úhlová rychlost hřídele, \gls{symbol:vnitrni-elektromechanicky-moment} (Nm) je vnitřní elektromechanický moment stroje a \gls{symbol:zatezny-moment} (Nm) je moment zátěžný.
 
 	\subsection{I-n model asynchronního motoru}
-		Jak již bylo v~předcházejících částech zmíněno, pokud není k~dispozici dostatečný počet LUTs pro výpočet kompletního matematického modelu, je možné využít \gls{abbreviation:pl} na výpočet např. proudově-otáčkového, resp. $I$-$n$ modelu a regulační procesy realizovat v~\gls{abbreviation:ps}.\par
-		Popis $I$-$n$ modelu vychází ze základních rovnic, popisující asynchronní motor, uvedených např. v~\cite{kobrle-elektricke-pohony} (rovnice jsou upraveny a přeznačeny dle moderních konvencí ale význam zůstává zachován). V~teorii prostorových vektorů je možné tedy psát soustavu rovnic
+		Jak již bylo v~předcházejících částech zmíněno, pokud není k~dispozici dostatečný počet \gls{abbreviation:luts} pro výpočet kompletního matematického modelu, je možné využít \gls{abbreviation:pl} na výpočet proudově-otáčkového, resp. $I$-$n$ modelu a regulační procesy realizovat v~\gls{abbreviation:ps}.\par
+		Popis $I$-$n$ modelu vychází ze základních rovnic, popisující asynchronní motor, uvedených např. v~\cite{kobrle-elektricke-pohony} a \cite{lipcak-bauer-ept-moodle} (rovnice jsou upraveny a přeznačeny dle moderních konvencí ale význam zůstává zachován). V~teorii prostorových vektorů je možné tedy psát soustavu rovnic
 
 		\begin{equation}
 			\underline{u_{1}^{k}} = R_1 \underline{i_{1}^{k}} + \frac{\dd{\underline{\psi_1^{k}}}}{\dd{t}} + \text{j} \omega_k \underline{\psi_1^{k}},
@@ -1109,7 +1111,7 @@ kde \gls{symbol:sigma-rozptyl}~$= 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozp
 		\end{equation}
 
 		kde \gls{symbol:u1-vektor} (V) je prostorový vektor statorového napětí, \gls{symbol:u2-vektor} (V) je prostorový vektor rotorového napětí, \gls{symbol:i1-vektor} (A) je prostorový vektor statorového proudu, \gls{symbol:i2-vektor} (A) je prostorový vektor rotorového proudu, \gls{symbol:prostorovy-vektor-statoroveho-toku} (Wb) je prostorový vektor magnetického toku statoru, \gls{symbol:prostorovy-vektor-rotoroveho-toku} (Wb) je prostorový vektor magnetického toku rotoru, \gls{symbol:elektricka-uhlova-rychlost} (s$^{-1}$) je elektrická úhlová rychlost otáčení rotoru, \gls{symbol:otaciva-rychlost-souradnicoveho-systemu} (s$^{-1}$) je úhlová rychlost otáčení použitého souřadnicového systému, \gls{symbol:r1} ($\Omega$), resp. \gls{symbol:r2} ($\Omega$) je rezistivita statorového, resp. rotorového vinutí, \gls{symbol:l1} (H), resp. \gls{symbol:l2} (H) je statorová, resp. rotorová indukčnost a \gls{symbol:lm} (H) je hlavní magnetizační indukčnost.\par
-		$I$-$n$ model vychází z~předpokladu, že otáčivá úhlová rychlost souřadnicového systému \gls{symbol:otaciva-rychlost-souradnicoveho-systemu} = 0 a tudíž model bude odvozován v~souřadnicovém systému spojeným se statorem (souřadnicový systém $\alpha \beta$). Po vzolení daného souřadnicového systému pro soustavu rovnic platí
+		$I$-$n$ model vychází z~předpokladu, že otáčivá úhlová rychlost souřadnicového systému \gls{symbol:otaciva-rychlost-souradnicoveho-systemu} = 0 a tudíž model je odvozován v~souřadnicovém systému spojeným se statorem (souřadnicový systém $\alpha \beta$). Po vzolení daného souřadnicového systému pro soustavu rovnic platí
 
 		\begin{equation}
 			\underline{u_{1}^{\alpha \beta}} = R_1 \underline{i_{1}^{\alpha \beta}} + \frac{\dd{\underline{\psi_1^{\alpha \beta}}}}{\dd{t}},
@@ -1126,14 +1128,14 @@ kde \gls{symbol:sigma-rozptyl}~$= 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozp
 			\underline{\psi_2^{\alpha \beta}} = L_2 \underline{i_2^{\alpha \beta}} + L_\text{m} \underline{i_1^{\alpha \beta}}.
 		\end{equation}
 
-		V~případě řízení asynchronního motoru s~kotvou nakrátko orientovaného na rotorový tok je dále z~rovnice \ref{eq:alphabeta-tok-rotor-rovnice-i-n-model} vyjádřen prostorový vektor \gls{symbol:i2alpha-beta}, který je dále dosazen do upravené rovnice \ref{eq:alphabeta-napeti-rotor-rovnice-i-n-model}, u~které je přepokládáno, že \gls{symbol:u2alpha-beta} = 0.
+		V~případě řízení asynchronního motoru s~kotvou nakrátko orientovaného na rotorový tok je dále z~rovnice \ref{eq:alphabeta-tok-rotor-rovnice-i-n-model} vyjádřen prostorový vektor \gls{symbol:i2alpha-beta}, který je dále dosazen do upravené rovnice \ref{eq:alphabeta-napeti-rotor-rovnice-i-n-model}, u~které je přepokládáno, že \gls{symbol:u2alpha-beta} = 0.\par
 		Výsledná diferenciální rovnice pro prostorový vektor rotorového magnetického toku je
 
 		\begin{equation}
 			\frac{\dd{\underline{\psi_{2}^{\alpha \beta}}}}{\dd{t}} = \frac{R_2}{L_2}L_\text{m} i_1^{\alpha \beta} + j \omega \underline{\psi_2^{\alpha \beta}} - \frac{R_2}{L_2} \underline{\psi_2^{\alpha \beta}}.
 		\end{equation}
 
-		Rozepsáním představené diferenciální rovnice do reálné a imaginární složky vznikne soustava diferenciálních rovnic, kterou je třeba řešit.
+		Rozepsáním představené diferenciální rovnice do reálné a imaginární složky vznikne soustava diferenciálních rovnic $I$-$n$ modelu.
 
 		\begin{equation}\label{eq:i-n-model-psi-2-diff-for-rk-4}
 			\begin{gathered}
@@ -1143,57 +1145,58 @@ kde \gls{symbol:sigma-rozptyl}~$= 1 - L_\text{m}^{2}/(L_1 L_2)$ (-) je tzv. rozp
 
 
 \section{Použité nástroje pro vývoj aplikace pro PS a PL}
-V~této části jsou představeny jednotlivé nástroje, využívané při tvorbě programu pro \gls{abbreviation:ps} a akcelerované aplikace (kernelu) realizované na \gls{abbreviation:pl}. Je důležité zmínit, že na v~\gls{abbreviation:ps} je skutečně spouštěn zkompilovaný program vytvářený pomocí jazyka C, C++ nebo Python. Na \gls{abbreviation:pl} je ovšem vytvořen \gls{abbreviation:hw}, který reprezentuje myšlené algoritmy aplikace. Tento \gls{abbreviation:hw} je popisován pomocí nízkoúrovňových jazyků, do kterých je algoritmus převeden v~\gls{abbreviation:hls} z~jazyka C. Není tudíž korektně správné mluvit o~tom, že se vytváří program pro \gls{abbreviation:fpga}. Z~toho důvodu bude v~této práci používáno označení pro vytváření \gls{abbreviation:hw} na \gls{abbreviation:pl} \textit{vytváření kernelu} (creation of the kernel). Označení \textit{kernel} je myšleno v~odlišném významu než je využíváno v~části \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.\par
+V~této části jsou představeny jednotlivé nástroje, využívané při tvorbě programu pro \gls{abbreviation:ps} a akcelerované aplikace (kernelu) realizované na \gls{abbreviation:pl}. Je důležité zmínit, že na v~\gls{abbreviation:ps} je skutečně spouštěn zkompilovaný program vytvářený pomocí jazyka C, C++ nebo Python. Na \gls{abbreviation:pl} je ovšem vytvořen \gls{abbreviation:hw}, který reprezentuje myšlené algoritmy aplikace. Tento \gls{abbreviation:hw} je popisován pomocí nízkoúrovňových jazyků, do kterých je algoritmus převeden pomocí~\gls{abbreviation:hls} z~jazyka C. Není tudíž korektně správné mluvit o~tom, že se vytváří program pro \gls{abbreviation:fpga}. Z~toho důvodu bude v~této práci používáno označení pro vytváření \gls{abbreviation:hw} na \gls{abbreviation:pl} \textit{vytváření kernelu} (creation of the kernel). Označení \textit{kernel} je myšleno v~odlišném významu než je využíváno v~části \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.\par
 	% Také jsou v~této části představeny postupy využívání vývojových nástrojů, které vedou k~úspěšné tvorbě aplikace.\par
 Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Tento způsob závisí na použitém vývojovém nástroji pro daný \gls{abbreviation:hw}. V~této práci je využíváno \gls{abbreviation:som} od firmy Xilinx, proto je výhodné využívat již připravené nástroje, které umožní snazší vývoj \gls{abbreviation:sw}, tvorbu \gls{abbreviation:hw} a přípravu systému na \gls{abbreviation:som}.\par
-	Veškerý používaný \gls{abbreviation:sw} v~této práci od firmy Xilinx je po registraci volně dostupný ke stažení na \cite{xilinx-downloads}.
+	VV této práci veškerý používaný \gls{abbreviation:sw} od firmy Xilinx je po registraci volně dostupný ke stažení na \cite{xilinx-downloads}.
 		\subsection{Xilinx Vivado}\label{subsec:xilinx-vivado}
-			Xilinx Vivado je nástroj, používaný pro tvorbu \gls{abbreviation:hw} architektury, resp. platformy, pro kterou bude v~další části postupu možné vytvořit akcelerovanou aplikaci. Ve Vivado je možné tvořit \gls{abbreviation:hw} návrh, převeditelný do \gls{abbreviation:hdl}, který bude spustitelný v~\gls{abbreviation:pl} bez použití Vitis \gls{abbreviation:hls}. Pro vývojáře \gls{abbreviation:hw} pro \gls{abbreviation:fpga} může sloužit i jako jediný vývojářský nástroj.\par
-			Se znalostí \gls{abbreviation:vhdl} je možné ve Vivado vytvářet požadované \gls{abbreviation:hw} konstrukce, ovšem tvorba těchto konstrukcí ve Vivado je relativně náročnou záležitostí není předmětem této práce, ale je nevyhnutelnou součástí výzkumu využití těhto platforem pro řízení elektrických pohonů.\par
+			Xilinx Vivado je nástroj, používaný pro tvorbu \gls{abbreviation:hw} architektury, resp. platformy, pro kterou bude v~další části postupu možné vytvořit akcelerovanou aplikaci. Ve Vivado je možné tvořit \gls{abbreviation:hw} návrh, převeditelný do \gls{abbreviation:hdl}, který bude spustitelný v~\gls{abbreviation:pl} bez použití Vitis \gls{abbreviation:hls}. Pro vývojáře \gls{abbreviation:hw} na \gls{abbreviation:fpga} může sloužit i jako hlavní vývojářský nástroj.\par
+			Se znalostí \gls{abbreviation:vhdl} je možné ve Vivado vytvářet požadované \gls{abbreviation:hw} konstrukce, ovšem tvorba těchto konstrukcí ve Vivado je relativně náročnou záležitostí a není předmětem této práce. Využití \gls{abbreviation:vhdl} je však nevyhnutelnou součástí budoucího výzkumu využití těchto platforem pro řízení elektrických pohonů.\par
 			Xilinx Vivado je součástí instalačního balíčku \textit{Xilinx Unified Installer}, dostupného z~\cite{xilinx-downloads}. Součástí balíčku verze 2022.2 SFD je také nástroj \hyperref[subsec:xilinx-vitis]{\textit{Xilinx Vitis}}. Je doporučeno instalovat oba tyto programy a vyvarovat se oddělené instalace, jež může přinášet problémy se vzájemnou i zpětnou kompatibilitou jednotlivých nástrojů.
 		\subsection{Xilinx Vitis}\label{subsec:xilinx-vitis}
-		Xilinx Vitis je nástroj, který slouží k~vytváření akcelerovaných aplikací na zařízení firmy Xilinx. Tento nástroj obsahuje základní vrstvu s~názvem Xilinx Vitis \gls{abbreviation:ps}, která slouží jako jádro převodu vytvářených aplikací v~C, C++, OpenCL do \gls{abbreviation:rtl}. V~programu Xilinx Vitis bude vytvářena největší část aplikace, proto je vhodné nastínit postup, jakým Vitis pracuje.
+		Xilinx Vitis je nástroj, který slouží k~vytváření akcelerovaných aplikací na zařízení firmy Xilinx. Tento nástroj obsahuje základní vrstvu s~názvem Xilinx Vitis \gls{abbreviation:hls}, která slouží jako jádro převodu vytvářených aplikací v~C, C++, OpenCL do \gls{abbreviation:rtl}. V~programu Xilinx Vitis bude vytvářena největší část aplikace, proto je vhodné nastínit postup, jakým Vitis pracuje.
 		\par
-		Nejprve je vytvořen tzv. „host program“ bežící na \gls{abbreviation:ps}, který je vyvíjen v~C/C++ jazyku (popř. Python), používající Xilinx Runtime (\gls{abbreviation:xrt}) Application Programming Interface (\gls{abbreviation:api}). Tento program je následně kompilován pomocí g++ kompilátoru, který vytvoří spustitelný soubor pro procesor. Tento host program komunikuje s~akcelerovanou částí aplikace (kernel), umístěným v~\gls{abbreviation:pl} v~\gls{abbreviation:fpga}. Blok \textit{ARM x86 host Application Compilation} naznačuje, jakým způsobem je vytvářena aplikace pro host procesor. \cite{vitis-unified-software-platform-documentation-2022}\par
-		Poté Vitis \gls{abbreviation:hls} compiler přeloží C/C++ zdrojový kód pro kernel do register transfer level (\gls{abbreviation:rtl}) (úrovně registrů). Produkty této kompilace mají příponu „.xo“ (Xilinx Object) a mohou být spojovány do binárního souboru s~příponou „.xclbin“ pomocí Vitis linkeru. Souborem \textit{kernel.xclbin} je poté možné nakonfigurovat \gls{abbreviation:pl}.\cite{vitis-unified-software-platform-documentation-2022}\par
-		Na obr. \ref{fig:vitis-development-flow} je blokově znázorněn postup tvorby spustitelné aplikace v~programu Vitis. Tento diagram předpokládá, že již byla vytvořena \gls{abbreviation:hw} platforma ve Vivado a PetaLinux systém.\par
-		Produkty větve programu pro \gls{abbreviation:ps} a konfigurace pro \gls{abbreviation:pl} je po jejich dokončení možné použít v~daném heterogenním systému. Host program zařídí nakonfigurování \gls{abbreviation:pl} pomocí souboru \textit{kernel.xclbin} a následné zpracování výsledků. Blok s~názvem \textit{Running the Application} je kompletně vykonáván v~prostředí PetaLinux v~simulátoru (QEMU) nebo na fyzickém zařízení (vývojová deska).
+		Nejprve je vytvořen tzv. „host program“ bežící na \gls{abbreviation:ps}, který je vyvíjen v~C/C++ jazyku (popř. Python), používající Xilinx Runtime (\gls{abbreviation:xrt}) Application Programming Interface (\gls{abbreviation:api}). Tento program je následně kompilován pomocí g++ kompilátoru, který vytvoří spustitelný soubor pro procesor. Tento host program komunikuje s~akcelerovanou částí aplikace (kernel), umístěné v~\gls{abbreviation:pl}. Blok \textit{ARM x86 host Application Compilation} na obr. \ref{fig:vitis-development-flow} naznačuje, jakým způsobem je vytvářena aplikace pro host procesor. \cite{vitis-unified-software-platform-documentation-2022}\par
+		Poté Vitis \gls{abbreviation:hls} compiler přeloží C/C++ zdrojový kód pro kernel do register transfer level (\gls{abbreviation:rtl}) (úrovně registrů). Produkty této kompilace mají příponu „.xo“ (Xilinx Object) a mohou být spojovány do binárního souboru s~příponou „.xclbin“ pomocí Vitis linkeru. Souborem \textit{kernel.xclbin} je poté možné nakonfigurovat \gls{abbreviation:pl}. \cite{vitis-unified-software-platform-documentation-2022}\par
+		Na obr. \ref{fig:vitis-development-flow} je blokově znázorněn postup tvorby spustitelné aplikace v~programu Vitis. Tento diagram předpokládá, že již byla vytvořena \gls{abbreviation:hw} platforma ve Vivado a \textit{PetaLinux} systém.\par
+		Produkty větve programu pro \gls{abbreviation:ps} a konfigurace pro \gls{abbreviation:pl} je po jejich dokončení možné použít v~daném heterogenním systému. Host program zařídí nakonfigurování \gls{abbreviation:pl} pomocí souboru \textit{kernel.xclbin} a následné zpracování výsledků. Blok s~názvem \textit{Running the Application} je vykonáván v~prostředí \textit{PetaLinux} v~simulátoru (QEMU) nebo na fyzickém zařízení (vývojová deska).
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=1\textwidth]{src/png/vitis-development-flow.png}
+			\includegraphics[width=1\textwidth]{src/pdf/vitis-development-flow.pdf}
 			\caption{Blokový diagram tvorby spustitelné aplikace v~prostředí Vitis. (převzato z~\cite{vitis-unified-software-platform-documentation-2022}, upraveno)}
 			\label{fig:vitis-development-flow}
 		\end{figure}
 		
 		\subsection{PetaLinux Tools}\label{subsec:petalinux-tools}
-			\textit{PetaLinux Tools} je nástroj, který slouží k~vytvoření systému PetaLinux, který bude spuštěn na \gls{abbreviation:ps} v~daném \gls{abbreviation:som} nebo \gls{abbreviation:soc}. Z~tohoto systému je poté možné spouštět navazující programy host a kernel.\par
-			PetaLinux poskytuje distribuci systému Linux, který uživatel před tvorbou aplikace pomocí \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} využívá k~tomu, aby vytvořil operační systém, na kterém bude možné spuštět dané akcelerované aplikace. Tento systém je možné nakonfigurovat dle požadavků aplikace. Při tvoření tohoto systému je možné konfigurovat jádro systému (kernel), balíčky, které budou do systému nainstalovány, vytvořit uživatele systému nebo vybrat, kde v~paměti bude systém umístěn (\gls{abbreviation:ram}, \gls{abbreviation:sd} karta apod.). \cite{xilinx-petalinux}\par
-			PetaLinux Tools mohou sloužit k~debuggingu a virtualizaci systému pomocí QEMU. V~případě tvorby systému, který je konfigurovaný uživatelem, je třeba postupovat obezřetně a dodržovat nastavené postupy konfigurace, protože v~případě chyby je nutné překonfigurovat chybnou část nebo někdy kompletní build. Tvorba \textit{PetaLinux} systému je časově náročný postup, u~něhož je problematický debugging.\par
-			Pro funkční instalaci \textit{PetaLinux Tools} je nutné disponovat nainstalovanými správnými verzemi systémových a aplikačních balíků, které jsou nutnou prerekvizitou tvorby \textit{PetaLinux} pro \gls{abbreviation:ps}. Požadavky na balíky je možné nalézt při nahlédnutí do dokumentace \cite{petalinux-tools-documentation-2022} (UG1144) dané instalované verze \textit{PetaLinux Tools}. V~sekci \textit{Installation Reguirements} se nachází odkaz označený \textit{PetaLinux <version> Release Notes}, který ve spodní čásit obsahuje stáhnutelný soubor \textit{<version>\_PetaLinux\_Package\_List.xlsx}, který obsahuje požadované balíky a jejich verze. Bez použití podporovaných balíků by neprracoval nástroj PetaLinux Tools správně.
+			\textit{PetaLinux Tools} je nástroj, který slouží k~vytvoření systému \textit{PetaLinux}, jež bude spuštěn na \gls{abbreviation:ps} v~daném \gls{abbreviation:som} nebo \gls{abbreviation:soc}. Z~tohoto systému je poté možné spouštět navazující programy host (na \gls{abbreviation:ps}) a kernel (\gls{abbreviation:pl}).\par
+			\textit{PetaLinux} systém je možné nakonfigurovat dle požadavků aplikace. Při tvorbě tohoto systému je možné konfigurovat jádro systému (kernel), balíčky, které budou do systému nainstalovány, vytvořit uživatele systému nebo vybrat, kde v~paměti bude systém umístěn (\gls{abbreviation:ram}, \gls{abbreviation:sd} karta apod.). \cite{xilinx-petalinux}\par
+			V~případě tvorby systému, který je konfigurovaný uživatelem, je třeba postupovat obezřetně a dodržovat nastavené postupy konfigurace, protože v~případě chyby je nutné překonfigurovat chybnou část nebo někdy kompletní systém. Tvorba \textit{PetaLinux} systému je časově náročný postup, u~něhož je problematický debugging.\par
+			Pro funkční instalaci \textit{PetaLinux Tools} je nutné mít v systému, kde bude docházet k tvorbě \textit{PetaLinux}, nainstalované správné verze systémových a aplikačních balíků, které jsou nutnou prerekvizitou tvorby \textit{PetaLinux}. Požadavky na balíky je možné nalézt při nahlédnutí do dokumentace \cite{petalinux-tools-documentation-2022} (UG1144) instalované verze \textit{PetaLinux Tools}. V dokumentaci v~sekci \textit{Installation Reguirements} se nachází odkaz označený \textit{PetaLinux <version> Release Notes}, který ve spodní části obsahuje stáhnutelný soubor \textit{<version>\_PetaLinux\_Package\_List.xlsx}, jež obsahuje seznam požadovaných balíků a jejich verze. Bez použití podporovaných balíků by nepracoval nástroj \textit{PetaLinux Tools} správně.
 
 		\subsection{RealTime Linux Patch}\label{subsec:real-time-linux-patch}
-			Protože operační systém Linux nebyl původně vytvářen pro využití v~embedded systémech, ale v~obecných zařízeních jako jsou servery a stolní počítače, nebyl tento systém vhodný pro řešení úloh v~reálném čase. Proto se objevila snaha upravit tento systém takovým způsobem, aby jej bylo možné využívat v~real time systémech.\par
+			Protože operační systém Linux nebyl původně navrhován pro využití v~embedded systémech, ale v~obecných zařízeních jako jsou servery a stolní počítače, nebyl tento systém vhodný pro řešení úloh v~reálném čase (real time, \gls{abbreviation:rt}). Proto se objevila snaha upravit tento systém takovým způsobem, aby jej bylo možné využívat v~\gls{abbreviation:rt} systémech.\par
 			Real time systémy je obvykle možné rozdělit do jednotlivých úrovní podle časových požadavků systému v~reálném čase na:
 			\begin{itemize}
 				\item \textbf{Soft Real Time} – aplikace, ve které je hlavním parametrem kvalita výsledků, pokud v~některých případech nedojde k~dodržení časových omezení jednotlivých úkonů, nemá tato chyba vliv na zdraví člověka nebo stav majetku,
 				\item \textbf{Firm Real Time} – pokud v~aplikaci nedojde k~dodržení časových omezení výpočtů, je výsledek daného výpočtu považován za neplatný a nelze jej použít,
 				\item \textbf{Hard Real Time} – v~aplikaci je zakázáno nedodržení časových omezení, kdyby došlo k~překročení pevně daných časových rámců, může vzniklá situace vést k~ohrožení lidských životů nebo stavu majetku.
-			\end{itemize}
+			\end{itemize}\cite{the-real-time-linux-kernel-survey-on-preempt-rt}\par
 			V~\cite{the-real-time-linux-kernel-survey-on-preempt-rt} jsou představeny původní přístupy, kdy pro dodržení časových omezení a tzv. „preemptibility“ (přerušitelnosti vykonávaného vlákna) byl využit \textit{cokernel}.\par
-			Moderní způsob spočívá v~aplikování Linux patch pro danou verzi kernelu (pojmem kernel v~tomto případě není myšlena akcelerovaná aplikace, ale jádro operačního systému Linux), kdy není přidávaná do systému další vrstva jádra, ale původní jádro je upravováno. Úpravy spočívají ve změně některých přístupů funkčnosti jádra a přerušení. Tento patch se obecně nazývá \textit{PREEMPT\_RT} a o~začlenění jeho principů do mainline kernelu je dlouhodobě usilováno. \cite{the-real-time-linux-kernel-survey-on-preempt-rt}\par
-			Popis state-of-art \textit{PREEMPT\_RT} je popsán v~\cite{the-real-time-linux-kernel-survey-on-preempt-rt}. V~této práci je patch využit pro získání co největší přerušitelnosti jádra, tudíž aby byl kernel \textit{FULLY PREEMPTIBLE}. Pokud by tomu tak nebylo, nebyly by výsledky simulací matematických modelů při použití \gls{abbreviation:pl} a \gls{abbreviation:ps} konzistentní. Pokud je využívána architektura simulace, naznačená na obr. \ref{fig:rt-simulation-graph}, dojde při opakovaném spuštění aplikace s~vysokou pravděpodobností k~získání znehodnocených výsledků, které není možné použít. Při spuštění aplikace se tento problém projeví nevalidními výsledky, které neodpovídají žádnému ze zadaných parametrů. Po opakovaném spuštění aplikace je možné získat validní výsledky, ovšem četnost, kdy dochází k~získání nevalidních výsledků, je značně vysoká.
+			Moderní způsob spočívá v~aplikování Linux patch pro danou verzi kernelu (pojmem kernel v~tomto případě není myšlena akcelerovaná aplikace, ale jádro operačního systému Linux), kdy není přidávaná do systému další vrstva jádra, ale původní jádro je upravováno. Úpravy spočívají ve změně některých způsobů funkce jádra a přerušení. Tento patch se obecně nazývá \textit{PREEMPT\_\gls{abbreviation:rt}} a o~začlenění jeho principů do mainline kernelu je dlouhodobě usilováno. \cite{the-real-time-linux-kernel-survey-on-preempt-rt}\par
+			Popis state-of-art \textit{PREEMPT\_RT} je popsán v~\cite{the-real-time-linux-kernel-survey-on-preempt-rt}.\par
+			V~této diplomové práci je patch využit pro získání co největší přerušitelnosti jádra, tudíž aby byl kernel \textit{FULLY PREEMPTIBLE}. Pokud by tomu tak nebylo, nebyly by výsledky simulací matematických modelů při použití \gls{abbreviation:pl} a \gls{abbreviation:ps} konzistentní. Pokud je využívána architektura simulace, naznačená na obr. \ref{fig:rt-simulation-graph}, dojde při opakovaném spuštění aplikace s~vysokou pravděpodobností k~získání znehodnocených výsledků, které není možné použít. Při spuštění aplikace se tento problém projeví nevalidními výsledky, které neodpovídají žádnému ze zadaných parametrů. Po několikanásobném spuštění aplikace je možné získat validní výsledky, ovšem četnost, kdy dochází k~získání nevalidních výsledků, je značně vysoká.
 
 			\begin{figure}[H]
 				\centering
 					\includegraphics[width=1\textwidth]{src/png/rt-simulation-graph.png} 
-					\caption{Graf prováděné simulace při testování PREEMPT\_RT Linux Patch.}
+					\caption{Graf prováděné simulace při testování PREEMPT\_\gls{abbreviation:rt} Linux Patch.}
 					\label{fig:rt-simulation-graph}
 			\end{figure}
 			
 			\fbar
 			\subsubsection{Postup aplikace PREEMPT\_RT patch}\label{subsubsec:postup-aplikace-preempt-rt-patch}
 				Patch je možné aplikovat několika způsoby. V~této práci byl aplikován při fázi tvoření \textit{PetaLinux} systému pomocí úpravy konfiguračních souborů build procesu.\par
-				Pro bezproblémové aplikování patche je vhodné nejdříve vytvořit \textit{build} PetaLinux systému bez aplikovanání patch souboru s~minimální konfigurací a po úspěšném vytvoření systému patch aplikovat a build proces opakovat. Pro funkční aplikaci patch souboru je nutné znát verzi jádra \textit{PetaLinux}, na který bude aplikován. Označení verze je možné získat z~\texttt{Makefile} souboru umístěného v~cestě naznačené v~kódu \ref{lst:petalinux-kernel-makefile-path}, kde \texttt{<petalinux-project>} je označení pro kořenový (root) adresář \textit{PetaLinux} projektu, který je tvořen.
+				Pro bezproblémové aplikování patche je vhodné nejdříve vytvořit \textit{build} \textit{PetaLinux} systému minimální konfigurací a bez aplikovanání patch souboru a až po úspěšném vytvoření systému patch aplikovat a build proces opakovat. Pro funkční aplikaci patch souboru je nutné znát verzi jádra \textit{PetaLinux}, na který bude aplikován. Označení verze je možné získat z~\texttt{Makefile} souboru umístěného v~cestě naznačené v~kódu \ref{lst:petalinux-kernel-makefile-path}, kde \texttt{<petalinux-project>} je označení pro kořenový (root) adresář \textit{PetaLinux} projektu, který je tvořen.
 
 				\begin{lstlisting}[language={sh}, caption={Cesta Makefile souboru, ze kterého je možné získat označení verze jádra systému PetaLinux.}, label= {lst:petalinux-kernel-makefile-path}]
 <petalinux-project>/build/tmp/work-shared/xilinx-k26-kr/kernel-source/Makefile\end{lstlisting}
@@ -1455,7 +1458,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\begin{figure}[htbp!]
 					\centering
 					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-17.jpg}
-					\caption{Xilinx Vivado – \gls{abbreviation:ps} \gls{abbreviation:io} Configuration QSPI zařízení.}
+					\caption{Xilinx Vivado – \gls{abbreviation:ps} \gls{abbreviation:io} Configuration \gls{abbreviation:qspi} zařízení.}
 					\label{fig:kr26-xilix-vivado-flow-17}
 				\end{figure}
 

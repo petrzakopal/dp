@@ -123,4 +123,6 @@
 		\setentrycounter[]{page}\glsnumberformat{31}}}%
 \glossentry{symbol:u2alpha-beta}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{32}}}%
+\glossentry{symbol:udc}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{28}}}%
 \end{theglossary}\glossarypostamble
