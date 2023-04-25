@@ -253,8 +253,8 @@
       \strng{authorbibnamehash}{0ddb1a35936ae3df84886a7791c95a0b}
       \strng{authornamehash}{0ddb1a35936ae3df84886a7791c95a0b}
       \strng{authorfullhash}{0ddb1a35936ae3df84886a7791c95a0b}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{0123743338}
@@ -600,8 +600,8 @@
       \strng{authorbibnamehash}{91e59b269b8b7fe556c50ed9ba57c4d5}
       \strng{authornamehash}{91e59b269b8b7fe556c50ed9ba57c4d5}
       \strng{authorfullhash}{91e59b269b8b7fe556c50ed9ba57c4d5}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Industrial Informatics}
@@ -763,8 +763,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{6}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Documentation}
@@ -870,8 +870,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{8}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{AMD Xilinx Product Brief}
@@ -1017,8 +1017,8 @@
       \strng{authorbibnamehash}{8a5f954f7e1ca4572a0a214d86e662b7}
       \strng{authornamehash}{8a5f954f7e1ca4572a0a214d86e662b7}
       \strng{authorfullhash}{8a5f954f7e1ca4572a0a214d86e662b7}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Wiki}
@@ -1054,8 +1054,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{12}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Website}
@@ -1086,8 +1086,8 @@
       \strng{authorbibnamehash}{436815fc71ee001db86142a51abde5a0}
       \strng{authornamehash}{436815fc71ee001db86142a51abde5a0}
       \strng{authorfullhash}{436815fc71ee001db86142a51abde5a0}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Linux Foundation DokuWiki}
@@ -2390,8 +2390,8 @@
       \strng{authorbibnamehash}{994f3e122145764b71d4aa0e84e1a2eb}
       \strng{authornamehash}{994f3e122145764b71d4aa0e84e1a2eb}
       \strng{authorfullhash}{994f3e122145764b71d4aa0e84e1a2eb}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Xilinx Documentation Portal}
@@ -2427,8 +2427,8 @@
       \strng{authorbibnamehash}{8687eae34a3830fc0c113d9d65382e90}
       \strng{authornamehash}{8687eae34a3830fc0c113d9d65382e90}
       \strng{authorfullhash}{8687eae34a3830fc0c113d9d65382e90}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{The MathWorks, Inc. Videos and Webinars}

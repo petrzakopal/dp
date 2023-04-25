@@ -25,6 +25,8 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1}Úvod}{1}{section.1}%
 \defcounter {refsection}{0}\relax 
@@ -91,6 +93,8 @@
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {4.2.1}Generátory funkcí}{7}{subsubsection.4.2.1}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -1140,4 +1144,4 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup debuggingu PL pro Digilent Zybo}{118}{appendix.1.C}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup debuggingu PL pro Digilent Zybo}{119}{appendix.1.C}%
