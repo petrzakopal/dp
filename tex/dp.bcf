@@ -2252,4 +2252,67 @@
     <bcf:citekey order="121">the-real-time-linux-kernel-survey-on-preempt-rt</bcf:citekey>
     <bcf:citekey order="122">hackster-real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc</bcf:citekey>
     <bcf:citekey order="123">trenz-electronic-wiki-how-to-install-the-linux-rt</bcf:citekey>
-    <bcf:citekey order="124">xilinx-vivado-design-suite-user-guide-2022</bcf:
+    <bcf:citekey order="124">xilinx-vivado-design-suite-user-guide-2022</bcf:citekey>
+    <bcf:citekey order="125">vitis-unified-software-platform-documentation-2022</bcf:citekey>
+    <bcf:citekey order="126">petalinux-tools-documentation-2022</bcf:citekey>
+    <bcf:citekey order="127">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
+    <bcf:citekey order="128">github-vivado-board-files-for-digilent-fpga-boards</bcf:citekey>
+    <bcf:citekey order="129">digilent-installing-vivado-vitis-and-digilent-board-files</bcf:citekey>
+    <bcf:citekey order="130">hackster-getting-started-with-the-kria-kr260-in-petalinux</bcf:citekey>
+    <bcf:citekey order="131">hackster-add-peripherial-support-to-kria-kr260-vivado</bcf:citekey>
+    <bcf:citekey order="132">hackster-getting-started-with-the-kria-kr260-in-vivado</bcf:citekey>
+    <bcf:citekey order="133">hackster-getting-started-with-the-kria-kr260-in-vivado</bcf:citekey>
+    <bcf:citekey order="134">xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa</bcf:citekey>
+    <bcf:citekey order="135">xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa</bcf:citekey>
+    <bcf:citekey order="136">hackster-getting-started-with-the-kria-kr260-in-vivado</bcf:citekey>
+    <bcf:citekey order="137">xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide</bcf:citekey>
+    <bcf:citekey order="138">xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution</bcf:citekey>
+    <bcf:citekey order="139">hackster-add-peripherial-support-to-kria-kr260-vivado</bcf:citekey>
+    <bcf:citekey order="140">xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation</bcf:citekey>
+    <bcf:citekey order="141">kria-kr260-starter-kit-cc-schematics</bcf:citekey>
+    <bcf:citekey order="142">kria-kr260-starter-kit-cc-schematics</bcf:citekey>
+    <bcf:citekey order="143">kria-k26-som-xdc</bcf:citekey>
+    <bcf:citekey order="144">hackster-add-peripherial-support-to-kria-kr260-vivado</bcf:citekey>
+    <bcf:citekey order="145">hackster-getting-started-with-the-kria-kr260-in-petalinux</bcf:citekey>
+    <bcf:citekey order="146">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
+    <bcf:citekey order="147">xilinx-downloads</bcf:citekey>
+    <bcf:citekey order="148">axi-quad-spi-ip-product-guide</bcf:citekey>
+    <bcf:citekey order="149">axi-timer-v-2-0-ip-product-guide</bcf:citekey>
+    <bcf:citekey order="150">devicetree-org-specification</bcf:citekey>
+    <bcf:citekey order="151">youtube-devicetree-for-dummies</bcf:citekey>
+    <bcf:citekey order="152">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
+    <bcf:citekey order="153">hackster-getting-started-with-the-kria-kr260-in-petalinux</bcf:citekey>
+    <bcf:citekey order="154">xilinx-github-dfx-mgr</bcf:citekey>
+    <bcf:citekey order="155">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
+    <bcf:citekey order="156">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
+    <bcf:citekey order="157">xilinx-github-dfx-mgr</bcf:citekey>
+    <bcf:citekey order="158">xilinx-github-host-stream-free-running-kernel</bcf:citekey>
+    <bcf:citekey order="159">axi-quad-spi-ip-product-guide</bcf:citekey>
+    <bcf:citekey order="160">vitis-high-level-synthesis-user-guide</bcf:citekey>
+    <bcf:citekey order="161">microsemi-svm-min-max-algoritmus</bcf:citekey>
+    <bcf:citekey order="162">lipcak-bauer-ept-moodle</bcf:citekey>
+    <bcf:citekey order="163">kria-k26-som-ds</bcf:citekey>
+    <bcf:citekey order="164">xilinx-github-vitis-accel-examples-stream-free-running-kernel</bcf:citekey>
+    <bcf:citekey order="0" nocite="1">*</bcf:citekey>
+    <bcf:citekey order="165">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="166">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="167">digilent-zybo-reference-manual</bcf:citekey>
+    <bcf:citekey order="168">digilent-zybo-reference-manual</bcf:citekey>
+  </bcf:section>
+  <!-- SORTING TEMPLATES -->
+  <bcf:sortingtemplate name="none">
+    <bcf:sort order="1">
+      <bcf:sortitem order="1">citeorder</bcf:sortitem>
+    </bcf:sort>
+  </bcf:sortingtemplate>
+  <!-- DATALISTS -->
+  <bcf:datalist section="0"
+                name="none/global//global/global"
+                type="entry"
+                sortingtemplatename="none"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global">
+  </bcf:datalist>
+</bcf:controlfile>

@@ -1,0 +1,2452 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{tomshardware-system-on-chip}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=92aaceff6df8d347e3f06cb62c80e5a9}{%
+           family={Harding},
+           familyi={H\bibinitperiod},
+           given={Scharon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{fullhash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{bibnamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{authorbibnamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{authornamehash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \strng{authorfullhash}{92aaceff6df8d347e3f06cb62c80e5a9}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Blog post}
+      \field{day}{11}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{title}{What Is an SoC? A Basic Definition}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.tomshardware.com/reviews/glossary-soc-system-on-chip-definition,5890.html
+      \endverb
+      \verb{url}
+      \verb https://www.tomshardware.com/reviews/glossary-soc-system-on-chip-definition,5890.html
+      \endverb
+    \endentry
+    \entry{xilinx-what-is-a-som}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Website}
+      \field{langid}{english}
+      \field{title}{System-on-Modules (SOMs): How and Why to Use Them}
+      \field{urlday}{10}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/products/som/what-is-a-som.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/products/som/what-is-a-som.html
+      \endverb
+    \endentry
+    \entry{xilinx-kria-kr260-robotics-starter-kit}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Website}
+      \field{langid}{english}
+      \field{title}{Kria KR260 Robotics Starter Kit}
+      \field{urlday}{10}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/products/som/kria/kr260-robotics-starter-kit.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/products/som/kria/kr260-robotics-starter-kit.html
+      \endverb
+    \endentry
+    \entry{kria-som-carrier-card-design-guide-2022}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{27}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Kria SOM Carrier Card Design Guide (UG1091)}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1091-carrier-card-design/Introduction
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1091-carrier-card-design/Introduction
+      \endverb
+    \endentry
+    \entry{kria-k26-som-ds}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{26}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Kria K26 SOM Data Sheet (DS987)}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ds987-k26-som
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ds987-k26-som
+      \endverb
+    \endentry
+    \entry{antmicro-open-source-kria-k26-carrier-card}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{5}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub}
+      \field{langid}{english}
+      \field{title}{Antmicro's open source Kria K26 Devboard}
+      \field{urlday}{10}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/antmicro/kria-k26-devboard
+      \endverb
+      \verb{url}
+      \verb https://github.com/antmicro/kria-k26-devboard
+      \endverb
+    \endentry
+    \entry{Sass2010}{book}{}
+      \name{author}{2}{}{%
+        {{hash=2616ebf86f1b94355531f313375e3e09}{%
+           family={Sass},
+           familyi={S\bibinitperiod},
+           given={Ronald},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a741bd8a3d4162ced0702716c2aab73f}{%
+           family={Schmidt},
+           familyi={S\bibinitperiod},
+           given={Andrew\bibnamedelima G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Boston}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann}%
+      }
+      \strng{namehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{fullhash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{bibnamehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{authorbibnamehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{authornamehash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \strng{authorfullhash}{0ddb1a35936ae3df84886a7791c95a0b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0123743338}
+      \field{subtitle}{principles and practices}
+      \field{title}{Embedded systems design with platform FPGAs}
+      \field{year}{2010}
+    \endentry
+    \entry{juan-fpgas}{book}{}
+      \name{author}{3}{}{%
+        {{hash=f1a60490b9bf6324ccb8688ce4a145f1}{%
+           family={Andina},
+           familyi={A\bibinitperiod},
+           given={Juan\bibnamedelimb J.\bibnamedelimi R.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=b034740ff0a768c480af4feea0420da4}{%
+           family={Torre\bibnamedelima Arnanz},
+           familyi={T\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Eduardo},
+           giveni={E\bibinitperiod},
+           prefix={de\bibnamedelima la},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{hash=dce8ac8d6197b49254b016d5cd916dbe}{%
+           family={Valdés\bibnamedelima Peña},
+           familyi={V\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Marı́a\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{location}{1}{%
+        {Bosa Roca}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{2305db98fc92d0785ced5e30d8d33030}
+      \strng{fullhash}{2305db98fc92d0785ced5e30d8d33030}
+      \strng{bibnamehash}{2305db98fc92d0785ced5e30d8d33030}
+      \strng{authorbibnamehash}{2305db98fc92d0785ced5e30d8d33030}
+      \strng{authornamehash}{2305db98fc92d0785ced5e30d8d33030}
+      \strng{authorfullhash}{2305db98fc92d0785ced5e30d8d33030}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Field Programmable Gate Arrays (FPGAs) are currently recognized as the most suitable platform for the implementation of complex digital systems targeting an increasing number of industrial electronics applications. They cover a huge variety of application areas, such as: aerospace, food industry, art, industrial automation, automotive, biomedicine, process control, military, logistics, power electronics, chemistry, sensor networks, robotics, ultrasound, security, and artificial vision. This book first presents the basic architectures of the devices to familiarize the reader with the fundamentals of FPGAs before identifying and discussing new resources that extend the ability of the devices to solve problems in new application domains. Design methodologies are discussed and application examples are included for some of these domains, e.g., mechatronics, robotics, and power systems.;This book explains the how and why of field-programmable gate array (FPGA) usage. It analyzes fundamental architectures of FPGA devices, providing case studies and simple design examples. It also describes advanced features of the latest devices, exploring new resources enabling problem solving in new application domains, such as high-speed sensor interfacing and control of power converters. From basic circuits to state-of-the-art implementations, this text demystifies FPGAs for engineers who are not digital designers but need efficient digital solutions for their systems to be competitive.;}
+      \field{edition}{1}
+      \field{isbn}{9781439896990;1439896992;}
+      \field{title}{FPGAs: Fundamentals, Advanced Features, and Applications in Industrial Electronics}
+      \field{year}{2017;2015;}
+      \keyw{Field programmable gate arrays; Industrial Electronics; Microelectronics; Systems & Controls}
+    \endentry
+    \entry{xilinx-accelerated-computing}{incollection}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx, Inc.}
+      \field{langid}{english}
+      \field{title}{What Is Accelerated Computing, and Why Is It Important?}
+      \field{urlday}{3}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/applications/adaptive-computing/what-is-accelerated-computing-and-why-is-it-important.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/applications/adaptive-computing/what-is-accelerated-computing-and-why-is-it-important.html
+      \endverb
+    \endentry
+    \entry{ieee-selective-harmonic-elimination-nvidia}{article}{}
+      \name{author}{4}{}{%
+        {{hash=94f549b3de0aeab6822803a0c8e72908}{%
+           family={Nalcaci},
+           familyi={N\bibinitperiod},
+           given={Gamze},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4be5f3897634a5fcaff6fc353037f0d6}{%
+           family={Yildirim},
+           familyi={Y\bibinitperiod},
+           given={Doğan},
+           giveni={D\bibinitperiod}}}%
+        {{hash=60b4996064b175c2160531c7b6276785}{%
+           family={Cadirci},
+           familyi={C\bibinitperiod},
+           given={Isik},
+           giveni={I\bibinitperiod}}}%
+        {{hash=d3bc972203d8b75e9f85174117a88e67}{%
+           family={Ermis},
+           familyi={E\bibinitperiod},
+           given={Muammer},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{fullhash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{bibnamehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{authorbibnamehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{authornamehash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \strng{authorfullhash}{5749120ccda657a4ad78c3c5f9512e5d}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Industry Applications}
+      \field{number}{4}
+      \field{title}{Selective Harmonic Elimination for Variable Frequency Traction Motor Drives Using Harris Hawks Optimization}
+      \field{volume}{58}
+      \field{year}{2022}
+      \field{pages}{4778\bibrangedash 4791}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/TIA.2022.3174828
+      \endverb
+    \endentry
+    \entry{apple-explore-the-new-architecture-of-apple-silicon-macs}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3325b015fbae57ba74629a53f1ead961}{%
+           family={Apple},
+           familyi={A\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{bibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorbibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authornamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhash}{3325b015fbae57ba74629a53f1ead961}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Apple WWDC Video}
+      \field{langid}{english}
+      \field{title}{Explore the new system architecture of Apple silicon Macs}
+      \field{urlday}{18}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://developer.apple.com/videos/play/wwdc2020/10686/
+      \endverb
+      \verb{url}
+      \verb https://developer.apple.com/videos/play/wwdc2020/10686/
+      \endverb
+    \endentry
+    \entry{pang-beginning-fpga}{book}{}
+      \name{author}{3}{}{%
+        {{hash=98560bcbea5dfa554d4bd1c913b57cb6}{%
+           family={Pang},
+           familyi={P\bibinitperiod},
+           given={Aiken},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8a740ee4de1554a3e2fd243354295899}{%
+           family={Membrey},
+           familyi={M\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=b845a8112284954fc5bbad6baa0070f0}{%
+           family={služba)},
+           familyi={s\bibinitperiod},
+           given={SpringerLink\bibnamedelima (online},
+           giveni={S\bibinitperiod\bibinitdelim (\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berkeley, CA}%
+      }
+      \list{publisher}{1}{%
+        {Apress}%
+      }
+      \strng{namehash}{1c4fe9cfaf100639fb1eb8f0eade5745}
+      \strng{fullhash}{1c4fe9cfaf100639fb1eb8f0eade5745}
+      \strng{bibnamehash}{1c4fe9cfaf100639fb1eb8f0eade5745}
+      \strng{authorbibnamehash}{1c4fe9cfaf100639fb1eb8f0eade5745}
+      \strng{authornamehash}{1c4fe9cfaf100639fb1eb8f0eade5745}
+      \strng{authorfullhash}{1c4fe9cfaf100639fb1eb8f0eade5745}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{Book, Whole}
+      \field{subtitle}{Programming Metal}
+      \field{title}{Beginning FPGA: Programming Metal: Your brain on hardware}
+      \field{year}{2017;2016;}
+      \verb{urlraw}
+      \verb https://go.exlibris.link/JzysQtpz
+      \endverb
+      \verb{url}
+      \verb https://go.exlibris.link/JzysQtpz
+      \endverb
+    \endentry
+    \entry{rovere-sphery-vs-shapes}{incollection}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub}
+      \field{day}{14}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Sphery vs. shapes, the first raytraced game that is not software}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/JulianKemmerer/PipelineC-Graphics/blob/main/doc/Sphery-vs-Shapes.pdf
+      \endverb
+      \verb{url}
+      \verb https://github.com/JulianKemmerer/PipelineC-Graphics/blob/main/doc/Sphery-vs-Shapes.pdf
+      \endverb
+    \endentry
+    \entry{wikipedia-ray-tracing}{incollection}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Wikipedia}
+      \field{day}{6}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{title}{Ray tracing (graphics)}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Ray_tracing_(graphics)
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Ray_tracing_(graphics)
+      \endverb
+    \endentry
+    \entry{grover-reduction-of-power-consumption}{article}{}
+      \name{author}{2}{}{%
+        {{hash=07a43925bd2acc5cda2bb0c8b44a6d50}{%
+           family={Grover},
+           familyi={G\bibinitperiod},
+           given={Naresh},
+           giveni={N\bibinitperiod}}}%
+        {{hash=78f458057c10f22189822cb6e368b520}{%
+           family={K.Soni},
+           familyi={K\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{fullhash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{bibnamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{authorbibnamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{authornamehash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \strng{authorfullhash}{b60097a66d74fcdb4183ba8c76caa3ac}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Field Programmable Gate Arrays FPGAs are highly desirable for implementation of digital systems due to their flexibility, programmability and low end product life cycle. In more than 20 years since the introduction of FPGA, research and development has produced dramatic improvements in FPGA speed and area efficiency, narrowing the gap between FPGAs and ASICs and making FPGAs the platform of choice for implementing digital circuits. FPGAs hold significant promise as a fast to market replacement. Unfortunately, the advantages of FPGAs are offset in many cases by their high power consumption and area. The goal is to reduce the power consumption without sacrificing much performance or incurring a large chip area so that the territories of FPGAs applications can expand more effectively. Reducing the power of FPGAs is the key to lowering packaging and cooling costs, improving device reliability, and opening the door to new markets such as mobile electronics. This paper presents the tips to lower down the static and dynamic power dissipation in FPGAs. It gives an overview of various techniques at system, device, and circuit and architecture level used for reduction of power consumption of FPGAs and their outcomes.}
+      \field{isbn}{2074-9023}
+      \field{journaltitle}{International journal of information engineering and electronic business}
+      \field{number}{5}
+      \field{title}{Reduction of Power Consumption in FPGAs - An Overview}
+      \field{volume}{4}
+      \field{year}{2012}
+      \field{pages}{50\bibrangedash 69}
+      \range{pages}{20}
+    \endentry
+    \entry{amazon-ec2-f1}{incollection}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Amazon AWS}
+      \field{langid}{english}
+      \field{title}{Amazon EC2 F1 Instances}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://aws.amazon.com/ec2/instance-types/f1/
+      \endverb
+      \verb{url}
+      \verb https://aws.amazon.com/ec2/instance-types/f1/
+      \endverb
+    \endentry
+    \entry{wim-high-performance-computing-using-fpgas}{book}{}
+      \name{author}{2}{}{%
+        {{hash=1677f63d9a458d71bba87a78edcee5ec}{%
+           family={Vanderbauwhede},
+           familyi={V\bibinitperiod},
+           given={Wim},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2c1c67af73ac42961500d3ee1a460c76}{%
+           family={Benkrid},
+           familyi={B\bibinitperiod},
+           given={Khaled},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Publishing Company, Incorporated}%
+      }
+      \strng{namehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{fullhash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{bibnamehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{authorbibnamehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{authornamehash}{601324d9214ad24f68cfeca33ba6e08d}
+      \strng{authorfullhash}{601324d9214ad24f68cfeca33ba6e08d}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{High-Performance Computing using FPGA covers the area of high performance reconfigurable computing (HPRC). This book provides an overview of architectures, tools and applications for High-Performance Reconfigurable Computing (HPRC). FPGAs offer very high I/O bandwidth and fine-grained, custom and flexible parallelism and with the ever-increasing computational needs coupled with the frequency/power wall, the increasing maturity and capabilities of FPGAs, and the advent of multicore processors which has caused the acceptance of parallel computational models. The Part on architectures will introduce different FPGA-based HPC platforms: attached co-processor HPRC architectures such as the CHRECs Novo-G and EPCCs Maxwell systems; tightly coupled HRPC architectures, e.g. the Convey hybrid-core computer; reconfigurably networked HPRC architectures, e.g. the QPACE system, and standalone HPRC architectures such as EPFLs CONFETTI system. The Part on Tools will focus on high-level programming approaches for HPRC, with chapters on C-to-Gate tools (such as Impulse-C, AutoESL, Handel-C, MORA-C++); Graphical tools (MATLAB-Simulink, NI LabVIEW); Domain-specific languages, languages for heterogeneous computing(for example OpenCL, Microsofts Kiwi and Alchemy projects). The part on Applications will present case from several application domains where HPRC has been used successfully, such as Bioinformatics and Computational Biology; Financial Computing; Stencil computations; Information retrieval; Lattice QCD; Astrophysics simulations; Weather and climate modeling.}
+      \field{isbn}{1461417902}
+      \field{title}{High-Performance Computing Using FPGAs}
+      \field{year}{2013}
+    \endentry
+    \entry{andina-advanced-features-and-industrial-applications-of-fpga}{article}{}
+      \name{author}{3}{}{%
+        {{hash=13597300927d35b3db5aacac2f17bca2}{%
+           family={Rodrı́guez-Andina},
+           familyi={R\bibinithyphendelim A\bibinitperiod},
+           given={Juan\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=96cdb97bd347bac1de5506119b205fae}{%
+           family={Valdés-Peña},
+           familyi={V\bibinithyphendelim P\bibinitperiod},
+           given={Marı́a\bibnamedelima D.},
+           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=6f5d7c08307ed5a6101f613ef9291197}{%
+           family={Moure},
+           familyi={M\bibinitperiod},
+           given={Marı́a\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{91e59b269b8b7fe556c50ed9ba57c4d5}
+      \strng{fullhash}{91e59b269b8b7fe556c50ed9ba57c4d5}
+      \strng{bibnamehash}{91e59b269b8b7fe556c50ed9ba57c4d5}
+      \strng{authorbibnamehash}{91e59b269b8b7fe556c50ed9ba57c4d5}
+      \strng{authornamehash}{91e59b269b8b7fe556c50ed9ba57c4d5}
+      \strng{authorfullhash}{91e59b269b8b7fe556c50ed9ba57c4d5}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Industrial Informatics}
+      \field{number}{4}
+      \field{title}{Advanced Features and Industrial Applications of FPGAs---A Review}
+      \field{volume}{11}
+      \field{year}{2015}
+      \field{pages}{853\bibrangedash 864}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/TII.2015.2431223
+      \endverb
+    \endentry
+    \entry{mathworks-discovery-hil-simulation}{incollection}{}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The MathWorks, Inc.}
+      \field{langid}{english}
+      \field{title}{Hardware-in-the-Loop (HIL) Simulation}
+      \field{urlday}{6}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.mathworks.com/discovery/hardware-in-the-loop-hil.html
+      \endverb
+      \verb{url}
+      \verb https://www.mathworks.com/discovery/hardware-in-the-loop-hil.html
+      \endverb
+    \endentry
+    \entry{naouar-fpga-based-current-controllers-for-ac-machine-drives}{article}{}
+      \name{author}{5}{}{%
+        {{hash=0246e1b97b78c14313dd2f90e8125862}{%
+           family={Naouar},
+           familyi={N\bibinitperiod},
+           given={Mohamed-Wissem},
+           giveni={M\bibinithyphendelim W\bibinitperiod}}}%
+        {{hash=b6776cac030e187d023e3f571686f171}{%
+           family={Monmasson},
+           familyi={M\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=505325cc860f283002510b5b363c6ed2}{%
+           family={Naassani},
+           familyi={N\bibinitperiod},
+           given={Ahmad\bibnamedelima Ammar},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=3362f2f34b6289a08a580daffeb5645d}{%
+           family={Slama-Belkhodja},
+           familyi={S\bibinithyphendelim B\bibinitperiod},
+           given={Ilhem},
+           giveni={I\bibinitperiod}}}%
+        {{hash=e9e73beeb5a12b0d6c1de5f96a23981d}{%
+           family={Patin},
+           familyi={P\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{fullhash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{bibnamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{authorbibnamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{authornamehash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \strng{authorfullhash}{2c4446e1c7c6722464bfcc9b9a6d023e}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Industrial Electronics}
+      \field{number}{4}
+      \field{title}{FPGA-Based Current Controllers for AC Machine Drives---A Review}
+      \field{volume}{54}
+      \field{year}{2007}
+      \field{pages}{1907\bibrangedash 1925}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1109/TIE.2007.898302
+      \endverb
+    \endentry
+    \entry{digilent-zybo-7000-docs}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e2b4a5847320f16617f60880b1151e53}{%
+           family={Digilent},
+           familyi={D\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{fullhash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{bibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorbibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
+      \field{extraname}{1}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Digilent Documentation}
+      \field{langid}{english}
+      \field{title}{Zybo}
+      \field{urlday}{11}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://digilent.com/reference/programmable-logic/zybo/start
+      \endverb
+      \verb{url}
+      \verb https://digilent.com/reference/programmable-logic/zybo/start
+      \endverb
+    \endentry
+    \entry{digilent-zybo-compare}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e2b4a5847320f16617f60880b1151e53}{%
+           family={Digilent},
+           familyi={D\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{fullhash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{bibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorbibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
+      \field{extraname}{2}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Digilent Documentation}
+      \field{langid}{english}
+      \field{title}{Zybo Z7 Migration Guide}
+      \field{urlday}{11}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://digilent.com/reference/programmable-logic/zybo-z7/migration-guide
+      \endverb
+      \verb{url}
+      \verb https://digilent.com/reference/programmable-logic/zybo-z7/migration-guide
+      \endverb
+    \endentry
+    \entry{xilinx-zynq-7000-technical-reference-manual}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{6}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Documentation}
+      \field{day}{2}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{title}{Zynq-7000 SoC Technical Reference Manual}
+      \field{urlday}{11}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/v/u/en-US/ug585-Zynq-7000-TRM
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/v/u/en-US/ug585-Zynq-7000-TRM
+      \endverb
+    \endentry
+    \entry{digilent-zybo-reference-manual}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e2b4a5847320f16617f60880b1151e53}{%
+           family={Digilent},
+           familyi={D\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{fullhash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{bibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorbibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
+      \field{extraname}{3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Digilent Documentation}
+      \field{langid}{english}
+      \field{title}{Zybo Reference Manual}
+      \field{urlday}{11}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://digilent.com/reference/programmable-logic/zybo/reference-manual
+      \endverb
+      \verb{url}
+      \verb https://digilent.com/reference/programmable-logic/zybo/reference-manual
+      \endverb
+    \endentry
+    \entry{kria-kr260-robotics-starter-kit-user-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{7}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{17}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{title}{Kria KR260 Robotics Starter Kit User Guide (UG1092)}
+      \field{urlday}{5}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1092-kr260-starter-kit/Interfaces
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1092-kr260-starter-kit/Interfaces
+      \endverb
+    \endentry
+    \entry{kria-k26-som-product-brief}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{8}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Product Brief}
+      \field{langid}{english}
+      \field{title}{Kria K26 System-on-Module}
+      \field{urlday}{5}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/content/dam/xilinx/publications/product-briefs/xilinx-k26-product-brief.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/content/dam/xilinx/publications/product-briefs/xilinx-k26-product-brief.pdf
+      \endverb
+    \endentry
+    \entry{vitis-unified-software-platform-documentation-2022}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{9}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{langid}{english}
+      \field{title}{Vitis Unified Software Platform Documentation: Application Acceleration Development (UG1393)}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/
+      \endverb
+    \endentry
+    \entry{kria-kr260-starter-kit-cc-schematics}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{10}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Board Files}
+      \field{day}{9}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{title}{XTP743 - Kria KR260 Starter Kit Carrier Card Schematics (v1.0)}
+      \field{urlday}{6}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/member/forms/download/design-license.html?cid=bad0ada6-9a32-427e-a793-c68fed567427&filename=xtp743-kr260-schematic.zip
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/member/forms/download/design-license.html?cid=bad0ada6-9a32-427e-a793-c68fed567427&filename=xtp743-kr260-schematic.zip
+      \endverb
+    \endentry
+    \entry{kria-k26-som-xdc}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{11}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Board Files}
+      \field{day}{14}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{title}{XTP685 - Kria K26 SOM XDC File (v1.0)}
+      \field{urlday}{6}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/member/forms/download/design-license.html?cid=29e0261a-9532-4a47-bb06-38c83bbbb8c0&filename=xtp685-kria-k26-som-xdc.zip
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/member/forms/download/design-license.html?cid=29e0261a-9532-4a47-bb06-38c83bbbb8c0&filename=xtp685-kria-k26-som-xdc.zip
+      \endverb
+    \endentry
+    \entry{xilinx-wiki-atlassian-embedded-sw-support}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=5d88b0bffb5a0ba7e4824bc280ad27d3}{%
+           family={Admin},
+           familyi={A\bibinitperiod},
+           given={Confluence\bibnamedelima Wiki},
+           giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=7589a16e12c534b5bcfc5b891b16038a}{%
+           family={Roy},
+           familyi={R\bibinitperiod},
+           given={Debraj},
+           giveni={D\bibinitperiod}}}%
+        {{hash=4f97319b308ed6bd3f0c195c176bbd77}{%
+           family={dylan},
+           familyi={d\bibinitperiod}}}%
+      }
+      \strng{namehash}{8a5f954f7e1ca4572a0a214d86e662b7}
+      \strng{fullhash}{8a5f954f7e1ca4572a0a214d86e662b7}
+      \strng{bibnamehash}{8a5f954f7e1ca4572a0a214d86e662b7}
+      \strng{authorbibnamehash}{8a5f954f7e1ca4572a0a214d86e662b7}
+      \strng{authornamehash}{8a5f954f7e1ca4572a0a214d86e662b7}
+      \strng{authorfullhash}{8a5f954f7e1ca4572a0a214d86e662b7}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Wiki}
+      \field{day}{28}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{title}{Embedded SW Support}
+      \field{urlday}{6}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18841631/Embedded+SW+Support
+      \endverb
+      \verb{url}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18841631/Embedded+SW+Support
+      \endverb
+    \endentry
+    \entry{xilinx-appstore-for-kria-soms}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{12}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Website}
+      \field{langid}{english}
+      \field{title}{Pre-Built Applications for Kria System-on-Modules}
+      \field{urlday}{6}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/products/app-store/kria.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/products/app-store/kria.html
+      \endverb
+    \endentry
+    \entry{wiki-linux-foundation-real-time-linux}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=436815fc71ee001db86142a51abde5a0}{%
+           family={Foundation},
+           familyi={F\bibinitperiod},
+           given={Linux},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{436815fc71ee001db86142a51abde5a0}
+      \strng{fullhash}{436815fc71ee001db86142a51abde5a0}
+      \strng{bibnamehash}{436815fc71ee001db86142a51abde5a0}
+      \strng{authorbibnamehash}{436815fc71ee001db86142a51abde5a0}
+      \strng{authornamehash}{436815fc71ee001db86142a51abde5a0}
+      \strng{authorfullhash}{436815fc71ee001db86142a51abde5a0}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Linux Foundation DokuWiki}
+      \field{langid}{english}
+      \field{title}{Real-Time Linux}
+      \field{urlday}{6}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://wiki.linuxfoundation.org/realtime/start
+      \endverb
+      \verb{url}
+      \verb https://wiki.linuxfoundation.org/realtime/start
+      \endverb
+    \endentry
+    \entry{lipcak-bauer-ept-moodle}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=8106e7c795d705e1610eace6512a8ae6}{%
+           family={Lipčák},
+           familyi={L\bibinitperiod},
+           given={Ondřej},
+           giveni={O\bibinitperiod}}}%
+        {{hash=d44b88edbc4a6e2154a4fc92e21f00df}{%
+           family={Bauer},
+           familyi={B\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{fullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{bibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authorbibnamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authornamehash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \strng{authorfullhash}{5f7f3c20a89d9be217d36bc17be6d1b0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Materiál k přednáškám předmětu B1M14EPT}
+      \field{langid}{czech}
+      \field{title}{Doprovodný materiál k přednáškám}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://moodle.cvut.cz
+      \endverb
+      \verb{url}
+      \verb https://moodle.cvut.cz
+      \endverb
+    \endentry
+    \entry{kobrle-elektricke-pohony}{book}{}
+      \name{author}{2}{}{%
+        {{hash=df455503b24471d1c50b4a056d9fe820}{%
+           family={Kobrle},
+           familyi={K\bibinitperiod},
+           given={Pavel},
+           giveni={P\bibinitperiod}}}%
+        {{hash=dc1648d1b2f79e655c5c0bc84bedab91}{%
+           family={Pavelka},
+           familyi={P\bibinitperiod},
+           given={Jiřı́},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {V Praze}%
+      }
+      \list{publisher}{1}{%
+        {České vysoké učenı́ technické}%
+      }
+      \strng{namehash}{6bb5fb8a26d9144f60c8a6a013f5948d}
+      \strng{fullhash}{6bb5fb8a26d9144f60c8a6a013f5948d}
+      \strng{bibnamehash}{6bb5fb8a26d9144f60c8a6a013f5948d}
+      \strng{authorbibnamehash}{6bb5fb8a26d9144f60c8a6a013f5948d}
+      \strng{authornamehash}{6bb5fb8a26d9144f60c8a6a013f5948d}
+      \strng{authorfullhash}{6bb5fb8a26d9144f60c8a6a013f5948d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3. přepracované vydánı́}
+      \field{isbn}{978-80-01-06007-0}
+      \field{title}{Elektrické pohony a jejich řı́zenı́}
+      \field{year}{2016}
+    \endentry
+    \entry{xilinx-downloads}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{13}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Downloads}
+      \field{langid}{english}
+      \field{title}{Downloads}
+      \field{urlday}{19}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/support/download.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/support/download.html
+      \endverb
+    \endentry
+    \entry{xilinx-petalinux}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{14}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx PetaLinux Tools}
+      \field{langid}{english}
+      \field{title}{Downloads}
+      \field{urlday}{19}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/products/design-tools/embedded-software/petalinux-sdk.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/products/design-tools/embedded-software/petalinux-sdk.html
+      \endverb
+    \endentry
+    \entry{petalinux-tools-documentation-2022}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{15}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{langid}{english}
+      \field{title}{PetaLinux Tools Documentation: Reference Guide (UG1144)}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
+      \endverb
+    \endentry
+    \entry{the-real-time-linux-kernel-survey-on-preempt-rt}{article}{}
+      \name{author}{3}{}{%
+        {{hash=c1363097a364153efdd592634b99df00}{%
+           family={Reghenzani},
+           familyi={R\bibinitperiod},
+           given={Federico},
+           giveni={F\bibinitperiod}}}%
+        {{hash=f3c4bf38b95bdec9f8417e0a84984cc5}{%
+           family={Massari},
+           familyi={M\bibinitperiod},
+           given={Giuseppe},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4a389c3688d44a0f48e29f8a3a776229}{%
+           family={Fornaciari},
+           familyi={F\bibinitperiod},
+           given={William},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{90b05774e46a10ca07899c813aee65e8}
+      \strng{fullhash}{90b05774e46a10ca07899c813aee65e8}
+      \strng{bibnamehash}{90b05774e46a10ca07899c813aee65e8}
+      \strng{authorbibnamehash}{90b05774e46a10ca07899c813aee65e8}
+      \strng{authornamehash}{90b05774e46a10ca07899c813aee65e8}
+      \strng{authorfullhash}{90b05774e46a10ca07899c813aee65e8}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The increasing functional and nonfunctional requirements of real-time applications, the advent of mixed criticality computing, and the necessity of reducing costs are leading to an increase in the interest for employing COTS hardware in real-time domains. In this scenario, the Linux kernel is emerging as a valuable solution on the software side, thanks to the rich support for hardware devices and peripherals, along with a well-established programming environment. However, Linux has been developed as a general-purpose operating system, followed by several approaches to introduce actual real-time capabilities in the kernel. Among these, the PREEMPT_RT patch, developed by the kernel maintainers, has the goal to increase the predictability and reduce the latencies of the kernel directly modifying the existent kernel code. This article aims at providing a survey of the state-of-the-art approaches for building real-time Linux-based systems, with a focus on PREEMPT\_RT, its evolution, and the challenges that should be addressed in order to move PREEMPT_RT one step ahead. Finally, we present some applications and use cases that have already benefited from the introduction of this patch.}
+      \field{issn}{0360-0300}
+      \field{journaltitle}{ACM Comput. Surv.}
+      \field{month}{2}
+      \field{number}{1}
+      \field{title}{The Real-Time Linux Kernel: A Survey on PREEMPT\_RT}
+      \field{volume}{52}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1145/3297714
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3297714
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3297714
+      \endverb
+      \keyw{commercial-off-the-shelf,Linux}
+    \endentry
+    \entry{hackster-real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e56254dce3561eb08b4ea9e24e5df943}{%
+           family={Company]},
+           familyi={C\bibinitperiod},
+           given={LogicTronix\bibnamedelimb [FPGA\bibnamedelimb Design\bibnamedelimb +\bibnamedelimb Machine\bibnamedelima Learning},
+           giveni={L\bibinitperiod\bibinitdelim [\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim +\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{fullhash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{bibnamehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{authorbibnamehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{authornamehash}{e56254dce3561eb08b4ea9e24e5df943}
+      \strng{authorfullhash}{e56254dce3561eb08b4ea9e24e5df943}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{10}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{title}{Real Time Optimization in Petalinux with RT Patch on MPSoC}
+      \field{urlday}{7}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/LogicTronix/real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc-5f4832
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/LogicTronix/real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc-5f4832
+      \endverb
+    \endentry
+    \entry{trenz-electronic-wiki-how-to-install-the-linux-rt}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=e4052aff0dd541356ff24bb5000d9b77}{%
+           family={Errapart},
+           familyi={E\bibinitperiod},
+           given={Andrei},
+           giveni={A\bibinitperiod}}}%
+        {{hash=45b72a02be1eb193466c22949467961f}{%
+           family={Igelbrink},
+           familyi={I\bibinitperiod},
+           given={Felix},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{fullhash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{bibnamehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{authorbibnamehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{authornamehash}{a3914097df7ecd46682aa2a5d3686847}
+      \strng{authorfullhash}{a3914097df7ecd46682aa2a5d3686847}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Trenz Electronic Wiki}
+      \field{day}{5}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{title}{How to install the linux-rt (Real-Time) patch}
+      \field{urlday}{7}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://wiki.trenz-electronic.de/display/PD/How+to+install+the+linux-rt+%28Real-Time%29+patch
+      \endverb
+      \verb{url}
+      \verb https://wiki.trenz-electronic.de/display/PD/How+to+install+the+linux-rt+%28Real-Time%29+patch
+      \endverb
+    \endentry
+    \entry{xilinx-vivado-design-suite-user-guide-2022}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{16}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{langid}{english}
+      \field{title}{Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug973-vivado-release-notes-install-license/
+      \endverb
+    \endentry
+    \entry{github-vivado-board-files-for-digilent-fpga-boards}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e2b4a5847320f16617f60880b1151e53}{%
+           family={Digilent},
+           familyi={D\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{fullhash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{bibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorbibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
+      \field{extraname}{4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub.io}
+      \field{day}{25}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{title}{Vivado Board Files for Digilent FPGA Boards, 2022}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/Digilent/vivado-boards
+      \endverb
+      \verb{url}
+      \verb https://github.com/Digilent/vivado-boards
+      \endverb
+    \endentry
+    \entry{digilent-installing-vivado-vitis-and-digilent-board-files}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e2b4a5847320f16617f60880b1151e53}{%
+           family={Digilent},
+           familyi={D\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{fullhash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{bibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorbibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
+      \field{extraname}{5}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Digilent Reference}
+      \field{langid}{english}
+      \field{title}{Installing Vivado, Vitis, and Digilent Board Files}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://digilent.com/reference/programmable-logic/guides/installing-vivado-and-vitis
+      \endverb
+      \verb{url}
+      \verb https://digilent.com/reference/programmable-logic/guides/installing-vivado-and-vitis
+      \endverb
+    \endentry
+    \entry{hackster-getting-started-with-the-kria-kr260-in-petalinux}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=5b64c231e39b35a5c773db018a9abb44}{%
+           family={Knitter},
+           familyi={K\bibinitperiod},
+           given={Whitney},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{fullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{bibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorbibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authornamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorfullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{12}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{Getting Started with the Kria KR260 in PetaLinux 2022.1}
+      \field{urlday}{10}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-petalinux-2022-1-daec16
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-petalinux-2022-1-daec16
+      \endverb
+    \endentry
+    \entry{hackster-add-peripherial-support-to-kria-kr260-vivado}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=5b64c231e39b35a5c773db018a9abb44}{%
+           family={Knitter},
+           familyi={K\bibinitperiod},
+           given={Whitney},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{fullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{bibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorbibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authornamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorfullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{11}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{Add Peripheral Support to Kria KR260 Vivado 2022.1 Project}
+      \field{urlday}{10}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/whitney-knitter/add-peripheral-support-to-kria-kr260-vivado-2022-1-project-874960
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/whitney-knitter/add-peripheral-support-to-kria-kr260-vivado-2022-1-project-874960
+      \endverb
+    \endentry
+    \entry{hackster-getting-started-with-the-kria-kr260-in-vivado}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=5b64c231e39b35a5c773db018a9abb44}{%
+           family={Knitter},
+           familyi={K\bibinitperiod},
+           given={Whitney},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{fullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{bibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorbibnamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authornamehash}{5b64c231e39b35a5c773db018a9abb44}
+      \strng{authorfullhash}{5b64c231e39b35a5c773db018a9abb44}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{31}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{Getting Started with the Kria KR260 in Vivado 2022.1}
+      \field{urlday}{10}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-vivado-2022-1-33746d
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/whitney-knitter/getting-started-with-the-kria-kr260-in-vivado-2022-1-33746d
+      \endverb
+    \endentry
+    \entry{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{17}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Vitis Tutorials Github Repository}
+      \field{day}{22}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{title}{Vitis Custom Embedded Platform Creation Example on KV260 – Step 1: Create the Vivado Hardware Design and Generate XSA}
+      \field{urlday}{13}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step1.html
+      \endverb
+      \verb{url}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step1.html
+      \endverb
+    \endentry
+    \entry{xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{18}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Documentation}
+      \field{day}{11}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{title}{Zynq UltraScale+ MPSoC Processing System Product Guide (PG201)}
+      \field{urlday}{13}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/pg201-zynq-ultrascale-plus-processing-system/Fabric-Reset-Enable
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/pg201-zynq-ultrascale-plus-processing-system/Fabric-Reset-Enable
+      \endverb
+    \endentry
+    \entry{xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=5d88b0bffb5a0ba7e4824bc280ad27d3}{%
+           family={Admin},
+           familyi={A\bibinitperiod},
+           given={Confluence\bibnamedelima Wiki},
+           giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=1152796da0180131da1e64cbe5c3ef09}{%
+           family={Bhatt},
+           familyi={B\bibinitperiod},
+           given={Madhav},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{cf3494ef1ecfe3186427f88810f46864}
+      \strng{fullhash}{cf3494ef1ecfe3186427f88810f46864}
+      \strng{bibnamehash}{cf3494ef1ecfe3186427f88810f46864}
+      \strng{authorbibnamehash}{cf3494ef1ecfe3186427f88810f46864}
+      \strng{authornamehash}{cf3494ef1ecfe3186427f88810f46864}
+      \strng{authorfullhash}{cf3494ef1ecfe3186427f88810f46864}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Wiki}
+      \field{day}{24}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{Zynq UltraScale+ MPSoC Restart solution}
+      \field{urlday}{13}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842142/GPIO+User+Space+App
+      \endverb
+      \verb{url}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842142/GPIO+User+Space+App
+      \endverb
+    \endentry
+    \entry{xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation}{incollection}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=3589debb4784af4649a419cf54898994}{%
+           family={Zakopal},
+           familyi={Z\bibinitperiod},
+           given={Petr},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{3fff8172e252256b75e2af3bc810c977}
+      \strng{fullhash}{3fff8172e252256b75e2af3bc810c977}
+      \strng{bibnamehash}{3fff8172e252256b75e2af3bc810c977}
+      \strng{authorbibnamehash}{3fff8172e252256b75e2af3bc810c977}
+      \strng{authornamehash}{3fff8172e252256b75e2af3bc810c977}
+      \strng{authorfullhash}{3fff8172e252256b75e2af3bc810c977}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Support Community Forum}
+      \field{day}{18}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{title}{[Kria SOM KR260 Starter Kit] Schematic (pdf) vs constrains (xdc) pin confusion. Possible explanation on fan pinout.}
+      \field{urlday}{13}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://support.xilinx.com/s/question/0D54U00006alUwcSAE/kria-som-kr260-starter-kit-schematic-pdf-vs-constrains-xdc-pin-confusion-possible-explanation-on-fan-pinout?language=en_US
+      \endverb
+      \verb{url}
+      \verb https://support.xilinx.com/s/question/0D54U00006alUwcSAE/kria-som-kr260-starter-kit-schematic-pdf-vs-constrains-xdc-pin-confusion-possible-explanation-on-fan-pinout?language=en_US
+      \endverb
+    \endentry
+    \entry{xilinx-github-vitis-tutorials-step-2-create-the-software-components}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{19}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Vitis Tutorials Github Repository}
+      \field{day}{16}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{title}{Vitis Custom Embedded Platform Creation Example on KV260 – Step 2: Step 2: Create the Software Components}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step2.html
+      \endverb
+      \verb{url}
+      \verb https://xilinx.github.io/Vitis-Tutorials/2022-1/build/html/docs/Vitis_Platform_Creation/Design_Tutorials/01-Edge-KV260/step2.html
+      \endverb
+    \endentry
+    \entry{axi-quad-spi-ip-product-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{20}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{26}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{title}{AXI Quad SPI v3.2 LogiCORE IP Product Guide}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/pg153-axi-quad-spi
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/pg153-axi-quad-spi
+      \endverb
+    \endentry
+    \entry{axi-timer-v-2-0-ip-product-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{21}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{5}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{title}{AXI Timer v2.0 LogiCORE IP Product Guide}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/v/u/en-US/pg079-axi-timer
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/v/u/en-US/pg079-axi-timer
+      \endverb
+    \endentry
+    \entry{devicetree-org-specification}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=7e4c57e298e5eb3d7a121e7767a3dc6b}{%
+           family={Limited},
+           familyi={L\bibinitperiod},
+           given={Linaro},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{fullhash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{bibnamehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{authorbibnamehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{authornamehash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \strng{authorfullhash}{7e4c57e298e5eb3d7a121e7767a3dc6b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Specification page}
+      \field{langid}{english}
+      \field{title}{The DeviceTree Specification}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.devicetree.org/
+      \endverb
+      \verb{url}
+      \verb https://www.devicetree.org/
+      \endverb
+    \endentry
+    \entry{youtube-devicetree-for-dummies}{incollection}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{YouTube}
+      \field{day}{15}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{note}{Kanál uživatele The Linux Foundation}
+      \field{title}{Device Tree for Dummies! - Thomas Petazzoni, Free Electrons}
+      \field{urlday}{14}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://youtu.be/m_NyYEBxfn8
+      \endverb
+      \verb{url}
+      \verb https://youtu.be/m_NyYEBxfn8
+      \endverb
+      \warn{\item Overwriting field 'month' with month value from field 'date' for entry 'youtube-devicetree-for-dummies'}
+    \endentry
+    \entry{xilinx-github-dfx-mgr}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{22}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub}
+      \field{day}{23}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{DFX-MGR Github Repository}
+      \field{urlday}{15}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/Xilinx/dfx-mgr
+      \endverb
+      \verb{url}
+      \verb https://github.com/Xilinx/dfx-mgr
+      \endverb
+    \endentry
+    \entry{xilinx-github-host-stream-free-running-kernel}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{23}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub}
+      \field{langid}{english}
+      \field{title}{Stream Free Running Kernel (HLS C/C++)}
+      \field{urlday}{19}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx.github.io/Vitis_Accel_Examples/2020.2/html/streaming_free_running_k2k.html
+      \endverb
+      \verb{url}
+      \verb https://xilinx.github.io/Vitis_Accel_Examples/2020.2/html/streaming_free_running_k2k.html
+      \endverb
+    \endentry
+    \entry{vitis-high-level-synthesis-user-guide}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{24}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AMD Xilinx Documentation Portal}
+      \field{day}{7}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{title}{Vitis High-Level Synthesis User Guide (UG1399)}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/r/en-US/ug1399-vitis-hls
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/r/en-US/ug1399-vitis-hls
+      \endverb
+    \endentry
+    \entry{microsemi-svm-min-max-algoritmus}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=a6c488e2b49d9d447b340648980c62c1}{%
+           family={Corporation},
+           familyi={C\bibinitperiod},
+           given={Microsemi},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{fullhash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{bibnamehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{authorbibnamehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{authornamehash}{a6c488e2b49d9d447b340648980c62c1}
+      \strng{authorfullhash}{a6c488e2b49d9d447b340648980c62c1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{User Guide}
+      \field{langid}{english}
+      \field{title}{Space Vector Modulation v4.1, User Guide, UG0468}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.microsemi.com/document-portal/doc_download/133496-ug0468-space-vector-modulation-v4-1-user-guide
+      \endverb
+      \verb{url}
+      \verb https://www.microsemi.com/document-portal/doc_download/133496-ug0468-space-vector-modulation-v4-1-user-guide
+      \endverb
+    \endentry
+    \entry{xilinx-github-vitis-accel-examples-stream-free-running-kernel}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{25}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Vitis Accel Examples Github Repository}
+      \field{langid}{english}
+      \field{title}{Stream Free Running Kernel (HLS C/C++)}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://xilinx.github.io/Vitis_Accel_Examples/2022.2/html/streaming_free_running_k2k.html
+      \endverb
+      \verb{url}
+      \verb https://xilinx.github.io/Vitis_Accel_Examples/2022.2/html/streaming_free_running_k2k.html
+      \endverb
+    \endentry
+    \entry{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=19947edb20f496d8ecef44bc1609a614}{%
+           family={Hosseinabady},
+           familyi={H\bibinitperiod},
+           given={Mohammad},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{fullhash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{bibnamehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{authorbibnamehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{authornamehash}{19947edb20f496d8ecef44bc1609a614}
+      \strng{authorfullhash}{19947edb20f496d8ecef44bc1609a614}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Hackster.io, an Avnet Community}
+      \field{day}{16}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{Vitis 2021.1 Embedded Platform for Zybo-Z7-20, 2018}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a
+      \endverb
+      \verb{url}
+      \verb https://www.hackster.io/mohammad-hosseinabady2/vitis-2021-1-embedded-platform-for-zybo-z7-20-d39e1a
+      \endverb
+    \endentry
+    \entry{xilinx-zynq-7000-socs-with-hardware-and-software-programmability}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{26}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Website}
+      \field{langid}{english}
+      \field{title}{SoCs with Hardware and Software Programmability}
+      \field{urlday}{11}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html
+      \endverb
+      \verb{url}
+      \verb https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html
+      \endverb
+    \endentry
+    \entry{github-petalinux-bsp-project}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=e2b4a5847320f16617f60880b1151e53}{%
+           family={Digilent},
+           familyi={D\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{fullhash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{bibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorbibnamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
+      \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
+      \field{extraname}{6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub.io}
+      \field{day}{29}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{title}{Zybo Petalinux BSP Project, 2018}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2022}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/Digilent/Petalinux-Zybo
+      \endverb
+      \verb{url}
+      \verb https://github.com/Digilent/Petalinux-Zybo
+      \endverb
+    \endentry
+    \entry{messinger-roy-gpio-and-petalinux-part-1}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3646c7aeea09d3b1af3d76dfbbb9740e}{%
+           family={Messinger},
+           familyi={M\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{fullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{bibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorbibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{LinkedIn Article}
+      \field{day}{20}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{title}{GPIO and Petalinux - Part 1}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-1-roy-messinger/
+      \endverb
+      \verb{url}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-1-roy-messinger/
+      \endverb
+    \endentry
+    \entry{messinger-roy-gpio-and-petalinux-part-2}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3646c7aeea09d3b1af3d76dfbbb9740e}{%
+           family={Messinger},
+           familyi={M\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{fullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{bibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorbibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{LinkedIn Article}
+      \field{day}{27}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{title}{GPIO and Petalinux - Part 2}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-2-roy-messinger/
+      \endverb
+      \verb{url}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-2-roy-messinger/
+      \endverb
+    \endentry
+    \entry{messinger-roy-gpio-and-petalinux-part-3}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=3646c7aeea09d3b1af3d76dfbbb9740e}{%
+           family={Messinger},
+           familyi={M\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{fullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{bibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorbibnamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{LinkedIn Article}
+      \field{day}{23}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{title}{GPIO and Petalinux - Part 3 (Go, UIO, Go!)}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-3-go-uio-roy-messinger/
+      \endverb
+      \verb{url}
+      \verb https://www.linkedin.com/pulse/gpio-petalinux-part-3-go-uio-roy-messinger/
+      \endverb
+    \endentry
+    \entry{xilinx-wiki-atlassian-gpio-user-space-app}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=5d88b0bffb5a0ba7e4824bc280ad27d3}{%
+           family={Admin},
+           familyi={A\bibinitperiod},
+           given={Confluence\bibnamedelima Wiki},
+           giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=8b0946217d1a061cdb5a786cd8dfb61b}{%
+           family={O'Neal},
+           familyi={O\bibinitperiod},
+           given={Terry},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{fullhash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{bibnamehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{authorbibnamehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{authornamehash}{ae2699e980d0489b4416695a69016ba3}
+      \strng{authorfullhash}{ae2699e980d0489b4416695a69016ba3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Wiki}
+      \field{day}{14}
+      \field{langid}{english}
+      \field{month}{1}
+      \field{title}{GPIO User Space App}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842142/GPIO+User+Space+App
+      \endverb
+      \verb{url}
+      \verb https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842142/GPIO+User+Space+App
+      \endverb
+    \endentry
+    \entry{xilinx-docs-zynq-7000-reference-manual}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=994f3e122145764b71d4aa0e84e1a2eb}{%
+           family={Inc.},
+           familyi={I\bibinitperiod},
+           given={Xilinx},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{fullhash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{bibnamehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{authorbibnamehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{authornamehash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \strng{authorfullhash}{994f3e122145764b71d4aa0e84e1a2eb}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Xilinx Documentation Portal}
+      \field{day}{2}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{title}{Zynq-7000 SoC Technical Reference Manual (UG585)}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://docs.xilinx.com/v/u/en-US/ug585-Zynq-7000-TRM
+      \endverb
+      \verb{url}
+      \verb https://docs.xilinx.com/v/u/en-US/ug585-Zynq-7000-TRM
+      \endverb
+    \endentry
+    \entry{mathworks-antiwindup-clamping}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=8687eae34a3830fc0c113d9d65382e90}{%
+           family={The\bibnamedelima MathWorks},
+           familyi={T\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{fullhash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{bibnamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authorbibnamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authornamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authorfullhash}{8687eae34a3830fc0c113d9d65382e90}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The MathWorks, Inc. Videos and Webinars}
+      \field{langid}{english}
+      \field{title}{Understanding PID Control, Part 2: Anti-windup for PID control}
+      \field{urlday}{4}
+      \field{urlmonth}{3}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.mathworks.com/videos/understanding-pid-control-part-2-expanding-beyond-a-simple-integral-1528310418260.html
+      \endverb
+      \verb{url}
+      \verb https://www.mathworks.com/videos/understanding-pid-control-part-2-expanding-beyond-a-simple-integral-1528310418260.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

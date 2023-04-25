@@ -2116,7 +2116,7 @@ OCL_CHECK(err, q.finish());
 
 		\fbar
 		\subsection{CPU/FPGA Model}\label{subsec:cpu-fpga}
-			Nejrozsáhlejší částí hlavního programu je podaplikace s~názvem \gls{abbreviation:cpu}/\gls{abbreviation:fpga} Model, která využívá dvou kernelů, které komunikují přes \gls{abbreviation:ps}. Při prozkoumávání možností využití platformy autor narazil na možnost, že by kernely streamovali data přímo mezi sebou, bez nutnosti použití \gls{abbreviation:ps}. Tento způsob přenosu dat nebyl v~této práci využit, ale je plánováno jeho prozkoumání. Tyto kernely by bylo také vhodné realizovat stylem \textit{free running}, kdy by data byla z~\gls{abbreviation:ps} streamovaná přímo do jednotlivých kernelů v~okamžiku, když by byla v~PS k~dispozici. To by nejspíše umožnilo rychlejší reakci kernelu, která by přinesla zkrácení doby potřebné na přesun dat z~PS do \gls{abbreviation:pl} a naopak. Právě doba, potřebná na přesun hodnot představuje v~algoritmu největší časovou položku, kterou je třeba minimalizovat. Experimentálně zjištěné časy a waterfall graf je uveden v~sekci \ref{subsec:dosazene-vysledky-cpu-fpga}\par
+			Nejrozsáhlejší částí hlavního programu je podaplikace s~názvem \gls{abbreviation:cpu}/\gls{abbreviation:fpga} Model, která využívá dvou kernelů, které komunikují přes \gls{abbreviation:ps}. Při prozkoumávání možností využití platformy autor narazil na možnost, že by kernely streamovali data přímo mezi sebou, bez nutnosti použití \gls{abbreviation:ps}. Tento způsob přenosu dat nebyl v~této práci využit, ale je plánováno jeho prozkoumání. Tyto kernely by bylo také vhodné realizovat stylem \textit{free running}, kdy by data byla z~\gls{abbreviation:ps} streamovaná přímo do jednotlivých kernelů v~okamžiku, když by byla v~PS k~dispozici. To by nejspíše umožnilo rychlejší reakci kernelu, která by přinesla zkrácení doby potřebné na přesun dat z~PS do \gls{abbreviation:pl} a naopak. Právě doba, potřebná na přesun hodnot představuje v~algoritmu největší časovou položku, kterou je třeba minimalizovat. Experimentálně zjištěné časy a waterfall graf je uveden v~sekci \ref{subsec:poznatky-ziskane-profilovanim-aplikaci-cpu-fpga}\par
 			% dodat odkaz na sekci, kde budou umístěné výsledky
 			Algoritmus, využívaný v~této práci, je uveden na obr. \ref{fig:cpu-fpga-model}.\par
 			K~inicializaci PL je využita totožná preambule jako v~\hyperref[subsec:keyboard-input]{\textit{Keyboard Input}} podaplikaci. Stejným způsobem dochází i k~nastavení potřebných bufferů a parametrů modelů a simulace.\par
@@ -2134,7 +2134,7 @@ OCL_CHECK(err, q.finish());
 
 			\subsubsection{Zobrazení výsledků simulace}\label{subsubsec:zobrazeni-vysledku-simulace}
 			Aby bylo možné vizuálně pozorovat výsledky simulace, bylo nutné data ze souboru \texttt{globalSimulationData.csv} vizualizovat způsobem, jež umožňuje rychlé zpracování velikého množství dat a v~nejlepším případě je Open Source.\par
-			První přístup spočíval ke kontrole výsledků v~programu Wolfram Mathematica. Ovšem při kroku simulace $1 \mu$s a simulovaném čase 1 s~se jednalo o~výpis jednoho milion hodnot. Vykreslení takového množství hodnot, které byly přímkově spojeny, bylo příliš náročné pro zařízení autora a trvalo přiliš dlouho dobu. A~protože Wolfram Mathematika není Open Source, bylo od tohoto způsobu upuštěno. Další možností bylo využití programu MATLAB, ovšem opět není Open Source a autor dbal na co největší otevřenosti projektu. Proto bylo nakonec využito jazyku Python, jež není zatížen problémem \textit{Vendor lock-in} a vykreslení požadovaného grafu se stejnou kvalitou jako v~MATLABu nebo ve Wolfram Mathematica trvalo velmi krátkou dobu. Kód č. \ref{lst:python-skript-tok-rychlost} vyprodukuje graf č. \ref{fig:k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru}. Zobrazené výsledky odpovídají žádaným hodnotám, regulovaných veličin. V~simulaci byly nastaveny požadované hodnoty:
+			První přístup spočíval ke kontrole výsledků v~programu Wolfram Mathematica. Ovšem při kroku simulace $1 \mu$s a simulovaném čase 1 s~se jednalo o~výpis jednoho milion hodnot. Vykreslení takového množství hodnot, které byly přímkově spojeny, bylo příliš náročné pro zařízení autora a trvalo přiliš dlouho dobu. A~protože Wolfram Mathematika není Open Source, bylo od tohoto způsobu upuštěno. Další možností bylo využití programu MATLAB, ovšem opět není Open Source a autor dbal na co největší otevřenosti projektu. Proto bylo nakonec využito jazyku Python, jež není zatížen problémem \textit{Vendor lock-in} a vykreslení požadovaného grafu se stejnou kvalitou jako v~MATLAB™u nebo ve Wolfram Mathematica trvalo velmi krátkou dobu. Kód č. \ref{lst:python-skript-tok-rychlost} vyprodukuje graf č. \ref{fig:k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru}. Zobrazené výsledky odpovídají žádaným hodnotám, regulovaných veličin. V~simulaci byly nastaveny požadované hodnoty:
 			\begin{itemize}
 				\item velikost magnetického toku rotoru \gls{symbol:psi2} = 0.9032 Wb,
 				\item velikost mechanické otáčivé rychlosti \gls{symbol:mechanicka-uhlova-rychlost} = 10 s$^{-1}$ v~čase $t$ = 0.6 s.
@@ -2224,9 +2224,9 @@ OCL_CHECK(err, krnl_CurVelLoadLegacy = cl::Kernel(
 	Po potřebných deklaracích a definicích pro správnou funkci kernelu je dynamicky naalokována paměť pro určité konstatní parametry simulace, jako je krok simulace, časové rozmezí simulace, počet kroků. Protože je v~podaplikaci simulován zjednodušený $I$-$n$ model, kdy není uvažována změna parametrů stroje během simulace (např. rezistivita rotorového vinutí), jsou v~bloku \texttt{PARAMETERS SETTINGS} definovány také parametry stroje vstupující do myšleného modelu.\par
 	Do této aplikace vstupují předpočítané nebo změřené hodnoty následujících veličin:
 	\begin{itemize}
-		\item proud $I1$, jež reprezentuje velikost proudu statoru $i_1 (t)$ procházející první fází do řízeného motoru,
-		\item proud $I2$, jež reprezentuje velikost proudu statoru $i_2 (t)$ procházející druhou fází do řízeného motoru,
-		\item proud $I3$, jež reprezentuje velikost proudu statoru $i_3 (t)$ procházející třetí fází do řízeného motoru,
+		\item proud \gls{symbol:i1-velikost-program}, jež reprezentuje velikost proudu statoru \gls{symbol:i1a} procházející první fází do řízeného motoru,
+		\item proud \gls{symbol:i2-velikost-program}, jež reprezentuje velikost proudu statoru \gls{symbol:i1b} procházející druhou fází do řízeného motoru,
+		\item proud \gls{symbol:i3-velikost-program}, jež reprezentuje velikost proudu statoru \gls{symbol:i1c} procházející třetí fází do řízeného motoru,
 		\item mechanická otáčivá rychlost rotoru mototu \gls{symbol:mechanicka-uhlova-rychlost}.
 	\end{itemize}
 	Uvedené hodnoty jsou načítány ze souboru \texttt{outputData.csv}, který je strukturován dle formátu, uvedeném v~\ref{lst:output-data-csv-struktura}. Formát nevyužívá nových řádků pro oddělení sady dat, pouze využívá oddělení pomocí čárky. Tento přístup byl zvolen aby byla zajištěna co nejmenší velikost souboru a aby bylo maximálně zjednodušeno načítání dat pomocí funkce \texttt{std::getline}.\par
@@ -2234,7 +2234,7 @@ OCL_CHECK(err, krnl_CurVelLoadLegacy = cl::Kernel(
 	\begin{lstlisting}[language={Text}, caption={Struktura souboru outputData, ze kterého jsou načítány hodnoty pro akcelerovaný kernel.}, label={lst:output-data-csv-struktura}]
 time,i1,i2,i3,MechanicalAngularVelocity.,..,...
 \end{lstlisting}
-	Po načtení hodnot do definovaných proměnných jsou vytvořeny v~PS buffery, které jsou mapovány na jednotlivé adresy proměnných a mají rozsah jednotlivých proměnných, ke kterým jsou mapovány. Poté, jako u~všech představených aplikací s~kernelem, kde není využíván přístup free running kernelu \cite{xilinx-github-host-stream-free-running-kernel}, jsou nastaveny buffery jako jednotlivé vstupní parametry kernelu. Dále ve vyznačené části \texttt{krnl\_CurVelLoadLegacy} na obr. \ref{fig:preloaded-data} je provedena sada příkazů pro přenos hodnot proměnných pomocí bufferů do globální paměti, přístupné z~\gls{abbreviation:pl}, spuštění kernelu a opětovné přenesení výsledných hodnot z~globální paměti do \gls{abbreviation:ps}.\par
+	Po načtení hodnot do definovaných proměnných jsou vytvořeny v~\gls{abbreviation:ps} buffery, které jsou mapovány na jednotlivé adresy proměnných a mají rozsah jednotlivých proměnných, ke kterým jsou mapovány. Poté, jako u~všech představených aplikací s~kernelem, kde není využíván přístup free running kernelu \cite{xilinx-github-host-stream-free-running-kernel}, jsou nastaveny buffery jako jednotlivé vstupní parametry kernelu. Dále ve vyznačené části \texttt{krnl\_CurVelLoadLegacy} na obr. \ref{fig:preloaded-data} je provedena sada příkazů pro přenos hodnot proměnných pomocí bufferů do globální paměti, přístupné z~\gls{abbreviation:pl}, spuštění kernelu a opětovné přenesení výsledných hodnot z~globální paměti do \gls{abbreviation:ps}.\par
 	V~této legacy aplikaci je při výpisu hodnot vybraných veličin také provedeno ukládání hodnot do csv souboru \texttt{outputCurVel2.csv}. Struktura tohoto legacy souboru je v~kódu \ref{lst:output-cur-vel-2-csv}.\par
 	Po ukončení podaplikace je opět dealokována paměť proměnných, která byla dynamicky alokována.
 
@@ -2593,7 +2593,7 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 
 		\subsubsection{Implementace modelu asynchronního motoru}
 			Diferenciální rovnice matematického modelu asynchronního motoru (popsané v~části \hyperref[subsec:matematicky-popis-kompletniho-modelu-stroje]{\textit{Matematický popis „kompletního“ modelu stroje}}) jsou v~této práci opět řešeny pomocí metody RK4. Implementace této metody je popsána v~\hyperref[subsubsec:implementace-vypoctu-diferencialnich-rovnic]{\textit{Implementace výpočtu diferenciálních rovnic}}.\par
-			Oproti \texttt{krnl\_calculateCurVelModel}, kernel \texttt{krnl\_calculateInvMot}, realizovaný v~době psaní této práce, téměř nevyužívá paradigmu \textit{Producer–Consumer}. V~budoucí práci je plánováno využít realizovaný systém pro HIL a proto bude třeba \textit{Producer-Consumer} přístup ve značné míře aplikovat. Po aplikaci ovšem dojde ke významné komplikaci kódu, protože zavedení \textit{Slice} funkcí způsobí znásobení počtu proměnných v~kernelu. Jen na jednu sadu mezivýpočtů prvků $k_{i1}$ pro velikosti proudů statoru \gls{symbol:i1alpha}, \gls{symbol:i1beta} a magnetických toků rotoru \gls{symbol:psi2alpha}, \gls{symbol:psi2beta} bude místo 6 vstupních proměnných potřeba proměnných 24. (je však možné použít pole a datový typ float, ovšem stále se jedná o~znečitelnění kódu)\par
+			Oproti \texttt{krnl\_calculateCurVelModel}, kernel \texttt{krnl\_calculateInvMot}, realizovaný v~době psaní této práce, téměř nevyužívá paradigmu \textit{Producer–Consumer}. V~budoucí práci je plánováno využít realizovaný systém pro \gls{abbreviation:hil} a proto bude třeba \textit{Producer-Consumer} přístup ve značné míře aplikovat. Po aplikaci ovšem dojde ke významné komplikaci kódu, protože zavedení \textit{Slice} funkcí způsobí znásobení počtu proměnných v~kernelu. Jen na jednu sadu mezivýpočtů prvků $k_{i1}$ pro velikosti proudů statoru \gls{symbol:i1alpha}, \gls{symbol:i1beta} a magnetických toků rotoru \gls{symbol:psi2alpha}, \gls{symbol:psi2beta} bude místo 6 vstupních proměnných potřeba proměnných 24. (je však možné použít pole a datový typ float, ovšem stále se jedná o~znečitelnění kódu)\par
 
 
 	\fbar
@@ -2613,21 +2613,21 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 \end{figure}
 
 	\subsection{SPI komunikace}\label{subsec:spi-komunikace}
-	V~částech \hyperref[subsec:spi]{\textit{SPI}} a \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}} je představen způsob využití \gls{abbreviation:ip} bloku AXI Quad SPI. Pomocí tohoto bloku je možné provádět komunikaci s~externími zařízeními. Pokud by se jednalo o~skutečnou aplikaci pro řízení elektrického pohonu, byly by jako externí zařízení použity ADC a DAC. Pro ukázku funkčnosti SPI komunikace byl využit prvek MAX7219, který vyžaduje napájecí napětí v~rozmezí 4 V~až 5 V. Ovšem jak již bylo v~části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}} uvedeno, výstupní napětí využitých PMOD konektorů je pouze 3,3 V. Aby bylo možné tento obvod využít k~demonstraci, je pro připojení PMOD konektorům k~obovdu MAX7219 využit převodník úrovní. Finální experimentální zapojení pro testování SPI komunikace je zobrazeno na \ref{fig:spi-test-connection}.
+	V~částech \hyperref[subsec:spi]{\textit{SPI}} a \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}} je představen způsob využití \gls{abbreviation:ip} bloku \gls{abbreviation:axi} Quad \gls{abbreviation:spi}. Pomocí tohoto bloku je možné provádět komunikaci s~externími zařízeními. Pokud by se jednalo o~skutečnou aplikaci pro řízení elektrického pohonu, byly by jako externí zařízení použity \gls{abbreviation:adc} a \gls{abbreviation:dac}. Pro ukázku funkčnosti \gls{abbreviation:spi} komunikace byl využit prvek MAX7219, který vyžaduje napájecí napětí v~rozmezí 4 V~až 5 V. Ovšem jak již bylo v~části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}} uvedeno, výstupní napětí využitých \gls{abbreviation:pmod} konektorů je pouze 3,3 V. Aby bylo možné tento obvod využít k~demonstraci, je pro připojení \gls{abbreviation:pmod} konektorům k~obovdu MAX7219 využit převodník úrovní. Finální experimentální zapojení pro testování \gls{abbreviation:spi} komunikace je zobrazeno na \ref{fig:spi-test-connection}.
 
 
 
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/pdf/spi-test-connection.pdf}
-		\caption{Názorné schéma připojení PMOD 3 Xilinx Kria KR260 k~LED Matici s~obvodem MAX7219.}
+		\caption{Názorné schéma připojení \gls{abbreviation:pmod} 3 Xilinx Kria KR260 k~\gls{abbreviation:led} Matici s~obvodem MAX7219.}
 		\label{fig:spi-test-connection}
 	\end{figure}
 
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/python-graph/spi-osciloscope-data/pdf/clk-data-full-graph.pdf}
-		\caption{Oscilogram znázorňující časové průběhy SPI komunikace – 10 MHz CLK signál a MOSI signál, přenášející data 0x10000001.}
+		\caption{Oscilogram znázorňující časové průběhy \gls{abbreviation:spi} komunikace – 10 MHz \gls{abbreviation:clk} signál a \gls{abbreviation:mosi} signál, přenášející data 0x10000001.}
 		\label{fig:clk-data-full-graph}
 	\end{figure}
 
@@ -2635,26 +2635,26 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/python-graph/spi-osciloscope-data/pdf/clk-mid-graph.pdf}
-		\caption{Oscilogram znázorňující detail časového průběhu SPI komunikace – 10 MHz CLK signál.}
+		\caption{Oscilogram znázorňující detail časového průběhu \gls{abbreviation:spi} komunikace – 10 MHz \gls{abbreviation:clk} signál.}
 		\label{fig:clk-mid-graph}
 	\end{figure}
 
 
 
-	V~rámci prozkoumávání funkčnosti SPI komunikace byly pomocí osciloskopu změřeny oscilogramy pro signály \textcolor{ctublue}{CLK} a \textcolor{ctured}{MOSI}.\par
-	Na grafu \ref{fig:clk-data-full-graph} je možné pozorovat průběhy obou signálů a jejich vzájemnou závislost. Je vidět, že náběžná hrana signálu MOSI začíná před náběžnou hranou CLK. Tato souslednost je vytvořena z~důvodu, aby již v~okamžiku, kdy vzniká náběžná hrana \textcolor{ctublue}{CLK} signálu, byla úroveň signálu \textcolor{ctured}{MOSI} ustálená na hodnotě 3,3 V.\par
+	V~rámci prozkoumávání funkčnosti \gls{abbreviation:spi} komunikace byly pomocí osciloskopu změřeny oscilogramy pro signály \textcolor{ctublue}{\gls{abbreviation:clk}} a \textcolor{ctured}{\gls{abbreviation:mosi}}.\par
+	Na grafu \ref{fig:clk-data-full-graph} je možné pozorovat průběhy obou signálů a jejich vzájemnou závislost. Je vidět, že náběžná hrana signálu \gls{abbreviation:mosi} začíná před náběžnou hranou \gls{abbreviation:clk}. Tato souslednost je vytvořena z~důvodu, aby již v~okamžiku, kdy vzniká náběžná hrana \textcolor{ctublue}{\gls{abbreviation:clk}} signálu, byla úroveň signálu \textcolor{ctured}{\gls{abbreviation:mosi}} ustálená na hodnotě 3,3 V.\par
 	Na obou signálech je vidět, že nedochází při náběžné hraně k~dosáhnutí přesně úrovně 3,3 V, ale k~překmitnutí hodnoty až na úroveň téměr 4,38431 V. Při sestupné hraně dochází k~podkmitnutí hodnoty 0 V~na hodnotu -0,854902 V. Při komunikaci s~některými prvky nejsou tyto překmity žádoucí a bylo by třeba provést kroky k~jejich odstranění. Důvod nedodržení úrovní by bylo vhodné více prozkoumat, ovšem tento úkol by byl nad rámec této práce a je možné mu věnovat úsilí v~nadcházejících pracích.\par
-	V~případě, že nedochází k~odesílání signálu \textcolor{ctured}{MOSI} bylo pomocí oscilogramu \ref{fig:clk-data-full-graph} zjištěno, že se v~signálu objevuje šum v~napěťovém rozmezí přibližně - 0.200 V~až 0.170 V. Po ukončení přenosu signálu \textcolor{ctublue}{CLK} je šum již relativně malý. Je tudíž možné předpokládat, že rušení je způsobeno přenosem \textcolor{ctublue}{CLK} signálu pomocí vodiče, který nezaručuje dostatečné odstínění možného EMC rušení a způsobuje tvorbu šumu v~\textcolor{ctured}{MOSI} signálu.
+	V~případě, že nedochází k~odesílání signálu \textcolor{ctured}{\gls{abbreviation:mosi}} bylo pomocí oscilogramu \ref{fig:clk-data-full-graph} zjištěno, že se v~signálu objevuje šum v~napěťovém rozmezí přibližně - 0.200 V~až 0.170 V. Po ukončení přenosu signálu \textcolor{ctublue}{\gls{abbreviation:clk}} je šum již relativně malý. Je tudíž možné předpokládat, že rušení je způsobeno přenosem \textcolor{ctublue}{\gls{abbreviation:clk}} signálu pomocí vodiče, který nezaručuje dostatečné odstínění možného \gls{abbreviation:emc} rušení a způsobuje tvorbu šumu v~\textcolor{ctured}{\gls{abbreviation:mosi}} signálu.
 
 	\fbar
-\section{Dosažené výsledky}
+\section{Poznatky získané profilováním aplikací}
 % je třeba zas využít xrt_coreutil a měření pomocí přidání kódu do aplikace, ale asi nebude možné používat na celých 1M dat, vyřešit a přidat možnost ovládat počet iterací
-V této sekci budou představeny výsledky a poznatky ohledně vytvořčných aplikací, které byly získány analýzou výstupů profilování host aplikace pomocí knihovny \texttt{xrt\_coreutil} a programu \textit{Vitis Analyzer}.\par
+V~této sekci budou představeny výsledky a poznatky ohledně vytvořených aplikací, které byly získány profilovánmí host aplikace (běžící na \gls{abbreviation:ps}) pomocí knihovny \texttt{xrt\_coreutil} a programu \textit{Vitis Analyzer}.\par
 
-	\subsection{Preloaded Data – Legacy Application}\label{subsec:dosazene-vysledky-preloaded-data-legacy-application}
-		V části \hyperref[subsec:preloaded-data]{\textit{Preloaded Data}} byla představena aplikace, ktrá používá starší verzi kódu v kernelu a PS.\par
+	\subsection{Preloaded Data – Legacy Application}\label{subsec:poznatky-ziskane-profilovanim-aplikaci-preloaded-data-legacy-application}
+		V~části \hyperref[subsec:preloaded-data]{\textit{Preloaded Data}} byla představena aplikace, ktrá používá starší verzi kódu v~kernelu a \gls{abbreviation:ps}.\par
 		Struktura systému aplikace, která je vizualizována pomocí Vitis Analyzer je zobrazena na \ref{fig:legacy-rt-step-0.000001-system-diagram-crop}.\par
-		Informace o skutečném využití zdrojů kernelem je pro porovnání jednotlivých aplikací, interagující s kernelem, uvedeno v tab. \ref{tab:vyuziti-zdroju-pl-pro-akcelerovane-aplikace}.
+		Informace o~skutečném využití zdrojů kernelem je pro porovnání jednotlivých aplikací, interagující s~kernelem, uvedeno v~tab. \ref{tab:vyuziti-zdroju-pl-pro-akcelerovane-aplikace}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -2665,20 +2665,20 @@ V této sekci budou představeny výsledky a poznatky ohledně vytvořčných ap
 
 
 
-		Tuto aplikaci je převážně vhodné analyzovat z pohledu rychlosti zpracování dat v kernelu v závislosti na velikosti přenášených dat. Aplikace byla testována pro zpracování jednoho milionu a sto tisíc sad hodnot velikostí fázových statorových proudů ($i_\text{1a}$, $i_\text{1b}$, $i_\text{1c}$, v programu označeny jako \texttt{I1}, \texttt{I2}, \texttt{I3}), velikosti mechanické otáčivé rychlosti motoru $\Omega$ a složek magnetického toku rotoru $\psi_{2\alpha}$ a $\psi_{2\beta}$.\par
-		V tabulce \ref{tab:porovnani-vybranych-hodnot-behu-kernelu-pro-1M-100k-sad-hodnot} jsou uvedeny vybrané hodnoty, získané analýzou běhu kernelů.\par
-		Dle získaných výsledků je možné konstatovat, že pokud po dokončení výpočtu kernelu dochází k ukládání hodnot do souboru a výpisu hodnot do konzole, není možné o navýšení doby běhu kernelu signifikantní. V případě, že byly aplikace spouštěny po sobě, docházelo k mírnému kolísání hodnot \textit{total runtime}. Tudíž dané navýšení hodnoty mezi UVH a BUVH měřením je způsobeno nejspíše nestálostí systému a může být předmětem dalšího zkoumání. Zrychlení běhu kernelu se např. projevuje po opakovaném spuštění kernelu, kdy vlivem zabudované optimalizace nedochází ke změně uložených hodnot, které jsou dány jako konstanty apod.\par
-		Je ovšem vhodné zmínit, že počet zpracovávaných hodnot v kernelu má značný vliv na dobu potřebnou na zpracování jedné sady hodnot. Po přepočtu hodnoty \textit{total runtime} na \textit{total runtime / number of steps}  je vidět, že při zpracování desetinásobného počtu sad hodnot dochází ke snížení času potřebného na zpracování jedné sady téměř pětkrát. Při přepočtu doby potřebné na přenos hodnot veličin do a z globální paměti, označené jako \textit{migrateMemObjects}, dochází ke snížení času téměř osmkrát.\par
-		U uvedených faktů je možné usoudit, že akcelerovaná aplikace pomocí kernelu v PL těží z rozsahu zpracovávaných dat. Pokud je do globální paměti přeneseno veliké množství dat, které je kernelem zpracováno, bude doba potřebná na zpracování jedné hodnoty kratší, než pokud bude přeneseno dat méně. Proto se vyplácí akcelerovat aplikace, kde dochází k náročným matematickým výpočtům mnoha hodnot, které jsou prováděny nejlépe v cyklech.\par
-		Negativní závěr v případě použití malého množství dat je možné pozorovat i u aplikace \hyperref[subsec:dosazene-vysledky-cpu-fpga]{\textit{CPU/FPGA}}.\par
-		Je vhodné doplnit informaci z \cite{kria-k26-som-ds}, že Xilinx MPSoC K26 používá pro přenost dat z PS do globální paměti pro PL PCIe s propustností dat až 6.0 Gb/s. V tomto případě se nejedná o PCIe pro komunikaci s externími prvky, ale s globální pamětí umístěné na MPSoC. Tudíž samotný přesun dat mezi pamětí PS a globální pamětí by měl probíhat vysokou rychlostí. V jednom z testovacích běhů aplikace \hyperref[subsec:preloaded-data]{\textit{Preloaded Data}} dochází k blokování běhu programu vlivem zápisu dat do globální paměti z PS po dobu přibližně 1,2 ms a vlivem čtení výsledných hodnot z této paměti po dobu přibližně 0,380 ms.\par
-		Je vhodné upozornit, že sice v obr. \ref{fig:legacy-rt-step-0.000001-timeline-trace-execution} je po přiblížení fialově naznačená aktivita \textit{Paralel Write} nazvána jako \textit{Host to Memory}. V případě v okamžiku běhu kernelu nedochází host programem k zápisu do globální paměti. Jedná se tedy nejspíše o zápis PL do globální paměti, ze které budou poté pomocí jiné instrukce čteny výsledné hodnoty do paměti PS. Ale i tato úvaha může být nesprávná, protože po ukončení běhu kernelu a vykonání instrukce \textit{Read}, dochází až do konce celkového běhu programu k instrukci \textit{Paralel Write}.\par
+		Tuto aplikaci je převážně vhodné analyzovat z~pohledu rychlosti zpracování dat v~kernelu v~závislosti na velikosti přenášených dat. Aplikace byla testována pro zpracování jednoho milionu a sto tisíc sad hodnot velikostí fázových statorových proudů (\gls{symbol:i1a}, \gls{symbol:i1b}, \gls{symbol:i1c}, v~programu označeny jako \texttt{\gls{symbol:i1-velikost-program}}, \texttt{\gls{symbol:i2-velikost-program}}, \texttt{\gls{symbol:i3-velikost-program}}), velikosti mechanické otáčivé rychlosti motoru \gls{symbol:mechanicka-uhlova-rychlost} a složek magnetického toku rotoru \gls{symbol:psi2alpha} a \gls{symbol:psi2beta}.\par
+		V~tabulce \ref{tab:porovnani-vybranych-hodnot-behu-kernelu-pro-1M-100k-sad-hodnot} jsou uvedeny vybrané hodnoty, získané analýzou běhu kernelů.\par
+		Dle získaných výsledků je možné konstatovat, že pokud po dokončení výpočtu kernelu dochází k~ukládání hodnot do souboru a výpisu hodnot do konzole, není možné o~navýšení doby běhu kernelu signifikantní. V~případě, že byly aplikace spouštěny po sobě, docházelo k~mírnému kolísání hodnot \textit{total runtime}. Tudíž dané navýšení hodnoty mezi \gls{abbreviation:uvh} a \gls{abbreviation:buvh} měřením je způsobeno nejspíše nestálostí systému a může být předmětem dalšího zkoumání. Zrychlení běhu kernelu se např. projevuje po opakovaném spuštění kernelu, kdy vlivem zabudované optimalizace nedochází ke změně uložených hodnot, které jsou dány jako konstanty apod.\par
+		Je ovšem vhodné zmínit, že počet zpracovávaných hodnot v~kernelu má značný vliv na dobu potřebnou na zpracování jedné sady hodnot. Po přepočtu hodnoty \textit{total runtime} na \textit{total runtime / number of steps}  je vidět, že při zpracování desetinásobného počtu sad hodnot dochází ke snížení času potřebného na zpracování jedné sady téměř pětkrát. Při přepočtu doby potřebné na přenos hodnot veličin do a z~globální paměti, označené jako \textit{migrateMemObjects}, dochází ke snížení času téměř osmkrát.\par
+		U~uvedených faktů je možné usoudit, že akcelerovaná aplikace pomocí kernelu v~\gls{abbreviation:pl} těží z~rozsahu zpracovávaných dat. Pokud je do globální paměti přeneseno veliké množství dat, které je kernelem zpracováno, bude doba potřebná na zpracování jedné hodnoty kratší, než pokud bude přeneseno dat méně. Proto se vyplácí akcelerovat aplikace, kde dochází k~náročným matematickým výpočtům mnoha hodnot, které jsou prováděny nejlépe v~cyklech.\par
+		Negativní závěr v~případě použití malého množství dat je možné pozorovat i u~aplikace \hyperref[subsec:poznatky-ziskane-profilovanim-aplikaci-cpu-fpga]{\textit{CPU/FPGA}}.\par
+		Je vhodné doplnit informaci z~\cite{kria-k26-som-ds}, že Xilinx \gls{abbreviation:mpsoc} K26 používá pro přenost dat z~\gls{abbreviation:ps} do globální paměti pro \gls{abbreviation:pl} \gls{abbreviation:pcie} s~propustností dat až 6.0 Gb/s. V~tomto případě se nejedná o~\gls{abbreviation:pcie} pro komunikaci s~externími prvky, ale s~globální pamětí umístěné na \gls{abbreviation:mpsoc}. Tudíž samotný přesun dat mezi pamětí \gls{abbreviation:ps} a globální pamětí by měl probíhat vysokou rychlostí. V~jednom z~testovacích běhů aplikace \hyperref[subsec:preloaded-data]{\textit{Preloaded Data}} dochází k~blokování běhu programu vlivem zápisu dat do globální paměti z~\gls{abbreviation:ps} po dobu přibližně 1,2 ms a vlivem čtení výsledných hodnot z~této paměti po dobu přibližně 0,380 ms.\par
+		Je vhodné upozornit, že sice v~obr. \ref{fig:legacy-rt-step-0.000001-timeline-trace-execution} je po přiblížení fialově naznačená aktivita \textit{Paralel Write} nazvána jako \textit{Host to Memory}. V~případě v~okamžiku běhu kernelu nedochází host programem k~zápisu do globální paměti. Jedná se tedy nejspíše o~zápis \gls{abbreviation:pl} do globální paměti, ze které budou poté pomocí jiné instrukce čteny výsledné hodnoty do paměti PS. Ale i tato úvaha může být nesprávná, protože po ukončení běhu kernelu a vykonání instrukce \textit{Read}, dochází až do konce celkového běhu programu k~instrukci \textit{Paralel Write}.\par
 		
 	
 
 		\begin{table}[H]
 		\centering
-		\caption{Porovnání vybraných hodnot běhu kernelu v aplikace Preloaded Data – Legacy App pro 1 milion a 100 tisíc sad hodnot. (UVH – ukládání a výpis hodnot, BUVH – bez ukládání a výpišu hodnot)}
+		\caption{Porovnání vybraných hodnot běhu kernelu v~aplikace Preloaded Data – Legacy App pro 1 milion a 100 tisíc sad hodnot. (\gls{abbreviation:uvh} – ukládání a výpis hodnot, \gls{abbreviation:buvh} – bez ukládání a výpišu hodnot)}
 		\vspace*{0.15cm}
 		\resizebox{\textwidth}{!}
 		{
@@ -2689,9 +2689,9 @@ V této sekci budou představeny výsledky a poznatky ohledně vytvořčných ap
 		\rowcolor{codeblue}
 		název & krok & total runtime (ms) & runtime 1 step ($\mu$s) & migrateMemObjects (ms) & clFinish (ms)\\
 		\noalign{\hrule height 2pt}
-		100 k hodnot, UVH & $1\cdot 10^{-5}$ & 502,284 & 5,02284 & 0,749 & 503,691\\ \hline
-		1 M hodnot, UVH & $1\cdot 10^{-6}$ & 1007,880 & 1,00788 & 0,940 & 1019,280 \\ \hline
-		1 M hodnot, BUVH & $1\cdot 10^{-6}$ & 1005,070 & 1,005070 & 0,907 & 1016,220\\\noalign{\hrule height 2pt}
+		100 k~hodnot, \gls{abbreviation:uvh} & $1\cdot 10^{-5}$ & 502,284 & 5,02284 & 0,749 & 503,691\\ \hline
+		1 M hodnot, \gls{abbreviation:uvh} & $1\cdot 10^{-6}$ & 1007,880 & 1,00788 & 0,940 & 1019,280 \\ \hline
+		1 M hodnot, \gls{abbreviation:buvh} & $1\cdot 10^{-6}$ & 1005,070 & 1,005070 & 0,907 & 1016,220\\\noalign{\hrule height 2pt}
 			\end{tabular}
 		}
 			\label{tab:porovnani-vybranych-hodnot-behu-kernelu-pro-1M-100k-sad-hodnot}
@@ -2707,16 +2707,16 @@ V této sekci budou představeny výsledky a poznatky ohledně vytvořčných ap
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/png/vitis-analyzer/legacy-rt/1M-data/writing-data-output/legacy-rt-step-0.000001-timeline-trace-execution.png}
-		\caption{Timeline Trace – Vitis Analyzer pro Preloaded Data aplikaci při zpracování 1 M dat. Na obrázku je zobrazena část, kdy je spuštěn kernel a aplikace v PS čeká na výsledky jeho kalkulací.}
+		\caption{Timeline Trace – Vitis Analyzer pro Preloaded Data aplikaci při zpracování 1 M dat. Na obrázku je zobrazena část, kdy je spuštěn kernel a aplikace v~\gls{abbreviation:ps} čeká na výsledky jeho kalkulací.}
 		\label{fig:legacy-rt-step-0.000001-timeline-trace-execution}
 	\end{figure}
 
 
 	\fbar
-	\subsection{CPU/FPGA}\label{subsec:dosazene-vysledky-cpu-fpga}
-		Aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA}} nebylo možné v její původní verzi analyzovat. V případě, že byla aplikace spuštěna pro 1 M steps (1 M souborů hodnot), aplikace běžela, ale nedokončila se v definovaném čase a byla \textit{PetaLinux} systémem automaticky ukončena. Tato situace vzniká nejspíše vlivem toho, že systém není schopen při tolika iteracích spuštění kernelu ukládat soubory a hodnoty analýzy. V některých případech byla systémem zobrazena hláška \textit{Killed} a v původním systému \textit{PetaLinux} bez RT patche aplikace nebyla nikdy dokončena akceptovatelným způsobem. Z udaných důvodů vyplývá, že je vhodné analyzovat tuto aplikaci na menším souboru dat. Analýza byla provedena pro 1000 souborů hodnot (steps) a 100 souborů hodnot (steps).\par
-		V tabulce \ref{tab:vybrane-hodnoty-behu-kernelu-v-podaplikaci-cpu-fpga} jsou uvedeny výsledky daných běhů programu. Protože je aplikace postavena na iteracích spouštění kernelu a nikoliv na iteracích algoritmu uvnitř kernelu, je možné pozorovat odlišené výsledky, než které byly zjištěny u aplikace \hyperref[subsec:dosazene-vysledky-preloaded-data-legacy-application]{\textit{Preloaded Data – Legacy Application}}. V aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA}} nedochází při zvýšení počtu sad zpracovávaných hodnot ke snížení doby potřebné na jednu iteraci běhu kernelu.\par
-		Ve stávající architektuře aplikace dochází k přesunu dat mezi \texttt{ krnl\_calculateCurVelModel} a \texttt{krnl\_calculateInvMot} pomocí PS. Architektura kernelů a PS je zobrazena na obr. \ref{fig:rt-system-diagram-crop}. Tento přenos dat představuje další instrukce, které je nutné vykonávat a může způsobit zpoždění běhu aplikace. Proto je vhodné v nadcházejících pracích analyzovat architekturu, kdy dochází k přenosu dat mezi jednotlivými kernely napřímo pomocí streamu dat. Tento způsob je představen firmou Xilinx v \cite{xilinx-github-vitis-accel-examples-stream-free-running-kernel}.\par
+	\subsection{CPU/FPGA}\label{subsec:poznatky-ziskane-profilovanim-aplikaci-cpu-fpga}
+		Aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA}} nebylo možné v~její původní verzi analyzovat. V~případě, že byla aplikace spuštěna pro 1 M steps (1 M souborů hodnot), aplikace běžela, ale nedokončila se v~definovaném čase a byla \textit{PetaLinux} systémem automaticky ukončena. Tato situace vzniká nejspíše vlivem toho, že systém není schopen při tolika iteracích spuštění kernelu ukládat soubory a hodnoty analýzy. V~některých případech byla systémem zobrazena hláška \textit{Killed} a v~původním systému \textit{PetaLinux} bez \gls{abbreviation:rt} patche aplikace nebyla nikdy dokončena akceptovatelným způsobem. Z~udaných důvodů vyplývá, že je vhodné analyzovat tuto aplikaci na menším souboru dat. Analýza byla provedena pro 1000 souborů hodnot (steps) a 100 souborů hodnot (steps).\par
+		V~tabulce \ref{tab:vybrane-hodnoty-behu-kernelu-v-podaplikaci-cpu-fpga} jsou uvedeny výsledky daných běhů programu. Protože je aplikace postavena na iteracích spouštění kernelu a nikoliv na iteracích algoritmu uvnitř kernelu, je možné pozorovat odlišené výsledky, než které byly zjištěny u~aplikace \hyperref[subsec:poznatky-ziskane-profilovanim-aplikaci-preloaded-data-legacy-application]{\textit{Preloaded Data – Legacy Application}}. V~aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA}} nedochází při zvýšení počtu sad zpracovávaných hodnot ke snížení doby potřebné na jednu iteraci běhu kernelu.\par
+		Ve stávající architektuře aplikace dochází k~přesunu dat mezi \texttt{ krnl\_calculateCurVelModel} a \texttt{krnl\_calculateInvMot} pomocí PS. Architektura kernelů a PS je zobrazena na obr. \ref{fig:rt-system-diagram-crop}. Tento přenos dat představuje další instrukce, které je nutné vykonávat a může způsobit zpoždění běhu aplikace. Proto je vhodné v~nadcházejících pracích analyzovat architekturu, kdy dochází k~přenosu dat mezi jednotlivými kernely napřímo pomocí streamu dat. Tento způsob je představen firmou Xilinx v~\cite{xilinx-github-vitis-accel-examples-stream-free-running-kernel}.\par
 
 
 		
@@ -2724,20 +2724,20 @@ V této sekci budou představeny výsledky a poznatky ohledně vytvořčných ap
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/png/vitis-analyzer/rt/keyboard-input-10-values-loop/writing-data-output/rt-system-diagram-crop.png}
-		\caption{System diagram – Vitis Analyzer pro CPU/FPGA aplikaci.}
+		\caption{System diagram – Vitis Analyzer pro \gls{abbreviation:cpu}/\gls{abbreviation:fpga} aplikaci.}
 		\label{fig:rt-system-diagram-crop}
 	\end{figure}
 
 	\begin{table}[H]
 		\centering
-		\caption{Vybrané hodnoty běhu kernelu v podaplikaci CPU/FPGA.}
+		\caption{Vybrané hodnoty běhu kernelu v~podaplikaci \gls{abbreviation:cpu}/\gls{abbreviation:fpga}.}
 		\vspace*{0.15cm}
 		% \resizebox{\textwidth}{!}
 		% {
 		\begin{tabular}{!{\vrule width 2pt} l | c | c !{\vrule width 2pt}}
 		\noalign{\hrule height 2pt}
 		\rowcolor{ctuyellow}
-		\multicolumn{3}{!{\vrule width 2pt} c !{\vrule width 2pt}}{CPU/FPGA}\\\noalign{\hrule height 2pt}
+		\multicolumn{3}{!{\vrule width 2pt} c !{\vrule width 2pt}}{\gls{abbreviation:cpu}/\gls{abbreviation:fpga}}\\\noalign{\hrule height 2pt}
 		\rowcolor{codeblue}
 		název & hodnota (ms) & hodnota 1 step (ms)\\
 		\noalign{\hrule height 2pt}
@@ -2764,14 +2764,14 @@ V této sekci budou představeny výsledky a poznatky ohledně vytvořčných ap
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/png/vitis-analyzer/rt/cpu-fpga-model-1k-values-0.000001-step/writing-data-output/rt-timeline-trace-zoom-out.png}
-		\caption{Timeline Trace – Vitis Analyzer pro CPU/FPGA aplikaci při zpracování 1000 souborů dat. Na obrázku je zobrazen celý životní cyklus aplikace od startu až po ukončení.}
+		\caption{Timeline Trace – Vitis Analyzer pro \gls{abbreviation:cpu}/\gls{abbreviation:fpga} aplikaci při zpracování 1000 souborů dat. Na obrázku je zobrazen celý životní cyklus aplikace od startu až po ukončení.}
 		\label{fig:rt-timeline-trace-zoom-out}
 	\end{figure}
 
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{src/png/vitis-analyzer/rt/cpu-fpga-model-1k-values-0.000001-step/writing-data-output/rt-timeline-trace-execution-start-zoom-in.png}
-		\caption{Timeline Trace – Vitis Analyzer pro CPU/FPGA aplikaci při zpracování 1000 souborů dat. Na obrázku je zobrazena přiblížená část, kdy dochází k iteraci spuštění jednotlivých kernelů.}
+		\caption{Timeline Trace – Vitis Analyzer pro \gls{abbreviation:cpu}/\gls{abbreviation:fpga} aplikaci při zpracování 1000 souborů dat. Na obrázku je zobrazena přiblížená část, kdy dochází k~iteraci spuštění jednotlivých kernelů.}
 		\label{fig:rt-timeline-trace-execution-start-zoom-in}
 	\end{figure}
 
@@ -2780,13 +2780,13 @@ V této sekci budou představeny výsledky a poznatky ohledně vytvořčných ap
 
 	\begin{table}[H]
 		\centering
-		\caption{Využití zdrojů PL pro akcelerované aplikace.}
+		\caption{Využití zdrojů \gls{abbreviation:pl} pro akcelerované aplikace.}
 		\vspace*{0.15cm}
 		
 		\begin{tabular}{!{\vrule width 2pt} l | c | c | c | c | c !{\vrule width 2pt}}
 		\noalign{\hrule height 2pt}
 		\rowcolor{codeblue}
-		Kernel & LUT & Registry & BRAM & URAM & DSP\\
+		Kernel & \gls{abbreviation:lut} & Registry & \gls{abbreviation:bram} & \gls{abbreviation:uram} & \gls{abbreviation:dsp}\\
 		\noalign{\hrule height 2pt}
 		krnl\_CurVelLoadLegacy & 6 520 & 8 003 & 2 & 0 & 19\\ \hline
 		krnl\_calculateCurVelModel & 23 713 & 23 490 & 3 & 0 & 103\\ \hline
@@ -2826,7 +2826,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\printglossary[type=symbolslist, style =  myStyleSymbols]
 
 		\section{Tvorba HW designu pro Digilent Zybo Zynq-7000 vývojovou desku}\label{sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku}
-		V~této části bude představen postup tvorby HW architektury pro vývojovou desku Digilent Zybo Zynq-7000. Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}. V~případě, že je požadováno vytvoření dalších speciálních bloků v~čipu PL je třeba do blokového designu vložit odpovídající IP bloky, které zajistí potřebnou funkcionalitu.\par
+		V~této části bude představen postup tvorby \gls{abbreviation:hw} architektury pro vývojovou desku Digilent Zybo Zynq-7000. Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}. V~případě, že je požadováno vytvoření dalších speciálních bloků v~čipu \gls{abbreviation:pl} je třeba do blokového designu vložit odpovídající \gls{abbreviation:ip} bloky, které zajistí potřebnou funkcionalitu.\par
 		Nejprve je nutné vytvořit nový Vivado projekt a pojmenovat ho dle požadavků. Při výběru typu projektu je nutné zvolit možnost \textit{RTL Project} a aktivovat možnost \textit{Project is an extensible Vitis platform}. Tento úkon je naznačen na obr. \ref{fig:zybo-xilinx-vivado-flow-01}.
 
 			\begin{figure}[htbp!]
@@ -2836,12 +2836,12 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 				\label{fig:zybo-xilinx-vivado-flow-01}
 			\end{figure}
 
-		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. V~této práci bude využíváno desky \textit{Zybo}. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku verze 2.0 a pokračovat v~tvorbě designu. Výběr základního HW je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-02}.
+		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. V~této práci bude využíváno desky \textit{Zybo}. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku verze 2.0 a pokračovat v~tvorbě designu. Výběr základního \gls{abbreviation:hw} je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-02}.
 
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg}
-			\caption{Xilinx Vivado – výběr základního HW, pro který bude vytvářena architektura pro Digilent Zybo.}
+			\caption{Xilinx Vivado – výběr základního \gls{abbreviation:hw}, pro který bude vytvářena architektura pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-02}
 		\end{figure}
 		
@@ -2854,7 +2854,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 			\label{fig:zybo-xilinx-vivado-flow-05}
 		\end{figure}
 
-		Nyní je možné již přistoupit k~tvorbě vlastní architektury. Prvotním krokem tvorby fesignu je vložit blok \textit{ZYNQ7 Processing System} a zvolit nově zobrazenou možnost \textit{Run Block Automation}. V~těchto pomocných automatizacích je většinou výhodné ponechávat nastavené výchozí hodnoty, které jsou pro většinu tvořeného HW designu dostačující. Menu s~výběrem IP bloku ZynQ PS je zobrazeno na obr. \ref{fig:zybo-xilinx-vivado-flow-07}.
+		Nyní je možné již přistoupit k~tvorbě vlastní architektury. Prvotním krokem tvorby fesignu je vložit blok \textit{ZYNQ7 Processing System} a zvolit nově zobrazenou možnost \textit{Run Block Automation}. V~těchto pomocných automatizacích je většinou výhodné ponechávat nastavené výchozí hodnoty, které jsou pro většinu tvořeného \gls{abbreviation:hw} designu dostačující. Menu s~výběrem \gls{abbreviation:ip} bloku ZynQ \gls{abbreviation:ps} je zobrazeno na obr. \ref{fig:zybo-xilinx-vivado-flow-07}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -2883,8 +2883,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		\fbar
 
-		Nyní je možné otevřít nastavení \textit{ZYNQ7 Processing System} a v~záložce \textit{Interrupts} povolit nastavení \textit{Fabric Interrupts/PL-PS Interrupt Ports/IRQ\_F2P} přerušení. Následně do designu je nutné vložit blok řídící přerušení se jménem \textit{AXI Interrupt Controller}, otevřít jeho nastavení a v~sekci \textit{Processor Interrupt Type and Connection} změnit nastavení \textit{Interrupt Output Connection} z~\textit{Bus} na \textit{Single}. Následně je opět možné spustit automatické propojení jednotlivých bloků s~výchozím nastavením.\par
-		Aby byly přerušení funkční, je třeba propojit výstup bloku \textit{AXI Interrupt Controller} se jménem \textit{irq} se vstupem bloku \textit{ZYNQ7 Processing System} \textit{IRQ\_F2P}. Minimální funkční blokový design je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-17}.
+		Nyní je možné otevřít nastavení \textit{ZYNQ7 Processing System} a v~záložce \textit{Interrupts} povolit nastavení \textit{Fabric Interrupts/PL-PS Interrupt Ports/\gls{abbreviation:irq}\_F2P} přerušení. Následně do designu je nutné vložit blok řídící přerušení se jménem \textit{\gls{abbreviation:axi} Interrupt Controller}, otevřít jeho nastavení a v~sekci \textit{Processor Interrupt Type and Connection} změnit nastavení \textit{Interrupt Output Connection} z~\textit{Bus} na \textit{Single}. Následně je opět možné spustit automatické propojení jednotlivých bloků s~výchozím nastavením.\par
+		Aby byly přerušení funkční, je třeba propojit výstup bloku \textit{\gls{abbreviation:axi} Interrupt Controller} se jménem \textit{irq} se vstupem bloku \textit{ZYNQ7 Processing System} \textit{\gls{abbreviation:irq}\_F2P}. Minimální funkční blokový design je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-17}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -2898,7 +2898,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		\begin{table}[H]
 			\centering
-			\caption{Ukázka nastavených AXI portů v~Xilinx Vivado platformě pro \textit{Digilent Zybo}.}
+			\caption{Ukázka nastavených \gls{abbreviation:axi} portů v~Xilinx Vivado platformě pro \textit{Digilent Zybo}.}
 		  \vspace*{0.15cm}
 		
 			\begin{tabular}{!{\vrule width 2pt} c | c | c | c !{\vrule width 2pt}}
@@ -2916,42 +2916,42 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 			\label{tab:vivado-platform-setup-axi-digilent-zybo}
 		\end{table}
 
-		Aby bylo možné zapisovat do globální paměti přes MAXI Adapter je nutné povolit funkci vybraných portů v~bloku \textit{AXI Interconnect}. V~této práci byly povoleny porty \textit{M01\_AXI} až \textit{M32\_AXI}.\par
+		Aby bylo možné zapisovat do globální paměti přes MAXI Adapter je nutné povolit funkci vybraných portů v~bloku \textit{\gls{abbreviation:axi} Interconnect}. V~této práci byly povoleny porty \textit{M01\_AXI} až \textit{M32\_AXI}.\par
 		Následně v~záložce \textit{Clock} je nutné povolit \textit{clk\_outx}, kde $x \in <1,5>$, nastavit jejich odpovídající ID a jako výchozí použít taktovací signál 100 MHz.\par
-		Dále je v~záložce \textit{Interrupt} nutné aktivovat výstup \textit{intr} bloku \textit{AXI Interrupt Controller}.\par
+		Dále je v~záložce \textit{Interrupt} nutné aktivovat výstup \textit{intr} bloku \textit{\gls{abbreviation:axi} Interrupt Controller}.\par
 		Aby bylo možné případně provádět HW-emulaci, je nutné v~kartě \textit{Diagram} zvolit blok \textit{ZYNQ7 Processing System} a v~záložce \textit{Block Properties} v~nabídce \textit{SELECTED\_SIM\_MODEL} zvolit možnost tlm. \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}\par
 		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
-		V~této práci nebylo dosaženo funkční SW ani HW simulace pro desku Digilent Zybo z~neznámých důvodů. Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{scp} přesunuty potřebné soubory, jednalo se pouze o~SW simulaci bez připojeného PL a tudíž nebylo možné algoritmy ověřit.\par
+		V~této práci nebylo dosaženo funkční \gls{abbreviation:sw} ani \gls{abbreviation:hw} simulace pro desku Digilent Zybo z~neznámých důvodů. Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{\gls{abbreviation:scp}} přesunuty potřebné soubory, jednalo se pouze o~\gls{abbreviation:sw} simulaci bez připojeného \gls{abbreviation:pl} a tudíž nebylo možné algoritmy ověřit.\par
 		% vsunutý blok, zkontrolovat poté kontinuitu s předchozím textem
-		Pro zajištění funkčních GPIO (General Purpose Input/Output) pro ovládání LED signalizace, tlačítek a přepínačů, připojených na PL, je nutné do blokového designu z~karty \textit{Board/Zybo/GPIO} vložit potřebné IP. Po kliknutí pomocí pravého tlačítka myši na vybraný blok je nutné zvolit z~nabídky \textit{Connect board component} a požadovaný GPIO interface. Blok \textit{AXI GPIO} je automaticky vložen do blokového designu a jeho přítomnost je signalizována na kartě \textit{Board/Zybo/GPIO} zvýraznění vložených bloků (ukázka na obr. \ref{fig:zybo-xilinx-vivado-flow-38}). Dle požadavku uživatele je možné vybrat zda bude využíváno \textit{GPIO} nebo \textit{GPIO2} rozhraní. Dle vybraného rozhraní budou poté adresovány jednotlivé výstupy a vstupy v~\textit{Petalinux}. Ukázka vytvořeného designu s~IP pro GPIO je na obr. \ref{fig:zybo-xilinx-vivado-flow-37}.
+		Pro zajištění funkčních \gls{abbreviation:gpio} (General Purpose Input/Output) pro ovládání \gls{abbreviation:led} signalizace, tlačítek a přepínačů, připojených na \gls{abbreviation:pl}, je nutné do blokového designu z~karty \textit{Board/Zybo/GPIO} vložit potřebné \gls{abbreviation:ip}. Po kliknutí pomocí pravého tlačítka myši na vybraný blok je nutné zvolit z~nabídky \textit{Connect board component} a požadovaný \gls{abbreviation:gpio} interface. Blok \textit{\gls{abbreviation:axi} \gls{abbreviation:gpio}} je automaticky vložen do blokového designu a jeho přítomnost je signalizována na kartě \textit{Board/Zybo/\gls{abbreviation:gpio}} zvýraznění vložených bloků (ukázka na obr. \ref{fig:zybo-xilinx-vivado-flow-38}). Dle požadavku uživatele je možné vybrat zda bude využíváno \textit{\gls{abbreviation:gpio}} nebo \textit{GPIO2} rozhraní. Dle vybraného rozhraní budou poté adresovány jednotlivé výstupy a vstupy v~\textit{PetaLinux}. Ukázka vytvořeného designu s~\gls{abbreviation:ip} pro \gls{abbreviation:gpio} je na obr. \ref{fig:zybo-xilinx-vivado-flow-37}.
 
 
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.65\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-38.jpg}
-			\caption{Xilinx Vivado – signalizace vložených AXI GPIO bloků pro LED, BTN, SW na kartě \textit{Board/Zybo/GPIO} pro Digilent Zybo.}
+			\caption{Xilinx Vivado – signalizace vložených \gls{abbreviation:axi} \gls{abbreviation:gpio} bloků pro \gls{abbreviation:led}, \gls{abbreviation:btn}, \gls{abbreviation:sw} na kartě \textit{Board/Zybo/GPIO} pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-38}
 		\end{figure}
 
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.95\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-37.jpg}
-			\caption{Xilinx Vivado – block design s~využitím GPIO pro LED, BTN, SW propojených s~PL pro Digilent Zybo.}
+			\caption{Xilinx Vivado – block design s~využitím \gls{abbreviation:gpio} pro \gls{abbreviation:led}, \gls{abbreviation:btn}, \gls{abbreviation:sw} propojených s~\gls{abbreviation:pl} pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-37}
 		\end{figure}
 
-		Rozdělení vstupů a výstupů do jednotlivých částí SoC – PS a PL je vyzobrazeno na obr. \ref{fig:digilent-zybo-ps-pl-gpio}.
+		Rozdělení vstupů a výstupů do jednotlivých částí \gls{abbreviation:soc} – \gls{abbreviation:ps} a \gls{abbreviation:pl} je vyzobrazeno na obr. \ref{fig:digilent-zybo-ps-pl-gpio}.
 
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.55\textwidth]{src/png/digilent-zybo-ps-pl-gpio.png}
-			\caption{Uspořádání připojení tlačítek, přepínačů a LED k~PS a PL pro vývojovou desku Digilent Zybo. \cite{digilent-zybo-reference-manual}}
+			\caption{Uspořádání připojení tlačítek, přepínačů a \gls{abbreviation:led} k~\gls{abbreviation:ps} a \gls{abbreviation:pl} pro vývojovou desku Digilent Zybo. \cite{digilent-zybo-reference-manual}}
 			\label{fig:digilent-zybo-ps-pl-gpio}
 		\end{figure}
 
 
-		Před dalším pokračováním je možné design validovat ponocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již HW design vytvořen a nakonfigurován, je možné v~kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create HDL Wrapper}. V~tomto kroku je opět prováděna validace designu. Pokud se v~designu vyskytují kritická upozornění, která jsou zobrazena například na obr. \ref{fig:zybo-xilinx-vivado-flow-24}, je stále možné pokračovat v~tvorbě konečného produktu.\par
-		Po vytvoření \textit{HDL Wrapper} je možné v~menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést, v~případě pokračování v~požadavku generování bitstreamu budou automaticky provedeny. V~navazující nabídce možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru, nebo clusteru. Také je možné zvolit kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V~případě využití osobního počítače pro generaci bitstreamu (i předcházející syntézy a implementace) autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z~experimentálního zjištění, že v~případě využití vyššího počtu jader může dojít k~neočekávané chybě a proces provádění úkolů bude bez udání jakékoli informace ukončen a proces syntézy, implementace a generace bitstreamu bude nutné spustit znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:zybo-xilinx-vivado-flow-29}.\par
+		Před dalším pokračováním je možné design validovat ponocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již \gls{abbreviation:hw} design vytvořen a nakonfigurován, je možné v~kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create \gls{abbreviation:hdl} Wrapper}. V~tomto kroku je opět prováděna validace designu. Pokud se v~designu vyskytují kritická upozornění, která jsou zobrazena například na obr. \ref{fig:zybo-xilinx-vivado-flow-24}, je stále možné pokračovat v~tvorbě konečného produktu.\par
+		Po vytvoření \textit{\gls{abbreviation:hdl} Wrapper} je možné v~menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést, v~případě pokračování v~požadavku generování bitstreamu budou automaticky provedeny. V~navazující nabídce možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru, nebo clusteru. Také je možné zvolit kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V~případě využití osobního počítače pro generaci bitstreamu (i předcházející syntézy a implementace) autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z~experimentálního zjištění, že v~případě využití vyššího počtu jader může dojít k~neočekávané chybě a proces provádění úkolů bude bez udání jakékoli informace ukončen a proces syntézy, implementace a generace bitstreamu bude nutné spustit znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:zybo-xilinx-vivado-flow-29}.\par
 
 
 		\begin{figure}[htbp!]
@@ -2971,16 +2971,16 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		Indikátor provádění jednotlivých procesů je umístěn v~pravém horním rohu. Záznam prováděných procesů je umístěn v~kartě \textit{Log}.\par
 		Po úspěšném provedení jednotlivých kroků je zobrazena nabídka, která umožňuje nahlédnout na vytvořený design. Tuto nabídku je možné zavřít aniž by byla vykonávána jakákoliv z~nabízených možností.\par
-		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v~Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný HW i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí \texttt{v++}. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
+		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v~Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný \gls{abbreviation:hw} i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí \texttt{v++}. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
 		Po nastavení dodatečných informací platformy je možné jej vyexportovat do požadované lokace, kde bude dále využívána.
 
 
 	\section{Upravený postup debuggingu PL pro Digilent Zybo}
-	Debugging pro program pro PL. Pro host program je možné debuggovat přímo ve Vitis, ale bez PL kernelu.
+	Debugging pro program pro \gls{abbreviation:pl}. Pro host program je možné debuggovat přímo ve Vitis, ale bez \gls{abbreviation:pl} kernelu.
 	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=0.85\textwidth]{src/png/vitis-edited-debugging-flow.png}
-		\caption{Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do PL.}
+		\caption{Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do \gls{abbreviation:pl}.}
 		\label{fig:vitis-edited-debugging-flow}
 	\end{figure}
 	\end{appendices}
