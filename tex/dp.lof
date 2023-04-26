@@ -1104,8 +1104,8 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {B~-~11}{\ignorespaces Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.\relax }}{119}{figure.caption.94}%
+\contentsline {figure}{\numberline {B~-~11}{\ignorespaces Xilinx Vivado – kritická upozornění zobrazená po validaci designu, která je možné ignorovat.\relax }}{119}{figure.caption.94}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {B~-~12}{\ignorespaces Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat pro Digilent Zybo.\relax }}{120}{figure.caption.95}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {C~-~1}{\ignorespaces Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do \gls {abbreviation:pl}.\relax }}{121}{figure.caption.96}%
+\contentsline {figure}{\numberline {C~-~1}{\ignorespaces Diagram popisující upravený postup pro nahrávání a spouštění akcelerované aplikace pro Digilent Zybo.\relax }}{121}{figure.caption.96}%

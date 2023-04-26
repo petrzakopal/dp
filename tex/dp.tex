@@ -2850,8 +2850,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\printglossary[type=symbolslist, style =  myStyleSymbols]
 
 		\section{Tvorba HW designu pro Digilent Zybo Zynq-7000 vývojovou desku}\label{sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku}
-		V~této části bude představen postup tvorby \gls{abbreviation:hw} architektury pro vývojovou desku Digilent Zybo Zynq-7000. Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}. V~případě, že je požadováno vytvoření dalších speciálních bloků v~čipu \gls{abbreviation:pl} je třeba do blokového designu vložit odpovídající \gls{abbreviation:ip} bloky, které zajistí potřebnou funkcionalitu.\par
-		Nejprve je nutné vytvořit nový Vivado projekt a pojmenovat ho dle požadavků. Při výběru typu projektu je nutné zvolit možnost \textit{RTL Project} a aktivovat možnost \textit{Project is an extensible Vitis platform}. Tento úkon je naznačen na obr. \ref{fig:zybo-xilinx-vivado-flow-01}.
+		V~této části bude představen postup tvorby \gls{abbreviation:hw} architektury pro vývojovou desku Digilent Zybo Zynq-7000. Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}. V~případě, že je požadováno vytvoření dalších speciálních bloků v \gls{abbreviation:pl} je třeba do blokového designu vložit odpovídající \gls{abbreviation:ip} bloky, které zajistí potřebnou funkcionalitu.\par
+		Nejprve je nutné vytvořit nový Vivado projekt a pojmenovat ho dle požadavků. Při výběru typu projektu je nutné zvolit možnost \textit{\gls{abbreviation:rtl} Project} a aktivovat možnost \textit{Project is an extensible Vitis platform}. Tento úkon je naznačen na obr. \ref{fig:zybo-xilinx-vivado-flow-01}.
 
 			\begin{figure}[htbp!]
 				\centering
@@ -2860,7 +2860,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 				\label{fig:zybo-xilinx-vivado-flow-01}
 			\end{figure}
 
-		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. V~této práci bude využíváno desky \textit{Zybo}. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku verze 2.0 a pokračovat v~tvorbě designu. Výběr základního \gls{abbreviation:hw} je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-02}.
+		Následně v~nabídce \textit{Xilinx part} vybrat možnost \textit{Board} a do vyhledávání zadat název využívané desky. Díky instalovaným \textit{board files}, představených v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}, je možné nalézt požadovanou desku Digilent Zybo verze 2.0 a pokračovat v~tvorbě designu. Výběr základního \gls{abbreviation:hw} je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-02}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -2869,7 +2869,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 			\label{fig:zybo-xilinx-vivado-flow-02}
 		\end{figure}
 		
-		Po úspěšné inicializaci projektu je pro další pokračování nutné v~menu \textit{Flow Navigator/IP Integrator} zvolit možnost \textit{Create Block Design} a vytvořit nový blokový design. Tvorba blokového designu je naznačena na obr. \ref{fig:zybo-xilinx-vivado-flow-05}.
+		Po úspěšné inicializaci projektu je pro další pokračování nutné v~menu \textit{Flow Navigator/\gls{abbreviation:ip} Integrator} zvolit možnost \textit{Create Block Design} a vytvořit nový blokový design. Tvorba blokového designu je naznačena na obr. \ref{fig:zybo-xilinx-vivado-flow-05}.
 		
 		\begin{figure}[htbp!]
 			\centering
@@ -2878,7 +2878,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 			\label{fig:zybo-xilinx-vivado-flow-05}
 		\end{figure}
 
-		Nyní je možné již přistoupit k~tvorbě vlastní architektury. Prvotním krokem tvorby fesignu je vložit blok \textit{ZYNQ7 Processing System} a zvolit nově zobrazenou možnost \textit{Run Block Automation}. V~těchto pomocných automatizacích je většinou výhodné ponechávat nastavené výchozí hodnoty, které jsou pro většinu tvořeného \gls{abbreviation:hw} designu dostačující. Menu s~výběrem \gls{abbreviation:ip} bloku ZynQ \gls{abbreviation:ps} je zobrazeno na obr. \ref{fig:zybo-xilinx-vivado-flow-07}.
+		Nyní je již možné přistoupit k~tvorbě vlastní architektury. Prvotním krokem tvorby fesignu je vložit blok \textit{ZYNQ7 Processing System} a zvolit nově zobrazenou možnost \textit{Run Block Automation}. V~těchto pomocných automatizacích je většinou výhodné ponechávat nastavené výchozí hodnoty, které jsou pro většinu tvořeného \gls{abbreviation:hw} designu dostačující. Menu s~výběrem \gls{abbreviation:ip} bloku ZynQ \gls{abbreviation:ps} je zobrazeno na obr. \ref{fig:zybo-xilinx-vivado-flow-07}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -2888,8 +2888,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\end{figure}
 
 
-		Poté je pro funkční akcelerované aplikace nutné vložit do designu blok \textit{Clocking Wizard}, ve kterém nastavit v~záložce \textit{Output Clocks}, aby byl signál aktivní v~0 a aktivovat pět výstupních signálů \textit{Clock}. Těmto signálům je po aktivaci možné nastavit taktovací frekvenci na 50, 100, 150, 200 a 300 Hz. Poté je nutné na výstup \textit{FCLK\_CLK0} bloku \textit{ZYNQ7 Processing System} připojit vstup \textit{clk\_in1} a k~výstupu \textit{FCLK\_RESET0\_N} vstup \textit{resetn}.\par
-		Po nastavení bloku \textit{Clocking Wizard} je zapotřebí do designu vložit pět bloků \textit{Processor System Reset}. Následuje propojení odpovídajících výstupů bloků \textit{Clocking Wizard} s~názvem \textit{clk\_outX}, kde \textit{X} značí pořadí výstupního signálu, s~odpovídajícímí bloky \textit{Processor System Reset} a jejich vstupy \textit{slowest\_sync\_clk}. Ke všem vstupům \textit{dcm\_locked} bloků \textit{Processor System Reset} je nutné připojit výstup \textit{locked} \textit{Clocking Wizard}. A~konečně ke všem vstupům \textit{ext\_reset\_in} připojit výstup \textit{FCLK\_RESET0\_N} ZynQ bloku. Představené propojení jednotlivých bloků je možné pozorovat na obr. \ref{fig:zybo-xilinx-vivado-flow-12}.
+		Poté je pro funkční akcelerované aplikace nutné vložit do designu blok \textit{Clocking Wizard}, ve kterém nastavit v~záložce \textit{Output Clocks}, aby byl signál aktivní v~0 a aktivovat pět výstupních signálů \textit{Clock}. Těmto signálům je po aktivaci možné nastavit taktovací frekvenci na 50, 100, 150, 200 a 300 MHz. Poté je nutné na výstup \textit{FCLK\_CLK0} bloku \textit{ZYNQ7 Processing System} připojit vstup \textit{clk\_in1} a k~výstupu \textit{FCLK\_RESET0\_N} vstup \textit{resetn}.\par
+		Po nastavení bloku \textit{Clocking Wizard} je zapotřebí do designu vložit pět bloků \textit{Processor System Reset}. Následuje propojení odpovídajících výstupů bloků \textit{Clocking Wizard} s~názvem \textit{clk\_outX}, kde \textit{X} značí pořadí výstupního signálu, s~odpovídajícímí bloky \textit{Processor System Reset} a jejich vstupy \textit{slowest\_sync\_clk}. Ke všem vstupům \textit{dcm\_locked} bloků \textit{Processor System Reset} je nutné připojit výstup \textit{locked} z \textit{Clocking Wizard} bloku. A~konečně ke všem vstupům \textit{ext\_reset\_in} připojit výstup \textit{FCLK\_RESET0\_N} ZynQ bloku. Představené propojení jednotlivých bloků je možné pozorovat na obr. \ref{fig:zybo-xilinx-vivado-flow-12}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -2907,8 +2907,8 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		\fbar
 
-		Nyní je možné otevřít nastavení \textit{ZYNQ7 Processing System} a v~záložce \textit{Interrupts} povolit nastavení \textit{Fabric Interrupts/PL-PS Interrupt Ports/\gls{abbreviation:irq}\_F2P} přerušení. Následně do designu je nutné vložit blok řídící přerušení se jménem \textit{\gls{abbreviation:axi} Interrupt Controller}, otevřít jeho nastavení a v~sekci \textit{Processor Interrupt Type and Connection} změnit nastavení \textit{Interrupt Output Connection} z~\textit{Bus} na \textit{Single}. Následně je opět možné spustit automatické propojení jednotlivých bloků s~výchozím nastavením.\par
-		Aby byly přerušení funkční, je třeba propojit výstup bloku \textit{\gls{abbreviation:axi} Interrupt Controller} se jménem \textit{irq} se vstupem bloku \textit{ZYNQ7 Processing System} \textit{\gls{abbreviation:irq}\_F2P}. Minimální funkční blokový design je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-17}.
+		Nyní je možné otevřít nastavení \textit{ZYNQ7 Processing System} a v~záložce \textit{Interrupts} povolit nastavení \textit{Fabric Interrupts/\gls{abbreviation:pl}-\gls{abbreviation:ps} Interrupt Ports/\gls{abbreviation:irq}\_F2P} přerušení. Následně do designu je nutné vložit blok řídící přerušení \textit{\gls{abbreviation:axi} Interrupt Controller}, otevřít jeho nastavení a v~sekci \textit{Processor Interrupt Type and Connection} změnit nastavení \textit{Interrupt Output Connection} z~\textit{Bus} na \textit{Single}. Následně je opět možné spustit automatické propojení jednotlivých bloků s~výchozím nastavením.\par
+		Aby bylo přerušení funkční, je třeba propojit výstup bloku \textit{\gls{abbreviation:axi} Interrupt Controller} \textit{irq} se vstupem bloku \textit{ZYNQ7 Processing System} \textit{\gls{abbreviation:irq}\_F2P}. Minimální funkční blokový design je zobrazen na obr. \ref{fig:zybo-xilinx-vivado-flow-17}.
 
 		\begin{figure}[htbp!]
 			\centering
@@ -2917,7 +2917,7 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 			\label{fig:zybo-xilinx-vivado-flow-17}
 		\end{figure}
 
-		Nyní je možné přejít ze záložky \textit{Diagram} do záložky \textit{Platform Setup} ve které je pro zajištění funkčnosti nutné nastavit určité potřebné konektory a výstupy. Následuje nastavení parametrů bloku \textit{ZYNQ7 Processing System} v~záložce \textit{AXI Port} dle tabulky č. \ref{tab:vivado-platform-setup-axi-digilent-zybo}.
+		Nyní je možné přejít ze záložky \textit{Diagram} do záložky \textit{Platform Setup} ve které je pro zajištění funkčnosti designu nutné nastavit potřebné konektory a výstupy. Následuje nastavení parametrů bloku \textit{ZYNQ7 Processing System} v~záložce \textit{\gls{abbreviation:axi} Port} dle tabulky č. \ref{tab:vivado-platform-setup-axi-digilent-zybo}.
 
 
 		\begin{table}[H]
@@ -2943,11 +2943,12 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		Aby bylo možné zapisovat do globální paměti přes MAXI Adapter je nutné povolit funkci vybraných portů v~bloku \textit{\gls{abbreviation:axi} Interconnect}. V~této práci byly povoleny porty \textit{M01\_AXI} až \textit{M32\_AXI}.\par
 		Následně v~záložce \textit{Clock} je nutné povolit \textit{clk\_outx}, kde $x \in <1,5>$, nastavit jejich odpovídající ID a jako výchozí použít taktovací signál 100 MHz.\par
 		Dále je v~záložce \textit{Interrupt} nutné aktivovat výstup \textit{intr} bloku \textit{\gls{abbreviation:axi} Interrupt Controller}.\par
-		Aby bylo možné případně provádět HW-emulaci, je nutné v~kartě \textit{Diagram} zvolit blok \textit{ZYNQ7 Processing System} a v~záložce \textit{Block Properties} v~nabídce \textit{SELECTED\_SIM\_MODEL} zvolit možnost tlm. \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}\par
+		Aby bylo možné případně provádět \gls{abbreviation:hw}-emulaci, je nutné v~kartě \textit{Diagram} zvolit blok \textit{ZYNQ7 Processing System} a v~záložce \textit{Block Properties} v~nabídce \textit{SELECTED\_SIM\_MODEL} zvolit možnost tlm. \cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}\par
 		% informace o nefunkcnim emulatoru, pokud se povede spustit, vymazat
-		V~této práci nebylo dosaženo funkční \gls{abbreviation:sw} ani \gls{abbreviation:hw} simulace pro desku Digilent Zybo z~neznámých důvodů. Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{\gls{abbreviation:scp}} přesunuty potřebné soubory, jednalo se pouze o~\gls{abbreviation:sw} simulaci bez připojeného \gls{abbreviation:pl} a tudíž nebylo možné algoritmy ověřit.\par
+		V~této práci nebylo dosaženo funkční \gls{abbreviation:sw} ani \gls{abbreviation:hw} simulace pro desku Digilent Zybo.\par
+		% Pokud byl emulátor QEMU spuštěn zvlášť pomocí příkazové řádky a přes příkaz byly \textit{\gls{abbreviation:scp}} přesunuty potřebné soubory, jednalo se pouze o~\gls{abbreviation:sw} simulaci bez připojeného \gls{abbreviation:pl} a tudíž nebylo možné algoritmy ověřit.\par
 		% vsunutý blok, zkontrolovat poté kontinuitu s předchozím textem
-		Pro zajištění funkčních \gls{abbreviation:gpio} (General Purpose Input/Output) pro ovládání \gls{abbreviation:led} signalizace, tlačítek a přepínačů, připojených na \gls{abbreviation:pl}, je nutné do blokového designu z~karty \textit{Board/Zybo/GPIO} vložit potřebné \gls{abbreviation:ip}. Po kliknutí pomocí pravého tlačítka myši na vybraný blok je nutné zvolit z~nabídky \textit{Connect board component} a požadovaný \gls{abbreviation:gpio} interface. Blok \textit{\gls{abbreviation:axi} \gls{abbreviation:gpio}} je automaticky vložen do blokového designu a jeho přítomnost je signalizována na kartě \textit{Board/Zybo/\gls{abbreviation:gpio}} zvýraznění vložených bloků (ukázka na obr. \ref{fig:zybo-xilinx-vivado-flow-38}). Dle požadavku uživatele je možné vybrat zda bude využíváno \textit{\gls{abbreviation:gpio}} nebo \textit{GPIO2} rozhraní. Dle vybraného rozhraní budou poté adresovány jednotlivé výstupy a vstupy v~\textit{PetaLinux}. Ukázka vytvořeného designu s~\gls{abbreviation:ip} pro \gls{abbreviation:gpio} je na obr. \ref{fig:zybo-xilinx-vivado-flow-37}.
+		Pro zajištění funkčních \gls{abbreviation:gpio} (General Purpose Input/Output) pro ovládání \gls{abbreviation:led} signalizace, tlačítek a přepínačů, připojených na \gls{abbreviation:pl}, je nutné do blokového designu z~karty \textit{Board/Zybo/\gls{abbreviation:gpio}} vložit potřebné \gls{abbreviation:ip}. Po kliknutí pomocí pravého tlačítka myši na vybraný blok je nutné zvolit z~nabídky \textit{Connect board component} požadovaný \gls{abbreviation:gpio} interface. Blok \textit{\gls{abbreviation:axi} \gls{abbreviation:gpio}} je automaticky vložen do blokového designu a jeho přítomnost je signalizována na kartě \textit{Board/Zybo/\gls{abbreviation:gpio}} zvýrazněním vložených bloků (ukázka na obr. \ref{fig:zybo-xilinx-vivado-flow-38}). Dle požadavku uživatele je možné vybrat zda bude využíváno \textit{\gls{abbreviation:gpio}} nebo \textit{\gls{abbreviation:gpio}2} rozhraní. Dle vybraného rozhraní budou poté adresovány jednotlivé výstupy a vstupy v~\textit{PetaLinux}. Ukázka vytvořeného designu s~\gls{abbreviation:ip} pro \gls{abbreviation:gpio} je na obr. \ref{fig:zybo-xilinx-vivado-flow-37}.
 
 
 		\begin{figure}[htbp!]
@@ -2974,14 +2975,14 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 		\end{figure}
 
 
-		Před dalším pokračováním je možné design validovat ponocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již \gls{abbreviation:hw} design vytvořen a nakonfigurován, je možné v~kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create \gls{abbreviation:hdl} Wrapper}. V~tomto kroku je opět prováděna validace designu. Pokud se v~designu vyskytují kritická upozornění, která jsou zobrazena například na obr. \ref{fig:zybo-xilinx-vivado-flow-24}, je stále možné pokračovat v~tvorbě konečného produktu.\par
-		Po vytvoření \textit{\gls{abbreviation:hdl} Wrapper} je možné v~menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést, v~případě pokračování v~požadavku generování bitstreamu budou automaticky provedeny. V~navazující nabídce možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru, nebo clusteru. Také je možné zvolit kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V~případě využití osobního počítače pro generaci bitstreamu (i předcházející syntézy a implementace) autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z~experimentálního zjištění, že v~případě využití vyššího počtu jader může dojít k~neočekávané chybě a proces provádění úkolů bude bez udání jakékoli informace ukončen a proces syntézy, implementace a generace bitstreamu bude nutné spustit znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:zybo-xilinx-vivado-flow-29}.\par
+		Před dalším pokračováním je možné design validovat pomocí příslušného tlačítka validace na horizontální ovládací liště. Pokud je již \gls{abbreviation:hw} design vytvořen a nakonfigurován, je možné v~kartě \textit{Sources/Design Sources} vybrat vytvořený design a pomocí nabídky pravého tlačítka myši vybrat možnost \textit{Create \gls{abbreviation:hdl} Wrapper}. V~tomto kroku je opět prováděna validace designu. Pokud se v~designu vyskytují pouze kritická upozornění, která jsou zobrazena na obr. \ref{fig:zybo-xilinx-vivado-flow-24}, je stále možné pokračovat v~tvorbě.\par
+		Po vytvoření \textit{\gls{abbreviation:hdl} Wrapper} je možné v~menu \textit{Flow Navigator/Program and Debug} zvolit krok \textit{Generate Bitstream}. Pokud do tohoto kroku nebyla provedena syntéza ani implementace designu, objeví se hlášení, že je třeba tyto kroky provést, v~případě pokračování v~požadavku generování bitstreamu budou automaticky provedeny. V~navazující nabídce je možné vybrat, zda procesy budou probíhat lokálně či na vzdáleném serveru, nebo clusteru. Také je možné zvolit kolik výpočetních jader procesoru se bude podílet na prováděných úkolech. V~případě využití osobního počítače pro generaci bitstreamu (i předcházející syntézy a implementace) autor práce doporučuje používat méně než polovinu dostupných jader. Tato volba vychází z~experimentálního zjištění, že v~případě využití vyššího počtu jader může dojít k~neočekávané chybě a proces provádění úkolů bude bez udání jakékoli informace ukončen. Tudíž proces syntézy, implementace a generace bitstreamu bude nutné spustit znovu. Ukázka nastavení procesu je zobrazena na obr. \ref{fig:zybo-xilinx-vivado-flow-29}.\par
 
 
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg}
-			\caption{Xilinx Vivado – kritická upozornění vzniklá po validaci designu, která je možné ignorovat.}
+			\caption{Xilinx Vivado – kritická upozornění zobrazená po validaci designu, která je možné ignorovat.}
 			\label{fig:zybo-xilinx-vivado-flow-24}
 		\end{figure}
 
@@ -2995,16 +2996,25 @@ Aliquam dapibus leo velit, ultrices eleifend mi feugiat eget. Aliquam euismod fa
 
 		Indikátor provádění jednotlivých procesů je umístěn v~pravém horním rohu. Záznam prováděných procesů je umístěn v~kartě \textit{Log}.\par
 		Po úspěšném provedení jednotlivých kroků je zobrazena nabídka, která umožňuje nahlédnout na vytvořený design. Tuto nabídku je možné zavřít aniž by byla vykonávána jakákoliv z~nabízených možností.\par
-		Po ukončení procesů je pro možné použití vytvořeného designu pro tvorbu PetaLinux systému a aplikací v~Xilinx Vitis nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný \gls{abbreviation:hw} i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí \texttt{v++}. Důležitou volbou je zvolení možnost \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
-		Po nastavení dodatečných informací platformy je možné jej vyexportovat do požadované lokace, kde bude dále využívána.
+		Po ukončení procesů je pro možné použití vytvořeného designu k tvorbě \textit{PetaLinux} systému a aplikace v~Xilinx Vitis \gls{abbreviation:ide} nutné exportovat vytvořenou platformu. Export je proveden pomocí sekvence tlačítek \textit{File/Export/Export platform}. Ve výběru platformy je výhodné zvolit možnost \textit{Hardware and hardware emulation}, která umožňuje použít design pro skutečný \gls{abbreviation:hw} i jeho emulaci. V~nabídce \textit{Platform State} je nutné vybrat možnost \textit{Pre-Synthesis}, která umožňuje další zpracování aplikace v~Xilinx Vitis pomocí \texttt{v++}. Důležitou volbou je zvolení \textit{Include bistream}, který byl produktem tvorby designu v~této části.\par
+		Po nastavení dodatečných informací platformy je možné spustit export do požadované lokace.
 
 
-	\section{Upravený postup debuggingu PL pro Digilent Zybo}
-	Debugging pro program pro \gls{abbreviation:pl}. Pro host program je možné debuggovat přímo ve Vitis, ale bez \gls{abbreviation:pl} kernelu.
+	\section{Upravený postup nahrávání aplikace pro Digilent Zybo}
+	Při prvotním zkoumání vývoje aplikací pro Digilent Zybo byl objeven postup, jakým kontrolovat funkčnost vytvářených programů. Tento postup je naznačen na obr. \ref{fig:vitis-edited-debugging-flow}.\par
+	Po nastavení build procesu ve Vitis \gls{abbreviation:ide} tak, aby vytvářel spustitelnou aplikaci na zařízení, je možné po spuštění platformy připojit partition \textit{mmcblk0p1}. Následně je možné do prostoru platformy z vývojářského zařízení, které je v části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}}, v obr. \ref{fig:workspace-scheme} označeno jako \textcolor{ctuorange}{development machine}, přesunout soubory
+	\begin{itemize}
+		\item BOOT.BIN,
+		\item image.ub,
+		\item <binary-container-name>.xclbin,
+		\item <host-program-name>.
+	\end{itemize}
+	Přesun souborů je možné provést pomocí \gls{abbreviation:scp}.\par
+	Po úspěšném přesunu souborů je nutné zařízení Digilent Zybo restartovat a opět připojit partition. Následně je již možné spustit host aplikaci na \gls{abbreviation:ps} a nakonfigurovat \gls{abbreviation:pl} pomocí \texttt{xclbin} souboru.
 	\begin{figure}[htbp!]
 		\centering
-		\includegraphics[width=0.85\textwidth]{src/png/vitis-edited-debugging-flow.png}
-		\caption{Diagram popisující upravený postup pro debuggování a spouštění host programu a nahrávání host programu do \gls{abbreviation:pl}.}
+		\includegraphics[width=0.85\textwidth]{src/pdf/vitis-edited-debugging-flow.pdf}
+		\caption{Diagram popisující upravený postup pro nahrávání a spouštění akcelerované aplikace pro Digilent Zybo.}
 		\label{fig:vitis-edited-debugging-flow}
 	\end{figure}
 	\end{appendices}
