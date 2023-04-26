@@ -2290,18 +2290,17 @@
     <bcf:citekey order="160">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
     <bcf:citekey order="161">xilinx-github-vitis-tutorials-step-2-create-the-software-components</bcf:citekey>
     <bcf:citekey order="162">xilinx-github-dfx-mgr</bcf:citekey>
-    <bcf:citekey order="163">xilinx-github-host-stream-free-running-kernel</bcf:citekey>
-    <bcf:citekey order="164">axi-quad-spi-ip-product-guide</bcf:citekey>
-    <bcf:citekey order="165">vitis-high-level-synthesis-user-guide</bcf:citekey>
-    <bcf:citekey order="166">microsemi-svm-min-max-algoritmus</bcf:citekey>
-    <bcf:citekey order="167">lipcak-bauer-ept-moodle</bcf:citekey>
-    <bcf:citekey order="168">kria-k26-som-ds</bcf:citekey>
-    <bcf:citekey order="169">xilinx-github-vitis-accel-examples-stream-free-running-kernel</bcf:citekey>
+    <bcf:citekey order="163">axi-quad-spi-ip-product-guide</bcf:citekey>
+    <bcf:citekey order="164">vitis-high-level-synthesis-user-guide</bcf:citekey>
+    <bcf:citekey order="165">microsemi-svm-min-max-algoritmus</bcf:citekey>
+    <bcf:citekey order="166">lipcak-bauer-ept-moodle</bcf:citekey>
+    <bcf:citekey order="167">kria-k26-som-ds</bcf:citekey>
+    <bcf:citekey order="168">xilinx-github-vitis-accel-examples-stream-free-running-kernel</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
+    <bcf:citekey order="169">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
     <bcf:citekey order="170">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
-    <bcf:citekey order="171">hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20</bcf:citekey>
+    <bcf:citekey order="171">digilent-zybo-reference-manual</bcf:citekey>
     <bcf:citekey order="172">digilent-zybo-reference-manual</bcf:citekey>
-    <bcf:citekey order="173">digilent-zybo-reference-manual</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

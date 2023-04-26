@@ -1975,41 +1975,6 @@
       \verb https://github.com/Xilinx/dfx-mgr
       \endverb
     \endentry
-    \entry{xilinx-github-host-stream-free-running-kernel}{incollection}{}
-      \name{author}{1}{}{%
-        {{hash=751f6909b12cc240122891470ea09b53}{%
-           family={Xilinx},
-           familyi={X\bibinitperiod},
-           given={Inc.},
-           giveni={I\bibinitperiod}}}%
-      }
-      \strng{namehash}{751f6909b12cc240122891470ea09b53}
-      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
-      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
-      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
-      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
-      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{23}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{GitHub}
-      \field{langid}{english}
-      \field{title}{Stream Free Running Kernel (HLS C/C++)}
-      \field{urlday}{19}
-      \field{urlmonth}{4}
-      \field{urlyear}{2023}
-      \field{year}{2020}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://xilinx.github.io/Vitis_Accel_Examples/2020.2/html/streaming_free_running_k2k.html
-      \endverb
-      \verb{url}
-      \verb https://xilinx.github.io/Vitis_Accel_Examples/2020.2/html/streaming_free_running_k2k.html
-      \endverb
-    \endentry
     \entry{vitis-high-level-synthesis-user-guide}{incollection}{}
       \name{author}{1}{}{%
         {{hash=751f6909b12cc240122891470ea09b53}{%
@@ -2024,7 +1989,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{24}
+      \field{extraname}{23}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -2093,7 +2058,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{25}
+      \field{extraname}{24}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -2162,7 +2127,7 @@
       \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
-      \field{extraname}{26}
+      \field{extraname}{25}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -2311,8 +2276,8 @@
       \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
       \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
       \field{extraname}{3}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{LinkedIn Article}
@@ -2444,6 +2409,42 @@
       \endverb
       \verb{url}
       \verb https://www.mathworks.com/videos/understanding-pid-control-part-2-expanding-beyond-a-simple-integral-1528310418260.html
+      \endverb
+    \endentry
+    \entry{xilinx-github-host-stream-free-running-kernel}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=751f6909b12cc240122891470ea09b53}{%
+           family={Xilinx},
+           familyi={X\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{751f6909b12cc240122891470ea09b53}
+      \strng{fullhash}{751f6909b12cc240122891470ea09b53}
+      \strng{bibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorbibnamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
+      \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
+      \field{extraname}{26}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{GitHub}
+      \field{langid}{english}
+      \field{title}{Stream Free Running Kernel (HLS C/C++)}
+      \field{urlday}{19}
+      \field{urlmonth}{4}
+      \field{urlyear}{2023}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://xilinx.github.io/Vitis_Accel_Examples/2020.2/html/streaming_free_running_k2k.html
+      \endverb
+      \verb{url}
+      \verb https://xilinx.github.io/Vitis_Accel_Examples/2020.2/html/streaming_free_running_k2k.html
       \endverb
     \endentry
   \enddatalist
