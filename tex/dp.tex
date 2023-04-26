@@ -1651,30 +1651,30 @@ Image Packaging Configuration -> Copy final images to tftpboot < >\end{lstlistin
 \end{figure}
 
 
-	Po prvotní konfiguraci bylo zjištěno, že při požadavku na aplikaci \gls{abbreviation:rt} patch pro PetaLinux je vhodné provést prvotní build systému a poté pokračovat v~následných konfiguracích. Build proces je spuštěn příkazem \ref{lst:petalinux-build}.\par
-	Proces aplikace \gls{abbreviation:rt} Patch je představen v~části \hyperref[subsubsec:postup-aplikace-preempt-rt-patch]{\textit{Postup aplikace PREEMPT\_RT patch}}.\par
+	Bylo zjištěno, že při tvorbě systému s aplikovaným \gls{abbreviation:rt} patchem pro \textit{PetaLinux} je vhodné provést úvodní build systému bez dodatečných konfigurací a poté build opakovat s~požadovanými konfiguracemi. Build proces je spuštěn příkazem \ref{lst:petalinux-build}.\par
+	Proces aplikace \gls{abbreviation:rt} patche je představen v~části \hyperref[subsubsec:postup-aplikace-preempt-rt-patch]{\textit{Postup aplikace PREEMPT\_\gls{abbreviation:rt} patch}}.\par
 
 \begin{lstlisting}[language={sh}, caption={PetaLinux build příkaz pro vytvoření systému.}, label= {lst:petalinux-build}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
 petalinux-build\end{lstlisting}
 
-	\subsection{Konfigurace kernelu PetaLinux}
-	Po aplikaci patche je vhodné pokračovat v~nastavování kernelu PetaLinux systému pomocí příkazu \ref{lst:petalinux-config-c-kernel}  dle požadavků aplikace. Ve vytvářené aplikaci je využíván \texttt{Userspace IO Driver} a proto je nutné aktivovat konfiguraci kernelu, která zajistí automatické načtení driveru (ovladače) do systému při jeho startu. Pokud by se tak nestalo, bylo by nutné vkládat moduly, resp. drivery manuálně pomocí příkazů \texttt{modprobe} či \texttt{insmod}. Při konfiguraci kernelu je možné aktivovat i další prvky, které nejsou v~této práci využívány. Aktivovaná konfigurace pro \texttt{Userspace IO Driver} je zobrazena v~kódu \ref{lst:petalinux-config-c-kernel-userspace-io-driver}.\par
+	\subsection{Konfigurace jádra PetaLinux}
+	Po aplikaci patche je vhodné pokračovat nastavením jádra (pro jádro systému je zavedeno tkaé označení kernel) \textit{PetaLinux} systému pomocí příkazu \ref{lst:petalinux-config-c-kernel}. Ve vytvářené aplikaci je využíván \texttt{Userspace IO Driver} a proto je nutné aktivovat konfiguraci jádra, která zajistí automatické načtení driveru (ovladače) do systému při jeho startu. Pokud by se tak nestalo, bylo by nutné vkládat moduly, resp. drivery manuálně pomocí příkazů \texttt{modprobe} či \texttt{insmod}. Při konfiguraci jádra je možné aktivovat i další prvky, které nejsou v~této práci využívány. Ukázka konfigurace pro \texttt{Userspace IO Driver} je zobrazena v~kódu \ref{lst:petalinux-config-c-kernel-userspace-io-driver}.\par
 
-\begin{lstlisting}[language={sh}, caption={PetaLinux příkaz pro konfiguraci kernelu systému.}, label= {lst:petalinux-config-c-kernel}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
+\begin{lstlisting}[language={sh}, caption={PetaLinux příkaz pro konfiguraci jádra systému.}, label= {lst:petalinux-config-c-kernel}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
 petalinux-config -c kernel\end{lstlisting}
 
-\begin{lstlisting}[language={sh}, caption={PetaLinux konfigurace pro User Space IO Drivers.}, label= {lst:petalinux-config-c-kernel-userspace-io-driver}]
+\begin{lstlisting}[language={sh}, caption={PetaLinux konfigurace pro User Space IO Driver.}, label= {lst:petalinux-config-c-kernel-userspace-io-driver}]
 Device drivers -> user space IO drivers <\*>
 Device drivers -> user space IO drivers -> Userspace platform driver with generic irq and dynamic memory <*>
 Device drivers -> user space IO drivers -> Userspace platform driver with generic IRQ handling <*>\end{lstlisting}
 
 		\fbar
 		\subsubsection{Konfigurace Device Tree}\label{subsubsec:konfigurace-device-tree}
-		Aby bylo možné využívat zmiňovaný \texttt{Userspace IO Driver} v~podobě \texttt{generic-uio} driver pro řešení přerušení (interrupts) od prvků \gls{abbreviation:axi} Quad \gls{abbreviation:spi} \cite{axi-quad-spi-ip-product-guide}, AXI Timer \cite{axi-timer-v-2-0-ip-product-guide} a dalších, je nezbytné provést konfiguraci \texttt{devicetree}. Konfiguraci \texttt{devicetree} je možné provádět i u~tvorby Linux systému pro jiné vývojové desky s~\gls{abbreviation:soc}, které neobsahují \gls{abbreviation:fpga}, ale využívají systému Linux.\par
-		Problematika \texttt{devicetree} je značně obsáhlá, tento standard je obhospodařován komunitou systému Linux a jsou vydávány specifikace, které tuto datovou strukturu popisují. Tyto specifikace je možné nalézt na oficiálních stránkách této iniciativy. \cite{devicetree-org-specification}\par
+		Aby bylo možné využívat zmiňovaný \texttt{Userspace IO Driver} v~podobě \texttt{generic-uio} driveru pro řešení přerušení (interrupts) od prvků \gls{abbreviation:axi} Quad \gls{abbreviation:spi} \cite{axi-quad-spi-ip-product-guide}, AXI Timer \cite{axi-timer-v-2-0-ip-product-guide} a dalších, je nezbytné provést odpovídající konfiguraci \texttt{devicetree}. Konfiguraci \texttt{devicetree} je možné provádět i u~tvorby Linux systému pro jiné vývojové desky s~\gls{abbreviation:soc}, které neobsahují \gls{abbreviation:fpga}, ale využívají systému Linux.\par
+		Problematika \texttt{devicetree} je značně obsáhlá, tento standard je obhospodařován komunitou systému Linux a pravidelně jsou vydávány specifikace, které tuto datovou strukturu popisují. Tyto specifikace je možné nalézt na oficiálních stránkách této komunity. \cite{devicetree-org-specification}\par
 		Existuje i záznam velmi přínosné prezentace z~\textit{Embedded Linux Conference Europe} ohledně problematiky Device Tree od \textit{Thomas Petazzoni} s~názvem \textit{Device Tree for Dummies!} \cite{youtube-devicetree-for-dummies}.\par
-		Při tvorbě akcelerované aplikace v~této práci byl využit \texttt{devicetree} soubor automaticky vytvořený při konfiguraci kernelu a prvotním build procesu \textit{PetaLinux} systému. Ovšem aby bylo možné použít zmiňované bloky, je třeba do souboru \texttt{system-user.dtsi}, který slouží k~překonfigurování automaticky vytvořeného souboru \texttt{system-conf.dtsi}, protože je při \texttt{parse} procesu čten jako poslední.\par
-		Obsah \texttt{system-user.dtsi} souboru je zobrazen v~\ref{lst:system-user-dtsi-device-tree}. Soubor je možné nalézt v~cestě \texttt{<petalinux-project>/project-spec/meta-user/recipes-bsp/device-tree/files/system.user.dtsi}.\par
+		Při tvorbě akcelerované aplikace v~této práci byl využit \gls{abbreviation:dt} soubor automaticky vytvořený při konfiguraci jádra systému při prvním build procesu \textit{PetaLinux} systému. Ovšem aby bylo možné použít zmiňované bloky, je třeba do souboru \texttt{system-user.dtsi} zapsat požadované konfigurace. Soubor \texttt{system-user.dtsi} překonfiguruje automaticky vytvořený souboru \texttt{system-conf.dtsi}. V hierarchii načítání konfiguračních souborů je čten \texttt{system-conf.dtsi} jako poslední.\par
+		Upravený obsah \texttt{system-user.dtsi} souboru je zobrazen v~\ref{lst:system-user-dtsi-device-tree}. Soubor je možné nalézt v~cestě \texttt{<petalinux-project>/project-spec/meta-user/recipes-bsp/device-tree/files/system.user.dtsi}.\par
 
 		\begin{lstlisting}[language={devicetree}, caption={Obsah souboru system-user.dtsi, překonfigurovávající soubor system-conf.dtsi.}, label= {lst:system-user-dtsi-device-tree}]
 /include/ "system-conf.dtsi"
@@ -1695,10 +1695,10 @@ Device drivers -> user space IO drivers -> Userspace platform driver with generi
     };
 };\end{lstlisting}
 
-			Tento rekonfigurační \texttt{devicetree} byl získán reengineeringem souboru \texttt{pl.dtsi}. Soubor \texttt{pl.dtsi} je získán za pomoci exportovaného \textit{XPR} souboru pomocí \texttt{\gls{abbreviation:xsct}} (Xilinx Software Command-Line Tool). Postup byl získán ze zdrojů \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}.\par
-			V~definované struktuře z~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} je vhodné příkazy vyvolávat ze složky \texttt{linux-files}. Postup spočívá v~spuštění nástroje, otevření HW designu souboru \textit{\gls{abbreviation:xsa}} a použití příkazu \texttt{createdts} s~příslušnými parametry. Postup je naznačen v~kódu \ref{lst:xsct-flow}.\par
+			Tento rekonfigurační \gls{abbreviation:dt} byl získán reengineeringem souboru \texttt{pl.dtsi}. Soubor \texttt{pl.dtsi} je získán za pomoci exportovaného \textit{\gls{abbreviation:xpr}} souboru pomocí \texttt{\gls{abbreviation:xsct}} (Xilinx Software Command-Line Tool). Postup tvorby byl získán z \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a \cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}.\par
+			V~definované struktuře z~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} je vhodné příkazy vyvolávat ze složky \texttt{linux-files}. Postup spočívá ve~spuštění nástroje, načtení \gls{abbreviation:hw} designu ze souboru \textit{\gls{abbreviation:xsa}} a použití příkazu \texttt{createdts} s~příslušnými parametry. Postup je naznačen v~kódu \ref{lst:xsct-flow}.\par
 
-		\begin{lstlisting}[language={xsct}, caption={Postup tvorby pl.dtsi souboru pomoci \gls{abbreviation:xsct}, popisující devicetree v~runtime.}, label= {lst:xsct-flow}]
+		\begin{lstlisting}[language={xsct}, caption={Postup tvorby pl.dtsi souboru pomocí \gls{abbreviation:xsct}, popisující \gls{abbreviation:dt} při běžícím PetaLinux.}, label= {lst:xsct-flow}]
 xsct # start the Xilinx Software Command-Line Tool
 
 hsi::open_hw_design ../hw/kria_bd_wrapper.xsa # open HW design
@@ -1707,10 +1707,10 @@ createdts -hw ../hw/kria_bd_wrapper.xsa -zocl -platform-name kria_kr260 -git-bra
 
 exit # exit the tool\end{lstlisting}
 
-		Uvedeným způsobem je získán textový soubor \texttt{pl.dtsi}, který je možné opět konfigurovat pomocí textového editoru. Soubor má podobnou strukturu jako běžný \texttt{devicetree}, ovšem definuje tzv. fragmenty pro \texttt{device tree overlay}. Protože byla aktivována v~kroku HW konfigurace \textit{PetaLinux} možnost \texttt{FPGA Manager -> Fpga Manager <*>}, je v~jádru systému \textit{PetaLinux} zabudovaná jen základní část \texttt{devicetree}. Zbytková část je poté načtena do systému při běhu systému (at runtime) při vyvolání příkazu \texttt{xmutil loadapp <name-of-the-app>} a spuštění aplikace, resp. načtení bitstreamu do \gls{abbreviation:pl}. Příkaz \texttt{xmutil} je specifický pro \textit{PetaLinux} a Xilinx nástroje. Pro ostatní \textit{Linux} distribuce a zařízení je nutné využívat obecný způsob načítání \texttt{device tree overlay}.\par
+		Uvedeným způsobem je získán textový soubor \texttt{pl.dtsi}, který je možné opět konfigurovat pomocí textového editoru. Soubor má podobnou strukturu jako běžný \gls{abbreviation:dt}, ovšem definuje tzv. fragmenty pro \texttt{device tree overlay}. Protože byla v~kroku \gls{abbreviation:hw} konfigurace \textit{PetaLinux} aktivována možnost \texttt{FPGA Manager -> Fpga Manager <*>}, je v~jádru systému \textit{PetaLinux} zabudovaná jen základní část \gls{abbreviation:dt}. Zbytková část je poté načtena do systému při běhu systému (at runtime) po vyvolání příkazu \texttt{xmutil loadapp <name-of-the-app>} a spuštění aplikace, resp. načtení bitstreamu do \gls{abbreviation:pl}. Příkaz \texttt{xmutil} je specifický pro \textit{PetaLinux} a Xilinx nástroje. Pro ostatní \textit{Linux} distribuce a zařízení je nutné využívat obecný způsob načítání \texttt{device tree overlay}.\par
 		Pro vyvíjenou aplikaci v~této práci je nutné u~použitého bloku \gls{abbreviation:axi} Timer
-		změnit \textit{property value} \texttt{compatible = "generic-uio";} a pro \gls{abbreviation:axi} Quad \gls{abbreviation:spi} na téže hodnotu.\par
-		Následně je nutné textový soubor \texttt{pl.dtsi} převést do binární podoby, vhodné pro systém. Ke kompilaci je používán nástroj \texttt{\gls{abbreviation:dtc}} (Device Tree Compiler), dostupný pro většinu distribucí Linux. Příkaz, který popisuje kompilaci souboru \texttt{pl.dtsi} (Device Tree Source Include, \gls{abbreviation:dtsi}) na \texttt{pl.dtbo} (Device Tree Blob Object, \gls{abbreviation:dtbo}) je zobrazen v~kódu \ref{lst:dtsi-to-dtbo}.\par
+		změnit \textit{property value} na \texttt{compatible = "generic-uio";} a pro \gls{abbreviation:axi} Quad \gls{abbreviation:spi} na téže hodnotu.\par
+		Pro funkčnost v \textit{PetaLinux} je nutné textový soubor \texttt{pl.dtsi} převést do binární podoby. Ke kompilaci je používán nástroj \texttt{\gls{abbreviation:dtc}} (Device Tree Compiler), dostupný pro většinu distribucí Linux systému. Příkaz, který popisuje kompilaci souboru \texttt{pl.dtsi} (Device Tree Source Include, \gls{abbreviation:dtsi}) na \texttt{pl.dtbo} (Device Tree Blob Object, \gls{abbreviation:dtbo}) je zobrazen v~kódu \ref{lst:dtsi-to-dtbo}.\par
 
 		\begin{lstlisting}[language={sh}, caption={Kompilace textového souboru device tree overlay pl.dtsi na binární pl.dtbo}, label= {lst:dtsi-to-dtbo}, morekeywords={dtc}]
 dtc -@ -O dtb -o <path-to-output-file> <path-to-input-file> # general command
@@ -1731,12 +1731,12 @@ petalinux-config -c rootfs\end{lstlisting}
 %% POZOR
 %% vyhodit asi věci na zpracování obrazu openCV v4lutils, x11 po vyzkoušení
 		Při konfiguraci \texttt{rootfs} je možné vybrat, jaké aplikace budou do systému \textit{PetaLinux} v~základní instalaci vloženy. Pro funkční akcelerovanou aplikaci je doporučováno zvolit výběr nastavení, uvedený v~kódu \ref{lst:petalinux-config-c-rootfs-settings}.\par
-		Pokud vývoj aplikace nevyžaduje nejnovější instalační balíky a jejich aktualizace pomocí připojení k~internetu, není třeba instalovat \texttt{dnf} (Dandified YUM – new version of Yellowdog Updater, Modifier, Package Manager).\par
+		Pokud vývoj aplikace nevyžaduje nejnovější instalační balíky a jejich aktualizace při připojení k~internetu, není třeba instalovat \texttt{dnf} (Dandified YUM – new version of Yellowdog Updater, Modifier, Package Manager).\par
 		Základní funkce jednotlivých nastavení je následující:
 		\vspace*{0.25cm}
 		\begin{description}
 			\item \texttt{dnf} – Package Manager,
-			\item \texttt{xrt} – Xilinx Runtime Library – knihovna mj. zajišťující komunikaci mezi PS aplikací a akcelerovanými kernely v~PL,
+			\item \texttt{xrt} – Xilinx Runtime Library – knihovna mj. zajišťující komunikaci mezi \gls{abbreviation:ps} aplikací a akcelerovanými kernely v~\gls{abbreviation:pl},
 			\item \texttt{zocl} – ovladač pro ZynQ OpenCL akcelerátory,
 			\item \texttt{opencl-headers} a \texttt{opencl-clhpp} – knihovny pro OpenCL (Open Computing Language),
 			\item \texttt{packagegroup-petalinux} – skupina balíků pro \textit{PetaLinux},
@@ -1745,7 +1745,7 @@ petalinux-config -c rootfs\end{lstlisting}
 			\item \texttt{packagegroup-petalinux-x11} – skupina balíků, zajišťující X Window System (není nutné pro vyvíjenou aplikaci).
 		\end{description}
 		\vspace*{0.75cm}
-		Aktivované nastavení automatického přihlašování není doporučeno používat v~zařízení v~provozu z~bezpečnostních důvodů. Při debuggingu a vyvíjení aplikace ovšem přináší zjednodušení přihlašování. Bezpečnost systému v~produkčním prostředí není obsahem této práce.\par
+		Aktivaci automatického přihlašování uživatele \textit{root} není doporučeno  z~bezpečnostních důvodů používat u~zařízení v~provozu. Při debuggingu a vyvíjení aplikace ovšem automatické přihlášení přináší zjednodušení. Bezpečnost systému v~produkčním prostředí není obsahem této práce.\par
 
 
 \begin{lstlisting}[language={Text}, caption={Doporučené nastavení rootfs pro akcelerovanou aplikaci.}, label= {lst:petalinux-config-c-rootfs-settings}]
@@ -1781,9 +1781,9 @@ Petaliunx Package Groups -> packagegroup-petalinux-x11 -> packagegroup-petalinux
 	
 	\fbar
 	\subsection{Závěrečný build PetaLinux, generování SDK a tvoření WIC obrazu systému}
-	Po provedení požadované \texttt{rootfs} konfigurace je možné přistoupit opět k~build procesu pomocí příkazu \ref{lst:petalinux-build}. Po první části build procesu je možné aktivovat proces generování \textit{\gls{abbreviation:sdk}} (Software Development Kit), který je nutný k~tomu, aby bylo možné akcelerovanou aplikaci ve Vitis vyvíjet a aktivovat její build proces. Generování \textit{\gls{abbreviation:sdk}} je provedeno pomocí příkazu \ref{lst:petalinux-build-sdk}. Autor vypozoroval, že pokud je postup tvorby \textit{PetaLinux} dodržen a jsou nainstalované všechny správné packages v~operačním systému, kde dochází k~buildu \textit{\gls{abbreviation:sdk}}, a vznikne v~procesu generování chyba ohledně \texttt{do\_populate\_sdk}, zahrnující klíčové slovo \textit{python}, je třeba restart operačního systému a pokusit se o~opakování příkazu \ref{lst:petalinux-build-sdk}.\par
-	Tento \textit{\gls{abbreviation:sdk}} je pro jeho využití ve Vitis \gls{abbreviation:ide} nutné instalovat. Instalace je doporučena do složky \texttt{linux-files}, udaná strukturou v~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} pomocí příkazu \ref{lst:petalinux-install-sdk-to-linux-files}.
-	Po vygenerování \textit{\gls{abbreviation:sdk}} je možné přistoupit ke kroku vytvoření a „zabalení“ (package) určitých komponent, pro vytvoření obrazu systému \textit{PetaLinux}. K~tomuto jsou využity příkazy \ref{lst:petalinux-package-boot} a \ref{lst:petalinux-package-wic}.\par
+	Po provedení požadované \texttt{rootfs} konfigurace je možné přistoupit opět k~build procesu pomocí příkazu \ref{lst:petalinux-build}. Po první části build procesu je možné spustit proces generování \textit{\gls{abbreviation:sdk}} (Software Development Kit), který je nutný k~tomu, aby bylo možné akcelerovanou aplikaci ve Vitis vyvíjet. Generování \textit{\gls{abbreviation:sdk}} je provedeno pomocí příkazu \ref{lst:petalinux-build-sdk}. Autor vypozoroval, že pokud je postup tvorby \textit{PetaLinux} dodržen a jsou nainstalované všechny správné packages v~operačním systému, kde dochází k~tvorbě \textit{\gls{abbreviation:sdk}}, a vznikne v~procesu generování chyba v \texttt{do\_populate\_sdk} zahrnující klíčové slovo \textit{python}, je třeba provést restart operačního systému a pokusit se o~opakování příkazu \ref{lst:petalinux-build-sdk}. Příčina této chyby nebyla odhalena.\par
+	Po build procesu \textit{\gls{abbreviation:sdk}} je pro tvorbu aplikace ve Vitis \gls{abbreviation:ide} nutné \textit{\gls{abbreviation:sdk}} také instalovat. Je doporučeno provést instalaci do složky \texttt{linux-files} pomocí příkazu \ref{lst:petalinux-install-sdk-to-linux-files}.
+	Po instalaci \textit{\gls{abbreviation:sdk}} je možné přistoupit ke kroku vytvoření a „zabalení“ (package) určitých komponent, které slouží k vytvoření obrazu systému \textit{PetaLinux}. K~tomuto kroku jsou využity příkazy \ref{lst:petalinux-package-boot} a \ref{lst:petalinux-package-wic}.\par
 
 
 \begin{lstlisting}[language={sh}, caption={Příkaz pro aktivování build procesu SDK}, label= {lst:petalinux-build-sdk}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
@@ -1803,12 +1803,12 @@ petalinux-package --wic --images-dir ./images/linux/ --bootfiles "ramdisk.cpio.g
 	\begin{lstlisting}[language={sh}, caption={Příkaz pro kopírování boot komponent do složky dané strukturou projektu.}, label={lst:petalinux-cp-boot-components}, morekeywords={cp}]
 cp bl31.elf pmufw.elf system.dtb u-boot.elf zynqmp_fsbl.elf ./../../../linux-files/pfm/boot/\end{lstlisting}
 
-		Vygenerovaný obraz systému typu \texttt{wic} je možné použít na flash \gls{abbreviation:sd} karty, která je následně vložena do vývojové desky. K~flashnutí je možné na opetačním systému macOS nebo Linux využít příkazu \texttt{dd}. Pokud uživatel není zkušený, je doporučováno využít program \textit{balenaEtcher}.\par
+		Vygenerovaný obraz systému typu \texttt{\gls{abbreviation:wic}} je možné použít na flash \gls{abbreviation:sd} karty, která je poté vložena do slotu vývojové desky. K~flashnutí je možné na opetačním systému macOS nebo Linux využít příkazu \texttt{dd}. Pokud uživatel není zkušený, je doporučováno využít program \textit{balenaEtcher}.\par
 		V~této části byl představen postup generování systému \textit{PetaLinux}, byly doporučeny jednotlivá nastavení a konfigurace, vhodné pro vyvíjenou aplikaci. Na závěr části byl nastíněn postup flash \gls{abbreviation:sd} karty, kterou je poté možné vložit do vývojové desky a započít boot proces systému.
 
 	\subsection{Spuštění systému PetaLinux na KR260}
-		Po úspěšném procesu flashnutí obrazu systému \texttt{wic} na \gls{abbreviation:sd} kartu, je možné kartu vložit do vývojové desky a připojit desku na napájení. \gls{abbreviation:cc} KR260 neobsahuje přepínač, který by umožňoval přerušení napájení desky. Proto se deska vypíná pomocí manuálního odstranění napájení. Restart (reboot) desky je proveden softwaerový způsobem pomocí příkazu \texttt{reboot now} nebo opět pomocí odstranění a připojení napájení (power cycle).\par
-		Po připojení naoájení dochází k~automatickému spuštění \textit{bootloaderu} a postupnému načtení a spuštění systému. Pokud je uživatel připojen k~desce pomocí \gls{abbreviation:usb}, resp. \gls{abbreviation:uart} komunikace (např. pomocí \textit{minicom} s~baud rate 115200), budou v~terminálu vypisovány informace jak z~bootloaderu opřed spuštěním \textit{PetaLinux}, tak informace z~\textit{kernel ring buffer}. Po úspěšném spuštění systému je možné informace z~\textit{kernel ring buffer} opět zobrazit pomocí příkazu \texttt{dmesg}. Výpis je v~některých případech důležitý při debuggingu systému a jeho informace je možné využít i při spouštění akcelerované aplikace a načítání \texttt{pl.dtbo} a \texttt{xclbin} souboru.\par
+		Po úspěšném procesu flashnutí obrazu systému \texttt{\gls{abbreviation:wic}} na \gls{abbreviation:sd} kartu, je možné kartu vložit do příslušného slotu vývojové desky a připojit desku na napájení. \gls{abbreviation:cc} KR260 neobsahuje přepínač, který by umožňoval přerušení napájení desky. Proto se deska vypíná pomocí manuálního odpojení napájení. Restart (reboot) desky je proveden softwarový způsobem pomocí příkazu \texttt{reboot now} nebo opět pomocí odpojení a připojení napájení (power cycle).\par
+		Po připojení napájení dochází k~automatickému spuštění \textit{bootloaderu} a postupnému načtení a spuštění systému. Pokud je uživatel připojen k~desce pomocí \gls{abbreviation:usb}, resp. \gls{abbreviation:uart} komunikace (např. pomocí \textit{minicom} s~baud rate 115200), budou v~terminálu vypisovány informace jak z~bootloaderu před spuštěním \textit{PetaLinux}, tak informace z~\textit{kernel ring buffer}. Po úspěšném spuštění systému je možné informace z~\textit{kernel ring buffer} opět zobrazit pomocí příkazu \texttt{dmesg}. Výpis je v~některých případech důležitý při debuggingu systému a jeho informace je možné využít i při spouštění akcelerované aplikace a načítání \texttt{pl.dtbo} a \texttt{xclbin} souboru.\par
 
 	\subsection{Nastavení Ethernet adaptéru po spuštění systému}
 		Bylo vypozorváno, že vlivem tvorby platformy a nastavení \textit{PetaLinux} je \texttt{eth0} interface po restartu systému neaktivní, je třeba jej aktivovat pomocí příkazu \texttt{ifup eth0}.\par
@@ -1822,6 +1822,25 @@ iface eth0 inet static
 	network 192.168.144.0
 	gateway 192.168.144.1
 	broadcast 192.168.144.255\end{lstlisting}
+
+	Autor práce však požadoval automatickou inicializaci adaptéru \texttt{eth0} a proto využil možnosti vytvořit \texttt{bash} skript, který bude spouštěn po startu \textit{PetaLinux} systému. Jedná se ovšem o experimentální přístup, protože po některých restartech systému vznikla situace, kdy skript byl spuštěn, adaptér byl načtený (kontrola přiřazené IP adresy proběhla pomocí \texttt{ip addr}), ale k zařízení nebylo možné se připojit. Důvod tohoto problému nebyl při realizaci této práce objeven.\par
+	Obsah vytvořeného skriptu \texttt{ethernetUp.sh} je zobrazen v \ref{lst:eth0-automatic-initialization-script}. Soubor \texttt{networking} je již zakomponován v systému a obsahuje potřebné konfigurace.\par
+
+	\begin{lstlisting}[language={sh}, caption={Skript pro automatickou inicializaci adaptéru eth0}, label={lst:eth0-automatic-initialization-script}, morekeywords={}]
+#!/bin/sh		
+echo "Starting network interfaces!"
+ip addr
+/etc/init.d/networking start
+ip addr\end{lstlisting}
+
+	Příkazy, které je třeba vyvolat aby skript \texttt{ethernetUp.sh} byl spuštěn po restartu systému, jsou uvedeny v \ref{lst:eth0-automatic-initialization-script-commands}.
+
+\begin{lstlisting}[language={sh}, caption={Skript pro automatickou inicializaci adaptéru eth0}, label={lst:eth0-automatic-initialization-script-commands}, morekeywords={}]
+sudo cp /path/to/your-script/ethernetUp.sh /etc/init.d/ # copying script to init.d directory
+
+sudo chmod +x /etc/init.d/ethernetUp.sh # making script executable
+
+sudo ln -s /etc/init.d/ethernetUp.sh /etc/rc5.d/S99ethernetUp.sh # creating soft symbolic link to a script in the folder rc5.d which represents layer, when the script should be run\end{lstlisting}
 
 
 	\fbar
@@ -2785,7 +2804,8 @@ V~této sekci budou představeny výsledky a poznatky ohledně vytvořených apl
 		\centering
 		\caption{Využití zdrojů \gls{abbreviation:pl} pro akcelerované aplikace.}
 		\vspace*{0.15cm}
-		
+		V tabulce \ref{tab:vyuziti-zdroju-pl-pro-akcelerovane-aplikace} je prezentováno využití zdrojů \gls{abbreviation:lut}, registrů, \gls{abbreviation:bram}, \gls{abbreviation:uram} a \gls{abbreviation:dsp} jednotlivými akcelerovanými aplikacemi (kernely). Je vidět, že kernel \texttt{krnl\_calculateInvMot} by s vysokou pravděpodobností mohl být realizován i ve vývojové desce Digilent Zybo. Naopak \texttt{krnl\_calculateCurVelModel}, který obsahuje $I$-$n$ model simulovaného motoru, regulátory a \gls{abbreviation:svm} vyžaduje v aktuálním provedení množství zdrojů, které prezentovaná deska Digilent Zybo není schopna poskytnout.\par
+
 		\begin{tabular}{!{\vrule width 2pt} l | c | c | c | c | c !{\vrule width 2pt}}
 		\noalign{\hrule height 2pt}
 		\rowcolor{codeblue}

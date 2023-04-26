@@ -308,7 +308,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {14~-~1}{\ignorespaces Nastavení cest souborů pro platformu ve Vitis \gls {abbreviation:ide} souboru platform.spr.\relax }}{61}{table.caption.55}%
+\contentsline {table}{\numberline {14~-~1}{\ignorespaces Nastavení cest souborů pro platformu ve Vitis \gls {abbreviation:ide} souboru platform.spr.\relax }}{62}{table.caption.55}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -330,13 +330,13 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {18~-~1}{\ignorespaces Porovnání vybraných hodnot běhu kernelu v~aplikace Preloaded Data – Legacy App pro 1 milion a 100 tisíc sad hodnot. (\gls {abbreviation:uvh} – ukládání a výpis hodnot, \gls {abbreviation:buvh} – bez ukládání a výpišu hodnot)\relax }}{95}{table.caption.73}%
+\contentsline {table}{\numberline {18~-~1}{\ignorespaces Porovnání vybraných hodnot běhu kernelu v~aplikace Preloaded Data – Legacy App pro 1 milion a 100 tisíc sad hodnot. (\gls {abbreviation:uvh} – ukládání a výpis hodnot, \gls {abbreviation:buvh} – bez ukládání a výpišu hodnot)\relax }}{96}{table.caption.73}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {18~-~2}{\ignorespaces Vybrané hodnoty běhu kernelu v~podaplikaci \gls {abbreviation:cpu}/\gls {abbreviation:fpga}.\relax }}{98}{table.caption.77}%
+\contentsline {table}{\numberline {18~-~2}{\ignorespaces Vybrané hodnoty běhu kernelu v~podaplikaci \gls {abbreviation:cpu}/\gls {abbreviation:fpga}.\relax }}{99}{table.caption.77}%
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {18~-~3}{\ignorespaces Využití zdrojů \gls {abbreviation:pl} pro akcelerované aplikace.\relax }}{99}{table.caption.80}%
+\contentsline {table}{\numberline {18~-~3}{\ignorespaces Využití zdrojů \gls {abbreviation:pl} pro akcelerované aplikace.\relax }}{100}{table.caption.80}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -968,7 +968,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {B~-~1}{\ignorespaces Ukázka nastavených \gls {abbreviation:axi} portů v~Xilinx Vivado platformě pro \textit {Digilent Zybo}.\relax }}{114}{table.caption.90}%
+\contentsline {table}{\numberline {B~-~1}{\ignorespaces Ukázka nastavených \gls {abbreviation:axi} portů v~Xilinx Vivado platformě pro \textit {Digilent Zybo}.\relax }}{115}{table.caption.90}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
