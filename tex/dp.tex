@@ -958,7 +958,7 @@ Tato práce se zajímá o~aplikace a možné využití FPGA při řízení elekt
 					Vlivem omezených zdrojů bylo možné i přes optimalizaci C++ kódu (pro dodržení load-compute-store modelu programování \cite{vitis-unified-software-platform-documentation-2022}) akcelerované aplikace (kernelu) možné umístit do \gls{abbreviation:pl} v~Digilent Zybo Z7 pouze $I$-$n$ model asynchronního motoru, jehož výsledkem byl transformační úhel, složky magnetického toku rotoru $\psi_2^{\alpha \beta}$ a velikost magnetického toku rotoru $| \psi_2 |$. Oproti tomu při využití Kria K26 \gls{abbreviation:som} je možné využít \gls{abbreviation:pl} pro výpočet $I$-$n$ modelu stroje, zjednodušeného modelu asynchronního motoru, regulátorů a invertoru.
 
 			\subsection{Developer Experience}
-					V~moderní době, kdy je kladen značný důraz na rychlost vývoje aplikace, je také hodnotícím faktorem developer experience. Tudíž jak je systém konfigurace a vytváření aplikací přívětivý pro vývojáře. V~době vydání Digilent Zybo Z7 byl používán postup vytvoření operačního systému \textit{PetaLinux} již s~pevně daným Device Tree (\gls{abbreviation:dt}), které bylo možné měnit pomocí rekonfigurace a následného opakování celého procesu tvorby systému a aplikace. To přinášelo značné časové prodlevy při ladění aplikace a vytvářeného \gls{abbreviation:pl} hardware.\par
+					V~moderní době, kdy je kladen značný důraz na rychlost vývoje aplikace, je také hodnotícím faktorem developer experience (\gls{abbreviation:dx}). Tudíž jak je systém konfigurace a vytváření aplikací přívětivý pro vývojáře. V~době vydání Digilent Zybo Z7 byl používán postup vytvoření operačního systému \textit{PetaLinux} již s~pevně daným Device Tree (\gls{abbreviation:dt}), které bylo možné měnit pomocí rekonfigurace a následného opakování celého procesu tvorby systému a aplikace. To přinášelo značné časové prodlevy při ladění aplikace a vytvářeného \gls{abbreviation:pl} hardware.\par
 					Při použití Xilinx Kria K26 \gls{abbreviation:som} je možné při tvorbě systému definovat kostru \gls{abbreviation:dt} pro \gls{abbreviation:ps}, kterou je poté možné do značného rozsahu upravovat pomocí Device Tree Overlay (\gls{abbreviation:dto}). Pomocí \gls{abbreviation:dto} je možné rekonfigurovat \gls{abbreviation:ip} vytvářené v~\gls{abbreviation:pl}. Změnou v~\gls{abbreviation:dto} je možné ovlivňovat funkčnost některých \gls{abbreviation:ip} v~\gls{abbreviation:pl} při chodu operačního systému \textit{PetaLinux}. Ovšem tyto úpravy mají určitá omezení a je vhodné Device Tree vhodně nakonfigurovat již při vytváření operačního systému \textit{PetaLinux}.\par
 					Více informací o~chování a tvorbě \gls{abbreviation:dt}/\gls{abbreviation:dto}, zjištěných při realizaci této práce, je uvedeno v~části \hyperref[subsubsec:konfigurace-device-treesubsubsec:konfigurace-device-tree]{\textit{Petalinux}}.\par
 					Digilent pro své výrobky vytvořil „board files“ a „constraints files“, které umožňují snazší konfiguraci \gls{abbreviation:ps} a \gls{abbreviation:pl} v~prostředí Vivado. Značným přínosem jsou „constraints files“, které umožňují snazší a rychlejší mapování fyzických pinů vývojové desky k~portům, pinům a rozhraní, vytvářených ve Vivado. Pro vývojovou desku Xilinx Kria KR260 jsou v~repozitáři ve Vivado již „board files“ obsaženy. Ovšem oficiální „constraints files“ nejsou od výrobce k~dispozici. Pro mapování pinů je nutné si vyžádat dokumentaci, pomocí které je možné odvodit požadované mapování a „constrains files“ vytvořit. Potřebná dokumentace pro odvození mapování je v~souborech \cite{kria-kr260-starter-kit-cc-schematics} a \cite{kria-k26-som-xdc}.
@@ -1195,14 +1195,14 @@ Tvorba akcelerované aplikace může být obecně prováděna více způsoby. Te
 			
 			\fbar
 			\subsubsection{Postup aplikace PREEMPT\_RT patch}\label{subsubsec:postup-aplikace-preempt-rt-patch}
-				Patch je možné aplikovat několika způsoby. V~této práci byl aplikován při fázi tvoření \textit{PetaLinux} systému pomocí úpravy konfiguračních souborů build procesu.\par
-				Pro bezproblémové aplikování patche je vhodné nejdříve vytvořit \textit{build} \textit{PetaLinux} systému minimální konfigurací a bez aplikovanání patch souboru a až po úspěšném vytvoření systému patch aplikovat a build proces opakovat. Pro funkční aplikaci patch souboru je nutné znát verzi jádra \textit{PetaLinux}, na který bude aplikován. Označení verze je možné získat z~\texttt{Makefile} souboru umístěného v~cestě naznačené v~kódu \ref{lst:petalinux-kernel-makefile-path}, kde \texttt{<petalinux-project>} je označení pro kořenový (root) adresář \textit{PetaLinux} projektu, který je tvořen.
+				Patch je možné aplikovat několika způsoby. V~této práci byl aplikován při tvoření \textit{PetaLinux} systému pomocí úpravy konfiguračních souborů build procesu.\par
+				Pro bezproblémové aplikování patche je vhodné nejdříve vytvořit \textit{build} \textit{PetaLinux} systému s minimální konfigurací a bez aplikovanání patch souboru a až po úspěšném vytvoření systému patch aplikovat a build proces opakovat. Pro funkční aplikaci patch souboru je nutné znát verzi jádra \textit{PetaLinux}, na který bude aplikován. Označení verze je možné získat z~\texttt{Makefile} souboru umístěného v~cestě naznačené v~kódu \ref{lst:petalinux-kernel-makefile-path}, kde \texttt{<petalinux-project>} je označení pro kořenový (root) adresář \textit{PetaLinux} projektu.
 
 				\begin{lstlisting}[language={sh}, caption={Cesta Makefile souboru, ze kterého je možné získat označení verze jádra systému PetaLinux.}, label= {lst:petalinux-kernel-makefile-path}]
 <petalinux-project>/build/tmp/work-shared/xilinx-k26-kr/kernel-source/Makefile\end{lstlisting}
 				Protože je zmiňovaný \texttt{Makefile} soubor rozměrný a pro určení verze kernelu je signifikantní pouze jeho úvodní část, je v~kódu č. \ref{lst:petalinux-makefile-kernel-version} vynechána podstatná část souboru, která není pro aplikování patche podstatná.
 
-				\begin{lstlisting}[language={make}, caption={Významná část Makefile souboru pro určení verze jádra PetaLinux.}, label= {lst:petalinux-makefile-kernel-version}]
+				\begin{lstlisting}[language={make}, caption={Významná část Makefile souboru pro určení verze jádra PetaLinux systému.}, label= {lst:petalinux-makefile-kernel-version}]
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 5
 PATCHLEVEL = 15
@@ -1211,9 +1211,9 @@ EXTRAVERSION =
 NAME = Trick or Treat
 ...\end{lstlisting}
 				
-				Z~kódu \ref{lst:petalinux-makefile-kernel-version} je možné vyčíst, že je třeba využít patch pro verzi \textit{5.15.36}. Pokud není možné informaci ohledně verze jádra linuxu dohledat, je možné vytvořit PetaLinux obvyklým způsobem, vytvořit obraz systému, ten nahrát na SD kartu, provést spuštění systému na vývojové desce a po úspěšném přihlášení do systému vyvolat příkaz \texttt{uname -a} a dle uvedených informací odvodit verzi jádra.\par
-				Poté je z~adresy \href{https://cdn.kernel.org/pub/linux/kernel/projects/rt/}{\textcolor{ctublue}{https://cdn.kernel.org/pub/linux/kernel/projects/rt/}} možné stáhnout patch pro zjištěnou verzi jádra. V~této práci byl využit patch pro Petalinux 2022.2 umístěný v~cestě \texttt{5.15/older/patch-5.15.36-rt41.patch.gz}.\par
-				Dalším krokem je extrahovaný soubor \texttt{patch-5.15.36-rt41.patch} přenést do složky \texttt{<petalinux-project>/project-spec/meta-user/recipes-kernel/linux/linux-xlnx/}. Build proces musí následně mít informaci o~umístění daného souboru, proto je vyžadováno aby do souboru \texttt{<petalinux-project>/project-spec/meta-user/recipes-kernel/linux/linux-xlnx\_\%.bbappend} zapsat na poslední řádek příkaz \texttt{SRC\_URI:append = " file://patch-5.15.36-rt41.patch"}, kde \texttt{patch-5.15.36-rt41.patch} je název patch souboru. Ukázka \texttt{linux-xlnx\_\%.bbappend} souboru, využitého v~této práci je v~kódu \ref{lst:petalinux-patch-bbbappend}. Jak je vidět, soubor obsahuje informace o~různých konfiguračních souborech pro tvorbu jádra Linux systému. Šestý řádek označuje uživatelskou konfiguraci, pomocí data, kdy byla vytvořena.
+				Z~kódu \ref{lst:petalinux-makefile-kernel-version} je možné vyčíst, že je třeba využít patch pro verzi jádra \textit{5.15.36}. Pokud není v souboru informace ohledně verze jádra linuxu uvedena, je možné vytvořit PetaLinux obvyklým způsobem, vytvořit obraz systému, ten nahrát na \gls{abbreviation:sd} kartu, provést spuštění systému na vývojové desce a po úspěšném přihlášení do systému vyvolat příkaz \texttt{uname -a} a dle uvedených informací odvodit verzi jádra.\par
+				Poté je z~adresy \href{https://cdn.kernel.org/pub/linux/kernel/projects/rt/}{\textcolor{ctublue}{https://cdn.kernel.org/pub/linux/kernel/projects/rt/}} možné stáhnout patch pro zjištěnou verzi jádra. V~této práci byl využit patch jádra pro \textit{PetaLinux} 2022.2 umístěný v~cestě \texttt{5.15/older/patch-5.15.36-rt41.patch.gz}.\par
+				Dalším krokem je extrahovaný soubor \texttt{patch-5.15.36-rt41.patch} přenést do složky \texttt{<petalinux-project>/project-spec/meta-user/recipes-kernel/linux/linux-xlnx/}. Build proces musí následně pracovat s informací o~umístění patch souboru, proto je vyžadováno aby do konfiguračního souboru \texttt{<petalinux-project>/project-spec/meta-user/recipes-kernel/linux/linux-xlnx\_\%.bbappend} byl na poslední řádek zapsán příkaz \texttt{SRC\_URI:append = " file://patch-5.15.36-rt41.patch"}, kde \texttt{patch-5.15.36-rt41.patch} je název patch souboru. Ukázka \texttt{linux-xlnx\_\%.bbappend} souboru, využitého v~této práci je v~kódu \ref{lst:petalinux-patch-bbbappend}. Jak je vidět, soubor obsahuje informace o~různých konfiguračních souborech pro tvorbu jádra Linux systému.
 
 				\begin{lstlisting}[language={sh}, caption={Ukázka konfiguračního souboru pro aplikování Linux patch souboru.}, label= {lst:petalinux-patch-bbbappend}]
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
@@ -1223,9 +1223,9 @@ KERNEL_FEATURES:append = " bsp.cfg"
 SRC_URI:append = " file://patch-5.15.36-rt41.patch"
 SRC_URI += "file://user_2023-04-07-11-32-00.cfg"\end{lstlisting}
 
-				Aby došlo k~aplikování změn, vyvolaných \gls{abbreviation:rt} patch souborem je nutné během build procesu provést určité změny v~konfiguraci vytvářeného \textit{PetaLinux} projektu. (postup předpokládá, že již byl vytvořen prvotní build s~minimální konfigurací) Opět jsou v~\textit{PetaLinux} Environment (prostředí) vyvolány příkazy \texttt{petalinux-config} pro prvotní konfiguraci HW a \texttt{petalinux-confic -c kernel} pro konfiguraci jádra. Po otevření konfigurační nabídky kernelu je nutné provést změny, vyznačené v~\ref{lst:kernel-config-rt-patch}.
+				Aby došlo k~aplikování změn, vyvolaných \gls{abbreviation:rt} patch souborem, je nutné během build procesu provést určité změny v~konfiguraci vytvářeného \textit{PetaLinux} projektu. (postup předpokládá, že již byl vytvořen prvotní build s~minimální konfigurací) Opět jsou v~\textit{PetaLinux} Environment (prostředí) vyvolány příkazy \texttt{petalinux-config} pro prvotní konfiguraci \gls{abbreviation:hw} a \texttt{petalinux-confic -c kernel} pro konfiguraci jádra. Po otevření konfigurační nabídky jádra je nutné provést změny, vyznačené v~\ref{lst:kernel-config-rt-patch}.
 
-				\begin{lstlisting}[language={sh}, caption={Úpravy v~konfiguraci jádra pro RT patch.}, label= {lst:kernel-config-rt-patch}]
+				\begin{lstlisting}[language={sh}, caption={Úpravy v~konfiguraci jádra pro \gls{abbreviation:rt} patch.}, label= {lst:kernel-config-rt-patch}]
 General setup -> Timers subsystem -> High Resolution Timer Support <*>
 General setup -> Preemption Mode -> Fully Preemptive Kernel (RT) <*>
 Main menu -> Kernel Features -> Timer frequenc -> 1000 Hz <*>
@@ -1237,17 +1237,17 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\item[] \texttt{<*>} funkce je aktivována.
 				\end{description}
 
-				Po konfiguraci je již možné pokračovat klasickým způsobem build procesu popsaným v~části \hyperref[subsec:tvorba-petalinux]{\textit{Tvorba PetaLinux}}.\par
-				Představený postup čerpá informace o~aplikování patch souboru z~\cite{hackster-real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc}, \cite{trenz-electronic-wiki-how-to-install-the-linux-rt} a z~experimentálního zjištění autora.
+				Po konfiguraci je již možné provádět build proces klasickým způsobem, popsaným v~části \hyperref[subsec:tvorba-petalinux]{\textit{Tvorba PetaLinux}}.\par
+				Představený postup čerpá informace o~aplikování patch souboru z~\cite{hackster-real-time-optimization-in-petalinux-with-rt-patch-on-mpsoc}, \cite{trenz-electronic-wiki-how-to-install-the-linux-rt} a z~experimentálního zjištění autora.\par
 
 
 			
 
 		\subsection{Programovací prostředí – operační systém Linux}
-			Pro práci s~představenými nástroji \hyperref[subsec:xilinx-vivado]{Xilinx Vivado}, \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} a \hyperref[subsec:petalinux-tools]{PetaLinux Tools} je nutné využívat podporovaných operačních systémů, které umožňují správnou funkci využitých nástrojů.\par
-			Jednotlivé požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. Pro nejnovější verze v~době zpracování této práce jsou požadavky pro \hyperref[subsec:xilinx-vivado]{Xilinx Vivado} dostupné v~\cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} v~\cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsec:petalinux-tools]{PetaLinux Tools} je třeba dodržet systémové požadavky uvedené v~\cite{petalinux-tools-documentation-2022}.
+			Pro práci s~představenými nástroji \hyperref[subsec:xilinx-vivado]{\textit{Xilinx Vivado}}, \hyperref[subsec:xilinx-vitis]{\textit{Xilinx Vitis}} a \hyperref[subsec:petalinux-tools]{\textit{PetaLinux Tools}} je nutné využívat podporovaných operačních systémů.\par
+			Požadavky na operační systémy je možné nalézt na stránkách dokumentace \href{https://docs.xilinx.com}{\textcolor{ctublue}{https://docs.xilinx.com}}. V době zpracování této práce jsou pro nejnovější verze nástrojů 2022.2 požadavky pro \hyperref[subsec:xilinx-vivado]{Xilinx Vivado} dostupné v~\cite{xilinx-vivado-design-suite-user-guide-2022}. Požadavky na operační systém pro \hyperref[subsec:xilinx-vitis]{Xilinx Vitis} v~\cite{vitis-unified-software-platform-documentation-2022}. Pro využivání a tvorbu \hyperref[subsec:petalinux-tools]{PetaLinux Tools} je třeba dodržet systémové požadavky uvedené v~\cite{petalinux-tools-documentation-2022}.\par
 			Pokud uživatel využívá starších verzí vývojových nástrojů, je doporučeno využít operační systém Linux. Pro tuto práci byl nejdříve využíván systém Ubuntu 18.04 \gls{abbreviation:lts} (Bionic Beaver), dostupný ke stažení na adrese \href{http://old-releases.ubuntu.com}{\textcolor{ctublue}{http://old-releases.ubuntu.com}}. V~průběhu práce došlo k~aktualizování verzí vývojových nástrojů, které byly původně kompatibilní pouze s~verzí Ubuntu 18.04 a nižší. Veškerá práce a postupy byly po aktualizaci přeneseny na novější verzi systému Ubuntu 20.04 \gls{abbreviation:lts} (Focal Fossa).\par
-			Je důležité poznamenat, že neplatí skutečnost, že když např. Vivado podporuje některou z~novějších verzí Ubuntu, bude jí podporovat také \textit{PetaLinux Tools}. Vždy je doporučeno využívat starší verze a kontrolovat vzájemnou kompatibilitu, aby se předešlo zbytečné ztrátě času.\par
+			Je důležité poznamenat, že když Vivado podporuje některou z~novějších verzí Ubuntu, není jisté, že jí podporuje také \textit{PetaLinux Tools}. Vždy je doporučeno využívat starší verze a kontrolovat vzájemnou kompatibilitu, aby se předešlo zbytečné ztrátě času.\par
 			V~případě využívání představených nástrojů a systému Linux je třeba dbát na správné postupy instalací a v~případě problémů využívat dostupné dokumentace.
 		% Jaké verze jsou momentálně podporované
 		% Co je třeba nainstalovat za balíčky před započetím instalace
@@ -1255,11 +1255,11 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 		% Proč zrovna linux Open Source
 
 	\section{Struktura složek}\label{sec:struktura-slozek}
-		Aby byl vývoj, debugging, deployment a verzování aplikace co nejméně problematickým a zdlouhavým procesem pro vývojáře (jak \gls{abbreviation:hw} tak \gls{abbreviation:sw}), je vhodné zavést pro daný projekt/vývoj pevný systém složek (file system), který bude dodržován napříč projekty. V~případě existence takového systému je možné vytvořit postupy a skripty, které značně urychlí práci na vyvíjeném projektu.\par
-		Tyto skripty mohou sloužit k~snadnějšímu přenosu souborů mezi jednotlivými složkami pro potřeby daných vývojových nástrojů, přenos souborů na vývvojovou desku a nebo k~výrazně rychlejší práci s~vývojovými nástroji \textit{PetaLinux Tools} a Vitis \gls{abbreviation:hls}. Díky tomuto systému složek bude pro každý projekt přesně stanovaná cesta k~vytvořenému \gls{abbreviation:sdk} (software development kit), který je potřeba pro vývoj akcelerované aplikace.\par
+		Aby byl vývoj, debugging, deployment a verzování aplikace co nejméně problematickým a zdlouhavým procesem pro vývojáře (jak \gls{abbreviation:hw} tak \gls{abbreviation:sw}), je vhodné zavést pro daný projekt pevný systém složek (file system), který bude dodržován napříč projekty. V~případě existence takového systému je možné vytvořit postupy a skripty, které značně urychlí práci na vyvíjeném projektu.\par
+		Tyto skripty mohou sloužit ke~snadnějšímu přenosu souborů mezi jednotlivými složkami pro potřeby daných vývojových nástrojů, přenos souborů na vývojovou desku a nebo k~výrazně rychlejší práci s~vývojovými nástroji \textit{PetaLinux Tools} a Vitis \gls{abbreviation:ide}.
 		V~této práci bude dodržována struktura naznačená v~kódu \ref{lst:struktura-slozek}.
 
-		\begin{lstlisting}[language={Text}, caption={Struktura složek, využívaná při tvorbě projektů k~dosažení lepšího DX.}, label= {lst:struktura-slozek}]
+		\begin{lstlisting}[language={Text}, caption={Struktura složek, využívaná při tvorbě projektů k~dosažení lepšího \gls{abbreviation:dx}.}, label= {lst:struktura-slozek}]
 - projects folder
 	- top folder (project name)
 		- transfer				// user generated
@@ -1273,46 +1273,46 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 			- sysroots			// created by ./sdk.sh -d ./../linux-files
 		- vitis\end{lstlisting}
 
-		Tato struktura přináší možnosti rychlejšího pohyb v~projektu pomocí vzdáleného přístupu \gls{abbreviation:ssh} a emulátoru terminálu, který umožňuje provádět build aplikace i bez použití \gls{abbreviation:gui} Vitis \gls{abbreviation:hls}. Využíváním headless módu dochází k~odstranění některých nedostatků \gls{abbreviation:sw}, jako je např. zastavení build procesu z~neznámých důvodů. Ovšem \gls{abbreviation:gui} je vhodné na provádění úkonů, jejichž způsob provedení v~headless módu nebyl při realizaci této práce objeven (tvorba platformy, tvorba aplikace, automatické vytváření \texttt{makefile} souborů apod.).\par
+		Tato struktura přináší možnosti rychlejšího pohybu v~projektu pomocí vzdáleného přístupu \gls{abbreviation:ssh} a emulátoru terminálu, který umožňuje provádět build aplikace i bez použití \gls{abbreviation:gui} Vitis \gls{abbreviation:ide}. Využíváním headless módu dochází k~odstranění některých nedostatků \gls{abbreviation:sw}. Ovšem \gls{abbreviation:gui} je vhodné na provádění úkonů, jejichž způsob provedení v~headless módu nebyl při realizaci této práce objeven (tvorba platformy, tvorba aplikace, automatické vytváření \texttt{makefile} souborů apod.).\par
 		V~případě verzování projektu je ovšem důležité si uvědomit, že některé soubory mají značnou velikost a některé složky obsahují velmi mnoho souborů (více než 8 000 souborů). Proto je nutné tuto skutečnost vnímat a dle vlastních požadavků vyjmout vybrané prvky z~verzování.
 		
 
 	\section{Tvorba HW architektury Xilinx Vivado}
-		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis pomocí \gls{abbreviation:hls} C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K~tvorbě platformy je využit SW Xilinx Vivado. V~tomto programu je možné konfigurovat jednotlivé \gls{abbreviation:ip} (intellectual property) prvky jako je ZynQ jednotka, \gls{abbreviation:gpio}, Timer, \gls{abbreviation:spi} komunikace a další. Výsledkem tvorby platformy v~této práci je vytvoření \gls{abbreviation:xsa} souboru, který bude použit pro konfiguraci \textit{PetaLinux} systému a jako vstupní informace pro tvorbu Platformy ve Vitis. Ve Vivado je možné vytvářet aplikace přímo v~\gls{abbreviation:vhdl}.\par
+		Aby bylo možné vytvořit akcelerovanou aplikaci ve Vitis s pomocí \gls{abbreviation:hls} C++, je třeba připravit platformu, resp. hardware, pro který bude daná aplikace vyvíjena. K~tvorbě platformy je využit Xilinx Vivado. V~tomto programu je možné konfigurovat jednotlivé \gls{abbreviation:ip} (intellectual property) prvky jako je ZynQ jednotka, \gls{abbreviation:gpio}, Timer, \gls{abbreviation:spi} komunikace a další. Výsledkem tvorby platformy v~této práci je soubor \gls{abbreviation:xsa}, který je použit pro konfiguraci \textit{PetaLinux} systému a slouží jako vstupní informace pro tvorbu Platformy ve Vitis. Ve Vivado je možné vytvářet aplikace přímo v~\gls{abbreviation:vhdl}.\par
 		Tvorba \gls{abbreviation:hw} pro různé platformy (Digilent Zybo, Xilinx Kria KR260, \gls{abbreviation:soc}, \gls{abbreviation:som}) má částečně odlišné specifikace a odlišný postup. Rámcový postup je však totožný pro většinu platforem využívající zařízení od firmy Xilinx, Inc.\par
 		V~této sekci bude popsána tvorba platformy pro vývojovou desku Xilinx Kria KR260 Starter Kit, na níž byla realizována finální aplikace. V~příloze práce je naznačen postup tvorby základní platformy pro vývojovou desku Digilent Zybo.\par
 
 		\subsection{Vivado Board Files}\label{subsec:vivado-board-files}
-			Aby bylo možné snadněji vytvořit potřebnou \gls{abbreviation:hw} architekturu, firmy velmi časo dodávají ke svému produktu \textit{Board Files} soubory, obsahující různá přednastavení, konfigurace, informace a způsob připojení \gls{abbreviation:ip} bloků k~reálným součástím (constrains). \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
+			Aby bylo možné snadněji vytvořit potřebnou \gls{abbreviation:hw} architekturu, firmy často dodávají ke svému produktu \textit{Board Files} soubory, obsahující přednastavení, konfigurace, informace a způsob připojení \gls{abbreviation:ip} bloků k~reálným součástím (constraints). \cite{github-vivado-board-files-for-digilent-fpga-boards}\par
 			Samozřejmě by bylo možné \gls{abbreviation:hw} architekturu vytvořit i bez těchto konfiguračních souborů, ovšem postup tvorby by byl značně náročnější. Pro vývojovou desku Xilinx Kria KR260 Starter Kit výrobce dodává Board files již s~instalací Vivado. Pro používanou vývojovou desku Digilent Zybo Zynq-7000 je možné stáhnout tyto soubory z~\cite{github-vivado-board-files-for-digilent-fpga-boards}. Způsob instalace board files je popsaný v~oficiální dokumentaci firmy Digilent, Inc. v~\cite{digilent-installing-vivado-vitis-and-digilent-board-files}.\par
 			Po úspěšné instalaci souborů je možné spustit Xilinx Vivado a vytvořit potřebnou \gls{abbreviation:hw} architekturu pro akcelerovanou aplikaci.\par
 			
 		
 		\subsection{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}\label{subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku}
 				Při tvorbě designu pro vývojovou desku Xilinx Kria KR260, byly čerpány základní rámcové informace o~postupu z~\cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} a \cite{hackster-getting-started-with-the-kria-kr260-in-vivado}. Konkrétní postup se liší dle vytvářené aplikace a zkoumaných vlastností.\par
-				Protože prvotní vývoj a zkoumání využitelnosti SoC bylo prováděno na desce Digilent Zybo Zynq-7000, je v~příloze \hyperref[sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku]{\textit{Tvorba HW designu pro Digilent Zybo Zynq-7000
-				vývojovou desku}} nastíněn postup tvorby HW designu pro původní desku. Konfigurace \gls{abbreviation:ps} a tvorba \gls{abbreviation:hw} pro Digilent Zybo se odlišuje převážně proto, že Zybo používá starší \gls{abbreviation:ps} Zynq-7000, oproti novějšímu \gls{abbreviation:ps} MPSoC Zynq UltraScale+ v~Xilinx Kria.\par
+				Protože prvotní vývoj a zkoumání využitelnosti \gls{abbreviation:soc} bylo prováděno na desce Digilent Zybo Zynq-7000, je v~příloze \hyperref[sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000-vyvojovou-desku]{\textit{Tvorba HW designu pro Digilent Zybo Zynq-7000
+				vývojovou desku}} nastíněn postup tvorby \gls{abbreviation:hw} designu pro původní desku. Konfigurace \gls{abbreviation:ps} a tvorba \gls{abbreviation:hw} pro Digilent Zybo se odlišuje převážně proto, že Zybo používá starší \gls{abbreviation:ps} Zynq-7000, oproti novějšímu \gls{abbreviation:ps} MPSoC Zynq UltraScale+ v~Xilinx Kria.\par
 				Prvním krokem je vytvoření Vivado projektu a jeho umístění do složky \texttt{hw} (popis struktury složek v~projektu je představen v~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}}).\par
-				Postup tvorba projektu začíná pro většinu akcelerovaných aplikací stejným způsobem. Po otveření programu Vivado stačí vytvořit nový project typu \textit{RTL Project} a aktivovat nastavení \textit{Project is an extensible Vitis platform}. Ukázka nabídky tvorby projektu je na obr. \ref{fig:kr26-xilix-vivado-flow-01}.
+				Postup tvorby projektu začíná pro většinu akcelerovaných aplikací stejným způsobem. Po otveření programu Vivado stačí vytvořit nový project typu \textit{RTL Project} a aktivovat nastavení \textit{Project is an extensible Vitis platform}. Ukázka nabídky tvorby projektu je na obr. \ref{fig:kr26-xilix-vivado-flow-01}.
 
 
 				\begin{figure}[htbp!]
 					\centering
 					\includegraphics[width=0.65\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-01.jpg}
-					\caption{Xilinx Vivado – volba typu projektu, použitelného dále jako platforma ve Vitis, pro Xilinx KR26.}
+					\caption{Xilinx Vivado – volba typu projektu pro Xilinx KR26, použitelného dále jako platforma ve Vitis.}
 					\label{fig:kr26-xilix-vivado-flow-01}
 				\end{figure}
 
-				Dalším krokem při zakládání projektu je zvolení prvku, na který bude vyvíjený \gls{abbreviation:hw} design určen. Je možné zvolit přímo komponentu, pro kterou je design určen nebo již přednastavené vývojové desky. Pokud není vývojová deska v~repozitáři od Xilinx, je možné jí vložit dle způsobu popsaného v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}. Xilinx Kria KR260 je však již součástí daného repozitáře a je možné ji v~repozitáři vyhledat a zvolit. Výběr desky z~repozitáře je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-02}.
+				Dalším krokem při zakládání projektu je zvolení prvku, pro který bude vyvíjený \gls{abbreviation:hw} design určen. Je možné zvolit přímo komponentu, nebo již přednastavené vývojové desky. Pokud není vývojová deska v~repozitáři od Xilinx, je možné jí vložit dle způsobu popsaného v~části \hyperref[subsec:vivado-board-files]{\textit{Vivado Board Files}}. Xilinx Kria KR260 je však již součástí daného repozitáře a je možné ji v~repozitáři vyhledat a zvolit. Výběr desky z~repozitáře je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-02}.
 
 				\begin{figure}[htbp!]
 					\centering
 					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-02.jpg}
-					\caption{Xilinx Vivado – výběr základní komponenty, pro který bude HW design vytvářen.}
+					\caption{Xilinx Vivado – výběr základní komponenty, pro který bude \gls{abbreviation:hw} design vytvářen.}
 					\label{fig:kr26-xilix-vivado-flow-02}
 				\end{figure}
 
-				Po vytvoření projektu je uživateli zobrazena hlavní Vivado obrazovka. V~základním nastavení jsou v~pravé části obrazovky zobrazeny informace o~vybrané základní komponentě/desce a v~levé části pracovní menu. Pro pokračování ve vytváření designu je třeba zvolit v~menu odkaz \textit{Create block design} a pojmenovat jej dle požadavků autora designu. Zvýrazněné menu a nabídka vytváření blokového je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-03}.
+				Po vytvoření projektu je uživateli zobrazena hlavní Vivado obrazovka. V~základním nastavení jsou v~pravé části obrazovky zobrazeny informace o~vybrané základní komponentě/desce a v~levé části pracovní menu. Pro pokračování ve tvorbě designu je třeba zvolit v~menu odkaz \textit{Create block design} a pojmenovat jej dle požadavků autora designu. Menu a nabídka vytváření blokového je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-03}.
 		
 				\begin{figure}[htbp!]
 					\centering
@@ -1322,7 +1322,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\end{figure}
 
 				Až po krok vytváření block designu byl postup velmi podobný pro obě představené vývojové desky. Nyní je již možné přistoupit k~vlastní tvorbě blokového designu v~kartě \textit{Diagram}.\par
-				Bloky lze přidávat znakem \texttt{+} v~aktivním okně nebo po kliknutím pravého tlačítka myši do volného prostoru v~téže okně a zvolení \textit{Add IP}. Prvním krokem je přidání \gls{abbreviation:ps}, v~případě Xilinx KR26 se jedná o~\gls{abbreviation:ip} y názvem \texttt{Zynq UltraScale+ MPSoC}. Výhoda používání Vivado je taková, že po vložení některých bloků je k~dispozici aktivace automatického propojení/nastavení vybraných bloků \gls{abbreviation:ip}. Po vložení \gls{abbreviation:ps} bloku je vhodné tuto automatizaci spustit pomocí aktivního odkazu, zobrazeného na kartě \textit{Diagram} v~obr. \ref{fig:kr26-xilix-vivado-flow-05}.
+				Bloky lze přidávat znakem \texttt{+} v~aktivním okně nebo po kliknutím pravého tlačítka myši do volného prostoru v~téže okně a zvolení \textit{Add \gls{abbreviation:ip}}. Prvním krokem je přidání \gls{abbreviation:ps}, v~případě Xilinx KR26 se jedná o~\gls{abbreviation:ip} s názvem \texttt{Zynq UltraScale+ MPSoC}. Výhoda používání Vivado je taková, že po vložení některých bloků je k~dispozici aktivace automatického propojení/nastavení některých bloků \gls{abbreviation:ip}. Po vložení \gls{abbreviation:ps} bloku je vhodné tuto automatizaci spustit pomocí aktivního odkazu, zobrazeného na kartě \textit{Diagram} v~obr. \ref{fig:kr26-xilix-vivado-flow-05}.
 
 				\begin{figure}[htbp!]
 					\centering
@@ -1338,7 +1338,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{fig:kr26-xilix-vivado-flow-05}
 				\end{figure}
 
-				Další krok je důležitý pro tvorbu akcelerované aplikace pomocí Vitis. Je třeba předkonfigurovat \gls{abbreviation:ps} \gls{abbreviation:axi} (rozhraní) takovým způsobem, aby \gls{abbreviation:axi} s~vysokým výkonem bylo využito až pro akcelerovanou aplikaci a nikoliv v~některém z~automatických propojení, jejichž pozitivní přínos byl představen v~předchozím odstavci. Tato informace je popsána jak v~\cite{hackster-getting-started-with-the-kria-kr260-in-vivado} ale také v~oficiálních příkladových \cite{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa} (\textit{v sekci Add Interrupt Support, krok 1}) pro tvorbu platformy pro vývojovou desku Xilinx Kria KV260, jež používá totožný modul Xilinx Kria K26. Obr. \ref{fig:kr26-xilix-vivado-flow-06} obsahuje snímek obrazovky s~požadovaným nastavením bloku \texttt{Zynq UltraScale+ MPSoC} a daných rozhraní.
+				Další krok je důležitý pro tvorbu akcelerované aplikace pomocí Vitis. Je třeba předkonfigurovat \gls{abbreviation:ps} \gls{abbreviation:axi} (rozhraní) takovým způsobem, aby \gls{abbreviation:axi} s~vysokým výkonem bylo využito až pro akcelerovanou aplikaci a nikoliv v~některém z~automatických propojení, jejichž pozitivní přínos byl představen v~předchozím odstavci. Tato informace je popsána jak v~\cite{hackster-getting-started-with-the-kria-kr260-in-vivado} ale také v~oficiálních repozitářích \cite{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa} (\textit{v sekci Add Interrupt Support, krok 1}) pro tvorbu platformy vývojové desky Xilinx Kria KV260, jež používá totožný modul Xilinx Kria K26. Obr. \ref{fig:kr26-xilix-vivado-flow-06} obsahuje ukázku nastavení bloku \texttt{Zynq UltraScale+ MPSoC} a daných rozhraní.
 
 				\begin{figure}[htbp!]
 					\centering
@@ -1347,8 +1347,8 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{fig:kr26-xilix-vivado-flow-06}
 				\end{figure}
 
-				Protože dle \cite{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa} je počet clock signálů \texttt{pl\_clk} z~\gls{abbreviation:ps} omezený, je vhodné pro vytvoření požadovaných taktovacích signálů využít blok \texttt{Clocking wizard}. V~tomto bloku je možné vytvořit taktovací signály s~požadovanými parametry. Pokud počet signálů nestačí, je možné přidat další \gls{abbreviation:ip}.\par
-				Pro design ukázkové platformy v~této práci je vhodné přidat tři taktovací signály s~frekvencí 100, 200 a 20 MHz. také je důležité nastavit \textit{Reset type} na \textit{Active Low}. Příklad nastavení bloku \texttt{Clocking wizard} je na obr. \ref{fig:kr26-xilix-vivado-flow-07}.
+				Protože dle \cite{xilinx-github-vitis-tutorials-step-1-create-the-vivado-hardware-design-and-generate-xsa} je počet clock signálů \texttt{pl\_clk} z~\gls{abbreviation:ps} omezený, je vhodné pro vytvoření požadovaných taktovacích signálů (pro \gls{abbreviation:pl}) využít blok \texttt{Clocking wizard}. V~tomto bloku je možné vytvořit taktovací signály s~požadovanými parametry. Pokud počet signálů nestačí, je možné přidat další \gls{abbreviation:ip}.\par
+				Pro design ukázkové platformy v~této práci jsou využity tři taktovací signály s~frekvencí 100, 200 a 20 MHz. Také je důležité nastavit \textit{Reset type} na \textit{Active Low}. Příklad nastavení bloku \texttt{Clocking wizard} je na obr. \ref{fig:kr26-xilix-vivado-flow-07}.
 
 				\begin{figure}[htbp!]
 					\centering
@@ -1374,9 +1374,9 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{fig:kr26-xilix-vivado-flow-09}
 				\end{figure}
 				
-				Vstup pro přerušení \texttt{pl\_ps irq} může obsahovat maximálně 16 interrupt signálů. Pro design v~této aplikaci to je dostačující případ, ovšem pokud je vyžadováno, aby aplikace využívala více signálů přerušení, je třeba využít blok \texttt{AXI Interrupt Controller}. Doporučené nastavení tohoto \gls{abbreviation:ip} je na obr. \ref{fig:kr26-xilix-vivado-flow-10}. Aby bylo možné připojit signál k~\texttt{pl\_ps irq} je nutné přepnout nastavení \textit{Processor Interrupt Type and Connection -> Interrupt Output Connection} na \texttt{Single} z~výchozího \texttt{Bus}.\par
-				V~případě nevyužití bloku \texttt{\gls{abbreviation:axi} Interrupt Controller}, nebo při snaze přivést signály přerušení přímo do \texttt{pl\_ps irq} vstupu \gls{abbreviation:ps} systému je pro připojení více signálů doporučeno použít \gls{abbreviation:ip} blok \texttt{Concat}. V~pokročilejší části této práci je tento blok také využit, aby byla demonstrována možnost jeho využití a projevení tohoto připojení v~PetaLinux systému.\par
-				Po dokončení konfigurace \texttt{\gls{abbreviation:axi} Interrupt Controller} je opět možné aktivovat automatizaci propojení a v~konfiguračním okně vybrat požadovanou frekvenci clock signálů. V~této práci je využito 200 MHz. Výsledný design po automatizaci je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-12}.\par
+				Vstup pro přerušení \texttt{pl\_ps irq} může obsahovat maximálně 16 interrupt signálů. Pro design v~této aplikaci se jedná o dostačující počet, ovšem pokud je vyžadováno, aby aplikace využívala více signálů přerušení, je třeba využít blok \texttt{\gls{abbreviation:axi} Interrupt Controller}. Doporučené nastavení tohoto \gls{abbreviation:ip} je uvedeno na obr. \ref{fig:kr26-xilix-vivado-flow-10}. Aby bylo možné připojit signál k~\texttt{pl\_ps irq} je nutné přepnout nastavení \textit{Processor Interrupt Type and Connection -> Interrupt Output Connection} na \texttt{Single} z~výchozího \texttt{Bus}.\par
+				V~případě nevyužití bloku \texttt{\gls{abbreviation:axi} Interrupt Controller}, nebo při snaze přivést signály přerušení přímo do \texttt{pl\_ps irq} vstupu \gls{abbreviation:ps} systému je pro připojení více signálů doporučeno použít \gls{abbreviation:ip} blok \texttt{Concat}. V~dalších částech této práci je tento blok také využit, aby byla demonstrována možnost jeho využití a projevení tohoto připojení v~\textit{PetaLinux} systému.\par
+				Po dokončení konfigurace \texttt{\gls{abbreviation:axi} Interrupt Controller} je možné aktivovat automatizaci propojení a v~konfiguračním okně vybrat požadovanou frekvenci \gls{abbreviation:clk} signálů. V~této práci je využito 200 MHz. Výsledný design po automatizaci je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-12}.\par
 
 				\begin{figure}[htbp!]
 					\centering
@@ -1392,9 +1392,10 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{fig:kr26-xilix-vivado-flow-12}
 				\end{figure}
 
-				Pokud by vyvíjená aplikace nevyužívala další \gls{abbreviation:pl} \gls{abbreviation:ip} bloky, je možné přistoupit ke konfiguraci platformy, \gls{abbreviation:ps} a periferií připojených k~\gls{abbreviation:ps}. Pro vyvíjenou ukázkovou aplikaci je vytvořený HW blokový design naznačen v~sekci \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW Block design vyvíjené aplikace}}.\par
-				Ovšem při využití vývojové desky Xilinx Kria KR260 je vhodné aktivovat řízení chladícího ventilátoru pomocí  \gls{abbreviation:pwm}. Pro tuto možnost musí být aktivovaný výstup \textit{Waveout} u~TTC 0, jak je tomu naznačeno na obr. \ref{fig:kr26-xilix-vivado-flow-30}. Po aktivaci \textit{Waveout} na I/O \textit{EMI0} se objeví na bloku \texttt{Zynq UltraScale+ MPSoC} výstup s~názvem \texttt{emio\_ttc0\_wave\_o[2:0]}. Označení \texttt{[2:0]} znamená, že signál je tříbitový, pro řízení ventilátoru pomocí PWM je ovšem využitelný pouze jeden bit. Pro odstranění dvou horních bitů je využito \gls{abbreviation:ip} bloku \texttt{Slice}.\par
-				Konfigurace bloku \texttt{Slice} je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-29}. \textit{Din Width} určuje šířku vstupujícího signálu. V~řešeném případě se jedná o~trojbitový signál. \textit{Din From} určuje označení bitu, od kterého bude odstraněno \textit{Din Down To} bitů pro výstup z~bloku \texttt{Slice}. Položka \textit{Dout Width} je automaticky doplněna dle nastavení předchozích položek.\par Následně je nutné nastavit výstupní pin, na který bude signál \gls{abbreviation:pwm} pro řízení ventilátoru odesílán. Pro vytvoření pinu existuje mnoho způsobů, v~tomto případě je ovšem nejjednodušší pravým tlačítkem myší kliknout na výstup bloku \texttt{Slice} \texttt{Dout[0:0]} a zvolit \textit{Make External}. Tento pin je poté vhodné pojmenovat \texttt{fan\_en\_b}. Minimální funkční design s~výstupním pinem pro ventilátor je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-31}.
+				Pokud by vyvíjená aplikace nevyužívala další \gls{abbreviation:pl} \gls{abbreviation:ip} bloky, je možné přistoupit ke konfiguraci platformy, \gls{abbreviation:ps} a periferií připojených k~\gls{abbreviation:ps}. Pro vyvíjenou ukázkovou aplikaci je vytvořený \gls{abbreviation:hw} blokový design naznačen v~sekci \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW Block design vyvíjené aplikace}}.\par
+				Ovšem při využití vývojové desky Xilinx Kria KR260 je vhodné aktivovat řízení chladícího ventilátoru pomocí \gls{abbreviation:pwm}. Pro tuto možnost musí být aktivovaný výstup \textit{Waveout} u~TTC 0, jak je tomu naznačeno na obr. \ref{fig:kr26-xilix-vivado-flow-30}. Po aktivaci \textit{Waveout} na \gls{abbreviation:io} \textit{EMI0} se objeví na bloku \texttt{Zynq UltraScale+ MPSoC} výstup s~názvem \texttt{emio\_ttc0\_wave\_o[2:0]}. Označení \texttt{[2:0]} znamená, že signál je tříbitový. Pro řízení ventilátoru pomocí \gls{abbreviation:pwm} je ovšem využíván pouze jeden bit. Pro odstranění dvou horních bitů je využito \gls{abbreviation:ip} bloku \texttt{Slice}.\par
+				Konfigurace bloku \texttt{Slice} je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-29}. \textit{Din Width} určuje šířku vstupujícího signálu. V~řešeném případě se jedná o~tříbitový signál. \textit{Din From} určuje označení bitu, od kterého bude odstraněno \textit{Din Down To} bitů pro výstup z~bloku \texttt{Slice}. Vstup \textit{Dout Width} je automaticky doplněn dle nastavení předchozích položek.\par
+				Následně je nutné nastavit výstupní pin, na který bude signál \gls{abbreviation:pwm} pro řízení ventilátoru odesílán. Pro vytvoření pinu existuje mnoho způsobů, v~tomto případě je ovšem nejjednodušší pravým tlačítkem myší kliknout na výstup bloku \texttt{Slice} \texttt{Dout[0:0]} a zvolit \textit{Make External}. Tento pin je poté vhodné pojmenovat \texttt{fan\_en\_b}. Minimální funkční design s~výstupním pinem pro ventilátor je zobrazen na obr. \ref{fig:kr26-xilix-vivado-flow-31}.
 
 				\begin{figure}[htbp!]
 					\centering
@@ -1436,14 +1437,14 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{tab:vivado-platform-setup-axi-xilinx-kria}
 				\end{table}
 
-				Dalším krokem je povolení a nastavení výchozích clock signálů v~záložce \textit{Clock}. V~této práci byl zvolen výchozí clock signál 200 MHz. Snímek záložky zachycující nastavení pro dva clock signály je na obr. \ref{fig:kr26-xilix-vivado-flow-14}.\par
+				Dalším krokem je povolení a nastavení výchozích \gls{abbreviation:clk} signálů v~záložce \textit{Clock}. V~této práci byl zvolen výchozí \gls{abbreviation:clk} signál 200 MHz. Snímek záložky zachycující nastavení pro dva clock signály je na obr. \ref{fig:kr26-xilix-vivado-flow-14}.\par
 				Posledním důležitým krokem je povolení signálu \texttt{intr} z~použitého bloku \texttt{Axi Interrupt Controller} v~kartě \textit{Platform Setup -> Interrupt}.\par
 				Volitelným, ovšem vhodným krokem je pojmenovat platformu a udat jejího autora a verzi v~kartě \textit{Platform Setup -> Interrupt}.
 
 				\begin{figure}[htbp!]
 					\centering
 					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-14.jpg}
-					\caption{Xilinx Vivado – záložka nastavení clock signálů na platformě.}
+					\caption{Xilinx Vivado – záložka nastavení \gls{abbreviation:clk} signálů na platformě.}
 					\label{fig:kr26-xilix-vivado-flow-14}
 				\end{figure}
 
@@ -1451,9 +1452,9 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				Autorka článku \cite{hackster-getting-started-with-the-kria-kr260-in-vivado} zmiňuje, že pokud je zapnuta možnost \textit{Incremental Synthesis}, můžou vznikat při postupu tvorby akcelerované aplikace problémy. Proto doporučuje pomocí nabídky \textit{Settings -> Synthesis -> Incremental Synthesis} zvolit možnost \textit{Disable incremental synthesis}.\par
 
 				\subsubsection{Konfigurace PS pro využití implementovaných periferií}
-				Aby bylo možné využívat periferie, jako je DisplayPort, Ethernet nebo USB konektory, je nutné nakonfigurovat \gls{abbreviation:ps}. Konfigurační nabídka je otevřena po otevření \gls{abbreviation:ip} bloku \texttt{Zynq UltraScale+ MPSoC} a vybrání \textit{I/O Configuration}.\par
+				Aby bylo možné využívat periferie, jako je DisplayPort, Ethernet nebo \gls{abbreviation:usb} konektory, je nutné nakonfigurovat \gls{abbreviation:ps}. Konfigurační nabídka je otevřena při konfiguraci \gls{abbreviation:ip} bloku \texttt{Zynq UltraScale+ MPSoC} a vybrání \textit{\gls{abbreviation:io} Configuration}.\par
 				Pro názornost je využito snímků obrazovky jednotlivých významných konfigurací. Některé z~konfigurací jsou již nastaveny jako výchozí, některé je třeba konfigurovat.\par
-				Na obr. \ref{fig:kr26-xilix-vivado-flow-17} je zobrazeno kompletní konfigurační okno ve kterém jsou jednotlivá připojení pro PS nastavovány. Další snímky jsou však z~důvodu úspory plochy zaměřeny pouze na konkrétní nastavení.
+				Na obr. \ref{fig:kr26-xilix-vivado-flow-17} je zobrazeno kompletní konfigurační okno ve kterém jsou jednotlivá připojení pro \gls{abbreviation:ps} nastavovány. Další snímky jsou však z~důvodu úspory plochy zaměřeny pouze na konkrétní nastavení.
 
 				\begin{figure}[htbp!]
 					\centering
@@ -1465,7 +1466,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\begin{figure}[htbp!]
 					\centering
 					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-18.jpg}
-					\caption{Xilinx Vivado – \gls{abbreviation:ps} \gls{abbreviation:io} Configuration I2C zařízení.}
+					\caption{Xilinx Vivado – \gls{abbreviation:ps} \gls{abbreviation:io} Configuration \gls{abbreviation:iic} zařízení.}
 					\label{fig:kr26-xilix-vivado-flow-18}
 				\end{figure}
 
@@ -1509,7 +1510,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\begin{figure}[htbp!]
 					\centering
 					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-30.jpg}
-					\caption{Xilinx Vivado – \gls{abbreviation:ps} \gls{abbreviation:io} Configuration Triple Timer Counter (TTC), TTC 0 výstup Waveout je využit pro PIN řídící chladící ventilátor na SoM.}
+					\caption{Xilinx Vivado – \gls{abbreviation:ps} \gls{abbreviation:io} Configuration Triple Timer Counter (TTC), TTC 0 výstup Waveout je využit pro PIN řídící chladící ventilátor na \gls{abbreviation:som}.}
 					\label{fig:kr26-xilix-vivado-flow-30}
 				\end{figure}
 
@@ -1528,10 +1529,10 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\end{figure}
 
 				\fbar
-				Po úspěšné konfiguraci \gls{abbreviation:io} je možné přistoupit ke kartě \textit{PS-PL Configuration} a v~záložce \textit{General -> Fabric Reset Enable} povolit \textit{Fabric Reset Enable} a zvolit v~nabídce \textit{Number of Fabric Resets} číslo 4.\par
-				Toto nastavení \textit{Number of Fabric Resets} udává, kolik signálů je možné použít pro reset \gls{abbreviation:pl} \gls{abbreviation:ip} bloků. \cite{xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide}, \cite{xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution}\par
+				Po úspěšné konfiguraci \gls{abbreviation:io} je možné přistoupit ke kartě \textit{\gls{abbreviation:ps}-\gls{abbreviation:pl} Configuration} a v~záložce \textit{General -> Fabric Reset Enable} povolit \textit{Fabric Reset Enable} a zvolit v~nabídce \textit{Number of Fabric Resets} číslo 4.\par
+				Toto nastavení \textit{Number of Fabric Resets} udává, kolik signálů je možné použít pro reset \gls{abbreviation:pl} \gls{abbreviation:ip} bloků. \cite{xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide} \cite{xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution}\par
 
-				V~předchozích krocích a obrázcích byla představena základní konfigurace \gls{abbreviation:ps} pro funkčnost periferií, přítomných na vývojové desce Xilinx Kria KR260 s~\texttt{Zynq UltraScale+ MPSoC}. Po této základní konfiguraci je možné pozorovat v~konfigurační nabídce \gls{abbreviation:ps} \gls{abbreviation:ip} v~kartě \textit{PS UltraScale+ Block Design} označení pomocí „$\checkmark$“ symbolu u~konfigurovaných prvků. Ukázka systému je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-28}.
+				V~předchozích krocích byla představena základní konfigurace \gls{abbreviation:ps} pro funkčnost periferií, přítomných na vývojové desce Xilinx Kria KR260 s~\texttt{Zynq UltraScale+ MPSoC}. Po provedení konfigurace je možné v~konfigurační nabídc \gls{abbreviation:ps} \gls{abbreviation:ip} v~kartě \textit{\gls{abbreviation:ps} UltraScale+ Block Design} pozorovat u~konfigurovaných prvků označení pomocí „$\checkmark$“ symbolu. Ukázka systému je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-28}.
 
 				\begin{figure}[htbp!]
 					\centering
@@ -1541,7 +1542,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\end{figure}
 
 			\subsubsection{Design Constraints}
-				Aby bylo možné vytvořené \textit{virtuální} piny ve Vivado propojit se skutečnými fyzickými piny MPSoC, resp. vývojové desky, je třeba vytvořit soubor v~prostředí Vivado, který toto fyzické propojení definuje. Tyto soubory se nazývají \textit{Constraints Files}.\par
+				Aby bylo možné vytvořené \textit{virtuální} piny ve Vivado propojit se skutečnými fyzickými piny \gls{abbreviation:mpsoc}, resp. fyzickými piny vývojové desky, je třeba vytvořit soubor v~prostředí Vivado, který toto fyzické propojení definuje. Tyto soubory se nazývají \textit{Constraints Files}.\par
 				Jejich tvorba může probíhat i mimo prostředí Vivado, jsou to textové soubory, jež lze upravit v~libovolném textovém editoru. Tato skutečnost lze využít při časté tvorbě designů v~nových projektech pro zrychlení konfigurace. Soubory je poté možné jednoduše importovat.\par
 				Soubory se vkládají pomocí výběru v~levém menu \textit{Project Manager -> Add Sources -> Add or create constraints -> Add Files/Create File}. Nabídka tvorby souboru je vyzobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-32}.\par
 
@@ -1552,7 +1553,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{fig:kr26-xilix-vivado-flow-32}
 				\end{figure}
 
-				Pro spojení vytvořeného virtuálního pinu \texttt{fan\_en\_b} a fyzického pinu, ke kterému je na \gls{abbreviation:cc} připojen ventilátor je do \texttt{\gls{abbreviation:xdc}} souboru zapsána konfigurace z~kódu \ref{lst:fan-pinout-constraints-file}.\par
+				Pro spojení vytvořeného virtuálního pinu \texttt{fan\_en\_b} a fyzického pinu, ke kterému je na \gls{abbreviation:cc} připojen ventilátor, je do \texttt{\gls{abbreviation:xdc}} souboru zapsána konfigurace z~kódu \ref{lst:fan-pinout-constraints-file}.\par
 				Kód \ref{lst:fan-pinout-constraints-file} byl získán z~\cite{hackster-add-peripherial-support-to-kria-kr260-vivado}. Autorem však bylo ověřeno, že se skutečně jedná o~fyzický pin \texttt{A12}.\par
 				
 				
@@ -1567,23 +1568,23 @@ set_property IOSTANDARD LVCMOS33 [get_ports {fan_en_b}]
 set_property SLEW SLOW [get_ports {fan_en_b}]
 set_property DRIVE 4 [get_ports {fan_en_b}]\end{lstlisting}
 
-				Vyhledání propojení fyzického pinu a označení pro soubory \texttt{\gls{abbreviation:xdc}} probíhá totožně také pro konektory \textit{PMOD} a \textit{Raspberry Pi HAT}. Oficiální dokumentace pro postup vyhledání pinů nebyla autorem nalezena, proto se pokusil nalézt vlastní postup, který ověřil na oficiálním fóru Xilinx \cite{xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation}.\par
+				Vyhledání propojení fyzického pinu a označení pro soubory \texttt{\gls{abbreviation:xdc}} probíhá totožně pro konektory \textit{\gls{abbreviation:pmod}} a \textit{Raspberry Pi HAT}. Oficiální dokumentace pro postup vyhledání pinů nebyla autorem nalezena, proto se pokusil nalézt vlastní postup, který ověřil na oficiálním fóru Xilinx \cite{xilinx-support-forum-petrzakopal-schematic-vs-constrains-pin-confusion-explanation}.\par
 				\vspace*{0.55cm}
 				Postup nalezení reálného pinu je následující:
 				\begin{enumerate}
 					\item Nalézt ve schématu \cite{kria-kr260-starter-kit-cc-schematics} Kria KR260 \gls{abbreviation:cc} požadované označení fyzického pinu (např. pro ventilátor \texttt{HDA20}).
-					\item Nalézt ve schématu \cite{kria-kr260-starter-kit-cc-schematics}, ke kterému pinu na \gls{abbreviation:pl} connector (\texttt{SOM240\_1 CONNECTOR}) je nalezený PIN připojen. (v~případě ventilátoru \texttt{C24}).
-					\item V~XDC \cite{kria-k26-som-xdc} souboru pro Xilinx Kria K26 vyhledat daný pin z~connector připojení, zkontrolovat, zda je připojen ke správnémiu connectoru ze schématu a získat požadovanou hodnotu \texttt{PACKAGE\_PIN}.
+					\item Nalézt ve schématu \cite{kria-kr260-starter-kit-cc-schematics}, ke kterému pinu na \gls{abbreviation:pl} konektoru (\texttt{SOM240\_1 CONNECTOR}) je nalezený PIN připojen. (v~případě ventilátoru \texttt{C24}).
+					\item V~\gls{abbreviation:xdc} \cite{kria-k26-som-xdc} souboru pro Xilinx Kria K26 vyhledat udaný pin v připojení konektoru a zkontrolovat, zda je připojen ke správnému konektoru ze schématu a získat požadované označení \texttt{PACKAGE\_PIN}.
 				\end{enumerate}
 				\vspace*{0.75cm}
 				\fbar
 				Po provedení všech pořebných nastavení a konfigurací je možné přejít k~finální části postupu ve Vivado.\par
-				Nejprve je vhodné vytvořený design validovat pomocí symbolu „$\checkmark$“ v~ovládací liště v~okně \textit{Platform}. Pokud jsou získány upozornění s~označením \textit{Warning}, je možné pokračovat v~tvorbě platformy. V~bloku \textit{Sources} zvolit pravým tlačítkem vytvořený block design a aktivovat nabídku \textit{Generate Output Products}. Objeví se konfigurační okno, ve kterém je vhodné nastavit v~části \textit{Synthesis Options} volbu \textit{Out of context per IP}. V~části \textit{Run Settings} je možné zvolit, kolik jader procesoru se bude podílet na zvolené činnosti. Pro osobní počítače autor doporučuje zvolit méně než polovinu dostupných jader \gls{abbreviation:cpu}. Bylo vypozorováno, že pokud jader je zvoleno více, může zatížení systému způsobit samovolné ukončení programmu Vivado.\par
-				Po provedení akce je možné zvolit opět v~nabídce pro block design akci \textit{Create HDL Wrapper}. V~nabídce akce je výhodné využít možnosti \textit{Let Vivado manage wrapper and auto update}, kdy Vivado bude aktualizovar \gls{abbreviation:hdl} wrapper podle změn provedených v~designu.\par
-				Autorovi se ovšem při změně block designu vyplatilo \gls{abbreviation:hdl} Wrapper kompletně smazat a opětovaně provést kroky \textit{Generate Output Products} a \textit{Create HDL Wrapper}.\par
-				Nyní je již možné přistoupit k~syntéze, implementaci a generování bit stream. Jednotlivé kroky je možné pomocí levé nabídky ve Vivado aktivovat samostatně, nebo zvolit pouze generování bit streamu a Vivado automaticky zajistí, že pokud došlo ke změně designu, budou provedeny kroky syntézy a implementace.\par
-				Po úspěšném provedení generování bitstreamu je možné platformu exportovat pro její další využití v~\textit{PetaLinux Tools} a Vitis. Export je možné provést pomocí volby \textit{File -> Export -> Export Platform}. Ve zobrazené nabídce je obecně u~vývojových desek vhodné zvolit \textit{Hardware and hardware emulation}, pokud je požadovaná také \gls{abbreviation:hw} emulace. Dle \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} podpora HW emulace pro K26 prozatím není dostupná. Posledním krokem je vybrání v~nastavení \textit{Platform State} volby \textit{Pre-synthesis} a \textit{Include bitstream}. Po nastavení označení platformy je možné provést export.\par
-				V~této části byl představen postup tvorby základní \gls{abbreviation:hw} platfromy pro Xilinx KR260 Starter Kit vývojovou desku v~prostředí Vivado. Výstupem projektu ve Vivado je soubor \textit{\gls{abbreviation:xpr}}, který je dále využit při tvorbě akcelerované aplikace v~PetaLinux Tools a Vitis. Pro některé případy, kdy není potřeba specifický \gls{abbreviation:hw} v~\gls{abbreviation:pl} je možné využít předpřipravené \textit{XPR} soubory. Tyto předpřipravené soubory slouží pouze k~seznámení s~vývojovými deskami a nejsou dostačující pro vývoj specifické akcelerované aplikace.
+				Nejprve je vhodné vytvořený design validovat pomocí symbolu „$\checkmark$“ v~ovládací liště v~okně \textit{Platform}. Pokud jsou získány upozornění s~označením \textit{Warning}, je možné pokračovat v~tvorbě platformy. V~bloku \textit{Sources} zvolit pravým tlačítkem vytvořený block design a aktivovat nabídku \textit{Generate Output Products}. Objeví se konfigurační okno, ve kterém je vhodné nastavit v~části \textit{Synthesis Options} volbu \textit{Out of context per \gls{abbreviation:ip}}. V~části \textit{Run Settings} je možné zvolit kolik jader procesoru se bude podílet na zvolené činnosti. Pro osobní počítače autor doporučuje zvolit méně než polovinu dostupných jader \gls{abbreviation:cpu}. Bylo vypozorováno, že pokud jader je zvoleno více, může zatížení systému způsobit samovolné ukončení programmu Vivado.\par
+				Po ukončení generace je možné zvolit v~nabídce pro block design akci \textit{Create \gls{abbreviation:hdl} Wrapper}. V~nabídce akce je výhodné využít možnost \textit{Let Vivado manage wrapper and auto update}, kdy Vivado bude aktualizovat \gls{abbreviation:hdl} wrapper podle změn provedených v~designu.\par
+				Autorovi se ovšem při změně block designu vyplatilo \gls{abbreviation:hdl} Wrapper kompletně smazat a opětovaně provést kroky \textit{Generate Output Products} a \textit{Create \gls{abbreviation:hdl} Wrapper}.\par
+				Nyní je již možné přistoupit k~syntéze, implementaci a generování bit streamu. Jednotlivé kroky je možné pomocí levé nabídky ve Vivado aktivovat samostatně, nebo zvolit pouze generování bit streamu a Vivado automaticky zajistí, že pokud došlo ke změně designu, budou provedeny kroky syntézy a implementace automaticky.\par
+				Po úspěšném provedení generování bitstreamu je možné platformu exportovat pro její další využití v~\textit{PetaLinux Tools} a Vitis. Export je možné provést pomocí volby \textit{File -> Export -> Export Platform}. Ve zobrazené nabídce je obecně u~vývojových desek vhodné zvolit \textit{Hardware and hardware emulation}. Dle \cite{hackster-add-peripherial-support-to-kria-kr260-vivado} podpora \gls{abbreviation:hw} emulace pro K26 není aktuálně dostupná. Posledním krokem je v~nastavení \textit{Platform State} vybrání volby \textit{Pre-synthesis} a \textit{Include bitstream}. Po označení platformy je možné provést export.\par
+				V~této části byl představen postup tvorby základní \gls{abbreviation:hw} platfromy pro Xilinx KR260 Starter Kit vývojovou desku v~prostředí Vivado. Výstupem projektu ve Vivado je soubor \textit{\gls{abbreviation:xpr}}, který je dále využit při tvorbě akcelerované aplikace v~\textit{PetaLinux Tools} a Vitis. Pro některé případy, kdy není potřeba specifický \gls{abbreviation:hw} v~\gls{abbreviation:pl} je možné využít předpřipravené \textit{\gls{abbreviation:xpr}} soubory. Tyto předpřipravené soubory slouží pouze k~seznámení s~vývojovými deskami a nejsou dostačující pro vývoj specifické akcelerované aplikace.
 				
 			\fbar
 			\subsubsection{HW block design vyvíjené aplikace}\label{subsubsec:hw-block-design-vyvijene-aplikace}
@@ -1601,18 +1602,18 @@ set_property DRIVE 4 [get_ports {fan_en_b}]\end{lstlisting}
 
 	\fbar
 	\section{Tvorba PetaLinux}\label{subsec:tvorba-petalinux}
-	Jak již bylo zmíněno v~části \hyperref[subsec:aplikace-a-operacni-system]{\textit{Aplikace a operační systém}}, aplikace pro Xilinx Kria je možné vytvářen pro \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. V~této práci je využito systému \textit{PetaLinux}, který díky své tvorbě pomocí \textit{PetaLinux Tools} je možné konfigurovat tak, aby využíval \gls{abbreviation:hw} v~\gls{abbreviation:pl} a splňoval požadavky vytvářené aplikace.\par
-	Konfigurace pro jednotlivé požadavky vytvářených aplikací se mohou odlišovat, ovšem rámec (flow) tvorby systému zůstává pro danou platformu zachován. V~této práci bude představen postup tvorby \textit{PetaLinux} systému pro HW platformu osabující prvky představené v~části \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW block design vyvíjené aplikace}}.\par
+	Jak již bylo zmíněno v~části \hyperref[subsec:aplikace-a-operacni-system]{\textit{Aplikace a operační systém}}, aplikace pro Xilinx Kria je možné vytvářen pro \textit{Bare Metal / Standalone}, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. V~této práci je využito systému \textit{PetaLinux}, který díky své tvorbě pomocí \textit{PetaLinux Tools} je možné konfigurovat tak, aby využíval \gls{abbreviation:hw} konfigurovaný v~\gls{abbreviation:pl} a splňoval požadavky vytvářené aplikace.\par
+	Konfigurace pro jednotlivé požadavky vytvářených aplikací se mohou odlišovat, ovšem rámec (flow) tvorby systému zůstává pro danou platformu zachován. V~této práci bude představen postup tvorby \textit{PetaLinux} systému pro \gls{abbreviation:hw} platformu obsahující prvky, představené v~části \hyperref[subsubsec:hw-block-design-vyvijene-aplikace]{\textit{HW block design vyvíjené aplikace}}.\par
 	Postup tvorby \textit{PetaLinux} systému čerpá informace z~\cite{hackster-getting-started-with-the-kria-kr260-in-petalinux}, \cite{xilinx-github-vitis-tutorials-step-2-create-the-software-components} a z~experimentálních zjištění autora práce.\par
-	Prvním krokem je aktivace \textit{PetaLinux} prostředí (environment). Příkaz k~aktivaci je závislý na umístění instalovaných \textit{PetaLinux Tools} a je zobrazen v~kódu \ref{lst:petalinux-environment}. Představený postup předpokládá práci s~definovanou strukturou vyvíjené aplikace/projektu definované v~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} v~kódu \ref{lst:struktura-slozek}.
+	Prvním krokem je aktivace \textit{PetaLinux} prostředí (environment). Příkaz k~aktivaci je závislý na umístění instalovaných \textit{PetaLinux Tools} a je zobrazen v~kódu \ref{lst:petalinux-environment}. Představený postup předpokládá práci s~definovanou strukturou projektu, definované v~části \hyperref[sec:struktura-slozek]{\textit{Struktura složek}} v~kódu \ref{lst:struktura-slozek}.
 
 
 	\begin{lstlisting}[language={sh}, caption={Aktivace prostředí PetaLinux verze 2022.2.}, label= {lst:petalinux-environment}, morekeywords={source}]
 source /tools/Xilinx/PetaLinux/2022.2/settings.sh\end{lstlisting}
 
-	Po aktivaci prostředí je možné vytvořit projekt pomocí příkazu \ref{lst:petalinux-create}. Soubor \texttt{xilinx-kr260-starterkit-v2022.2-10141622.bsp} je možné stáhnout z~oficiálních stránek Xilinx \cite{xilinx-downloads} pro aktuální využívanou verzi vývojových nástrojů.
+	Po aktivaci prostředí je možné vytvořit projekt pomocí příkazu \ref{lst:petalinux-create}. Soubor \texttt{xilinx-kr260-starterkit-v2022.2-10141622.bsp} (\gls{abbreviation:bsp}) je možné pro aktuální využívanou verzi vývojových nástrojů stáhnout z~oficiálních stránek Xilinx \cite{xilinx-downloads}.
 
-	\begin{lstlisting}[language={sh}, caption={Tvorba PetaLinux projektu ze základního BSP souboru.}, label= {lst:petalinux-create}, morekeywords={petalinux-build, petalinux-package, petalinux-config, petalinux-create}]
+	\begin{lstlisting}[language={sh}, caption={Tvorba PetaLinux projektu ze základního \gls{abbreviation:bsp} souboru.}, label= {lst:petalinux-create}, morekeywords={petalinux-build, petalinux-package, petalinux-config, petalinux-create}]
 # general command
 petalinux-create --type project -s <path-to-bsp-file> --name <project-name>
 
@@ -1622,13 +1623,13 @@ petalinux-create --type project -s ./../xilinx-kr260-starterkit-v2022.2-10141622
 	\fbar
 	\subsection{Hardware konfigurace PetaLinux}
 	Nyní je možné přejít do adresáře projektu pomocí \texttt{cd <project-name>} a začít konfigurovat \textit{PetaLinux}.\par
-	První konfigurace spočívá v~implementaci \gls{abbreviation:hw} platformy do projektu pomocí příkazu \ref{lst:petalinux-config-hw}. Kdy je předpokládáno, že ve složce \texttt{hw} je umístěn soubor exportované platformy z~Vivado, získaný v~části \hyperref[subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku]{\textit{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}}.\par
+	První konfigurace spočívá v~načtení \gls{abbreviation:hw} platformy do projektu pomocí příkazu \ref{lst:petalinux-config-hw}. Kdy je předpokládáno, že ve složce \texttt{hw} je umístěn soubor exportované platformy z~Vivado, získaný v~části \hyperref[subsec:tvorba-hw-designu-pro-xilinx-kria-kr260-vyvojovou-desku]{\textit{Tvorba HW designu pro Xilinx Kria KR260 vývojovou desku}}.\par
 
 
-	\begin{lstlisting}[language={sh}, caption={Konfigurace PetaLinux pomocí XPR souboru z~Vivado.}, label= {lst:petalinux-config-hw}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
+	\begin{lstlisting}[language={sh}, caption={Konfigurace PetaLinux pomocí \gls{abbreviation:xpr} souboru z~Vivado.}, label= {lst:petalinux-config-hw}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
 petalinux-config --get-hw-description=./../hw/\end{lstlisting}
 
-	Po načtení \textit{XSA} souboru je v~terminálu zobrazena konfigurační nabídka. Nastavení prvků v~této nabídce je pro K26 \gls{abbreviation:som} uvedeno v~kódu \ref{lst:petalinux-config-hw-settings}.
+	Po načtení \textit{\gls{abbreviation:xsa}} souboru je v~terminálu zobrazena konfigurační nabídka. Nastavení prvků v~této nabídce je pro K26 \gls{abbreviation:som} uvedeno v~kódu \ref{lst:petalinux-config-hw-settings}.
 
 
 

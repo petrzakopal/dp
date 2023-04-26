@@ -286,9 +286,9 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~1}{\ignorespaces Xilinx Vivado – volba typu projektu, použitelného dále jako platforma ve Vitis, pro Xilinx KR26.\relax }}{40}{figure.caption.25}%
+\contentsline {figure}{\numberline {12~-~1}{\ignorespaces Xilinx Vivado – volba typu projektu pro Xilinx KR26, použitelného dále jako platforma ve Vitis.\relax }}{40}{figure.caption.25}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~2}{\ignorespaces Xilinx Vivado – výběr základní komponenty, pro který bude HW design vytvářen.\relax }}{40}{figure.caption.26}%
+\contentsline {figure}{\numberline {12~-~2}{\ignorespaces Xilinx Vivado – výběr základní komponenty, pro který bude \gls {abbreviation:hw} design vytvářen.\relax }}{40}{figure.caption.26}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {12~-~3}{\ignorespaces Xilinx Vivado – nabídka vytváření block design.\relax }}{41}{figure.caption.27}%
 \defcounter {refsection}{0}\relax 
@@ -318,13 +318,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {12~-~13}{\ignorespaces Xilinx Vivado – minimální funkční design s~výstupním pinem pro řízení ventilátoru.\relax }}{46}{figure.caption.37}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~14}{\ignorespaces Xilinx Vivado – záložka nastavení clock signálů na platformě.\relax }}{47}{figure.caption.39}%
+\contentsline {figure}{\numberline {12~-~14}{\ignorespaces Xilinx Vivado – záložka nastavení \gls {abbreviation:clk} signálů na platformě.\relax }}{47}{figure.caption.39}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {12~-~15}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration \gls {abbreviation:qspi} zařízení.\relax }}{48}{figure.caption.40}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~16}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration I2C zařízení.\relax }}{48}{figure.caption.41}%
+\contentsline {figure}{\numberline {12~-~16}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration \gls {abbreviation:iic} zařízení.\relax }}{48}{figure.caption.41}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {12~-~17}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration PMU (\gls {abbreviation:gpio} 4 a \gls {abbreviation:gpio} 5 není vybráno).\relax }}{48}{figure.caption.42}%
 \defcounter {refsection}{0}\relax 
@@ -336,7 +336,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {12~-~21}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration System Watchdog Timers (SWDT).\relax }}{49}{figure.caption.46}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~22}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration Triple Timer Counter (TTC), TTC 0 výstup Waveout je využit pro PIN řídící chladící ventilátor na SoM.\relax }}{49}{figure.caption.47}%
+\contentsline {figure}{\numberline {12~-~22}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration Triple Timer Counter (TTC), TTC 0 výstup Waveout je využit pro PIN řídící chladící ventilátor na \gls {abbreviation:som}.\relax }}{49}{figure.caption.47}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {12~-~23}{\ignorespaces Xilinx Vivado – \gls {abbreviation:ps} \gls {abbreviation:io} Configuration \gls {abbreviation:usb}.\relax }}{50}{figure.caption.48}%
 \defcounter {refsection}{0}\relax 

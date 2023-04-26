@@ -13,7 +13,19 @@
 
 ## Mé denní poznámky ✏️
 
-📝 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), měření ve vitis analyzer, tabulky, práce na dosažených výsledkách
+📝 [26.04.2023]() <-- psaní do [dp.tex](dp.tex), korekce
+
+---
+
+📝 [25.04.2023]() <-- psaní do [dp.tex](dp.tex), korekce
+
+---
+
+📝 [24.04.2023]() <-- psaní do [dp.tex](dp.tex), dělání zkratek
+
+---
+
+📝 [23.04.2023]() <-- psaní do [dp.tex](dp.tex), měření ve vitis analyzer, tabulky, práce na dosažených výsledkách
 
 ---
 
