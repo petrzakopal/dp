@@ -2156,69 +2156,13 @@ OCL_CHECK(err, q.finish());
 
 			\subsubsection{Zobrazení výsledků simulace}\label{subsubsec:zobrazeni-vysledku-simulace}
 			Aby bylo možné při debuggingu aplikace vizuálně pozorovat výsledky simulace, bylo nutné data ze souboru\\\texttt{globalSimulationData.csv} vizualizovat způsobem, jež umožňuje rychlé zpracování velikého množství dat a v~nejlepším případě je Open Source.\par
-			První přístup spočíval ke kontrole výsledků v~programu Wolfram Mathematica. Ovšem při kroku simulace $1 \mu$s a simulovaném čase 1 s~se jednalo o~výpis jednoho milion hodnot. Vykreslení takového množství hodnot, které byly přímkově spojeny, bylo příliš náročné pro zařízení autora a trvalo přiliš dlouho dobu. A~protože Wolfram Mathematika vyžaduje licenci, bylo od tohoto způsobu upuštěno. Další možností bylo využití programu MATLAB™, ovšem opět je vyžadována licence a autor dbal na co největší otevřenosti projektu. Proto bylo nakonec využito jazyku Python, jež není zatížen problémem \textit{Vendor lock-in} a vykreslení požadovaného grafu se stejnou kvalitou jako v~MATLAB™u nebo ve Wolfram Mathematica trvalo velmi krátkou dobu. Kód č. \ref{lst:python-skript-tok-rychlost} vyprodukuje graf č. \ref{fig:k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru}. Zobrazené výsledky odpovídají žádaným hodnotám, regulovaných veličin. V~simulaci byly nastaveny požadované hodnoty:
+			První přístup spočíval ke kontrole výsledků v~programu Wolfram Mathematica. Ovšem při kroku simulace $1 \mu$s a simulovaném čase 1 s~se jednalo o~výpis jednoho milion hodnot. Vykreslení takového množství hodnot, které byly přímkově spojeny, bylo příliš náročné pro zařízení autora a trvalo přiliš dlouho dobu. A~protože Wolfram Mathematika vyžaduje licenci, bylo od tohoto způsobu upuštěno. Další možností bylo využití programu MATLAB™, ovšem opět je vyžadována licence a autor dbal na co největší otevřenosti projektu. Proto bylo nakonec využito jazyku Python, jež není zatížen problémem \textit{Vendor lock-in} a vykreslení požadovaného grafu se stejnou kvalitou jako v~MATLAB™u nebo ve Wolfram Mathematica trvalo velmi krátkou dobu. Python skript pro vykreslení grafu je součástí přílohy této práce. Graf č. \ref{fig:k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru} reprezentuje výsledky simulace řízení asynchronního motoru pomocí \gls{abbreviation:foc}. Zobrazené výsledky odpovídají žádaným hodnotám, regulovaných veličin. V~simulaci byly nastaveny požadované hodnoty:
 			\begin{itemize}
 				\item velikost magnetického toku rotoru \gls{symbol:psi2} = 0.9032 Wb,
 				\item velikost mechanické otáčivé rychlosti \gls{symbol:mechanicka-uhlova-rychlost} = 10 s$^{-1}$ v~čase $t$ = 0.6 s.
 			\end{itemize}
 
-			\begin{lstlisting}[language={python}, caption={Ukázka python skriptu pro vykreslení časové závislosti mechanické otáčivé rychlosti rotoru $\Omega$ a velikosti magnetického toku rotoru \gls{symbol:psi2}.}, label={lst:python-skript-tok-rychlost}]
-# importing dependencies
-# GRAPH USED IN A~CONJUCTION WITH testCalculationLoop file program
-import pandas as pd
-from matplotlib import pyplot as plt
-
-# setting global font for plots
-plt.rcParams["font.family"] = "Times New Roman"
-
-
-# defining custom CTU FEE colors
-ctuBlue="#0065BD"
-ctuLightBlue = "#6AADE4"
-ctuRed = "#C60C30"
-ctuGreen = "#A2AD00"
-ctuGreenyBlue = "#00B2A9"
-ctuOrange = "#E05206"
-ctuYellow = "#F0AB00"
-
-
-# setting figure size, the value is in inches, but help from one tutorial gives info, that because of dpi it translates to pixels like inches * 100 = pixels
-plt.rcParams["figure.figsize"] = [15, 6]
-
-# some kind of autolayout
-plt.rcParams["figure.autolayout"] = True
-
-# defining which columns are in inported CSV
-columns = ["globalSimulationTime", "psi2amplitude","motorMechanicalAngularVelocity", "idRegulatorMeasuredValue", "idRegulatorWantedValue", "velocityRegulatorWantedValue", "velocityRegulatorSaturationOutput", "velocityRegulatorClampingStatus", "fluxRegulatorISum"]
-df = pd.read_csv("./globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=10000000)
-
-# print out part of the csv files as a text to terminal
-print("Contents in csv file:", df)
-
-figure_first = plt.figure("psi2amplitude")
-
-plt.title("Závislost mechanické otáčivé rychlosti rotoru a velikosti magnetického toku rotoru na čase", fontsize=22, fontweight=700)
-
-# ax = axis, but subplot is here mainly for deleting some axis on top and right
-ax = plt.subplot(111)
-ax.spines[['right', 'top']].set_visible(False)
-# formating ticks, there can be used fontweight="bold"
-plt.yticks(fontsize=15, fontweight=700)
-plt.xticks(fontsize=15, weight=700)
-
-ax.xaxis.get_offset_text().set_fontsize(18)
-offset_text = ax.xaxis.get_offset_text()
-offset_text.set_position((0, 0))  # move horizontally to the center and down by 
-
-# adding grid
-plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
-
-plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue, label="psi2amplitude")
-plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed, label="angularVelocity")
-plt.xlabel("time (s)",fontsize=17, fontweight=400, loc = "right")
-plt.ylabel("psi2amplitude (Wb)\nangularVelocity (s^(-1))",fontsize=14 ,fontweight=400, loc = "top", rotation=0)
-plt.legend(  bbox_to_anchor=(0.5, -0.05), ncol=2, fontsize=14 )
-plt.show()\end{lstlisting}
+			
 
 
 		\begin{figure}[htbp!]
@@ -3035,6 +2979,66 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 		\caption{Diagram popisující upravený postup pro nahrávání a spouštění akcelerované aplikace pro Digilent Zybo.}
 		\label{fig:vitis-edited-debugging-flow}
 	\end{figure}
+
+	\section{Python skript pro vykreslení výsledných průběhů simulace}
+	V kódu \ref{lst:python-skript-tok-rychlost} je uveden Python skript, který slouží k vizualizaci dat získaných ze simulace v části \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA Model}}.
+	\begin{lstlisting}[language={python}, caption={Ukázka python skriptu pro vykreslení časové závislosti mechanické otáčivé rychlosti rotoru $\Omega$ a velikosti magnetického toku rotoru \gls{symbol:psi2}.}, label={lst:python-skript-tok-rychlost}]
+# importing dependencies
+# GRAPH USED IN A~CONJUCTION WITH testCalculationLoop file program
+import pandas as pd
+from matplotlib import pyplot as plt
+
+# setting global font for plots
+plt.rcParams["font.family"] = "Times New Roman"
+
+
+# defining custom CTU FEE colors
+ctuBlue="#0065BD"
+ctuLightBlue = "#6AADE4"
+ctuRed = "#C60C30"
+ctuGreen = "#A2AD00"
+ctuGreenyBlue = "#00B2A9"
+ctuOrange = "#E05206"
+ctuYellow = "#F0AB00"
+
+
+# setting figure size, the value is in inches, but help from one tutorial gives info, that because of dpi it translates to pixels like inches * 100 = pixels
+plt.rcParams["figure.figsize"] = [15, 6]
+
+# some kind of autolayout
+plt.rcParams["figure.autolayout"] = True
+
+# defining which columns are in inported CSV
+columns = ["globalSimulationTime", "psi2amplitude","motorMechanicalAngularVelocity", "idRegulatorMeasuredValue", "idRegulatorWantedValue", "velocityRegulatorWantedValue", "velocityRegulatorSaturationOutput", "velocityRegulatorClampingStatus", "fluxRegulatorISum"]
+df = pd.read_csv("./globalSimulationData.csv", names=columns, header=None, skiprows=0, nrows=10000000)
+
+# print out part of the csv files as a text to terminal
+print("Contents in csv file:", df)
+
+figure_first = plt.figure("psi2amplitude")
+
+plt.title("Závislost mechanické otáčivé rychlosti rotoru a velikosti magnetického toku rotoru na čase", fontsize=22, fontweight=700)
+
+# ax = axis, but subplot is here mainly for deleting some axis on top and right
+ax = plt.subplot(111)
+ax.spines[['right', 'top']].set_visible(False)
+# formating ticks, there can be used fontweight="bold"
+plt.yticks(fontsize=15, fontweight=700)
+plt.xticks(fontsize=15, weight=700)
+
+ax.xaxis.get_offset_text().set_fontsize(18)
+offset_text = ax.xaxis.get_offset_text()
+offset_text.set_position((0, 0))  # move horizontally to the center and down by 
+
+# adding grid
+plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
+
+plt.plot(df.globalSimulationTime, df.psi2amplitude, color=ctuBlue, label="psi2amplitude")
+plt.plot(df.globalSimulationTime, df.motorMechanicalAngularVelocity, color=ctuRed, label="angularVelocity")
+plt.xlabel("time (s)",fontsize=17, fontweight=400, loc = "right")
+plt.ylabel("psi2amplitude (Wb)\nangularVelocity (s^(-1))",fontsize=14 ,fontweight=400, loc = "top", rotation=0)
+plt.legend(  bbox_to_anchor=(0.5, -0.05), ncol=2, fontsize=14 )
+plt.show()\end{lstlisting}
 
 	\end{appendices}
 \end{document}
