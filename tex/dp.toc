@@ -456,7 +456,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {16.3.1}Zobrazení výsledků simulace}{73}{subsubsection.16.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.4}Preloaded Data}{76}{subsection.16.4}%
+\contentsline {subsection}{\numberline {16.4}Preloaded Data}{77}{subsection.16.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {16.5}SPI}{78}{subsection.16.5}%
 \babel@toc {czech}{}\relax 
@@ -486,7 +486,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {17}Popis pracoviště}{91}{section.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {17.1}SPI komunikace}{91}{subsection.17.1}%
+\contentsline {subsection}{\numberline {17.1}SPI komunikace}{92}{subsection.17.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {18}Poznatky získané profilováním aplikací}{95}{section.18}%
 \defcounter {refsection}{0}\relax 

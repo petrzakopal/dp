@@ -2155,7 +2155,7 @@ OCL_CHECK(err, q.finish());
 
 
 			\subsubsection{Zobrazení výsledků simulace}\label{subsubsec:zobrazeni-vysledku-simulace}
-			Aby bylo možné vizuálně pozorovat výsledky simulace, bylo nutné data ze souboru\\\texttt{globalSimulationData.csv} vizualizovat způsobem, jež umožňuje rychlé zpracování velikého množství dat a v~nejlepším případě je Open Source.\par
+			Aby bylo možné při debuggingu aplikace vizuálně pozorovat výsledky simulace, bylo nutné data ze souboru\\\texttt{globalSimulationData.csv} vizualizovat způsobem, jež umožňuje rychlé zpracování velikého množství dat a v~nejlepším případě je Open Source.\par
 			První přístup spočíval ke kontrole výsledků v~programu Wolfram Mathematica. Ovšem při kroku simulace $1 \mu$s a simulovaném čase 1 s~se jednalo o~výpis jednoho milion hodnot. Vykreslení takového množství hodnot, které byly přímkově spojeny, bylo příliš náročné pro zařízení autora a trvalo přiliš dlouho dobu. A~protože Wolfram Mathematika vyžaduje licenci, bylo od tohoto způsobu upuštěno. Další možností bylo využití programu MATLAB™, ovšem opět je vyžadována licence a autor dbal na co největší otevřenosti projektu. Proto bylo nakonec využito jazyku Python, jež není zatížen problémem \textit{Vendor lock-in} a vykreslení požadovaného grafu se stejnou kvalitou jako v~MATLAB™u nebo ve Wolfram Mathematica trvalo velmi krátkou dobu. Kód č. \ref{lst:python-skript-tok-rychlost} vyprodukuje graf č. \ref{fig:k26-simulace-graf-mechanicka-rychlost-velikost-mg-toku-rotoru}. Zobrazené výsledky odpovídají žádaným hodnotám, regulovaných veličin. V~simulaci byly nastaveny požadované hodnoty:
 			\begin{itemize}
 				\item velikost magnetického toku rotoru \gls{symbol:psi2} = 0.9032 Wb,
@@ -2205,6 +2205,10 @@ ax.spines[['right', 'top']].set_visible(False)
 # formating ticks, there can be used fontweight="bold"
 plt.yticks(fontsize=15, fontweight=700)
 plt.xticks(fontsize=15, weight=700)
+
+ax.xaxis.get_offset_text().set_fontsize(18)
+offset_text = ax.xaxis.get_offset_text()
+offset_text.set_position((0, 0))  # move horizontally to the center and down by 
 
 # adding grid
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
@@ -2641,6 +2645,7 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 	\label{fig:workspace-scheme}
 \end{figure}
 
+	\fbar
 	\subsection{SPI komunikace}\label{subsec:spi-komunikace}
 	V~částech \hyperref[subsec:spi]{\textit{SPI}} a \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}} je představen způsob využití \gls{abbreviation:ip} bloku \gls{abbreviation:axi} Quad \gls{abbreviation:spi}. Pomocí tohoto bloku je možné provádět komunikaci s~externími zařízeními. Pokud by se jednalo o~skutečnou aplikaci pro řízení elektrického pohonu, byly by jako externí zařízení použity \gls{abbreviation:adc} a \gls{abbreviation:dac}. Pro ukázku funkčnosti \gls{abbreviation:spi} komunikace byl využit prvek \textit{MAX7219}, který vyžaduje napájecí napětí v~rozmezí 4~V~až 5~V. Jak již bylo v~části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}} uvedeno, výstupní napětí \gls{abbreviation:pmod} konektorů je pouze 3,3~V. Aby bylo možné tento obvod využít k~demonstraci funkce \gls{abbreviation:spi}, je pro připojení \gls{abbreviation:pmod} konektorů k~obvodu \textit{MAX7219} využit převodník úrovní. Finální experimentální zapojení pro testování \gls{abbreviation:spi} komunikace je zobrazeno na \ref{fig:spi-test-connection}.\par
 
@@ -2720,7 +2725,7 @@ V~této sekci budou představeny výsledky a poznatky ohledně vytvořených apl
 		\noalign{\hrule height 2pt}
 		100 k~hodnot, \gls{abbreviation:uvh} & $1\cdot 10^{-5}$ & 502,284 & 5,02284 & 0,749 & 503,691\\ \hline
 		1 M hodnot, \gls{abbreviation:uvh} & $1\cdot 10^{-6}$ & 1007,880 & 1,00788 & 0,940 & 1019,280 \\ \hline
-		1 M hodnot, \gls{abbreviation:buvh} & $1\cdot 10^{-6}$ & 1005,070 & 1,005070 & 0,907 & 1016,220\\\noalign{\hrule height 2pt}
+		1 M hodnot, \gls{abbreviation:buvh} & $1\cdot 10^{-6}$ & 1005,070 & 1,00507 & 0,907 & 1016,220\\\noalign{\hrule height 2pt}
 			\end{tabular}
 		}
 			\label{tab:porovnani-vybranych-hodnot-behu-kernelu-pro-1M-100k-sad-hodnot}
@@ -2776,7 +2781,7 @@ V~této sekci budou představeny výsledky a poznatky ohledně vytvořených apl
 		\multicolumn{3}{!{\vrule width 2pt} c !{\vrule width 2pt}}{1000 \gls{abbreviation:sh}}\\\noalign{\hrule height 2pt}
 		total runtime krnl\_calculateCurVelModel & 110,916 & 0,110916\\ \hline
 		total runtime krnl\_calculateInvMot & 110,486 & 0,110486\\ \hline
-		device execution time& 1539,1 & 1,5391\\ \hline
+		device execution time& 1539,100 & 1,53910\\ \hline
 		migrateMemObjects & 115,889 & 0,11589\\ \hline
 		clFinish & 626,687 & 0,626687\\ \noalign{\hrule height 2pt}
 		\rowcolor{ctugreenyblue}
