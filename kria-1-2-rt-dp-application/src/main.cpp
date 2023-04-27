@@ -1,6 +1,6 @@
 
 /*******************************************************************************
-Author: FEE CTU
+Author: Petr Zakopal, FEE CTU
 Purpose: Host program
 Comment: Thesis Export Version of Main APP without Legacy PL Processing of I-n model
 *******************************************************************************/
@@ -619,9 +619,6 @@ int main(int argc, char *argv[])
     float globalCalculationStep = 0.000001;
     float globalInitialCalculationTime = 0;
     float globalFinalCalculationTime = 1;
-    // float commonModeVoltage;
-    // float compareLevel;
-    // float trianglePoint;
     float minMaxCommonModeVoltageConstant = 287;
     float uS = 400;
     float uDC = ((3 * sqrt(2)) / PI) * uS;
@@ -698,7 +695,7 @@ int main(int argc, char *argv[])
     CurVelModel.motorParameters->R2 = 0.225f;                                      // Ohm, rotor rezistance
     CurVelModel.motorParameters->Lm = 0.0825f;                                     // H, main flux inductance
     CurVelModel.motorParameters->L2 = 0.08477f;                                    // H, inductance
-    // CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs
+    // CurVelModel.motorParameters->nOfPolePairs = 2; // number of pole pairs - used from modelCVCoeff
     CurVelModel.calculateMotorCVCoeff(CurVelModel.modelCVCoeff, CurVelModel.motorParameters);
     CurVelModel.modelCVCoeff->nOfPolePairs = 2;
     /*------------------------------------------------------------------------------------------*/
@@ -799,7 +796,7 @@ int main(int argc, char *argv[])
         /*------------------------------------------------------------*/
         /*-------------------- PROGRAM SETTINGS ---------------------*/
         int verboseOutput = false;
-        int numberOfIterations = 0;
+        int numberOfIterations = 0; // implement later
         std::cout << "\n\r------------------------------------------\n";
         std::cout << "Select verbose output:\n0 - disabled\n1 - enabled\n";
         std::cout << "------------------------------------------\n";
@@ -809,7 +806,8 @@ int main(int argc, char *argv[])
         // std::cout << "------------------------------------------\n";
         // scanf("%i", &numberOfIterations);
         /*------------------------------------------------------------*/
-        /*------------------------------------------------------------------------*/
+
+                /*------------------------------------------------------------------------*/
         /*-------------------- OUTPUT CSV DATA FILE CREATION ---------------------*/
         std::ofstream globalSimulationData;
         globalSimulationData.open("outputData/globalSimulationData.csv", std::ofstream::out | std::ofstream::trunc);
@@ -1031,11 +1029,6 @@ int main(int argc, char *argv[])
             inputI2 = masterMotorOutput[7];
             inputI3 = masterMotorOutput[8];
 
-            /*-------------------- SIMULATED INVERTOR FOR SIMULATION WITH 3 PHASE CONTROLLED THYRISTOR 400 V ---------------------*/
-            // invertor voltage reconstruction for phase A, B, C
-            // Invertor.invertorReconstructVoltages(svmCore.invertorSwitch, Invertor.reconstructedInvertorOutputVoltage, uDC);
-            /*-------------------------------------------------------------------------------------------------------------------*/
-
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if (verboseOutput and (i < 4))
             {
@@ -1045,15 +1038,6 @@ int main(int argc, char *argv[])
             }
             /*------------------------------------------------------------------------------------------------------*/
 
-            /******************************************************************************/
-            /*-------------------- VIRTUAL ASYNCHRONOUS MOTOR MODEL ---------------------*/
-
-            /*---------------------------------------------------------------------------*/
-            /*-------------------- CLARKE TRANSFORM FOR ASM MODEL ---------------------*/
-            // MotorModel.modelVariables->u1alpha = Transformation.clarkeTransform1(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
-            // MotorModel.modelVariables->u1beta = Transformation.clarkeTransform2(Invertor.reconstructedInvertorOutputVoltage->u1a, Invertor.reconstructedInvertorOutputVoltage->u1b, Invertor.reconstructedInvertorOutputVoltage->u1c, 0.6667);
-            /*---------------------------------------------------------------------------*/
-
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if (verboseOutput and (i < 4))
             {
@@ -1061,28 +1045,6 @@ int main(int argc, char *argv[])
                 std::cout << "u1beta to motor: " << MotorModel.modelVariables->u1beta << "\n";
             }
             /*-----------------------------------------------------------------------------------------------------*/
-
-            /*-----------------------------------------------------------------------------------*/
-            /*-------------------- MAIN ASM MODEL CODE WITH RK4 ODE SOLVING ---------------------*/
-            // MotorModel.mathModelCalculateOnlineValue(MotorModel.odeCalculationSettings, MotorModel.modelVariables, MotorModel.stateSpaceCoeff, MotorModel.motorParameters);
-            /*-----------------------------------------------------------------------------------*/
-            /******************************************************************************/
-
-            /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
-            if (verboseOutput and (i < 4))
-            {
-                // std::cout << "ASM i1alpha: " << MotorModel.modelVariables->i1alpha << "\n";
-                // std::cout << "ASM i1beta: " << MotorModel.modelVariables->i1beta << "\n";
-                // std::cout << "ASM motorTorque: " << MotorModel.modelVariables->motorTorque<< "\n";
-                // std::cout << "ASM motorMechanicalAngularVelocity: " << MotorModel.modelVariables->motorMechanicalAngularVelocity << "\n";
-                // std::cout << "ASM psi2alpha: " << MotorModel.modelVariables->psi2alpha << "\n";
-                // std::cout << "ASM psi2beta: " << MotorModel.modelVariables->psi2beta << "\n";
-            }
-            /*-----------------------------------------------------------------------------------------------------*/
-
-            // inputI1 = Transformation.inverseClarkeTransform1(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-            // inputI2 = Transformation.inverseClarkeTransform2(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
-            // inputI3 = Transformation.inverseClarkeTransform3(MotorModel.modelVariables->i1alpha, MotorModel.modelVariables->i1beta);
 
             /*-------------------- CONSOLE OUTPUT FOR TESTING PURPOSES BASED ON A USER SETTINGS ---------------------*/
             if (verboseOutput and (i < 4))

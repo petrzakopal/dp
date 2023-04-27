@@ -1,6 +1,7 @@
 /*******************************************************************************
-Author: FEE CVUT
+Author: Petr Zakopal, FEE CVUT
 Purpose: Kernel
+Comment: Thesis Export Version of kernel of an induction motor model and invertor
 *******************************************************************************/
 // Includes
 #include <stdint.h>
@@ -72,33 +73,16 @@ extern "C"
         float psi2beta;
         float i1alpha;
         float i1beta;
-        // float halfCalculationStep;
         float motorParameters[7];
         float stateSpaceCoeff[18];
         float motorMechanicalAngularVelocity;
-        // float calculationStep;
-        // float u1alpha;
-        // float u1beta;
-        // float loadTorque;
-        // float uDC;
 
         // local variables
-
         float i1alphaLocal;
         float i1betaLocal;
         float psi2alphaLocal;
         float psi2betaLocal;
         float motorTorqueLocal;
-        // float u1a;
-        // float u1b;
-        // float u1c;
-        // float i1;
-        // float i2;
-        // float i3;
-
-        // local variable to export
-
-        // float motorTorque;
         float motorMechanicalAngularVelocityLocal; // paste new value of motorMechanicalAngularVelociyt and export it to host
         float motorElectricalAngularVelocity;
 

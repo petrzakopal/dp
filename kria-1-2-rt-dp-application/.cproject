@@ -191,11 +191,9 @@
                             							
                             <tool id="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64.571002252" name="GCC Host Linker (ARMv8-A for A53/A72 - 64 bit)" superClass="com.xilinx.ide.accel.tool.gcc_linker.hw.aarch64">
                                 								
-                                <option id="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64.1437834216" superClass="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64" useByScannerDiscovery="false" valueType="libFiles">
+                                <option id="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64.1437834216" name="Libraries (-l)" superClass="com.xilinx.ide.accel.cpp.linker.option.libs.aarch64" useByScannerDiscovery="false" valueType="libFiles">
                                     									
                                     <listOptionValue builtIn="false" value="xilinxopencl"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="xrt_coreutil"/>
                                     									
                                     <listOptionValue builtIn="false" value="pthread"/>
                                     									

@@ -1,6 +1,7 @@
 /*******************************************************************************
-Author: FEE CVUT
+Author: Petr Zakopal, FEE CVUT
 Purpose: Kernel
+Comment: Thesis Export Version of kernel of I-n model, SVM and regulators
 *******************************************************************************/
 // Includes
 #include <stdint.h>
@@ -74,8 +75,6 @@ extern "C"
         // coefficients for RK4
         float k1psi2alpha, k2psi2alpha, k3psi2alpha, k4psi2alpha;
         float k1psi2beta, k2psi2beta, k3psi2beta, k4psi2beta;
-        // helper variable to reduce calculation fo the same value
-
         float psi2alphaTemp[8];
         float psi2betaTemp[8];
         float i1alphaTemp[8];
@@ -232,8 +231,6 @@ extern "C"
 
     float generateActualValueTriangleWaveKernel(float *triangleWaveSettings)
     {
-        // float triangleActualValue; // maybe put in triangleWaveSettings, and make this function void, do not know, this should be used only as a local variable
-
         // numerical method with abs value and modulo
         float const triangleActualValue = (((4 * triangleWaveSettings[0]) / triangleWaveSettings[2]) * abs(fmod((fmod((triangleWaveSettings[3] - (triangleWaveSettings[2] / 4)), triangleWaveSettings[2]) + triangleWaveSettings[2]), triangleWaveSettings[2]) - (triangleWaveSettings[2] / 2)) - triangleWaveSettings[0]);
 
@@ -314,16 +311,11 @@ extern "C"
         float R2DL2Temp[8];
         float transformationAngle;
         float psi2amplitude;
-        // float trianglePoint;
-        // float commonModeVoltage;
         float psi2alpha;
         float psi2beta;
         float i1alpha;
         float i1beta;
-
         float triangleWaveSettings[4];
-
-        // check if const makes kernel faster/better
         const float globalSimulationTime = masterInput[0];
         const float globalCalculationStep = masterInput[1];
         const float minMaxCommonModeVoltageConstant = masterInput[2];

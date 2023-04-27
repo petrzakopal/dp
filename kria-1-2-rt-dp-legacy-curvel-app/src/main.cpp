@@ -1,6 +1,6 @@
 
 /*******************************************************************************
-Author: FEE CTU
+Author: Petr Zakopal, FEE CTU
 Purpose: Host program
 Comment: Thesis Export Version of Legacy APP PL Processing of I-n model loading from file
 *******************************************************************************/
@@ -400,12 +400,6 @@ bool oddNumberOfTimer = true;
 
 void threadSPI(void *ptr, int fd, off_t slaveSelect)
 {
-    // void *ptr;  // pointer to a virtual memory filled by mmap
-    // int fd;     // file descriptor
-    // char *uiod; // name what device to open
-    //  uiod = "/dev/mem";
-    // uiod = "/dev/uio4";
-    //  off_t slaveSelect = 0x1;
 
     // letter variable
     off_t pismenoZ[8] = {0b000110000001,
@@ -427,25 +421,6 @@ void threadSPI(void *ptr, int fd, off_t slaveSelect)
                          0b011100000000 + 0b10001000,
                          0b100000000000 + 0b11111111};
 
-    // fd = open(uiod, O_RDWR | O_NONBLOCK); // opening device
-
-    // if error
-    /*
-    if (fd < 1)
-    {
-        perror("open\n");
-        printf("Invalid UIO device file:%s.\n", uiod);
-    }
-    else
-    {
-        std::cout << "Successfully opened device.\n";
-    }*/
-
-    // map PL memory to virtual memory
-    // ptr = mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-    // initializeSPI(ptr, 0x1);
-    // initializeLEDmatrix(ptr, fd, slaveSelect);
-
     if (oddNumberOfTimer == true)
     {
         clearLEDmatrix(ptr, fd, slaveSelect);
@@ -458,11 +433,6 @@ void threadSPI(void *ptr, int fd, off_t slaveSelect)
         printLetterOnLEDMatrix(ptr, fd, slaveSelect, pismenoP);
         oddNumberOfTimer = true;
     }
-
-    // munmap(ptr, MAP_SIZE);
-
-    // // Closing fd
-    // close(fd);
 }
 
 /*
@@ -871,8 +841,6 @@ int main(int argc, char *argv[])
         // first type kernel
         OCL_CHECK(err, cl::Buffer buffer_odeCVCalculationSettings(context, CL_MEM_USE_HOST_PTR, 4 * sizeof(float), odeCVCalculationSettingsArray, &err));
 
-        // OCL_CHECK(err, cl::Buffer buffer_modelCVVariables(context, CL_MEM_USE_HOST_PTR, sizeof(modelCVVariablesType),CurVelModel.modelCVVariables,&err)); // enable for first type kernel
-
         OCL_CHECK(err, cl::Buffer buffer_modelCVCoeff(context, CL_MEM_USE_HOST_PTR, 3 * sizeof(float), modelCVCoeffArray, &err));
 
         OCL_CHECK(err, cl::Buffer buffer_inputI1(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float), inputI1, &err));
@@ -883,32 +851,22 @@ int main(int argc, char *argv[])
 
         OCL_CHECK(err, cl::Buffer buffer_inputMotorMechanicalAngularVelocity(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float), inputMotorMechanicalAngularVelocity, &err));
 
-        // OCL_CHECK(err, cl::Buffer buffer_psi2Amplitude(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),psi2Amplitude,&err));
-
-        // second type kernel – disable for first type kernel
         OCL_CHECK(err, cl::Buffer buffer_psi2alpha(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float), psi2alpha, &err));
 
         OCL_CHECK(err, cl::Buffer buffer_psi2beta(context, CL_MEM_USE_HOST_PTR, odeCVCalculationSettingsArray[4] * sizeof(float), psi2beta, &err));
-        // OCL_CHECK(err, cl::Buffer buffer_transformAngle(context, CL_MEM_USE_HOST_PTR, CurVelModel.odeCVCalculationSettings->numberOfIterations * sizeof(float),transformAngle,&err));
 
         int narg = 0;
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_odeCVCalculationSettings));
-        // OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_modelCVVariables)); // enable for first type kernel
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_modelCVCoeff));
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_inputI1));
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_inputI2));
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_inputI3));
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_inputMotorMechanicalAngularVelocity));
-        // OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_psi2Amplitude));
 
-        // //second type kernel - disable for frst type kernel
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_psi2alpha));
         OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_psi2beta));
-        // OCL_CHECK(err, err = krnl_CurVelLoadLegacy.setArg(narg++, buffer_transformAngle));
 
         // Data will be migrated to kernel space
-        // delete buffer_psi2alpha and buffer_psi2beta for first type kernel
-        // delete buffer_modelCVVariables for second type kernel and add for first type
         OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_odeCVCalculationSettings, buffer_modelCVCoeff, buffer_inputI1, buffer_inputI2, buffer_inputI3, buffer_inputMotorMechanicalAngularVelocity, buffer_psi2alpha, buffer_psi2beta}, 0 /* 0 means from host*/));
 
         /*------------------------------------------------------------------------------------------------------------*/
@@ -930,21 +888,15 @@ int main(int argc, char *argv[])
         for (int i = 0; i < odeCVCalculationSettingsArray[4]; i++)
         {
             timeCV = timeCV + odeCVCalculationSettingsArray[2];
-
             psi2Amplitude = sqrtf(psi2alpha[i] * psi2alpha[i] + psi2beta[i] * psi2beta[i]);
             transformAngle = atan2f(psi2beta[i], psi2alpha[i]);
             std::cout << "psi2Amplitude index " << i << " : " << psi2Amplitude << "\n";
-
-            // std::cout << "psi2Amplitude index "<< i << " : " << psi2Amplitude[i] << "\n";
             std::cout << "transformAngle[" << i << "]: " << transformAngle << "\n";
-            // std::cout << "inputI1[" << i << "]: "<< inputI1[i] << "\n";
 
             modelCVOutputDataFile2 << timeCV << "," << psi2Amplitude << "," << transformAngle << "\n";
         }
 
         modelCVOutputDataFile2.close();
-
-        std::cout << "the end of the most useful program is here\n";
 
         // free the memory
         free(motorParametersArray);
@@ -953,14 +905,13 @@ int main(int argc, char *argv[])
         free(inputI1);
         free(inputI2);
         free(inputI3);
-        // free(psi2Amplitude);
         free(psi2alpha);
         free(psi2beta);
         free(inputMotorMechanicalAngularVelocity);
         free(odeCVCalculationSettingsArray);
     }
 
-    std::cout << "the end of the most useful program is here\n";
+    std::cout << "the end of the preloaded data application\n";
 
     // timer thread testing
     if (modeSelection == 3)
@@ -993,11 +944,5 @@ int main(int argc, char *argv[])
         mainSPIfunction();
     }
 
-    /*-----------------------------------------------------------*/
-    /*-------------------- MEMORY FREEING ---------------------*/
     OCL_CHECK(err, q.finish());
-
-    /*-----------------------------------------------------------*/
 }
-
-// musí být chyba v algoritmu velocity regulatoru

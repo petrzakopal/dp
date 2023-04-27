@@ -1,6 +1,7 @@
 /*******************************************************************************
-Author: FEE CVUT
+Author: Petr Zakopal, FEE CUT
 Purpose: Kernel
+Comment: Thesis Export Version of kernel of Legacy PL Processing of I-n model
 *******************************************************************************/
 // Includes
 #include <stdint.h>
