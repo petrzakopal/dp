@@ -1,22 +1,22 @@
 [0] Config.pm:311> INFO - This is Biber 2.16
 [0] Config.pm:314> INFO - Logfile is 'dp.blg'
-[89] biber-darwin:340> INFO - === Thu Apr 27, 2023, 09:50:02
-[110] Biber.pm:415> INFO - Reading 'dp.bcf'
-[221] Biber.pm:949> INFO - Using all citekeys in bib section 0
-[237] Biber.pm:4340> INFO - Processing section 0
-[250] Biber.pm:4531> INFO - Looking for bibtex format file 'src/bib/zdroje.bib' for section 0
-[255] bibtex.pm:1689> INFO - LaTeX decoding ...
-[339] bibtex.pm:1494> INFO - Found BibTeX data source 'src/bib/zdroje.bib'
-[345] Utils.pm:395> WARN - Duplicate entry key: 'xilinx-github-vitis-tutorials-step-2-create-the-software-components' in file 'src/bib/zdroje.bib', skipping ...
-[431] Utils.pm:395> WARN - legacy year field '2017;2016;' in entry 'pang-beginning-fpga' is not an integer - this will probably not sort properly.
-[514] Utils.pm:395> WARN - ISBN '9781439896990;1439896992;' in entry 'juan-fpgas' is invalid - run biber with '--validate_datamodel' for details.
-[515] Utils.pm:395> WARN - legacy year field '2017;2015;' in entry 'juan-fpgas' is not an integer - this will probably not sort properly.
-[581] Utils.pm:395> WARN - legacy month field 'feb' in entry 'the-real-time-linux-kernel-survey-on-preempt-rt' is not an integer - this will probably not sort properly.
-[592] Utils.pm:395> WARN - ISBN '2074-9023' in entry 'grover-reduction-of-power-consumption' is invalid - run biber with '--validate_datamodel' for details.
-[622] Utils.pm:395> WARN - Overwriting field 'month' with month value from field 'date' for entry 'youtube-devicetree-for-dummies'
-[688] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[688] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
-[688] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'cs-CZ'
-[736] bbl.pm:654> INFO - Writing 'dp.bbl' with encoding 'UTF-8'
-[766] bbl.pm:757> INFO - Output to dp.bbl
-[767] Biber.pm:128> INFO - WARNINGS: 7
+[103] biber-darwin:340> INFO - === Thu Apr 27, 2023, 18:44:18
+[129] Biber.pm:415> INFO - Reading 'dp.bcf'
+[259] Biber.pm:949> INFO - Using all citekeys in bib section 0
+[278] Biber.pm:4340> INFO - Processing section 0
+[292] Biber.pm:4531> INFO - Looking for bibtex format file 'src/bib/zdroje.bib' for section 0
+[301] bibtex.pm:1689> INFO - LaTeX decoding ...
+[401] bibtex.pm:1494> INFO - Found BibTeX data source 'src/bib/zdroje.bib'
+[408] Utils.pm:395> WARN - Duplicate entry key: 'xilinx-github-vitis-tutorials-step-2-create-the-software-components' in file 'src/bib/zdroje.bib', skipping ...
+[451] Utils.pm:395> WARN - legacy year field '2017;2016;' in entry 'pang-beginning-fpga' is not an integer - this will probably not sort properly.
+[476] Utils.pm:395> WARN - legacy month field 'feb' in entry 'the-real-time-linux-kernel-survey-on-preempt-rt' is not an integer - this will probably not sort properly.
+[571] Utils.pm:395> WARN - ISBN '2074-9023' in entry 'grover-reduction-of-power-consumption' is invalid - run biber with '--validate_datamodel' for details.
+[672] Utils.pm:395> WARN - ISBN '9781439896990;1439896992;' in entry 'juan-fpgas' is invalid - run biber with '--validate_datamodel' for details.
+[672] Utils.pm:395> WARN - legacy year field '2017;2015;' in entry 'juan-fpgas' is not an integer - this will probably not sort properly.
+[724] Utils.pm:395> WARN - Overwriting field 'month' with month value from field 'date' for entry 'youtube-devicetree-for-dummies'
+[801] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[802] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
+[802] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'cs-CZ'
+[852] bbl.pm:654> INFO - Writing 'dp.bbl' with encoding 'UTF-8'
+[886] bbl.pm:757> INFO - Output to dp.bbl
+[886] Biber.pm:128> INFO - WARNINGS: 7
