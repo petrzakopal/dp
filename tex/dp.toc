@@ -1136,7 +1136,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {A.1}Seznam zkratek}{107}{subsection.1.A.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Seznam symbolů}{109}{subsection.1.A.2}%
+\contentsline {subsection}{\numberline {A.2}Seznam symbolů}{110}{subsection.1.A.2}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000}{112}{appendix.1.B}%
 \babel@toc {czech}{}\relax 
