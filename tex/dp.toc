@@ -144,15 +144,17 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Programování}{10}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.3}Programování}{9}{subsection.4.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {4.3.1}Forma tvorby algoritmu pro FPGA}{10}{subsubsection.4.3.1}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.2}Konverze HDL na konfigurační Bitstream}{10}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2}Konverze HDL na konfigurační bitstream}{10}{subsubsection.4.3.2}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -178,7 +180,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.5}Využití}{11}{subsection.4.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.5.1}Aplikace v~nepohonářských odvětví}{12}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.1}Aplikace v~nepohonářských odvětví}{11}{subsubsection.4.5.1}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -1136,9 +1138,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {A.1}Seznam zkratek}{106}{subsection.1.A.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Seznam symbolů}{109}{subsection.1.A.2}%
+\contentsline {subsection}{\numberline {A.2}Seznam symbolů}{110}{subsection.1.A.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000}{111}{appendix.1.B}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000}{112}{appendix.1.B}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -1146,6 +1148,6 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup nahrávání aplikace pro Digilent Zybo}{119}{appendix.1.C}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup nahrávání aplikace pro Digilent Zybo}{120}{appendix.1.C}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {D}Python skript pro vykreslení výsledných průběhů simulace}{120}{appendix.1.D}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {D}Python skript pro vykreslení výsledných průběhů simulace}{121}{appendix.1.D}%

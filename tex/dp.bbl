@@ -567,8 +567,8 @@
       \strng{authorbibnamehash}{601324d9214ad24f68cfeca33ba6e08d}
       \strng{authornamehash}{601324d9214ad24f68cfeca33ba6e08d}
       \strng{authorfullhash}{601324d9214ad24f68cfeca33ba6e08d}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{High-Performance Computing using FPGA covers the area of high performance reconfigurable computing (HPRC). This book provides an overview of architectures, tools and applications for High-Performance Reconfigurable Computing (HPRC). FPGAs offer very high I/O bandwidth and fine-grained, custom and flexible parallelism and with the ever-increasing computational needs coupled with the frequency/power wall, the increasing maturity and capabilities of FPGAs, and the advent of multicore processors which has caused the acceptance of parallel computational models. The Part on architectures will introduce different FPGA-based HPC platforms: attached co-processor HPRC architectures such as the CHRECs Novo-G and EPCCs Maxwell systems; tightly coupled HRPC architectures, e.g. the Convey hybrid-core computer; reconfigurably networked HPRC architectures, e.g. the QPACE system, and standalone HPRC architectures such as EPFLs CONFETTI system. The Part on Tools will focus on high-level programming approaches for HPRC, with chapters on C-to-Gate tools (such as Impulse-C, AutoESL, Handel-C, MORA-C++); Graphical tools (MATLAB-Simulink, NI LabVIEW); Domain-specific languages, languages for heterogeneous computing(for example OpenCL, Microsofts Kiwi and Alchemy projects). The part on Applications will present case from several application domains where HPRC has been used successfully, such as Bioinformatics and Computational Biology; Financial Computing; Stencil computations; Information retrieval; Lattice QCD; Astrophysics simulations; Weather and climate modeling.}
@@ -730,8 +730,8 @@
       \strng{authornamehash}{e2b4a5847320f16617f60880b1151e53}
       \strng{authorfullhash}{e2b4a5847320f16617f60880b1151e53}
       \field{extraname}{2}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Digilent Documentation}
@@ -973,8 +973,8 @@
       \strng{authornamehash}{751f6909b12cc240122891470ea09b53}
       \strng{authorfullhash}{751f6909b12cc240122891470ea09b53}
       \field{extraname}{11}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{AMD Xilinx Board Files}
@@ -2276,8 +2276,8 @@
       \strng{authornamehash}{3646c7aeea09d3b1af3d76dfbbb9740e}
       \strng{authorfullhash}{3646c7aeea09d3b1af3d76dfbbb9740e}
       \field{extraname}{3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{LinkedIn Article}

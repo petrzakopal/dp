@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hwlink:HwLinkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hwlink="http://www.xilinx.com/acceleration/hwlink" name="kria-1-2-rt-dp-application_system_hw_link" platform="/home/petr/Documents/xilinx-workspace/vitis-workspace/dp/kria-1-2-rt-dp-platform/export/kria-1-2-rt-dp-platform/kria-1-2-rt-dp-platform.xpfm" systemProject="kria-1-2-rt-dp-application_system" cpu="pl">
+  <configuration name="Emulation-SW" id="com.xilinx.ide.accel.config.hwlink.sw_emu.322167274">
+    <configBuildOptions xsi:type="hwlink:LinkOptions">
+      <binaryContainers name="binary_container_1">
+        <kernels name="krnl_calculateCurVelModel" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateCurVelModel_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+        <kernels name="krnl_calculateInvMot" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateInvMot_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+      </binaryContainers>
+    </configBuildOptions>
+  </configuration>
+  <configuration name="Emulation-HW" id="com.xilinx.ide.accel.config.hwlink.hw_emu.1144398791">
+    <configBuildOptions xsi:type="hwlink:LinkOptions" target="hw_emu">
+      <binaryContainers name="binary_container_1">
+        <kernels name="krnl_calculateCurVelModel" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateCurVelModel_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+        <kernels name="krnl_calculateInvMot" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateInvMot_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+      </binaryContainers>
+    </configBuildOptions>
+  </configuration>
+  <configuration name="Hardware" id="com.xilinx.ide.accel.config.hwlink.hw.96047810">
+    <configBuildOptions xsi:type="hwlink:LinkOptions" target="hw">
+      <binaryContainers name="binary_container_1">
+        <kernels name="krnl_calculateCurVelModel" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateCurVelModel_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+        <kernels name="krnl_calculateInvMot" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateInvMot_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+      </binaryContainers>
+    </configBuildOptions>
+    <lastBuildOptions xsi:type="hwlink:LinkOptions" target="hw">
+      <binaryContainers name="binary_container_1">
+        <kernels name="krnl_calculateCurVelModel" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateCurVelModel_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+        <kernels name="krnl_calculateInvMot" projectName="kria-1-2-rt-dp-application_kernels">
+          <computeUnits name="krnl_calculateInvMot_1" slr="">
+            <args name="masterInput" master="true" memory=""/>
+            <args name="masterOutput" master="true" memory=""/>
+          </computeUnits>
+        </kernels>
+      </binaryContainers>
+    </lastBuildOptions>
+  </configuration>
+</hwlink:HwLinkProject>

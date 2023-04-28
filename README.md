@@ -2,54 +2,62 @@
 
 ## Pracuji na
 
-- ⚡️ _zkoumám_ interrupts + timers
+- ✅ ⚡️ _zkoumám_ interrupts + timers
 - přesun I-n modelu do FPGA
 - ✅ _akvizize dat nejspíše v dalším vlákně programu pomocí timeru a jeho přerušení a mutexů, to vlákno bude nekonečné a spojí se až na konci programmu_ hledání jak funguje timer a přerušení a jak dělat akvizici dat do zybo pomocí PMOD GPIO a XADC pro otáčková resp. proudová čidla
 - najít proudová a otáčková vhodná čidla nebo jak to naemulovat něčím dalším
 - ✅ začít dělat regulátor a výstup pro měnič v cmodelu...
 - ✅ momentální cíl -> model do FPGA, zkusit reakci na předpočítaná data, po úspěchu začít modelovat regulátory, SVM, výstup na měnič, výstup z pmod
-- lze arduinem vytvořit nulu na PMOD při paralelním spojení nebo budu arduinem řídit MOSFET a vytvářet požadovaný signál (modelování vstupů do fpga / výstupů z motoru)
-- a další...
+- ✅ lze arduinem vytvořit nulu na PMOD při paralelním spojení nebo budu arduinem řídit MOSFET a vytvářet požadovaný signál (modelování vstupů do fpga / výstupů z motoru)
+- ✅ a další...
 
 ## Mé denní poznámky ✏️
 
-📝 [26.04.2023]() <-- psaní do [dp.tex](dp.tex), korekce
+📝 [28.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), korekce
 
 ---
 
-📝 [25.04.2023]() <-- psaní do [dp.tex](dp.tex), korekce
+📝 [27.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), korekce
 
 ---
 
-📝 [24.04.2023]() <-- psaní do [dp.tex](dp.tex), dělání zkratek
+📝 [26.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), korekce
 
 ---
 
-📝 [23.04.2023]() <-- psaní do [dp.tex](dp.tex), měření ve vitis analyzer, tabulky, práce na dosažených výsledkách
+📝 [25.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), korekce
 
 ---
 
-📝 [22.04.2023]() <-- psaní do [dp.tex](dp.tex), snaha implementace odkazů na zkratky atd. autor původního sesbíraného kódu a nápadu [Jakub Kučera](https://www.linkedin.com/in/jakub-ku%C4%8Dera-49682421a/), vytváření a dávání dohromady designu grafů v pythonu, aby to bylo co nejvíce open source 🔓 [sources and files](./tex/src/python-graph/)
+📝 [24.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), dělání zkratek
 
 ---
 
-📝 [21.04.2023]() <-- psaní do [dp.tex](dp.tex)
+📝 [23.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), měření ve vitis analyzer, tabulky, práce na dosažených výsledkách
 
 ---
 
-📝 [20.04.2023]() <-- psaní do [dp.tex](dp.tex), opravil jsem chybu v code v testLoop (jen tam a poté v aktivní větvi v na serveru), aby vypisování výsledků do souboru podle time - nebylo podle time ale podle čísla iteraci, po tom, co došlo k přehoupnutí čísla přes 1 - byl problém a nevešlo se celé číslo do double ani float (co jsem experimentálně vyzkoušel), takže až pak ve vykreslovacím programu, který pracuje s vyšší úrovní abstrakce přepočítat vzorek na čas, také jsem přidal do triangle actual value do main souboru loop cmodel a také do aktivního souboru na serveru reset hodnot času triangle, když je větší nebo rovno periodě, aby se nestal stejný problém s přetečením a nebo nepřesností
+📝 [22.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), snaha implementace odkazů na zkratky atd. autor původního sesbíraného kódu a nápadu [Jakub Kučera](https://www.linkedin.com/in/jakub-ku%C4%8Dera-49682421a/), vytváření a dávání dohromady designu grafů v pythonu, aby to bylo co nejvíce open source 🔓 [sources and files](./tex/src/python-graph/)
 
 ---
 
-💻 [19.04.2023]() <-- psaní do [dp.tex](dp.tex)
+📝 [21.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex)
 
 ---
 
-💻 [18.04.2023]() <-- psaní do [dp.tex](dp.tex), oprava velikost kreslení vývojových diagramů, vložení spi do classy (ne moc fancy, jen rychle kvůli dp)...
+📝 [20.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), opravil jsem chybu v code v testLoop (jen tam a poté v aktivní větvi v na serveru), aby vypisování výsledků do souboru podle time - nebylo podle time ale podle čísla iteraci, po tom, co došlo k přehoupnutí čísla přes 1 - byl problém a nevešlo se celé číslo do double ani float (co jsem experimentálně vyzkoušel), takže až pak ve vykreslovacím programu, který pracuje s vyšší úrovní abstrakce přepočítat vzorek na čas, také jsem přidal do triangle actual value do main souboru loop cmodel a také do aktivního souboru na serveru reset hodnot času triangle, když je větší nebo rovno periodě, aby se nestal stejný problém s přetečením a nebo nepřesností
 
 ---
 
-💻 [17.04.2023](/notes/20230417.md) <-- psaní do [dp.tex](dp.tex), kreslení vývojových diagramů, práce na legacy aplikaci
+💻 [19.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex)
+
+---
+
+💻 [18.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), oprava velikost kreslení vývojových diagramů, vložení spi do classy (ne moc fancy, jen rychle kvůli dp)...
+
+---
+
+💻 [17.04.2023](/notes/20230417.md) <-- psaní do [dp.tex](./tex/dp.tex), kreslení vývojových diagramů, práce na legacy aplikaci
 
 ---
 
