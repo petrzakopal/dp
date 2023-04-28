@@ -168,103 +168,37 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5~-~1}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA \gls {abbreviation:soc} Trainer Board – boční pohled.\relax }}{14}{figure.caption.8}%
+\contentsline {figure}{\numberline {5~-~1}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA \gls {abbreviation:soc} Trainer Board – boční pohled.\relax }}{13}{figure.caption.8}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5~-~2}{\ignorespaces Detailní schéma čipu Zynq-7000, umístěného na vývojové desce \textit {Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}. (převzato z~\cite {xilinx-zynq-7000-technical-reference-manual})\relax }}{16}{figure.caption.9}%
+\contentsline {figure}{\numberline {5~-~2}{\ignorespaces Detailní schéma čipu Zynq-7000, umístěného na vývojové desce \textit {Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board}. (převzato z~\cite {xilinx-zynq-7000-technical-reference-manual})\relax }}{15}{figure.caption.9}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5~-~3}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board vrchní pohled s~vyznačením komponent.\relax }}{16}{figure.caption.10}%
+\contentsline {figure}{\numberline {5~-~3}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board – vrchní pohled s~vyznačením komponent.\relax }}{15}{figure.caption.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5~-~4}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board – spodní pohled.\relax }}{17}{figure.caption.11}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~1}{\ignorespaces Vývojová deska Xilinx Kria KR260 – boční pohled.\relax }}{19}{figure.caption.13}%
+\contentsline {figure}{\numberline {5~-~4}{\ignorespaces Vývojová deska Digilent ZYBO Zynq-7000 ARM/FPGA SoC Trainer Board – spodní pohled.\relax }}{16}{figure.caption.11}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~2}{\ignorespaces Blokový diagram K26 \gls {abbreviation:som} Kria. \cite {kria-k26-som-ds}\relax }}{20}{figure.caption.14}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
+\contentsline {figure}{\numberline {6~-~1}{\ignorespaces Vývojová deska Xilinx Kria KR260 – boční pohled.\relax }}{18}{figure.caption.13}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~3}{\ignorespaces Vývojová deska Xilinx Kria KR260 vrchní pohled s~vyznačením komponent.\relax }}{22}{figure.caption.16}%
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6~-~4}{\ignorespaces Vývojová deska Xilinx Kria KR260 – spodní pohled.\relax }}{22}{figure.caption.17}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
+\contentsline {figure}{\numberline {6~-~2}{\ignorespaces Blokový diagram K26 \gls {abbreviation:som} Kria. \cite {kria-k26-som-ds}\relax }}{19}{figure.caption.14}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {8~-~1}{\ignorespaces Obecné schéma zpětnovazební vektorové regulace. (převzato z~\cite {lipcak-bauer-ept-moodle}, \cite {kobrle-elektricke-pohony}, upraveno)\relax }}{28}{figure.caption.19}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
+\contentsline {figure}{\numberline {6~-~3}{\ignorespaces Vývojová deska Xilinx Kria KR260 vrchní pohled s~vyznačením komponent.\relax }}{21}{figure.caption.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {8~-~2}{\ignorespaces Simulační schéma zpětnovazební vektorové regulace, realizované v~této práci. (převzato z~\cite {lipcak-bauer-ept-moodle}, \cite {kobrle-elektricke-pohony}, upraveno)\relax }}{28}{figure.caption.20}%
+\contentsline {figure}{\numberline {6~-~4}{\ignorespaces Vývojová deska Xilinx Kria KR260 – spodní pohled.\relax }}{21}{figure.caption.17}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {10~-~1}{\ignorespaces Blokový diagram tvorby spustitelné aplikace v~prostředí Vitis. (převzato z~\cite {vitis-unified-software-platform-documentation-2022}, upraveno)\relax }}{33}{figure.caption.23}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {10~-~2}{\ignorespaces Graf prováděné simulace při testování PREEMPT\_\gls {abbreviation:rt} Linux Patch.\relax }}{34}{figure.caption.24}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -288,15 +222,85 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~1}{\ignorespaces Xilinx Vivado – volba typu projektu pro Xilinx KR26, použitelného dále jako platforma ve Vitis.\relax }}{39}{figure.caption.25}%
+\contentsline {figure}{\numberline {8~-~1}{\ignorespaces Obecné schéma zpětnovazební vektorové regulace. (převzato z~\cite {lipcak-bauer-ept-moodle}, \cite {kobrle-elektricke-pohony}, upraveno)\relax }}{27}{figure.caption.19}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~2}{\ignorespaces Xilinx Vivado – výběr základní komponenty, pro který bude \gls {abbreviation:hw} design vytvářen.\relax }}{39}{figure.caption.26}%
+\contentsline {figure}{\numberline {8~-~2}{\ignorespaces Simulační schéma zpětnovazební vektorové regulace, realizované v~této práci. (převzato z~\cite {lipcak-bauer-ept-moodle}, \cite {kobrle-elektricke-pohony}, upraveno)\relax }}{27}{figure.caption.20}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~3}{\ignorespaces Xilinx Vivado – nabídka vytváření block design.\relax }}{40}{figure.caption.27}%
+\contentsline {figure}{\numberline {10~-~1}{\ignorespaces Blokový diagram tvorby spustitelné aplikace v~prostředí Vitis. (převzato z~\cite {vitis-unified-software-platform-documentation-2022}, upraveno)\relax }}{32}{figure.caption.23}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10~-~2}{\ignorespaces Graf prováděné simulace při testování PREEMPT\_\gls {abbreviation:rt} Linux Patch.\relax }}{33}{figure.caption.24}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {12~-~1}{\ignorespaces Xilinx Vivado – volba typu projektu pro Xilinx KR26, použitelného dále jako platforma ve Vitis.\relax }}{38}{figure.caption.25}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {12~-~2}{\ignorespaces Xilinx Vivado – výběr základní komponenty, pro který bude \gls {abbreviation:hw} design vytvářen.\relax }}{38}{figure.caption.26}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {12~-~3}{\ignorespaces Xilinx Vivado – nabídka vytváření block design.\relax }}{39}{figure.caption.27}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {12~-~4}{\ignorespaces Xilinx Vivado – vložení \gls {abbreviation:ps} \gls {abbreviation:ip} bloku.\relax }}{40}{figure.caption.28}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12~-~5}{\ignorespaces Xilinx Vivado – automatické propojení pro \gls {abbreviation:ps}.\relax }}{41}{figure.caption.29}%
+\contentsline {figure}{\numberline {12~-~5}{\ignorespaces Xilinx Vivado – automatické propojení pro \gls {abbreviation:ps}.\relax }}{40}{figure.caption.29}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -410,7 +414,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {16~-~5}{\ignorespaces Časová závislost velikosti mechanické otáčivé rychlosti \gls {symbol:mechanicka-uhlova-rychlost} a velikosti magnetického toku rotoru \gls {symbol:psi2}. Výsledné hodnoty získané ze simulace akcelerované pomocí kernelu v~\gls {abbreviation:pl}.\relax }}{75}{figure.caption.62}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~6}{\ignorespaces Preloaded Data větev aplikace – automatické čtení změřených/simulovaných vstupních hodnot do $I$-$n$ modelu a jejich následné hromadné zpracování v~kernelu.\relax }}{77}{figure.caption.63}%
+\contentsline {figure}{\numberline {16~-~6}{\ignorespaces Preloaded Data větev aplikace – automatické čtení změřených/simulovaných vstupních hodnot do $I$-$n$ modelu a jejich hromadné zpracování v~kernelu.\relax }}{77}{figure.caption.63}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 

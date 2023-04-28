@@ -164,7 +164,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5~-~1}{\ignorespaces Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000. (informace a značení převzaty z~\cite {digilent-zybo-reference-manual})\relax }}{18}{table.caption.12}%
+\contentsline {table}{\numberline {5~-~1}{\ignorespaces Popis označených komponent na vývojové desce Digilent Zybo Zynq-7000. (informace a značení převzaty z~\cite {digilent-zybo-reference-manual})\relax }}{17}{table.caption.12}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -172,69 +172,11 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6~-~1}{\ignorespaces Popis označených komponent na vývojové desce Xilinx Kria KR260. (informace a značení převzaty z~\cite {kria-kr260-robotics-starter-kit-user-guide})\relax }}{21}{table.caption.15}%
+\contentsline {table}{\numberline {6~-~1}{\ignorespaces Popis označených komponent na vývojové desce Xilinx Kria KR260. (informace a značení převzaty z~\cite {kria-kr260-robotics-starter-kit-user-guide})\relax }}{20}{table.caption.15}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6~-~2}{\ignorespaces Porovnání hlavních parametrů Kria K26 \gls {abbreviation:som} Commercial a Industrial. (informace a značení převzaty z~\cite {kria-k26-som-product-brief})\relax }}{23}{table.caption.18}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9~-~1}{\ignorespaces Štítkové údaje stroje.\relax }}{29}{table.caption.21}%
-\defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {9~-~2}{\ignorespaces Změřené parametry stroje.\relax }}{29}{table.caption.22}%
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
-\babel@toc {czech}{}\relax 
+\contentsline {table}{\numberline {6~-~2}{\ignorespaces Porovnání hlavních parametrů Kria K26 \gls {abbreviation:som} Commercial a Industrial. (informace a značení převzaty z~\cite {kria-k26-som-product-brief})\relax }}{22}{table.caption.18}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -272,7 +214,69 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {12~-~1}{\ignorespaces Ukázka nastavených \gls {abbreviation:axi} portů v~Xilinx Vivado platformě pro Xilinx Kria KR260.\relax }}{44}{table.caption.38}%
+\contentsline {table}{\numberline {9~-~1}{\ignorespaces Štítkové údaje stroje.\relax }}{28}{table.caption.21}%
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {9~-~2}{\ignorespaces Změřené parametry stroje.\relax }}{28}{table.caption.22}%
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\babel@toc {czech}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {12~-~1}{\ignorespaces Ukázka nastavených \gls {abbreviation:axi} portů v~Xilinx Vivado platformě pro Xilinx Kria KR260.\relax }}{46}{table.caption.38}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
