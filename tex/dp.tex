@@ -2657,11 +2657,11 @@ V~této sekci budou představeny výsledky a poznatky ohledně vytvořených apl
 		\rowcolor{ctuyellow}
 		\multicolumn{6}{!{\vrule width 2pt} c !{\vrule width 2pt}}{Preloaded Data}\\\noalign{\hrule height 2pt}
 		\rowcolor{codeblue}
-		název & krok & total runtime (ms) & runtime 1 step ($\mu$s) & migrateMemObjects (ms) & clFinish (ms)\\
+		název & krok & total runtime (ms) & runtime 1 \gls{abbreviation:sh} ($\mu$s) & migrateMemObjects (ms) & clFinish (ms)\\
 		\noalign{\hrule height 2pt}
-		100 k~hodnot, \gls{abbreviation:uvh} & $1\cdot 10^{-5}$ & 502,284 & 5,02284 & 0,749 & 503,691\\ \hline
-		1 M hodnot, \gls{abbreviation:uvh} & $1\cdot 10^{-6}$ & 1007,880 & 1,00788 & 0,940 & 1019,280 \\ \hline
-		1 M hodnot, \gls{abbreviation:buvh} & $1\cdot 10^{-6}$ & 1005,070 & 1,00507 & 0,907 & 1016,220\\\noalign{\hrule height 2pt}
+		100 k~\gls{abbreviation:sh}, \gls{abbreviation:uvh} & $1\cdot 10^{-5}$ & 502,284 & 5,02284 & 0,749 & 503,691\\ \hline
+		1 M \gls{abbreviation:sh}, \gls{abbreviation:uvh} & $1\cdot 10^{-6}$ & 1007,880 & 1,00788 & 0,940 & 1019,280 \\ \hline
+		1 M \gls{abbreviation:sh}, \gls{abbreviation:buvh} & $1\cdot 10^{-6}$ & 1005,070 & 1,00507 & 0,907 & 1016,220\\\noalign{\hrule height 2pt}
 			\end{tabular}
 		}
 			\label{tab:porovnani-vybranych-hodnot-behu-kernelu-pro-1M-100k-sad-hodnot}
