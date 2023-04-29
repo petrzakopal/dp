@@ -1152,6 +1152,6 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup nahrávání aplikace pro Digilent Zybo}{120}{appendix.1.C}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup nahrávání aplikace pro Digilent Zybo}{121}{appendix.1.C}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {D}Python skript pro vykreslení výsledných průběhů simulace}{121}{appendix.1.D}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {D}Python skript pro vykreslení výsledných průběhů simulace}{122}{appendix.1.D}%
