@@ -128,6 +128,7 @@
 \glossaryentry{SOM?\glossentry{abbreviation:som}|setentrycounter[]{page}"\glsnumberformat}{XIII}
 \glossaryentry{AXI?\glossentry{abbreviation:axi}|setentrycounter[]{page}"\glsnumberformat}{XIII}
 \glossaryentry{IDE?\glossentry{abbreviation:ide}|setentrycounter[]{page}"\glsnumberformat}{XIII}
+\glossaryentry{SH?\glossentry{abbreviation:sh}|setentrycounter[]{page}"\glsnumberformat}{XIII}
 \glossaryentry{UVH?\glossentry{abbreviation:uvh}|setentrycounter[]{page}"\glsnumberformat}{XIII}
 \glossaryentry{BUVH?\glossentry{abbreviation:buvh}|setentrycounter[]{page}"\glsnumberformat}{XIII}
 \glossaryentry{CPU?\glossentry{abbreviation:cpu}|setentrycounter[]{page}"\glsnumberformat}{XIII}
@@ -1107,6 +1108,7 @@
 \glossaryentry{PS?\glossentry{abbreviation:ps}|setentrycounter[]{page}"\glsnumberformat}{95}
 \glossaryentry{PL?\glossentry{abbreviation:pl}|setentrycounter[]{page}"\glsnumberformat}{95}
 \glossaryentry{PS?\glossentry{abbreviation:ps}|setentrycounter[]{page}"\glsnumberformat}{95}
+\glossaryentry{SH?\glossentry{abbreviation:sh}|setentrycounter[]{page}"\glsnumberformat}{95}
 \glossaryentry{UVH?\glossentry{abbreviation:uvh}|setentrycounter[]{page}"\glsnumberformat}{95}
 \glossaryentry{BUVH?\glossentry{abbreviation:buvh}|setentrycounter[]{page}"\glsnumberformat}{95}
 \glossaryentry{SH?\glossentry{abbreviation:sh}|setentrycounter[]{page}"\glsnumberformat}{95}
