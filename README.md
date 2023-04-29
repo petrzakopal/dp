@@ -13,6 +13,10 @@
 
 ## Mé denní poznámky ✏️
 
+📝 [29.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), korekce, první verze pro čtení vedoucím
+
+---
+
 📝 [28.04.2023]() <-- psaní do [dp.tex](./tex/dp.tex), korekce
 
 ---
