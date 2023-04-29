@@ -208,7 +208,8 @@
 		\setentrycounter[]{page}\glsnumberformat{44}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{51\delimR 53}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{55\delimN 56}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{61\delimR 63}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{61}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{63}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{77\delimR 81}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{90}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{100}\delimN 

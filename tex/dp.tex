@@ -472,7 +472,7 @@ literate=
 \pagenumbering{arabic} %to arabic page numbering - enabling page numbering after gobble which disabled page numbering
 \pagenumbering{gobble}
 \null\newpage
-\null\newpage %PŘI VERZI ONLINE
+% \null\newpage %PŘI VERZI ONLINE
 \setcounter{page}{1}
 \pagenumbering{arabic}
 \fontspec{Times New Roman}
@@ -967,7 +967,7 @@ V~závěru práce je představena realizace akcelerované aplikace, která je sc
 			\subsection{Aplikace a operační systém}\label{subsec:aplikace-a-operacni-system}
 				Aplikace pro Digilent Zybo je možné vytvářet jako \textit{Bare Metal / Standalone} nebo jako aplikace pro operační systém \textit{PetaLinux}.\par
 				Pro Xilinx Kria je možné využít \textit{Bare Metal / Standalone} přístup, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. Výrobce na stránkách Wiki podpory produktů Xilinx zmiňuje, že poskytuje podporu převážně ve formě veřejného fóra na adrese \href{https://support.xilinx.com}{\textcolor{ctublue}{\textit{support.xilinx.com}}}. Oficiální podpora je vždy dostupná pro dvě poslední major verze softwarových nástrojů, které jsou součástí \textit{PetaLinux Tools} a~\textit{Xilinx~\gls{abbreviation:sdk}}. \cite{xilinx-wiki-atlassian-embedded-sw-support}\par
-				Výrobce vytvořil pro Xilinx Kria ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. V~budoucím plánu výrobce je vytvořit větší množství aplikací, které by mohly sloužit jako výchozí bod pro vývojáře a byly by umístěny v~Kria App Store. \cite{xilinx-appstore-for-kria-soms}\par
+				Výrobce vytvořil pro Xilinx Kria ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. V~budoucím plánu výrobce je vytvořit větší množství aplikací, které by mohly sloužit jako výchozí bod pro vývojáře a byly by umístěny~v~Kria~App~Store. \cite{xilinx-appstore-for-kria-soms}\par
 				\gls{abbreviation:ps} na porovnávaných vývojových deskách podporují PREEMPT\_\gls{abbreviation:rt} Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~PREEMPT\_\gls{abbreviation:rt} Linux Patch \textit{PetaLinux} je v~sekci \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
 
 \section{Zpětnovazební vektorová regulace}
@@ -1314,7 +1314,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 					\label{fig:kr26-xilix-vivado-flow-02}
 				\end{figure}
 
-				Po vytvoření projektu je uživateli zobrazena hlavní Vivado obrazovka. V~základním nastavení jsou v~pravé části obrazovky zobrazeny informace o~vybrané základní komponentě/desce a v~levé části pracovní menu. Pro pokračování ve tvorbě designu je třeba zvolit v~menu odkaz \textit{Create block design} a pojmenovat jej dle požadavků autora designu. Menu a nabídka vytváření blokového je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-03}.
+				Po vytvoření projektu je uživateli zobrazena hlavní Vivado obrazovka. V~základním nastavení jsou v~pravé části obrazovky zobrazeny informace o~vybrané základní komponentě/desce a v~levé části pracovní menu. Pro pokračování ve tvorbě designu je třeba zvolit v~menu odkaz \textit{Create block design} a pojmenovat jej dle požadavků autora designu. Menu a~nabídka vytváření blokového designu je zobrazena na obr.~\ref{fig:kr26-xilix-vivado-flow-03}.
 		
 				\begin{figure}[htbp!]
 					\centering
@@ -1441,7 +1441,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 				\end{table}
 
 				Dalším krokem je povolení a nastavení výchozích \gls{abbreviation:clk} signálů v~záložce \textit{Clock}. V~této práci byl zvolen výchozí \gls{abbreviation:clk} signál 200 MHz. Snímek záložky zachycující nastavení pro dva clock signály je na obr. \ref{fig:kr26-xilix-vivado-flow-14}.\par
-				Posledním důležitým krokem je povolení signálu \texttt{intr} z~použitého bloku \texttt{Axi Interrupt Controller} v~kartě \textit{Platform Setup -> Interrupt}.\par
+				Posledním důležitým krokem je v~kartě \textit{Platform Setup -> Interrupt} povolit signál \texttt{intr} z~použitého bloku \texttt{Axi Interrupt Controller}.\par
 				Volitelným, ovšem vhodným krokem je pojmenovat platformu a udat jejího autora a verzi v~kartě \textit{Platform Setup -> Interrupt}.
 
 				\begin{figure}[htbp!]
@@ -1658,7 +1658,7 @@ Image Packaging Configuration -> Copy final images to tftpboot < >\end{lstlistin
 petalinux-build\end{lstlisting}
 
 	\subsection{Konfigurace jádra PetaLinux}
-	Po aplikaci patche je vhodné pokračovat nastavením jádra (pro jádro systému je zavedeno také označení kernel) \textit{PetaLinux} systému pomocí příkazu \ref{lst:petalinux-config-c-kernel}. Ve vytvářené aplikaci je využíván \texttt{Userspace IO Driver} a proto je nutné aktivovat konfiguraci jádra, která zajistí automatické načtení driveru (ovladače) do systému při jeho startu. Pokud by se tak nestalo, bylo by nutné vkládat moduly, resp. drivery manuálně pomocí příkazů \texttt{modprobe} či \texttt{insmod}. Při konfiguraci jádra je možné aktivovat i další prvky, které nejsou v~této práci využívány. Ukázka konfigurace pro \texttt{Userspace IO Driver} je zobrazena v~kódu \ref{lst:petalinux-config-c-kernel-userspace-io-driver}.\par
+	Po aplikaci patche je vhodné pokračovat nastavením jádra (pro jádro systému je zavedeno také označení kernel) \textit{PetaLinux} systému pomocí příkazu \ref{lst:petalinux-config-c-kernel}. Ve vytvářené aplikaci je využíván \texttt{Userspace IO Driver} a proto je nutné aktivovat konfiguraci jádra, která zajistí automatické načtení driveru (ovladače) do systému při jeho startu. Pokud by se tak nestalo, bylo by nutné vkládat moduly manuálně pomocí příkazů \texttt{modprobe} či \texttt{insmod}. Při konfiguraci jádra je možné aktivovat i další prvky, které nejsou v~této práci využívány. Ukázka konfigurace pro \texttt{Userspace IO Driver} je zobrazena v~kódu~\ref{lst:petalinux-config-c-kernel-userspace-io-driver}.\par
 
 \begin{lstlisting}[language={sh}, caption={PetaLinux příkaz pro konfiguraci jádra systému.}, label= {lst:petalinux-config-c-kernel}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
 petalinux-config -c kernel\end{lstlisting}
@@ -1717,7 +1717,7 @@ dtc -@ -O dtb -o <path-to-output-file> <path-to-input-file> # general command
 
 dtc -@ -O dtb -o ./dtg_output/dtg_output/kria_kr260/psu_cortexa53_0/device_tree_domain/bsp/pl.dtbo ./dtg_output/dtg_output/kria_kr260/psu_cortexa53_0/device_tree_domain/bsp/pl.dtsi # command for project file structure
 \end{lstlisting}
-	Pokud byla kompilace úspěšná (v~některých případech dochází k~vypsání hlášky ohledně \gls{abbreviation:ip} bloku \texttt{interrupt controller}, tu je možné ignorovat) je vhodné přesunout soubor \texttt{pl.dtbo} do složky \texttt{transfer}.
+	Pokud byla kompilace úspěšná (v~některých případech dochází k~vypsání hlášky ohledně \gls{abbreviation:ip} bloku\\\texttt{interrupt controller}, tu je možné ignorovat) je vhodné přesunout soubor \texttt{pl.dtbo} do složky \texttt{transfer}.
 
 	\fbar
 	\subsection{Konfigurace Root File System}
@@ -1797,7 +1797,7 @@ petalinux-package --boot --u-boot --force\end{lstlisting}
 \begin{lstlisting}[language={sh}, caption={Příkaz pro vytvoření obrazu systému, který bude vvyužit v~procesu flash SD Card (vybalování obrazu systému na SD kartu).}, label= {lst:petalinux-package-wic}, morekeywords={petalinux-build, petalinux-package, petalinux-config}]
 petalinux-package --wic --images-dir ./images/linux/ --bootfiles "ramdisk.cpio.gz.u-boot,boot.scr,Image,system.dtb,system-zynqmp-sck-kr-g-revB.dtb" --disk-name "sda"\end{lstlisting}
 
-	Aby bylo možné využít vygenerované \gls{abbreviation:sdk} pomocí Vitis \gls{abbreviation:ide}, je nutné vytvořené boot komponenty projektu překopírovat do jedné složky, aby při tvorbě Vitis Platformy mohly být jejich cesty snadno vloženy do konfiguračního souboru. Boot komponenty jsou umístěny v~cestě \texttt{<petalinux-project>/images/linux} a je vhodné je zkopírovat do složky ve vytvořené struktuře dle příkazu \ref{lst:petalinux-cp-boot-components}.\par
+	Aby bylo možné využít vygenerované \gls{abbreviation:sdk} pomocí Vitis \gls{abbreviation:ide}, je nutné vytvořené boot komponenty projektu překopírovat do jedné složky, aby při tvorbě Vitis Platformy mohly být jejich cesty snadno vloženy do konfiguračního souboru. Boot komponenty jsou umístěny v~cestě\\\texttt{<petalinux-project>/images/linux} a je vhodné je zkopírovat do složky ve vytvořené struktuře dle příkazu \ref{lst:petalinux-cp-boot-components}.\par
 
 	\begin{lstlisting}[language={sh}, caption={Příkaz pro kopírování boot komponent do složky dané strukturou projektu.}, label={lst:petalinux-cp-boot-components}, morekeywords={cp}]
 cp bl31.elf pmufw.elf system.dtb u-boot.elf zynqmp_fsbl.elf ./../../../linux-files/pfm/boot/\end{lstlisting}
@@ -1852,7 +1852,7 @@ sudo ln -s /etc/init.d/ethernetUp.sh /etc/rc5.d/S99ethernetUp.sh # creating soft
 		\fbar
 		\subsection{Tvorba platformy pro akcelerovanou aplikaci}
 		Před tvorbou samotné akcelerované aplikace je nejprve nutné vytvořit tzv. \textit{Platform project}, jež využije vytvořený Vivado \textit{\gls{abbreviation:xsa}} soubor\\a soubor \textit{Image} z~cesty \texttt{<petalinux-project>/linux/image/Image}. Při tvorbě platformy v~nabídce výběru systému je nutné vybrat \textit{linux} a zrušit možnost \textit{Generate boot components}. Konfigurace je zobrazena na obr. \ref{fig:vitis-new-platform-linux}.\par
-		Po vytvoření \textit{Platform project} je nezbytné do projektu vložit cesty potřebných souborů platformy. Přidání cest probíhá v~souboru \texttt{<platform-name>/platform.spr} v~záložce \texttt{linux on cortexa53}. Vysvětlení, jaké cesty souborů je třeba vložit v~konfiguraci, je uvedeno v~tabulce \ref{tab:vitis-platform-spr-settings}.\par
+		Po vytvoření \textit{Platform project} je nezbytné do projektu vložit cesty potřebných souborů platformy. Přidání cest probíhá v~souboru \texttt{<platform-name>/platform.spr} v~záložce\\\texttt{linux on cortexa53}. Vysvětlení, jaké cesty souborů je třeba vložit v~konfiguraci, je uvedeno v~tabulce \ref{tab:vitis-platform-spr-settings}.\par
 	
 
 	\begin{lstlisting}[language={sh}, caption={Aktivace prostředí pro Vitis verze 2022.2.}, label= {lst:vitis-environment}, morekeywords={source}]
@@ -1895,10 +1895,9 @@ source /tools/Xilinx/Vitis/2022.2/settings64.sh\end{lstlisting}
 		  }
 			\label{tab:vitis-platform-spr-settings}
 		\end{table}
-
-		Většinu souborů tvořených ve Vitis je možné otevřít pomocí textového editoru. Soubor \texttt{platform.spr} není výjimkou. Pokud dochází k~tvorbě mnoha projektů se stejným nastavením platformy, je možné vytvořit skripty, které automaticky vytvoří konfigurovaný \texttt{platform.spr} soubor s~danou strukturou a nastavením.\par
-		Po základní konfiguraci platformy je možné spustit její kompilaci pomocí pravého kliknutí na její název v~okně \textit{Explorer} a volby možnosti \textit{Build Project}. Ukázka tohoto kroku je na obr. \ref{fig:vitis-platform-build}.
 		\fbar
+		Většinu souborů tvořených ve Vitis je možné otevřít pomocí textového editoru.\\Soubor \texttt{platform.spr} není výjimkou. Pokud dochází k~tvorbě mnoha projektů se stejným nastavením platformy, je možné vytvořit skripty, které automaticky vytvoří konfigurovaný \texttt{platform.spr} soubor s~danou strukturou a nastavením.\par
+		Po základní konfiguraci platformy je možné spustit její kompilaci pomocí pravého kliknutí na její název v~okně \textit{Explorer} a volby možnosti \textit{Build Project}. Ukázka tohoto kroku je na obr. \ref{fig:vitis-platform-build}.
 		\begin{figure}[htbp!]
 			\centering
 			\includegraphics[width=0.95\textwidth]{src/jpg/vitis-build-project-platform.jpg}
@@ -2203,7 +2202,7 @@ OCL_CHECK(err, krnl_CurVelLoadLegacy = cl::Kernel(
 	\begin{lstlisting}[language={Text}, caption={Struktura souboru outputData, ze kterého jsou načítány hodnoty pro akcelerovaný kernel.}, label={lst:output-data-csv-struktura}]
 time,i1,i2,i3,MechanicalAngularVelocity.,..,...
 \end{lstlisting}
-	Po načtení hodnot do definovaných proměnných jsou vytvořeny v~\gls{abbreviation:ps} buffery, které jsou mapovány na adresy odpovídajících ukazatelů a mají rozsah jednotlivých proměnných, ke kterým jsou mapovány. Buffery jsou nastaveny jako jednotlivé vstupní parametry kernelu. Ve vyznačené části \texttt{krnl\_CurVelLoadLegacy} na obr. \ref{fig:preloaded-data} je provedena sada příkazů pro přenos hodnot proměnných pomocí bufferů do globální paměti, přístupné z~\gls{abbreviation:pl}, spuštění kernelu a opětovné přenesení výsledných hodnot z~globální paměti do \gls{abbreviation:ps}.\par
+	Po načtení hodnot do definovaných proměnných jsou vytvořeny v~\gls{abbreviation:ps} buffery, které jsou mapovány na adresy odpovídajících ukazatelů a mají rozsah jednotlivých proměnných, ke kterým jsou mapovány. Buffery jsou nastaveny jako jednotlivé vstupní parametry kernelu.\\Ve vyznačené části \texttt{krnl\_CurVelLoadLegacy} na obr. \ref{fig:preloaded-data} je provedena sada příkazů pro přenos hodnot proměnných pomocí bufferů do globální paměti, přístupné z~\gls{abbreviation:pl}, spuštění kernelu a opětovné přenesení výsledných hodnot z~globální paměti do \gls{abbreviation:ps}.\par
 	V~této legacy aplikaci je při výpisu hodnot vybraných veličin také provedeno ukládání hodnot do csv souboru \texttt{outputCurVel2.csv}. Struktura tohoto legacy souboru je v~kódu \ref{lst:output-cur-vel-2-csv}.\par
 	Po ukončení podaplikace je opět dealokována paměť proměnných, která byla dynamicky alokována.
 
@@ -2306,7 +2305,7 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
 
  	\fbar
  	\subsubsection{Thread Loop}\label{subsubsec:thread-loop}
- 		Část aplikace Thread Loop, jejíž vývojový diagram je na obr. \ref{fig:threadLoop}, reprezentuje soubor algoritmů a funkcí, které jsou prováděny ve vlákně \texttt{backgroundThread}. Funkce, která je pomocí \texttt{backgroundThread} spuštěna, je v~kódu nazvána \texttt{threadLoop()}.\par
+ 		Část aplikace Thread Loop, jejíž vývojový diagram je na obr. \ref{fig:threadLoop}, reprezentuje soubor algoritmů a funkcí, které jsou prováděny ve vlákně \texttt{backgroundThread}.\\Funkce, která je pomocí \texttt{backgroundThread} spuštěna, je v~kódu nazvána \texttt{threadLoop()}.\par
 		Protože tato aplikace pracuje opět s~adresy \gls{abbreviation:hw} registrů, vytvořených v~\gls{abbreviation:pl} a zobrazitelnými v~user space, je s~ohledem na bezpečnost programu vhodné přistupovat k~paměti pomocí mapování \gls{abbreviation:uio} zařízení do user space pomocí \texttt{mmap()} funkce.\par
 		Po inicializační části mapování registrů jednotky \gls{abbreviation:axi} Timer (postup zobrazen v~horní části kódu~\ref{lst:thread-loop-code}) a \gls{abbreviation:axi} Quad \gls{abbreviation:spi} do user space dané aplikace, je v~případě ukázkové aplikace využito opět komunikování \gls{abbreviation:spi} jednotky s~obvodem \textit{MAX7219}. V~práci je uvedena kompletní ukázka funkce \texttt{threadLoop()}, jejíž algoritmus odráží vývojový diagram \ref{fig:threadLoop}. V~případě zájmu o~nahlédnutí na kódy použitých funkcí
  		\begin{itemize}
@@ -2476,7 +2475,7 @@ void sliceInternalVariables8Parts(float variableIn, float *variableOut)
 			variableOut[i] = variableIn;
 		}
 	}\end{lstlisting}
-	V~prvotní fázi vývoje kernelů bylo používáno knihoven, které autor vytvořit pro simulaci téže úlohy pomocí stolního počítače s~využitím kompilátoru \texttt{gcc} verze \texttt{c++14}. I~když konstrukce v~těchto knihovnách umožňovaly vytvořit přehledné algoritmy a struktury, nebyl tento přístup v~práci využit. Čím složitější a více přehlednější popis problému by byl v~kernelu realizován, tím problematičtější pro \gls{abbreviation:hls} je vytvořit vhodný popis \gls{abbreviation:rtl} a provést implementaci s~tvorbou bitstreamu. Tento problém se opět projeví ve změně použitých resources. Počet potřebných resources může v~extrémních případech několikanásobně přerůst počet dostupných zdrojů v~\gls{abbreviation:pl}. Tento problém se projevoval převážně u~vývojové desky Digilent Zybo.\par
+	V~prvotní fázi vývoje kernelů bylo používáno knihoven, které autor vytvořit pro simulaci téže úlohy pomocí stolního počítače s~využitím kompilátoru \texttt{gcc} verze \texttt{c++14}. I~když konstrukce v~těchto knihovnách umožňovaly vytvořit přehledné algoritmy a struktury, nebyl tento přístup v~práci využit. Čím složitější a více přehlednější popis problému by byl v~kernelu realizován, tím problematičtější pro \gls{abbreviation:hls} je vytvořit vhodný popis \gls{abbreviation:rtl} a provést implementaci s~tvorbou bitstreamu. Tento problém se opět projeví ve změně použitých resources. Počet potřebných resources může v~extrémních případech několikanásobně přesáhnout počet dostupných zdrojů v~\gls{abbreviation:pl}. Tento problém se projevoval převážně u~vývojové desky Digilent Zybo.\par
 
 			\subsubsection{Implementace výpočtu diferenciálních rovnic}\label{subsubsec:implementace-vypoctu-diferencialnich-rovnic}
 		Výpočet diferenciálních rovnic byl realizován pomocí algoritmu \textit{Runge–Kutta} 4. řádu (\gls{abbreviation:rk4}). Vhodnost tohoto algoritmu řešení byla ověřena výsledky simulace v~MATLAB™u.\par
@@ -2506,8 +2505,7 @@ float psi2betaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, floa
 
 		\subsubsection{Implementace regulátorů}
 			V~kernelu byly implementovány \gls{abbreviation:pi} regulátory se strukturou naznačenou na obr. \ref{fig:regulator-scheme}. Pro omezení wind-up efektu byl použit princip \textit{clamping}.\par
-			Při realizaci v~C++ by bylo vhodné realizovat pro regulátory ucelený datový typ struktury, která by obsahovala potřebné proměnné. Tento způsob byl výhodný při implementaci algoritmu v~\gls{abbreviation:pc}, ovšem jak již bylo zmíňeno v~části \hyperref[subsec:akcelerovane-algoritmy-kernely-v-pl]{\textit{Akcelerované algoritmy (kernely) v~PL}}, pro překlad pomocí \gls{abbreviation:hls} bylo nutné využít datová pole typu float. Tento přístup snížil čitelnost kódu, ale zachoval relativně kvalitní překlad \gls{abbreviation:hls}.\par
-			Blokové schéma principu \gls{abbreviation:pi} regulátoru, který byl implementován do algoritmu, je zobrazeno v~obr.~\ref{fig:regulator-scheme}.\par
+			Při realizaci v~C++ by bylo vhodné realizovat pro regulátory ucelený datový typ struktury, která by obsahovala potřebné proměnné. Tento způsob byl výhodný při implementaci algoritmu v~\gls{abbreviation:pc}, ovšem jak již bylo zmíňeno v~části \hyperref[subsec:akcelerovane-algoritmy-kernely-v-pl]{\textit{Akcelerované algoritmy (kernely) v~PL}}, pro překlad pomocí \gls{abbreviation:hls} bylo nutné využít datová pole typu float. Tento přístup snížil čitelnost kódu, ale zachoval relativně kvalitní překlad \gls{abbreviation:hls}. Blokové schéma principu \gls{abbreviation:pi} regulátoru, který byl implementován do algoritmu, je zobrazeno v~obr.~\ref{fig:regulator-scheme}.\par
 			
 
 
@@ -2750,7 +2748,7 @@ V~této sekci budou představeny výsledky a poznatky ohledně vytvořených apl
 
 	\fbar
 	\subsection{Využití zdrojů pro PL jednotlivých akcelerovaných aplikací}\label{subsec:vyuziti-zdroju-pro-pl-jednotlivych-akcelerovanych-aplikaci}
-	V~tabulce \ref{tab:vyuziti-zdroju-pl-pro-akcelerovane-aplikace} je prezentováno využití zdrojů \gls{abbreviation:lut}, registrů, \gls{abbreviation:bram}, \gls{abbreviation:uram} a \gls{abbreviation:dsp} jednotlivými akcelerovanými aplikacemi (kernely). Je vidět, že kernel \texttt{krnl\_calculateInvMot} by s~vysokou pravděpodobností mohl být realizován i ve vývojové desce Digilent Zybo. Naopak \texttt{krnl\_calculateCurVelModel}, který obsahuje $I$-$n$ model simulovaného motoru, regulátory a \gls{abbreviation:svm}, vyžaduje v~aktuálním provedení množství zdrojů, které prezentovaná deska Digilent Zybo není schopna poskytnout.\par
+	V~tabulce \ref{tab:vyuziti-zdroju-pl-pro-akcelerovane-aplikace} je prezentováno využití zdrojů \gls{abbreviation:lut}, registrů, \gls{abbreviation:bram}, \gls{abbreviation:uram} a \gls{abbreviation:dsp} jednotlivými akcelerovanými aplikacemi (kernely). Je vidět, že kernel \texttt{krnl\_calculateInvMot} by s~vysokou pravděpodobností mohl být realizován i ve vývojové desce Digilent Zybo.\\Naopak \texttt{krnl\_calculateCurVelModel}, který obsahuje $I$-$n$ model simulovaného motoru, regulátory a \gls{abbreviation:svm}, vyžaduje v~aktuálním provedení množství zdrojů, které prezentovaná deska Digilent Zybo není schopna poskytnout.\par
 	\begin{table}[H]
 		\centering
 		\caption{Využití zdrojů \gls{abbreviation:pl} pro akcelerované aplikace.}

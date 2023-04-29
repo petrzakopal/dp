@@ -1,7 +1,7 @@
 This is makeindex, version 2.15 [TeX Live 2021] (kpathsea + Thai support).
 Scanning style file ./dp.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file dp.ntn2.....done (1249 entries accepted, 0 rejected).
-Sorting entries.............done (14009 comparisons).
-Generating output file dp.abbreviation....done (594 lines written, 0 warnings).
-Output written in dp.abbreviation.
+Scanning input file dp.ntn1....done (108 entries accepted, 0 rejected).
+Sorting entries....done (775 comparisons).
+Generating output file dp.symbol....done (152 lines written, 0 warnings).
+Output written in dp.symbol.
 Transcript written in dp.slg.
