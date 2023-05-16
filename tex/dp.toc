@@ -264,7 +264,7 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.4}Aplikace a operační systém}{24}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.4}Aplikace a operační systém}{25}{subsection.7.4}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -468,31 +468,31 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.6}Timer Thread}{80}{subsection.16.6}%
+\contentsline {subsubsection}{\numberline {16.5.1}Zapojení pro testování SPI komunikace}{80}{subsubsection.16.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.6.1}Thread Loop}{81}{subsubsection.16.6.1}%
+\contentsline {subsection}{\numberline {16.6}Timer Thread}{82}{subsection.16.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.7}Akcelerované algoritmy (kernely) v~PL}{86}{subsection.16.7}%
+\contentsline {subsubsection}{\numberline {16.6.1}Thread Loop}{82}{subsubsection.16.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {16.7}Akcelerované algoritmy (kernely) v~PL}{88}{subsection.16.7}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.1}Implementace výpočtu diferenciálních rovnic}{87}{subsubsection.16.7.1}%
+\contentsline {subsubsection}{\numberline {16.7.1}Implementace výpočtu diferenciálních rovnic}{89}{subsubsection.16.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.2}Implementace regulátorů}{87}{subsubsection.16.7.2}%
+\contentsline {subsubsection}{\numberline {16.7.2}Implementace regulátorů}{89}{subsubsection.16.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.3}Implementace modulace prostorového vektoru}{88}{subsubsection.16.7.3}%
+\contentsline {subsubsection}{\numberline {16.7.3}Implementace modulace prostorového vektoru}{90}{subsubsection.16.7.3}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.4}Implementace modelu invertoru}{89}{subsubsection.16.7.4}%
+\contentsline {subsubsection}{\numberline {16.7.4}Implementace modelu invertoru}{91}{subsubsection.16.7.4}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.5}Implementace modelu asynchronního motoru}{89}{subsubsection.16.7.5}%
+\contentsline {subsubsection}{\numberline {16.7.5}Implementace modelu asynchronního motoru}{91}{subsubsection.16.7.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {17}Popis pracoviště}{90}{section.17}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {17.1}SPI komunikace}{91}{subsection.17.1}%
+\contentsline {section}{\numberline {17}Popis pracoviště}{92}{section.17}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {18}Poznatky získané profilováním aplikací}{94}{section.18}%
 \defcounter {refsection}{0}\relax 
@@ -1144,7 +1144,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {A.2}Seznam symbolů}{110}{subsection.1.A.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000}{112}{appendix.1.B}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {B}Tvorba HW designu pro Digilent Zybo Zynq-7000}{113}{appendix.1.B}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
@@ -1152,6 +1152,6 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup nahrávání aplikace pro Digilent Zybo}{121}{appendix.1.C}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {C}Upravený postup nahrávání aplikace pro Digilent Zybo}{122}{appendix.1.C}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{P\v {r}\'{\i }loha \numberline {D}Python skript pro vykreslení výsledných průběhů simulace}{122}{appendix.1.D}%
+\contentsline {section}{P\v {r}\'{\i }loha \numberline {D}Python skript pro vykreslení výsledných průběhů simulace}{123}{appendix.1.D}%

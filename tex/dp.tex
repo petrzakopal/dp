@@ -479,8 +479,8 @@ literate=
 
 \section{Úvod}
 V~době, kdy byla od elektrických pohonů požadována spolehlivost, vysoká účinnost a výpočetně nenáročné, ovšem kvalitní řízení, byly k~řízení využívány konvenční digitální signálové procesory (\gls{abbreviation:dsp}). Postupem času však docházelo ke zjištění, že výkon \gls{abbreviation:dsp} nemusí být dostatečný, zejména pro aplikace, u~kterých je vyžadováno provést velké množství náročných výpočtů za co nejkratší čas. Aktuálně nastupuje éra \gls{abbreviation:soc}, které v~mnoha případech obsahují heterogenní strukturu řídící procesorové jednotky (\gls{abbreviation:cpu}) a logického programovatelného pole (\gls{abbreviation:fpga}). Implementace hradlových polí přináší nejen v~řízení elektrických pohonů zvýšení výpočetního výkonu, ale také snížení energetické náročnosti.\par
-Perspektiva \gls{abbreviation:soc} a \gls{abbreviation:fpga} je podpořena jejich využíváním i mimo obor elektrických pohonů a trakce. Z~důvodu vysoké propustnosti \gls{abbreviation:fpga}, vysokých výpočetních výkonů a nízké energetické náročnosti jsou využívány v~\gls{abbreviation:ai}, machine learningu, zpracování obrazu a jiných nepohonářských aplikacích.\par
-Překážkou využití \gls{abbreviation:fpga} je jejich složitější programovatelnost z~hlediska tvoření aplikace. Aplikace je tvořena postupem, který kladne vysoké nároky na vzdělání a zkušenosti vývojářů. Většina \gls{abbreviation:fpga} je „programována“ pomocí jazyků Verilog či \gls{abbreviation:vhdl}, jejichž použití a filozofie mohou pro softwarově orientované programátory představovat značnou překážku. Proto je v~poslední době trend tvořit aplikace pomocí vyšší úrovně syntézy (\gls{abbreviation:hls}). Při použití \gls{abbreviation:hls} je možné tvořit programy ve vyšších programovacích jazycích jako je například C, C++ či Python. Vytvořený kód je přeložen do úrovně registrů (\gls{abbreviation:rtl}), která je následně syntetizována, implementována a generována do bitstreamu, který slouží ke konfiguraci cílového \gls{abbreviation:fpga} zařízení.\par
+Perspektiva \gls{abbreviation:soc} a \gls{abbreviation:fpga} je podpořena jejich využíváním i mimo obor elektrických pohonů. Z~důvodu vysoké propustnosti \gls{abbreviation:fpga}, vysokých výpočetních výkonů a nízké energetické náročnosti jsou využívány v~\gls{abbreviation:ai}, machine learningu, zpracování obrazu a jiných nepohonářských aplikacích.\par
+Náročnější postup designování logiky a algoritmů aplikací v~\gls{abbreviation:fpga} může představovat problém v~jejich implementaci. Aplikace je tvořena postupem, který kladne vysoké nároky na vzdělání a zkušenosti vývojářů. Většina \gls{abbreviation:fpga} je designována pomocí jazyků Verilog či \gls{abbreviation:vhdl}, jejichž použití a filozofie mohou pro softwarově orientované programátory představovat značnou překážku. Proto je v~poslední době trend tvořit aplikace pomocí vyšší úrovně syntézy (\gls{abbreviation:hls}). Při použití \gls{abbreviation:hls} je možné tvořit programy ve vyšších programovacích jazycích jako je například C, C++ či Python. Vytvořený kód je přeložen do úrovně registrů (\gls{abbreviation:rtl}), která je následně syntetizována, implementována a generována do bitstreamu, který slouží ke konfiguraci cílového \gls{abbreviation:fpga} zařízení.\par
 V~prvních kapitolách této práce jsou v~teoretické úrovni představeny \gls{abbreviation:soc}, \gls{abbreviation:fpga} a jejich možné využití v~pohonářských i nepohonářských aplikacích. Z~mnoha dostupných produktů na trhu byly vybrány platformy Xilinx Kria KR260 \gls{abbreviation:som} a Digilent Zybo Zynq-7000. Platformy byly vzájemně porovnány z~různých hledisek a pro demonstraci možného využití platformy pro simulaci asynchronního motoru řízeného pomocí \gls{abbreviation:foc} byla vybrána platforma Xilinx Kria KR260.\par
 V~navazujících kapitolách je čtenářovi představen postup, kterým je možné vytvořit kompletní akcelerovanou aplikaci s~použitím nástrojů \textit{PetaLinux}, Vivado a Vitis \gls{abbreviation:ide}.\par
 V~závěru práce je představena realizace akcelerované aplikace, která je schopna využívat \gls{abbreviation:spi} komunikaci s~externími zařízeními. Pro \gls{abbreviation:spi} komunikaci byl vytvořen hardware (\gls{abbreviation:hw}) přímo v~\gls{abbreviation:fpga}, který je ovládán z~prostředí (user space) aplikace. Na základě analýzy aplikace bylo vyhodnoceno, zda způsob vybrané realizace je vhodný pro provádění výpočtů v~reálném čase.
@@ -495,12 +495,12 @@ V~závěru práce je představena realizace akcelerované aplikace, která je sc
 	% Aplikace Embedded system (existují i pro mobilní aplikace, osobní počítače)
 	System on a chip (\gls{abbreviation:soc}) je struktura, využívající integrování různých prvků systému na jeden čip. Integrace prvků na jeden čip značně snižuje nároky na rozměry nosičů, na kterých jsou tyto \gls{abbreviation:soc} umístěny. Místo diskrétních čipů, obstarávající jednotlivé funkce, je využito jednoho čipu s~integrovanými prvky, které vykonávají požadované funkce.\par
 	Při integrování prvků do jedné polovodičové struktury dochází ke značnému snížení potřebných počtů kovových vodivých spojů, snížení časové náročnosti výroby a zvýšení rychlosti přenosu dat. Proto je \gls{abbreviation:soc} upřednostňováno před metalicky spojenými diskrétními prvky, vykonávající dané operace.\par
-	Označení \gls{abbreviation:soc} může představovat mnoho struktur. Obecné rozdělení, které je možné naleznout v~literatuře a veřejných zdrojích, je následující:
+	Označení \gls{abbreviation:soc} může představovat mnoho struktur. Obecné rozdělení, které je možné naleznout v~literatuře a veřejných zdrojích, je následující \cite{tomshardware-system-on-chip}:
 	\begin{itemize}
 		\item \gls{abbreviation:soc} využívající mikrokontroléru (obsahující \gls{abbreviation:cpu}, \gls{abbreviation:ram}, \gls{abbreviation:rom}),
 		\item \gls{abbreviation:soc} využívající pouze mikroprocesoru (obsahující \gls{abbreviation:cpu}, možné i \gls{abbreviation:gpu}, jádra pro specializované výpočty),
 		\item \gls{abbreviation:soc} určené pro specifické aplikace (Application Specific Integrated Circuit – \gls{abbreviation:asic}).
-	\end{itemize}\cite{tomshardware-system-on-chip}\par
+	\end{itemize}\par
 	Z~uvedených rozdělení jsou pro řízení elektrických pohonů nejvíce využívány \gls{abbreviation:soc} s~mikrokontrolérem a \gls{abbreviation:asic}.
 
 	\subsection{Application Specific Integrated Circuit}
@@ -583,7 +583,7 @@ V~závěru práce je představena realizace akcelerované aplikace, která je sc
 		\subsubsection{Generátory funkcí}\label{subsubsec:generatory-funkci}
 		Oproti předchůdcům (\gls{abbreviation:pld}), které pro generování funkcí používaly logická hradla tvořená \gls{abbreviation:cmos} tranzistory, využívají \gls{abbreviation:fpga} tzv. generátory funkcí.\par
 		Logickou funkci je možné popsat pravdivostní tabulkou, která má určitý počet vstupů a odpovídající počet výstupů. Dle \cite{Sass2010} je možné si představit, že se generátor dané funkce skládá ze samostatné statické paměti (\gls{abbreviation:sram}), jejíž výstupy jsou přímo přivedeny na vstup multiplexeru (\gls{abbreviation:mux}). Signály výběru výstupů by odpovídaly vstupním proměnným a jednotlivé vstupy do \gls{abbreviation:mux} výstupům funkce.\par
-		Pro bližší pochopení generátoru funkcí z~předchozího odstavce je možné představit realizaci smyšlené logické funkce $\text{f} (x, y, z) = \bar{x}z + y$. Pravdivostní tabulka této smyšlené logické funkce je zobrazena v~tab.~\ref{tab:fpga-pravdivostni-tabulka-smyslene-funkce-generatoru-funkci}. Odpovídající realizace pomocí \gls{abbreviation:mux} a \gls{abbreviation:sram} je zobrazena na obr. \ref{fig:fpga-function-generator}. Tato reprezentace se nazývá look-up table (\gls{abbreviation:lut}). Grafické znázornění inspirováno \cite{Sass2010}.
+		Pro bližší pochopení generátoru funkcí z~předchozího odstavce je možné představit realizaci smyšlené logické funkce $\text{f} (x, y, z) = \bar{x}z + y$. Pravdivostní tabulka této smyšlené logické funkce je zobrazena v~tab.~\ref{tab:fpga-pravdivostni-tabulka-smyslene-funkce-generatoru-funkci}. Odpovídající realizace pomocí \gls{abbreviation:mux} a \gls{abbreviation:sram} je zobrazena na obr. \ref{fig:fpga-function-generator}. Tato reprezentace se nazývá look-up table (\gls{abbreviation:lut}). Grafické znázornění je inspirováno \cite{Sass2010}.
 		
 
 	\begin{minipage}[t]{0.45\textwidth}
@@ -661,8 +661,8 @@ V~závěru práce je představena realizace akcelerované aplikace, která je sc
 			Všechny vyšší úrovně reprezentace algoritmů jsou převedeny na \gls{abbreviation:hdl}. Následným krokem je \textit{syntéza} (synthesis), která slouží k~převodu \gls{abbreviation:hdl} na tzv. \textit{netlist}. Při převodu je \gls{abbreviation:hdl} převáděn na logické členy AND, OR apod. \cite{Sass2010}\par
 			Po vytvoření netlistu je nutné rozhodnout, jakým způsobem je možné a výhodné realizovat jednotlivé bloky v~logických buňkách a \gls{abbreviation:lut}. Konečné využití členů závisí na rozsahu vstupů realizovatelných \gls{abbreviation:lut}. Proces seskupování logických členů a určování funkce \gls{abbreviation:lut} se nazývá mapování (\gls{abbreviation:map}). Výsledkem \gls{abbreviation:map} je opět netlist. Tento netlist však reprezentuje \gls{abbreviation:fpga} členy (\gls{abbreviation:lut}, klopné obvody apod.). \cite{Sass2010}\par
 			Po mapování následuje proces umisťování (placement) při kterém je rozhodováno, které z~logických bloků budou realizovat \gls{abbreviation:fpga} členy, získané v~kroku MAP. \cite{Sass2010}\par
-			Bloky, které jsou umístěny ve struktuře \gls{abbreviation:fpga} je nutné spojit pomocí dostupných propojů. Proces spojování a optimalizace propojů takovým způsobem, aby bylo minimalizováno časové zpoždění signálu, se nazývá \textit{routing}. Obvykle se proces slučuje s~\gls{abbreviation:map} do jedné fáze a nazývá se \textit{place-and-route}~(\gls{abbreviation:par}). \cite{Sass2010} \par
-			Posledním krokem je vytvoření binárního souboru, nazývaného \textit{bitstream}, kterým je poté „programováno“ \gls{abbreviation:fpga}. Tento proces převede netlist z~kroku \gls{abbreviation:par} na nastavení \gls{abbreviation:sram} v~jednotlivých logických buňkách \gls{abbreviation:fpga} tak, aby byl vytvořen požadovaný design v~\gls{abbreviation:fpga}. Proces převede konfiguraci propojů a propojovacích matic do dalších \gls{abbreviation:sram}, které ovládají příslušné propoje a matice. \cite{Sass2010}\par
+			Bloky, které jsou umístěny ve struktuře \gls{abbreviation:fpga} je nutné spojit pomocí dostupných propojů. Proces spojování a optimalizace propojů takovým způsobem, aby bylo minimalizováno časové zpoždění signálu, se nazývá \textit{routing}. Obvykle je proces slučován s~\gls{abbreviation:map} do jedné fáze a nazývá se \textit{place-and-route}~(\gls{abbreviation:par}). \cite{Sass2010} \par
+			Posledním krokem je vytvoření binárního souboru, nazývaného \textit{bitstream}, kterým je poté konfigurováno \gls{abbreviation:fpga}. Tento proces převede netlist z~kroku \gls{abbreviation:par} na nastavení \gls{abbreviation:sram} v~jednotlivých logických buňkách \gls{abbreviation:fpga} tak, aby byl vytvořen požadovaný design v~\gls{abbreviation:fpga}. Proces převede konfiguraci propojů a propojovacích matic do dalších \gls{abbreviation:sram}, které ovládají příslušné propoje a matice. \cite{Sass2010}\par
 
 			
 			\begin{figure}[htbp!]
@@ -678,7 +678,7 @@ V~závěru práce je představena realizace akcelerované aplikace, která je sc
 			% Existuje mnoho článků na téma energy/power efficiency of fpgas ale v žádném není popsáno, proč je jeho spotřeba nižší, než v CPU
 			Nižší potřebný výkon pro realizaci nepohonářské aplikace podporuje výzkum a článek \cite{rovere-sphery-vs-shapes}, ve kterém autoři představují svoji práci, v~níž realizovali hru. Ve hře je hlavním úkolem aplikace výpočet stínů a odrazů materiálů. Způsob vykreslení, který je v~aplikaci použit, je nazýván \textit{ray tracing}. Ray tracing je označován jako výpočetně náročný způsob, který není vhodný pro real-time aplikace ale pro vykreslování nepohyblivých obrazů, které není nutné zobrazovat v~reálném čase. \cite{wikipedia-ray-tracing}\par
 			% píšou jednoho jádra, ale to je divný, spíše prostě spotřeba %
-			Autoři v~textu popisují, že v~případě využití \gls{abbreviation:fpga} pro výpočty v~reálném čase byla jeho spotřeba 660~mW. Hru autoři vyzkoušeli spustit také na \gls{abbreviation:cpu} platformě skládající se z~Ryzen™️ 4900H 8-core/16 threads 64-bit CPU @ up to 4,4~GHz clock. V~případě testování na \gls{abbreviation:cpu} byla indikována spotřeba 33~W. Tudíž při použití \gls{abbreviation:fpga} spotřeba klesla přibližně 50x. \cite{rovere-sphery-vs-shapes}.\par
+			Autoři v~textu popisují, že v~případě využití \gls{abbreviation:fpga} pro výpočty v~reálném čase byla jeho spotřeba 660~mW. Hru autoři vyzkoušeli spustit také na \gls{abbreviation:cpu} platformě skládající se z~Ryzen™️ 4900H 8-core/16 threads 64-bit CPU @ up to 4,4~GHz clock. V~případě testování na \gls{abbreviation:cpu} byla indikována spotřeba 33~W. Tudíž při použití \gls{abbreviation:fpga} spotřeba klesla přibližně 50x. \cite{rovere-sphery-vs-shapes}\par
 			I~přes nízkou spotřebu energie v~\gls{abbreviation:fpga} jsou prováděny výzkumy, jak minimalizovat disipaci elektrické energie v~podobě tepla a přiblížit se tak energetické náročnosti \gls{abbreviation:asics}.\par
 			Disipace energie v~\gls{abbreviation:fpga} je rozdělena na statickou a dynamickou. Statická disipace je způsobena zbytkovým proudem tranzistorů ve vypnutém stavu mezi drain a source elektrodou, mezi gate a drain elektrodou a jevem, nazvaným gate direct-tunneling. \cite{grover-reduction-of-power-consumption}\par
 			Dynamická disipace je způsobena spínacími a vypínacími ztráty použitých tranzistorů (obvykle \gls{abbreviation:cmos}) a je závislá na použitém napětí, frekvenci a kapacitě přechodů, kterou je třeba nabít a vybít při spínání a vypínání tranzistorů. \cite{grover-reduction-of-power-consumption}
@@ -819,7 +819,7 @@ V~závěru práce je představena realizace akcelerované aplikace, která je sc
 				27 & Ethernet RJ45 Connector & komunikace\\ \hline
 				28 & Power Jack & napájení 5 V/2,5 A\\ \hline
 				29 & TX/RX \gls{abbreviation:led} & indikace \gls{abbreviation:uart} komunikace\\ \hline
-				30 & Xilinx Zynq \gls{abbreviation:soc} & srdce desky\\ \hline
+				30 & Xilinx Zynq \gls{abbreviation:soc} & systém na čipu\\ \hline
 				31 & DDR2 Memory & \gls{abbreviation:ram}\\\noalign{\hrule height 2pt}
 				\end{tabular}
 				}
@@ -956,22 +956,23 @@ V~závěru práce je představena realizace akcelerované aplikace, která je sc
 					Jak již bylo zmíněno v~sekci \hyperref[sec:vyvojova-deska-digilent-zybo]{\textit{Vývojová deska Digilent Zybo}}, \gls{abbreviation:ps} vývojové desky Digilent Zybo Zynq-7000 obsahuje dvoujádrový procesor Cortex-A9 s~taktovací frekvencí 650 MHz. Oproti tomu novější \gls{abbreviation:ps} desky s~Kria K26 \gls{abbreviation:som} obsahuje čtyřjádrový procesor Cortex®-A53 MPCore™ s~taktovací frekvencí až 1,5 GHz. \gls{abbreviation:som} je doplněn dvoujádrovým real-time procesorem Arm Cortex-R5F MPCore s~taktovací frekvencí až 600 MHz. \cite{digilent-zybo-reference-manual} \cite{kria-k26-som-ds}\par
 					Dalším důležitým faktorem jsou zdroje pro \gls{abbreviation:pl}. Digilent Zybo disponuje pouze 17 600 \gls{abbreviation:luts}. Oproti tomu K26 \gls{abbreviation:som} obsahuje 117 120 \gls{abbreviation:luts}. Novější verze Digilent Zybo desek obsahuje novější verze Zynq čipu, který nabízí také 17 600 \gls{abbreviation:luts} (Zybo Z7-10) nebo 53 200 \gls{abbreviation:luts} (Zybo Z7-20). \cite{digilent-zybo-reference-manual} \cite{kria-k26-som-ds}\par
 					Počet \gls{abbreviation:luts} v~této práci má značný vliv na možný rozsah vytvářené aplikace, která je počtem zdrojů (\gls{abbreviation:luts}, Flip-Flops, \gls{abbreviation:bram} atd.) velmi ovlivněna.\par
-					Vlivem omezených zdrojů bylo možné i přes optimalizaci C++ kódu (pro dodržení load-compute-store modelu programování \cite{vitis-unified-software-platform-documentation-2022}) akcelerované aplikace (kernelu) umístit do \gls{abbreviation:pl} v~Digilent Zybo Z7 pouze $I$-$n$ model asynchronního motoru, jehož výsledkem byl transformační úhel \gls{symbol:theta-transform-angle} a složky vektoru magnetického toku rotoru \gls{symbol:psi2alpha-beta}. Oproti tomu při využití Kria K26 \gls{abbreviation:som} je možné využít \gls{abbreviation:pl} pro výpočet $I$-$n$ modelu stroje, zjednodušeného modelu asynchronního motoru, regulátorů a invertoru.
+					Vlivem omezených zdrojů bylo možné i přes optimalizaci C++ kódu (pro dodržení load-compute-store modelu programování \cite{vitis-unified-software-platform-documentation-2022}) ukázkové akcelerované aplikace (kernelu) v~této práci umístit do \gls{abbreviation:pl} v~Digilent Zybo Z7 pouze $I$-$n$ model asynchronního motoru, jehož výsledkem byl transformační úhel \gls{symbol:theta-transform-angle} a složky vektoru magnetického toku rotoru \gls{symbol:psi2alpha-beta}. Oproti tomu při využití Kria~K26 \gls{abbreviation:som} je možné využít \gls{abbreviation:pl} pro výpočet $I$-$n$ modelu stroje, zjednodušeného modelu asynchronního motoru, regulátorů a invertoru.
 
 			\subsection{Developer Experience}
 					V~moderní době, kdy je kladen značný důraz na rychlost vývoje aplikace, je hodnotícím faktorem i developer experience (\gls{abbreviation:dx}). Tudíž jak je systém konfigurace a vytváření aplikací přívětivý pro vývojáře. U~Digilent Zybo Z7 byl používán postup vytvoření operačního systému \textit{PetaLinux} již s~pevně daným Device Tree (\gls{abbreviation:dt}), které bylo možné měnit pomocí rekonfigurace a následného opakování celého procesu tvorby systému a aplikace. To přinášelo značné časové prodlevy při ladění aplikace a vytvářeného \gls{abbreviation:pl} hardware.\par
 					Při použití Xilinx Kria K26 \gls{abbreviation:som} je možné při tvorbě systému definovat kostru \gls{abbreviation:dt} pro \gls{abbreviation:ps}, kterou je poté možné do značného rozsahu upravovat pomocí Device Tree Overlay (\gls{abbreviation:dto}). Pomocí \gls{abbreviation:dto} je možné rekonfigurovat \gls{abbreviation:ip} vytvářené v~\gls{abbreviation:pl}. Změnou v~\gls{abbreviation:dto} je možné ovlivňovat funkčnost některých \gls{abbreviation:ip} v~\gls{abbreviation:pl} při chodu operačního systému \textit{PetaLinux}. Ovšem tyto úpravy mají určitá omezení a je vhodné Device Tree vhodně nakonfigurovat již při vytváření operačního systému \textit{PetaLinux}.\par
 					Více informací o~chování a tvorbě \gls{abbreviation:dt}/\gls{abbreviation:dto}, zjištěných při realizaci této práce, je uvedeno v~části \hyperref[subsubsec:konfigurace-device-tree]{\textit{Konfigurace Device Tree}}.\par
 					Digilent pro své výrobky vytvořil „board files“ a „constraints files“, které umožňují snazší konfiguraci \gls{abbreviation:ps} a \gls{abbreviation:pl} v~prostředí Vivado. Značným přínosem jsou „constraints files“, které umožňují snazší a rychlejší mapování fyzických pinů vývojové desky k~portům, pinům a rozhraní, vytvářených ve Vivado. Pro vývojovou desku Xilinx Kria KR260 jsou v~repozitáři ve Vivado již „board files“ obsaženy. Ovšem oficiální „constraints files“ nejsou od výrobce k~dispozici. Pro mapování pinů je nutné si vyžádat dokumentaci, pomocí které je možné odvodit požadované mapování a „constrains files“ vytvořit. Potřebná dokumentace pro odvození mapování je v~souborech \cite{kria-kr260-starter-kit-cc-schematics} a \cite{kria-k26-som-xdc}.
-
+			
+			\newpage
 			\subsection{Aplikace a operační systém}\label{subsec:aplikace-a-operacni-system}
 				Aplikace pro Digilent Zybo je možné vytvářet jako \textit{Bare Metal / Standalone} nebo jako aplikace pro operační systém \textit{PetaLinux}.\par
 				Pro Xilinx Kria je možné využít \textit{Bare Metal / Standalone} přístup, \textit{PetaLinux} a také distribuci operačního systému Linux \textit{Ubuntu}. Výrobce na stránkách Wiki podpory produktů Xilinx zmiňuje, že poskytuje podporu převážně ve formě veřejného fóra na adrese \href{https://support.xilinx.com}{\textcolor{ctublue}{\textit{support.xilinx.com}}}. Oficiální podpora je vždy dostupná pro dvě poslední major verze softwarových nástrojů, které jsou součástí \textit{PetaLinux Tools} a~\textit{Xilinx~\gls{abbreviation:sdk}}. \cite{xilinx-wiki-atlassian-embedded-sw-support}\par
-				Výrobce vytvořil pro Xilinx Kria ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. V~budoucím plánu výrobce je vytvořit větší množství aplikací, které by mohly sloužit jako výchozí bod pro vývojáře a byly by umístěny~v~Kria~App~Store. \cite{xilinx-appstore-for-kria-soms}\par
+				Výrobce vytvořil pro Xilinx Kria ukázkové akcelerované aplikace, které je možné při využívání operačního systému \textit{Ubuntu} přímo stáhnout z~Kria App Store. V~plánu výrobce je vytvořit více aplikací, které by mohly sloužit jako výchozí bod pro vývojáře a byly by umístěny~v~Kria~App~Store. \cite{xilinx-appstore-for-kria-soms}\par
 				\gls{abbreviation:ps} na porovnávaných vývojových deskách podporují PREEMPT\_\gls{abbreviation:rt} Linux Patch. K~tomuto patchi ovšem Xilinx, Inc. neposkytuje žádnou oficiální podporu a je nutné získávat informace přímo od autorů projektu na Wiki stránce \cite{wiki-linux-foundation-real-time-linux} nebo z~omezené podpory pomocí fóra. Více informací o~PREEMPT\_\gls{abbreviation:rt} Linux Patch \textit{PetaLinux} je v~sekci \hyperref[subsec:real-time-linux-patch]{\textit{RealTime Linux Patch}}.
 
 \section{Zpětnovazební vektorová regulace}
-	V~této práci bude využití platformy demonstrováno pomocí realizace simulace zpětnovazebního vektorového řízení asynchronního motoru. Zadání této simulační úlohy bylo převzato z~předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
+	V~této práci bude využití platformy demonstrováno pomocí realizace simulace zpětnovazebního vektorového řízení asynchronního motoru. Zadání úlohy bylo převzato z~předmětu B1M14EPT. \cite{lipcak-bauer-ept-moodle}\par
 	Hlavním záměrem této práce není představovat princip vektorové regulace, ale je vhodné pomocí blokového schématu nastínit její princip. Na obr. \ref{fig:foc-block} je zobrazeno obecné schéma zpětnovazební vektorové regulace. Naznačeným obecným způsobem by bylo možné realizovat fyzickou regulaci s~použitím vývojové desky a potřebných prvků (\gls{abbreviation:adc}, senzorů, \dots).\par
 	Z~finančních důvodů je možné při spojení vinutí motoru do hvězdy a volby konstanty Clarkovi transformace \gls{symbol:konstanta-clarkovi-transformace-pri-wk-0} = $2/3$ měřit pouze dvě hodnoty napájecích proudů statoru motoru. Pro úplnost jsou naznačeny v~obr. \ref{fig:foc-block} všechny tři snímače. Pro měření otáčivé rychlosti motoru je možné použít inkrementální snímač a jeho výsledné impulzy zpracovávat pomocí \gls{abbreviation:ps} nebo \gls{abbreviation:pl}. Pokud by byl k~dispozici jiný druh snímače, je preferován prvek s~možností komunikace pomocí \gls{abbreviation:spi}, která splňuje požadavky na rychlé příjmání a odesílání hodnot.\par
 	V~této práci byla realizována pouze simulace jednotlivých prvků \gls{abbreviation:foc}. Upravené blokové schéma simulace je zobrazeno na obr. \ref{foc-block-colored}.\par
@@ -1318,24 +1319,24 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 		
 				\begin{figure}[htbp!]
 					\centering
-					\includegraphics[width=0.85\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-03.jpg}
+					\includegraphics[width=1\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-03.jpg}
 					\caption{Xilinx Vivado – nabídka vytváření block design.}
 					\label{fig:kr26-xilix-vivado-flow-03}
 				\end{figure}
 
 				Až po krok vytváření block designu byl postup velmi podobný pro obě představené vývojové desky. Nyní je již možné přistoupit k~vlastní tvorbě blokového designu v~kartě \textit{Diagram}.\par
-				Bloky lze přidávat znakem \texttt{+} v~aktivním okně nebo po kliknutí pravého tlačítka myši do volného prostoru v~téže okně a zvolení \textit{Add \gls{abbreviation:ip}}. Prvním krokem je přidání \gls{abbreviation:ps}, v~případě Xilinx KR26 se jedná o~\gls{abbreviation:ip} s~názvem \texttt{Zynq UltraScale+ MPSoC}. Výhoda používání Vivado je taková, že po vložení některých bloků je k~dispozici aktivace automatického propojení/nastavení některých bloků \gls{abbreviation:ip}. Po vložení \gls{abbreviation:ps} bloku je vhodné tuto automatizaci spustit pomocí aktivního odkazu, zobrazeného na kartě \textit{Diagram} v~obr. \ref{fig:kr26-xilix-vivado-flow-05}.
+				Bloky lze přidávat znakem „\texttt{+}“ v~aktivním okně nebo po kliknutí pravého tlačítka myši do volného prostoru v~téže okně a zvolení \textit{Add \gls{abbreviation:ip}}. Prvním krokem je přidání \gls{abbreviation:ps}, v~případě Xilinx KR26 se jedná o~\gls{abbreviation:ip} s~názvem \texttt{Zynq UltraScale+ MPSoC}. Výhoda používání Vivado je taková, že po vložení některých bloků je k~dispozici aktivace automatického propojení/nastavení některých bloků \gls{abbreviation:ip}. Po vložení \gls{abbreviation:ps} bloku je vhodné tuto automatizaci spustit pomocí aktivního odkazu, zobrazeného na kartě \textit{Diagram} v~obr. \ref{fig:kr26-xilix-vivado-flow-05}.
 
 				\begin{figure}[htbp!]
 					\centering
-					\includegraphics[width=0.85\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-04.jpg}
+					\includegraphics[width=1\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-04.jpg}
 					\caption{Xilinx Vivado – vložení \gls{abbreviation:ps} \gls{abbreviation:ip} bloku.}
 					\label{fig:kr26-xilix-vivado-flow-04}
 				\end{figure}
 
 				\begin{figure}[htbp!]
 					\centering
-					\includegraphics[width=0.85\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-05.jpg}
+					\includegraphics[width=1\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-05.jpg}
 					\caption{Xilinx Vivado – automatické propojení pro \gls{abbreviation:ps}.}
 					\label{fig:kr26-xilix-vivado-flow-05}
 				\end{figure}
@@ -1383,14 +1384,14 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 
 				\begin{figure}[htbp!]
 					\centering
-					\includegraphics[width=0.75\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-10.jpg}
+					\includegraphics[width=0.85\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-10.jpg}
 					\caption{Xilinx Vivado – nastavení bloku \gls{abbreviation:axi} Interrupt Controller.}
 					\label{fig:kr26-xilix-vivado-flow-10}
 				\end{figure}
 
 				\begin{figure}[htbp!]
 					\centering
-					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-12.jpg}
+					\includegraphics[width=1\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-12.jpg}
 					\caption{Xilinx Vivado – block design po automatizaci a propojení bloku \gls{abbreviation:axi} Interrupt Controller.}
 					\label{fig:kr26-xilix-vivado-flow-12}
 				\end{figure}
@@ -1402,14 +1403,14 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 
 				\begin{figure}[htbp!]
 					\centering
-					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-29.jpg}
+					\includegraphics[width=0.85\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-29.jpg}
 					\caption{Xilinx Vivado – nastavení bloku Slice pro odstranění dvou horních bitů signálu.}
 					\label{fig:kr26-xilix-vivado-flow-29}
 				\end{figure}
 
 				\begin{figure}[htbp!]
 					\centering
-					\includegraphics[width=0.95\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-31.jpg}
+					\includegraphics[width=1\textwidth]{src/png/kr26-xilinx-vivado-flow/kr26-xilix-vivado-flow-31.jpg}
 					\caption{Xilinx Vivado – minimální funkční design s~výstupním pinem pro řízení ventilátoru.}
 					\label{fig:kr26-xilix-vivado-flow-31}
 				\end{figure}
@@ -1533,7 +1534,7 @@ Main menu -> CPU power Management -> CPU Frequency Scaling < >\end{lstlisting}
 
 				\fbar
 				Po úspěšné konfiguraci \gls{abbreviation:io} je možné přistoupit ke kartě \textit{\gls{abbreviation:ps}-\gls{abbreviation:pl} Configuration} a v~záložce \textit{General -> Fabric Reset Enable} povolit \textit{Fabric Reset Enable} a zvolit v~nabídce \textit{Number of Fabric Resets} číslo 4.\par
-				Toto nastavení \textit{Number of Fabric Resets} udává, kolik signálů je možné použít pro reset \gls{abbreviation:pl} \gls{abbreviation:ip} bloků. \cite{xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide} \cite{xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution}\par
+				Nastavení \textit{Number of Fabric Resets} udává, kolik signálů je možné použít pro reset \gls{abbreviation:ip} bloků realizovaných v~\gls{abbreviation:pl}. \cite{xilinx-ultra-scale-plus-mpsoc-processing-syste-product-guide} \cite{xilinx-wiki-atlassian-zynq-ultra-scale-plus-mpsoc-restart-solution}\par
 
 				V~předchozích krocích byla představena základní konfigurace \gls{abbreviation:ps} pro funkčnost periferií, přítomných na vývojové desce Xilinx Kria KR260 s~\texttt{Zynq UltraScale+ MPSoC}. Po provedení konfigurace je možné v~konfigurační nabídce \gls{abbreviation:ps} \gls{abbreviation:ip} v~kartě \textit{\gls{abbreviation:ps} UltraScale+ Block Design} pozorovat u~konfigurovaných prvků označení pomocí „$\checkmark$“ symbolu. Ukázka systému je zobrazena na obr. \ref{fig:kr26-xilix-vivado-flow-28}.
 
@@ -1645,7 +1646,7 @@ Image Packaging Configuration -> Copy final images to tftpboot < >\end{lstlistin
 
 \begin{figure}[htbp!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{src/jpg/terminal-petalinux-config-crop.jpg}
+	\includegraphics[width=1\textwidth]{src/jpg/terminal-petalinux-config-crop.jpg}
 	\caption{Xilinx Vivado – snímek obrazovky konfigurace PetaLinux pomocí „petalinux-config“ příkazu.}
 	\label{fig:terminal-petalinux-config}
 \end{figure}
@@ -2016,6 +2017,7 @@ Aplikaci a bitstream které jsou aktuálně načtené je možné spustit i mimo 
 
 \section{Vytvořená aplikace}\label{sec:vytvorena-aplikace}
  V~této části je představena vytvořená aplikace pro \gls{abbreviation:ps} a akcelerovaná aplikace pro \gls{abbreviation:pl}. Shodnocení výsledků aplikací je uvedeno v~sekci \hyperref[sec:poznatky-ziskane-profilovanim-aplikaci]{\textit{Poznatky získané profilováním aplikací}}.\par
+ Hlavním cílem této práce bylo představit možnosti využití platformy pro řízení elektrického pohonu nebo systém \gls{abbreviation:hil}. Proto jednotlivé ukázkové podaplikace reprezentují části a algoritmy, které by bylo možné využít při realizaci skutečného připojení platformy k~řízenému pracovišti.\par
  % přidat odkaz na místo, kde budou časové výsledky, ukázky z vitis analyzéru apod.
  Aby bylo možné představit jednotlivé funkce, které by byly používány při řízení elektrického pohonu, je ukázková aplikace rozdělena do pěti větví, které je možné vybrat po spuštění aplikace. Je nutné podotknout, že větev \texttt{PRELOADED DATA} bylo nutné realizovat do zvláštní aplikace, protože současné vkládání všech vytvořených kernelů do bitstreamu by vyžadovalo příliš mnoho resources (např. \gls{abbreviation:fifo}). Aby bylo možné všechny větve aplikace realizovat s~pomocí pouze jednoho bitstreamu, bylo by nutné podrobit algoritmus kernelu další optimalizaci.\par
  Základních pět větví ukázkové aplikace a jejich vztahy k~celkovému běhu programu jsou zobrazeny na obr. \ref{fig:application-overview}.
@@ -2223,6 +2225,7 @@ time,psi2Amplitude,transformAngle
 
 	   \fbar
 	   \subsection{SPI}\label{subsec:spi}
+	   Pro potencionální komunikaci s~externími jednotkami v~reálné aplikaci bylo zvoleno \gls{abbreviation:spi} rozhraní. \gls{abbreviation:spi} bylo zvoleno, protože je využíváno externími jednotkami jako jsou \gls{abbreviation:adc}, \gls{abbreviation:dac}. Tyto jednotky jsou schopny díky \gls{abbreviation:spi} komunikovat s~řídící platformou téměř v~reálném čase.\par
 	   Část aplikace, která prezentuje funkčnost \gls{abbreviation:spi} komunikace není oproti předchozím podaplikacím akcelerována. Tudíž nevyužívá akcelerované funkce (kernelu) pro urychlení výpočtů. Využívá však \gls{abbreviation:pl}, ve kterém byl vytvořen \gls{abbreviation:ip} blok \textit{\gls{abbreviation:axi} Quad \gls{abbreviation:spi}}, který umožňuje \gls{abbreviation:spi} komunikaci. Tento blok způsobí vytvoření adres pamětí, které je možní z~userspace programu nebo běhu \textit{PetaLinux} systému adresovat.\par
 	   Jiná možná realizace \gls{abbreviation:spi} komunikace by byla pomocí \gls{abbreviation:spi} driveru v~\gls{abbreviation:ps}, který by bylo nutné aktivovat při tvorbě \textit{PetaLinux} systému.\par
 	   Je důležité zmínit, že nakonfigurované parametry bloku \textit{\gls{abbreviation:axi} Quad \gls{abbreviation:spi}} lze změnit pouze ve Vivado, tudíž je důležité při tvorbě \gls{abbreviation:hw} platformy již znát požadavky zařízení, se kterými bude aplikace komunikovat. Tyto parametry jsou délka přenášené zprávy nebo frekvenci signálu \texttt{\gls{abbreviation:clk}}.\par
@@ -2251,43 +2254,84 @@ time,psi2Amplitude,transformAngle
 #define SPI_IPIER 0x28\end{lstlisting}
 
 	Jak je možné na názorném vývojovém diagramu \ref{fig:spi} pozorovat, je pro zvýšení bezpečnosti programu využito mapování pouze potřebné části \gls{abbreviation:hw} registrů. K~mapování do uživatelského prostředí dochází pomocí \gls{abbreviation:uio} zařízení a \texttt{mmap} funkce. V~\gls{abbreviation:dt} jednotky je využit \textit{generic-uio} driver, díky kterému je možné pozorovat vzniklá přerušení od \gls{abbreviation:spi} a tyto přerušení také znovu povolovat pomocí acknowledge operace. Autor zatím nenašel způsob, pomocí něhož by bylo možné vykonat acknowledge přerušení v~\textit{PetaLinux}, pokud by bylo využito výchozích driverů \gls{abbreviation:spi} jednotky.\par
-	Po provedení mapování adres registrů do userspace pomocí funkce \texttt{initializeSPI()} (jejíž algoritmus je zobrazen v~kódu \ref{lst:initialize-spi}) následuje inicializace jednotky, se kterou aplikace má komunikovat. Pokud by se jednalo o~skutečnou aplikaci pro řízení elektrického pohonu, aplikace by komunikovala nejspíše s~analogově-digitálními převodníky. Pokud by se jednalo o~aplikaci \gls{abbreviation:hil}, nejspíše by aplikace komunikovala s~digitálně-analogovými převodníky. V~této práci je realizována pouze komunikace s~jednotkou \textit{MAX7219}, která je připojena k~\gls{abbreviation:led} matici. Z~toho důvodu je po inicializaci \gls{abbreviation:spi} jednotky třeba inicializovat jednotku \textit{MAX7219} a nejlépe zajistit, aby po její inicializaci došlo ke zhasnutí všech diod na matici. Tyto kroky jsou provedeny pomocí funkcí \texttt{initializeLEDMatrix()} a \texttt{clearLEDmatrix()}. Kód funkcí je součástí souborů, jež jsou přílohou této práce.\par
-	Po inicializaci je možné pomocí proměnné \texttt{dataTransfer} vybrat ze dvou testovacích módů. Mód při \texttt{dataTransfer == 0} je určen pro manuální odesílání zpráv pomocí \gls{abbreviation:spi} jednotky, mód kdy platí \texttt{dataTransfer == 1} odešle předem definované zprávy.\par
+	Po provedení mapování adres registrů do userspace pomocí funkce \texttt{initializeSPI()} (jejíž algoritmus je zobrazen v~kódu \ref{lst:initialize-spi}) následuje inicializace jednotky, se kterou aplikace má komunikovat. Pro ukázku využití \gls{abbreviation:spi} komunikace s~externím prvkem byla realizována komunikace s~jednotkou \textit{MAX7219}, připojenou na LED matici 8x8. Pokud by se jednalo o~aplikaci v~produkčním prostředí elektrických pohonů, probíhala by komunikace nejspíše s~analogově-digitálními převodníky, digitálně-analogovými převodníky, či jinými dostupnými jednotkami.\par
+	V~ukázkové aplikaci je odeslána sekvence dat do \textit{MAX7219} která zajistí, aby po její inicializaci došlo ke zhasnutí všech diod na matici. Tyto kroky jsou provedeny pomocí funkcí \texttt{initializeLEDMatrix()} a \texttt{clearLEDmatrix()}. Kód funkcí je součástí souborů, jež jsou přílohou této práce.\par
+	Po inicializaci je možné pomocí proměnné \texttt{dataTransfer} vybrat ze dvou testovacích módů. Mód při \texttt{dataTransfer == 0} je určen pro manuální odesílání zpráv pomocí \gls{abbreviation:spi} jednotky, mód kdy platí \texttt{dataTransfer == 1} odešle předem definované zprávy.\par Ukázka testovacího zapojení vývojové platformy s~jednotkou \textit{MAX7219} je uvedena v~části \hyperref[subsubsec:zapojeni-pro-testovani-spi-komunikace]{\textit{Zapojení pro testování SPI komunikace}}\par
 	Před ukončením aplikace jsou odmapovány \gls{abbreviation:hw} paměti a je uzavřeno \gls{abbreviation:uio} zařízení.
 
+	\begin{lstlisting}[language={c++}, caption={Algoritmus inicializace \gls{abbreviation:axi} Quad \gls{abbreviation:spi} jednotky v~C++.}, label={lst:initialize-spi}]
+		/*
+		 * @name     initializeSPI
+		 * @brief    Initialize SPI communication in PL for desired slave and mapped device.
+		 * @todo     Implement interrupt and delete sleep_for...
+		 */
+		void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
+		{
+			*((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
+		
+			*((unsigned *)(ptr + SPI_DTR)) = 0x06;
+		
+			*((unsigned *)(ptr + SPI_SPISSR)) = 0x00;
+		
+			*((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
+		
+			*((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
+		
+			// Interrupt settings
+			// Global Interrupt Enable
+			*((unsigned *)(ptr + SPI_DGIER)) = 0x80000000;
+		
+			// Interrupt enables
+			// *((unsigned *)(ptr + SPI_IPIER)) = 0x3FFF;               // enabling all interrupts
+			*((unsigned *)(ptr + SPI_IPIER)) = 0x4; // enabling only DTR is clear INT
+		
+			off_t interruptStatus;
+		
+			interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
+			std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
+			*((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;       // resetting SPI interrupt status register
+		}\end{lstlisting}
+		
+	
+	
+	\subsubsection{Zapojení pro testování SPI komunikace}\label{subsubsec:zapojeni-pro-testovani-spi-komunikace}
+	Jak již bylo zmíněno v~předchozích částech textu, v~této práci je realizována ukázka využití \gls{abbreviation:spi} komunikace s~pomocí obvodu \textit{MAX7219}, který je připojen k~\gls{abbreviation:led} matici.
+	Obvod \textit{MAX7219} vyžaduje napájecí napětí v~rozmezí 4~V~až 5~V. Výstupní napětí \gls{abbreviation:pmod} konektorů, dostupných na vývojové desce Kria~KR260, je pouze 3,3~V. Aby bylo možné tento obvod využít k~demonstraci funkce \gls{abbreviation:spi}, je pro připojení \gls{abbreviation:pmod} konektorů k~obvodu \textit{MAX7219} využit převodník úrovní. Zapojení pro testování \gls{abbreviation:spi} komunikace je zobrazeno na obr. \ref{fig:spi-test-connection}.\par
 
-\begin{lstlisting}[language={c++}, caption={Algoritmus inicializace \gls{abbreviation:axi} Quad \gls{abbreviation:spi} jednotky v~C++.}, label={lst:initialize-spi}]
-/*
- * @name     initializeSPI
- * @brief    Initialize SPI communication in PL for desired slave and mapped device.
- * @todo     Implement interrupt and delete sleep_for...
- */
-void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
-{
-    *((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
 
-    *((unsigned *)(ptr + SPI_DTR)) = 0x06;
 
-    *((unsigned *)(ptr + SPI_SPISSR)) = 0x00;
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=1\textwidth]{src/pdf/spi-test-connection.pdf}
+		\caption{Názorné schéma připojení \gls{abbreviation:pmod}3 Xilinx Kria KR260 k~\gls{abbreviation:led} Matici s~obvodem MAX7219.}
+		\label{fig:spi-test-connection}
+	\end{figure}
 
-    *((unsigned *)(ptr + SPI_SPISSR)) = slaveSelect;
 
-    *((unsigned *)(ptr + SPI_SPICR)) = 0x1E6;
 
-    // Interrupt settings
-    // Global Interrupt Enable
-    *((unsigned *)(ptr + SPI_DGIER)) = 0x80000000;
+	\fbar
+	V~rámci prozkoumávání funkčnosti \gls{abbreviation:spi} komunikace byly pomocí osciloskopu zaznamenány oscilogramy pro signály \textcolor{ctublue}{\gls{abbreviation:clk}} a \textcolor{ctured}{\gls{abbreviation:mosi}}.\par
+	Na grafu \ref{fig:clk-data-full-graph} je možné pozorovat průběhy obou signálů a jejich vzájemnou závislost. Je vidět, že náběžná hrana signálu \gls{abbreviation:mosi} začíná před náběžnou hranou \gls{abbreviation:clk}. Tato souslednost je vytvořena z~důvodu, aby již v~okamžiku, kdy vzniká náběžná hrana \textcolor{ctublue}{\gls{abbreviation:clk}} signálu, byla úroveň signálu \textcolor{ctured}{\gls{abbreviation:mosi}} ustálená na odpovídající hodnotě (3,3~V~nebo 0~V).\par
+	Na obou signálech je vidět, že nedochází při náběžné hraně k~dosáhnutí přesně úrovně 3,3~V, ale k~překmitnutí hodnoty až na úroveň téměr 4,384~V. Při sestupné hraně dochází k~podkmitnutí hodnoty 0~V~na hodnotu -0,855~V. V~případě komunikace s~některými prvky nejsou tyto překmity žádoucí a bylo by třeba provést kroky k~jejich odstranění. Důvod nedodržení úrovní by bylo vhodné více prozkoumat, ovšem tento úkol by byl nad rámec této práce a je možné mu věnovat úsilí v~nadcházejících pracích.\par
+	V~okamžiku neodesílání \textcolor{ctured}{\gls{abbreviation:mosi}} bylo pomocí oscilogramu \ref{fig:clk-data-full-graph} zjištěno, že se v~signálu objevuje šum v~napěťovém rozmezí přibližně -0,200~V~až 0,170~V. Po ukončení přenosu signálu \textcolor{ctublue}{\gls{abbreviation:clk}} je úroveň šumu již značně nižší. Je tudíž možné předpokládat, že rušení je způsobeno šířením elektromagnetického pole vodiče, přenášejícího \textcolor{ctublue}{\gls{abbreviation:clk}} signál, prostorem kolem vodiče, který nezaručuje dostatečné odstínění možného \gls{abbreviation:emc} rušení.
 
-    // Interrupt enables
-    // *((unsigned *)(ptr + SPI_IPIER)) = 0x3FFF;               // enabling all interrupts
-    *((unsigned *)(ptr + SPI_IPIER)) = 0x4; // enabling onty DTR is clear INT
 
-    off_t interruptStatus;
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=1\textwidth]{src/python-graph/spi-osciloscope-data/pdf/clk-data-full-graph.pdf}
+		\caption{Oscilogram znázorňující časové průběhy \gls{abbreviation:spi} komunikace – 10 MHz \gls{abbreviation:clk} signál a \gls{abbreviation:mosi} signál přenášející data 0x10000001.}
+		\label{fig:clk-data-full-graph}
+	\end{figure}
 
-    interruptStatus = *((unsigned *)(ptr + SPI_IPISR));
-    std::this_thread::sleep_for(std::chrono::nanoseconds(1)); // could not resolve other way now, because reading and writing to register takes more time that one tick probably
-    *((unsigned *)(ptr + SPI_IPISR)) = interruptStatus;       // resetting SPI interrupt status register
-}\end{lstlisting}
+
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=1\textwidth]{src/python-graph/spi-osciloscope-data/pdf/clk-mid-graph.pdf}
+		\caption{Oscilogram znázorňující detail časového průběhu \gls{abbreviation:spi} komunikace – 10 MHz \gls{abbreviation:clk} signál.}
+		\label{fig:clk-mid-graph}
+	\end{figure}
+
+	
 
 	\fbar
 	\subsection{Timer Thread}
@@ -2365,8 +2409,8 @@ void spiClass::initializeSPI(void *ptr, off_t slaveSelect)
 			   // *((unsigned *)(timer1ptr + 0x4)) = 0xE8287BFF;
 			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFFF37;
 			   *((unsigned *)(timer1ptr + 0x4)) = 0xFFFFF82F; // 10 us
-			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5
-s~*((unsigned *)(timer1ptr)) = 0XE0;
+			   // *((unsigned *)(timer1ptr + 0x4)) = 0xFA0A1EFF; // 0.5s
+			   *((unsigned *)(timer1ptr)) = 0XE0;
 		   
 			   // one tick is 0.8 ns, have to wait till data is moved to counter register
 			   // otherwise it wont start, solve maybe later or ask about it
@@ -2501,7 +2545,7 @@ float psi2betaFce(float R2MLmDL2, float R2DL2, float i1alpha, float i1beta, floa
 				y_{i(n+1)} = y_{i n} + \frac{k_{i 1}}{6} + \frac{k_{i 2}}{3} + \frac{k_{i 3}}{3} + \frac{k_{i 4}}{6} + O(h^{5}),
 			\end{gathered}
 		\end{equation}
-		kde \gls{symbol:h} značí krok metody, index $i$ označuje pořadí proměnné, pro kterou je uvedena skladba rovnic.\par
+		kde \gls{symbol:h} značí krok metody, index $i$ označuje pořadí proměnné pro kterou je uvedena skladba rovnic.\par
 
 		\subsubsection{Implementace regulátorů}
 			V~kernelu byly implementovány \gls{abbreviation:pi} regulátory se strukturou naznačenou na obr. \ref{fig:regulator-scheme}. Pro omezení wind-up efektu byl použit princip \textit{clamping}.\par
@@ -2571,52 +2615,19 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 	Na obr. \ref{fig:workspace-scheme} je zobrazeno blokové schéma pracoviště, které bylo vytvořeno v~rámci této práce a slouží k~vývoji akcelerovaných aplikací.\par
 	Blok \textit{\gls{abbreviation:pc}} představuje osobní počítač, který slouží k~přístupu k~pracovišti a je propojeno s~vývojovou deskou KR260 pomocí \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} spojení, které je vhodné v~případě, že nedošlo k~inicializaci ethernet adaptéru. Vývojová deska je pomocí adaptéru \textit{eth0} připojena do switche na pracovišti, ke kterému je uživatelský počítač také připojen. Pomocí \textcolor{ctublue}{modrého značení} jsou do switche připojeny také bloky \textcolor{ctuorange}{development machine}. Fyzicky se jedná o~připojení serveru pomocí adaptéru \textit{eno2}, který je umístěn ve fakultním datacentru. Tímto způsobem je vytvořena virtuální síť, která je využívána pouze pro komunikaci mezi zařízeními vývojového pracoviště.\par
 	Připojení serveru pomocí adaptéru \textit{eno1} do externí sítě \textcolor{ctugreenyblue}{Ethernet (world)} přináší krom možnosti vzdáleného přístupu do virtualizovaného zařízení v~hypervisoru Proxmox \gls{abbreviation:ve} také možnost vzdáleného přístupu do sítě \textcolor{ctublue}{Ethernet (private)}. Využití serveru pro tvorbu aplikací bylo zvoleno z~důvodu výkonové a časové náročnosti tvoření \textit{PetaLinux} systému, \gls{abbreviation:hw} designu ve Vivado a tvoření bitstreamu ve Vitis \gls{abbreviation:ide}. Díky vzdáleným přístupům je možné pracovat na vývoji i mimo laboratoř. Protože v~některých případech při restartování vývojové desky nedochází ke správné inicializaci adaptéru \textit{eth0}, je v~navazující práci plánováno připojit vývojovou desku k~\gls{abbreviation:sbc} (single board computer) pomocí \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} rozhraní a \gls{abbreviation:sbc} připojit do \textcolor{ctublue}{Ethernet (private)}. K~vývojové desce bude možné přistupovat cestou \textcolor{ctugreenyblue}{Ethernet (world)} -> \textcolor{ctuorange}{development machine} -> \textcolor{ctublue}{Ethernet (private)} -> \gls{abbreviation:pcb} -> \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} -> Kria KR260. Toto fyzické spojení umožní přístup ke K26 pomocí \textit{minicom}. Po přípojení bude možní provést manuální inicializaci adaptéru po restartování vývojové desky.\par
-	Protože obvod \textit{MAX7219} s~\gls{abbreviation:led} maticí vyžaduje napájení v~rozmezí 4~V~až 5~V~a výstupy \gls{abbreviation:pmod} dodávají napětí pouze 3,3~V, je třeba pro napájení testovacího rozhraní využít externího zdroje. V~této práci byla pro napájení obvodu využita deska Arduino UNO, která je napájena z~\gls{abbreviation:usb} rozhraní uživatelského počítače. Volba tohoto napájení byla vybrána z~důvodu jednoduchosti a dostupnosti. Provedení testovacího zapojení \gls{abbreviation:spi} komunikace je znázorněno v~části \hyperref[subsec:spi-komunikace]{\textit{SPI komunikace}}.\par
+	Protože ukázka využití \gls{abbreviation:spi} komunikace je realizována pomocí obvodu \textit{MAX7219} s~\gls{abbreviation:led} maticí, který vyžaduje napájení v~rozmezí 4~V~až 5~V~a výstupy \gls{abbreviation:pmod} dodávají napětí pouze 3,3~V, je třeba pro napájení testovacího rozhraní využít externího zdroje. V~této práci byla pro napájení obvodu využita deska Arduino UNO, která je napájena z~\gls{abbreviation:usb} rozhraní uživatelského počítače. Volba tohoto napájení byla vybrána z~důvodu jednoduchosti a dostupnosti. Provedení zapojení pro testování \gls{abbreviation:spi} komunikace je znázorněno v~části \hyperref[subsubsec:zapojeni-pro-testovani-spi-komunikace]{\textit{Zapojení pro testování SPI komunikace}}.\par
 	Představená architektura pracoviště byla tvořena tak, aby nebylo problematické ji rozšiřovat o~další prvky a umožňovala vzdálený přístup s~podporou více aktivních uživatelů v~jeden okamžik.
 
 
 \begin{figure}[htbp!]
 	\centering
-	\includegraphics[width=1\textwidth]{src/pdf/workspace-scheme.pdf}
+	\includegraphics[width=0.95\textwidth]{src/pdf/workspace-scheme.pdf}
 	\caption{Blokové schéma uspořádání vývojového pracoviště.}
 	\label{fig:workspace-scheme}
 \end{figure}
 
 	\fbar
-	\subsection{SPI komunikace}\label{subsec:spi-komunikace}
-	V~částech \hyperref[subsec:spi]{\textit{SPI}} a \hyperref[subsubsec:thread-loop]{\textit{Thread Loop}} je představen způsob využití \gls{abbreviation:ip} bloku \gls{abbreviation:axi} Quad \gls{abbreviation:spi}. Pomocí tohoto bloku je možné provádět komunikaci s~externími zařízeními. Pokud by se jednalo o~skutečnou aplikaci pro řízení elektrického pohonu, byly by jako externí zařízení použity \gls{abbreviation:adc} a \gls{abbreviation:dac}. Pro ukázku funkčnosti \gls{abbreviation:spi} komunikace byl využit prvek \textit{MAX7219}, který vyžaduje napájecí napětí v~rozmezí 4~V~až 5~V. Jak již bylo v~části \hyperref[sec:popis-pracoviste]{\textit{Popis pracoviště}} uvedeno, výstupní napětí \gls{abbreviation:pmod} konektorů je pouze 3,3~V. Aby bylo možné tento obvod využít k~demonstraci funkce \gls{abbreviation:spi}, je pro připojení \gls{abbreviation:pmod} konektorů k~obvodu \textit{MAX7219} využit převodník úrovní. Zapojení pro testování \gls{abbreviation:spi} komunikace je zobrazeno na obr. \ref{fig:spi-test-connection}.\par
-
-
-
-	\begin{figure}[htbp!]
-		\centering
-		\includegraphics[width=1\textwidth]{src/pdf/spi-test-connection.pdf}
-		\caption{Názorné schéma připojení \gls{abbreviation:pmod}3 Xilinx Kria KR260 k~\gls{abbreviation:led} Matici s~obvodem MAX7219.}
-		\label{fig:spi-test-connection}
-	\end{figure}
-
-	\begin{figure}[htbp!]
-		\centering
-		\includegraphics[width=1\textwidth]{src/python-graph/spi-osciloscope-data/pdf/clk-data-full-graph.pdf}
-		\caption{Oscilogram znázorňující časové průběhy \gls{abbreviation:spi} komunikace – 10 MHz \gls{abbreviation:clk} signál a \gls{abbreviation:mosi} signál přenášející data 0x10000001.}
-		\label{fig:clk-data-full-graph}
-	\end{figure}
-
-
-	\begin{figure}[htbp!]
-		\centering
-		\includegraphics[width=1\textwidth]{src/python-graph/spi-osciloscope-data/pdf/clk-mid-graph.pdf}
-		\caption{Oscilogram znázorňující detail časového průběhu \gls{abbreviation:spi} komunikace – 10 MHz \gls{abbreviation:clk} signál.}
-		\label{fig:clk-mid-graph}
-	\end{figure}
-
-
-	\fbar
-	V~rámci prozkoumávání funkčnosti \gls{abbreviation:spi} komunikace byly pomocí osciloskopu změřeny oscilogramy pro signály \textcolor{ctublue}{\gls{abbreviation:clk}} a \textcolor{ctured}{\gls{abbreviation:mosi}}.\par
-	Na grafu \ref{fig:clk-data-full-graph} je možné pozorovat průběhy obou signálů a jejich vzájemnou závislost. Je vidět, že náběžná hrana signálu \gls{abbreviation:mosi} začíná před náběžnou hranou \gls{abbreviation:clk}. Tato souslednost je vytvořena z~důvodu, aby již v~okamžiku, kdy vzniká náběžná hrana \textcolor{ctublue}{\gls{abbreviation:clk}} signálu, byla úroveň signálu \textcolor{ctured}{\gls{abbreviation:mosi}} ustálená na odpovídající hodnotě (3,3~V~nebo 0~V).\par
-	Na obou signálech je vidět, že nedochází při náběžné hraně k~dosáhnutí přesně úrovně 3,3~V, ale k~překmitnutí hodnoty až na úroveň téměr 4,384~V. Při sestupné hraně dochází k~podkmitnutí hodnoty 0~V~na hodnotu -0,855~V. V~případě komunikace s~některými prvky nejsou tyto překmity žádoucí a bylo by třeba provést kroky k~jejich odstranění. Důvod nedodržení úrovní by bylo vhodné více prozkoumat, ovšem tento úkol by byl nad rámec této práce a je možné mu věnovat úsilí v~nadcházejících pracích.\par
-	V~okamžiku neodesílání \textcolor{ctured}{\gls{abbreviation:mosi}} bylo pomocí oscilogramu \ref{fig:clk-data-full-graph} zjištěno, že se v~signálu objevuje šum v~napěťovém rozmezí přibližně -0,200~V~až 0,170~V. Po ukončení přenosu signálu \textcolor{ctublue}{\gls{abbreviation:clk}} je úroveň šumu již značně nižší. Je tudíž možné předpokládat, že rušení je způsobeno šířením elektromagnetického pole vodiče, přenášejícího \textcolor{ctublue}{\gls{abbreviation:clk}} signál, prostorem kolem vodiče, který nezaručuje dostatečné odstínění možného \gls{abbreviation:emc} rušení.
-
+	
 	\fbar
 \section{Poznatky získané profilováním aplikací}\label{sec:poznatky-ziskane-profilovanim-aplikaci}
 % je třeba zas využít xrt_coreutil a měření pomocí přidání kódu do aplikace, ale asi nebude možné používat na celých 1M dat, vyřešit a přidat možnost ovládat počet iterací
@@ -2686,7 +2697,7 @@ V~této sekci budou představeny výsledky a poznatky ohledně vytvořených apl
 	\subsection{CPU/FPGA}\label{subsec:poznatky-ziskane-profilovanim-aplikaci-cpu-fpga}
 		Aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA}} nebylo možné v~její původní verzi analyzovat. V~případě, že byla aplikace spuštěna pro 1 M \gls{abbreviation:sh} (1 M souborů hodnot), aplikace běžela, ale nedokončila se v~definovaném čase a byla \textit{PetaLinux} systémem automaticky ukončena. Tato situace vzniká nejspíše vlivem toho, že systém není schopen při takovém množství iterací spuštění kernelu ukládat soubory a hodnoty analýzy. V~některých případech byla systémem zobrazena hláška \textit{Killed}. V~původním systému, \textit{PetaLinux} bez aplikovaného \gls{abbreviation:rt} patche, aplikace nebyla nikdy dokončena akceptovatelným způsobem. Z~udaných důvodů vyplývá, že je vhodné analyzovat tuto aplikaci na menším \gls{abbreviation:sh}. Analýza byla provedena pro 1000 \gls{abbreviation:sh} a 100 \gls{abbreviation:sh}.\par
 		V~tabulce \ref{tab:vybrane-hodnoty-behu-kernelu-v-podaplikaci-cpu-fpga} jsou uvedeny výsledky daných běhů programu. Protože je aplikace postavena na iteracích spouštění kernelu a nikoliv na iteracích algoritmu uvnitř kernelu, je možné pozorovat odlišené výsledky, než které byly zjištěny u~aplikace \hyperref[subsec:poznatky-ziskane-profilovanim-aplikaci-preloaded-data-legacy-application]{\textit{Preloaded Data – Legacy Application}}. V~aplikaci \hyperref[subsec:cpu-fpga]{\textit{CPU/FPGA}} nedochází při zvýšení počtu \gls{abbreviation:sh} ke snížení doby potřebné na jednu iteraci běhu kernelu.\par
-		Ve stávající architektuře aplikace dochází k~přesunu dat mezi \texttt{ krnl\_calculateCurVelModel} a \texttt{krnl\_calculateInvMot} pomocí \gls{abbreviation:ps}. Architektura kernelů a \gls{abbreviation:ps} je zobrazena na obr. \ref{fig:rt-system-diagram-crop}. Tento přenos dat představuje další instrukce, které je nutné vykonávat a může způsobit zpoždění běhu aplikace. Z~toho důvodu je vhodné v~nadcházejících pracích analyzovat architekturu, kdy dochází k~přenosu dat mezi jednotlivými kernely napřímo pomocí streamingu dat. Tento způsob je představen firmou Xilinx v~\cite{xilinx-github-vitis-accel-examples-stream-free-running-kernel}.\par
+		Ve stávající architektuře aplikace dochází k~přesunu dat mezi \texttt{ krnl\_calculateCurVelModel} a \texttt{krnl\_calculateInvMot} pomocí \gls{abbreviation:ps}. Architektura kernelů a \gls{abbreviation:ps} je zobrazena na obr. \ref{fig:rt-system-diagram-crop}. Tento přenos dat představuje další instrukce, které je nutné vykonávat a může způsobit zpoždění běhu aplikace. Z~toho důvodu je vhodné v~nadcházejících pracích analyzovat architekturu, kdy dochází k~přenosu dat mezi jednotlivými kernely napřímo pomocí streamingu dat. Tento způsob přenosu dat je představen firmou Xilinx v~\cite{xilinx-github-vitis-accel-examples-stream-free-running-kernel}.\par
 		Doby, potřebné na výpočet jedné \gls{abbreviation:sh}, které je možné vyčíst z~tabulky \ref{tab:vybrane-hodnoty-behu-kernelu-v-podaplikaci-cpu-fpga}, a doby, které byly získány pomocí profilování aplikace naznačují, že tento způsob tvorby akcelerovaných aplikací není vhodný pro řízení elektrických pohonů nebo pro realizaci \gls{abbreviation:hil}. Vhodnějším přístupem, který je vhodné zvolit a prozkoumat, je využití programu Vitis \gls{abbreviation:hls} pro tvorbu \gls{abbreviation:ip}, které budou integrovány do \gls{abbreviation:pl} v~programu Vivado. Realizované algoritmy v~\gls{abbreviation:ip} budou nezávislé na \gls{abbreviation:ps} a budou se chovat, jako kdyby byly realizovány v~samostatném \gls{abbreviation:fpga}. Tento způsob realizace by měl splňovat požadavky na dobu zpracování požadovaných \gls{abbreviation:sh}, která bývá v~některých aplikacích menší než 5 $\mu$s.
 
 
@@ -2773,12 +2784,12 @@ V~této sekci budou představeny výsledky a poznatky ohledně vytvořených apl
 \newpage
 \addcontentsline{toc}{section}{\numberline{}Závěr} 
 \section*{Závěr}
-Práce je zaměřená na možné využití platforem \gls{abbreviation:soc}, zejména heterogenních, s~\gls{abbreviation:fpga} v~oboru řízení elektrických pohonů. V~úvodních kapitolách se autor věnoval rozdílu \gls{abbreviation:som} a \gls{abbreviation:soc} struktur. Protože je při řízení elektrických pohonů a nebo analýze jejich chování potřeba analyzovat velké množství dat v~reálném čase, analyzoval autor struktury, které obsahují i logická programovatelná pole, jež jsou schopny náročné výpočty provádět. Pro demonstraci využití byly vybrány a porovnány dvě vývojové desky, jež využívají \gls{abbreviation:soc} a \gls{abbreviation:som} od firmy Xilinx, Inc. Prvotní vývoj akcelerované aplikace probíhal s~využitím desky Digilent Zybo Zynq-7000, ovšem z~důvodu nedostatečného množství zdrojů v~\gls{abbreviation:pl} bylo její využití pro realizaci ukázkové aplikace zavrhnuto. Realizace ukázkové aplikace byla nakonec prováděna s~využitím Kria KR260 s~K26 \gls{abbreviation:som}, jež obsahuje dostatečné množství zdrojů pro vytvoření akcelerované simulace řízení asynchronního motoru pomocí \gls{abbreviation:foc}.\par
+Práce je zaměřená na možné využití platforem \gls{abbreviation:soc}, zejména heterogenních s~\gls{abbreviation:fpga}, v~oboru řízení elektrických pohonů. V~úvodních kapitolách se autor věnoval rozdílu \gls{abbreviation:som} a \gls{abbreviation:soc} struktur. Protože je při řízení elektrických pohonů a nebo analýze jejich chování potřeba analyzovat velké množství dat v~reálném čase, analyzoval autor struktury, které obsahují i logická programovatelná pole, jež jsou schopny náročné výpočty provádět. Pro demonstraci využití byly vybrány a porovnány dvě vývojové desky, jež využívají \gls{abbreviation:soc} a \gls{abbreviation:som} od firmy Xilinx, Inc. Prvotní vývoj akcelerované aplikace probíhal s~využitím desky Digilent Zybo Zynq-7000, ovšem z~důvodu nedostatečného množství zdrojů v~\gls{abbreviation:pl} bylo její využití pro realizaci ukázkové aplikace zavrhnuto. Realizace ukázkové aplikace byla nakonec prováděna s~využitím Kria KR260 s~K26 \gls{abbreviation:som}, jež obsahuje dostatečné množství zdrojů pro vytvoření akcelerované simulace řízení asynchronního motoru pomocí \gls{abbreviation:foc}.\par
 V~práci je představen postup, kterým je možné vytvořit \gls{abbreviation:hw} design, využitý při tvorbě \textit{PetaLinux} systému. Aplikace na vývojové desky bylo možné realizovat jako \textit{Bare Metal} nebo systémové, s~využitím \textit{PetaLinux} systému, který je spuštěn na \gls{abbreviation:ps}.\par
 Realizované algoritmy simulace jsou popsány vývojovými diagramy, které nastiňují způsob práce s~akcelerovanými aplikacemi.\par
-V~závěru této práce byla provedena analýza použitého přístupu k~akcelerovaným aplikacím a bylo zjištěno, že zvolený způsob není vhodný. Pro řízení elektrických pohonů v~reálném čase není vhodné realizovat část aplikace v~\gls{abbreviation:ps} a část aplikace v~\gls{abbreviation:pl}. Přenos dat do globální paměti z~\gls{abbreviation:ps} do \gls{abbreviation:pl} a zpět spolu se zpožděným spouštěním kernelu vnáší do algortimů přiliš veliké časové konstanty, které při řízení v~reálném čase není možné tolerovat.\par
+V~závěru této práce byla provedena analýza použitého přístupu k~akcelerovaným aplikacím a bylo zjištěno, že zvolený způsob realizace není vhodný. Pro řízení elektrických pohonů v~reálném čase není vhodné realizovat část aplikace v~\gls{abbreviation:ps} a část aplikace v~\gls{abbreviation:pl}. Přenos dat do globální paměti z~\gls{abbreviation:ps} do \gls{abbreviation:pl} a zpět spolu se zpožděným spouštěním kernelu vnáší do algortimů přiliš veliké časové konstanty, které při řízení v~reálném čase není možné tolerovat.\par
 Autor v~rámci analýzy realizovaných aplikací nastiňuje další způsoby tvorby aplikace, kterými by bylo tyto časové konstanty možné minimalizovat. Pro zrychlení komunikace mezi kernely a \gls{abbreviation:ps} by bylo možné realizovat vyšší míru paralelizace algoritmů, zkombinovanou s~přístupem streamingu dat do volně běžícího (free running) kernelu. Další možností je realizovat algoritmy do jednotlivých \gls{abbreviation:ip} bloků pomocí Vitis \gls{abbreviation:hls}, nikoliv Vitis \gls{abbreviation:ide}, a tyto bloky realizovat přímo ve struktuře \gls{abbreviation:pl} s~pomocí \gls{abbreviation:sw} Vivado. Tento přístup by znamenal, že prakticky veškeré algoritmy by byly realizované v~\gls{abbreviation:fpga} a \gls{abbreviation:ps} aplikace by sloužila pouze ke konfiguraci hodnot v~daných \gls{abbreviation:hw} registrech.\par
-Tato diplomová práce vytváří základy pro možnou navazující práci, ve které bude vyhledáván způsob, jakým realizovat řízení v~reálném čase s~pomocí moderních heterogenních systémů se \gls{abbreviation:soc}. Další práce by měla být zaměřena na dodržení potřebných časových a bezpečnostních opatření aplikace pro produkční prostředí. Kromě řízení v~reálném čase je možné v~navazující práci řešit využití těchto platforem pro realizaci \gls{abbreviation:hil} systémů. Realizované systémy \gls{abbreviation:hil} by díky těmto platformám mohly být oproti stávajícím komerčním řešením méně energeticky a finančně náročné.
+Tato diplomová práce vytváří základy pro možnou navazující práci, ve které bude vyhledáván způsob, jakým realizovat řízení v~reálném čase s~pomocí moderních heterogenních systémů se \gls{abbreviation:soc} a \gls{abbreviation:som}. Další práce by měla být zaměřena na dodržení potřebných časových a bezpečnostních opatření aplikace pro produkční prostředí. Kromě řízení v~reálném čase je možné v~navazující práci řešit využití těchto platforem pro realizaci \gls{abbreviation:hil} systémů. Realizované systémy \gls{abbreviation:hil} by díky těmto platformám mohly být oproti stávajícím komerčním řešením méně energeticky a finančně náročné.
 \par
 	
 
@@ -2803,13 +2814,14 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 		\newpage
 		\printglossary[type=symbolslist, style =  myStyleSymbols]
 
+		\newpage
 		\section{Tvorba HW designu pro Digilent Zybo Zynq-7000}\label{sec:appendicies:-tvorba-hw-designu-pro-digilent-zybo-zynq-7000}
 		V~této části bude představen postup tvorby \gls{abbreviation:hw} architektury pro vývojovou desku Digilent Zybo Zynq-7000. Postup tvorby platformy byl částečně převzat z~\cite{hackster-vitis-2021-1-embedded-platform-for-zybo-z7-20}. V~případě, že je požadováno vytvoření dalších speciálních bloků v~\gls{abbreviation:pl} je třeba do blokového designu vložit odpovídající \gls{abbreviation:ip} bloky, které zajistí potřebnou funkcionalitu.\par
 		Nejprve je nutné vytvořit nový Vivado projekt a pojmenovat ho dle požadavků. Při výběru typu projektu je nutné zvolit možnost \textit{\gls{abbreviation:rtl} Project} a aktivovat možnost \textit{Project is an extensible Vitis platform}. Tento úkon je naznačen na obr.~\ref{fig:zybo-xilinx-vivado-flow-01}.
 
 			\begin{figure}[htbp!]
 				\centering
-				\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg}
+				\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-01.jpg}
 				\caption{Xilinx Vivado – volba typu projektu pro Digilent Zybo.}
 				\label{fig:zybo-xilinx-vivado-flow-01}
 			\end{figure}
@@ -2818,7 +2830,7 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg}
+			\includegraphics[width=0.95\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-02.jpg}
 			\caption{Xilinx Vivado – výběr základního \gls{abbreviation:hw}, pro který bude vytvářena architektura pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-02}
 		\end{figure}
@@ -2827,7 +2839,7 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 		
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg}
+			\includegraphics[width=0.95\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-05.jpg}
 			\caption{Xilinx Vivado – vytváření Block Design pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-05}
 		\end{figure}
@@ -2836,7 +2848,7 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg}
+			\includegraphics[width=0.95\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-07.jpg}
 			\caption{Xilinx Vivado – vložení bloku ZYNQ7 Processing System pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-07}
 		\end{figure}
@@ -2847,14 +2859,14 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.75\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg}
+			\includegraphics[width=0.95\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-36.jpg}
 			\caption{Xilinx Vivado – nastavení výstupních taktovacích signálů pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-36}
 		\end{figure}
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg}
+			\includegraphics[width=1\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-12.jpg}
 			\caption{Xilinx Vivado – propojení bloků taktování pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-12}
 		\end{figure}
@@ -2866,7 +2878,7 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg}
+			\includegraphics[width=1\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-17.jpg}
 			\caption{Xilinx Vivado – minimální funkční blokový design pro akcelerovanou aplikaci pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-17}
 		\end{figure}
@@ -2935,7 +2947,7 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg}
+			\includegraphics[width=1\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-24.jpg}
 			\caption{Xilinx Vivado – kritická upozornění, zobrazená po validaci designu, která je možné ignorovat.}
 			\label{fig:zybo-xilinx-vivado-flow-24}
 		\end{figure}
@@ -2943,7 +2955,7 @@ Tato diplomová práce vytváří základy pro možnou navazující práci, ve k
 
 		\begin{figure}[htbp!]
 			\centering
-			\includegraphics[width=0.85\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg}
+			\includegraphics[width=1\textwidth]{src/png/zybo-xilinx-vivado-flow/zybo-xilinx-vivado-flow-29.jpg}
 			\caption{Xilinx Vivado – nastavení provádění úkonů syntézy, implementace a generování bitstreamu, volba použitých výpočetních jader a určení, kde se mají procesy vykonávat pro Digilent Zybo.}
 			\label{fig:zybo-xilinx-vivado-flow-29}
 		\end{figure}
@@ -3021,6 +3033,7 @@ plt.xticks(fontsize=15, weight=700)
 
 ax.xaxis.get_offset_text().set_fontsize(18)
 offset_text = ax.xaxis.get_offset_text()
+offset_text.set_visible(False) # set offset text not visible
 offset_text.set_position((0, 0))  # move horizontally to the center and down by 
 
 # adding grid
