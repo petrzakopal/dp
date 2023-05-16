@@ -2015,6 +2015,24 @@ Aplikaci a bitstream které jsou aktuálně načtené je možné spustit i mimo 
 	S~určitou pravděpodobností existují i jiné způsoby deploymentu aplikací, ale autor je v~době realizace této práce zatím nenalezl.
 
 
+	\fbar
+\section{Popis pracoviště}\label{sec:popis-pracoviste}
+	Na obr. \ref{fig:workspace-scheme} je zobrazeno blokové schéma pracoviště, které bylo vytvořeno v~rámci této práce a slouží k~vývoji akcelerovaných aplikací.\par
+	Blok \textit{\gls{abbreviation:pc}} představuje osobní počítač, který slouží k~přístupu k~pracovišti a je propojeno s~vývojovou deskou KR260 pomocí \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} spojení, které je vhodné v~případě, že nedošlo k~inicializaci ethernet adaptéru. Vývojová deska je pomocí adaptéru \textit{eth0} připojena do switche na pracovišti, ke kterému je uživatelský počítač také připojen. Pomocí \textcolor{ctublue}{modrého značení} jsou do switche připojeny také bloky \textcolor{ctuorange}{development machine}. Fyzicky se jedná o~připojení serveru pomocí adaptéru \textit{eno2}, který je umístěn ve fakultním datacentru. Tímto způsobem je vytvořena virtuální síť, která je využívána pouze pro komunikaci mezi zařízeními vývojového pracoviště.\par
+	Připojení serveru pomocí adaptéru \textit{eno1} do externí sítě \textcolor{ctugreenyblue}{Ethernet (world)} přináší krom možnosti vzdáleného přístupu do virtualizovaného zařízení v~hypervisoru Proxmox \gls{abbreviation:ve} také možnost vzdáleného přístupu do sítě \textcolor{ctublue}{Ethernet (private)}. Využití serveru pro tvorbu aplikací bylo zvoleno z~důvodu výkonové a časové náročnosti tvoření \textit{PetaLinux} systému, \gls{abbreviation:hw} designu ve Vivado a tvoření bitstreamu ve Vitis \gls{abbreviation:ide}. Díky vzdáleným přístupům je možné pracovat na vývoji i mimo laboratoř. Protože v~některých případech při restartování vývojové desky nedochází ke správné inicializaci adaptéru \textit{eth0}, je v~navazující práci plánováno připojit vývojovou desku k~\gls{abbreviation:sbc} (single board computer) pomocí \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} rozhraní a \gls{abbreviation:sbc} připojit do \textcolor{ctublue}{Ethernet (private)}. K~vývojové desce bude možné přistupovat cestou \textcolor{ctugreenyblue}{Ethernet (world)} -> \textcolor{ctuorange}{development machine} -> \textcolor{ctublue}{Ethernet (private)} -> \gls{abbreviation:pcb} -> \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} -> Kria KR260. Toto fyzické spojení umožní přístup ke K26 pomocí \textit{minicom}. Po přípojení bude možní provést manuální inicializaci adaptéru po restartování vývojové desky.\par
+	Protože ukázka využití \gls{abbreviation:spi} komunikace je realizována pomocí obvodu \textit{MAX7219} s~\gls{abbreviation:led} maticí, který vyžaduje napájení v~rozmezí 4~V~až 5~V~a výstupy \gls{abbreviation:pmod} dodávají napětí pouze 3,3~V, je třeba pro napájení testovacího rozhraní využít externího zdroje. V~této práci byla pro napájení obvodu využita deska Arduino UNO, která je napájena z~\gls{abbreviation:usb} rozhraní uživatelského počítače. Volba tohoto napájení byla vybrána z~důvodu jednoduchosti a dostupnosti. Provedení zapojení pro testování \gls{abbreviation:spi} komunikace je znázorněno v~části \hyperref[subsubsec:zapojeni-pro-testovani-spi-komunikace]{\textit{Zapojení pro testování SPI komunikace}}.\par
+	Představená architektura pracoviště byla tvořena tak, aby nebylo problematické ji rozšiřovat o~další prvky a umožňovala vzdálený přístup s~podporou více aktivních uživatelů v~jeden okamžik.
+
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.95\textwidth]{src/pdf/workspace-scheme.pdf}
+	\caption{Blokové schéma uspořádání vývojového pracoviště.}
+	\label{fig:workspace-scheme}
+\end{figure}
+
+	\fbar
+
 \section{Vytvořená aplikace}\label{sec:vytvorena-aplikace}
  V~této části je představena vytvořená aplikace pro \gls{abbreviation:ps} a akcelerovaná aplikace pro \gls{abbreviation:pl}. Shodnocení výsledků aplikací je uvedeno v~sekci \hyperref[sec:poznatky-ziskane-profilovanim-aplikaci]{\textit{Poznatky získané profilováním aplikací}}.\par
  Hlavním cílem této práce bylo představit možnosti využití platformy pro řízení elektrického pohonu nebo systém \gls{abbreviation:hil}. Proto jednotlivé ukázkové podaplikace reprezentují části a algoritmy, které by bylo možné využít při realizaci skutečného připojení platformy k~řízenému pracovišti.\par
@@ -2610,23 +2628,7 @@ float svmCoreClass::generateActualValueTriangleWave(TriangleWaveSettingsType *tr
 			Oproti \texttt{krnl\_calculateCurVelModel}, kernel \texttt{krnl\_calculateInvMot} téměř nevyužívá paradigmu \textit{Producer–Consumer}. V~budoucí práci je plánováno využít realizovaný systém pro \gls{abbreviation:hil} a proto bude třeba \textit{Producer-Consumer} přístup ve značné míře aplikovat. Po aplikaci ovšem dojde k~významné komplikaci kódu, protože zavedení \textit{Slice} funkcí způsobí znásobení počtu proměnných v~kernelu. Jen na jednu sadu mezivýpočtů prvků $k_{i1}$ pro velikosti proudů statoru \gls{symbol:i1alpha}, \gls{symbol:i1beta} a magnetických toků rotoru \gls{symbol:psi2alpha}, \gls{symbol:psi2beta} bude místo 6 vstupních proměnných potřeba proměnných 24. (je však možné použít pole a datový typ float, ovšem stále se jedná o~zkomplikování kódu)\par
 
 
-	\fbar
-\section{Popis pracoviště}\label{sec:popis-pracoviste}
-	Na obr. \ref{fig:workspace-scheme} je zobrazeno blokové schéma pracoviště, které bylo vytvořeno v~rámci této práce a slouží k~vývoji akcelerovaných aplikací.\par
-	Blok \textit{\gls{abbreviation:pc}} představuje osobní počítač, který slouží k~přístupu k~pracovišti a je propojeno s~vývojovou deskou KR260 pomocí \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} spojení, které je vhodné v~případě, že nedošlo k~inicializaci ethernet adaptéru. Vývojová deska je pomocí adaptéru \textit{eth0} připojena do switche na pracovišti, ke kterému je uživatelský počítač také připojen. Pomocí \textcolor{ctublue}{modrého značení} jsou do switche připojeny také bloky \textcolor{ctuorange}{development machine}. Fyzicky se jedná o~připojení serveru pomocí adaptéru \textit{eno2}, který je umístěn ve fakultním datacentru. Tímto způsobem je vytvořena virtuální síť, která je využívána pouze pro komunikaci mezi zařízeními vývojového pracoviště.\par
-	Připojení serveru pomocí adaptéru \textit{eno1} do externí sítě \textcolor{ctugreenyblue}{Ethernet (world)} přináší krom možnosti vzdáleného přístupu do virtualizovaného zařízení v~hypervisoru Proxmox \gls{abbreviation:ve} také možnost vzdáleného přístupu do sítě \textcolor{ctublue}{Ethernet (private)}. Využití serveru pro tvorbu aplikací bylo zvoleno z~důvodu výkonové a časové náročnosti tvoření \textit{PetaLinux} systému, \gls{abbreviation:hw} designu ve Vivado a tvoření bitstreamu ve Vitis \gls{abbreviation:ide}. Díky vzdáleným přístupům je možné pracovat na vývoji i mimo laboratoř. Protože v~některých případech při restartování vývojové desky nedochází ke správné inicializaci adaptéru \textit{eth0}, je v~navazující práci plánováno připojit vývojovou desku k~\gls{abbreviation:sbc} (single board computer) pomocí \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} rozhraní a \gls{abbreviation:sbc} připojit do \textcolor{ctublue}{Ethernet (private)}. K~vývojové desce bude možné přistupovat cestou \textcolor{ctugreenyblue}{Ethernet (world)} -> \textcolor{ctuorange}{development machine} -> \textcolor{ctublue}{Ethernet (private)} -> \gls{abbreviation:pcb} -> \textit{\gls{abbreviation:usb}/\gls{abbreviation:uart}} -> Kria KR260. Toto fyzické spojení umožní přístup ke K26 pomocí \textit{minicom}. Po přípojení bude možní provést manuální inicializaci adaptéru po restartování vývojové desky.\par
-	Protože ukázka využití \gls{abbreviation:spi} komunikace je realizována pomocí obvodu \textit{MAX7219} s~\gls{abbreviation:led} maticí, který vyžaduje napájení v~rozmezí 4~V~až 5~V~a výstupy \gls{abbreviation:pmod} dodávají napětí pouze 3,3~V, je třeba pro napájení testovacího rozhraní využít externího zdroje. V~této práci byla pro napájení obvodu využita deska Arduino UNO, která je napájena z~\gls{abbreviation:usb} rozhraní uživatelského počítače. Volba tohoto napájení byla vybrána z~důvodu jednoduchosti a dostupnosti. Provedení zapojení pro testování \gls{abbreviation:spi} komunikace je znázorněno v~části \hyperref[subsubsec:zapojeni-pro-testovani-spi-komunikace]{\textit{Zapojení pro testování SPI komunikace}}.\par
-	Představená architektura pracoviště byla tvořena tak, aby nebylo problematické ji rozšiřovat o~další prvky a umožňovala vzdálený přístup s~podporou více aktivních uživatelů v~jeden okamžik.
 
-
-\begin{figure}[htbp!]
-	\centering
-	\includegraphics[width=0.95\textwidth]{src/pdf/workspace-scheme.pdf}
-	\caption{Blokové schéma uspořádání vývojového pracoviště.}
-	\label{fig:workspace-scheme}
-\end{figure}
-
-	\fbar
 	
 	\fbar
 \section{Poznatky získané profilováním aplikací}\label{sec:poznatky-ziskane-profilovanim-aplikaci}

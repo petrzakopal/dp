@@ -446,53 +446,53 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {16}Vytvořená aplikace}{67}{section.16}%
+\contentsline {section}{\numberline {16}Popis pracoviště}{67}{section.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.1}Bezpečnost při uživatelském ukončení aplikace}{67}{subsection.16.1}%
+\contentsline {section}{\numberline {17}Vytvořená aplikace}{69}{section.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.2}Keyboard Input}{69}{subsection.16.2}%
+\contentsline {subsection}{\numberline {17.1}Bezpečnost při uživatelském ukončení aplikace}{69}{subsection.17.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.2.1}Konfigurace PL}{69}{subsubsection.16.2.1}%
+\contentsline {subsection}{\numberline {17.2}Keyboard Input}{71}{subsection.17.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.2.2}PS Aplikace}{69}{subsubsection.16.2.2}%
+\contentsline {subsubsection}{\numberline {17.2.1}Konfigurace PL}{71}{subsubsection.17.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.2.3}Interakce s~kernelem}{70}{subsubsection.16.2.3}%
+\contentsline {subsubsection}{\numberline {17.2.2}PS Aplikace}{71}{subsubsection.17.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.3}CPU/FPGA Model}{73}{subsection.16.3}%
+\contentsline {subsubsection}{\numberline {17.2.3}Interakce s~kernelem}{72}{subsubsection.17.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.3.1}Zobrazení výsledků simulace}{75}{subsubsection.16.3.1}%
+\contentsline {subsection}{\numberline {17.3}CPU/FPGA Model}{75}{subsection.17.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.4}Preloaded Data}{75}{subsection.16.4}%
+\contentsline {subsubsection}{\numberline {17.3.1}Zobrazení výsledků simulace}{77}{subsubsection.17.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.5}SPI}{77}{subsection.16.5}%
+\contentsline {subsection}{\numberline {17.4}Preloaded Data}{77}{subsection.17.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {17.5}SPI}{79}{subsection.17.5}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.5.1}Zapojení pro testování SPI komunikace}{80}{subsubsection.16.5.1}%
+\contentsline {subsubsection}{\numberline {17.5.1}Zapojení pro testování SPI komunikace}{82}{subsubsection.17.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.6}Timer Thread}{82}{subsection.16.6}%
+\contentsline {subsection}{\numberline {17.6}Timer Thread}{84}{subsection.17.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.6.1}Thread Loop}{82}{subsubsection.16.6.1}%
+\contentsline {subsubsection}{\numberline {17.6.1}Thread Loop}{84}{subsubsection.17.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {16.7}Akcelerované algoritmy (kernely) v~PL}{88}{subsection.16.7}%
+\contentsline {subsection}{\numberline {17.7}Akcelerované algoritmy (kernely) v~PL}{90}{subsection.17.7}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.1}Implementace výpočtu diferenciálních rovnic}{89}{subsubsection.16.7.1}%
+\contentsline {subsubsection}{\numberline {17.7.1}Implementace výpočtu diferenciálních rovnic}{91}{subsubsection.17.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.2}Implementace regulátorů}{89}{subsubsection.16.7.2}%
+\contentsline {subsubsection}{\numberline {17.7.2}Implementace regulátorů}{91}{subsubsection.17.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.3}Implementace modulace prostorového vektoru}{90}{subsubsection.16.7.3}%
+\contentsline {subsubsection}{\numberline {17.7.3}Implementace modulace prostorového vektoru}{92}{subsubsection.17.7.3}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.4}Implementace modelu invertoru}{91}{subsubsection.16.7.4}%
+\contentsline {subsubsection}{\numberline {17.7.4}Implementace modelu invertoru}{93}{subsubsection.17.7.4}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {16.7.5}Implementace modelu asynchronního motoru}{91}{subsubsection.16.7.5}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {17}Popis pracoviště}{92}{section.17}%
+\contentsline {subsubsection}{\numberline {17.7.5}Implementace modelu asynchronního motoru}{93}{subsubsection.17.7.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {18}Poznatky získané profilováním aplikací}{94}{section.18}%
 \defcounter {refsection}{0}\relax 

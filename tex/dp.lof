@@ -404,41 +404,41 @@
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~1}{\ignorespaces Základní větvení ukázkové aplikace.\relax }}{67}{figure.caption.58}%
+\contentsline {figure}{\numberline {16~-~1}{\ignorespaces Blokové schéma uspořádání vývojového pracoviště.\relax }}{68}{figure.caption.58}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~2}{\ignorespaces Keyboard Input větev aplikace – manuální nastavování vstupních hodnot do $I$-$n$ modelu.\relax }}{70}{figure.caption.59}%
+\contentsline {figure}{\numberline {17~-~1}{\ignorespaces Základní větvení ukázkové aplikace.\relax }}{69}{figure.caption.59}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~3}{\ignorespaces Snímek obrazovky konzole, zobrazující postup spuštění podaplikace \hyperref [subsec:keyboard-input]{Keyboard Input} a výpis první iterace výsledků z~kernelu.\relax }}{72}{figure.caption.60}%
+\contentsline {figure}{\numberline {17~-~2}{\ignorespaces Keyboard Input větev aplikace – manuální nastavování vstupních hodnot do $I$-$n$ modelu.\relax }}{72}{figure.caption.60}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~4}{\ignorespaces \gls {abbreviation:cpu}/\gls {abbreviation:fpga} Model větev aplikace – matematický $I$-$n$ model, regulace, \gls {abbreviation:asm} model v~\gls {abbreviation:fpga}.\relax }}{74}{figure.caption.61}%
+\contentsline {figure}{\numberline {17~-~3}{\ignorespaces Snímek obrazovky konzole, zobrazující postup spuštění podaplikace \hyperref [subsec:keyboard-input]{Keyboard Input} a výpis první iterace výsledků z~kernelu.\relax }}{74}{figure.caption.61}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~5}{\ignorespaces Časová závislost velikosti mechanické otáčivé rychlosti \gls {symbol:mechanicka-uhlova-rychlost} a velikosti magnetického toku rotoru \gls {symbol:psi2}. Výsledné hodnoty získané ze simulace akcelerované pomocí kernelu v~\gls {abbreviation:pl}.\relax }}{75}{figure.caption.62}%
+\contentsline {figure}{\numberline {17~-~4}{\ignorespaces \gls {abbreviation:cpu}/\gls {abbreviation:fpga} Model větev aplikace – matematický $I$-$n$ model, regulace, \gls {abbreviation:asm} model v~\gls {abbreviation:fpga}.\relax }}{76}{figure.caption.62}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~6}{\ignorespaces Preloaded Data větev aplikace – automatické čtení změřených/simulovaných vstupních hodnot do $I$-$n$ modelu a jejich hromadné zpracování v~kernelu.\relax }}{77}{figure.caption.63}%
+\contentsline {figure}{\numberline {17~-~5}{\ignorespaces Časová závislost velikosti mechanické otáčivé rychlosti \gls {symbol:mechanicka-uhlova-rychlost} a velikosti magnetického toku rotoru \gls {symbol:psi2}. Výsledné hodnoty získané ze simulace akcelerované pomocí kernelu v~\gls {abbreviation:pl}.\relax }}{77}{figure.caption.63}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {17~-~6}{\ignorespaces Preloaded Data větev aplikace – automatické čtení změřených/simulovaných vstupních hodnot do $I$-$n$ modelu a jejich hromadné zpracování v~kernelu.\relax }}{79}{figure.caption.64}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~7}{\ignorespaces \gls {abbreviation:spi} větev aplikace – manuální odesílání dat přes \gls {abbreviation:spi}.\relax }}{78}{figure.caption.64}%
+\contentsline {figure}{\numberline {17~-~7}{\ignorespaces \gls {abbreviation:spi} větev aplikace – manuální odesílání dat přes \gls {abbreviation:spi}.\relax }}{80}{figure.caption.65}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~8}{\ignorespaces Názorné schéma připojení \gls {abbreviation:pmod}3 Xilinx Kria KR260 k~\gls {abbreviation:led} Matici s~obvodem MAX7219.\relax }}{80}{figure.caption.65}%
+\contentsline {figure}{\numberline {17~-~8}{\ignorespaces Názorné schéma připojení \gls {abbreviation:pmod}3 Xilinx Kria KR260 k~\gls {abbreviation:led} Matici s~obvodem MAX7219.\relax }}{82}{figure.caption.66}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~9}{\ignorespaces Oscilogram znázorňující časové průběhy \gls {abbreviation:spi} komunikace – 10 MHz \gls {abbreviation:clk} signál a \gls {abbreviation:mosi} signál přenášející data 0x10000001.\relax }}{81}{figure.caption.66}%
+\contentsline {figure}{\numberline {17~-~9}{\ignorespaces Oscilogram znázorňující časové průběhy \gls {abbreviation:spi} komunikace – 10 MHz \gls {abbreviation:clk} signál a \gls {abbreviation:mosi} signál přenášející data 0x10000001.\relax }}{83}{figure.caption.67}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~10}{\ignorespaces Oscilogram znázorňující detail časového průběhu \gls {abbreviation:spi} komunikace – 10 MHz \gls {abbreviation:clk} signál.\relax }}{81}{figure.caption.67}%
+\contentsline {figure}{\numberline {17~-~10}{\ignorespaces Oscilogram znázorňující detail časového průběhu \gls {abbreviation:spi} komunikace – 10 MHz \gls {abbreviation:clk} signál.\relax }}{83}{figure.caption.68}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~11}{\ignorespaces \gls {abbreviation:spi} Timer Thread větev aplikace – \gls {abbreviation:axi} Timer Thread s~automatickým odesíláním dat.\relax }}{82}{figure.caption.68}%
+\contentsline {figure}{\numberline {17~-~11}{\ignorespaces \gls {abbreviation:spi} Timer Thread větev aplikace – \gls {abbreviation:axi} Timer Thread s~automatickým odesíláním dat.\relax }}{84}{figure.caption.69}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~12}{\ignorespaces \gls {abbreviation:spi} Timer Thread detail threadLoop části.\relax }}{84}{figure.caption.69}%
+\contentsline {figure}{\numberline {17~-~12}{\ignorespaces \gls {abbreviation:spi} Timer Thread detail threadLoop části.\relax }}{86}{figure.caption.70}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16~-~13}{\ignorespaces Blokové schéma regulátoru s~ošetřením anti-windup jevu pomocí principu clamping.\relax }}{90}{figure.caption.70}%
+\contentsline {figure}{\numberline {17~-~13}{\ignorespaces Blokové schéma regulátoru s~ošetřením anti-windup jevu pomocí principu clamping.\relax }}{92}{figure.caption.71}%
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
 \babel@toc {czech}{}\relax 
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {17~-~1}{\ignorespaces Blokové schéma uspořádání vývojového pracoviště.\relax }}{93}{figure.caption.71}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {18~-~1}{\ignorespaces System diagram – Vitis Analyzer pro Preloaded Data aplikaci.\relax }}{94}{figure.caption.72}%
 \babel@toc {czech}{}\relax 

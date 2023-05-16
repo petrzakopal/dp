@@ -7,32 +7,32 @@
 \glossentry{symbol:In}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{28}}}%
 \glossentry{symbol:i1-velikost-program}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{94}}}%
 \glossentry{symbol:i1alpha-beta}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}}}%
 \glossentry{symbol:i1alpha}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{91}}}%
+		\setentrycounter[]{page}\glsnumberformat{93}}}%
 \glossentry{symbol:i1a}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{94}}}%
 \glossentry{symbol:i1beta}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{91}}}%
+		\setentrycounter[]{page}\glsnumberformat{93}}}%
 \glossentry{symbol:i1b}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{94}}}%
 \glossentry{symbol:i1c}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{94}}}%
 \glossentry{symbol:i2-velikost-program}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{94}}}%
 \glossentry{symbol:i2alpha-beta}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{30}}}%
 \glossentry{symbol:i3-velikost-program}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{94}}}%
 \glossentry{symbol:prostorovy-vektor-statoroveho-proudu}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{28}}}\glsgroupskip
@@ -67,8 +67,8 @@
 \glossentry{symbol:mechanicka-uhlova-rychlost}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{XI}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{29}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{73}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{75\delimN 76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{75}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{77\delimN 78}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{94}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{124}}}%
 \glossentry{symbol:otaciva-rychlost-souradnicoveho-systemu}{\glossaryentrynumbers{\relax 
@@ -87,18 +87,16 @@
 		\setentrycounter[]{page}\glsnumberformat{29}}}%
 \glossentry{symbol:psi2alpha}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{89}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{91}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{94}}}%
+		\setentrycounter[]{page}\glsnumberformat{93\delimN 94}}}%
 \glossentry{symbol:psi2beta}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{89}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{91}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{94}}}%
+		\setentrycounter[]{page}\glsnumberformat{93\delimN 94}}}%
 \glossentry{symbol:psi2}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{XI}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{73}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{75}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{77}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{124}}}\glsgroupskip
 \glsgroupheading{R}\relax \glsresetentrylist %
 \glossentry{symbol:l1sigma}{\glossaryentrynumbers{\relax 
@@ -109,16 +107,16 @@
 		\setentrycounter[]{page}\glsnumberformat{28\delimN 29}}}\glsgroupskip
 \glsgroupheading{S}\relax \glsresetentrylist %
 \glossentry{symbol:sw1}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{91}}}%
+		\setentrycounter[]{page}\glsnumberformat{93}}}%
 \glossentry{symbol:sw2}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{91}}}%
+		\setentrycounter[]{page}\glsnumberformat{93}}}%
 \glossentry{symbol:sw3}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{91}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{93}}}\glsgroupskip
 \glsgroupheading{T}\relax \glsresetentrylist %
 \glossentry{symbol:h}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{89}}}%
+		\setentrycounter[]{page}\glsnumberformat{91}}}%
 \glossentry{symbol:t-cas}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{75}}}%
+		\setentrycounter[]{page}\glsnumberformat{77}}}%
 \glossentry{symbol:theta-transform-angle}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{24}}}\glsgroupskip
 \glsgroupheading{U}\relax \glsresetentrylist %
@@ -133,17 +131,17 @@
 \glossentry{symbol:u1-vektor}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}}}%
 \glossentry{symbol:u1a-fazove-napeti-statoru}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{91}}}%
+		\setentrycounter[]{page}\glsnumberformat{93}}}%
 \glossentry{symbol:u1alpha-beta}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}}}%
 \glossentry{symbol:u1alpha}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}}}%
 \glossentry{symbol:u1b-fazove-napeti-statoru}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{91}}}%
+		\setentrycounter[]{page}\glsnumberformat{93}}}%
 \glossentry{symbol:u1beta}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}}}%
 \glossentry{symbol:u1c-fazove-napeti-statoru}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{91}}}%
+		\setentrycounter[]{page}\glsnumberformat{93}}}%
 \glossentry{symbol:u2-vektor}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{29}}}%
 \glossentry{symbol:u2alpha-beta}{\glossaryentrynumbers{\relax 
