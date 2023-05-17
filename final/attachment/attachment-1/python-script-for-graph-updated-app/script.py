@@ -40,6 +40,11 @@ ax.spines[['right', 'top']].set_visible(False)
 plt.yticks(fontsize=15, fontweight=700)
 plt.xticks(fontsize=15, weight=700)
 
+ax.xaxis.get_offset_text().set_fontsize(18)
+offset_text = ax.xaxis.get_offset_text()
+offset_text.set_visible(False) # set offset text not visible
+offset_text.set_position((0, 0))  # move horizontally to the center and down by 
+
 # adding grid
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 

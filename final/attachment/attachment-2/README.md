@@ -1,4 +1,4 @@
-# Informace o struktuře archivu
+# Informace o struktuře příloh
 
 ## Struktura
 
