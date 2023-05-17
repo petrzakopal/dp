@@ -4,21 +4,31 @@
 
 ```
 .
-├── build
-│   ├── kria-1-2-rt-dp-application
-│   └── kria-1-2-rt-dp-legacy
-├── hw
-├── legacy-app
-│   ├── kria-1-2-rt-dp-legacy-curvel-app
-│   ├── kria-1-2-rt-dp-legacy-curvel-app_kernels
-│   └── kria-1-2-rt-dp-legacy-curvel-app_system_hw_link
-├── mappings
-├── python-script-for-graph-updated-app
-└── updated-app
-├── kria-1-2-rt-dp-application
-├── kria-1-2-rt-dp-application_kernels
-└── kria-1-2-rt-dp-application_system_hw_link
-
+├── attachment-1
+│   ├── build
+│   │   ├── kria-1-2-rt-dp-application
+│   │   └── kria-1-2-rt-dp-legacy
+│   ├── legacy-app
+│   │   ├── kria-1-2-rt-dp-legacy-curvel-app
+│   │   ├── kria-1-2-rt-dp-legacy-curvel-app_kernels
+│   │   └── kria-1-2-rt-dp-legacy-curvel-app_system_hw_link
+│   ├── mappings
+│   ├── python-script-for-graph-updated-app
+│   └── updated-app
+│       ├── kria-1-2-rt-dp-application
+│       ├── kria-1-2-rt-dp-application_kernels
+│       └── kria-1-2-rt-dp-application_system_hw_link
+├── attachment-2
+│   └── hw
+│       ├── kria-1.cache
+│       ├── kria-1.gen
+│       ├── kria-1.hw
+│       ├── kria-1.ip_user_files
+│       ├── kria-1.sim
+│       └── kria-1.srcs
+└── attachment-3
+    └── hw
+        └── kria-1.runs
 ```
 
 ### build
