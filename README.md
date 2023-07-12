@@ -1,5 +1,10 @@
 # Diplomová práce
 
+- obhájeno dne 29.06.2023
+- poslední commit je jen protože jsem se překlepl a dal jsem build
+- finální odevzdaná práce je v příslušné složce [final](./final/) nebo také na [dspace.cvut.cz](https://dspace.cvut.cz/handle/10467/110014)
+- dále tento repozitář nebude rozvíjen a až bude začínat práce na dizertaci, bude přidán odkaz opět na repozitář s příslušnými dokumenty a informacemi
+
 ## Pracuji na
 
 - ✅ ⚡️ _zkoumám_ interrupts + timers
